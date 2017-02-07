@@ -1,5 +1,9 @@
 # Scientific-Visualization
 
+## Requirements
+* OpenGL version: 3.3
+* GLSL version: 3.30.6 (shader preprocesser: ```#version 330```)
+
 ## Report
 For each assignment discussed in the report use the following stucture:
 
