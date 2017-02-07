@@ -1,0 +1,65 @@
+\usepackage{a4wide}
+
+% Language
+\usepackage[english]{babel}
+
+\usepackage[T1]{fontenc}
+
+% Affiliation
+\usepackage{authblk}
+
+% Biblio
+
+\usepackage{natbib}
+
+
+% Figures and listings
+
+\usepackage{float}
+\usepackage{listings}
+\usepackage{grffile}
+\usepackage[pdftex]{graphicx}
+\usepackage[bf]{caption}
+\usepackage{subcaption}
+\usepackage{placeins}%floatbarrier
+
+\usepackage{mdframed}
+
+
+\lstset{
+    breaklines=true,%
+    showstringspaces=false,
+    numbers=left,%
+    frame=single,
+    morekeywords={}
+}
+
+% References
+\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage[noabbrev]{cleveref}
+\usepackage{nameref}
+
+% To do
+\usepackage{todonotes}
+
+\newcommand{\alex}[1]{\todo[color=yellow!60]{\textbf{@Alex:}#1}}
+\newcommand{\Bastiaan}[1]{\todo[inline, color=green!60]{\textbf{@Bastiaan:}#1}}
+\newcommand{\Laura}[1]{\todo[inline, color=blue!20]{\textbf{@Laura:}#1}}
+\newcommand{\struc}[1]{\todo[inline, color=orange!60]{#1}}
+
+%Uncomment to hide personal todo's
+%\newcommand{\Laura}[1]{}
+%\newcommand{\Bastiaan}[1]{}
+%\newcommand{\structure}[1]{}
+
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{ dsfont }
+
+
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\renewcommand{\t}[1]{\lstinline[breaklines=true, basicstyle=\ttfamily\normalsize]{#1}}
