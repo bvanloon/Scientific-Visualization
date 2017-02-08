@@ -3,7 +3,6 @@
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent)
 {
-    qDebug() << "Canvas" << &endl;
 
     this->vertices = QVector<QVector3D>();
     this->vertices.append(QVector3D(-0.8f, -0.8f, 0.0f));
@@ -14,6 +13,12 @@ Canvas::Canvas(QWidget* parent) :
     this->colors.append(QVector3D(1.0f, 0.0f, 0.0f));
     this->colors.append(QVector3D(0.0f, 1.0f, 0.0f));
     this->colors.append(QVector3D(0.0f, 0.0f, 1.0f));
+
+//    QTimer *timer = new QTimer(this);
+//    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+//    timer->start(1);
+
+//    timer -> start(1);
 }
 
 Canvas::~Canvas()
@@ -26,8 +31,6 @@ Canvas::~Canvas()
 
 void Canvas::initializeGL()
 {
-    qDebug() << "initializeGL()" << &endl;
-
     initializeOpenGLFunctions();
 
     glEnable(GL_DEPTH_TEST);
@@ -39,13 +42,11 @@ void Canvas::initializeGL()
 
 bool Canvas::isAllocated(QOpenGLBuffer *buffer)
 {
-    qDebug() << "isAllocated" << &endl;
     return buffer->size() != 0;
 }
 
 void Canvas::initializeShaders()
 {
-    qDebug() << "initializeShaders" << &endl;
     this->shaderProgram = new QOpenGLShaderProgram();
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/shaders/vertex.glsl");
     this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/shaders/fragment.glsl");
@@ -54,8 +55,6 @@ void Canvas::initializeShaders()
 
 void Canvas::initializeBuffers()
 {
-    qDebug() << "initializeBuffers" << &endl;
-
     this->vao.create();
     this->vao.bind();
 
@@ -86,8 +85,6 @@ void Canvas::initializeBuffers()
 
 void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
 {
-    qDebug() << "updateBuffer" << &endl;
-
     buffer->bind();
     buffer->allocate(data.data(), data.size() * sizeof(data[0]));
     buffer->release();
@@ -95,22 +92,23 @@ void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
 
 void Canvas::paintGL()
 {
-//    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    if (!isAllocated(this->vertexBuffer)) {
-        qDebug() << "not allocated" << &endl;
-        return;
-    }
+    qDebug() << "PaintGl" << &endl;
+
+//    if (!isAllocated(this->vertexBuffer)) {
+//        qDebug() << "not allocated" << &endl;
+//        return;
+//    }
 
     this->shaderProgram->bind();
     this->vao.bind();
 
-    //Should be placed in correct spot
     setUniforms();
 
     updateTransformationMatrix();
 
-    glDrawArrays(GL_TRIANGLES, 0, 3 );
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 
     this->vao.release();
     this->shaderProgram->release();
@@ -118,21 +116,17 @@ void Canvas::paintGL()
 
 void Canvas::constructModelViewProjectionMatrix()
 {
-    qDebug() << "constructModelViewProjectionMatrix" << &endl;
-
     this->mvpMatrix.setToIdentity();
 }
 
 void Canvas::updateTransformationMatrix()
 {
-    qDebug() << "updateTransformationMatrix" << &endl;
-
     constructModelViewProjectionMatrix();
     this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
 }
 
 void Canvas::setUniforms()
 {
-    qDebug() << "setUniforms() does not do anything." << &endl;
+//   qDebug() << "setUniforms() does not do anything." << &endl;
 }
 

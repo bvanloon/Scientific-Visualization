@@ -11,6 +11,8 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+#include <QTimer>
+
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
