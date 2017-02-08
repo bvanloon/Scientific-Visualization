@@ -2,9 +2,9 @@
 #define MAIN_IH
 
 #include <QSurfaceFormat>
-
-#include "mainwindow.h"
 #include <QApplication>
+
+#include "view/mainwindow.h"
 
 int const majorOpenGLVersion = 4;
 int const minorOpenGLVersion = 1;
