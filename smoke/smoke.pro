@@ -13,10 +13,15 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        view/mainwindow.cpp
+        view/mainwindow.cpp \
+    view/canvas.cpp
 
 HEADERS  += main.ih\
-        view/mainwindow.h
+        view/mainwindow.h \
+    view/canvas.h
 
 
 FORMS    += view/mainwindow.ui
+
+RESOURCES += \
+    shaders.qrc
