@@ -1,11 +1,24 @@
-#include "mainwindow.h"
-#include <QApplication>
+#include "main.ih"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+    QApplication application(argc, argv);
 
-    return a.exec();
+    setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
+
+    MainWindow mainWindow;
+    mainWindow.show();
+
+    return application.exec();
+}
+
+void setOpenGLVersion(int const majorVersion, int const minorVersion)
+{
+    QSurfaceFormat glFormat;
+    glFormat.setProfile(QSurfaceFormat::CoreProfile);
+
+    glFormat.setVersion(majorVersion, minorVersion);
+    glFormat.setOption(QSurfaceFormat::DebugContext);
+
+    QSurfaceFormat::setDefaultFormat(glFormat);
 }
