@@ -11,7 +11,6 @@ layout(location = 0) out vec3 vsColor;
 
 void main(void)
 {
-//    vsColor = inputColor;
-    vsColor = vec3(1.0, 0.0, 0.0);
+    vsColor = inputColor;
     gl_Position = vec4(inputPosition, 1.0);
 }
