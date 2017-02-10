@@ -18,8 +18,8 @@ public:
 
 private:
     void initBuffers();
-    void initTriangleGeometry();
 
+    void updateBuffers(Simulation* simulation);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
     QOpenGLVertexArrayObject vao;

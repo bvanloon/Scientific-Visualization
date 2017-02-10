@@ -8,22 +8,13 @@ TriangleEngine::TriangleEngine()
     initializeOpenGLFunctions();
 
     initBuffers();
-    initTriangleGeometry();
 }
-
 
 TriangleEngine::~TriangleEngine()
 {
     this->vertexBuffer->destroy();
     this->colorBuffer->destroy();
     this->vao.destroy();
-}
-
-void TriangleEngine::draw(Simulation *simulation)
-{
-    this->vao.bind();
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    this->vao.release();
 }
 
 void TriangleEngine::initBuffers()
@@ -48,21 +39,19 @@ void TriangleEngine::initBuffers()
     this->vao.release();
 }
 
-void TriangleEngine::initTriangleGeometry()
+void TriangleEngine::draw(Simulation *simulation)
 {
-    QVector<QVector3D> vertices = QVector<QVector3D>();
-    vertices.append(QVector3D(-0.8f, -0.8f, 0.0f));
-    vertices.append(QVector3D(0.8f, -0.8f, 0.0f));
-    vertices.append(QVector3D(0.0f, 0.8f, 0.0f));
+    this->updateBuffers(simulation);
 
-    updateBuffer(this->vertexBuffer, vertices);
+    this->vao.bind();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    this->vao.release();
+}
 
-    QVector<QVector3D> colors = QVector<QVector3D>();
-    colors.append(QVector3D(1.0f, 0.0f, 0.0f));
-    colors.append(QVector3D(0.0f, 1.0f, 0.0f));
-    colors.append(QVector3D(0.0f, 0.0f, 1.0f));
-
-    updateBuffer(this->colorBuffer, colors);
+void TriangleEngine::updateBuffers(Simulation *simulation)
+{
+    updateBuffer(this->vertexBuffer, simulation->getVertices());
+    updateBuffer(this->colorBuffer, simulation->getColors());
 }
 
 void TriangleEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
