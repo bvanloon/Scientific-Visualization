@@ -40,11 +40,6 @@ void Canvas::initializeGL()
     initializeBuffers();
 }
 
-bool Canvas::isAllocated(QOpenGLBuffer *buffer)
-{
-    return buffer->size() != 0;
-}
-
 void Canvas::initializeShaders()
 {
     this->shaderProgram = new QOpenGLShaderProgram();
@@ -93,13 +88,6 @@ void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    qDebug() << "PaintGl" << &endl;
-
-//    if (!isAllocated(this->vertexBuffer)) {
-//        qDebug() << "not allocated" << &endl;
-//        return;
-//    }
 
     this->shaderProgram->bind();
     this->vao.bind();

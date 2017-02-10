@@ -39,8 +39,6 @@ private:
     QOpenGLBuffer *indexBuffer;
     QOpenGLVertexArrayObject vao;
 
-    bool isAllocated(QOpenGLBuffer *buffer);
-
     // OpenGL initialization
     void initializeShaders();
     void initializeBuffers();
