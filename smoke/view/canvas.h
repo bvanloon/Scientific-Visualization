@@ -5,7 +5,6 @@
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
-#include <QDebug>
 #include <QMatrix4x4>
 #include <QVector3D>
 #include <QOpenGLShaderProgram>
@@ -13,6 +12,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QTimer>
 
+#include <QDebug>
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
