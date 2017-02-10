@@ -20,6 +20,11 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
+void Canvas::onSimulationUpdated()
+{
+    update();
+}
+
 void Canvas::initializeGL()
 {
     initializeOpenGLFunctions();

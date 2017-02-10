@@ -31,6 +31,7 @@ signals:
     void mouseMoved(QPointF newPosition);
 
 public slots:
+    void onSimulationUpdated();
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -52,7 +53,6 @@ private:
     void setUniforms();
     void setMVPMatrix();
 
-    //ONLY USE THIS TO PASS THE SIMULATION TO THE ENGINES
     Simulation* simulation;
 
     //Engines

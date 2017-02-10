@@ -15,6 +15,7 @@ public:
     QVector<QVector3D> getColors();
 
 signals:
+    void simulationUpdated();
 
 public slots:
     void onMouseMoved(QPointF newPosition);

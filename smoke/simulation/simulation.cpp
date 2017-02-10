@@ -25,5 +25,7 @@ QVector<QVector3D> Simulation::getColors()
 void Simulation::onMouseMoved(QPointF newPosition)
 {
 
+    this->vertices.clear();
+    emit simulationUpdated();
 }
 

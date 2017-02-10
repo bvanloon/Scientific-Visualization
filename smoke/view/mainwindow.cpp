@@ -24,4 +24,7 @@ void MainWindow::connectCanvasAndSimulation()
 {
     connect(this->canvas, SIGNAL(mouseMoved(QPointF)),
             this->simulation, SLOT(onMouseMoved(QPointF)));
+
+    connect(this->simulation, SIGNAL(simulationUpdated()),
+            this->canvas, SLOT(onSimulationUpdated()));
 }
