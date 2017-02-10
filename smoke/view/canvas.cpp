@@ -114,6 +114,10 @@ void Canvas::paintGL()
     this->shaderProgram->release();
 }
 
+void Canvas::resizeGL(){
+    qDebug() << "resizeGL" << &endl
+}
+
 void Canvas::constructModelViewProjectionMatrix()
 {
     this->mvpMatrix.setToIdentity();
