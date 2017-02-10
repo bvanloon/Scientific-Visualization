@@ -35,37 +35,8 @@ private:
     //Shaders
     QOpenGLShaderProgram *shaderProgram;
 
-    //Buffers
-    QOpenGLBuffer *vertexBuffer;
-    QOpenGLBuffer *colorBuffer;
-    QOpenGLBuffer *indexBuffer;
-    QOpenGLVertexArrayObject vao;
-
     // OpenGL initialization
     void initializeShaders();
-    void initializeBuffers();
-    void initializeVertexBuffer(QOpenGLBuffer *buffer, GLint layoutPosition, GLint elementDimension, GLenum elementType);
-    void initializeIndexBuffer(QOpenGLBuffer* buffer);
-
-    // OpenGL update
-    int numIndices;
-    int numVertices;
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
-
-    // Transformation variables;
-    QMatrix4x4 mvpMatrix;
-    QMatrix3x3 normalMatrix;
-    QVector3D rotationAngles;
-    float zoomingFactor;
-    void constructModelViewProjectionMatrix();
-    void updateTransformationMatrix();
-
-    //Uniforms
-    void setUniforms();
-
-    //Temporary, model
-    QVector<QVector3D> vertices;
-    QVector<QVector3D> colors;
 
     //Engines
     TriangleEngine *triangleEnginge;

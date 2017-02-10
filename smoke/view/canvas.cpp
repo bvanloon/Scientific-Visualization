@@ -57,20 +57,3 @@ void Canvas::resizeGL(int w, int h)
 //    // Set perspective projection
 //    projection.perspective(fov, aspect, zNear, zFar);
 }
-
-void Canvas::constructModelViewProjectionMatrix()
-{
-    this->mvpMatrix.setToIdentity();
-}
-
-void Canvas::updateTransformationMatrix()
-{
-    constructModelViewProjectionMatrix();
-    this->shaderProgram->setUniformValue("mvpMatrix", this->mvpMatrix);
-}
-
-void Canvas::setUniforms()
-{
-//   qDebug() << "setUniforms() does not do anything." << &endl;
-}
-
