@@ -13,9 +13,9 @@ Settings::~Settings()
     delete simulation;
 }
 
+
 void Settings::onWindowResized(int width, int height)
 {
     this->canvas->width = width;
     this->canvas->height = height;
 }
-

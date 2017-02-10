@@ -10,9 +10,11 @@ public:
     explicit Settings(QObject *parent = 0);
     ~Settings();
 
+
     class Simulation {
         public:
             int dimension;
+
             Simulation() :
                 dimension(50)
             {}
@@ -23,6 +25,7 @@ public:
         public:
             int width;
             int height;
+
             Canvas() :
                 width(-1),
                 height(-1)
