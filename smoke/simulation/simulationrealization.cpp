@@ -1,6 +1,6 @@
 #include "simulationrealization.h"
 
-simulationRealization::simulationRealization(int gridSize):
+SimulationRealization::SimulationRealization(int gridSize):
     DIM(50), dt(0.4), visc(0.001),
     color_dir(0), vec_scale(1000), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
@@ -27,23 +27,23 @@ simulationRealization::simulationRealization(int gridSize):
 
 //FFT: Execute the Fast Fourier Transform on the dataset 'vx'.
 //     'dirfection' indicates if we do the direct (1) or inverse (-1) Fourier Transform
-void simulationRealization::FFT(int direction,void* vx)
+void SimulationRealization::FFT(int direction,void* vx)
 {
     if(direction==1) rfftwnd_one_real_to_complex(plan_rc,(fftw_real*)vx,(fftw_complex*)vx);
     else             rfftwnd_one_complex_to_real(plan_cr,(fftw_complex*)vx,(fftw_real*)vx);
 }
 
-int simulationRealization::clamp(float x){
+int SimulationRealization::clamp(float x){
     return ((x)>=0.0?((int)(x)):(-((int)(1-(x)))));
 }
 
-float simulationRealization::max(float x, float y)
+float SimulationRealization::max(float x, float y)
 {
     return x < y ? x : y;
 }
 
 //solve: Solve (compute) one step of the fluid flow simulation
-void simulationRealization::solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt)
+void SimulationRealization::solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt)
 {
     fftw_real x, y, x0, y0, f, r, U[2], V[2], s, t;
     int i, j, i0, j0, i1, j1;
@@ -99,4 +99,28 @@ void simulationRealization::solve(int grid_size, fftw_real* vx, fftw_real* vy, f
     for (i=0;i<grid_size;i++)
        for (j=0;j<grid_size;j++)
        { vx[i+grid_size*j] = f*vx0[i+(grid_size+2)*j]; vy[i+grid_size*j] = f*vy0[i+(grid_size+2)*j]; }
+}
+
+// diffuse_matter: This function diffuses matter that has been placed in the velocity field. It's almost identical to the
+// velocity diffusion step in the function above. The input matter densities are in rho0 and the result is written into rho.
+void SimulationRealization::diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt)
+{
+    fftw_real x, y, x0, y0, s, t;
+    int i, j, i0, j0, i1, j1;
+
+    for ( x=0.5f/gride_size,i=0 ; i<gride_size ; i++,x+=1.0f/gride_size )
+        for ( y=0.5f/gride_size,j=0 ; j<gride_size ; j++,y+=1.0f/gride_size )
+        {
+            x0 = gride_size*(x-dt*vx[i+gride_size*j])-0.5f;
+            y0 = gride_size*(y-dt*vy[i+gride_size*j])-0.5f;
+            i0 = clamp(x0);
+            s = x0-i0;
+            i0 = (gride_size+(i0%gride_size))%gride_size;
+            i1 = (i0+1)%gride_size;
+            j0 = clamp(y0);
+            t = y0-j0;
+            j0 = (gride_size+(j0%gride_size))%gride_size;
+            j1 = (j0+1)%gride_size;
+            rho[i+gride_size*j] = (1-s)*((1-t)*rho0[i0+gride_size*j0]+t*rho0[i0+gride_size*j1])+s*((1-t)*rho0[i1+gride_size*j0]+t*rho0[i1+gride_size*j1]);
+        }
 }
