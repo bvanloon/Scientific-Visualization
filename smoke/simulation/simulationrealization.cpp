@@ -1,4 +1,5 @@
 #include "simulationrealization.h"
+#include <QDebug>
 
 SimulationRealization::SimulationRealization(int gridSize):
     DIM(50), dt(0.4), visc(0.001),
@@ -6,6 +7,8 @@ SimulationRealization::SimulationRealization(int gridSize):
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
     scalar_col(0), frozen(0)
 {
+    qDebug() << "SimulationRealization::SimulationRealization(int gridSize)";
+
     int i; size_t dim;
 
     dim     = gridSize * 2*(gridSize/2+1)*sizeof(fftw_real);        //Allocate data structures

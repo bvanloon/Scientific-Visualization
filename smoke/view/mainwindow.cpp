@@ -7,10 +7,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->simulation = new Simulation();
+    this->settings = new Settings();
+
+    this->simulation = new Simulation(this->settings);
+
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
-    this->settings = new Settings();
 
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();
@@ -20,6 +22,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete this->simulation;
+    delete this->settings;
 }
 
 void MainWindow::connectCanvasAndSimulation()

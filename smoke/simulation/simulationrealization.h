@@ -9,6 +9,9 @@ class SimulationRealization
 public:
     SimulationRealization(int gridSize = 50);
 
+    int clamp(float x);
+    float max(float x, float y);
+
 private:
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
     const int DIM;				//size of simulation grid
@@ -34,8 +37,6 @@ private:
     int   frozen;               //toggles on/off the animation
 
     void FFT(int direction,void* vx);
-    int clamp(float x);
-    float max(float x, float y);
     void solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt);
     void diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
     void set_forces(void);
