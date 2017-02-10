@@ -35,6 +35,7 @@ public:
 signals:
 
 public slots:
+    void onWindowResized(int width, int height);
 };
 
 #endif // SETTINGS_H

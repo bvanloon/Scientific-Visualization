@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QVector3D>
+#include <QPointF>
 
 class Simulation : public QObject
 {
