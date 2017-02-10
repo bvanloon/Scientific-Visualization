@@ -23,6 +23,8 @@ public slots:
 private:
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
+
+    QPointf lastMousePosition;
 };
 
 #endif // SMOKE_H
