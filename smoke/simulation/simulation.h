@@ -24,7 +24,7 @@ private:
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
 
-    QPointf lastMousePosition;
+    QPointF lastMousePosition;
 };
 
 #endif // SMOKE_H
