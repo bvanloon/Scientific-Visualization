@@ -1,6 +1,7 @@
 #include "simulation.h"
+#include <QVector3D>
 
-Simulation::Simulation():
+Simulation::Simulation()
 {
     vertices.append(QVector3D(-0.8f, -0.8f, 0.0f));
     vertices.append(QVector3D(0.8f, -0.8f, 0.0f));
