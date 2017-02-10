@@ -104,7 +104,7 @@ void Canvas::paintGL()
 
 void Canvas::resizeGL(int w, int h)
 {
-    qDebug() << "resizeGL" << &endl;
+    qDebug() << "resizeGL: not yet implemented" << &endl;
 
 //    // Calculate aspect ratio
 //    qreal aspect = qreal(w) / qreal(h ? h : 1);
