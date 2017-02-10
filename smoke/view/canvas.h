@@ -32,7 +32,7 @@ public slots:
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
     void paintGL() Q_DECL_OVERRIDE;
-    void resizeGL(int w, int h) Q_DECL_OVERRIDE;
+    void resizeGL(int width, int height) Q_DECL_OVERRIDE;
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
@@ -43,6 +43,7 @@ private:
     void initializeShaders();
 
     //Uniforms
+    QMatrix4x4 modelViewMatrix;
     QMatrix4x4 projectionMatrix;
 
     void setUniforms();

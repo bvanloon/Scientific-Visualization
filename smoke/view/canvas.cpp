@@ -6,6 +6,8 @@ Canvas::Canvas(QWidget* parent) :
 {
     //Enusre that the mouse is always tracked, even if we didn't click first.
     this->setMouseTracking(true);
+
+    modelViewMatrix.setToIdentity();
 }
 
 Canvas::~Canvas()
@@ -39,20 +41,6 @@ void Canvas::initializeShaders()
     this->shaderProgram->link();
 }
 
-void Canvas::setUniforms()
-{
-    setMVPMatrix();
-}
-
-void Canvas::setMVPMatrix()
-{
-    QMatrix4x4 modelViewMatrix;
-    modelViewMatrix.translate(0.0, 0.0, -5.0);
-//    matrix.rotate(rotation);
-
-    this->shaderProgram->setUniformValue("mvp_matrix", this->projectionMatrix * modelViewMatrix);
-}
-
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -66,15 +54,27 @@ void Canvas::paintGL()
     shaderProgram->release();
 }
 
-void Canvas::resizeGL(int w, int h)
+void Canvas::setUniforms()
 {
-    qreal aspectRatio = qreal(w) / qreal(h ? h : 1);
-    const qreal zNear = 3.0;
-    const qreal zFar = 7.0;
-    const qreal fov = 45.0;
+    setMVPMatrix();
+}
+
+void Canvas::setMVPMatrix()
+{
+    QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
+
+    this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
+}
+
+void Canvas::resizeGL(int width, int height)
+{
+    glViewport(0.0f, 0.0f, (GLfloat) width, (GLfloat) height);
+
+    float nearClippingPlane = -1.0f;
+    float farClippingPlane = 1.0f;
 
     projectionMatrix.setToIdentity();
-    projectionMatrix.perspective(fov, aspectRatio, zNear, zFar);
+    projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
