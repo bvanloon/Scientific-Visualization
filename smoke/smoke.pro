@@ -8,7 +8,11 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+
+macx {
+    QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+}
+
 
 TARGET = smoke
 TEMPLATE = app
@@ -19,14 +23,16 @@ SOURCES += main.cpp\
     view/canvas.cpp \
     engines/triangleengine.cpp \
     simulation/simulation.cpp \
-    simulation/simulationrealization.cpp
+    simulation/simulationrealization.cpp \
+    settings/settings.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
     view/canvas.h \
     engines/triangleengine.h \
     simulation/simulation.h \
-    simulation/simulationrealization.h
+    simulation/simulationrealization.h \
+    settings/settings.h
 
 FORMS    += view/mainwindow.ui
 

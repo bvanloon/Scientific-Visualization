@@ -25,6 +25,7 @@ public:
 
 signals:
     void mouseMoved(QPointF newPosition);
+    void windowResized(int width, int height);
 
 public slots:
     void onSimulationUpdated();

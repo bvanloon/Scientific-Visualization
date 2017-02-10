@@ -10,8 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     this->simulation = new Simulation();
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
+    this->settings = new Settings();
 
     connectCanvasAndSimulation();
+    connectSettingsAndCanvas();
 }
 
 MainWindow::~MainWindow()
@@ -27,4 +29,10 @@ void MainWindow::connectCanvasAndSimulation()
 
     connect(this->simulation, SIGNAL(simulationUpdated()),
             this->canvas, SLOT(onSimulationUpdated()));
+}
+
+void MainWindow::connectSettingsAndCanvas()
+{
+    connect(this->canvas, SIGNAL(windowResized(int, int)),
+            this->settings, SLOT(onWindowResized(int, int)));
 }
