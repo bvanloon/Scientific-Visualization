@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include <view/canvas.h>
+#include "simulation/simulation.h"
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +19,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    Canvas *canvas;
+    Simulation *simulation;
 };
 
 #endif // MAINWINDOW_H
