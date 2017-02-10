@@ -34,6 +34,7 @@ private:
     int   frozen;               //toggles on/off the animation
 
     void FFT(int direction,void* vx);
+    int clamp(float x);
 };
 
 #endif // SIMULATIONREALIZATION_H

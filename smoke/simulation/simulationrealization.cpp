@@ -32,3 +32,7 @@ void simulationRealization::FFT(int direction,void* vx)
     if(direction==1) rfftwnd_one_real_to_complex(plan_rc,(fftw_real*)vx,(fftw_complex*)vx);
     else             rfftwnd_one_complex_to_real(plan_cr,(fftw_complex*)vx,(fftw_real*)vx);
 }
+
+int simulationRealization::clamp(float x){
+    return ((x)>=0.0?((int)(x)):(-((int)(1-(x)))));
+}
