@@ -2,7 +2,9 @@
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent)
-{}
+{
+    this->setMouseTracking(true);
+}
 
 Canvas::~Canvas()
 {
@@ -60,5 +62,10 @@ void Canvas::resizeGL(int w, int h)
 //    projection.setToIdentity();
 
 //    // Set perspective projection
-//    projection.perspective(fov, aspect, zNear, zFar);
+    //    projection.perspective(fov, aspect, zNear, zFar);
+}
+
+void Canvas::mouseMoveEvent(QMouseEvent *event)
+{
+    qDebug() << "moving!";
 }
