@@ -115,7 +115,7 @@ void Canvas::paintGL()
 }
 
 void Canvas::resizeGL(){
-    qDebug() << "resizeGL" << &endl
+    qDebug() << "resizeGL" << &endl;
 }
 
 void Canvas::constructModelViewProjectionMatrix()
