@@ -7,7 +7,7 @@
 class simulationRealization
 {
 public:
-    simulationRealization();
+    simulationRealization(int gridSize = 50);
 
 private:
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
