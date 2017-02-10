@@ -32,6 +32,8 @@ private:
     const int COLOR_BANDS;
     int   scalar_col;           //method for scalar coloring
     int   frozen;               //toggles on/off the animation
+
+    void FFT(int direction,void* vx);
 };
 
 #endif // SIMULATIONREALIZATION_H

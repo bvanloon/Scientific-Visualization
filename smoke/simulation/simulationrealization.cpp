@@ -25,3 +25,10 @@ simulationRealization::simulationRealization(int gridSize):
     { vx[i] = vy[i] = vx0[i] = vy0[i] = fx[i] = fy[i] = rho[i] = rho0[i] = 0.0f; }
 }
 
+//FFT: Execute the Fast Fourier Transform on the dataset 'vx'.
+//     'dirfection' indicates if we do the direct (1) or inverse (-1) Fourier Transform
+void simulationRealization::FFT(int direction,void* vx)
+{
+    if(direction==1) rfftwnd_one_real_to_complex(plan_rc,(fftw_real*)vx,(fftw_complex*)vx);
+    else             rfftwnd_one_complex_to_real(plan_cr,(fftw_complex*)vx,(fftw_real*)vx);
+}
