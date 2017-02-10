@@ -10,9 +10,14 @@ public:
     explicit Settings(QObject *parent = 0);
     ~Settings();
 
+    friend QDebug operator<<(QDebug stream, const Settings &settings);
+
     class Simulation {
         public:
             int dimension;
+
+            friend QDebug operator<<(QDebug stream, const Settings::Simulation &simulation);
+
             Simulation() :
                 dimension(50)
             {}
@@ -23,6 +28,9 @@ public:
         public:
             int width;
             int height;
+
+            friend QDebug operator<<(QDebug stream, const Settings::Canvas &canvas);
+
             Canvas() :
                 width(-1),
                 height(-1)
