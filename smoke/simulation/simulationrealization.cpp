@@ -36,3 +36,8 @@ void simulationRealization::FFT(int direction,void* vx)
 int simulationRealization::clamp(float x){
     return ((x)>=0.0?((int)(x)):(-((int)(1-(x)))));
 }
+
+float simulationRealization::max(float x, float y)
+{
+    return x < y ? x : y;
+}

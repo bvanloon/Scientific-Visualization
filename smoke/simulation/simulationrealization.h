@@ -35,6 +35,7 @@ private:
 
     void FFT(int direction,void* vx);
     int clamp(float x);
+    float max(float x, float y);
 };
 
 #endif // SIMULATIONREALIZATION_H
