@@ -93,6 +93,7 @@ Makefile*
 
 ## Local folders
 src/build-Triangle-GCC-Debug/
+build-*
 
 ###C###
 
