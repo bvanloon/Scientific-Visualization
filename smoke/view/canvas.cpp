@@ -4,7 +4,7 @@
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent)
 {
-    //Enusre that the mouse is always tracked, even if we didn't click first.
+    //Ensure that the mouse is always tracked, even if we didn't click first.
     this->setMouseTracking(true);
 
     modelViewMatrix.setToIdentity();
