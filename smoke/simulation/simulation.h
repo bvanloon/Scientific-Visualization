@@ -9,6 +9,9 @@ class Simulation
 public:
     Simulation();
 
+signals:
+    void simulationChanged(Simulation simulation);
+
 private:
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
