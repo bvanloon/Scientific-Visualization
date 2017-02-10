@@ -22,6 +22,8 @@ private:
 
     Canvas *canvas;
     Simulation *simulation;
+
+    void connectCanvasAndSimulation();
 };
 
 #endif // MAINWINDOW_H

@@ -7,15 +7,21 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qDebug() << "MainWindow::MainWindow(QWidget *parent)";
-
     this->simulation = new Simulation();
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
+
+    connectCanvasAndSimulation();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete this->simulation;
+}
+
+void MainWindow::connectCanvasAndSimulation()
+{
+    connect(this->canvas, SIGNAL(mouseMoved(QPointF)),
+            this->simulation, SLOT(onMouseMoved(QPointF)));
 }

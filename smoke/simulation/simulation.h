@@ -17,6 +17,7 @@ public:
 signals:
 
 public slots:
+    void onMouseMoved(QPointF newPosition);
 
 private:
     QVector<QVector3D> vertices;

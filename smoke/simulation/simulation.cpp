@@ -1,4 +1,5 @@
 #include "simulation.h"
+#include <QDebug>
 
 Simulation::Simulation(QObject *parent) : QObject(parent)
 {
@@ -19,5 +20,10 @@ QVector<QVector3D> Simulation::getVertices()
 QVector<QVector3D> Simulation::getColors()
 {
     return this->colors;
+}
+
+void Simulation::onMouseMoved(QPointF newPosition)
+{
+
 }
 

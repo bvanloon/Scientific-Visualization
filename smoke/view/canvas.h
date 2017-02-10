@@ -27,6 +27,9 @@ public:
 
     void setSimulation(Simulation *simulation);
 
+signals:
+    void mouseMoved(QPointF newPosition);
+
 public slots:
 
 protected:

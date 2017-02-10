@@ -79,4 +79,5 @@ void Canvas::resizeGL(int width, int height)
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
+    emit mouseMoved(event->localPos());
 }
