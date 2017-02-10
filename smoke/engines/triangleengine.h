@@ -11,10 +11,10 @@
 class TriangleEngine : protected QOpenGLFunctions
 {
 public:
-    TriangleEngine(Simulation *simulation);
+    TriangleEngine();
     virtual ~TriangleEngine();
 
-    void draw();
+    void draw(Simulation* simulation);
 
 private:
     void initBuffers();

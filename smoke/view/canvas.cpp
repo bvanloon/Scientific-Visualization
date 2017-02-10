@@ -24,7 +24,7 @@ void Canvas::initializeGL()
 
     initializeShaders();
 
-    this->triangleEnginge = new TriangleEngine(this->simulation);
+    this->triangleEnginge = new TriangleEngine();
 }
 
 void Canvas::initializeShaders()
@@ -41,7 +41,7 @@ void Canvas::paintGL()
 
     this->shaderProgram->bind();
 
-    this->triangleEnginge->draw();
+    this->triangleEnginge->draw(this->simulation);
 
     this->shaderProgram->release();
 }

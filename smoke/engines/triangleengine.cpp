@@ -1,6 +1,6 @@
 #include "triangleengine.h"
 
-TriangleEngine::TriangleEngine(Simulation* simulation)
+TriangleEngine::TriangleEngine()
 {
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     this->colorBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
@@ -19,7 +19,7 @@ TriangleEngine::~TriangleEngine()
     this->vao.destroy();
 }
 
-void TriangleEngine::draw()
+void TriangleEngine::draw(Simulation *simulation)
 {
     this->vao.bind();
     glDrawArrays(GL_TRIANGLES, 0, 3);
