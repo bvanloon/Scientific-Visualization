@@ -15,6 +15,7 @@ Settings::~Settings()
 
 void Settings::onWindowResized(int width, int height)
 {
-    qDebug() << "settings received: " << width << " " << height;
+    this->canvas->width = width;
+    this->canvas->height = height;
 }
 

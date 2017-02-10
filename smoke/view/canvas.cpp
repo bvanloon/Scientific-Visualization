@@ -84,8 +84,6 @@ void Canvas::resizeGL(int width, int height)
 
     emit windowResized(width, height);
 
-    qDebug() << "canvas send: " << width << " " << height;
-
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
