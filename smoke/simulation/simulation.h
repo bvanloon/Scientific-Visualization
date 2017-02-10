@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QVector3D>
-#include <QPointF>
+#include <QPoint>
 
 #include "simulation/simulationrealization.h"
 #include "settings/settings.h"
@@ -23,7 +23,7 @@ signals:
     void simulationUpdated();
 
 public slots:
-    void onMouseMoved(QPointF newPosition);
+    void onMouseMoved(QPoint newPosition);
 
 private:
     QVector<QVector3D> vertices;
@@ -32,7 +32,7 @@ private:
     SimulationRealization *realization;
     Settings *settings;
 
-    QPointF lastMousePosition;
+    QPoint lastMousePosition;
 };
 
 #endif // SMOKE_H

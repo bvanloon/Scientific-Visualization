@@ -32,7 +32,7 @@ QVector<QVector3D> Simulation::getColors()
 }
 
 
-void Simulation::onMouseMoved(QPointF newPosition)
+void Simulation::onMouseMoved(QPoint newPosition)
 {
     int xi,yi;
 
