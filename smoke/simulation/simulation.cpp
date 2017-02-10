@@ -5,7 +5,7 @@ Simulation::Simulation(Settings* settings, QObject *parent) :
     QObject(parent), lastMousePosition(0.0f, 0.0f)
 {
     this->settings = settings;
-    this->realization = new SimulationRealization(settings->simulation->dimension);
+    this->realization = new SimulationRealization(settings);
 
     vertices.append(QVector3D(800.0f, 400.0f, 0.0f));
     vertices.append(QVector3D(500.0f, 200.0, 0.0f));
@@ -43,14 +43,22 @@ void Simulation::onMouseMoved(QPoint newPosition)
     if (xi > (this->settings->simulation->dimension - 1))  xi = this->settings->simulation->dimension - 1; if (yi > (this->settings->simulation->dimension - 1))  yi = this->settings->simulation->dimension - 1;
     if (xi < 0) xi = 0; if (yi < 0) yi = 0;
 
+    newPosition.setY(this->settings->canvas->height - newPosition.y());
+
+    this->realization->addForceAt(newPosition, this->lastMousePosition);
+    this->lastMousePosition = newPosition;
+
+
+
+
     this->vertices.clear();
 
-    vertices.append(QVector3D(newPosition.x(),      402 - newPosition.y(),      0.0f));
-    vertices.append(QVector3D(newPosition.x() - 10, 402 - newPosition.y() - 10, 0.0f));
-    vertices.append(QVector3D(newPosition.x() + 10, 402 - newPosition.y() - 10, 0.0f));
+    vertices.append(QVector3D(newPosition.x(),       newPosition.y(),      0.0f));
+    vertices.append(QVector3D(newPosition.x() - 10,  newPosition.y() - 10, 0.0f));
+    vertices.append(QVector3D(newPosition.x() + 10,  newPosition.y() - 10, 0.0f));
 
 
-    this->lastMousePosition = newPosition;
+
     emit simulationUpdated();
 }
 

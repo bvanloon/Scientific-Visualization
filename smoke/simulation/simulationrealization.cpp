@@ -1,12 +1,15 @@
 #include "simulationrealization.h"
 #include <QDebug>
+#include <QPoint>
 
-SimulationRealization::SimulationRealization(int gridSize):
+SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
     DIM(50), dt(0.4), visc(0.001),
     color_dir(0), vec_scale(1000), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
     scalar_col(0), frozen(0)
 {
+    this->settings = settings;
+
     qDebug() << "SimulationRealization::SimulationRealization(int gridSize)";
 
     int i; size_t dim;
@@ -43,6 +46,23 @@ int SimulationRealization::clamp(float x){
 float SimulationRealization::max(float x, float y)
 {
     return x < y ? x : y;
+}
+
+int SimulationRealization::addForceAt(QPoint currentMousePosition, QPoint oldMousePosition )
+{
+    QPoint mouseDiff = currentMousePosition - oldMousePosition;
+
+    double length = sqrt(QPoint::dotProduct(mouseDiff, mouseDiff));
+
+    if (length != 0.0 )
+    {
+        mouseDiff *= 0.1/length;
+    }
+
+    int idx = currentMousePosition.y() * this->settings->simulation->dimension + currentMousePosition.x();
+    fx[idx] += mouseDiff.x();
+    fy[idx] += mouseDiff.y();
+    rho[idx] = 10.0f;
 }
 
 //solve: Solve (compute) one step of the fluid flow simulation

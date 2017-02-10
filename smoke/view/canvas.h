@@ -24,7 +24,7 @@ public:
     void setSimulation(Simulation *simulation);
 
 signals:
-    void mouseMoved(QPointF newPosition);
+    void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
 
 public slots:

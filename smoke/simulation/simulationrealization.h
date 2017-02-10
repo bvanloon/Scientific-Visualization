@@ -2,17 +2,22 @@
 #define SIMULATIONREALIZATION_H
 
 #include "rfftw.h"
+#include "settings/settings.h"
 #include <math.h>
 
 class SimulationRealization
 {
 public:
-    SimulationRealization(int gridSize = 50);
+    SimulationRealization( Settings* settings,int gridSize = 50);
 
     int clamp(float x);
     float max(float x, float y);
 
+    int addForceAt(QPoint currentMousePosition, QPoint oldMousePosition);
+
 private:
+    Settings* settings;
+
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
     const int DIM;				//size of simulation grid
     double dt;				//simulation time step

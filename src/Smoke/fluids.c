@@ -169,8 +169,8 @@ void set_forces(void)
         rho0[i]  = 0.995 * rho[i];
         fx[i] *= 0.85;
         fy[i] *= 0.85;
-        vx0[i]    = fx[i];
-        vy0[i]    = fy[i];
+        vx0[i]   = fx[i];
+        vy0[i]   = fy[i];
 	}
 }
 
@@ -368,6 +368,7 @@ void drag(int mx, int my)
 	yi = (int)clamp((double)(DIM + 1) * ((double)(winHeight - my) / (double)winHeight));
 
 	X = xi; Y = yi;
+
 
 	if (X > (DIM - 1))  X = DIM - 1; if (Y > (DIM - 1))  Y = DIM - 1;
 	if (X < 0) X = 0; if (Y < 0) Y = 0;
