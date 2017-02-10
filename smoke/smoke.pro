@@ -16,13 +16,15 @@ SOURCES += main.cpp\
         view/mainwindow.cpp \
     view/canvas.cpp \
     engines/triangleengine.cpp \
-    simulation/simulation.cpp
+    simulation/simulation.cpp \
+    simulation/simulationrealization.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
     view/canvas.h \
     engines/triangleengine.h \
-    simulation/simulation.h
+    simulation/simulation.h \
+    simulation/simulationrealization.h
 
 FORMS    += view/mainwindow.ui
 

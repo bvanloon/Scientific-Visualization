@@ -6,12 +6,8 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QMatrix4x4>
-#include <QVector3D>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
-#include <QTimer>
-
 #include <QDebug>
 
 #include "engines/triangleengine.h"

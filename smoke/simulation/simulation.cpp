@@ -26,8 +26,6 @@ void Simulation::onMouseMoved(QPointF newPosition)
 {
     this->vertices.clear();
 
-    qDebug() << newPosition;
-
     vertices.append(QVector3D(newPosition.x(),      402 - newPosition.y(),      0.0f));
     vertices.append(QVector3D(newPosition.x() - 10, 402 - newPosition.y() - 10, 0.0f));
     vertices.append(QVector3D(newPosition.x() + 10, 402 - newPosition.y() - 10, 0.0f));
