@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->simulation = new Simulation();
     this->canvas = ui->openGLWidget;
+    this->canvas->setSimulation(this->simulation);
 }
 
 MainWindow::~MainWindow()

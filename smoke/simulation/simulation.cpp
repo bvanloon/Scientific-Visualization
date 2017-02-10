@@ -2,6 +2,5 @@
 
 Simulation::Simulation()
 {
-    qDebug() << "Simulation::Simulation()";
 }
 

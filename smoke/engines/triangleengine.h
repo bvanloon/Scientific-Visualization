@@ -6,10 +6,12 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 
+#include "simulation/simulation.h"
+
 class TriangleEngine : protected QOpenGLFunctions
 {
 public:
-    TriangleEngine();
+    TriangleEngine(Simulation *simulation);
     virtual ~TriangleEngine();
 
     void draw();
@@ -17,6 +19,7 @@ public:
 private:
     void initBuffers();
     void initTriangleGeometry();
+    void initConnectionsToSimulation(Simulation* simulation);
 
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 

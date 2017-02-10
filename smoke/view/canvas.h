@@ -15,6 +15,7 @@
 #include <QDebug>
 
 #include "engines/triangleengine.h"
+#include "simulation/simulation.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -23,6 +24,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 public:
     Canvas(QWidget* parent);
     ~Canvas();
+
+    void setSimulation(Simulation* simulation);
 
 public slots:
 
@@ -37,6 +40,9 @@ private:
 
     // OpenGL initialization
     void initializeShaders();
+
+    //ONLY USE THIS TO PASS THE SIMULATION TO THE ENGINES
+    Simulation* simulation;
 
     //Engines
     TriangleEngine *triangleEnginge;

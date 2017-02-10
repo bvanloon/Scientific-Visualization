@@ -9,6 +9,11 @@ Canvas::~Canvas()
     delete this->shaderProgram;
 }
 
+void Canvas::setSimulation(Simulation *simulation)
+{
+    this->simulation = simulation;
+}
+
 void Canvas::initializeGL()
 {
     initializeOpenGLFunctions();
@@ -19,7 +24,7 @@ void Canvas::initializeGL()
 
     initializeShaders();
 
-    this->triangleEnginge = new TriangleEngine();
+    this->triangleEnginge = new TriangleEngine(this->simulation);
 }
 
 void Canvas::initializeShaders()
