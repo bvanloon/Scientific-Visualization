@@ -139,3 +139,18 @@ void SimulationRealization::set_forces(void)
         vy0[i]    = fy[i];
     }
 }
+
+//do_one_simulation_step: Do one complete cycle of the simulation:
+//      - set_forces:
+//      - solve:            read forces from the user
+//      - diffuse_matter:   compute a new set of velocities
+void SimulationRealization::do_one_simulation_step(void)
+{
+    if (!frozen)
+    {
+      set_forces();
+      solve(DIM, vx, vy, vx0, vy0, visc, dt);
+      diffuse_matter(DIM, vx, vy, rho, rho0, dt);
+    }
+}
+
