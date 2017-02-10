@@ -30,43 +30,6 @@ void Canvas::initializeShaders()
     this->shaderProgram->link();
 }
 
-void Canvas::initializeBuffers()
-{
-    this->vao.create();
-    this->vao.bind();
-
-    //Init vertex buffer
-    this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    this->vertexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->vertexBuffer->create();
-    this->vertexBuffer->bind();
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    //Init color buffer
-    this->colorBuffer= new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    this->colorBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->colorBuffer->create();
-    this->colorBuffer->bind();
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    this->vao.release();
-
-    //Fill buffers
-    updateBuffer(this->vertexBuffer, this->vertices);
-    updateBuffer(this->colorBuffer, this->colors);
-}
-
-void Canvas::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
-{
-    buffer->bind();
-    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
-    buffer->release();
-}
-
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
