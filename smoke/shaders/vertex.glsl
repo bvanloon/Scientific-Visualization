@@ -12,5 +12,5 @@ layout(location = 0) out vec3 vsColor;
 void main(void)
 {
     vsColor = inputColor;
-    gl_Position = vec4(inputPosition, 1.0);
+    gl_Position = mvpMatrix * vec4(inputPosition, 1.0);
 }

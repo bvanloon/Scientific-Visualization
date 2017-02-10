@@ -1,4 +1,5 @@
 #include "canvas.h"
+#include <QMouseEvent>
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent)
@@ -38,35 +39,44 @@ void Canvas::initializeShaders()
     this->shaderProgram->link();
 }
 
+void Canvas::setUniforms()
+{
+    setMVPMatrix();
+}
+
+void Canvas::setMVPMatrix()
+{
+    QMatrix4x4 modelViewMatrix;
+    modelViewMatrix.translate(0.0, 0.0, -5.0);
+//    matrix.rotate(rotation);
+
+    this->shaderProgram->setUniformValue("mvp_matrix", this->projectionMatrix * modelViewMatrix);
+}
+
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    this->shaderProgram->bind();
+    shaderProgram->bind();
 
-    this->triangleEnginge->draw(this->simulation);
+    setUniforms();
 
-    this->shaderProgram->release();
+    triangleEnginge->draw(this->simulation);
+
+    shaderProgram->release();
 }
 
 void Canvas::resizeGL(int w, int h)
 {
-    qDebug() << "resizeGL: not yet implemented" << &endl;
+    qreal aspectRatio = qreal(w) / qreal(h ? h : 1);
+    const qreal zNear = 3.0;
+    const qreal zFar = 7.0;
+    const qreal fov = 45.0;
 
-//    // Calculate aspect ratio
-//    qreal aspect = qreal(w) / qreal(h ? h : 1);
-
-//    // Set near plane to 3.0, far plane to 7.0, field of view 45 degrees
-//    const qreal zNear = 3.0, zFar = 7.0, fov = 45.0;
-
-//    // Reset projection
-//    projection.setToIdentity();
-
-//    // Set perspective projection
-    //    projection.perspective(fov, aspect, zNear, zFar);
+    projectionMatrix.setToIdentity();
+    projectionMatrix.perspective(fov, aspectRatio, zNear, zFar);
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    qDebug() << "moving!";
 }

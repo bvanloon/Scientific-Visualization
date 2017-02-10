@@ -42,6 +42,12 @@ private:
     // OpenGL initialization
     void initializeShaders();
 
+    //Uniforms
+    QMatrix4x4 projectionMatrix;
+
+    void setUniforms();
+    void setMVPMatrix();
+
     //ONLY USE THIS TO PASS THE SIMULATION TO THE ENGINES
     Simulation* simulation;
 
