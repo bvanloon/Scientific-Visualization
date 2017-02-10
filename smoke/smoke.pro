@@ -23,7 +23,6 @@ HEADERS  += main.ih\
     view/canvas.h \
     engines/triangleengine.h \
     simulation/simulation.h
-    simulation/simulation.ih
 
 FORMS    += view/mainwindow.ui
 

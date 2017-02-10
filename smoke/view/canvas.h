@@ -25,7 +25,7 @@ public:
     Canvas(QWidget* parent);
     ~Canvas();
 
-    void setSimulation(Simulation* simulation);
+    void setSimulation(Simulation *simulation);
 
 public slots:
 

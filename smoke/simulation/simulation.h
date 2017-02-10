@@ -1,20 +1,17 @@
-#ifndef SIMULATION_H
-#define SIMULATION_H
+#ifndef SMOKE_H
+#define SMOKE_H
 
 #include <QObject>
-#include <QDebug>
 
-class Simulation
+class Simulation : public QObject
 {
+    Q_OBJECT
 public:
-    Simulation();
+    explicit Simulation(QObject *parent = 0);
 
 signals:
-    void simulationChanged(Simulation simulation);
 
-private:
-    QVector<QVector3D> vertices;
-    QVector<QVector3D> colors;
+public slots:
 };
 
-#endif // SIMULATION_H
+#endif // SMOKE_H
