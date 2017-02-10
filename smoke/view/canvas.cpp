@@ -2,30 +2,10 @@
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent)
-{
-
-    this->vertices = QVector<QVector3D>();
-    this->vertices.append(QVector3D(-0.8f, -0.8f, 0.0f));
-    this->vertices.append(QVector3D(0.8f, -0.8f, 0.0f));
-    this->vertices.append(QVector3D(0.0f, 0.8f, 0.0f));
-
-    this->colors = QVector<QVector3D>();
-    this->colors.append(QVector3D(1.0f, 0.0f, 0.0f));
-    this->colors.append(QVector3D(0.0f, 1.0f, 0.0f));
-    this->colors.append(QVector3D(0.0f, 0.0f, 1.0f));
-
-//    QTimer *timer = new QTimer(this);
-//    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-//    timer->start(1);
-
-//    timer -> start(1);
-}
+{}
 
 Canvas::~Canvas()
 {
-    this->vertexBuffer->destroy();
-    this->indexBuffer->destroy();
-    this->vao.destroy();
     delete this->shaderProgram;
 }
 
@@ -33,11 +13,13 @@ void Canvas::initializeGL()
 {
     initializeOpenGLFunctions();
 
-    glEnable(GL_DEPTH_TEST);
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+    glEnable(GL_DEPTH_TEST);
+
     initializeShaders();
-    initializeBuffers();
+
+    this->triangleEnginge = new TriangleEngine();
 }
 
 void Canvas::initializeShaders()
@@ -90,15 +72,9 @@ void Canvas::paintGL()
     glClear(GL_COLOR_BUFFER_BIT);
 
     this->shaderProgram->bind();
-    this->vao.bind();
 
-    setUniforms();
+    this->triangleEnginge->draw();
 
-    updateTransformationMatrix();
-
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    this->vao.release();
     this->shaderProgram->release();
 }
 

@@ -14,11 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         view/mainwindow.cpp \
-    view/canvas.cpp
+    view/canvas.cpp \
+    engines/triangleengine.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
-    view/canvas.h
+    view/canvas.h \
+    engines/triangleengine.h
 
 
 FORMS    += view/mainwindow.ui

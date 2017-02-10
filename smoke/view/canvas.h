@@ -14,6 +14,8 @@
 
 #include <QDebug>
 
+#include "engines/triangleengine.h"
+
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
@@ -64,6 +66,9 @@ private:
     //Temporary, model
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
+
+    //Engines
+    TriangleEngine *triangleEnginge;
 };
 
 #endif // CANVAS_H
