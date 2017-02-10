@@ -28,3 +28,17 @@ FORMS    += view/mainwindow.ui
 
 RESOURCES += \
     shaders.qrc
+
+unix: LIBS += -L$$PWD/fftw-2.1.5/lib/ -lrfftw
+
+INCLUDEPATH += $$PWD/fftw-2.1.5/include
+DEPENDPATH += $$PWD/fftw-2.1.5/include
+
+unix: PRE_TARGETDEPS += $$PWD/fftw-2.1.5/lib/librfftw.a
+
+unix: LIBS += -L$$PWD/fftw-2.1.5/lib/ -lfftw
+
+INCLUDEPATH += $$PWD/fftw-2.1.5/include
+DEPENDPATH += $$PWD/fftw-2.1.5/include
+
+unix: PRE_TARGETDEPS += $$PWD/fftw-2.1.5/lib/libfftw.a
