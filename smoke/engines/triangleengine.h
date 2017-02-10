@@ -19,7 +19,6 @@ public:
 private:
     void initBuffers();
     void initTriangleGeometry();
-    void initConnectionsToSimulation(Simulation *simulation);
 
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 

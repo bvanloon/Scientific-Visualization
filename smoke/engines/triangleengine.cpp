@@ -9,8 +9,6 @@ TriangleEngine::TriangleEngine(Simulation* simulation)
 
     initBuffers();
     initTriangleGeometry();
-
-    initConnectionsToSimulation(simulation);
 }
 
 
@@ -65,10 +63,6 @@ void TriangleEngine::initTriangleGeometry()
     colors.append(QVector3D(0.0f, 0.0f, 1.0f));
 
     updateBuffer(this->colorBuffer, colors);
-}
-
-void TriangleEngine::initConnectionsToSimulation(Simulation *simulation)
-{
 }
 
 void TriangleEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
