@@ -15,13 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         view/mainwindow.cpp \
     view/canvas.cpp \
-    engines/triangleengine.cpp
+    engines/triangleengine.cpp \
+    simulation/simulation.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
     view/canvas.h \
-    engines/triangleengine.h
-
+    engines/triangleengine.h \
+    simulation/simulation.h
+    simulation/simulation.ih
 
 FORMS    += view/mainwindow.ui
 
