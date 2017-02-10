@@ -36,6 +36,7 @@ private:
     void FFT(int direction,void* vx);
     int clamp(float x);
     float max(float x, float y);
+    void solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt);
 };
 
 #endif // SIMULATIONREALIZATION_H
