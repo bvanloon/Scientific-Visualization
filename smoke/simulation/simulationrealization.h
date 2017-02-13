@@ -46,6 +46,7 @@ private:
     void diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
     void set_forces(void);
     void do_one_simulation_step(void);
+    int arrayIndexCursorLocation(QPoint currentMousePosition);
 };
 
 #endif // SIMULATIONREALIZATION_H

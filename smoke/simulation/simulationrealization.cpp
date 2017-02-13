@@ -48,18 +48,40 @@ float SimulationRealization::max(float x, float y)
     return x > y ? x : y;
 }
 
+int SimulationRealization::arrayIndexCursorLocation(QPoint currentMousePosition)
+{
+    // Compute the array index that corresponds to the cursor location
+    int xi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)currentMousePosition.x()/ (double)this->settings->canvas->width));
+    int yi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)((double)currentMousePosition.y()) / (double)this->settings->canvas->height));
+
+    //Bound array index to canvas dimensions
+    if (xi > (this->settings->simulation->dimension - 1))
+        xi = this->settings->simulation->dimension - 1;
+    if (yi > (this->settings->simulation->dimension - 1))
+        yi = this->settings->simulation->dimension - 1;
+    if (xi < 0)
+        xi = 0;
+    if (yi < 0)
+        yi = 0;
+
+    return yi * this->settings->simulation->dimension + xi;
+}
+
+
 int SimulationRealization::addForceAt(QPoint currentMousePosition, QPoint oldMousePosition )
 {
     QPoint mouseDiff = currentMousePosition - oldMousePosition;
 
     double length = sqrt(QPoint::dotProduct(mouseDiff, mouseDiff));
+    //Invert y-position
+    currentMousePosition.setY(this->settings->canvas->height - currentMousePosition.y());
 
     if (length != 0.0 )
     {
         mouseDiff *= 0.1/length;
     }
 
-    int idx = currentMousePosition.y() * this->settings->simulation->dimension + currentMousePosition.x();
+    int idx = arrayIndexCursorLocation(currentMousePosition);
     fx[idx] += mouseDiff.x();
     fy[idx] += mouseDiff.y();
     rho[idx] = 10.0f;
