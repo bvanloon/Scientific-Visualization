@@ -77,9 +77,9 @@ int SimulationRealization::addForceAt(QPoint currentMousePosition, QPoint oldMou
     QPointF mouseDiff = QPointF(currentMousePosition - oldMousePosition);
     double length = sqrt(QPointF::dotProduct(mouseDiff, mouseDiff));
 
-    if (length != 0.0 )
+    if (length != 0.0f )
     {
-        mouseDiff *= 0.1/length;
+        mouseDiff *= 0.1f/length;
     }
 
     int idx = arrayIndexCursorLocation(currentMousePosition);
