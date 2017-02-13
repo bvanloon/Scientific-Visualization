@@ -45,7 +45,7 @@ int SimulationRealization::clamp(float x){
 
 float SimulationRealization::max(float x, float y)
 {
-    return x < y ? x : y;
+    return x > y ? x : y;
 }
 
 int SimulationRealization::addForceAt(QPoint currentMousePosition, QPoint oldMousePosition )
