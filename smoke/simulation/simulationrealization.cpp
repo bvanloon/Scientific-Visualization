@@ -1,6 +1,7 @@
 #include "simulationrealization.h"
 #include <QDebug>
 #include <QPoint>
+#include <QPointF>
 
 SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
     DIM(50), dt(0.4), visc(0.001),
@@ -70,11 +71,11 @@ int SimulationRealization::arrayIndexCursorLocation(QPoint currentMousePosition)
 
 int SimulationRealization::addForceAt(QPoint currentMousePosition, QPoint oldMousePosition )
 {
-    QPoint mouseDiff = currentMousePosition - oldMousePosition;
-
-    double length = sqrt(QPoint::dotProduct(mouseDiff, mouseDiff));
     //Invert y-position
     currentMousePosition.setY(this->settings->canvas->height - currentMousePosition.y());
+
+    QPointF mouseDiff = QPointF(currentMousePosition - oldMousePosition);
+    double length = sqrt(QPointF::dotProduct(mouseDiff, mouseDiff));
 
     if (length != 0.0 )
     {
