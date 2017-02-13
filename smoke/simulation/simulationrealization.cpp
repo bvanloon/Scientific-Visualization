@@ -53,7 +53,7 @@ int SimulationRealization::arrayIndexCursorLocation(QPoint currentMousePosition)
 {
     // Compute the array index that corresponds to the cursor location
     int xi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)currentMousePosition.x()/ (double)this->settings->canvas->width));
-    int yi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)((double)currentMousePosition.y()) / (double)this->settings->canvas->height));
+    int yi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)currentMousePosition.y() / (double)this->settings->canvas->height));
 
     //Bound array index to canvas dimensions
     if (xi > (this->settings->simulation->dimension - 1))
