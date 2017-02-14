@@ -6,16 +6,16 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QMatrix4x4>
-#include <QVector3D>
 #include <QOpenGLShaderProgram>
-#include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+#include <QDebug>
 #include <QTimer>
 
-#include <QDebug>
-
 #include "engines/triangleengine.h"
+#include "engines/vectorengine.h"
+#include "engines/smokeengine.h"
 #include "simulation/simulation.h"
+
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -26,12 +26,17 @@ public:
     ~Canvas();
 
     void setSimulation(Simulation *simulation);
+    void setSettings(Settings *settings);
 
 signals:
-    void mouseMoved(QPointF newPosition);
+    void mouseMoved(QPoint newPosition);
+    void windowResized(int width, int height);
 
 public slots:
     void onSimulationUpdated();
+
+private slots:
+    void idleLoop();
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -54,9 +59,17 @@ private:
     void setMVPMatrix();
 
     Simulation* simulation;
+    Settings* settings;
 
     //Engines
     TriangleEngine *triangleEnginge;
+    VectorEngine *vectorEngine;
+    SmokeEngine *smokeEngine;
+
+
+    //Idle Loop
+    QTimer* timer;
+    void initiateIdleLoop();
 };
 
 #endif // CANVAS_H
