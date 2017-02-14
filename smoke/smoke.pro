@@ -29,6 +29,7 @@ SOURCES += main.cpp\
     engines/vectorengine.cpp \
     engines/smokeengine.cpp
     colormaps/abstractcolormap.cpp \
+    colormaps/rainbowcolormap.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -41,6 +42,7 @@ HEADERS  += main.ih\
     engines/vectorengine.h \
     engines/smokeengine.h
     colormaps/abstractcolormap.h \
+    colormaps/rainbowcolormap.h
 
 FORMS    += view/mainwindow.ui
 
