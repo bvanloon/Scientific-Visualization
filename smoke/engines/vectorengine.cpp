@@ -3,7 +3,6 @@
 VectorEngine::VectorEngine(Settings *settings)
 {
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    this->colorBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
     initializeOpenGLFunctions();
 
@@ -13,7 +12,6 @@ VectorEngine::VectorEngine(Settings *settings)
 VectorEngine::~VectorEngine()
 {
     this->vertexBuffer->destroy();
-    this->colorBuffer->destroy();
     this->vao.destroy();
 }
 
@@ -48,25 +46,17 @@ void VectorEngine::initBuffers()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
-    this->colorBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->colorBuffer->create();
-    this->colorBuffer->bind();
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
     this->vao.release();
 }
 
 void VectorEngine::updateBuffers(Simulation *simulation)
 {
-//    qDebug() << "void VectorEngine::updateBuffers(Simulation *simulation)";
-//    QVector<QVector3D> lines = QVector<QVector3D>();
-//    lines.append(QVector3D(0.0f, 0.0f, 0.0f));
-//    lines.append(QVector3D(100.0f, 100.0f, 100.0f));
+    qDebug() << "void VectorEngine::updateBuffers(Simulation *simulation)";
+    QVector<QVector3D> lines = QVector<QVector3D>();
+    lines.append(QVector3D(1.0f, 1.0f, 0.0f));
+    lines.append(QVector3D(100.0f, 100.0f, 0.0f));
 
-    updateBuffer(this->vertexBuffer, simulation->getVertices());
-    updateBuffer(this->colorBuffer, simulation->getColors());
+    updateBuffer(this->vertexBuffer, lines);
 }
 
 void VectorEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
