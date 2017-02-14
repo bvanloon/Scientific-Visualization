@@ -8,7 +8,7 @@ SimulationRealization::SimulationRealization(Settings* settings):
     dt(0.4), visc(0.001),
     color_dir(0), vec_scale(1000), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
-    scalar_col(0), frozen(0)
+    scalar_col(0)
 {
     this->settings = settings;
 
@@ -162,10 +162,7 @@ void SimulationRealization::set_forces(void)
 //      - diffuse_matter:   compute a new set of velocities
 void SimulationRealization::do_one_simulation_step(void)
 {
-    if (!frozen)
-    {
       set_forces();
       solve(settings->simulation->dimension, vx, vy, vx0, vy0, visc, dt);
       diffuse_matter(settings->simulation->dimension, vx, vy, rho, rho0, dt);
-    }
 }
