@@ -4,11 +4,11 @@
 #include <QPoint>
 #include <QPointF>
 
-SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
-    DIM(50), dt(0.4), visc(0.001),
-    color_dir(0), vec_scale(1000), draw_smoke(0), draw_vecs(1),
+SimulationRealization::SimulationRealization(Settings* settings):
+    dt(0.4), visc(0.001),
+    color_dir(0), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
-    scalar_col(0), frozen(0)
+    scalar_col(0)
 {
     this->settings = settings;
 
@@ -16,20 +16,20 @@ SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
 
     int i; size_t dim;
 
-    dim     = gridSize * 2*(gridSize/2+1)*sizeof(fftw_real);        //Allocate data structures
+    dim     = settings->simulation->dimension * 2*(settings->simulation->dimension/2+1)*sizeof(fftw_real);        //Allocate data structures
     vx       = (fftw_real*) malloc(dim);
     vy       = (fftw_real*) malloc(dim);
     vx0      = (fftw_real*) malloc(dim);
     vy0      = (fftw_real*) malloc(dim);
-    dim     = gridSize * gridSize * sizeof(fftw_real);
+    dim     = settings->simulation->dimension * settings->simulation->dimension * sizeof(fftw_real);
     fx      = (fftw_real*) malloc(dim);
     fy      = (fftw_real*) malloc(dim);
     rho     = (fftw_real*) malloc(dim);
     rho0    = (fftw_real*) malloc(dim);
-    plan_rc = rfftw2d_create_plan(gridSize, gridSize, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
-    plan_cr = rfftw2d_create_plan(gridSize, gridSize, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
+    plan_rc = rfftw2d_create_plan(settings->simulation->dimension, settings->simulation->dimension, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
+    plan_cr = rfftw2d_create_plan(settings->simulation->dimension, settings->simulation->dimension, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
 
-    for (i = 0; i < gridSize * gridSize; i++)                      //Initialize data structures to 0
+    for (i = 0; i < settings->simulation->dimension * settings->simulation->dimension; i++)                      //Initialize data structures to 0
     { vx[i] = vy[i] = vx0[i] = vy0[i] = fx[i] = fy[i] = rho[i] = rho0[i] = 0.0f; }
 }
 
@@ -146,7 +146,7 @@ void SimulationRealization::diffuse_matter(int gride_size, fftw_real *vx, fftw_r
 void SimulationRealization::set_forces(void)
 {
     int i;
-    for (i = 0; i < DIM * DIM; i++)
+    for (i = 0; i < settings->simulation->dimension * settings->simulation->dimension; i++)
     {
         rho0[i]  = 0.995 * rho[i];
         fx[i] *= 0.85;
@@ -162,10 +162,7 @@ void SimulationRealization::set_forces(void)
 //      - diffuse_matter:   compute a new set of velocities
 void SimulationRealization::do_one_simulation_step(void)
 {
-    if (!frozen)
-    {
       set_forces();
-      solve(DIM, vx, vy, vx0, vy0, visc, dt);
-      diffuse_matter(DIM, vx, vy, rho, rho0, dt);
-    }
+      solve(settings->simulation->dimension, vx, vy, vx0, vy0, visc, dt);
+      diffuse_matter(settings->simulation->dimension, vx, vy, rho, rho0, dt);
 }

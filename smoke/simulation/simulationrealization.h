@@ -8,8 +8,7 @@
 class SimulationRealization
 {
 public:
-    SimulationRealization( Settings* settings,int gridSize = 50);
-
+    SimulationRealization( Settings* settings);
 
     int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
     void do_one_simulation_step(void);
@@ -21,7 +20,6 @@ private:
     Settings* settings;
 
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
-    const int DIM;				//size of simulation grid
     double dt;				//simulation time step
     float visc;				//fluid viscosity
 //    fftw_real *vx, *vy;             //(vx,vy)   = velocity field at the current moment
@@ -32,16 +30,14 @@ private:
 
 
     //--- VISUALIZATION PARAMETERS ---------------------------------------------------------------------
-    int   winWidth, winHeight;      //size of the graphics window, in pixels
     int   color_dir;            //use direction color-coding or not
-    float vec_scale;			//scaling of hedgehogs
     int   draw_smoke;           //draw the smoke or not
     int   draw_vecs;            //draw the vector field or not
     const int COLOR_BLACKWHITE;   //different types of color mapping: black-and-white, rainbow, banded
     const int COLOR_RAINBOW;
     const int COLOR_BANDS;
     int   scalar_col;           //method for scalar coloring
-    int   frozen;               //toggles on/off the animation
+
 
     void FFT(int direction,void* vx);
     void solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt);
