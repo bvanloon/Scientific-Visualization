@@ -36,18 +36,28 @@ public:
 
     class Grid {
         public:
-            fftw_real cell_width;
-            fftw_real cell_height;
+            fftw_real cellWidth;
+            fftw_real cellHeight;
 
             Grid() :
-                cell_width(-1),
-                cell_height(-1)
+                cellWidth(-1),
+                cellHeight(-1)
+            {}
+    };
+
+    class Visualization {
+        public:
+            float vecScale;
+
+            Visualization():
+                vecScale(1000)
             {}
     };
 
     Simulation *simulation;
     Canvas *canvas;
     Grid *grid;
+    Visualization *visualization;
 
 signals:
 

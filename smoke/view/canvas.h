@@ -11,6 +11,7 @@
 #include <QDebug>
 
 #include "engines/triangleengine.h"
+#include "engines/vectorengine.h"
 #include "simulation/simulation.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
@@ -22,6 +23,7 @@ public:
     ~Canvas();
 
     void setSimulation(Simulation *simulation);
+    void setSettings(Settings *settings);
 
 signals:
     void mouseMoved(QPoint newPosition);
@@ -51,9 +53,11 @@ private:
     void setMVPMatrix();
 
     Simulation* simulation;
+    Settings* settings;
 
     //Engines
     TriangleEngine *triangleEnginge;
+    VectorEngine *vectorEngine;
 };
 
 #endif // CANVAS_H

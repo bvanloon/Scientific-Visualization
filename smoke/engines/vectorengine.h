@@ -7,11 +7,12 @@
 #include <QOpenGLVertexArrayObject>
 
 #include "simulation/simulation.h"
+#include "settings/settings.h"
 
 class VectorEngine : protected QOpenGLFunctions
 {
 public:
-    VectorEngine();
+    VectorEngine(Settings* settings);
     virtual ~VectorEngine();
 
     void draw(Simulation* simulation);
@@ -21,6 +22,8 @@ private:
 
     void updateBuffers(Simulation* simulation);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
+
+    Settings* settings;
 
     QOpenGLVertexArrayObject vao;
     QOpenGLBuffer* vertexBuffer;

@@ -6,6 +6,7 @@ Settings::Settings(QObject *parent) : QObject(parent)
     this->canvas = new Canvas();
     this->simulation = new Simulation();
     this->grid  = new Grid();
+    this->visualization = new Visualization();
 }
 
 Settings::~Settings()
@@ -13,6 +14,7 @@ Settings::~Settings()
     delete canvas;
     delete simulation;
     delete grid;
+    delete visualization;
 }
 
 
@@ -32,6 +34,6 @@ void Settings::onDimensionChanged(int newDimension)
 
 void Settings::updateGridCellSize()
 {
-    this->grid->cell_height = (fftw_real) this->canvas->height / (fftw_real)(this->simulation->dimension + 1);
-    this->grid->cell_width = (fftw_real) this->canvas->width / (fftw_real)(this->simulation->dimension + 1);
+    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(this->simulation->dimension + 1);
+    this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(this->simulation->dimension + 1);
 }

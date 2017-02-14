@@ -19,6 +19,8 @@ public:
     QVector<QVector3D> getVertices();
     QVector<QVector3D> getColors();
 
+    SimulationRealization *realization;
+
 signals:
     void simulationUpdated();
 
@@ -28,8 +30,6 @@ public slots:
 private:
     QVector<QVector3D> vertices;
     QVector<QVector3D> colors;
-
-    SimulationRealization *realization;
     Settings *settings;
 
     QPoint lastMousePosition;

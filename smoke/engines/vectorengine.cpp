@@ -1,6 +1,7 @@
 #include "vectorengine.h"
 
-VectorEngine::VectorEngine()
+VectorEngine::VectorEngine(Settings *settings):
+    settings(settings)
 {
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
@@ -17,21 +18,20 @@ VectorEngine::~VectorEngine()
 
 void VectorEngine::draw(Simulation *simulation)
 {
-//    glBegin(GL_LINES);				//draw velocities
-//    for (int i = 0; i < DIM; i++)
-//      for (int j = 0; j < DIM; j++)
+//    int idx;
+//    for (int i = 0; i < this->settings->simulation->dimension; i++)
+//      for (int j = 0; j < this->settings->simulation->dimension; j++)
 //      {
-//        idx = (j * DIM) + i;
+//        idx = (j * this->settings->simulation->dimension) + i;
 //        glColor3f(1.0f, 0.0f, 0.0f);
-//        glVertex2f(wn + (fftw_real)i * wn, hn + (fftw_real)j * hn);
-//        glVertex2f((wn + (fftw_real)i * wn) + vec_scale * vx[idx], (hn + (fftw_real)j * hn) + vec_scale * vy[idx]);
+//        glVertex2f(this->settings->grid->cellWidth + (fftw_real)i * this->settings->grid->cellWidth, this->settings->grid->cellHeight + (fftw_real)j * this->settings->grid->cellHeight);
+//        glVertex2f((this->settings->grid->cellWidth + (fftw_real)i * this->settings->grid->cellWidth) + this->settings->visualization->vecScale * simulation->realization->vx[idx], (this->settings->grid->cellHeight + (fftw_real)j * this->settings->grid->cellHeight) + this->settings->visualization->vecScale * simulation->realization->vy[idx]);
 //      }
-//    glEnd();
-//    this->updateBuffers(simulation);
+    this->updateBuffers(simulation);
 
-//    this->vao.bind();
-//    glDrawArrays(GL_TRIANGLES, 0, 3);
-//    this->vao.release();
+    this->vao.bind();
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    this->vao.release();
 }
 
 void VectorEngine::initBuffers()

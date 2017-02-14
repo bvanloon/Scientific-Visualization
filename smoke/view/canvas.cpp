@@ -21,6 +21,11 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
+void Canvas::setSettings(Settings *settings)
+{
+    this->settings = settings;
+}
+
 void Canvas::onSimulationUpdated()
 {
     update();
@@ -37,6 +42,7 @@ void Canvas::initializeGL()
     initializeShaders();
 
     this->triangleEnginge = new TriangleEngine();
+    this->vectorEngine = new VectorEngine(this->settings);
 }
 
 void Canvas::initializeShaders()
@@ -55,7 +61,7 @@ void Canvas::paintGL()
 
     setUniforms();
 
-    triangleEnginge->draw(this->simulation);
+    vectorEngine->draw(this->simulation);
 
     shaderProgram->release();
 }
