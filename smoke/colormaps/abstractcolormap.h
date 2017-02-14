@@ -1,14 +1,17 @@
 #ifndef ABSTRACTCOLORMAP_H
 #define ABSTRACTCOLORMAP_H
 
+#include <QImage>
 
 class AbstractColorMap
 {
 public:
     AbstractColorMap(int numColors);
 
-private:
+protected:
     int numColors;
+
+    QImage* image;
 
 };
 
