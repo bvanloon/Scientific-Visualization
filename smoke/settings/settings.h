@@ -16,9 +16,11 @@ public:
     class Simulation {
         public:
             int dimension;
+            bool frozen;
 
             Simulation() :
-                dimension(50)
+                dimension(50),
+                frozen(false)
             {}
     };
 

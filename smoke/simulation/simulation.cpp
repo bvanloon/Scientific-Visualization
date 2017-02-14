@@ -50,14 +50,16 @@ QVector<QVector3D> Simulation::getGridV()
                         this->settings->visualization->vecScale * this->realization->vx[idx],
                         this->settings->visualization->vecScale * this->realization->vy[idx],
                         0.0f);
-            qDebug() << "offset: " << offset;
             gridVertices.append(gridPoint);
             gridVertices.append(gridPoint + offset);
         }
     }
-    qDebug() << "QVector<QVector3D> Simulation::getGridV()";
-    qDebug() << gridVertices.at(0);
     return gridVertices;
+}
+
+void Simulation::step()
+{
+    this->realization->do_one_simulation_step();
 }
 
 void Simulation::onMouseMoved(QPoint newPosition)

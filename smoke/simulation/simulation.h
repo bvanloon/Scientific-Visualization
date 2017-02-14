@@ -22,6 +22,8 @@ public:
 
     SimulationRealization *realization;
 
+    void step();
+
 signals:
     void simulationUpdated();
 

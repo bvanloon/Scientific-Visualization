@@ -12,6 +12,7 @@ public:
 
 
     int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
+    void do_one_simulation_step(void);
 
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
     fftw_real *vx, *vy;             //(vx,vy)   = velocity field at the current moment
@@ -46,7 +47,7 @@ private:
     void solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt);
     void diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
     void set_forces(void);
-    void do_one_simulation_step(void);
+
 };
 
 #endif // SIMULATIONREALIZATION_H

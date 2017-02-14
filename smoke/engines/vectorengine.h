@@ -20,7 +20,7 @@ public:
 private:
     void initBuffers();
 
-    void updateBuffers(Simulation* simulation);
+    int updateBuffers(Simulation* simulation);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
     Settings* settings;

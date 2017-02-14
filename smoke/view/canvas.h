@@ -9,6 +9,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QDebug>
+#include <QTimer>
 
 #include "engines/triangleengine.h"
 #include "engines/vectorengine.h"
@@ -31,6 +32,9 @@ signals:
 
 public slots:
     void onSimulationUpdated();
+
+private slots:
+    void idleLoop();
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -58,6 +62,10 @@ private:
     //Engines
     TriangleEngine *triangleEnginge;
     VectorEngine *vectorEngine;
+
+    //Idle Loop
+    QTimer* timer;
+    void initiateIdleLoop();
 };
 
 #endif // CANVAS_H

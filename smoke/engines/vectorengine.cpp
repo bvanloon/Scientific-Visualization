@@ -17,11 +17,9 @@ VectorEngine::~VectorEngine()
 
 void VectorEngine::draw(Simulation *simulation)
 {
-    qDebug() << "void VectorEngine::draw(Simulation *simulation)";
-    this->updateBuffers(simulation);
-
+    int bufferLength = this->updateBuffers(simulation);
     this->vao.bind();
-    glDrawArrays(GL_LINES, 0, 3);
+    glDrawArrays(GL_LINES, 0, bufferLength);
     this->vao.release();
 }
 
@@ -40,15 +38,11 @@ void VectorEngine::initBuffers()
     this->vao.release();
 }
 
-void VectorEngine::updateBuffers(Simulation *simulation)
+int VectorEngine::updateBuffers(Simulation *simulation)
 {
-    qDebug() << "void VectorEngine::updateBuffers(Simulation *simulation)";
-//    QVector<QVector3D> lines = QVector<QVector3D>();
-//    lines.append(QVector3D(1.0f, 1.0f, 0.0f));
-//    lines.append(QVector3D(100.0f, 100.0f, 0.0f));
-
-    qDebug() << simulation->getGridV().at(0);
-    updateBuffer(this->vertexBuffer, simulation->getGridV());
+    QVector<QVector3D> vertices = simulation->getGridV();
+    updateBuffer(this->vertexBuffer, vertices);
+    return vertices.length();
 }
 
 void VectorEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
