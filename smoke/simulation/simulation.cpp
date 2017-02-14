@@ -36,6 +36,7 @@ void Simulation::onMouseMoved(QPoint newPosition)
 {
     //Invert y-position
     newPosition.setY(this->settings->canvas->height - newPosition.y());
+
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;
 
