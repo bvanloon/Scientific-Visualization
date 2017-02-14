@@ -1,8 +1,9 @@
-#include "vectorengine.h"
+#include "smokeengine.h"
 
-VectorEngine::VectorEngine(Settings *settings) :
+SmokeEngine::SmokeEngine(Settings *settings):
     settings(settings)
 {
+
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
     initializeOpenGLFunctions();
@@ -10,21 +11,22 @@ VectorEngine::VectorEngine(Settings *settings) :
     initBuffers();
 }
 
-VectorEngine::~VectorEngine()
+SmokeEngine::~SmokeEngine()
 {
     this->vertexBuffer->destroy();
     this->vao.destroy();
 }
 
-void VectorEngine::draw(Simulation *simulation)
+void SmokeEngine::draw(Simulation *simulation)
 {
     int bufferLength = this->updateBuffers(simulation);
+
     this->vao.bind();
-    glDrawArrays(GL_LINES, 0, bufferLength);
+    glDrawArrays(GL_TRIANGLES, 0, bufferLength);
     this->vao.release();
 }
 
-void VectorEngine::initBuffers()
+void SmokeEngine::initBuffers()
 {
     this->vao.create();
     this->vao.bind();
@@ -39,17 +41,17 @@ void VectorEngine::initBuffers()
     this->vao.release();
 }
 
-int VectorEngine::updateBuffers(Simulation *simulation)
+int SmokeEngine::updateBuffers(Simulation *simulation)
 {
-    QVector<QVector3D> vertices = simulation->getGridVertices();
-    updateBuffer(this->vertexBuffer, vertices);
-    return vertices.length();
+    QVector<QVector3D> triangles = simulation->getGridTriangulation();
+
+    updateBuffer(this->vertexBuffer, triangles);
+    return triangles.length();
 }
 
-void VectorEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
+void SmokeEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
 {
     buffer->bind();
     buffer->allocate(data.data(), data.size() * sizeof(data[0]));
     buffer->release();
 }
-

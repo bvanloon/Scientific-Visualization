@@ -55,6 +55,7 @@ void Canvas::initializeGL()
 
     this->triangleEnginge = new TriangleEngine();
     this->vectorEngine = new VectorEngine(this->settings);
+    this->smokeEngine = new SmokeEngine(this->settings);
 }
 
 void Canvas::initializeShaders()
@@ -73,7 +74,8 @@ void Canvas::paintGL()
 
     setUniforms();
 
-    vectorEngine->draw(this->simulation);
+    //vectorEngine->draw(this->simulation);
+    smokeEngine->draw(this->simulation);
 
     shaderProgram->release();
 }

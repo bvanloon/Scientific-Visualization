@@ -31,7 +31,7 @@ QVector<QVector3D> Simulation::getColors()
     return this->colors;
 }
 
-QVector<QVector3D> Simulation::getGridV()
+QVector<QVector3D> Simulation::getGridVertices()
 {
     QVector<QVector3D> gridVertices;
     int idx;
@@ -56,6 +56,43 @@ QVector<QVector3D> Simulation::getGridV()
     }
     return gridVertices;
 }
+
+QVector<QVector3D> Simulation::getGridTriangulation()
+{
+    QVector<QVector3D> gridTriangles;
+
+    double px0, py0, px1, py1, px2, py2, px3, py3;
+
+    for (int j = 0; j < settings->simulation->dimension - 1; j++)
+    {
+        for (int i = 0; i < settings->simulation->dimension - 1; i++)
+        {
+            px0 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
+            py0 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
+
+            px1 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
+            py1 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
+
+            px2 = settings->grid->cellWidth + (fftw_real)(i + 1) * settings->grid->cellWidth;
+            py2 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
+
+            px3 = settings->grid->cellWidth + (fftw_real)(i + 1) * settings->grid->cellWidth;
+            py3 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
+
+            gridTriangles.append(QVector3D(px0,py0,0.0f) );
+            gridTriangles.append(QVector3D(px1,py1,0.0f) );
+            gridTriangles.append(QVector3D(px2,py2,0.0f) );
+
+            gridTriangles.append(QVector3D(px0,py0,0.0f) );
+            gridTriangles.append(QVector3D(px2,py2,0.0f) );
+            gridTriangles.append(QVector3D(px3,py3,0.0f) );
+        }
+    }
+
+    return gridTriangles;
+}
+
+
 
 void Simulation::step()
 {

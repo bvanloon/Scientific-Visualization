@@ -13,7 +13,9 @@
 
 #include "engines/triangleengine.h"
 #include "engines/vectorengine.h"
+#include "engines/smokeengine.h"
 #include "simulation/simulation.h"
+
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -62,6 +64,8 @@ private:
     //Engines
     TriangleEngine *triangleEnginge;
     VectorEngine *vectorEngine;
+    SmokeEngine *smokeEngine;
+
 
     //Idle Loop
     QTimer* timer;
