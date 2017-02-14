@@ -73,7 +73,9 @@ int clamp(float x)
 { return ((x)>=0.0?((int)(x)):(-((int)(1-(x))))); }
 
 float max(float x, float y)
-{ return x < y ? x : y; }
+{ 
+	return x > y ? x : y; 
+}
 
 //solve: Solve (compute) one step of the fluid flow simulation
 void solve(int n, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt)
@@ -169,8 +171,8 @@ void set_forces(void)
         rho0[i]  = 0.995 * rho[i];
         fx[i] *= 0.85;
         fy[i] *= 0.85;
-        vx0[i]    = fx[i];
-        vy0[i]    = fy[i];
+        vx0[i]   = fx[i];
+        vy0[i]   = fy[i];
 	}
 }
 
@@ -252,45 +254,51 @@ void direction_to_color(float x, float y, int method)
 //visualize: This is the main visualization function
 void visualize(void)
 {
-	int        i, j, idx; double px,py;
+	int        i, j, idx;
 	fftw_real  wn = (fftw_real)winWidth / (fftw_real)(DIM + 1);   // Grid cell width
 	fftw_real  hn = (fftw_real)winHeight / (fftw_real)(DIM + 1);  // Grid cell heigh
 
 	if (draw_smoke)
 	{
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	for (j = 0; j < DIM - 1; j++)			//draw smoke
-	{
-		glBegin(GL_TRIANGLE_STRIP);
-
-		i = 0;
-		px = wn + (fftw_real)i * wn;
-		py = hn + (fftw_real)j * hn;
-		idx = (j * DIM) + i;
-		glColor3f(rho[idx],rho[idx],rho[idx]);
-		glVertex2f(px,py);
-
-		for (i = 0; i < DIM - 1; i++)
+		int idx0, idx1, idx2, idx3;
+		double px0, py0, px1, py1, px2, py2, px3, py3;
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glBegin(GL_TRIANGLES);
+		for (j = 0; j < DIM - 1; j++)            //draw smoke
 		{
-			px = wn + (fftw_real)i * wn;
-			py = hn + (fftw_real)(j + 1) * hn;
-			idx = ((j + 1) * DIM) + i;
-			set_colormap(rho[idx]);
-			glVertex2f(px, py);
-			px = wn + (fftw_real)(i + 1) * wn;
-			py = hn + (fftw_real)j * hn;
-			idx = (j * DIM) + (i + 1);
-			set_colormap(rho[idx]);
-			glVertex2f(px, py);
-		}
+			for (i = 0; i < DIM - 1; i++)
+			{
+				px0 = wn + (fftw_real)i * wn;
+				py0 = hn + (fftw_real)j * hn;
+				idx0 = (j * DIM) + i;
 
-		px = wn + (fftw_real)(DIM - 1) * wn;
-		py = hn + (fftw_real)(j + 1) * hn;
-		idx = ((j + 1) * DIM) + (DIM - 1);
-		set_colormap(rho[idx]);
-		glVertex2f(px, py);
+
+				px1 = wn + (fftw_real)i * wn;
+				py1 = hn + (fftw_real)(j + 1) * hn;
+				idx1 = ((j + 1) * DIM) + i;
+
+
+				px2 = wn + (fftw_real)(i + 1) * wn;
+				py2 = hn + (fftw_real)(j + 1) * hn;
+				idx2 = ((j + 1) * DIM) + (i + 1);
+
+
+				px3 = wn + (fftw_real)(i + 1) * wn;
+				py3 = hn + (fftw_real)j * hn;
+				idx3 = (j * DIM) + (i + 1);
+
+
+				set_colormap(rho[idx0]);    glVertex2f(px0, py0);
+				set_colormap(rho[idx1]);    glVertex2f(px1, py1);
+				set_colormap(rho[idx2]);    glVertex2f(px2, py2);
+
+
+				set_colormap(rho[idx0]);    glVertex2f(px0, py0);
+				set_colormap(rho[idx2]);    glVertex2f(px2, py2);
+				set_colormap(rho[idx3]);    glVertex2f(px3, py3);
+			}
+		}
 		glEnd();
-	}
 	}
 
 	if (draw_vecs)
@@ -368,6 +376,7 @@ void drag(int mx, int my)
 	yi = (int)clamp((double)(DIM + 1) * ((double)(winHeight - my) / (double)winHeight));
 
 	X = xi; Y = yi;
+
 
 	if (X > (DIM - 1))  X = DIM - 1; if (Y > (DIM - 1))  Y = DIM - 1;
 	if (X < 0) X = 0; if (Y < 0) Y = 0;
