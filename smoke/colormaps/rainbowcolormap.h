@@ -6,7 +6,7 @@
 class RainbowColorMap : public AbstractColorMap
 {
 public:
-    RainbowColorMap();
+    RainbowColorMap(int numColors, float dx);
 };
 
 #endif // RAINBOWCOLORMAP_H

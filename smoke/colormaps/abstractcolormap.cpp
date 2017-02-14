@@ -1,7 +1,10 @@
 #include "abstractcolormap.h"
 
-AbstractColorMap::AbstractColorMap()
-{
+#include <QDebug>
 
+AbstractColorMap::AbstractColorMap(int numColors):
+    numColors(numColors)
+{
+    qDebug() << "AbstractColorMap";
 }
 
