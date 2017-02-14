@@ -13,7 +13,7 @@ public:
     int clamp(float x);
     float max(float x, float y);
 
-    int addForceAt(QPoint currentMousePosition, QPoint oldMousePosition);
+    int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
 
 private:
     Settings* settings;
@@ -46,7 +46,7 @@ private:
     void diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
     void set_forces(void);
     void do_one_simulation_step(void);
-    int arrayIndexCursorLocation(QPoint currentMousePosition);
+    int arrayIndexCursorLocation(QPoint newMousePosition);
 };
 
 #endif // SIMULATIONREALIZATION_H
