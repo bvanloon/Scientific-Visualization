@@ -2,14 +2,22 @@
 #define SIMULATIONREALIZATION_H
 
 #include "rfftw.h"
+#include "settings/settings.h"
 #include <math.h>
 
 class SimulationRealization
 {
 public:
-    SimulationRealization(int gridSize = 50);
+    SimulationRealization( Settings* settings,int gridSize = 50);
+
+    int clamp(float x);
+    float max(float x, float y);
+
+    int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
 
 private:
+    Settings* settings;
+
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
     const int DIM;				//size of simulation grid
     double dt;				//simulation time step
@@ -34,12 +42,11 @@ private:
     int   frozen;               //toggles on/off the animation
 
     void FFT(int direction,void* vx);
-    int clamp(float x);
-    float max(float x, float y);
     void solve(int grid_size, fftw_real* vx, fftw_real* vy, fftw_real* vx0, fftw_real* vy0, fftw_real visc, fftw_real dt);
     void diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
     void set_forces(void);
     void do_one_simulation_step(void);
+    int arrayIndexCursorLocation(QPoint newMousePosition);
 };
 
 #endif // SIMULATIONREALIZATION_H

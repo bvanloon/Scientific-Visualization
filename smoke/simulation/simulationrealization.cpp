@@ -1,11 +1,18 @@
 #include "simulationrealization.h"
+#include <QDebug>
+#include <QPoint>
+#include <QPointF>
 
-SimulationRealization::SimulationRealization(int gridSize):
+SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
     DIM(50), dt(0.4), visc(0.001),
     color_dir(0), vec_scale(1000), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
     scalar_col(0), frozen(0)
 {
+    this->settings = settings;
+
+    qDebug() << "SimulationRealization::SimulationRealization(int gridSize)";
+
     int i; size_t dim;
 
     dim     = gridSize * 2*(gridSize/2+1)*sizeof(fftw_real);        //Allocate data structures
@@ -39,7 +46,43 @@ int SimulationRealization::clamp(float x){
 
 float SimulationRealization::max(float x, float y)
 {
-    return x < y ? x : y;
+    return x > y ? x : y;
+}
+
+int SimulationRealization::arrayIndexCursorLocation(QPoint newMousePosition)
+{
+    // Compute the array index that corresponds to the cursor location
+    int xi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)newMousePosition.x()/ (double)this->settings->canvas->width));
+    int yi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)newMousePosition.y() / (double)this->settings->canvas->height));
+
+    //Bound array index to canvas dimensions
+    if (xi > (this->settings->simulation->dimension - 1))
+        xi = this->settings->simulation->dimension - 1;
+    if (yi > (this->settings->simulation->dimension - 1))
+        yi = this->settings->simulation->dimension - 1;
+    if (xi < 0)
+        xi = 0;
+    if (yi < 0)
+        yi = 0;
+
+    return yi * this->settings->simulation->dimension + xi;
+}
+
+
+int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePosition )
+{
+    QPointF mouseDiff = QPointF(newMousePosition - oldMousePosition);
+    double length = sqrt(QPointF::dotProduct(mouseDiff, mouseDiff));
+
+    if (length != 0.0f )
+    {
+        mouseDiff *= 0.1f/length;
+    }
+
+    int idx = arrayIndexCursorLocation(newMousePosition);
+    fx[idx] += mouseDiff.x();
+    fy[idx] += mouseDiff.y();
+    rho[idx] = 10.0f;
 }
 
 //solve: Solve (compute) one step of the fluid flow simulation

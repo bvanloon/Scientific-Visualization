@@ -1,5 +1,6 @@
 #include "canvas.h"
 #include <QMouseEvent>
+#include <QDebug>
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent)
@@ -80,9 +81,13 @@ void Canvas::resizeGL(int width, int height)
 
     projectionMatrix.setToIdentity();
     projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
+
+    emit windowResized(width, height);
+
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    emit mouseMoved(event->localPos());
+    QPointF mousePosition = event->localPos();
+    emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
 }
