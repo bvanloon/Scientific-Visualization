@@ -27,6 +27,7 @@ private:
 
     QOpenGLVertexArrayObject vao;
     QOpenGLBuffer* vertexBuffer;
+    QOpenGLBuffer* colorBuffer;
 };
 
 #endif // VECTORENGINE_H
