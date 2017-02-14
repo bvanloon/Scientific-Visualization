@@ -31,7 +31,7 @@ QVector<QVector3D> Simulation::getColors()
     return this->colors;
 }
 
-QVector<QVector3D> Simulation::getGridV()
+QVector<QVector3D> Simulation::getGridVertices()
 {
     QVector<QVector3D> gridVertices;
     int idx;

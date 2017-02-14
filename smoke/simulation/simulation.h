@@ -18,7 +18,7 @@ public:
 
     QVector<QVector3D> getVertices();
     QVector<QVector3D> getColors();
-    QVector<QVector3D> getGridV();
+    QVector<QVector3D> getGridVertices();
 
     SimulationRealization *realization;
 
