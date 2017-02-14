@@ -21,7 +21,6 @@ private:
     Settings* settings;
 
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
-    const int DIM;				//size of simulation grid
     double dt;				//simulation time step
     float visc;				//fluid viscosity
 //    fftw_real *vx, *vy;             //(vx,vy)   = velocity field at the current moment
