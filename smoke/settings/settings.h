@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+#include <fftw.h>
+
 class Settings : public QObject
 {
     Q_OBJECT
@@ -32,8 +34,20 @@ public:
             {}
     };
 
+    class Grid {
+        public:
+            fftw_real cell_width;
+            fftw_real cell_height;
+
+            Grid() :
+                cell_width(-1),
+                cell_height(-1)
+            {}
+    };
+
     Simulation *simulation;
     Canvas *canvas;
+    Grid *grid;
 
 signals:
 
