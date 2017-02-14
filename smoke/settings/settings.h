@@ -53,6 +53,10 @@ signals:
 
 public slots:
     void onWindowResized(int width, int height);
+    void onDimensionChanged(int newDimension);
+
+private:
+    void updateGridCellSize();
 };
 
 #endif // SETTINGS_H
