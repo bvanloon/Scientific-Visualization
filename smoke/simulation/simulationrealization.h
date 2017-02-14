@@ -31,7 +31,6 @@ private:
 
     //--- VISUALIZATION PARAMETERS ---------------------------------------------------------------------
     int   color_dir;            //use direction color-coding or not
-    float vec_scale;			//scaling of hedgehogs
     int   draw_smoke;           //draw the smoke or not
     int   draw_vecs;            //draw the vector field or not
     const int COLOR_BLACKWHITE;   //different types of color mapping: black-and-white, rainbow, banded
