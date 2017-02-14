@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
+    this->canvas->setSettings(this->settings);
 
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();

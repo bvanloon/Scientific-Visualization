@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     simulation/simulation.cpp \
     simulation/simulationrealization.cpp \
     settings/settings.cpp \
-    simulation/utils.cpp
+    simulation/utils.cpp \
+    engines/vectorengine.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -34,7 +35,8 @@ HEADERS  += main.ih\
     simulation/simulation.h \
     simulation/simulationrealization.h \
     settings/settings.h \
-    simulation/utils.h
+    simulation/utils.h \
+    engines/vectorengine.h
 
 FORMS    += view/mainwindow.ui
 

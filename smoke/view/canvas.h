@@ -9,8 +9,10 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QDebug>
+#include <QTimer>
 
 #include "engines/triangleengine.h"
+#include "engines/vectorengine.h"
 #include "simulation/simulation.h"
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
@@ -22,6 +24,7 @@ public:
     ~Canvas();
 
     void setSimulation(Simulation *simulation);
+    void setSettings(Settings *settings);
 
 signals:
     void mouseMoved(QPoint newPosition);
@@ -29,6 +32,9 @@ signals:
 
 public slots:
     void onSimulationUpdated();
+
+private slots:
+    void idleLoop();
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
@@ -51,9 +57,15 @@ private:
     void setMVPMatrix();
 
     Simulation* simulation;
+    Settings* settings;
 
     //Engines
     TriangleEngine *triangleEnginge;
+    VectorEngine *vectorEngine;
+
+    //Idle Loop
+    QTimer* timer;
+    void initiateIdleLoop();
 };
 
 #endif // CANVAS_H

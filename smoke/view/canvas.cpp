@@ -3,17 +3,20 @@
 #include <QDebug>
 
 Canvas::Canvas(QWidget* parent) :
-    QOpenGLWidget(parent)
+    QOpenGLWidget(parent),
+    timer(new QTimer(this))
 {
     //Ensure that the mouse is always tracked, even if we didn't click first.
     this->setMouseTracking(true);
 
     modelViewMatrix.setToIdentity();
+    this->initiateIdleLoop();
 }
 
 Canvas::~Canvas()
 {
     delete this->shaderProgram;
+    delete this->timer;
 }
 
 void Canvas::setSimulation(Simulation *simulation)
@@ -21,8 +24,22 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
+void Canvas::setSettings(Settings *settings)
+{
+    this->settings = settings;
+}
+
 void Canvas::onSimulationUpdated()
 {
+    update();
+}
+
+void Canvas::idleLoop()
+{
+    if(!this->settings->simulation->frozen)
+    {
+        this->simulation->step();
+    }
     update();
 }
 
@@ -37,6 +54,7 @@ void Canvas::initializeGL()
     initializeShaders();
 
     this->triangleEnginge = new TriangleEngine();
+    this->vectorEngine = new VectorEngine(this->settings);
 }
 
 void Canvas::initializeShaders()
@@ -55,7 +73,7 @@ void Canvas::paintGL()
 
     setUniforms();
 
-    triangleEnginge->draw(this->simulation);
+    vectorEngine->draw(this->simulation);
 
     shaderProgram->release();
 }
@@ -70,6 +88,12 @@ void Canvas::setMVPMatrix()
     QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
 
     this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
+}
+
+void Canvas::initiateIdleLoop()
+{
+   this->timer->start();
+   connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
 }
 
 void Canvas::resizeGL(int width, int height)
