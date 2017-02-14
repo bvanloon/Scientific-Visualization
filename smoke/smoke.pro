@@ -28,6 +28,7 @@ SOURCES += main.cpp\
     simulation/utils.cpp \
     engines/vectorengine.cpp \
     engines/smokeengine.cpp
+    colormaps/abstractcolormap.cpp \
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -39,6 +40,7 @@ HEADERS  += main.ih\
     simulation/utils.h \
     engines/vectorengine.h \
     engines/smokeengine.h
+    colormaps/abstractcolormap.h \
 
 FORMS    += view/mainwindow.ui
 
