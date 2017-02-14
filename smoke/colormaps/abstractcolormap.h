@@ -5,9 +5,10 @@
 class AbstractColorMap
 {
 public:
-    AbstractColorMap();
+    AbstractColorMap(int numColors);
 
 private:
+    int numColors;
 
 };
 
