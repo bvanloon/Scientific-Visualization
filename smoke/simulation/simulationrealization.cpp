@@ -12,8 +12,6 @@ SimulationRealization::SimulationRealization(Settings* settings):
 {
     this->settings = settings;
 
-    qDebug() << "SimulationRealization::SimulationRealization(int gridSize)";
-
     int i; size_t dim;
 
     dim     = settings->simulation->dimension * 2*(settings->simulation->dimension/2+1)*sizeof(fftw_real);        //Allocate data structures
