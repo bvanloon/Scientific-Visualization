@@ -18,6 +18,7 @@ public:
 
     QVector<QVector3D> getVertices();
     QVector<QVector3D> getColors();
+    QVector<QVector3D> getGridV();
 
     SimulationRealization *realization;
 
@@ -28,7 +29,7 @@ public slots:
     void onMouseMoved(QPoint newPosition);
 
 private:
-    QVector<QVector3D> vertices;
+    QVector<QVector3D> gridVertices;
     QVector<QVector3D> colors;
     Settings *settings;
 
