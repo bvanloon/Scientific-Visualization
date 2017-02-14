@@ -18,6 +18,7 @@ SOURCES += main.cpp\
     engines/triangleengine.cpp \
     simulation/simulation.cpp \
     colormaps/abstractcolormap.cpp \
+    colormaps/rainbowcolormap.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -25,6 +26,7 @@ HEADERS  += main.ih\
     engines/triangleengine.h \
     simulation/simulation.h \
     colormaps/abstractcolormap.h \
+    colormaps/rainbowcolormap.h
 
 FORMS    += view/mainwindow.ui
 
