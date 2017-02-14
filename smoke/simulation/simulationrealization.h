@@ -8,7 +8,7 @@
 class SimulationRealization
 {
 public:
-    SimulationRealization( Settings* settings,int gridSize = 50);
+    SimulationRealization( Settings* settings);
 
 
     int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);

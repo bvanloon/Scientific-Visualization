@@ -4,8 +4,8 @@
 #include <QPoint>
 #include <QPointF>
 
-SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
-    DIM(50), dt(0.4), visc(0.001),
+SimulationRealization::SimulationRealization(Settings* settings):
+    DIM(settings->simulation->dimension), dt(0.4), visc(0.001),
     color_dir(0), vec_scale(1000), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
     scalar_col(0), frozen(0)
@@ -16,20 +16,20 @@ SimulationRealization::SimulationRealization(Settings* settings, int gridSize):
 
     int i; size_t dim;
 
-    dim     = gridSize * 2*(gridSize/2+1)*sizeof(fftw_real);        //Allocate data structures
+    dim     = DIM * 2*(DIM/2+1)*sizeof(fftw_real);        //Allocate data structures
     vx       = (fftw_real*) malloc(dim);
     vy       = (fftw_real*) malloc(dim);
     vx0      = (fftw_real*) malloc(dim);
     vy0      = (fftw_real*) malloc(dim);
-    dim     = gridSize * gridSize * sizeof(fftw_real);
+    dim     = DIM * DIM * sizeof(fftw_real);
     fx      = (fftw_real*) malloc(dim);
     fy      = (fftw_real*) malloc(dim);
     rho     = (fftw_real*) malloc(dim);
     rho0    = (fftw_real*) malloc(dim);
-    plan_rc = rfftw2d_create_plan(gridSize, gridSize, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
-    plan_cr = rfftw2d_create_plan(gridSize, gridSize, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
+    plan_rc = rfftw2d_create_plan(DIM, DIM, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
+    plan_cr = rfftw2d_create_plan(DIM, DIM, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
 
-    for (i = 0; i < gridSize * gridSize; i++)                      //Initialize data structures to 0
+    for (i = 0; i < DIM * DIM; i++)                      //Initialize data structures to 0
     { vx[i] = vy[i] = vx0[i] = vy0[i] = fx[i] = fy[i] = rho[i] = rho0[i] = 0.0f; }
 }
 
