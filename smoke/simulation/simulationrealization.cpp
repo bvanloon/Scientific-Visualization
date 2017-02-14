@@ -71,9 +71,6 @@ int SimulationRealization::arrayIndexCursorLocation(QPoint currentMousePosition)
 
 int SimulationRealization::addForceAt(QPoint currentMousePosition, QPoint oldMousePosition )
 {
-    //Invert y-position
-    currentMousePosition.setY(this->settings->canvas->height - currentMousePosition.y());
-
     QPointF mouseDiff = QPointF(currentMousePosition - oldMousePosition);
     double length = sqrt(QPointF::dotProduct(mouseDiff, mouseDiff));
 
