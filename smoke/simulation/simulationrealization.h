@@ -10,8 +10,6 @@ class SimulationRealization
 public:
     SimulationRealization( Settings* settings,int gridSize = 50);
 
-    int clamp(float x);
-    float max(float x, float y);
 
     int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
 
@@ -46,7 +44,6 @@ private:
     void diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt);
     void set_forces(void);
     void do_one_simulation_step(void);
-    int arrayIndexCursorLocation(QPoint newMousePosition);
 };
 
 #endif // SIMULATIONREALIZATION_H

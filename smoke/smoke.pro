@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     engines/triangleengine.cpp \
     simulation/simulation.cpp \
     simulation/simulationrealization.cpp \
-    settings/settings.cpp
+    settings/settings.cpp \
+    simulation/utils.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -32,7 +33,8 @@ HEADERS  += main.ih\
     engines/triangleengine.h \
     simulation/simulation.h \
     simulation/simulationrealization.h \
-    settings/settings.h
+    settings/settings.h \
+    simulation/utils.h
 
 FORMS    += view/mainwindow.ui
 

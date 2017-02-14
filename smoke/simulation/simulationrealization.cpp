@@ -1,4 +1,5 @@
 #include "simulationrealization.h"
+#include "utils.h"
 #include <QDebug>
 #include <QPoint>
 #include <QPointF>
@@ -40,34 +41,6 @@ void SimulationRealization::FFT(int direction,void* vx)
     else             rfftwnd_one_complex_to_real(plan_cr,(fftw_complex*)vx,(fftw_real*)vx);
 }
 
-int SimulationRealization::clamp(float x){
-    return ((x)>=0.0?((int)(x)):(-((int)(1-(x)))));
-}
-
-float SimulationRealization::max(float x, float y)
-{
-    return x > y ? x : y;
-}
-
-int SimulationRealization::arrayIndexCursorLocation(QPoint newMousePosition)
-{
-    // Compute the array index that corresponds to the cursor location
-    int xi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)newMousePosition.x()/ (double)this->settings->canvas->width));
-    int yi = (int)clamp((double)(this->settings->simulation->dimension + 1) * ((double)newMousePosition.y() / (double)this->settings->canvas->height));
-
-    //Bound array index to canvas dimensions
-    if (xi > (this->settings->simulation->dimension - 1))
-        xi = this->settings->simulation->dimension - 1;
-    if (yi > (this->settings->simulation->dimension - 1))
-        yi = this->settings->simulation->dimension - 1;
-    if (xi < 0)
-        xi = 0;
-    if (yi < 0)
-        yi = 0;
-
-    return yi * this->settings->simulation->dimension + xi;
-}
-
 
 int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePosition )
 {
@@ -79,7 +52,7 @@ int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePo
         mouseDiff *= 0.1f/length;
     }
 
-    int idx = arrayIndexCursorLocation(newMousePosition);
+    int idx = cursorLocationToArrayIndex(newMousePosition, this->settings);
     fx[idx] += mouseDiff.x();
     fy[idx] += mouseDiff.y();
     rho[idx] = 10.0f;
@@ -196,4 +169,3 @@ void SimulationRealization::do_one_simulation_step(void)
       diffuse_matter(DIM, vx, vy, rho, rho0, dt);
     }
 }
-
