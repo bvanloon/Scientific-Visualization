@@ -34,6 +34,8 @@ private:
     QRect colorBar;
 
     int numberOfTicks;
+    float minimumValue;
+    float maximumValue;
 
     static const int colorMapImageWidth;
     static const int tickWidth;
@@ -41,7 +43,7 @@ private:
 
     void drawColorMapImage();
     void drawLabels();
-    void drawLabel();
+    void drawLabel(QPointF left, float labelValue);
     void drawTicks();
     void drawTick(QPointF left);
 };

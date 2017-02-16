@@ -9,13 +9,15 @@
 
 const int ColorMapLegend::colorMapImageWidth = 10;
 const int ColorMapLegend::tickWidth = 15;
-const int ColorMapLegend::maximumNumberOfTicks = 5;
+const int ColorMapLegend::maximumNumberOfTicks = 20;
 
 ColorMapLegend::ColorMapLegend(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ColorMapLegend),
-    colorMap(new RainbowColorMap(26)),
+    colorMap(new RainbowColorMap(40)),
     colorBar(0, 0, colorMapImageWidth, 524),
+    minimumValue(0),
+    maximumValue(39),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks))
 {
     ui->setupUi(this);
@@ -41,7 +43,7 @@ void ColorMapLegend::paintEvent(QPaintEvent *event)
 {
     drawColorMapImage();
     drawLabels();
-    drawTicks();
+    drawTicksAndLabels();
 }
 
 void ColorMapLegend::drawColorMapImage()
@@ -50,24 +52,16 @@ void ColorMapLegend::drawColorMapImage()
     painter.drawImage(colorBar, *colorMap);
 }
 
-void ColorMapLegend::drawLabels()
-{
-    //Probbaly some calls to drawLabel and drawLabelText
-}
-
-void ColorMapLegend::drawLabel()
-{
-
-}
-
-void ColorMapLegend::drawTicks()
+void ColorMapLegend::drawTicksAndLabels()
 {
     float colorBoxHeight = colorBar.height() / (float) colorMap->getNumColors();
     int numberOfColorBoxesPerTick = round(colorMap->getNumColors() / (numberOfTicks - 1));
-    for(float y = 0;
-        y < colorBar.height();
-        y+= colorBoxHeight * numberOfColorBoxesPerTick){
+    float y = 0;
+    for(int tickNumber = 0;
+        tickNumber < (numberOfTicks - 1);
+        tickNumber++, y+= colorBoxHeight * numberOfColorBoxesPerTick){
         drawTick(QPointF(0, y));
+        drawLabel()
     }
     drawTick(QPointF(0, colorBar.height() - 1));
 }
@@ -77,4 +71,9 @@ void ColorMapLegend::drawTick(QPointF left)
     QPainter painter(this);
     QPointF right = left + QPointF(tickWidth, 0);
     painter.drawLine(left, right);
+}
+
+void ColorMapLegend::drawLabel(QPointF left, float labelValue)
+{
+
 }
