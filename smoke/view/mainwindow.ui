@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>518</height>
+    <width>544</width>
+    <height>524</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -43,6 +43,9 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="ColorMapLegend" name="widget" native="true"/>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -52,6 +55,12 @@
    <class>Canvas</class>
    <extends>QOpenGLWidget</extends>
    <header location="global">view/canvas.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ColorMapLegend</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormaplegend.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

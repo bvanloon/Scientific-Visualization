@@ -9,3 +9,8 @@ AbstractColorMap::AbstractColorMap(int numColors):
 {
     fill(QColor(Qt::white).rgb());
 }
+
+int AbstractColorMap::getNumColors()
+{
+    return numColors;
+}
