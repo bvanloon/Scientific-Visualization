@@ -36,6 +36,7 @@ private:
     int numberOfTicks;
     float minimumValue;
     float maximumValue;
+    QPointF textOffset;
 
     static const int colorMapImageWidth;
     static const int tickWidth;
@@ -43,8 +44,10 @@ private:
 
     void drawColorMapImage();
     void drawTicksAndLabels();
-    void drawTickandLabel(QPointF left);
+    void drawTickandLabel(QPointF left, float value);
     void drawLabel(QPointF left, float labelValue);
+
+    int getDescriptionLabelHeight();
 };
 
 #endif // COLORMAPLEGEND_H

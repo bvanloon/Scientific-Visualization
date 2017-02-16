@@ -5,6 +5,7 @@
 
 #include <QDebug>
 #include <QPainter>
+#include <QString>
 
 
 const int ColorMapLegend::colorMapImageWidth = 10;
@@ -18,7 +19,8 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     colorBar(0, 0, colorMapImageWidth, 524),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
     minimumValue(0),
-    maximumValue(19)
+    maximumValue(19),
+    textOffset(2, 3)
 {
     ui->setupUi(this);
 }
@@ -36,7 +38,8 @@ void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
 {
-    colorBar.setHeight(event->size().height());
+    colorBar.setTop(getDescriptionLabelHeight());
+    colorBar.setHeight(event->size().height() - 2 * getDescriptionLabelHeight());
 }
 
 void ColorMapLegend::paintEvent(QPaintEvent *event)
@@ -51,29 +54,37 @@ void ColorMapLegend::drawColorMapImage()
     painter.drawImage(colorBar, *colorMap);
 }
 
+int ColorMapLegend::getDescriptionLabelHeight()
+{
+    QFontMetrics fontMetrics(font());
+    return fontMetrics.height();
+}
+
 void ColorMapLegend::drawTicksAndLabels()
 {
     float colorBoxHeight = colorBar.height() / (float) colorMap->getNumColors();
     int numberOfColorBoxesPerTick = round(colorMap->getNumColors() / (numberOfTicks - 1));
-    float y = 0;
+    float y = colorBar.top();
     for(int tickNumber = 0;
         tickNumber < numberOfTicks;
         tickNumber++, y+= colorBoxHeight * numberOfColorBoxesPerTick){
-        drawTickandLabel(QPointF(0, y));
+        drawTickandLabel(QPointF(0, y), 0.0);
     }
-    drawTickandLabel(QPointF(0, colorBar.height() - 1));
+    drawTickandLabel(QPointF(0, colorBar.bottom()), maximumValue);
 }
 
-void ColorMapLegend::drawTickandLabel(QPointF left)
+void ColorMapLegend::drawTickandLabel(QPointF left, float value)
 {
     QPainter painter(this);
     QPointF right = left + QPointF(tickWidth, 0);
     painter.drawLine(left, right);
 
-    drawLabel(right, 0.0);
+    drawLabel(right, value);
 }
 
 void ColorMapLegend::drawLabel(QPointF left, float labelValue)
 {
-
+    QPainter painter(this);
+    QString valueStr = QString().setNum(labelValue, 'g', 2);
+    painter.drawText(left + textOffset, valueStr);
 }
