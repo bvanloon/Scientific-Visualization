@@ -11,12 +11,12 @@
 
 const int ColorMapLegend::colorMapImageWidth = 10;
 const int ColorMapLegend::tickWidth = 15;
-const int ColorMapLegend::maximumNumberOfTicks = 21;
+const int ColorMapLegend::maximumNumberOfTicks = 30;
 
 ColorMapLegend::ColorMapLegend(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ColorMapLegend),
-    colorMap(new RainbowColorMap(20)),
+    colorMap(new RainbowColorMap(256)),
     colorBar(0, 0, colorMapImageWidth, 524),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
     minimumValue(0),
