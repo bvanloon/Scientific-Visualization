@@ -3,6 +3,7 @@
 int main(int argc, char *argv[])
 {
     QApplication application(argc, argv);
+    application.setQuitOnLastWindowClosed(true);
 
     setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
 
