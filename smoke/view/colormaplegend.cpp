@@ -11,7 +11,8 @@
 
 const int ColorMapLegend::colorMapImageWidth = 10;
 const int ColorMapLegend::tickWidth = 15;
-const int ColorMapLegend::maximumNumberOfTicks = 30;
+const int ColorMapLegend::maximumNumberOfTicks = 25;
+const QPointF ColorMapLegend::textOffset = QPointF(2, 3);
 
 ColorMapLegend::ColorMapLegend(QWidget *parent) :
     QWidget(parent),
@@ -20,8 +21,7 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     colorBar(0, 0, colorMapImageWidth, 524),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
     minimumValue(0),
-    maximumValue(20),
-    textOffset(2, 3)
+    maximumValue(20)
 {
     ui->setupUi(this);
 }
@@ -35,6 +35,9 @@ ColorMapLegend::~ColorMapLegend()
 void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 {
     numberOfTicks = std::min(colorMap.getNumColors(), maximumNumberOfTicks);
+    qDebug() << "void ColorMapLegend::onColorMapChanged: setMinimumValue";
+    qDebug() << "void ColorMapLegend::onColorMapChanged: setMaximumValue";
+    update();
 }
 
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
@@ -64,16 +67,17 @@ int ColorMapLegend::getDescriptionLabelHeight()
 void ColorMapLegend::drawTicksAndLabels()
 {
     float colorBoxHeight = colorBar.height() / (float) colorMap->getNumColors();
-    int numberOfColorBoxesPerTick = round(colorMap->getNumColors() / (numberOfTicks - 1));
+    float colorBoxesPerTick = colorMap->getNumColors() / (float) (numberOfTicks - 1);
 
-    float value;
-    float y = colorBar.top();
-    for(int tickNumber = 0;
-        tickNumber < numberOfTicks;
-        tickNumber++, y+= colorBoxHeight * numberOfColorBoxesPerTick)
+    float value, y, currentColorBox = 0;
+    for(int currentTickNumber = 0; currentTickNumber < (numberOfTicks - 1); currentTickNumber++)
     {
+        y = colorBar.top() + colorBoxHeight * round(currentColorBox);
+
         value = mapToRange(y, (float) colorBar.top(), (float) colorBar.bottom(), minimumValue, maximumValue);
         drawTickandLabel(QPointF(0, y), value);
+
+        currentColorBox += colorBoxesPerTick;
     }
     drawTickandLabel(QPointF(0, colorBar.bottom()), maximumValue);
 }

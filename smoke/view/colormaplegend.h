@@ -36,11 +36,12 @@ private:
     int numberOfTicks;
     float minimumValue;
     float maximumValue;
-    QPointF textOffset;
+
 
     static const int colorMapImageWidth;
     static const int tickWidth;
     static const int maximumNumberOfTicks;
+    static const QPointF textOffset;
 
     void drawColorMapImage();
     void drawTicksAndLabels();
