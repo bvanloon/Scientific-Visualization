@@ -42,10 +42,9 @@ private:
     static const int maximumNumberOfTicks;
 
     void drawColorMapImage();
-    void drawLabels();
+    void drawTicksAndLabels();
+    void drawTickandLabel(QPointF left);
     void drawLabel(QPointF left, float labelValue);
-    void drawTicks();
-    void drawTick(QPointF left);
 };
 
 #endif // COLORMAPLEGEND_H
