@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     simulation/utils.cpp \
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
-    view/colormaplegend.cpp
+    view/colormaplegend.cpp \
+    utilities.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -44,7 +45,8 @@ HEADERS  += main.ih\
     simulation/utils.h \
     engines/vectorengine.h \
     engines/smokeengine.h \
-    view/colormaplegend.h
+    view/colormaplegend.h \
+    utilities.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui

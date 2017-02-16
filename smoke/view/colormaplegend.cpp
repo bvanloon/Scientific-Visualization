@@ -1,11 +1,12 @@
 #include <math.h>
 
-#include "colormaplegend.h"
-#include "ui_colormaplegend.h"
-
 #include <QDebug>
 #include <QPainter>
 #include <QString>
+
+#include "colormaplegend.h"
+#include "ui_colormaplegend.h"
+#include "utilities.h"
 
 
 const int ColorMapLegend::colorMapImageWidth = 10;
@@ -19,7 +20,7 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     colorBar(0, 0, colorMapImageWidth, 524),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
     minimumValue(0),
-    maximumValue(19),
+    maximumValue(20),
     textOffset(2, 3)
 {
     ui->setupUi(this);
@@ -64,11 +65,15 @@ void ColorMapLegend::drawTicksAndLabels()
 {
     float colorBoxHeight = colorBar.height() / (float) colorMap->getNumColors();
     int numberOfColorBoxesPerTick = round(colorMap->getNumColors() / (numberOfTicks - 1));
+
+    float value;
     float y = colorBar.top();
     for(int tickNumber = 0;
         tickNumber < numberOfTicks;
-        tickNumber++, y+= colorBoxHeight * numberOfColorBoxesPerTick){
-        drawTickandLabel(QPointF(0, y), 0.0);
+        tickNumber++, y+= colorBoxHeight * numberOfColorBoxesPerTick)
+    {
+        value = mapToRange(y, (float) colorBar.top(), (float) colorBar.bottom(), minimumValue, maximumValue);
+        drawTickandLabel(QPointF(0, y), value);
     }
     drawTickandLabel(QPointF(0, colorBar.bottom()), maximumValue);
 }
