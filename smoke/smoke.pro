@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     colormaps/abstractcolormap.cpp \
     colormaps/rainbowcolormap.cpp
     engines/smokeengine.cpp \
-    view/colormaplegend.cpp
+    view/colormaplegend.cpp \
+    utilities.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS  += main.ih\
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h
     engines/smokeengine.h \
-    view/colormaplegend.h
+    view/colormaplegend.h \
+    utilities.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui
