@@ -7,7 +7,7 @@
 class RainbowColorMap : public AbstractColorMap
 {
 public:
-    RainbowColorMap(int numColors, float dx);
+    RainbowColorMap(int numColors, float dx = 0.8);
 
 private:
     void fill();
