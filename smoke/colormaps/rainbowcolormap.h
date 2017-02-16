@@ -9,10 +9,8 @@ class RainbowColorMap : public AbstractColorMap
 public:
     RainbowColorMap(int numColors, float dx);
 
-    QImage *getImage();
-
 private:
-    void fillImage();
+    void fill();
     QRgb toRainbowColor(float i);
 
     float dx;

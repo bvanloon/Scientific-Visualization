@@ -10,20 +10,16 @@ RainbowColorMap::RainbowColorMap(int numColors, float dx):
     AbstractColorMap(numColors),
     dx(dx)
 { 
-    fillImage();
+    fill();
 }
 
-QImage* RainbowColorMap::getImage()
-{
-    return this->image;
-}
 
-void RainbowColorMap::fillImage()
+void RainbowColorMap::fill()
 {
     float stepSize = 1.0/(numColors - 1);
     float f = 0;
     for(int i = 0; i < numColors; f+=stepSize, i++){
-        this->image->setPixel(0, i, toRainbowColor(f));
+        setPixel(0, i, toRainbowColor(f));
     }
 }
 

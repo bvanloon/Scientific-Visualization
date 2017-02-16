@@ -3,16 +3,13 @@
 
 #include <QImage>
 
-class AbstractColorMap
+class AbstractColorMap : public QImage
 {
 public:
     AbstractColorMap(int numColors);
 
 protected:
     int numColors;
-
-    QImage* image;
-
 };
 
 #endif // ABSTRACTCOLORMAP_H
