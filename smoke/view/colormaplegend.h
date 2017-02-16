@@ -2,6 +2,8 @@
 #define COLORMAPLEGEND_H
 #include <QResizeEvent>
 #include <QWidget>
+#include <QRect>
+
 #include <colormaps/abstractcolormap.h>
 #include <colormaps/rainbowcolormap.h>
 
@@ -17,18 +19,31 @@ public:
     explicit ColorMapLegend(QWidget *parent = 0);
     ~ColorMapLegend();
 
+public slots:
+    void onColorMapChanged(AbstractColorMap colorMap);
+
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
 private:
     Ui::ColorMapLegend *ui;
 
     AbstractColorMap* colorMap;
 
-    static const int colorMapImageWidth;
+    QRect colorBar;
 
-    void draw();
+    int numberOfTicks;
+
+    static const int colorMapImageWidth;
+    static const int tickWidth;
+    static const int maximumNumberOfTicks;
+
     void drawColorMapImage();
+    void drawLabels();
+    void drawLabel();
+    void drawTicks();
+    void drawTick(QPointF left);
 };
 
 #endif // COLORMAPLEGEND_H
