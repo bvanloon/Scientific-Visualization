@@ -1,10 +1,13 @@
 #include "canvas.h"
 #include <QMouseEvent>
 #include <QDebug>
+#include <QImage>
+#include <colormaps/rainbowcolormap.h>
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
-    timer(new QTimer(this))
+    timer(new QTimer(this)),
+    texture(0)
 {
     //Ensure that the mouse is always tracked, even if we didn't click first.
     this->setMouseTracking(true);
@@ -17,6 +20,7 @@ Canvas::~Canvas()
 {
     delete this->shaderProgram;
     delete this->timer;
+    delete this->texture;
 }
 
 void Canvas::setSimulation(Simulation *simulation)
@@ -32,6 +36,11 @@ void Canvas::setSettings(Settings *settings)
 void Canvas::onSimulationUpdated()
 {
     update();
+}
+
+void Canvas::onTextureUpdated()
+{
+    this->setTexture();
 }
 
 void Canvas::idleLoop()
@@ -56,6 +65,8 @@ void Canvas::initializeGL()
     this->triangleEnginge = new TriangleEngine();
     this->vectorEngine = new VectorEngine(this->settings);
     this->smokeEngine = new SmokeEngine(this->settings);
+
+    setTexture();
 }
 
 void Canvas::initializeShaders()
@@ -66,6 +77,22 @@ void Canvas::initializeShaders()
     this->shaderProgram->link();
 }
 
+void Canvas::initializeTexture(QImage* image)
+{
+    if(isValid()){
+        if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
+        if (texture->isCreated()) texture->destroy();
+
+        texture->create();
+        texture->setSize(image->height());
+        texture->setFormat(QOpenGLTexture::RGBA16F);
+        texture->setMagnificationFilter(QOpenGLTexture::Nearest);
+        texture->setWrapMode(QOpenGLTexture::Repeat);
+        texture->allocateStorage();
+        texture->setData(image->mirrored());
+    }
+}
+
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -74,8 +101,12 @@ void Canvas::paintGL()
 
     setUniforms();
 
+    this->texture->bind();
+
     //vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
+
+    this->texture->release();
 
     shaderProgram->release();
 }
@@ -90,6 +121,13 @@ void Canvas::setMVPMatrix()
     QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
 
     this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
+}
+
+void Canvas::setTexture()
+{
+    QImage* colorMap = new RainbowColorMap(256);
+    initializeTexture(colorMap);
+    delete colorMap;
 }
 
 void Canvas::initiateIdleLoop()

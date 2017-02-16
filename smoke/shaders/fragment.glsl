@@ -1,14 +1,15 @@
 #version 410 core
 
 //Variable in
-layout(location = 0) in vec3 vsColor;
+layout(location = 0) in float vsTextureCoordinate;
 
 //Variable out
 out vec4 fColor;
 
 //Uniform in
+uniform sampler1D colormap;
 
 void main(void)
 {
-    fColor = vec4(vsColor, 1.0);
+    fColor = texture(colormap, vsTextureCoordinate);
 }
