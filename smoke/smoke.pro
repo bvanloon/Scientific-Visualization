@@ -30,6 +30,8 @@ SOURCES += main.cpp\
     engines/smokeengine.cpp
     colormaps/abstractcolormap.cpp \
     colormaps/rainbowcolormap.cpp
+    engines/smokeengine.cpp \
+    view/colormaplegend.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -43,8 +45,11 @@ HEADERS  += main.ih\
     engines/smokeengine.h
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h
+    engines/smokeengine.h \
+    view/colormaplegend.h
 
-FORMS    += view/mainwindow.ui
+FORMS    += view/mainwindow.ui \
+    view/colormaplegend.ui
 
 RESOURCES += \
     shaders.qrc
