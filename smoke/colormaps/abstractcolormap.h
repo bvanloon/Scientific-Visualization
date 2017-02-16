@@ -8,6 +8,8 @@ class AbstractColorMap : public QImage
 public:
     AbstractColorMap(int numColors);
 
+    int getNumColors();
+
 protected:
     int numColors;
 };
