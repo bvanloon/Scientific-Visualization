@@ -8,6 +8,7 @@
 #include <QMatrix4x4>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
+#include <QOpenGLTexture>
 #include <QDebug>
 #include <QTimer>
 
@@ -34,6 +35,7 @@ signals:
 
 public slots:
     void onSimulationUpdated();
+    void onTextureUpdated();
 
 private slots:
     void idleLoop();
@@ -50,13 +52,17 @@ private:
 
     // OpenGL initialization
     void initializeShaders();
+    void initializeTexture(QImage *image);
 
     //Uniforms
     QMatrix4x4 modelViewMatrix;
     QMatrix4x4 projectionMatrix;
 
+    QOpenGLTexture *texture;
+
     void setUniforms();
     void setMVPMatrix();
+    void setTexture();
 
     Simulation* simulation;
     Settings* settings;
