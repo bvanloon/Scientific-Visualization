@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QPainter>
 #include <QString>
+#include <QTransform>
 
 #include "colormaplegend.h"
 #include "ui_colormaplegend.h"
@@ -55,7 +56,11 @@ void ColorMapLegend::paintEvent(QPaintEvent *event)
 void ColorMapLegend::drawColorMapImage()
 {
     QPainter painter(this);
-    painter.drawImage(colorBar, *colorMap);
+    QTransform rotating;
+    rotating.rotate(90);
+    QImage rotatedImage = colorMap->transformed(rotating);
+
+    painter.drawImage(colorBar, rotatedImage);
 }
 
 int ColorMapLegend::getDescriptionLabelHeight()
