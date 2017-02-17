@@ -63,6 +63,7 @@ private:
     void setUniforms();
     void setMVPMatrix();
     void setTexture();
+    void setRange(float minimum, float maximum);
 
     Simulation* simulation;
     Settings* settings;

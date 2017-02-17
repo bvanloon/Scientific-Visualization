@@ -1,4 +1,9 @@
 #version 410 core
+//Definitions
+struct rangeInfo {
+    float minimum;
+    float maximum;
+};
 
 // Variable in
 layout(location = 0) in vec3 inputPosition;
@@ -9,14 +14,15 @@ layout(location = 0) out float vsTextureCoordinate;
 
 //Uniform in
 uniform mat4 mvpMatrix;
+uniform rangeInfo range;
 
-float mapToUnitLength(float value, float oldMin, float oldMax)
+float mapToUnitLength(float value, rangeInfo oldRange)
 {
-    float slope = 1/ (oldMax - oldMin);
-    return slope * (value - oldMin);
+    float slope = 1/ (oldRange.maximum - oldRange.minimum);
+    return slope * (value - oldRange.minimum);
 }
 void main(void)
 {
-    vsTextureCoordinate = mapToUnitLength(inputTextureCoordinate,5,10);
+    vsTextureCoordinate = mapToUnitLength(inputTextureCoordinate,range);
     gl_Position = mvpMatrix * vec4(inputPosition, 1.0);
 }

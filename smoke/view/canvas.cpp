@@ -67,6 +67,7 @@ void Canvas::initializeGL()
     this->smokeEngine = new SmokeEngine(this->settings);
 
     setTexture();
+
 }
 
 void Canvas::initializeShaders()
@@ -100,6 +101,7 @@ void Canvas::paintGL()
 
     this->texture->bind();
 
+
     //vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
 
@@ -111,6 +113,7 @@ void Canvas::paintGL()
 void Canvas::setUniforms()
 {
     setMVPMatrix();
+    setRange(5.0,15.0);
 }
 
 void Canvas::setMVPMatrix()
@@ -125,6 +128,12 @@ void Canvas::setTexture()
     QImage* colorMap = new RainbowColorMap(256);
     initializeTexture(colorMap);
     delete colorMap;
+}
+
+void Canvas::setRange(float minimum, float maximum)
+{
+    this->shaderProgram->setUniformValue("range.minimum", minimum);
+    this->shaderProgram->setUniformValue("range.maximum", maximum);
 }
 
 void Canvas::initiateIdleLoop()
