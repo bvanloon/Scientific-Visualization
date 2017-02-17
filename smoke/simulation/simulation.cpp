@@ -92,6 +92,42 @@ QVector<QVector3D> Simulation::getGridTriangulation()
     return gridTriangles;
 }
 
+QVector<float> Simulation::getTextureCoordinates()
+{
+    QVector<float> textureCoordinates;
+
+    int idx0, idx1, idx2, idx3;
+
+    for (int j = 0; j < settings->simulation->dimension - 1; j++)
+    {
+        for (int i = 0; i < settings->simulation->dimension - 1; i++)
+        {
+            idx0 = (j * this->settings->simulation->dimension) + i;
+            idx1 = ((j  + 1)* this->settings->simulation->dimension) + i;
+            idx2 = ((j  + 1)* this->settings->simulation->dimension) + i + 1;
+            idx3 = (j * this->settings->simulation->dimension) + i + 1;
+
+//            textureCoordinates.append(this->realization->rho[idx0] );
+//            textureCoordinates.append(this->realization->rho[idx1] );
+//            textureCoordinates.append(this->realization->rho[idx2] );
+
+//            textureCoordinates.append(this->realization->rho[idx0] );
+//            textureCoordinates.append(this->realization->rho[idx2] );
+//            textureCoordinates.append(this->realization->rho[idx3] );
+            textureCoordinates.append(0.0 );
+            textureCoordinates.append(0.3 );
+            textureCoordinates.append(0.4 );
+
+            textureCoordinates.append(0.6 );
+            textureCoordinates.append(0.8 );
+            textureCoordinates.append(0.1 );
+        }
+    }
+
+    return textureCoordinates;
+
+}
+
 
 
 void Simulation::step()
@@ -115,4 +151,5 @@ void Simulation::onMouseMoved(QPoint newPosition)
 
     emit simulationUpdated();
 }
+
 

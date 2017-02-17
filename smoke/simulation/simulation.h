@@ -20,6 +20,7 @@ public:
     QVector<QVector3D> getColors();
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
+    QVector<float> getTextureCoordinates();
 
     SimulationRealization *realization;
 
