@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     simulation/utils.cpp \
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
-    view/colormaplegend.cpp utilities.cpp
+    view/colormaplegend.cpp utilities.cpp \
+    view/simulationsettingpane.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -44,10 +45,12 @@ HEADERS  += main.ih\
     engines/smokeengine.h \
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
-    view/colormaplegend.h utilities.h
+    view/colormaplegend.h utilities.h \
+    view/simulationsettingpane.h
 
 FORMS    += view/mainwindow.ui \
-    view/colormaplegend.ui
+    view/colormaplegend.ui \
+    view/simulationsettingpane.ui
 
 RESOURCES += \
     shaders.qrc
