@@ -29,7 +29,6 @@ public:
 
 signals:
     void simulationUpdated();
-    void rangeChanged(float minimum, float maximum);
 
 public slots:
     void onMouseMoved(QPoint newPosition);

@@ -32,7 +32,7 @@ private:
 
     void connectCanvasAndSimulation();
     void connectSettingsAndCanvas();
-    void connectSimulationAndColorMapLegend();
+    void connectSettingsAndColorMapLegend();
     void connectSettingAndSimulationSettingPane();
 };
 

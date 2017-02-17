@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();
-    connectSimulationAndColorMapLegend();
+    connectSettingsAndColorMapLegend();
     connectSettingAndSimulationSettingPane();
 
     this->simulationSettingPane->emitDefaults();
@@ -52,9 +52,9 @@ void MainWindow::connectSettingsAndCanvas()
             this->canvas, SLOT(onRangeChanged(float,float)));
 }
 
-void MainWindow::connectSimulationAndColorMapLegend()
+void MainWindow::connectSettingsAndColorMapLegend()
 {
-    connect(this->simulation, SIGNAL(rangeChanged(float,float)),
+    connect(this->settings, SIGNAL(rangeChanged(float,float)),
             this->colorMapLegend, SLOT(onRangeChanged(float,float)));
 
 }
