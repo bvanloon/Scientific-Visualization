@@ -114,10 +114,6 @@ QVector<float> Simulation::getTextureCoordinates()
             textureCoordinates.append(this->realization->rho[idx0] );
             textureCoordinates.append(this->realization->rho[idx2] );
             textureCoordinates.append(this->realization->rho[idx3] );
-
-
-            emitRange(&textureCoordinates);
-
         }
     }
 
@@ -150,21 +146,5 @@ void Simulation::onMouseMoved(QPoint newPosition)
     emit simulationUpdated();
 }
 
-void Simulation::emitRange( QVector<float> *vec)
-{
-    float minimum = FLT_MAX;
-    float maximum = FLT_MIN;
-
-    for (int i = 0; i < vec->length(); i++)
-    {
-        if ( vec->at(i) < minimum)
-            minimum = vec->at(i);
-
-        if (vec->at(i) > maximum )
-            maximum = vec->at(i);
-    }
-
-    emit rangeChanged(minimum, maximum);
-}
 
 

@@ -41,7 +41,6 @@ private:
 
     QPoint lastMousePosition;
 
-    void emitRange(QVector<float> *vec);
 };
 
 #endif // SMOKE_H
