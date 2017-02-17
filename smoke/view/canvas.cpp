@@ -43,6 +43,15 @@ void Canvas::onTextureUpdated()
     this->setTexture();
 }
 
+void Canvas::onRangeChanged(float minimum, float maximum)
+{
+    if(isValid()){
+        setRange(minimum, maximum);
+        update();
+    }
+
+}
+
 void Canvas::idleLoop()
 {
     if(!this->settings->simulation->frozen)

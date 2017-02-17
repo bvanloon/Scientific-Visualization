@@ -15,6 +15,7 @@ public:
 
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
     fftw_real *vx, *vy;             //(vx,vy)   = velocity field at the current moment
+    fftw_real *rho, *rho0;			//smoke density at the current (rho) and previous (rho0) moment
 
 private:
     Settings* settings;
@@ -25,7 +26,6 @@ private:
 //    fftw_real *vx, *vy;             //(vx,vy)   = velocity field at the current moment
     fftw_real *vx0, *vy0;           //(vx0,vy0) = velocity field at the previous moment
     fftw_real *fx, *fy;	            //(fx,fy)   = user-controlled simulation forces, steered with the mouse
-    fftw_real *rho, *rho0;			//smoke density at the current (rho) and previous (rho0) moment
     rfftwnd_plan plan_rc, plan_cr;  //simulation domain discretization
 
 

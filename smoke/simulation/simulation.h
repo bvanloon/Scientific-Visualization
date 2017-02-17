@@ -5,6 +5,7 @@
 #include <QVector>
 #include <QVector3D>
 #include <QPoint>
+#include <float.h>
 
 #include "simulation/simulationrealization.h"
 #include "settings/settings.h"
@@ -28,6 +29,7 @@ public:
 
 signals:
     void simulationUpdated();
+    void rangeChanged(float minimum, float maximum);
 
 public slots:
     void onMouseMoved(QPoint newPosition);
@@ -38,6 +40,8 @@ private:
     Settings *settings;
 
     QPoint lastMousePosition;
+
+    void emitRange(QVector<float> *vec);
 };
 
 #endif // SMOKE_H

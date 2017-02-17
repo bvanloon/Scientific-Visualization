@@ -107,22 +107,20 @@ QVector<float> Simulation::getTextureCoordinates()
             idx2 = ((j  + 1)* this->settings->simulation->dimension) + i + 1;
             idx3 = (j * this->settings->simulation->dimension) + i + 1;
 
-//            textureCoordinates.append(this->realization->rho[idx0] );
-//            textureCoordinates.append(this->realization->rho[idx1] );
-//            textureCoordinates.append(this->realization->rho[idx2] );
+            textureCoordinates.append(this->realization->rho[idx0] );
+            textureCoordinates.append(this->realization->rho[idx1] );
+            textureCoordinates.append(this->realization->rho[idx2] );
 
-//            textureCoordinates.append(this->realization->rho[idx0] );
-//            textureCoordinates.append(this->realization->rho[idx2] );
-//            textureCoordinates.append(this->realization->rho[idx3] );
-            textureCoordinates.append(0.0 );
-            textureCoordinates.append(0.3 );
-            textureCoordinates.append(0.4 );
+            textureCoordinates.append(this->realization->rho[idx0] );
+            textureCoordinates.append(this->realization->rho[idx2] );
+            textureCoordinates.append(this->realization->rho[idx3] );
 
-            textureCoordinates.append(0.6 );
-            textureCoordinates.append(0.8 );
-            textureCoordinates.append(0.1 );
+
+            emitRange(&textureCoordinates);
+
         }
     }
+
 
     return textureCoordinates;
 
@@ -150,6 +148,23 @@ void Simulation::onMouseMoved(QPoint newPosition)
     gridVertices.append(QVector3D(newPosition.x() + 10,  newPosition.y() - 10, 0.0f));
 
     emit simulationUpdated();
+}
+
+void Simulation::emitRange( QVector<float> *vec)
+{
+    float minimum = FLT_MAX;
+    float maximum = FLT_MIN;
+
+    for (int i = 0; i < vec->length(); i++)
+    {
+        if ( vec->at(i) < minimum)
+            minimum = vec->at(i);
+
+        if (vec->at(i) > maximum )
+            maximum = vec->at(i);
+    }
+
+    emit rangeChanged(minimum, maximum);
 }
 
 

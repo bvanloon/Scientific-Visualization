@@ -36,6 +36,7 @@ signals:
 public slots:
     void onSimulationUpdated();
     void onTextureUpdated();
+    void onRangeChanged(float minimum, float maximum);
 
 private slots:
     void idleLoop();
