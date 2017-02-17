@@ -79,14 +79,17 @@
         <height>16777215</height>
        </size>
       </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <widget class="QWidget" name="simulationTab">
        <attribute name="title">
-        <string>Tab 1</string>
+        <string>Simulation</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab_4">
+      <widget class="QWidget" name="tab2">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>tab 2</string>
        </attribute>
       </widget>
      </widget>
