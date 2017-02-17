@@ -17,10 +17,12 @@ public:
         public:
             int dimension;
             bool frozen;
+            float force;
 
             Simulation() :
                 dimension(50),
-                frozen(false)
+                frozen(false),
+                force(10.0f)
             {}
     };
 
