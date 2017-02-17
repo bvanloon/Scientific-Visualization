@@ -41,4 +41,5 @@ void Settings::updateGridCellSize()
 void Settings::onForceChanged(float newForce)
 {
     this->simulation->force = newForce;
+    qDebug() << "Settings::onForceChanged::newForce" << newForce;
 }

@@ -14,6 +14,7 @@ class SimulationSettingPane : public QWidget
 public:
     explicit SimulationSettingPane(QWidget *parent = 0);
     ~SimulationSettingPane();
+    void emitDefaults();
 
 signals:
     void forceChanged(float force);
