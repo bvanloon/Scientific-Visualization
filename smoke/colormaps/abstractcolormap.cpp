@@ -4,8 +4,8 @@
 #include <QColor>
 
 AbstractColorMap::AbstractColorMap(int numColors):
-    numColors(numColors),
-    QImage(1, numColors, QImage::Format_ARGB32)
+    QImage(numColors, 1, QImage::Format_ARGB32),
+    numColors(numColors)
 {
     fill(QColor(Qt::white).rgb());
 }

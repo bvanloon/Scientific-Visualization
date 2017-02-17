@@ -84,18 +84,15 @@ void Canvas::initializeTexture(QImage* image)
         if (texture->isCreated()) texture->destroy();
 
         texture->create();
-        texture->setSize(image->height());
-        texture->setFormat(QOpenGLTexture::RGBA16F);
+        texture->setData(image->mirrored());
         texture->setMagnificationFilter(QOpenGLTexture::Nearest);
         texture->setWrapMode(QOpenGLTexture::Repeat);
-        texture->allocateStorage();
-        texture->setData(image->mirrored());
     }
 }
 
 void Canvas::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     shaderProgram->bind();
 
