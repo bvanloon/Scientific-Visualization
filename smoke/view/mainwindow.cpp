@@ -14,9 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
     this->canvas->setSettings(this->settings);
+    this->colorMapLegend = ui->colorMapLegend;
 
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();
+    connectSimulationAndColorMapLegend();
 }
 
 MainWindow::~MainWindow()
@@ -42,4 +44,11 @@ void MainWindow::connectSettingsAndCanvas()
 {
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             this->settings, SLOT(onWindowResized(int, int)));
+}
+
+void MainWindow::connectSimulationAndColorMapLegend()
+{
+    connect(this->simulation, SIGNAL(rangeChanged(float,float)),
+            this->colorMapLegend, SLOT(onRangeChanged(float,float)));
+
 }

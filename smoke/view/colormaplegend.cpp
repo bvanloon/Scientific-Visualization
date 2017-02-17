@@ -41,6 +41,13 @@ void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
     update();
 }
 
+void ColorMapLegend::onRangeChanged(float minimum, float maximum)
+{
+    this->minimumValue = minimum;
+    this->maximumValue = maximum;
+    update();
+}
+
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
 {
     colorBar.setTop(getDescriptionLabelHeight());

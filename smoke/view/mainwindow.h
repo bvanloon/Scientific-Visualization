@@ -6,6 +6,7 @@
 #include <view/canvas.h>
 #include "simulation/simulation.h"
 #include "settings/settings.h"
+#include "colormaplegend.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,9 +26,11 @@ private:
     Canvas *canvas;
     Simulation *simulation;
     Settings *settings;
+    ColorMapLegend *colorMapLegend;
 
     void connectCanvasAndSimulation();
     void connectSettingsAndCanvas();
+    void connectSimulationAndColorMapLegend();
 };
 
 #endif // MAINWINDOW_H

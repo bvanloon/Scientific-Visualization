@@ -50,7 +50,7 @@
      </widget>
     </item>
     <item>
-     <widget class="ColorMapLegend" name="widget" native="true">
+     <widget class="ColorMapLegend" name="colorMapLegend" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
         <horstretch>0</horstretch>
