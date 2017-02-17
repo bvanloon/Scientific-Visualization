@@ -37,3 +37,8 @@ void Settings::updateGridCellSize()
     this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(this->simulation->dimension + 1);
     this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(this->simulation->dimension + 1);
 }
+
+void Settings::onForceChanged(float newForce)
+{
+    this->simulation->force = newForce;
+}

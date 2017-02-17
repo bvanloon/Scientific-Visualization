@@ -15,10 +15,13 @@ MainWindow::MainWindow(QWidget *parent) :
     this->canvas->setSimulation(this->simulation);
     this->canvas->setSettings(this->settings);
     this->colorMapLegend = ui->colorMapLegend;
+    this->simulationSettingPane = ui->simulationTab;
+
 
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();
     connectSimulationAndColorMapLegend();
+    connectSettingAndSimulationSettingPane();
 }
 
 MainWindow::~MainWindow()
@@ -52,3 +55,12 @@ void MainWindow::connectSimulationAndColorMapLegend()
             this->colorMapLegend, SLOT(onRangeChanged(float,float)));
 
 }
+
+void MainWindow::connectSettingAndSimulationSettingPane()
+{
+    connect(this->simulationSettingPane, SIGNAL(forceChanged(float)),
+            this->settings, SLOT(onForceChanged(float)));
+
+}
+
+

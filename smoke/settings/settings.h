@@ -68,6 +68,7 @@ signals:
 public slots:
     void onWindowResized(int width, int height);
     void onDimensionChanged(int newDimension);
+    void onForceChanged(float newForce);
 
 private:
     void updateGridCellSize();

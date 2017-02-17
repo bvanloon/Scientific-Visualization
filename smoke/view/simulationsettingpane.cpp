@@ -12,3 +12,8 @@ SimulationSettingPane::~SimulationSettingPane()
 {
     delete ui;
 }
+
+void SimulationSettingPane::on_forceSlider_valueChanged(int value)
+{
+    emit forceChanged((float)value);
+}
