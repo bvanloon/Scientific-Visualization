@@ -45,10 +45,9 @@ void Canvas::onTextureUpdated()
 
 void Canvas::onRangeChanged(float minimum, float maximum)
 {
-    if(isValid()){
-        setRange(minimum, maximum);
-        update();
-    }
+
+    this->minimum = minimum;
+    this->maximum = maximum;
 
 }
 
@@ -122,7 +121,7 @@ void Canvas::paintGL()
 void Canvas::setUniforms()
 {
     setMVPMatrix();
-    setRange(5.0,15.0);
+    setRange(this->minimum, this->maximum);
 }
 
 void Canvas::setMVPMatrix()

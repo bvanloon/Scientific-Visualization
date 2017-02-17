@@ -64,6 +64,7 @@ public:
     Visualization *visualization;
 
 signals:
+    void rangeChanged(float minimum, float maximum);
 
 public slots:
     void onWindowResized(int width, int height);

@@ -18,6 +18,7 @@
 #include "simulation/simulation.h"
 
 
+
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
@@ -78,6 +79,9 @@ private:
     //Idle Loop
     QTimer* timer;
     void initiateIdleLoop();
+
+    float minimum;
+    float maximum;
 };
 
 #endif // CANVAS_H

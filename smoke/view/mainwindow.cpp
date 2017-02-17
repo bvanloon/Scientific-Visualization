@@ -49,6 +49,9 @@ void MainWindow::connectSettingsAndCanvas()
 {
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             this->settings, SLOT(onWindowResized(int, int)));
+
+    connect(this->settings,SIGNAL(rangeChanged(float,float)),
+            this->canvas, SLOT(onRangeChanged(float,float)));
 }
 
 void MainWindow::connectSimulationAndColorMapLegend()
