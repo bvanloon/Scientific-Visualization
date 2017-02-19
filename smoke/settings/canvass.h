@@ -2,6 +2,8 @@
 #define CANVASS_H
 
 #include <QObject>
+#include <QSize>
+
 #include "settings/settingsns.h"
 
 class settingsns::Canvas : public QObject
@@ -10,6 +12,8 @@ class settingsns::Canvas : public QObject
 public:
 
     static const Canvas &instance();
+
+    QSize size;
 
 signals:
 

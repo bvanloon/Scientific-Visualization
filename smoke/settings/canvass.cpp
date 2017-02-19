@@ -1,7 +1,8 @@
 #include "canvass.h"
 
 settingsns::Canvas::Canvas(QObject *parent) :
-    QObject(parent)
+    QObject(parent),
+    size(500, 500)
 {}
 
 
