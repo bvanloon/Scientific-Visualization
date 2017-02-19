@@ -78,9 +78,6 @@ private:
     //Idle Loop
     QTimer* timer;
     void initiateIdleLoop();
-
-    float minimum;
-    float maximum;
 };
 
 #endif // CANVAS_H

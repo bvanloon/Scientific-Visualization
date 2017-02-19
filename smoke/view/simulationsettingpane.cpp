@@ -15,7 +15,7 @@ SimulationSettingPane::~SimulationSettingPane()
 
 void SimulationSettingPane::emitDefaults()
 {
-    emit forceChanged((float)this->ui->forceSlider->value());
+//    emit forceChanged((float)this->ui->forceSlider->value());
 }
 
 void SimulationSettingPane::on_forceSlider_valueChanged(int value)

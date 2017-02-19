@@ -41,10 +41,7 @@ void Canvas::onTextureUpdated()
 
 void Canvas::onRangeChanged(float minimum, float maximum)
 {
-
-    this->minimum = minimum;
-    this->maximum = maximum;
-
+    setRange(minimum, maximum);
 }
 
 void Canvas::idleLoop()
@@ -98,6 +95,8 @@ void Canvas::initializeTexture(QImage* image)
 void Canvas::setUniformsToDefaults()
 {
     setMVPMatrix();
+    qDebug() << "Canvas::setUniformsToDefaults setRange needs a default in the settings object.";
+    setRange(0.0f, 10.0f);
 }
 
 void Canvas::paintGL()
@@ -120,7 +119,7 @@ void Canvas::paintGL()
 
 void Canvas::setUniforms()
 {
-    setRange(this->minimum, this->maximum);
+//    setRange(this->minimum, this->maximum);
 }
 
 void Canvas::setMVPMatrix()
@@ -141,8 +140,11 @@ void Canvas::setTexture()
 
 void Canvas::setRange(float minimum, float maximum)
 {
-    this->shaderProgram->setUniformValue("range.minimum", minimum);
-    this->shaderProgram->setUniformValue("range.maximum", maximum);
+    if (this->shaderProgram->bind()){
+        this->shaderProgram->setUniformValue("range.minimum", minimum);
+        this->shaderProgram->setUniformValue("range.maximum", maximum);
+        this->shaderProgram->release();
+    }
 }
 
 void Canvas::initiateIdleLoop()
