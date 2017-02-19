@@ -48,7 +48,7 @@ QVector<QVector3D> Simulation::getGridVertices()
         {
             idx = (j * settingsns::simulation().dimension) + i;
             gridPoint = QVector3D(
-                        settingsns::simulation().cellSize.width() + (fftw_real)i * settings->grid->cellWidth,
+                        settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width(),
                         settingsns::simulation().cellSize.height() + (fftw_real)j *settings->grid->cellHeight,
                         0.0f);
             offset = QVector3D(
