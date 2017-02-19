@@ -25,18 +25,6 @@ public:
             {}
     };
 
-    class Grid {
-        public:
-//            fftw_real cellWidth;
-//            fftw_real cellHeight;
-
-            Grid()
-//                :
-//                cellWidth(-1),
-//                cellHeight(-1)
-            {}
-    };
-
     class Visualization {
         public:
             float vecScale;
@@ -47,15 +35,10 @@ public:
     };
 
     Canvas *canvas;
-    Grid *grid;
     Visualization *visualization;
 
 public slots:
     void onWindowResized(int width, int height);
-    void onForceChanged(float newForce);
-
-private:
-    void updateGridCellSize();
 };
 
 #endif // SETTINGS_H
