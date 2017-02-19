@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
-    this->canvas->setSettings(this->settings);
     this->colorMapLegend = ui->colorMapLegend;
     this->simulationSettingPane = ui->simulationTab;
 

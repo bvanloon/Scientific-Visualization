@@ -30,11 +30,6 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
-void Canvas::setSettings(Settings *settings)
-{
-    this->settings = settings;
-}
-
 void Canvas::onSimulationUpdated()
 {
     update();

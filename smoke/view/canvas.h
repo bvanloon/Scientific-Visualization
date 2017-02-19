@@ -28,7 +28,6 @@ public:
     ~Canvas();
 
     void setSimulation(Simulation *simulation);
-    void setSettings(Settings *settings);
 
 signals:
     void mouseMoved(QPoint newPosition);
@@ -68,7 +67,6 @@ private:
     void setRange(float minimum, float maximum);
 
     Simulation* simulation;
-    Settings* settings;
 
     //Engines
     TriangleEngine *triangleEnginge;
