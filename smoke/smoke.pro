@@ -30,10 +30,10 @@ SOURCES += main.cpp\
     engines/smokeengine.cpp \
     view/colormaplegend.cpp utilities.cpp \
     view/simulationsettingpane.cpp \
-    settings/settingsns.cpp \
     settings/simulations.cpp \
     settings/canvass.cpp \
-    settings/visualizations.cpp
+    settings/visualizations.cpp \
+    settings/settings.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -47,10 +47,10 @@ HEADERS  += main.ih\
     colormaps/rainbowcolormap.h \
     view/colormaplegend.h utilities.h \
     view/simulationsettingpane.h \
-    settings/settingsns.h \
     settings/simulations.h \
     settings/canvass.h \
-    settings/visualizations.h
+    settings/visualizations.h \
+    settings/settings.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

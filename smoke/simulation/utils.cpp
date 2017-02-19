@@ -1,6 +1,6 @@
 #include "utils.h"
 
-#include "settings/settingsns.h"
+#include "settings/settings.h"
 #include "settings/simulations.h"
 #include "settings/canvass.h"
 

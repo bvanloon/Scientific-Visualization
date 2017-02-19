@@ -1,7 +1,7 @@
 #include "view/mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "settings/settingsns.h"
+#include "settings/settings.h"
 #include "settings/simulations.h"
 #include "settings/canvass.h"
 
