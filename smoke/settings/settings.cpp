@@ -28,7 +28,7 @@ void Settings::onWindowResized(int width, int height)
 
 void Settings::updateGridCellSize()
 {
-    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(settingsns::simulation().dimension + 1);
+//    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(settingsns::simulation().dimension + 1);
 //    this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(settingsns::simulation().dimension + 1);
 }
 

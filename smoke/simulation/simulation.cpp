@@ -49,7 +49,7 @@ QVector<QVector3D> Simulation::getGridVertices()
             idx = (j * settingsns::simulation().dimension) + i;
             gridPoint = QVector3D(
                         settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width(),
-                        settingsns::simulation().cellSize.height() + (fftw_real)j *settings->grid->cellHeight,
+                        settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height(),
                         0.0f);
             offset = QVector3D(
                         this->settings->visualization->vecScale * this->realization->vx[idx],
@@ -73,16 +73,16 @@ QVector<QVector3D> Simulation::getGridTriangulation()
         for (int i = 0; i < settingsns::simulation().dimension - 1; i++)
         {
             px0 = settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width();
-            py0 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
+            py0 = settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height();
 
             px1 = settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width();
-            py1 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
+            py1 = settingsns::simulation().cellSize.height()+ (fftw_real)(j + 1) * settingsns::simulation().cellSize.height();
 
             px2 = settingsns::simulation().cellSize.width() + (fftw_real)(i + 1) * settingsns::simulation().cellSize.width();
-            py2 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
+            py2 = settingsns::simulation().cellSize.height() + (fftw_real)(j + 1) * settingsns::simulation().cellSize.height();
 
             px3 = settingsns::simulation().cellSize.width() + (fftw_real)(i + 1) * settingsns::simulation().cellSize.width();
-            py3 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
+            py3 = settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height();
 
             gridTriangles.append(QVector3D(px0,py0,0.0f) );
             gridTriangles.append(QVector3D(px1,py1,0.0f) );
