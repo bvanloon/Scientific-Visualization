@@ -72,16 +72,16 @@ QVector<QVector3D> Simulation::getGridTriangulation()
     {
         for (int i = 0; i < settingsns::simulation().dimension - 1; i++)
         {
-            px0 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
+            px0 = settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width();
             py0 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
 
-            px1 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
+            px1 = settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width();
             py1 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
 
-            px2 = settings->grid->cellWidth + (fftw_real)(i + 1) * settings->grid->cellWidth;
+            px2 = settingsns::simulation().cellSize.width() + (fftw_real)(i + 1) * settingsns::simulation().cellSize.width();
             py2 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
 
-            px3 = settings->grid->cellWidth + (fftw_real)(i + 1) * settings->grid->cellWidth;
+            px3 = settingsns::simulation().cellSize.width() + (fftw_real)(i + 1) * settingsns::simulation().cellSize.width();
             py3 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
 
             gridTriangles.append(QVector3D(px0,py0,0.0f) );

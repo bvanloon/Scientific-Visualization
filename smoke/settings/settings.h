@@ -27,12 +27,12 @@ public:
 
     class Grid {
         public:
-            fftw_real cellWidth;
+//            fftw_real cellWidth;
             fftw_real cellHeight;
 
             Grid()
                 :
-                cellWidth(-1),
+//                cellWidth(-1),
                 cellHeight(-1)
             {}
     };
