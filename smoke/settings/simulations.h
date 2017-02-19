@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QSizeF>
-#include "settingsns.h"
+#include "settings.h"
 
 class Settings::Simulation : public QObject
 {

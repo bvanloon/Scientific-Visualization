@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QSize>
 
-#include "settings/settingsns.h"
+#include "settings/settings.h"
 
 class Settings::Canvas : public QObject
 {

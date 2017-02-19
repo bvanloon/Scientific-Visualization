@@ -2,7 +2,7 @@
 #define VISUALIZATIONS_H
 
 #include <QObject>
-#include "settingsns.h"
+#include "settings.h"
 
 class Settings::Visualization : public QObject
 {

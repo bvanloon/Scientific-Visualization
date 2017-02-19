@@ -1,4 +1,4 @@
-#include "settingsns.h"
+#include "settings.h"
 #include "settings/simulations.h"
 #include "settings/canvass.h"
 #include "settings/visualizations.h"

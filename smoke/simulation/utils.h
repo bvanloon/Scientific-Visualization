@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include "settings/settingsns.h"
+#include "settings/settings.h"
 #include "settings/simulations.h"
 
 #include <QPoint>

@@ -4,7 +4,7 @@
 #include <QPoint>
 #include <QPointF>
 
-#include "settings/settingsns.h"
+#include "settings/settings.h"
 #include "settings/simulations.h"
 
 SimulationRealization::SimulationRealization():
