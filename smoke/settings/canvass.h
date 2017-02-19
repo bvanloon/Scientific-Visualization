@@ -18,6 +18,7 @@ public:
 signals:
 
 public slots:
+    void onWindowResized(int width, int height);
 
 private:
     explicit Canvas(QObject *parent = 0);

@@ -3,6 +3,7 @@
 
 #include "settings/settingsns.h"
 #include "settings/simulations.h"
+#include "settings/canvass.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -53,6 +54,9 @@ void MainWindow::connectSettingsAndCanvas()
 
     connect(&settingsns::simulation(),SIGNAL(rangeChanged(float,float)),
             this->canvas, SLOT(onRangeChanged(float,float)));
+
+    connect(this->canvas, SIGNAL(windowResized(int, int)),
+            &settingsns::canvas(), SLOT(onWindowResized(int, int)));
 }
 
 void MainWindow::connectSettingsAndColorMapLegend()
