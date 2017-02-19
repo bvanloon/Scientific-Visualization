@@ -3,6 +3,7 @@
 
 namespace settingsns {
     class Simulation;
+    const Simulation& simulation();
 }
 
 #endif // SETTINGSNS_H

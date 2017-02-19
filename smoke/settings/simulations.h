@@ -9,7 +9,7 @@ class settingsns::Simulation : public QObject
     Q_OBJECT
 public:
 
-    static const Simulation& instance();
+    static const Simulation &instance();
 
 signals:
 
