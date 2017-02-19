@@ -53,7 +53,7 @@ int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePo
         mouseDiff *= 0.1f/length;
     }
 
-    int idx = cursorLocationToArrayIndex(newMousePosition, this->settings);
+    int idx = cursorLocationToArrayIndex(newMousePosition);
     fx[idx] += mouseDiff.x();
     fy[idx] += mouseDiff.y();
     rho[idx] = settingsns::simulation().force;
