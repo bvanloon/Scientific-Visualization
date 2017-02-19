@@ -70,8 +70,8 @@ void Canvas::initializeGL()
     this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
 
+    setUniformsToDefaults();
     setTexture();
-
 }
 
 void Canvas::initializeShaders()
@@ -95,6 +95,11 @@ void Canvas::initializeTexture(QImage* image)
     }
 }
 
+void Canvas::setUniformsToDefaults()
+{
+    setMVPMatrix();
+}
+
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -104,7 +109,6 @@ void Canvas::paintGL()
     setUniforms();
 
     this->texture->bind();
-
 
 //    vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
@@ -116,15 +120,16 @@ void Canvas::paintGL()
 
 void Canvas::setUniforms()
 {
-    setMVPMatrix();
     setRange(this->minimum, this->maximum);
 }
 
 void Canvas::setMVPMatrix()
 {
+    shaderProgram->bind();
     QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
 
     this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
+    shaderProgram->release();
 }
 
 void Canvas::setTexture()
@@ -157,7 +162,7 @@ void Canvas::resizeGL(int width, int height)
     projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
 
     emit windowResized(width, height);
-
+    setMVPMatrix();
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)

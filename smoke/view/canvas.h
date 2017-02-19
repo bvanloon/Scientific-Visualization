@@ -61,6 +61,7 @@ private:
 
     QOpenGLTexture *texture;
 
+    void setUniformsToDefaults();
     void setUniforms();
     void setMVPMatrix();
     void setTexture();
