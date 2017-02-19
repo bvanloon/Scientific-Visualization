@@ -74,7 +74,7 @@ void Canvas::initializeGL()
 
     this->triangleEnginge = new TriangleEngine();
     this->vectorEngine = new VectorEngine(this->settings);
-    this->smokeEngine = new SmokeEngine(this->settings);
+    this->smokeEngine = new SmokeEngine();
 
     setTexture();
 

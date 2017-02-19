@@ -11,13 +11,12 @@
 class SmokeEngine : protected QOpenGLFunctions
 {
 public:
-    SmokeEngine(Settings* settings);
+    SmokeEngine();
     virtual ~SmokeEngine();
 
     void draw(Simulation* simulation);
 
 private:
-    Settings* settings;
     void initBuffers();
 
     int updateBuffers(Simulation* simulation);

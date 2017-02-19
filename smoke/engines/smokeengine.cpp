@@ -1,7 +1,6 @@
 #include "smokeengine.h"
 
-SmokeEngine::SmokeEngine(Settings *settings):
-    settings(settings)
+SmokeEngine::SmokeEngine()
 {
 
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
