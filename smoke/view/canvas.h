@@ -62,7 +62,6 @@ private:
     QOpenGLTexture *texture;
 
     void setUniformsToDefaults();
-    void setUniforms();
     void setMVPMatrix();
     void setTexture();
     void setRange(float minimum, float maximum);

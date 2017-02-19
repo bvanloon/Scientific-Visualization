@@ -105,8 +105,6 @@ void Canvas::paintGL()
 
     shaderProgram->bind();
 
-    setUniforms();
-
     this->texture->bind();
 
 //    vectorEngine->draw(this->simulation);
@@ -115,11 +113,6 @@ void Canvas::paintGL()
     this->texture->release();
 
     shaderProgram->release();
-}
-
-void Canvas::setUniforms()
-{
-//    setRange(this->minimum, this->maximum);
 }
 
 void Canvas::setMVPMatrix()
