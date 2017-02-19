@@ -15,7 +15,6 @@ const settingsns::Canvas &settingsns::Canvas::instance()
 
 void settingsns::Canvas::onWindowResized(int width, int height)
 {
-    qDebug() << "settingsns::Canvas::onWindowResized(int width, int height)";
     size.setWidth(width);
     size.setHeight(height);
 }

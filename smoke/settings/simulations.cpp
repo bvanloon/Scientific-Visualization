@@ -26,6 +26,11 @@ void settingsns::Simulation::onForceChanged(float newForce)
     emit rangeChanged(0.0, newForce);
 }
 
+void settingsns::Simulation::onWindowResized(int width, int height)
+{
+    qDebug() << "settingsns::Simulation::onWindowResize(int width, int height)";
+}
+
 void settingsns::Simulation::updateGridCellSize()
 {
     qDebug() << "settingsns::Simulation::updateGridCellSize";

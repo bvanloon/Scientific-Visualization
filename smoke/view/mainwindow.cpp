@@ -57,6 +57,9 @@ void MainWindow::connectSettingsAndCanvas()
 
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &settingsns::canvas(), SLOT(onWindowResized(int, int)));
+
+    connect(this->canvas, SIGNAL(windowResized(int, int)),
+            &settingsns::simulation(), SLOT(onWindowResized(int, int)));
 }
 
 void MainWindow::connectSettingsAndColorMapLegend()
