@@ -9,6 +9,6 @@
 
 int clamp(float x);
 float max(float x, float y);
-int cursorLocationToArrayIndex(QPoint newMousePosition, const settingsns::Simulation &simulationSettings, Settings *settings);
+int cursorLocationToArrayIndex(QPoint newMousePosition, Settings *settings);
 
 #endif // UTILS_H
