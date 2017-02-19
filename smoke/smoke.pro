@@ -26,7 +26,6 @@ SOURCES += main.cpp\
     colormaps/abstractcolormap.cpp \
     colormaps/rainbowcolormap.cpp \
     simulation/simulationrealization.cpp \
-    settings/settings.cpp \
     simulation/utils.cpp \
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
@@ -43,7 +42,6 @@ HEADERS  += main.ih\
     engines/triangleengine.h \
     simulation/simulation.h \
     simulation/simulationrealization.h \
-    settings/settings.h \
     simulation/utils.h \
     engines/vectorengine.h \
     engines/smokeengine.h \
