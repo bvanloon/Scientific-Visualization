@@ -1,7 +1,6 @@
 #include "vectorengine.h"
 
-VectorEngine::VectorEngine(Settings *settings) :
-    settings(settings)
+VectorEngine::VectorEngine()
 {
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
