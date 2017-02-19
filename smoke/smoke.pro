@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     view/colormaplegend.cpp utilities.cpp \
     view/simulationsettingpane.cpp \
     settings/settingsns.cpp \
-    settings/simulations.cpp
+    settings/simulations.cpp \
+    settings/canvass.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS  += main.ih\
     view/colormaplegend.h utilities.h \
     view/simulationsettingpane.h \
     settings/settingsns.h \
-    settings/simulations.h
+    settings/simulations.h \
+    settings/canvass.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

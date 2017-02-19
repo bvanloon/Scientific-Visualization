@@ -57,8 +57,6 @@ void MainWindow::connectSettingsAndCanvas()
 
 void MainWindow::connectSettingsAndColorMapLegend()
 {
-    connect(this->settings, SIGNAL(rangeChanged(float,float)),
-            this->colorMapLegend, SLOT(onRangeChanged(float,float)));
     connect(&settingsns::simulation(), SIGNAL(rangeChanged(float,float)),
             this->colorMapLegend, SLOT(onRangeChanged(float,float)));
 }
