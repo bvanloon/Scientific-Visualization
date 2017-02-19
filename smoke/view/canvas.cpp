@@ -8,8 +8,8 @@
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
-    timer(new QTimer(this)),
-    texture(0)
+    texture(0),
+    timer(new QTimer(this))
 {
     //Ensure that the mouse is always tracked, even if we didn't click first.
     this->setMouseTracking(true);
