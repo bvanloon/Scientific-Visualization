@@ -11,18 +11,6 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = 0);
     ~Settings();
-
-    class Visualization {
-        public:
-//            float vecScale;
-
-            Visualization()
-//                :
-//                vecScale(1000)
-            {}
-    };
-
-    Visualization *visualization;
 };
 
 #endif // SETTINGS_H
