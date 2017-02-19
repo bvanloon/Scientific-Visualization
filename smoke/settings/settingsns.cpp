@@ -1,6 +1,7 @@
 #include "settingsns.h"
 #include "settings/simulations.h"
 #include "settings/canvass.h"
+#include "settings/visualizations.h"
 
 const settingsns::Simulation &settingsns::simulation()
 {
@@ -10,4 +11,9 @@ const settingsns::Simulation &settingsns::simulation()
 const settingsns::Canvas &settingsns::canvas()
 {
     return Canvas::instance();
+}
+
+const settingsns::Visualization &settingsns::visualization()
+{
+    return Visualization::instance();
 }

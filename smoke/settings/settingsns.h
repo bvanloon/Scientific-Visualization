@@ -6,7 +6,10 @@ namespace settingsns {
     const Simulation& simulation();
 
     class Canvas;
-    const Canvas& canvas();
+    const Canvas &canvas();
+
+    class Visualization;
+    const Visualization &visualization();
 }
 
 #endif // SETTINGSNS_H
