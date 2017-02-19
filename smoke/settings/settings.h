@@ -12,21 +12,6 @@ public:
     explicit Settings(QObject *parent = 0);
     ~Settings();
 
-
-    class Simulation {
-        public:
-//            int dimension;
-//            bool frozen;
-//            float force;
-
-            Simulation()
-//                :
-//                dimension(50),
-//                frozen(false),
-//                force(10.0f)
-            {}
-    };
-
     class Canvas {
 
         public:
@@ -59,7 +44,6 @@ public:
             {}
     };
 
-    Simulation *simulation;
     Canvas *canvas;
     Grid *grid;
     Visualization *visualization;

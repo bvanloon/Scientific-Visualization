@@ -6,7 +6,6 @@
 Settings::Settings(QObject *parent) : QObject(parent)
 {
     this->canvas = new Canvas();
-    this->simulation = new Simulation();
     this->grid  = new Grid();
     this->visualization = new Visualization();
 }
@@ -14,7 +13,6 @@ Settings::Settings(QObject *parent) : QObject(parent)
 Settings::~Settings()
 {
     delete canvas;
-    delete simulation;
     delete grid;
     delete visualization;
 }
