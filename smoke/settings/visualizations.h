@@ -11,6 +11,8 @@ public:
 
     static const Visualization &instance();
 
+    float vectorScale;
+
 signals:
 
 public slots:

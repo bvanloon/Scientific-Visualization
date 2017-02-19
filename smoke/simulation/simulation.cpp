@@ -3,6 +3,7 @@
 #include "settings/settingsns.h"
 #include "settings/simulations.h"
 #include "settings/canvass.h"
+#include "settings/visualizations.h"
 
 #include <QDebug>
 
@@ -52,8 +53,8 @@ QVector<QVector3D> Simulation::getGridVertices()
                         settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height(),
                         0.0f);
             offset = QVector3D(
-                        this->settings->visualization->vecScale * this->realization->vx[idx],
-                        this->settings->visualization->vecScale * this->realization->vy[idx],
+                        settingsns::visualization().vectorScale * this->realization->vx[idx],
+                        settingsns::visualization().vectorScale * this->realization->vy[idx],
                         0.0f);
             gridVertices.append(gridPoint);
             gridVertices.append(gridPoint + offset);

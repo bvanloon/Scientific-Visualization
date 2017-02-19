@@ -14,10 +14,11 @@ public:
 
     class Visualization {
         public:
-            float vecScale;
+//            float vecScale;
 
-            Visualization():
-                vecScale(1000)
+            Visualization()
+//                :
+//                vecScale(1000)
             {}
     };
 
