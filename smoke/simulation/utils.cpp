@@ -1,26 +1,26 @@
 #include "utils.h"
 
+#include "settings/settingsns.h"
+#include "settings/simulations.h"
+#include "settings/canvass.h"
 
-
-
-
-int cursorLocationToArrayIndex(QPoint newMousePosition, Settings* settings)
+int cursorLocationToArrayIndex(QPoint newMousePosition)
 {
     // Compute the array index that corresponds to the cursor location
-    int xi = (int)clamp((double)(settings->simulation->dimension + 1) * ((double)newMousePosition.x()/ (double)settings->canvas->width));
-    int yi = (int)clamp((double)(settings->simulation->dimension + 1) * ((double)newMousePosition.y() / (double)settings->canvas->height));
+    int xi = (int)clamp((double)(Settings::simulation().dimension + 1) * ((double)newMousePosition.x()/ (double)Settings::canvas().size.width()));
+    int yi = (int)clamp((double)(Settings::simulation().dimension + 1) * ((double)newMousePosition.y() / (double)Settings::canvas().size.height()));
 
     //Bound array index to canvas dimensions
-    if (xi > (settings->simulation->dimension - 1))
-        xi = settings->simulation->dimension - 1;
-    if (yi > (settings->simulation->dimension - 1))
-        yi = settings->simulation->dimension - 1;
+    if (xi > (Settings::simulation().dimension - 1))
+        xi = Settings::simulation().dimension - 1;
+    if (yi > (Settings::simulation().dimension - 1))
+        yi = Settings::simulation().dimension - 1;
     if (xi < 0)
         xi = 0;
     if (yi < 0)
         yi = 0;
 
-    return yi * settings->simulation->dimension + xi;
+    return yi * Settings::simulation().dimension + xi;
 }
 
 int clamp(float x){

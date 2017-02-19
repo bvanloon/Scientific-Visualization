@@ -3,11 +3,12 @@
 #include <QDebug>
 #include <QImage>
 #include <colormaps/rainbowcolormap.h>
+#include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
-    timer(new QTimer(this)),
-    texture(0)
+    texture(0),
+    timer(new QTimer(this))
 {
     //Ensure that the mouse is always tracked, even if we didn't click first.
     this->setMouseTracking(true);
@@ -26,11 +27,6 @@ Canvas::~Canvas()
 void Canvas::setSimulation(Simulation *simulation)
 {
     this->simulation = simulation;
-}
-
-void Canvas::setSettings(Settings *settings)
-{
-    this->settings = settings;
 }
 
 void Canvas::onSimulationUpdated()
@@ -53,7 +49,7 @@ void Canvas::onRangeChanged(float minimum, float maximum)
 
 void Canvas::idleLoop()
 {
-    if(!this->settings->simulation->frozen)
+    if(!Settings::simulation().frozen)
     {
         this->simulation->step();
     }
@@ -71,8 +67,8 @@ void Canvas::initializeGL()
     initializeShaders();
 
     this->triangleEnginge = new TriangleEngine();
-    this->vectorEngine = new VectorEngine(this->settings);
-    this->smokeEngine = new SmokeEngine(this->settings);
+    this->vectorEngine = new VectorEngine();
+    this->smokeEngine = new SmokeEngine();
 
     setTexture();
 
@@ -110,7 +106,7 @@ void Canvas::paintGL()
     this->texture->bind();
 
 
-    //vectorEngine->draw(this->simulation);
+//    vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
 
     this->texture->release();

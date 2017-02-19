@@ -1,11 +1,16 @@
 #include "simulation.h"
+
+#include "settings/settingsns.h"
+#include "settings/simulations.h"
+#include "settings/canvass.h"
+#include "settings/visualizations.h"
+
 #include <QDebug>
 
-Simulation::Simulation(Settings* settings, QObject *parent) :
+Simulation::Simulation(QObject *parent) :
     QObject(parent), lastMousePosition(0.0f, 0.0f)
 {
-    this->settings = settings;
-    this->realization = new SimulationRealization(settings);
+    this->realization = new SimulationRealization();
 
     gridVertices.append(QVector3D(800.0f, 400.0f, 0.0f));
     gridVertices.append(QVector3D(500.0f, 200.0, 0.0f));
@@ -38,17 +43,17 @@ QVector<QVector3D> Simulation::getGridVertices()
     QVector3D gridPoint;
     QVector3D offset;
 
-    for (int i = 0; i < this->settings->simulation->dimension; i++){
-        for (int j = 0; j < this->settings->simulation->dimension; j++)
+    for (int i = 0; i < Settings::simulation().dimension; i++){
+        for (int j = 0; j < Settings::simulation().dimension; j++)
         {
-            idx = (j * this->settings->simulation->dimension) + i;
+            idx = (j * Settings::simulation().dimension) + i;
             gridPoint = QVector3D(
-                        settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth,
-                        settings->grid->cellHeight + (fftw_real)j *settings->grid->cellHeight,
+                        Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width(),
+                        Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height(),
                         0.0f);
             offset = QVector3D(
-                        this->settings->visualization->vecScale * this->realization->vx[idx],
-                        this->settings->visualization->vecScale * this->realization->vy[idx],
+                        Settings::visualization().vectorScale * this->realization->vx[idx],
+                        Settings::visualization().vectorScale * this->realization->vy[idx],
                         0.0f);
             gridVertices.append(gridPoint);
             gridVertices.append(gridPoint + offset);
@@ -63,21 +68,21 @@ QVector<QVector3D> Simulation::getGridTriangulation()
 
     double px0, py0, px1, py1, px2, py2, px3, py3;
 
-    for (int j = 0; j < settings->simulation->dimension - 1; j++)
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
-        for (int i = 0; i < settings->simulation->dimension - 1; i++)
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            px0 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
-            py0 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
+            px0 = Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width();
+            py0 = Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height();
 
-            px1 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
-            py1 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
+            px1 = Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width();
+            py1 = Settings::simulation().cellSize.height()+ (fftw_real)(j + 1) * Settings::simulation().cellSize.height();
 
-            px2 = settings->grid->cellWidth + (fftw_real)(i + 1) * settings->grid->cellWidth;
-            py2 = settings->grid->cellHeight + (fftw_real)(j + 1) * settings->grid->cellHeight;
+            px2 = Settings::simulation().cellSize.width() + (fftw_real)(i + 1) * Settings::simulation().cellSize.width();
+            py2 = Settings::simulation().cellSize.height() + (fftw_real)(j + 1) * Settings::simulation().cellSize.height();
 
-            px3 = settings->grid->cellWidth + (fftw_real)(i + 1) * settings->grid->cellWidth;
-            py3 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
+            px3 = Settings::simulation().cellSize.width() + (fftw_real)(i + 1) * Settings::simulation().cellSize.width();
+            py3 = Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height();
 
             gridTriangles.append(QVector3D(px0,py0,0.0f) );
             gridTriangles.append(QVector3D(px1,py1,0.0f) );
@@ -98,14 +103,14 @@ QVector<float> Simulation::getTextureCoordinates()
 
     int idx0, idx1, idx2, idx3;
 
-    for (int j = 0; j < settings->simulation->dimension - 1; j++)
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
-        for (int i = 0; i < settings->simulation->dimension - 1; i++)
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * this->settings->simulation->dimension) + i;
-            idx1 = ((j  + 1)* this->settings->simulation->dimension) + i;
-            idx2 = ((j  + 1)* this->settings->simulation->dimension) + i + 1;
-            idx3 = (j * this->settings->simulation->dimension) + i + 1;
+            idx0 = (j * Settings::simulation().dimension) + i;
+            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
+            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
+            idx3 = (j * Settings::simulation().dimension) + i + 1;
 
             textureCoordinates.append(this->realization->rho[idx0] );
             textureCoordinates.append(this->realization->rho[idx1] );
@@ -132,7 +137,7 @@ void Simulation::step()
 void Simulation::onMouseMoved(QPoint newPosition)
 {
     //Invert y-position
-    newPosition.setY(this->settings->canvas->height - newPosition.y());
+    newPosition.setY(Settings::canvas().size.height() - newPosition.y());
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;

@@ -26,12 +26,15 @@ SOURCES += main.cpp\
     colormaps/abstractcolormap.cpp \
     colormaps/rainbowcolormap.cpp \
     simulation/simulationrealization.cpp \
-    settings/settings.cpp \
     simulation/utils.cpp \
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
     view/colormaplegend.cpp utilities.cpp \
-    view/simulationsettingpane.cpp
+    view/simulationsettingpane.cpp \
+    settings/settingsns.cpp \
+    settings/simulations.cpp \
+    settings/canvass.cpp \
+    settings/visualizations.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -39,14 +42,17 @@ HEADERS  += main.ih\
     engines/triangleengine.h \
     simulation/simulation.h \
     simulation/simulationrealization.h \
-    settings/settings.h \
     simulation/utils.h \
     engines/vectorengine.h \
     engines/smokeengine.h \
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
     view/colormaplegend.h utilities.h \
-    view/simulationsettingpane.h
+    view/simulationsettingpane.h \
+    settings/settingsns.h \
+    settings/simulations.h \
+    settings/canvass.h \
+    settings/visualizations.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
