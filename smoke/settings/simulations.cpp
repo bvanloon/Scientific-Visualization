@@ -16,14 +16,12 @@ const settingsns::Simulation &settingsns::Simulation::instance()
 
 void settingsns::Simulation::onDimensionChanged(int newDimension)
 {
-    qDebug() << "settingsns::Simulation::onDimensionChanged";
     this->dimension = newDimension;
     updateGridCellSize();
 }
 
 void settingsns::Simulation::onForceChanged(float newForce)
 {
-    qDebug() << "void settingsns::Simulation::onForceChanged(float newForce)";
     this->force = newForce;
     emit rangeChanged(0.0, newForce);
 }
