@@ -43,17 +43,17 @@ QVector<QVector3D> Simulation::getGridVertices()
     QVector3D gridPoint;
     QVector3D offset;
 
-    for (int i = 0; i < settingsns::simulation().dimension; i++){
-        for (int j = 0; j < settingsns::simulation().dimension; j++)
+    for (int i = 0; i < Settings::simulation().dimension; i++){
+        for (int j = 0; j < Settings::simulation().dimension; j++)
         {
-            idx = (j * settingsns::simulation().dimension) + i;
+            idx = (j * Settings::simulation().dimension) + i;
             gridPoint = QVector3D(
-                        settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width(),
-                        settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height(),
+                        Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width(),
+                        Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height(),
                         0.0f);
             offset = QVector3D(
-                        settingsns::visualization().vectorScale * this->realization->vx[idx],
-                        settingsns::visualization().vectorScale * this->realization->vy[idx],
+                        Settings::visualization().vectorScale * this->realization->vx[idx],
+                        Settings::visualization().vectorScale * this->realization->vy[idx],
                         0.0f);
             gridVertices.append(gridPoint);
             gridVertices.append(gridPoint + offset);
@@ -68,21 +68,21 @@ QVector<QVector3D> Simulation::getGridTriangulation()
 
     double px0, py0, px1, py1, px2, py2, px3, py3;
 
-    for (int j = 0; j < settingsns::simulation().dimension - 1; j++)
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
-        for (int i = 0; i < settingsns::simulation().dimension - 1; i++)
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            px0 = settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width();
-            py0 = settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height();
+            px0 = Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width();
+            py0 = Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height();
 
-            px1 = settingsns::simulation().cellSize.width() + (fftw_real)i * settingsns::simulation().cellSize.width();
-            py1 = settingsns::simulation().cellSize.height()+ (fftw_real)(j + 1) * settingsns::simulation().cellSize.height();
+            px1 = Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width();
+            py1 = Settings::simulation().cellSize.height()+ (fftw_real)(j + 1) * Settings::simulation().cellSize.height();
 
-            px2 = settingsns::simulation().cellSize.width() + (fftw_real)(i + 1) * settingsns::simulation().cellSize.width();
-            py2 = settingsns::simulation().cellSize.height() + (fftw_real)(j + 1) * settingsns::simulation().cellSize.height();
+            px2 = Settings::simulation().cellSize.width() + (fftw_real)(i + 1) * Settings::simulation().cellSize.width();
+            py2 = Settings::simulation().cellSize.height() + (fftw_real)(j + 1) * Settings::simulation().cellSize.height();
 
-            px3 = settingsns::simulation().cellSize.width() + (fftw_real)(i + 1) * settingsns::simulation().cellSize.width();
-            py3 = settingsns::simulation().cellSize.height() + (fftw_real)j * settingsns::simulation().cellSize.height();
+            px3 = Settings::simulation().cellSize.width() + (fftw_real)(i + 1) * Settings::simulation().cellSize.width();
+            py3 = Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height();
 
             gridTriangles.append(QVector3D(px0,py0,0.0f) );
             gridTriangles.append(QVector3D(px1,py1,0.0f) );
@@ -103,14 +103,14 @@ QVector<float> Simulation::getTextureCoordinates()
 
     int idx0, idx1, idx2, idx3;
 
-    for (int j = 0; j < settingsns::simulation().dimension - 1; j++)
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
-        for (int i = 0; i < settingsns::simulation().dimension - 1; i++)
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * settingsns::simulation().dimension) + i;
-            idx1 = ((j  + 1)* settingsns::simulation().dimension) + i;
-            idx2 = ((j  + 1)* settingsns::simulation().dimension) + i + 1;
-            idx3 = (j * settingsns::simulation().dimension) + i + 1;
+            idx0 = (j * Settings::simulation().dimension) + i;
+            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
+            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
+            idx3 = (j * Settings::simulation().dimension) + i + 1;
 
             textureCoordinates.append(this->realization->rho[idx0] );
             textureCoordinates.append(this->realization->rho[idx1] );
@@ -137,7 +137,7 @@ void Simulation::step()
 void Simulation::onMouseMoved(QPoint newPosition)
 {
     //Invert y-position
-    newPosition.setY(settingsns::canvas().size.height() - newPosition.y());
+    newPosition.setY(Settings::canvas().size.height() - newPosition.y());
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;

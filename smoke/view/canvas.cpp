@@ -49,7 +49,7 @@ void Canvas::onRangeChanged(float minimum, float maximum)
 
 void Canvas::idleLoop()
 {
-    if(!settingsns::simulation().frozen)
+    if(!Settings::simulation().frozen)
     {
         this->simulation->step();
     }

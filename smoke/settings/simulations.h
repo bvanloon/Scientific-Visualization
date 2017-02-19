@@ -5,7 +5,7 @@
 #include <QSizeF>
 #include "settingsns.h"
 
-class settingsns::Simulation : public QObject
+class Settings::Simulation : public QObject
 {
     Q_OBJECT
 public:

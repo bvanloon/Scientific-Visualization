@@ -1,12 +1,12 @@
 #include "visualizations.h"
 #include <QDebug>
 
-settingsns::Visualization::Visualization(QObject *parent):
+Settings::Visualization::Visualization(QObject *parent):
     QObject(parent),
     vectorScale(1000)
 {}
 
-const settingsns::Visualization &settingsns::Visualization::instance()
+const Settings::Visualization &Settings::Visualization::instance()
 {
     static Visualization instance;
     return instance;

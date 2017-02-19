@@ -4,7 +4,7 @@
 #include <QObject>
 #include "settingsns.h"
 
-class settingsns::Visualization : public QObject
+class Settings::Visualization : public QObject
 {
     Q_OBJECT
 public:

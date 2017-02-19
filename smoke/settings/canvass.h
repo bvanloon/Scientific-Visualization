@@ -6,7 +6,7 @@
 
 #include "settings/settingsns.h"
 
-class settingsns::Canvas : public QObject
+class Settings::Canvas : public QObject
 {
     Q_OBJECT
 public:

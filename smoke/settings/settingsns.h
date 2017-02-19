@@ -1,7 +1,7 @@
 #ifndef SETTINGSNS_H
 #define SETTINGSNS_H
 
-namespace settingsns {
+namespace Settings {
     class Simulation;
     const Simulation& simulation();
 

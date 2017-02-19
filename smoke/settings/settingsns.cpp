@@ -3,17 +3,17 @@
 #include "settings/canvass.h"
 #include "settings/visualizations.h"
 
-const settingsns::Simulation &settingsns::simulation()
+const Settings::Simulation &Settings::simulation()
 {
     return Simulation::instance();
 }
 
-const settingsns::Canvas &settingsns::canvas()
+const Settings::Canvas &Settings::canvas()
 {
     return Canvas::instance();
 }
 
-const settingsns::Visualization &settingsns::visualization()
+const Settings::Visualization &Settings::visualization()
 {
     return Visualization::instance();
 }

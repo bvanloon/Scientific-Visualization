@@ -45,26 +45,26 @@ void MainWindow::connectCanvasAndSimulation()
 
 void MainWindow::connectSettingsAndCanvas()
 {
-    connect(&settingsns::simulation(),SIGNAL(rangeChanged(float,float)),
+    connect(&Settings::simulation(),SIGNAL(rangeChanged(float,float)),
             this->canvas, SLOT(onRangeChanged(float,float)));
 
     connect(this->canvas, SIGNAL(windowResized(int, int)),
-            &settingsns::canvas(), SLOT(onWindowResized(int, int)));
+            &Settings::canvas(), SLOT(onWindowResized(int, int)));
 
     connect(this->canvas, SIGNAL(windowResized(int, int)),
-            &settingsns::simulation(), SLOT(onWindowResized(int, int)));
+            &Settings::simulation(), SLOT(onWindowResized(int, int)));
 }
 
 void MainWindow::connectSettingsAndColorMapLegend()
 {
-    connect(&settingsns::simulation(), SIGNAL(rangeChanged(float,float)),
+    connect(&Settings::simulation(), SIGNAL(rangeChanged(float,float)),
             this->colorMapLegend, SLOT(onRangeChanged(float,float)));
 }
 
 void MainWindow::connectSettingAndSimulationSettingPane()
 {
     connect(this->simulationSettingPane, SIGNAL(forceChanged(float)),
-            &settingsns::simulation(), SLOT(onForceChanged(float)));
+            &Settings::simulation(), SLOT(onForceChanged(float)));
 }
 
 
