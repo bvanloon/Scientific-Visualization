@@ -18,7 +18,8 @@ public:
             int width;
             int height;
 
-            Canvas() :
+            Canvas()
+                :
                 width(-1),
                 height(-1)
             {}

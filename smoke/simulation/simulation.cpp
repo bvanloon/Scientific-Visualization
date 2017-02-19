@@ -2,6 +2,7 @@
 
 #include "settings/settingsns.h"
 #include "settings/simulations.h"
+#include "settings/canvass.h"
 
 #include <QDebug>
 
@@ -136,7 +137,7 @@ void Simulation::step()
 void Simulation::onMouseMoved(QPoint newPosition)
 {
     //Invert y-position
-    newPosition.setY(this->settings->canvas->height - newPosition.y());
+    newPosition.setY(settingsns::canvas().size.height() - newPosition.y());
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;
