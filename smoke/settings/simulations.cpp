@@ -1,12 +1,14 @@
 #include "simulations.h"
 #include "settings/canvass.h"
+#include "fftw.h"
 #include <QDebug>
 
 settingsns::Simulation::Simulation(QObject *parent):
     QObject(parent),
     dimension(50),
     frozen(false),
-    force(10.0f)
+    force(10.0f),
+    cellSize(-1, -1)
 {}
 
 const settingsns::Simulation &settingsns::Simulation::instance()
@@ -39,7 +41,6 @@ void settingsns::Simulation::updateGridCellSize()
 
 void settingsns::Simulation::updateGridCellSize(int width, int height)
 {
-    qDebug() << "TODO: settingsns::Simulation::updateGridCellSize(int width, int height)";
-    //    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(dimension + 1);
-        //    this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(dimension + 1);
+    cellSize.setHeight((fftw_real) width / (fftw_real)(dimension + 1));
+    cellSize.setWidth((fftw_real) height / (fftw_real)(dimension + 1));
 }

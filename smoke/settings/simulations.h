@@ -2,6 +2,7 @@
 #define SIMULATIONS_H
 
 #include <QObject>
+#include <QSizeF>
 #include "settingsns.h"
 
 class settingsns::Simulation : public QObject
@@ -14,6 +15,7 @@ public:
     int dimension;
     bool frozen;
     float force;
+    QSizeF cellSize;
 
 signals:
     void rangeChanged(float minimum, float maximum);
