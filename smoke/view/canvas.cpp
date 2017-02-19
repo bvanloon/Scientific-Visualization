@@ -3,7 +3,6 @@
 #include <QDebug>
 #include <QImage>
 #include <colormaps/rainbowcolormap.h>
-#include "settings/settings.h"
 #include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
