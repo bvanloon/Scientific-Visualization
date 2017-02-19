@@ -1,7 +1,7 @@
 #include "simulationsettingpane.h"
 #include "ui_simulationsettingpane.h"
 #include "settings/simulations.h"
-#include "settings/settingsns.h"
+#include "settings/settings.h"
 #include <QDebug>
 
 SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
