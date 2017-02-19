@@ -41,6 +41,6 @@ void settingsns::Simulation::updateGridCellSize()
 
 void settingsns::Simulation::updateGridCellSize(int width, int height)
 {
-    cellSize.setHeight((fftw_real) width / (fftw_real)(dimension + 1));
-    cellSize.setWidth((fftw_real) height / (fftw_real)(dimension + 1));
+    cellSize.setHeight((fftw_real) height / (fftw_real)(dimension + 1));
+    cellSize.setWidth((fftw_real) width / (fftw_real)(dimension + 1));
 }
