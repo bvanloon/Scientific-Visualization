@@ -29,16 +29,6 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
-void Canvas::onSimulationUpdated()
-{
-    update();
-}
-
-void Canvas::onTextureUpdated()
-{
-    this->setTexture();
-}
-
 void Canvas::onRangeChanged(float minimum, float maximum)
 {
     setRange(minimum, maximum);
@@ -67,8 +57,7 @@ void Canvas::initializeGL()
     this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
 
-    setUniformsToDefaults();
-    setTexture();
+    initializeUniforms();
 }
 
 void Canvas::initializeShaders()
@@ -79,24 +68,15 @@ void Canvas::initializeShaders()
     this->shaderProgram->link();
 }
 
-void Canvas::initializeTexture(QImage* image)
-{
-    if(isValid()){
-        if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
-        if (texture->isCreated()) texture->destroy();
-
-        texture->create();
-        texture->setData(image->mirrored());
-        texture->setMagnificationFilter(QOpenGLTexture::Nearest);
-        texture->setWrapMode(QOpenGLTexture::Repeat);
-    }
-}
-
-void Canvas::setUniformsToDefaults()
+void Canvas::initializeUniforms()
 {
     setMVPMatrix();
+
     qDebug() << "Canvas::setUniformsToDefaults setRange needs a default in the settings object.";
     setRange(0.0f, 10.0f);
+
+    qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
+    setTexture(RainbowColorMap(255));
 }
 
 void Canvas::paintGL()
@@ -124,11 +104,17 @@ void Canvas::setMVPMatrix()
     shaderProgram->release();
 }
 
-void Canvas::setTexture()
+void Canvas::setTexture(QImage image)
 {
-    QImage* colorMap = new RainbowColorMap(256);
-    initializeTexture(colorMap);
-    delete colorMap;
+    if(isValid()){
+        if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
+        if (texture->isCreated()) texture->destroy();
+
+        texture->create();
+        texture->setData(image.mirrored());
+        texture->setMagnificationFilter(QOpenGLTexture::Nearest);
+        texture->setWrapMode(QOpenGLTexture::Repeat);
+    }
 }
 
 void Canvas::setRange(float minimum, float maximum)

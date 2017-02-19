@@ -27,7 +27,6 @@ public:
     void step();
 
 signals:
-    void simulationUpdated();
 
 public slots:
     void onMouseMoved(QPoint newPosition);

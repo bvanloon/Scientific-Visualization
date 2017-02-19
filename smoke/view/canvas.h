@@ -34,8 +34,6 @@ signals:
     void windowResized(int width, int height);
 
 public slots:
-    void onSimulationUpdated();
-    void onTextureUpdated();
     void onRangeChanged(float minimum, float maximum);
 
 private slots:
@@ -53,7 +51,7 @@ private:
 
     // OpenGL initialization
     void initializeShaders();
-    void initializeTexture(QImage *image);
+    void initializeUniforms();
 
     //Uniforms
     QMatrix4x4 modelViewMatrix;
@@ -61,9 +59,8 @@ private:
 
     QOpenGLTexture *texture;
 
-    void setUniformsToDefaults();
     void setMVPMatrix();
-    void setTexture();
+    void setTexture(QImage image);
     void setRange(float minimum, float maximum);
 
     Simulation* simulation;

@@ -147,8 +147,6 @@ void Simulation::onMouseMoved(QPoint newPosition)
     gridVertices.append(QVector3D(newPosition.x(),       newPosition.y(),      0.0f));
     gridVertices.append(QVector3D(newPosition.x() - 10,  newPosition.y() - 10, 0.0f));
     gridVertices.append(QVector3D(newPosition.x() + 10,  newPosition.y() - 10, 0.0f));
-
-    emit simulationUpdated();
 }
 
 
