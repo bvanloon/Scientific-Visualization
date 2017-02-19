@@ -2,12 +2,13 @@
 
 #include "settings/settingsns.h"
 #include "settings/simulations.h"
+#include "settings/canvass.h"
 
 int cursorLocationToArrayIndex(QPoint newMousePosition, Settings* settings)
 {
     // Compute the array index that corresponds to the cursor location
-    int xi = (int)clamp((double)(settingsns::simulation().dimension + 1) * ((double)newMousePosition.x()/ (double)settings->canvas->width));
-    int yi = (int)clamp((double)(settingsns::simulation().dimension + 1) * ((double)newMousePosition.y() / (double)settings->canvas->height));
+    int xi = (int)clamp((double)(settingsns::simulation().dimension + 1) * ((double)newMousePosition.x()/ (double)settingsns::canvas().size.width()));
+    int yi = (int)clamp((double)(settingsns::simulation().dimension + 1) * ((double)newMousePosition.y() / (double)settingsns::canvas().size.height()));
 
     //Bound array index to canvas dimensions
     if (xi > (settingsns::simulation().dimension - 1))
