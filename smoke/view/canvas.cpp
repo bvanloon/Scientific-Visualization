@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QImage>
 #include <colormaps/rainbowcolormap.h>
+#include "settings/settings.h"
+#include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
@@ -53,7 +55,7 @@ void Canvas::onRangeChanged(float minimum, float maximum)
 
 void Canvas::idleLoop()
 {
-    if(!this->settings->simulation->frozen)
+    if(!settingsns::simulation().frozen)
     {
         this->simulation->step();
     }

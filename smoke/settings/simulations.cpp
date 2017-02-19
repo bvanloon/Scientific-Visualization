@@ -16,7 +16,8 @@ void settingsns::Simulation::onDimensionChanged(int newDimension)
 
 settingsns::Simulation::Simulation(QObject *parent):
     QObject(parent),
-    dimension(50)
+    dimension(50),
+    frozen(false)
 {}
 
 void settingsns::Simulation::updateGridCellSize()

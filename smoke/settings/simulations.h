@@ -12,6 +12,7 @@ public:
     static const Simulation &instance();
 
     int dimension;
+    bool frozen;
 
 signals:
 
