@@ -16,8 +16,6 @@ public:
     explicit Simulation(QObject *parent = 0);
     ~Simulation();
 
-    QVector<QVector3D> getVertices();
-    QVector<QVector3D> getColors();
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
     QVector<float> getTextureCoordinates();
@@ -32,9 +30,6 @@ public slots:
     void onMouseMoved(QPoint newPosition);
 
 private:
-    QVector<QVector3D> gridVertices;
-    QVector<QVector3D> colors;
-
     QPoint lastMousePosition;
 
 };

@@ -11,14 +11,6 @@ Simulation::Simulation(QObject *parent) :
     QObject(parent), lastMousePosition(0.0f, 0.0f)
 {
     this->realization = new SimulationRealization();
-
-    gridVertices.append(QVector3D(800.0f, 400.0f, 0.0f));
-    gridVertices.append(QVector3D(500.0f, 200.0, 0.0f));
-    gridVertices.append(QVector3D(100.0f, 400.0f, 0.0f));
-
-    colors.append(QVector3D(1.0f, 0.0f, 0.0f));
-    colors.append(QVector3D(0.0f, 1.0f, 0.0f));
-    colors.append(QVector3D(0.0f, 0.0f, 1.0f));
 }
 
 Simulation::~Simulation()
@@ -26,15 +18,6 @@ Simulation::~Simulation()
     delete this->realization;
 }
 
-QVector<QVector3D> Simulation::getVertices()
-{
-    return this->gridVertices;
-}
-
-QVector<QVector3D> Simulation::getColors()
-{
-    return this->colors;
-}
 
 QVector<QVector3D> Simulation::getGridVertices()
 {
@@ -124,7 +107,6 @@ QVector<float> Simulation::getTextureCoordinates()
 
 
     return textureCoordinates;
-
 }
 
 
@@ -141,12 +123,6 @@ void Simulation::onMouseMoved(QPoint newPosition)
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;
-
-    this->gridVertices.clear();
-
-    gridVertices.append(QVector3D(newPosition.x(),       newPosition.y(),      0.0f));
-    gridVertices.append(QVector3D(newPosition.x() - 10,  newPosition.y() - 10, 0.0f));
-    gridVertices.append(QVector3D(newPosition.x() + 10,  newPosition.y() - 10, 0.0f));
 }
 
 

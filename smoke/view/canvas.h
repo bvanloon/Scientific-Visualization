@@ -12,7 +12,6 @@
 #include <QDebug>
 #include <QTimer>
 
-#include "engines/triangleengine.h"
 #include "engines/vectorengine.h"
 #include "engines/smokeengine.h"
 #include "simulation/simulation.h"
@@ -66,7 +65,6 @@ private:
     Simulation* simulation;
 
     //Engines
-    TriangleEngine *triangleEnginge;
     VectorEngine *vectorEngine;
     SmokeEngine *smokeEngine;
 
