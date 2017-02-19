@@ -14,10 +14,3 @@ Settings::~Settings()
     delete canvas;
     delete visualization;
 }
-
-
-void Settings::onWindowResized(int width, int height)
-{
-    this->canvas->width = width;
-    this->canvas->height = height;
-}

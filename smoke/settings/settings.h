@@ -15,13 +15,13 @@ public:
     class Canvas {
 
         public:
-            int width;
-            int height;
+//            int width;
+//            int height;
 
             Canvas()
-                :
-                width(-1),
-                height(-1)
+//                :
+//                width(-1),
+//                height(-1)
             {}
     };
 
@@ -36,9 +36,6 @@ public:
 
     Canvas *canvas;
     Visualization *visualization;
-
-public slots:
-    void onWindowResized(int width, int height);
 };
 
 #endif // SETTINGS_H
