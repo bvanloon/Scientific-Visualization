@@ -23,8 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connectSettingsAndCanvas();
     connectSettingsAndColorMapLegend();
     connectSettingAndSimulationSettingPane();
-
-    this->simulationSettingPane->emitDefaults();
 }
 
 MainWindow::~MainWindow()

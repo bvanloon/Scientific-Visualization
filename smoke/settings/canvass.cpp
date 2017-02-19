@@ -3,7 +3,7 @@
 
 Settings::Canvas::Canvas(QObject *parent) :
     QObject(parent),
-    size(500, 500)
+    size(506, 500)
 {}
 
 

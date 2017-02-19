@@ -14,7 +14,6 @@ class SimulationSettingPane : public QWidget
 public:
     explicit SimulationSettingPane(QWidget *parent = 0);
     ~SimulationSettingPane();
-    void emitDefaults();
 
 signals:
     void forceChanged(float force);
@@ -24,6 +23,8 @@ private slots:
 
 private:
     Ui::SimulationSettingPane *ui;
+
+    void setUItoDefaults();
 };
 
 #endif // SIMULATIONSETTINGPANE_H
