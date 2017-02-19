@@ -8,11 +8,18 @@ class settingsns::Simulation : public QObject
 {
     Q_OBJECT
 public:
-    explicit Simulation(QObject *parent = 0);
+
+    static const Simulation& instance();
 
 signals:
 
 public slots:
+
+private:
+    explicit Simulation(QObject *parent = 0);
+
+    Simulation(Simulation const&) = delete;
+    void operator=(Simulation const&) = delete;
 };
 
 #endif // SIMULATIONS_H
