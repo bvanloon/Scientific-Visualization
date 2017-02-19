@@ -1,4 +1,5 @@
 #include "simulations.h"
+#include "settings/canvass.h"
 #include <QDebug>
 
 settingsns::Simulation::Simulation(QObject *parent):
@@ -28,12 +29,17 @@ void settingsns::Simulation::onForceChanged(float newForce)
 
 void settingsns::Simulation::onWindowResized(int width, int height)
 {
-    qDebug() << "settingsns::Simulation::onWindowResize(int width, int height)";
+    updateGridCellSize(width, height);
 }
 
 void settingsns::Simulation::updateGridCellSize()
 {
-    qDebug() << "settingsns::Simulation::updateGridCellSize";
-//    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(settingsns::simulation().dimension + 1);
-//    this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(settingsns::simulation().dimension + 1);
+    updateGridCellSize(settingsns::canvas().size.width(), settingsns::canvas().size.height());
+}
+
+void settingsns::Simulation::updateGridCellSize(int width, int height)
+{
+    qDebug() << "TODO: settingsns::Simulation::updateGridCellSize(int width, int height)";
+    //    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(dimension + 1);
+        //    this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(dimension + 1);
 }

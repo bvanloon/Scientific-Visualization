@@ -30,6 +30,7 @@ private:
     void operator=(Simulation const&) = delete;
 
     void updateGridCellSize();
+    void updateGridCellSize(int width, int height);
 
 };
 
