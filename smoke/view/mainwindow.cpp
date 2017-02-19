@@ -49,9 +49,6 @@ void MainWindow::connectCanvasAndSimulation()
 
 void MainWindow::connectSettingsAndCanvas()
 {
-    connect(this->canvas, SIGNAL(windowResized(int, int)),
-            this->settings, SLOT(onWindowResized(int, int)));
-
     connect(&settingsns::simulation(),SIGNAL(rangeChanged(float,float)),
             this->canvas, SLOT(onRangeChanged(float,float)));
 
