@@ -13,11 +13,14 @@ public:
 
     int dimension;
     bool frozen;
+    float force;
 
 signals:
+    void rangeChanged(float minimum, float maximum);
 
 public slots:
     void onDimensionChanged(int newDimension);
+    void onForceChanged(float newForce);
 
 private:
     explicit Simulation(QObject *parent = 0);

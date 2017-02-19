@@ -56,7 +56,7 @@ int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePo
     int idx = cursorLocationToArrayIndex(newMousePosition, this->settings);
     fx[idx] += mouseDiff.x();
     fy[idx] += mouseDiff.y();
-    rho[idx] = this->settings->simulation->force;
+    rho[idx] = settingsns::simulation().force;
 }
 
 //solve: Solve (compute) one step of the fluid flow simulation

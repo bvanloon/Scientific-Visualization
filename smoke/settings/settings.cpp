@@ -36,6 +36,6 @@ void Settings::updateGridCellSize()
 
 void Settings::onForceChanged(float newForce)
 {
-    this->simulation->force = newForce;
-    emit rangeChanged(0.0,newForce);
+//    this->simulation->force = newForce;
+//    emit rangeChanged(0.0,newForce);
 }

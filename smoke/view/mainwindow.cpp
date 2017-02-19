@@ -1,6 +1,9 @@
 #include "view/mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "settings/settingsns.h"
+#include "settings/simulations.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -48,7 +51,7 @@ void MainWindow::connectSettingsAndCanvas()
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             this->settings, SLOT(onWindowResized(int, int)));
 
-    connect(this->settings,SIGNAL(rangeChanged(float,float)),
+    connect(&settingsns::simulation(),SIGNAL(rangeChanged(float,float)),
             this->canvas, SLOT(onRangeChanged(float,float)));
 }
 
@@ -56,14 +59,14 @@ void MainWindow::connectSettingsAndColorMapLegend()
 {
     connect(this->settings, SIGNAL(rangeChanged(float,float)),
             this->colorMapLegend, SLOT(onRangeChanged(float,float)));
-
+    connect(&settingsns::simulation(), SIGNAL(rangeChanged(float,float)),
+            this->colorMapLegend, SLOT(onRangeChanged(float,float)));
 }
 
 void MainWindow::connectSettingAndSimulationSettingPane()
 {
     connect(this->simulationSettingPane, SIGNAL(forceChanged(float)),
-            this->settings, SLOT(onForceChanged(float)));
-
+            &settingsns::simulation(), SLOT(onForceChanged(float)));
 }
 
 

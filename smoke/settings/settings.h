@@ -17,12 +17,13 @@ public:
         public:
 //            int dimension;
 //            bool frozen;
-            float force;
+//            float force;
 
-            Simulation() :
+            Simulation()
+//                :
 //                dimension(50),
 //                frozen(false),
-                force(10.0f)
+//                force(10.0f)
             {}
     };
 
@@ -62,9 +63,6 @@ public:
     Canvas *canvas;
     Grid *grid;
     Visualization *visualization;
-
-signals:
-    void rangeChanged(float minimum, float maximum);
 
 public slots:
     void onWindowResized(int width, int height);
