@@ -31,7 +31,9 @@ SOURCES += main.cpp\
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
     view/colormaplegend.cpp utilities.cpp \
-    view/simulationsettingpane.cpp
+    view/simulationsettingpane.cpp \
+    settings/settingsns.cpp \
+    settings/simulations.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -46,7 +48,9 @@ HEADERS  += main.ih\
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
     view/colormaplegend.h utilities.h \
-    view/simulationsettingpane.h
+    view/simulationsettingpane.h \
+    settings/settingsns.h \
+    settings/simulations.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
