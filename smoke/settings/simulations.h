@@ -11,15 +11,21 @@ public:
 
     static const Simulation &instance();
 
+    int dimension;
+
 signals:
 
 public slots:
+    void onDimensionChanged(int newDimension);
 
 private:
     explicit Simulation(QObject *parent = 0);
 
     Simulation(Simulation const&) = delete;
     void operator=(Simulation const&) = delete;
+
+    void updateGridCellSize();
+
 };
 
 #endif // SIMULATIONS_H

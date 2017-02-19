@@ -3,24 +3,23 @@
 
 
 
-
-int cursorLocationToArrayIndex(QPoint newMousePosition, Settings* settings)
+int cursorLocationToArrayIndex(QPoint newMousePosition, const settingsns::Simulation& simulationSettings, Settings* settings)
 {
     // Compute the array index that corresponds to the cursor location
-    int xi = (int)clamp((double)(settings->simulation->dimension + 1) * ((double)newMousePosition.x()/ (double)settings->canvas->width));
-    int yi = (int)clamp((double)(settings->simulation->dimension + 1) * ((double)newMousePosition.y() / (double)settings->canvas->height));
+    int xi = (int)clamp((double)(simulationSettings.dimension + 1) * ((double)newMousePosition.x()/ (double)settings->canvas->width));
+    int yi = (int)clamp((double)(simulationSettings.dimension + 1) * ((double)newMousePosition.y() / (double)settings->canvas->height));
 
     //Bound array index to canvas dimensions
-    if (xi > (settings->simulation->dimension - 1))
-        xi = settings->simulation->dimension - 1;
-    if (yi > (settings->simulation->dimension - 1))
-        yi = settings->simulation->dimension - 1;
+    if (xi > (simulationSettings.dimension - 1))
+        xi = simulationSettings.dimension - 1;
+    if (yi > (simulationSettings.dimension - 1))
+        yi = simulationSettings.dimension - 1;
     if (xi < 0)
         xi = 0;
     if (yi < 0)
         yi = 0;
 
-    return yi * settings->simulation->dimension + xi;
+    return yi * simulationSettings.dimension + xi;
 }
 
 int clamp(float x){

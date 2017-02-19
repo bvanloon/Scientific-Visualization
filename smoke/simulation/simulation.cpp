@@ -1,4 +1,8 @@
 #include "simulation.h"
+
+#include "settings/settingsns.h"
+#include "settings/simulations.h"
+
 #include <QDebug>
 
 Simulation::Simulation(Settings* settings, QObject *parent) :
@@ -38,10 +42,10 @@ QVector<QVector3D> Simulation::getGridVertices()
     QVector3D gridPoint;
     QVector3D offset;
 
-    for (int i = 0; i < this->settings->simulation->dimension; i++){
-        for (int j = 0; j < this->settings->simulation->dimension; j++)
+    for (int i = 0; i < settingsns::simulation().dimension; i++){
+        for (int j = 0; j < settingsns::simulation().dimension; j++)
         {
-            idx = (j * this->settings->simulation->dimension) + i;
+            idx = (j * settingsns::simulation().dimension) + i;
             gridPoint = QVector3D(
                         settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth,
                         settings->grid->cellHeight + (fftw_real)j *settings->grid->cellHeight,
@@ -63,9 +67,9 @@ QVector<QVector3D> Simulation::getGridTriangulation()
 
     double px0, py0, px1, py1, px2, py2, px3, py3;
 
-    for (int j = 0; j < settings->simulation->dimension - 1; j++)
+    for (int j = 0; j < settingsns::simulation().dimension - 1; j++)
     {
-        for (int i = 0; i < settings->simulation->dimension - 1; i++)
+        for (int i = 0; i < settingsns::simulation().dimension - 1; i++)
         {
             px0 = settings->grid->cellWidth + (fftw_real)i * settings->grid->cellWidth;
             py0 = settings->grid->cellHeight + (fftw_real)j * settings->grid->cellHeight;
@@ -98,14 +102,14 @@ QVector<float> Simulation::getTextureCoordinates()
 
     int idx0, idx1, idx2, idx3;
 
-    for (int j = 0; j < settings->simulation->dimension - 1; j++)
+    for (int j = 0; j < settingsns::simulation().dimension - 1; j++)
     {
-        for (int i = 0; i < settings->simulation->dimension - 1; i++)
+        for (int i = 0; i < settingsns::simulation().dimension - 1; i++)
         {
-            idx0 = (j * this->settings->simulation->dimension) + i;
-            idx1 = ((j  + 1)* this->settings->simulation->dimension) + i;
-            idx2 = ((j  + 1)* this->settings->simulation->dimension) + i + 1;
-            idx3 = (j * this->settings->simulation->dimension) + i + 1;
+            idx0 = (j * settingsns::simulation().dimension) + i;
+            idx1 = ((j  + 1)* settingsns::simulation().dimension) + i;
+            idx2 = ((j  + 1)* settingsns::simulation().dimension) + i + 1;
+            idx3 = (j * settingsns::simulation().dimension) + i + 1;
 
             textureCoordinates.append(this->realization->rho[idx0] );
             textureCoordinates.append(this->realization->rho[idx1] );

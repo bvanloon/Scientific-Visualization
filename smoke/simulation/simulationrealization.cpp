@@ -4,6 +4,9 @@
 #include <QPoint>
 #include <QPointF>
 
+#include "settings/settingsns.h"
+#include "settings/simulations.h"
+
 SimulationRealization::SimulationRealization(Settings* settings):
     dt(0.4), visc(0.001),
     color_dir(0), draw_smoke(0), draw_vecs(1),
@@ -14,20 +17,20 @@ SimulationRealization::SimulationRealization(Settings* settings):
 
     int i; size_t dim;
 
-    dim     = settings->simulation->dimension * 2*(settings->simulation->dimension/2+1)*sizeof(fftw_real);        //Allocate data structures
+    dim     = settingsns::simulation().dimension * 2*(settingsns::simulation().dimension/2+1)*sizeof(fftw_real);        //Allocate data structures
     vx       = (fftw_real*) malloc(dim);
     vy       = (fftw_real*) malloc(dim);
     vx0      = (fftw_real*) malloc(dim);
     vy0      = (fftw_real*) malloc(dim);
-    dim     = settings->simulation->dimension * settings->simulation->dimension * sizeof(fftw_real);
+    dim     = settingsns::simulation().dimension * settingsns::simulation().dimension * sizeof(fftw_real);
     fx      = (fftw_real*) malloc(dim);
     fy      = (fftw_real*) malloc(dim);
     rho     = (fftw_real*) malloc(dim);
     rho0    = (fftw_real*) malloc(dim);
-    plan_rc = rfftw2d_create_plan(settings->simulation->dimension, settings->simulation->dimension, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
-    plan_cr = rfftw2d_create_plan(settings->simulation->dimension, settings->simulation->dimension, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
+    plan_rc = rfftw2d_create_plan(settingsns::simulation().dimension, settingsns::simulation().dimension, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
+    plan_cr = rfftw2d_create_plan(settingsns::simulation().dimension, settingsns::simulation().dimension, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
 
-    for (i = 0; i < settings->simulation->dimension * settings->simulation->dimension; i++)                      //Initialize data structures to 0
+    for (i = 0; i < settingsns::simulation().dimension * settingsns::simulation().dimension; i++)                      //Initialize data structures to 0
     { vx[i] = vy[i] = vx0[i] = vy0[i] = fx[i] = fy[i] = rho[i] = rho0[i] = 0.0f; }
 }
 
@@ -50,7 +53,7 @@ int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePo
         mouseDiff *= 0.1f/length;
     }
 
-    int idx = cursorLocationToArrayIndex(newMousePosition, this->settings);
+    int idx = cursorLocationToArrayIndex(newMousePosition, settingsns::simulation(), this->settings);
     fx[idx] += mouseDiff.x();
     fy[idx] += mouseDiff.y();
     rho[idx] = this->settings->simulation->force;
@@ -144,7 +147,7 @@ void SimulationRealization::diffuse_matter(int gride_size, fftw_real *vx, fftw_r
 void SimulationRealization::set_forces(void)
 {
     int i;
-    for (i = 0; i < settings->simulation->dimension * settings->simulation->dimension; i++)
+    for (i = 0; i < settingsns::simulation().dimension * settingsns::simulation().dimension; i++)
     {
         rho0[i]  = 0.995 * rho[i];
         fx[i] *= 0.85;
@@ -161,6 +164,6 @@ void SimulationRealization::set_forces(void)
 void SimulationRealization::do_one_simulation_step(void)
 {
       set_forces();
-      solve(settings->simulation->dimension, vx, vy, vx0, vy0, visc, dt);
-      diffuse_matter(settings->simulation->dimension, vx, vy, rho, rho0, dt);
+      solve(settingsns::simulation().dimension, vx, vy, vx0, vy0, visc, dt);
+      diffuse_matter(settingsns::simulation().dimension, vx, vy, rho, rho0, dt);
 }

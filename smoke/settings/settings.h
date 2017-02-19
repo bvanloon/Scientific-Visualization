@@ -15,12 +15,12 @@ public:
 
     class Simulation {
         public:
-            int dimension;
+//            int dimension;
             bool frozen;
             float force;
 
             Simulation() :
-                dimension(50),
+//                dimension(50),
                 frozen(false),
                 force(10.0f)
             {}
@@ -68,7 +68,6 @@ signals:
 
 public slots:
     void onWindowResized(int width, int height);
-    void onDimensionChanged(int newDimension);
     void onForceChanged(float newForce);
 
 private:
