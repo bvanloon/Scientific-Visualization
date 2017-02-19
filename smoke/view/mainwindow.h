@@ -5,7 +5,6 @@
 
 #include <view/canvas.h>
 #include "simulation/simulation.h"
-#include "settings/settings.h"
 #include "colormaplegend.h"
 #include "view/simulationsettingpane.h"
 
@@ -26,7 +25,6 @@ private:
 
     Canvas *canvas;
     Simulation *simulation;
-    Settings *settings;
     ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationSettingPane;
 
