@@ -30,7 +30,8 @@ public:
             fftw_real cellWidth;
             fftw_real cellHeight;
 
-            Grid() :
+            Grid()
+                :
                 cellWidth(-1),
                 cellHeight(-1)
             {}
