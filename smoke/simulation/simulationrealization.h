@@ -2,13 +2,13 @@
 #define SIMULATIONREALIZATION_H
 
 #include "rfftw.h"
-#include "settings/settings.h"
 #include <math.h>
+#include <QPoint>
 
 class SimulationRealization
 {
 public:
-    SimulationRealization( Settings* settings);
+    SimulationRealization();
 
     int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
     void do_one_simulation_step(void);
@@ -18,8 +18,6 @@ public:
     fftw_real *rho, *rho0;			//smoke density at the current (rho) and previous (rho0) moment
 
 private:
-    Settings* settings;
-
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
     double dt;				//simulation time step
     float visc;				//fluid viscosity

@@ -8,13 +8,12 @@
 #include <float.h>
 
 #include "simulation/simulationrealization.h"
-#include "settings/settings.h"
 
 class Simulation : public QObject
 {
     Q_OBJECT
 public:
-    explicit Simulation(Settings *settings, QObject *parent = 0);
+    explicit Simulation(QObject *parent = 0);
     ~Simulation();
 
     QVector<QVector3D> getVertices();
@@ -36,7 +35,6 @@ public slots:
 private:
     QVector<QVector3D> gridVertices;
     QVector<QVector3D> colors;
-    Settings *settings;
 
     QPoint lastMousePosition;
 

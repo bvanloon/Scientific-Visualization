@@ -7,13 +7,12 @@
 #include "settings/settingsns.h"
 #include "settings/simulations.h"
 
-SimulationRealization::SimulationRealization(Settings* settings):
+SimulationRealization::SimulationRealization():
     dt(0.4), visc(0.001),
     color_dir(0), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
     scalar_col(0)
 {
-    this->settings = settings;
 
     int i; size_t dim;
 

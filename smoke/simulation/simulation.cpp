@@ -7,11 +7,10 @@
 
 #include <QDebug>
 
-Simulation::Simulation(Settings* settings, QObject *parent) :
+Simulation::Simulation(QObject *parent) :
     QObject(parent), lastMousePosition(0.0f, 0.0f)
 {
-    this->settings = settings;
-    this->realization = new SimulationRealization(settings);
+    this->realization = new SimulationRealization();
 
     gridVertices.append(QVector3D(800.0f, 400.0f, 0.0f));
     gridVertices.append(QVector3D(500.0f, 200.0, 0.0f));
