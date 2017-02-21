@@ -15,7 +15,7 @@ FloatSlider::~FloatSlider()
     delete ui;
 }
 
-void FloatSlider::init(int numSteps, float minimum, float maximum)
+void FloatSlider::init(float minimum, float maximum, int numSteps)
 {
     this->setMinimum(minimum);
     this->setMaximum(maximum);
@@ -65,7 +65,6 @@ float FloatSlider::maximum() const
 {
     return this->maximumValue;
 }
-
 
 float FloatSlider::value() const
 {

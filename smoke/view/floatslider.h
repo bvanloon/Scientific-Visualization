@@ -17,7 +17,7 @@ public:
     explicit FloatSlider(QWidget *parent = 0);
     ~FloatSlider();
 
-    void init(int numSteps = 100, float minimumValue = 0.0f, float maximumValue = 1.0f);
+    void init(float minimumValue = 0.0f, float maximumValue = 1.0f, int numSteps = 100);
 
     void setRange(float minimumValue, float maximumValue);
     void setMinimum(float minimum);
@@ -30,8 +30,7 @@ public:
     float value() const;
 
 signals:
-    void sliderMoved(float position);
-
+    void sliderMoved(float value);
 
 private:
     Ui::FloatSlider *ui;
