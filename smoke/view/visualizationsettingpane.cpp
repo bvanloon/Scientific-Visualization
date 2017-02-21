@@ -20,7 +20,6 @@ VisualizationSettingPane::~VisualizationSettingPane()
 
 void VisualizationSettingPane::onValueRangeChanged(float minimum, float maximum)
 {
-    qDebug() << "VisualizationSettingPane::onValueRangeChanged";
     clampingSlidersSetRange(minimum, maximum);
 }
 

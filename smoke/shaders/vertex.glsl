@@ -23,19 +23,14 @@ float mapToUnitRange(float value, float oldMin, float oldMax)
 {
     float slope = 1 / (oldMax - oldMin);
     return slope * (value - oldMin);
-
 }
 
 float clampTextureCoordinates(float inputTextureCoordinate){
-    float slopeMin = colorMapInfo.minimum * colorMapInfo.clampStart;
-    float  slopeMax = colorMapInfo.maximum * colorMapInfo.clampEnd;
-
     //Clamping
-    inputTextureCoordinate = max(inputTextureCoordinate, slopeMin);
-    inputTextureCoordinate = min(inputTextureCoordinate, slopeMax);
+    inputTextureCoordinate = max(inputTextureCoordinate, colorMapInfo.clampStart);
+    inputTextureCoordinate = min(inputTextureCoordinate, colorMapInfo.clampEnd);
 
-    return mapToUnitRange(inputTextureCoordinate, slopeMin, slopeMax);
-
+    return mapToUnitRange(inputTextureCoordinate, colorMapInfo.clampStart, colorMapInfo.clampEnd);
 }
 
 float scaleTextureCoordinates(float inputTextureCoordinate){
