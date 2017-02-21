@@ -89,7 +89,7 @@
       </widget>
       <widget class="QWidget" name="colormapTab">
        <attribute name="title">
-        <string>Visualization</string>
+        <string>Color Map</string>
        </attribute>
       </widget>
      </widget>
