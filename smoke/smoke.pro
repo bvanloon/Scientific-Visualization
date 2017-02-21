@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     settings/simulations.cpp \
     settings/canvass.cpp \
     settings/visualizations.cpp \
-    settings/settings.cpp
+    settings/settings.cpp \
+    view/visualizationsettingspane.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -51,11 +52,13 @@ HEADERS  += main.ih\
     settings/simulations.h \
     settings/canvass.h \
     settings/visualizations.h \
-    settings/settings.h
+    settings/settings.h \
+    view/visualizationsettingspane.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
-    view/simulationsettingpane.ui
+    view/simulationsettingpane.ui \
+    view/visualizationsettingspane.ui
 
 RESOURCES += \
     shaders.qrc

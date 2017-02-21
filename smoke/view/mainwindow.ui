@@ -80,16 +80,16 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="SimulationSettingPane" name="simulationTab">
        <attribute name="title">
         <string>Simulation</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tab2">
+      <widget class="VisualizationSettingsPane" name="visualization">
        <attribute name="title">
-        <string>tab 2</string>
+        <string>Visualization</string>
        </attribute>
       </widget>
      </widget>
@@ -114,6 +114,12 @@
    <class>SimulationSettingPane</class>
    <extends>QWidget</extends>
    <header location="global">view/simulationsettingpane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>VisualizationSettingsPane</class>
+   <extends>QWidget</extends>
+   <header location="global">view/visualizationsettingspane.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

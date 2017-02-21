@@ -34,6 +34,11 @@ void Canvas::onValueRangeChanged(float minimum, float maximum)
     setColorMapValueRange(minimum, maximum);
 }
 
+void Canvas::onSetClamping(bool clampingOn)
+{
+    setColorMapClampingTo(clampingOn);
+}
+
 void Canvas::idleLoop()
 {
     if(!Settings::simulation().frozen)
