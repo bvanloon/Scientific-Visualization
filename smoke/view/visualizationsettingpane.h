@@ -31,6 +31,8 @@ private:
 
     void setUItoDefaults();
 
+    void clampingUISetDisabled(bool disabled);
+
 };
 
 #endif // VISUALIZATIONSETTINGSPANE_H

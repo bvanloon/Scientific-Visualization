@@ -20,6 +20,7 @@ VisualizationSettingPane::~VisualizationSettingPane()
 
 void VisualizationSettingPane::on_clampingCheckBox_clicked(bool checked)
 {
+    clampingUISetDisabled(!checked);
     emit setClamping(checked);
 }
 
@@ -40,6 +41,15 @@ void VisualizationSettingPane::setUItoDefaults()
                     1.0f,
                     (float) this->ui->clampingMaximumSlider->minimum(),
                     (float) this->ui->clampingMaximumSlider->maximum()));
+    clampingUISetDisabled(!Settings::defaults::visualization::clampingOn);
+}
+
+void VisualizationSettingPane::clampingUISetDisabled(bool disabled)
+{
+    this->ui->clampingMaximumSlider->setDisabled(disabled);
+    this->ui->clampingMaximumLabel->setDisabled(disabled);
+    this->ui->clampingMinimumSlider->setDisabled(disabled);
+    this->ui->clampingMinimumLabel->setDisabled(disabled);
 }
 
 void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int intValue)
@@ -83,5 +93,5 @@ void VisualizationSettingPane::on_clampingMaximumSlider_sliderMoved(int intValue
                               (float) this->ui->clampingMinimumSlider->minimum(),
                               (float) this->ui->clampingMinimumSlider->maximum(),
                               0.0f, 1.0f),
-                          unitValue);
+                          intValue);
 }
