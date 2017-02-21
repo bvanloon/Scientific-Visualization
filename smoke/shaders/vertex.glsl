@@ -19,20 +19,31 @@ layout(location = 0) out float vsTextureCoordinate;
 uniform mat4 mvpMatrix;
 uniform colorMapInfoStruct colorMapInfo;
 
-float clampTextureCoordinates(float inputTextureCoordinate3){
-    return 0.2;
+float clampTextureCoordinates(float inputTextureCoordinate){
+    float slopeMin = colorMapInfo.minimum * colorMapInfo.clampStart;
+    float  slopeMax = colorMapInfo.maximum * colorMapInfo.clampEnd;
+
+    //Clamping
+    inputTextureCoordinate = max(inputTextureCoordinate, slopeMin);
+    inputTextureCoordinate = min(inputTextureCoordinate, slopeMax);
+
+    float slope = 1 / (slopeMax - slopeMin);
+    return slope * (inputTextureCoordinate - slopeMin);
+
 }
 
-float scaleTextureCoordinates(float inputTextureCoordinate2){
-    return 0.8;
+float scaleTextureCoordinates(float inputTextureCoordinate){
+        float slope = 1 / (colorMapInfo.maximum - colorMapInfo.minimum);
+        return slope * (inputTextureCoordinate - colorMapInfo.minimum);
 }
 
-float computeTextureCoordinate(float inputTextureCoordinate1){
+float computeTextureCoordinate(float inputTextureCoordinate){
     if (colorMapInfo.clampingOn) {
-        return clampTextureCoordinates(inputTextureCoordinate1);
+        return clampTextureCoordinates(inputTextureCoordinate);
     }
-    return scaleTextureCoordinates(inputTextureCoordinate1);
+    return scaleTextureCoordinates(inputTextureCoordinate);
 }
+
 
 //float mapToUnitLength(float value, rangeInfo oldRange, clampInfo clampValues)
 //{
@@ -51,8 +62,7 @@ float computeTextureCoordinate(float inputTextureCoordinate1){
 //            value = slopeMax;
 //    }
 
-//    float slope = 1/ (slopeMax - slopeMin);
-//    return slope * (value - slopeMin);
+
 //}
 
 void main(void)
