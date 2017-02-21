@@ -20,6 +20,12 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
+   <property name="labelAlignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="formAlignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
    <item row="0" column="0">
     <widget class="QCheckBox" name="clampingCheckBox">
      <property name="text">
@@ -46,12 +52,24 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+     <property name="tickInterval">
+      <number>5</number>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QSlider" name="clampingMaximumSlider">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+     <property name="tickInterval">
+      <number>5</number>
      </property>
     </widget>
    </item>
