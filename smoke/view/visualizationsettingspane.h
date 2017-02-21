@@ -18,6 +18,9 @@ public:
 signals:
     void setClamping(bool clampingOn);
 
+private slots:
+    void on_clampingCheckBox_clicked(bool checked);
+
 private:
     Ui::VisualizationSettingsPane *ui;
 
