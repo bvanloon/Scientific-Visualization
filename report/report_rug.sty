@@ -1,14 +1,19 @@
-\usepackage{a4wide}
+\RequirePackage{a4wide}
+
+% Spacing
+\RequirePackage{xspace}
 
 % Language
-\usepackage[english]{babel}
+\RequirePackage[english]{babel}
 
-\usepackage[T1]{fontenc}
+% Fonts
+\RequirePackage[T1]{fontenc}
 
 % Affiliation
-\usepackage{authblk}
+\RequirePackage{authblk}
 
 % Biblio
+<<<<<<< HEAD
 \usepackage{natbib}
 
 % Figures and listings
@@ -18,28 +23,76 @@
 \usepackage[bf]{caption}
 \usepackage{subcaption}
 \usepackage{placeins}%floatbarrier
+=======
+\RequirePackage[backend=bibtex]{biblatex}
+\RequirePackage{csquotes}
 
-\usepackage{mdframed}
 
+% Figures
+\RequirePackage{float}
+\RequirePackage{listings}
+\RequirePackage{grffile}
+\RequirePackage[pdftex]{graphicx}
+\RequirePackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}
+\RequirePackage{subcaption}
+\RequirePackage{placeins}%floatbarrier
+>>>>>>> master
+
+\RequirePackage{mdframed}
+
+<<<<<<< HEAD
+=======
+% Math
+\RequirePackage{mathptmx}
+\RequirePackage{siunitx}
+\RequirePackage{mathtools}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+
+>>>>>>> master
 % References
-\usepackage{varioref}
-\usepackage{hyperref}
-\usepackage[noabbrev]{cleveref}
-\usepackage{nameref}
+\RequirePackage{varioref}
+\RequirePackage{hyperref}
+\RequirePackage[noabbrev]{cleveref}
+\RequirePackage{nameref}
+
+%Tables
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
 
 % To do
-\usepackage{todonotes}
+\RequirePackage{todonotes}
 
 \newcommand{\alex}[1]{\todo[color=yellow!60]{\textbf{@Alex:}#1}}
 \newcommand{\Bastiaan}[1]{\todo[inline, color=green!60]{\textbf{@Bastiaan:}#1}}
 \newcommand{\Laura}[1]{\todo[inline, color=blue!20]{\textbf{@Laura:}#1}}
 \newcommand{\struc}[1]{\todo[inline, color=orange!60]{#1}}
 
+<<<<<<< HEAD
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{mathtools}
 \usepackage{ dsfont }
 
+=======
+% Short Cuts
+\makeatletter
+\newcommand\ie{i.e\@ifnextchar.{}{.\@}\xspace}
+\newcommand\eg{e.g\@ifnextchar.{}{.\@}\xspace}
+\makeatother
+>>>>>>> master
 
+% Usefull commands
 \renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
-\renewcommand{\t}[1]{\lstinline[breaklines=true, basicstyle=\ttfamily\normalsize]{#1}}
+\newcommand*\justify{%
+  \fontdimen2\font=0.4em% interword space
+  \fontdimen3\font=0.2em% interword stretch
+  \fontdimen4\font=0.1em% interword shrink
+  \fontdimen7\font=0.1em% extra space
+  \hyphenchar\font=`\-% allowing hyphenation
+}
+\renewcommand{\t}[1]{\texttt{\justify#1}}
+\newcommand*\rfrac[2]{\ensuremath{{}^{#1}\!/_{#2}}}
+
+\RequirePackage{variables}
