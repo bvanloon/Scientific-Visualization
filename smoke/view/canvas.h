@@ -33,7 +33,7 @@ signals:
     void windowResized(int width, int height);
 
 public slots:
-    void onRangeChanged(float minimum, float maximum);
+    void onValueRangeChanged(float minimum, float maximum);
 
 private slots:
     void idleLoop();

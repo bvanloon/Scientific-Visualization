@@ -84,11 +84,11 @@ void Canvas::initializeColorMapInfo()
 {
     this->shaderProgram->bind();
     qDebug() << "Canvas::initializeColorMapInfo() needs a default in the settings object.";
-    this->shaderProgram->setUniformValue("colorMapInfo.minimum", 0.0f);
-    this->shaderProgram->setUniformValue("colorMapInfo.maximum", 1.0f);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", 0.0f);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", 1.0f);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", true);
+    this->shaderProgram->setUniformValue("colorMapInfo.minimum", Settings::defaults::simulation::valueRangeMin);
+    this->shaderProgram->setUniformValue("colorMapInfo.maximum", Settings::defaults::simulation::valueRangeMax);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", Settings::defaults::visualization::clampStart);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", Settings::defaults::visualization::clampEnd);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", Settings::defaults::visualization::clampingOn);
     this->shaderProgram->release();
 }
 

@@ -10,6 +10,18 @@ namespace Settings {
 
     class Visualization;
     const Visualization &visualization();
+
+    namespace defaults {
+        namespace simulation {
+            static const float valueRangeMin = 0.0f;
+            static const float valueRangeMax = 20.0f;
+        }
+        namespace visualization {
+            static const float clampStart = 0.0f;
+            static const float clampEnd = 1.0f;
+            static const bool clampingOn = false;
+        }
+    }
 }
 
 #endif // SETTINGSNS_H
