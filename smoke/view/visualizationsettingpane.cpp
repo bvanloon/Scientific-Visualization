@@ -45,8 +45,8 @@ void VisualizationSettingPane::setUItoDefaults()
 void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int intValue)
 {
     float unitValue = mapToRange((float) intValue,
-                                 (float) this->ui->clampingMaximumSlider->minimum(),
-                                 (float) this->ui->clampingMaximumSlider->maximum(),
+                                 (float) this->ui->clampingMinimumSlider->minimum(),
+                                 (float) this->ui->clampingMinimumSlider->maximum(),
                                  0.0f, 1.0f);
     if(intValue >= this->ui->clampingMaximumSlider->value()){
         intValue = this->ui->clampingMaximumSlider->value();
@@ -64,7 +64,24 @@ void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int intValue
                               0.0f, 1.0f));
 }
 
-void VisualizationSettingPane::on_clampingMaximumSlider_sliderMoved(int position)
+void VisualizationSettingPane::on_clampingMaximumSlider_sliderMoved(int intValue)
 {
-
+    float unitValue = mapToRange((float) intValue,
+                                 (float) this->ui->clampingMaximumSlider->minimum(),
+                                 (float) this->ui->clampingMaximumSlider->maximum(),
+                                 0.0f, 1.0f);
+    if(intValue <= this->ui->clampingMinimumSlider->value()){
+        intValue = this->ui->clampingMinimumSlider->value();
+        this->ui->clampingMaximumSlider->setValue(intValue);
+        unitValue = mapToRange((float) intValue,
+                               (float) this->ui->clampingMinimumSlider->minimum(),
+                               (float) this->ui->clampingMinimumSlider->maximum(),
+                               0.0f, 1.0f);
+    }
+    emit setClampingRange(mapToRange(
+                              (float) this->ui->clampingMinimumSlider->value(),
+                              (float) this->ui->clampingMinimumSlider->minimum(),
+                              (float) this->ui->clampingMinimumSlider->maximum(),
+                              0.0f, 1.0f),
+                          unitValue);
 }
