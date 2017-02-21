@@ -126,7 +126,7 @@ void Canvas::setTexture(QImage image)
         texture->create();
         texture->setData(image.mirrored());
         texture->setMagnificationFilter(QOpenGLTexture::Nearest);
-        texture->setWrapMode(QOpenGLTexture::Repeat);
+        texture->setWrapMode(QOpenGLTexture::ClampToEdge);
     }
 }
 
