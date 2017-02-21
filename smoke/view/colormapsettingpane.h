@@ -4,16 +4,16 @@
 #include <QWidget>
 
 namespace Ui {
-class VisualizationSettingsPane;
+class ColorMapSettingPane;
 }
 
-class VisualizationSettingPane : public QWidget
+class ColorMapSettingPane : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit VisualizationSettingPane(QWidget *parent = 0);
-    ~VisualizationSettingPane();
+    explicit ColorMapSettingPane(QWidget *parent = 0);
+    ~ColorMapSettingPane();
 
 signals:
     void setClamping(bool clampingOn);
@@ -28,7 +28,7 @@ private slots:
     void on_clampingMaximumSlider_sliderMoved(int position);
 
 private:
-    Ui::VisualizationSettingsPane *ui;
+    Ui::ColorMapSettingPane *ui;
 
     void setUItoDefaults();
 

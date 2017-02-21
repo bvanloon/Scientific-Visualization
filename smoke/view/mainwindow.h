@@ -28,7 +28,7 @@ private:
     Simulation *simulation;
     ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationSettingPane;
-    VisualizationSettingPane *visualiationSettingsPane;
+    ColorMapSettingPane *visualiationSettingsPane;
 
     void connectCanvasAndSimulation();
     void connectSettingsAndCanvas();
