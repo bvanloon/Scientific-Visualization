@@ -1,5 +1,6 @@
 #include "visualizationsettingspane.h"
 #include "ui_visualizationsettingspane.h"
+#include "settings/settings.h"
 #include <QDebug>
 
 VisualizationSettingsPane::VisualizationSettingsPane(QWidget *parent) :
@@ -7,6 +8,8 @@ VisualizationSettingsPane::VisualizationSettingsPane(QWidget *parent) :
     ui(new Ui::VisualizationSettingsPane)
 {
     ui->setupUi(this);
+
+    setUItoDefaults();
 }
 
 VisualizationSettingsPane::~VisualizationSettingsPane()
@@ -19,3 +22,7 @@ void VisualizationSettingsPane::on_clampingCheckBox_clicked(bool checked)
     emit setClamping(checked);
 }
 
+void VisualizationSettingsPane::setUItoDefaults()
+{
+    this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::clampingOn);
+}

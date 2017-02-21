@@ -24,6 +24,8 @@ private slots:
 private:
     Ui::VisualizationSettingsPane *ui;
 
+    void setUItoDefaults();
+
 };
 
 #endif // VISUALIZATIONSETTINGSPANE_H
