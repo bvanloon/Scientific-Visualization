@@ -18,6 +18,12 @@ VisualizationSettingPane::~VisualizationSettingPane()
     delete ui;
 }
 
+void VisualizationSettingPane::onValueRangeChanged(float minimum, float maximum)
+{
+    qDebug() << "VisualizationSettingPane::onValueRangeChanged";
+    clampingSlidersSetRange(minimum, maximum);
+}
+
 void VisualizationSettingPane::on_clampingCheckBox_clicked(bool checked)
 {
     clampingUISetDisabled(!checked);
@@ -26,22 +32,12 @@ void VisualizationSettingPane::on_clampingCheckBox_clicked(bool checked)
 
 void VisualizationSettingPane::setUItoDefaults()
 {
+    this->ui->clampingMinimumSlider->setValue(Settings::defaults::visualization::clampStart);
+    this->ui->clampingMaximumSlider->setValue(Settings::defaults::visualization::clampEnd);
     this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::clampingOn);
-    this->ui->clampingMinimumSlider->setValue(
-                mapToRange(
-                    Settings::defaults::visualization::clampStart,
-                    0.0f,
-                    1.0f,
-                    (float) this->ui->clampingMinimumSlider->minimum(),
-                    (float) this->ui->clampingMinimumSlider->maximum()));
-    this->ui->clampingMaximumSlider->setValue(
-                mapToRange(
-                    Settings::defaults::visualization::clampEnd,
-                    0.0f,
-                    1.0f,
-                    (float) this->ui->clampingMaximumSlider->minimum(),
-                    (float) this->ui->clampingMaximumSlider->maximum()));
     clampingUISetDisabled(!Settings::defaults::visualization::clampingOn);
+    clampingSlidersSetRange(Settings::defaults::simulation::valueRangeMin,
+                            Settings::defaults::simulation::valueRangeMax);
 }
 
 void VisualizationSettingPane::clampingUISetDisabled(bool disabled)
@@ -50,6 +46,12 @@ void VisualizationSettingPane::clampingUISetDisabled(bool disabled)
     this->ui->clampingMaximumLabel->setDisabled(disabled);
     this->ui->clampingMinimumSlider->setDisabled(disabled);
     this->ui->clampingMinimumLabel->setDisabled(disabled);
+}
+
+void VisualizationSettingPane::clampingSlidersSetRange(float minimum, float maximum)
+{
+    this->ui->clampingMinimumSlider->setRange(minimum, maximum);
+    this->ui->clampingMaximumSlider->setRange(minimum, maximum);
 }
 
 void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int position)
