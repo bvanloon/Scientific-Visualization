@@ -1,9 +1,13 @@
 #include "canvas.h"
 #include <QMouseEvent>
 #include <QDebug>
+#include <QImage>
+#include <colormaps/rainbowcolormap.h>
+#include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
+    texture(0),
     timer(new QTimer(this))
 {
     //Ensure that the mouse is always tracked, even if we didn't click first.
@@ -17,6 +21,7 @@ Canvas::~Canvas()
 {
     delete this->shaderProgram;
     delete this->timer;
+    delete this->texture;
 }
 
 void Canvas::setSimulation(Simulation *simulation)
@@ -24,19 +29,24 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
-void Canvas::setSettings(Settings *settings)
+void Canvas::onValueRangeChanged(float minimum, float maximum)
 {
-    this->settings = settings;
+    setColorMapValueRange(minimum, maximum);
 }
 
-void Canvas::onSimulationUpdated()
+void Canvas::onSetClamping(bool clampingOn)
 {
-    update();
+    setColorMapClampingTo(clampingOn);
+}
+
+void Canvas::onsetClampingRange(float minimum, float maximum)
+{
+    setColorMapClampRange(minimum, maximum);
 }
 
 void Canvas::idleLoop()
 {
-    if(!this->settings->simulation->frozen)
+    if(!Settings::simulation().frozen)
     {
         this->simulation->step();
     }
@@ -53,9 +63,10 @@ void Canvas::initializeGL()
 
     initializeShaders();
 
-    this->triangleEnginge = new TriangleEngine();
-    this->vectorEngine = new VectorEngine(this->settings);
-    this->smokeEngine = new SmokeEngine(this->settings);
+    this->vectorEngine = new VectorEngine();
+    this->smokeEngine = new SmokeEngine();
+
+    initializeUniforms();
 }
 
 void Canvas::initializeShaders()
@@ -66,30 +77,85 @@ void Canvas::initializeShaders()
     this->shaderProgram->link();
 }
 
+void Canvas::initializeUniforms()
+{
+    setMVPMatrix();
+
+    qDebug() << "Canvas::setUniformsToDefaults setRange needs a default in the settings object.";
+
+
+    qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
+    setTexture(RainbowColorMap(255));
+
+    initializeColorMapInfo();
+}
+
+void Canvas::initializeColorMapInfo()
+{
+    setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
+    setColorMapClampRange(Settings::defaults::visualization::clampStart, Settings::defaults::visualization::clampEnd);
+    setColorMapClampingTo(Settings::defaults::visualization::clampingOn);
+}
+
 void Canvas::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     shaderProgram->bind();
 
-    setUniforms();
+    this->texture->bind();
 
-    //vectorEngine->draw(this->simulation);
+//    vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
+
+    this->texture->release();
 
     shaderProgram->release();
 }
 
-void Canvas::setUniforms()
-{
-    setMVPMatrix();
-}
-
 void Canvas::setMVPMatrix()
 {
+    shaderProgram->bind();
     QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
 
     this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
+    shaderProgram->release();
+}
+
+void Canvas::setTexture(QImage image)
+{
+    if(isValid()){
+        if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
+        if (texture->isCreated()) texture->destroy();
+
+        texture->create();
+        texture->setData(image.mirrored());
+        texture->setMagnificationFilter(QOpenGLTexture::Nearest);
+        texture->setWrapMode(QOpenGLTexture::ClampToEdge);
+    }
+}
+
+void Canvas::setColorMapValueRange(float min, float max)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("colorMapInfo.minimum", min);
+    this->shaderProgram->setUniformValue("colorMapInfo.maximum", max);
+    this->shaderProgram->release();
+}
+
+void Canvas::setColorMapClampRange(float startClamp, float endClamp)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", startClamp);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", endClamp);
+    this->shaderProgram->release();
+}
+
+void Canvas::setColorMapClampingTo(bool clampingOn)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", clampingOn);
+    this->shaderProgram->release();
 }
 
 void Canvas::initiateIdleLoop()
@@ -109,7 +175,7 @@ void Canvas::resizeGL(int width, int height)
     projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
 
     emit windowResized(width, height);
-
+    setMVPMatrix();
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)

@@ -1,39 +1,19 @@
 #include "settings.h"
-#include <QDebug>
+#include "settings/simulations.h"
+#include "settings/canvass.h"
+#include "settings/visualizations.h"
 
-Settings::Settings(QObject *parent) : QObject(parent)
+const Settings::Simulation &Settings::simulation()
 {
-    this->canvas = new Canvas();
-    this->simulation = new Simulation();
-    this->grid  = new Grid();
-    this->visualization = new Visualization();
+    return Simulation::instance();
 }
 
-Settings::~Settings()
+const Settings::Canvas &Settings::canvas()
 {
-    delete canvas;
-    delete simulation;
-    delete grid;
-    delete visualization;
+    return Canvas::instance();
 }
 
-
-void Settings::onWindowResized(int width, int height)
+const Settings::Visualization &Settings::visualization()
 {
-    this->canvas->width = width;
-    this->canvas->height = height;
-
-    this->updateGridCellSize();
-}
-
-void Settings::onDimensionChanged(int newDimension)
-{
-    this->simulation->dimension = newDimension;
-    this->updateGridCellSize();
-}
-
-void Settings::updateGridCellSize()
-{
-    this->grid->cellHeight = (fftw_real) this->canvas->height / (fftw_real)(this->simulation->dimension + 1);
-    this->grid->cellWidth = (fftw_real) this->canvas->width / (fftw_real)(this->simulation->dimension + 1);
+    return Visualization::instance();
 }

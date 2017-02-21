@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>518</height>
+    <width>910</width>
+    <height>524</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -43,6 +49,51 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="ColorMapLegend" name="colorMapLegend" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>350</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="SimulationSettingPane" name="simulationTab">
+       <attribute name="title">
+        <string>Simulation</string>
+       </attribute>
+      </widget>
+      <widget class="ColorMapSettingPane" name="colormapTab">
+       <attribute name="title">
+        <string>Color Map</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -52,6 +103,24 @@
    <class>Canvas</class>
    <extends>QOpenGLWidget</extends>
    <header location="global">view/canvas.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ColorMapLegend</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormaplegend.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SimulationSettingPane</class>
+   <extends>QWidget</extends>
+   <header location="global">view/simulationsettingpane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorMapSettingPane</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormapsettingpane.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

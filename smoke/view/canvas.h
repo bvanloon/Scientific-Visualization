@@ -8,13 +8,14 @@
 #include <QMatrix4x4>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
+#include <QOpenGLTexture>
 #include <QDebug>
 #include <QTimer>
 
-#include "engines/triangleengine.h"
 #include "engines/vectorengine.h"
 #include "engines/smokeengine.h"
 #include "simulation/simulation.h"
+
 
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
@@ -26,14 +27,15 @@ public:
     ~Canvas();
 
     void setSimulation(Simulation *simulation);
-    void setSettings(Settings *settings);
 
 signals:
     void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
 
 public slots:
-    void onSimulationUpdated();
+    void onValueRangeChanged(float minimum, float maximum);
+    void onSetClamping(bool clampingOn);
+    void onsetClampingRange(float minimum, float maximum);
 
 private slots:
     void idleLoop();
@@ -50,19 +52,27 @@ private:
 
     // OpenGL initialization
     void initializeShaders();
+    void initializeUniforms();
+    void initializeColorMapInfo();
+
 
     //Uniforms
     QMatrix4x4 modelViewMatrix;
     QMatrix4x4 projectionMatrix;
 
-    void setUniforms();
+    QOpenGLTexture *texture;
+
     void setMVPMatrix();
 
+    void setTexture(QImage image);
+    void setColorMapValueRange(float min, float max);
+    void setColorMapClampRange(float startClamp, float endClamp);
+    void setColorMapClampingTo(bool clampingOn);
+
+
     Simulation* simulation;
-    Settings* settings;
 
     //Engines
-    TriangleEngine *triangleEnginge;
     VectorEngine *vectorEngine;
     SmokeEngine *smokeEngine;
 

@@ -1,74 +1,27 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef SETTINGSNS_H
+#define SETTINGSNS_H
 
-#include <QObject>
+namespace Settings {
+    class Simulation;
+    const Simulation& simulation();
 
-#include <fftw.h>
+    class Canvas;
+    const Canvas &canvas();
 
-class Settings : public QObject
-{
-    Q_OBJECT
-public:
-    explicit Settings(QObject *parent = 0);
-    ~Settings();
+    class Visualization;
+    const Visualization &visualization();
 
+    namespace defaults {
+        namespace simulation {
+            static const float valueRangeMin = 0.0f;
+            static const float valueRangeMax = 20.0f;
+        }
+        namespace visualization {
+            static const float clampStart = 5.0f;
+            static const float clampEnd = 15.0f;
+            static const bool clampingOn = false;
+        }
+    }
+}
 
-    class Simulation {
-        public:
-            int dimension;
-            bool frozen;
-
-            Simulation() :
-                dimension(50),
-                frozen(false)
-            {}
-    };
-
-    class Canvas {
-
-        public:
-            int width;
-            int height;
-
-            Canvas() :
-                width(-1),
-                height(-1)
-            {}
-    };
-
-    class Grid {
-        public:
-            fftw_real cellWidth;
-            fftw_real cellHeight;
-
-            Grid() :
-                cellWidth(-1),
-                cellHeight(-1)
-            {}
-    };
-
-    class Visualization {
-        public:
-            float vecScale;
-
-            Visualization():
-                vecScale(1000)
-            {}
-    };
-
-    Simulation *simulation;
-    Canvas *canvas;
-    Grid *grid;
-    Visualization *visualization;
-
-signals:
-
-public slots:
-    void onWindowResized(int width, int height);
-    void onDimensionChanged(int newDimension);
-
-private:
-    void updateGridCellSize();
-};
-
-#endif // SETTINGS_H
+#endif // SETTINGSNS_H

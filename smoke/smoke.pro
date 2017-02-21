@@ -8,9 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_CXXFLAGS += -std=c++11
 
 macx {
-    QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+    QMAKE_CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.10
 }
 
 
@@ -21,26 +22,43 @@ TEMPLATE = app
 SOURCES += main.cpp\
         view/mainwindow.cpp \
     view/canvas.cpp \
-    engines/triangleengine.cpp \
     simulation/simulation.cpp \
+    colormaps/abstractcolormap.cpp \
+    colormaps/rainbowcolormap.cpp \
     simulation/simulationrealization.cpp \
-    settings/settings.cpp \
     simulation/utils.cpp \
     engines/vectorengine.cpp \
-    engines/smokeengine.cpp
+    engines/smokeengine.cpp \
+    view/colormaplegend.cpp utilities.cpp \
+    view/simulationsettingpane.cpp \
+    settings/simulations.cpp \
+    settings/canvass.cpp \
+    settings/visualizations.cpp \
+    settings/settings.cpp \
+    view/colormapsettingpane.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
     view/canvas.h \
-    engines/triangleengine.h \
     simulation/simulation.h \
     simulation/simulationrealization.h \
-    settings/settings.h \
     simulation/utils.h \
     engines/vectorengine.h \
-    engines/smokeengine.h
+    engines/smokeengine.h \
+    colormaps/abstractcolormap.h \
+    colormaps/rainbowcolormap.h \
+    view/colormaplegend.h utilities.h \
+    view/simulationsettingpane.h \
+    settings/simulations.h \
+    settings/canvass.h \
+    settings/visualizations.h \
+    settings/settings.h \
+    view/colormapsettingpane.h
 
-FORMS    += view/mainwindow.ui
+FORMS    += view/mainwindow.ui \
+    view/colormaplegend.ui \
+    view/simulationsettingpane.ui \
+    view/colormapsettingpane.ui
 
 RESOURCES += \
     shaders.qrc
