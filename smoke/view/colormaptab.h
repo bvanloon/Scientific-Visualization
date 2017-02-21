@@ -1,19 +1,19 @@
-#ifndef VISUALIZATIONSETTINGSPANE_H
-#define VISUALIZATIONSETTINGSPANE_H
+#ifndef COLORMAPTAB_H
+#define COLORMAPTAB_H
 
 #include <QWidget>
 
 namespace Ui {
-class ColorMapSettingPane;
+class ColorMapTab;
 }
 
-class ColorMapSettingPane : public QWidget
+class ColorMapTab : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ColorMapSettingPane(QWidget *parent = 0);
-    ~ColorMapSettingPane();
+    explicit ColorMapTab(QWidget *parent = 0);
+    ~ColorMapTab();
 
 signals:
     void setClamping(bool clampingOn);
@@ -23,18 +23,17 @@ public slots:
     void onValueRangeChanged(float minimum, float maximum);
 
 private slots:
-    void on_clampingCheckBox_clicked(bool checked);
-    void on_clampingMinimumSlider_sliderMoved(int intValue);
     void on_clampingMaximumSlider_sliderMoved(int position);
+    void on_clampingMinimumSlider_sliderMoved(int position);
+    void on_clampingCheckBox_clicked(bool checked);
 
 private:
-    Ui::ColorMapSettingPane *ui;
+    Ui::ColorMapTab *ui;
 
     void setUItoDefaults();
 
     void clampingUISetDisabled(bool disabled);
     void clampingSlidersSetRange(float minimum, float maximum);
-
 };
 
-#endif // VISUALIZATIONSETTINGSPANE_H
+#endif // COLORMAPTAB_H
