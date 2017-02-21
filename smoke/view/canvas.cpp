@@ -29,9 +29,9 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
-void Canvas::onRangeChanged(float minimum, float maximum)
+void Canvas::onValueRangeChanged(float minimum, float maximum)
 {
-    setRange(minimum, maximum);
+    qDebug() << "implement onVlaueRangeChanged.";
 }
 
 void Canvas::idleLoop()
@@ -72,7 +72,7 @@ void Canvas::initializeUniforms()
     setMVPMatrix();
 
     qDebug() << "Canvas::setUniformsToDefaults setRange needs a default in the settings object.";
-    setRange(0.0f, 10.0f);
+
 
     qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
     setTexture(RainbowColorMap(255));
@@ -128,15 +128,6 @@ void Canvas::setTexture(QImage image)
         texture->setMagnificationFilter(QOpenGLTexture::Nearest);
         texture->setWrapMode(QOpenGLTexture::ClampToEdge);
     }
-}
-
-void Canvas::setRange(float minimum, float maximum)
-{
-//    if (this->shaderProgram->bind()){
-//        this->shaderProgram->setUniformValue("range.minimum", minimum);
-//        this->shaderProgram->setUniformValue("range.maximum", maximum);
-//        this->shaderProgram->release();
-//    }
 }
 
 void Canvas::initiateIdleLoop()
