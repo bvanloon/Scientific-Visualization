@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QImage>
 #include <colormaps/rainbowcolormap.h>
+#include <colormaps/grayscalecolormap.h>
 #include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
@@ -85,7 +86,7 @@ void Canvas::initializeUniforms()
 
 
     qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
-    setTexture(RainbowColorMap(255));
+    setTexture(GrayScaleColorMap(256));
 
     initializeColorMapInfo();
 }

@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     settings/canvass.cpp \
     settings/visualizations.cpp \
     settings/settings.cpp \
-    view/colormaptab.cpp
+    view/colormaptab.cpp \
+    colormaps/grayscalecolormap.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -53,7 +54,8 @@ HEADERS  += main.ih\
     settings/canvass.h \
     settings/visualizations.h \
     settings/settings.h \
-    view/colormaptab.h
+    view/colormaptab.h \
+    colormaps/grayscalecolormap.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

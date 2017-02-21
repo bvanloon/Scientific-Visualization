@@ -6,6 +6,7 @@
 #include <QTransform>
 
 #include "colormaplegend.h"
+#include "colormaps/grayscalecolormap.h"
 #include "ui_colormaplegend.h"
 #include "utilities.h"
 
@@ -18,7 +19,7 @@ const QPointF ColorMapLegend::textOffset = QPointF(2, 3);
 ColorMapLegend::ColorMapLegend(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ColorMapLegend),
-    colorMap(new RainbowColorMap(256)),
+    colorMap(new GrayScaleColorMap(256)),
     colorBar(0, 0, colorMapImageWidth, 524),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
     minimumValue(0),
