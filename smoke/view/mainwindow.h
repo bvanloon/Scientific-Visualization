@@ -34,8 +34,8 @@ private:
     void connectSettingsAndCanvas();
     void connectSettingsAndColorMapLegend();
     void connectSettingAndSimulationSettingPane();
-    void connectCanvasAndVisualizationSettingsPane();
-    void connectVisualizationSettingsPaneAndColorMapLegend();
+    void connectCanvasAndColorMapSettingsPane();
+    void connectColorMapSettingsPaneAndColorMapLegend();
 };
 
 #endif // MAINWINDOW_H

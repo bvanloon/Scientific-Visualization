@@ -17,15 +17,16 @@ MainWindow::MainWindow(QWidget *parent) :
     this->canvas->setSimulation(this->simulation);
     this->colorMapLegend = ui->colorMapLegend;
     this->simulationSettingPane = ui->simulationTab;
-    this->visualiationSettingsPane = ui->visualization;
+    qDebug() << "MainWindow::MainWindow: do something here";
+//    this->visualiationSettingsPane = ui->colormapTab;
 
 
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();
     connectSettingsAndColorMapLegend();
-    connectVisualizationSettingsPaneAndColorMapLegend();
+    connectColorMapSettingsPaneAndColorMapLegend();
     connectSettingAndSimulationSettingPane();
-    connectCanvasAndVisualizationSettingsPane();
+    connectCanvasAndColorMapSettingsPane();
 }
 
 MainWindow::~MainWindow()
@@ -64,17 +65,18 @@ void MainWindow::connectSettingAndSimulationSettingPane()
             &Settings::simulation(), SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectCanvasAndVisualizationSettingsPane()
+void MainWindow::connectCanvasAndColorMapSettingsPane()
 {
+    qDebug() << "MainWindow::connectCanvasAndColorMapSettingsPane: do something here";
     connect(this->visualiationSettingsPane, SIGNAL(setClamping(bool)),
             this->canvas, SLOT(onSetClamping(bool)));
     connect(this->visualiationSettingsPane, SIGNAL(setClampingRange(float,float)),
             this->canvas, SLOT(onsetClampingRange(float,float)));
 }
 
-void MainWindow::connectVisualizationSettingsPaneAndColorMapLegend()
+void MainWindow::connectColorMapSettingsPaneAndColorMapLegend()
 {
-    qDebug() << "MainWindow::connectVisualizationSettingsPaneAndColorMapLegend";
+    qDebug() << "MainWindow::connectColorMapSettingsPaneAndColorMapLegend: do something here";
     connect(this->visualiationSettingsPane, SIGNAL(setClampingRange(float,float)),
             this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
 }
