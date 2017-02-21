@@ -24,7 +24,7 @@ private slots:
 
     void on_clampingMinimumSlider_sliderMoved(int intValue);
 
-    void on_clampingMaximumSlider_sliderMoved(int intValue);
+    void on_clampingMaximumSlider_sliderMoved(int position);
 
 private:
     Ui::VisualizationSettingsPane *ui;

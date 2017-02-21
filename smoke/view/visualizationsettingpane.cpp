@@ -52,46 +52,16 @@ void VisualizationSettingPane::clampingUISetDisabled(bool disabled)
     this->ui->clampingMinimumLabel->setDisabled(disabled);
 }
 
-void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int intValue)
+void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int position)
 {
-    float unitValue = mapToRange((float) intValue,
-                                 (float) this->ui->clampingMinimumSlider->minimum(),
-                                 (float) this->ui->clampingMinimumSlider->maximum(),
-                                 0.0f, 1.0f);
-    if(intValue >= this->ui->clampingMaximumSlider->value()){
-        intValue = this->ui->clampingMaximumSlider->value();
-        this->ui->clampingMinimumSlider->setValue(intValue);
-        unitValue = mapToRange((float) intValue,
-                               (float) this->ui->clampingMaximumSlider->minimum(),
-                               (float) this->ui->clampingMaximumSlider->maximum(),
-                               0.0f, 1.0f);
-    }
-    emit setClampingRange(unitValue,
-                          mapToRange(
-                              (float) this->ui->clampingMaximumSlider->value(),
-                              (float) this->ui->clampingMaximumSlider->minimum(),
-                              (float) this->ui->clampingMaximumSlider->maximum(),
-                              0.0f, 1.0f));
+    position = std::min(position, this->ui->clampingMaximumSlider->value());
+    this->ui->clampingMinimumSlider->setValue(position);
+    emit setClampingRange((float) position, (float) this->ui->clampingMaximumSlider->value());
 }
 
-void VisualizationSettingPane::on_clampingMaximumSlider_sliderMoved(int intValue)
+void VisualizationSettingPane::on_clampingMaximumSlider_sliderMoved(int position)
 {
-    float unitValue = mapToRange((float) intValue,
-                                 (float) this->ui->clampingMaximumSlider->minimum(),
-                                 (float) this->ui->clampingMaximumSlider->maximum(),
-                                 0.0f, 1.0f);
-    if(intValue <= this->ui->clampingMinimumSlider->value()){
-        intValue = this->ui->clampingMinimumSlider->value();
-        this->ui->clampingMaximumSlider->setValue(intValue);
-        unitValue = mapToRange((float) intValue,
-                               (float) this->ui->clampingMinimumSlider->minimum(),
-                               (float) this->ui->clampingMinimumSlider->maximum(),
-                               0.0f, 1.0f);
-    }
-    emit setClampingRange(mapToRange(
-                              (float) this->ui->clampingMinimumSlider->value(),
-                              (float) this->ui->clampingMinimumSlider->minimum(),
-                              (float) this->ui->clampingMinimumSlider->maximum(),
-                              0.0f, 1.0f),
-                          intValue);
+    position = std::max(position, this->ui->clampingMinimumSlider->value());
+    this->ui->clampingMaximumSlider->setValue(position);
+    emit setClampingRange((float) this->ui->clampingMinimumSlider->value(), (float) position);
 }

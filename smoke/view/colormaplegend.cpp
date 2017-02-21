@@ -50,7 +50,9 @@ void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
 
 void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
 {
-    qDebug() << "ColorMapLegend::onClampRangeChanged to be implemented.";
+    this->minimumValue = minimum;
+    this->maximumValue = maximum;
+    update();
 }
 
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
