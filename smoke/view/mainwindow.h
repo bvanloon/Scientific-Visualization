@@ -7,7 +7,7 @@
 #include "simulation/simulation.h"
 #include "colormaplegend.h"
 #include "view/simulationsettingpane.h"
-#include "view/visualizationsettingspane.h"
+#include "view/visualizationsettingpane.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,7 +28,7 @@ private:
     Simulation *simulation;
     ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationSettingPane;
-    VisualizationSettingsPane *visualiationSettingsPane;
+    VisualizationSettingPane *visualiationSettingsPane;
 
     void connectCanvasAndSimulation();
     void connectSettingsAndCanvas();

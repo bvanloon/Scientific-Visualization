@@ -7,13 +7,13 @@ namespace Ui {
 class VisualizationSettingsPane;
 }
 
-class VisualizationSettingsPane : public QWidget
+class VisualizationSettingPane : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit VisualizationSettingsPane(QWidget *parent = 0);
-    ~VisualizationSettingsPane();
+    explicit VisualizationSettingPane(QWidget *parent = 0);
+    ~VisualizationSettingPane();
 
 signals:
     void setClamping(bool clampingOn);
