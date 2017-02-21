@@ -51,6 +51,7 @@ private:
     // OpenGL initialization
     void initializeShaders();
     void initializeUniforms();
+    void initializeColorMapInfo();
 
     //Uniforms
     QMatrix4x4 modelViewMatrix;
@@ -59,6 +60,7 @@ private:
     QOpenGLTexture *texture;
 
     void setMVPMatrix();
+
     void setTexture(QImage image);
     void setRange(float minimum, float maximum);
 

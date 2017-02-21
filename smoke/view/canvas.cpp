@@ -76,6 +76,20 @@ void Canvas::initializeUniforms()
 
     qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
     setTexture(RainbowColorMap(255));
+
+    initializeColorMapInfo();
+}
+
+void Canvas::initializeColorMapInfo()
+{
+    this->shaderProgram->bind();
+    qDebug() << "Canvas::initializeColorMapInfo() needs a default in the settings object.";
+    this->shaderProgram->setUniformValue("colorMapInfo.minimum", 0.0f);
+    this->shaderProgram->setUniformValue("colorMapInfo.maximum", 1.0f);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", 0.0f);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", 1.0f);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", true);
+    this->shaderProgram->release();
 }
 
 void Canvas::paintGL()
@@ -118,11 +132,11 @@ void Canvas::setTexture(QImage image)
 
 void Canvas::setRange(float minimum, float maximum)
 {
-    if (this->shaderProgram->bind()){
-        this->shaderProgram->setUniformValue("range.minimum", minimum);
-        this->shaderProgram->setUniformValue("range.maximum", maximum);
-        this->shaderProgram->release();
-    }
+//    if (this->shaderProgram->bind()){
+//        this->shaderProgram->setUniformValue("range.minimum", minimum);
+//        this->shaderProgram->setUniformValue("range.maximum", maximum);
+//        this->shaderProgram->release();
+//    }
 }
 
 void Canvas::initiateIdleLoop()
