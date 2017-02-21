@@ -41,3 +41,30 @@ void VisualizationSettingPane::setUItoDefaults()
                     (float) this->ui->clampingMaximumSlider->minimum(),
                     (float) this->ui->clampingMaximumSlider->maximum()));
 }
+
+void VisualizationSettingPane::on_clampingMinimumSlider_sliderMoved(int intValue)
+{
+    float unitValue = mapToRange((float) intValue,
+                                 (float) this->ui->clampingMaximumSlider->minimum(),
+                                 (float) this->ui->clampingMaximumSlider->maximum(),
+                                 0.0f, 1.0f);
+    if(intValue >= this->ui->clampingMaximumSlider->value()){
+        intValue = this->ui->clampingMaximumSlider->value();
+        this->ui->clampingMinimumSlider->setValue(intValue);
+        unitValue = mapToRange((float) intValue,
+                               (float) this->ui->clampingMaximumSlider->minimum(),
+                               (float) this->ui->clampingMaximumSlider->maximum(),
+                               0.0f, 1.0f);
+    }
+    emit setClampingRange(unitValue,
+                          mapToRange(
+                              (float) this->ui->clampingMaximumSlider->value(),
+                              (float) this->ui->clampingMaximumSlider->minimum(),
+                              (float) this->ui->clampingMaximumSlider->maximum(),
+                              0.0f, 1.0f));
+}
+
+void VisualizationSettingPane::on_clampingMaximumSlider_sliderMoved(int position)
+{
+
+}

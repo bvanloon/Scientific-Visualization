@@ -17,9 +17,14 @@ public:
 
 signals:
     void setClamping(bool clampingOn);
+    void setClampingRange(float minimum, float maximum);
 
 private slots:
     void on_clampingCheckBox_clicked(bool checked);
+
+    void on_clampingMinimumSlider_sliderMoved(int intValue);
+
+    void on_clampingMaximumSlider_sliderMoved(int position);
 
 private:
     Ui::VisualizationSettingsPane *ui;
