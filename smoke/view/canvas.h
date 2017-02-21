@@ -35,6 +35,7 @@ signals:
 public slots:
     void onValueRangeChanged(float minimum, float maximum);
     void onSetClamping(bool clampingOn);
+    void onsetClampingRange(float minimum, float maximum);
 
 private slots:
     void idleLoop();
