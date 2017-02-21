@@ -26,7 +26,7 @@ void Settings::Simulation::onDimensionChanged(int newDimension)
 void Settings::Simulation::onForceChanged(float newForce)
 {
     this->force = newForce;
-    emit rangeChanged(0.0, newForce);
+    emit valueRangeChanged(0.0f, newForce);
 }
 
 void Settings::Simulation::onWindowResized(int width, int height)

@@ -41,7 +41,7 @@ void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
     update();
 }
 
-void ColorMapLegend::onRangeChanged(float minimum, float maximum)
+void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
 {
     this->minimumValue = minimum;
     this->maximumValue = maximum;

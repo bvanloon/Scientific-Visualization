@@ -31,7 +31,7 @@ void Canvas::setSimulation(Simulation *simulation)
 
 void Canvas::onValueRangeChanged(float minimum, float maximum)
 {
-    qDebug() << "implement onVlaueRangeChanged.";
+    setColorMapValueRange(minimum, maximum);
 }
 
 void Canvas::idleLoop()
@@ -82,14 +82,9 @@ void Canvas::initializeUniforms()
 
 void Canvas::initializeColorMapInfo()
 {
-    this->shaderProgram->bind();
-    qDebug() << "Canvas::initializeColorMapInfo() needs a default in the settings object.";
-    this->shaderProgram->setUniformValue("colorMapInfo.minimum", Settings::defaults::simulation::valueRangeMin);
-    this->shaderProgram->setUniformValue("colorMapInfo.maximum", Settings::defaults::simulation::valueRangeMax);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", Settings::defaults::visualization::clampStart);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", Settings::defaults::visualization::clampEnd);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", Settings::defaults::visualization::clampingOn);
-    this->shaderProgram->release();
+    setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
+    setColorMapClampRange(Settings::defaults::visualization::clampStart, Settings::defaults::visualization::clampEnd);
+    setColorMapClampingTo(Settings::defaults::visualization::clampingOn);
 }
 
 void Canvas::paintGL()
@@ -128,6 +123,29 @@ void Canvas::setTexture(QImage image)
         texture->setMagnificationFilter(QOpenGLTexture::Nearest);
         texture->setWrapMode(QOpenGLTexture::ClampToEdge);
     }
+}
+
+void Canvas::setColorMapValueRange(float min, float max)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("colorMapInfo.minimum", min);
+    this->shaderProgram->setUniformValue("colorMapInfo.maximum", max);
+    this->shaderProgram->release();
+}
+
+void Canvas::setColorMapClampRange(float startClamp, float endClamp)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", startClamp);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", endClamp);
+    this->shaderProgram->release();
+}
+
+void Canvas::setColorMapClampingTo(bool clampingOn)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", clampingOn);
+    this->shaderProgram->release();
 }
 
 void Canvas::initiateIdleLoop()

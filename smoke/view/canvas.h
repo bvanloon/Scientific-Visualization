@@ -53,6 +53,7 @@ private:
     void initializeUniforms();
     void initializeColorMapInfo();
 
+
     //Uniforms
     QMatrix4x4 modelViewMatrix;
     QMatrix4x4 projectionMatrix;
@@ -62,7 +63,10 @@ private:
     void setMVPMatrix();
 
     void setTexture(QImage image);
-    void setRange(float minimum, float maximum);
+    void setColorMapValueRange(float min, float max);
+    void setColorMapClampRange(float startClamp, float endClamp);
+    void setColorMapClampingTo(bool clampingOn);
+
 
     Simulation* simulation;
 

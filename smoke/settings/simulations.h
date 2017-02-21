@@ -18,7 +18,7 @@ public:
     QSizeF cellSize;
 
 signals:
-    void rangeChanged(float minimum, float maximum);
+    void valueRangeChanged(float minimum, float maximum);
 
 public slots:
     void onDimensionChanged(int newDimension);
