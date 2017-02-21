@@ -15,8 +15,14 @@ public:
     explicit FloatSlider(QWidget *parent = 0);
     ~FloatSlider();
 
+    void init(int numSteps = 100, float minimum, float maximum);
+
 private:
     Ui::FloatSlider *ui;
+
+    int numSteps;
+    float minimum;
+    float maximum;
 };
 
 #endif // FLOATSLIDER_H

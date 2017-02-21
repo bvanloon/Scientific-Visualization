@@ -12,3 +12,10 @@ FloatSlider::~FloatSlider()
 {
     delete ui;
 }
+
+void FloatSlider::init(int numSteps, float minimum, float maximum)
+{
+    this->numSteps = numSteps;
+    this->minimum = minimum;
+    this->maximum = maximum;
+}
