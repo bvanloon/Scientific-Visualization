@@ -87,7 +87,7 @@
         <string>Simulation</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="colormapTab">
+      <widget class="ColorMapSettingPane" name="colormapTab">
        <attribute name="title">
         <string>Color Map</string>
        </attribute>
@@ -114,6 +114,12 @@
    <class>SimulationSettingPane</class>
    <extends>QWidget</extends>
    <header location="global">view/simulationsettingpane.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorMapSettingPane</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormapsettingpane.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
