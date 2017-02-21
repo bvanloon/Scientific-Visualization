@@ -23,6 +23,7 @@ public:
     void setMinimum(float minimum);
     void setMaximum(float maximum);
     void setValue(float value);
+    void setValue(int value);
     void setDisabled(bool disabled);
 
     float minimum() const;
@@ -31,6 +32,9 @@ public:
 
 signals:
     void sliderMoved(float value);
+
+private slots:
+    void on_slider_sliderMoved(int position);
 
 private:
     Ui::FloatSlider *ui;

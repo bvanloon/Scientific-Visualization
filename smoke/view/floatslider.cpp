@@ -48,6 +48,11 @@ void FloatSlider::setValue(float value)
     this->ui->valueLabel->setText(QString::number(value, 'f', 2));
 }
 
+void FloatSlider::setValue(int value)
+{
+    setValue(mapToFloatRange(value));
+}
+
 void FloatSlider::setDisabled(bool disabled)
 {
     this->ui->slider->setDisabled(disabled);
@@ -87,4 +92,10 @@ int FloatSlider::mapToIntRange(float value) const
 void FloatSlider::setLabelText(QLabel *label, float value)
 {
     label->setText(QString::number(value, 'f', 2));
+}
+
+void FloatSlider::on_slider_sliderMoved(int position)
+{
+    this->setValue(position);
+    qDebug() << "Do stuff! Emit a signal for example?";
 }
