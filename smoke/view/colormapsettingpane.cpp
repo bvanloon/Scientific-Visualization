@@ -1,4 +1,4 @@
-#include "visualizationsettingpane.h"
+#include "colormapsettingpane.h"
 #include "ui_visualizationsettingspane.h"
 #include "settings/settings.h"
 #include "utilities.h"

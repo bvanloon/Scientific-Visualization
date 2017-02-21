@@ -7,7 +7,7 @@
 #include "simulation/simulation.h"
 #include "colormaplegend.h"
 #include "view/simulationsettingpane.h"
-#include "view/visualizationsettingpane.h"
+#include "view/colormapsettingpane.h"
 
 namespace Ui {
 class MainWindow;
