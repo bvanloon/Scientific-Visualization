@@ -27,6 +27,8 @@ void ColorMapSettingPane::on_clampingCheckBox_clicked(bool checked)
 {
     clampingUISetDisabled(!checked);
     emit setClamping(checked);
+    emit setClampingRange((float) this->ui->clampingMinimumSlider->value(),
+                          (float) this->ui->clampingMaximumSlider->value());
 }
 
 void ColorMapSettingPane::setUItoDefaults()

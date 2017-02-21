@@ -16,17 +16,15 @@ MainWindow::MainWindow(QWidget *parent) :
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
     this->colorMapLegend = ui->colorMapLegend;
-    this->simulationSettingPane = ui->simulationTab;
-    qDebug() << "MainWindow::MainWindow: do something here";
-//    this->visualiationSettingsPane = ui->colormapTab;
-
+    this->simulationTab = ui->simulationTab;
+    this->colorMapTab = ui->colormapTab;
 
     connectCanvasAndSimulation();
-    connectSettingsAndCanvas();
+    connectCanvasAndSettings();
     connectSettingsAndColorMapLegend();
-    connectColorMapSettingsPaneAndColorMapLegend();
-    connectSettingAndSimulationSettingPane();
-    connectCanvasAndColorMapSettingsPane();
+    connectColorMapTabAndColorMapLegend();
+    connectSettingAndSimulationTab();
+    connectCanvasAndColorMapTab();
 }
 
 MainWindow::~MainWindow()
@@ -41,7 +39,7 @@ void MainWindow::connectCanvasAndSimulation()
             this->simulation, SLOT(onMouseMoved(QPoint)));
 }
 
-void MainWindow::connectSettingsAndCanvas()
+void MainWindow::connectCanvasAndSettings()
 {
     connect(&Settings::simulation(),SIGNAL(valueRangeChanged(float,float)),
             this->canvas, SLOT(onValueRangeChanged(float,float)));
@@ -59,25 +57,23 @@ void MainWindow::connectSettingsAndColorMapLegend()
             this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
 }
 
-void MainWindow::connectSettingAndSimulationSettingPane()
+void MainWindow::connectSettingAndSimulationTab()
 {
-    connect(this->simulationSettingPane, SIGNAL(forceChanged(float)),
+    connect(this->simulationTab, SIGNAL(forceChanged(float)),
             &Settings::simulation(), SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectCanvasAndColorMapSettingsPane()
+void MainWindow::connectCanvasAndColorMapTab()
 {
-    qDebug() << "MainWindow::connectCanvasAndColorMapSettingsPane: do something here";
-    connect(this->visualiationSettingsPane, SIGNAL(setClamping(bool)),
+    connect(this->colorMapTab, SIGNAL(setClamping(bool)),
             this->canvas, SLOT(onSetClamping(bool)));
-    connect(this->visualiationSettingsPane, SIGNAL(setClampingRange(float,float)),
+    connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
             this->canvas, SLOT(onsetClampingRange(float,float)));
 }
 
-void MainWindow::connectColorMapSettingsPaneAndColorMapLegend()
+void MainWindow::connectColorMapTabAndColorMapLegend()
 {
-    qDebug() << "MainWindow::connectColorMapSettingsPaneAndColorMapLegend: do something here";
-    connect(this->visualiationSettingsPane, SIGNAL(setClampingRange(float,float)),
+    connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
             this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
 }
 

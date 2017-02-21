@@ -41,7 +41,6 @@ void Canvas::onSetClamping(bool clampingOn)
 
 void Canvas::onsetClampingRange(float minimum, float maximum)
 {
-    qDebug() << "Canvas::onsetClampingRange";
     setColorMapClampRange(minimum, maximum);
 }
 

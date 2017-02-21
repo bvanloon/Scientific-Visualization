@@ -27,15 +27,15 @@ private:
     Canvas *canvas;
     Simulation *simulation;
     ColorMapLegend *colorMapLegend;
-    SimulationSettingPane *simulationSettingPane;
-    ColorMapSettingPane *visualiationSettingsPane;
+    SimulationSettingPane *simulationTab;
+    ColorMapSettingPane *colorMapTab;
 
     void connectCanvasAndSimulation();
-    void connectSettingsAndCanvas();
+    void connectCanvasAndSettings();
+    void connectCanvasAndColorMapTab();
     void connectSettingsAndColorMapLegend();
-    void connectSettingAndSimulationSettingPane();
-    void connectCanvasAndColorMapSettingsPane();
-    void connectColorMapSettingsPaneAndColorMapLegend();
+    void connectSettingAndSimulationTab();
+    void connectColorMapTabAndColorMapLegend();
 };
 
 #endif // MAINWINDOW_H
