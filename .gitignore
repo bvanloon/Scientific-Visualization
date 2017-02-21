@@ -158,3 +158,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 src/Smoke/
+
+smoke/fftw-2\.1\.5/sourceAndDoc/
