@@ -17,8 +17,8 @@ namespace Settings {
             static const float valueRangeMax = 20.0f;
         }
         namespace visualization {
-            static const float clampStart = 5.0f;
-            static const float clampEnd = 15.0f;
+            static const float clampStart = 0.0f;
+            static const float clampEnd = 1.0f;
             static const bool clampingOn = false;
         }
     }
