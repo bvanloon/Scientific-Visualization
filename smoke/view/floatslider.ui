@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="valueLabel">
      <property name="text">
-      <string>TextLabel</string>
+      <string>0.50</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -47,7 +47,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="maximulLabel">
+      <widget class="QLabel" name="maximumLabel">
        <property name="minimumSize">
         <size>
          <width>35</width>
