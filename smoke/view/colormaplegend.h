@@ -22,6 +22,7 @@ public:
 public slots:
     void onColorMapChanged(AbstractColorMap colorMap);
     void onValueRangeChanged(float minimum, float maximum);
+    void onClampRangeChanged(float minimum, float maximum);
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;

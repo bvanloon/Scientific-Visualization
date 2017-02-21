@@ -48,6 +48,11 @@ void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
     update();
 }
 
+void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
+{
+    qDebug() << "ColorMapLegend::onClampRangeChanged to be implemented.";
+}
+
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
 {
     colorBar.setTop(getDescriptionLabelHeight());

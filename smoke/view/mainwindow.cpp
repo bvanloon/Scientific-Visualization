@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connectCanvasAndSimulation();
     connectSettingsAndCanvas();
     connectSettingsAndColorMapLegend();
+    connectVisualizationSettingsPaneAndColorMapLegend();
     connectSettingAndSimulationSettingPane();
     connectCanvasAndVisualizationSettingsPane();
 }
@@ -67,6 +68,15 @@ void MainWindow::connectCanvasAndVisualizationSettingsPane()
 {
     connect(this->visualiationSettingsPane, SIGNAL(setClamping(bool)),
             this->canvas, SLOT(onSetClamping(bool)));
+    connect(this->visualiationSettingsPane, SIGNAL(setClampingRange(float,float)),
+            this->canvas, SLOT(onsetClampingRange(float,float)));
+}
+
+void MainWindow::connectVisualizationSettingsPaneAndColorMapLegend()
+{
+    qDebug() << "MainWindow::connectVisualizationSettingsPaneAndColorMapLegend";
+    connect(this->visualiationSettingsPane, SIGNAL(setClampingRange(float,float)),
+            this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
 }
 
 
