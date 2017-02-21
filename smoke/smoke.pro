@@ -8,9 +8,10 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QMAKE_CXXFLAGS += -std=c++11
 
 macx {
-    QMAKE_CXXFLAGS += -std=c++11 -stdlib=libc++ -mmacosx-version-min=10.10
+    QMAKE_CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.10
 }
 
 
