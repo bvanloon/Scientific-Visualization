@@ -36,7 +36,8 @@ SOURCES += main.cpp\
     settings/visualizations.cpp \
     settings/settings.cpp \
     view/colormaptab.cpp \
-    colormaps/grayscalecolormap.cpp
+    colormaps/grayscalecolormap.cpp \
+    colormaps/heatcolormap.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -55,7 +56,8 @@ HEADERS  += main.ih\
     settings/visualizations.h \
     settings/settings.h \
     view/colormaptab.h \
-    colormaps/grayscalecolormap.h
+    colormaps/grayscalecolormap.h \
+    colormaps/heatcolormap.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
