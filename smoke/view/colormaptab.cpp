@@ -34,6 +34,10 @@ void ColorMapTab::setUItoDefaults()
 {
     this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::clampingOn);
     clampingUISetDisabled(!Settings::defaults::visualization::clampingOn);
+    this->ui->clampingMaximumSlider->init(
+                Settings::defaults::visualization::clampStart,
+                Settings::defaults::visualization::clampEnd,
+                Settings::defaults::visualization::clampEnd);
     qDebug() << "ColorMapTab::setUItoDefaults(): Set the sliders to the correct values.";
 }
 
