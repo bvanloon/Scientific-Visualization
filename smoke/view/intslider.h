@@ -15,6 +15,8 @@ public:
     explicit IntSlider(QWidget *parent = 0);
     ~IntSlider();
 
+    void init(int minimum, int maximum, int value);
+
 private:
     Ui::IntSlider *ui;
 };

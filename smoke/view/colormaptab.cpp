@@ -55,6 +55,10 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::clampStart,
                 Settings::defaults::visualization::clampEnd,
                 Settings::defaults::visualization::clampStart);
+    this->ui->numColorsSlider->init(
+                Settings::defaults::visualization::colormap::minNumColors,
+                Settings::defaults::visualization::colormap::maxNumColors,
+                Settings::defaults::visualization::colormap::numColors);
 }
 
 void ColorMapTab::setUpConnections()

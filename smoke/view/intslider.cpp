@@ -12,3 +12,8 @@ IntSlider::~IntSlider()
 {
     delete ui;
 }
+
+void IntSlider::init(int minimum, int maximum, int value)
+{
+
+}
