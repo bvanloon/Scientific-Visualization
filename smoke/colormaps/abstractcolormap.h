@@ -6,9 +6,9 @@
 class AbstractColorMap : public QImage
 {
 public:
-    AbstractColorMap(int numColors);
-
     int getNumColors();
+    static AbstractColorMap * Create(int numColors);
+    AbstractColorMap(int numColors = 256);
 
 protected:
     int numColors;

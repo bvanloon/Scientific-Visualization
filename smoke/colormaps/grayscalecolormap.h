@@ -7,9 +7,10 @@
 class GrayScaleColorMap : public AbstractColorMap
 {
 public:
-    GrayScaleColorMap(int numColors);
+    static AbstractColorMap* Create(int numColors);
 
 private:
+    GrayScaleColorMap(int numColors);
     void fill();
 };
 

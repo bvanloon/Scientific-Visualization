@@ -11,6 +11,10 @@ GrayScaleColorMap::GrayScaleColorMap(int numColors):
     fill();
 }
 
+AbstractColorMap *GrayScaleColorMap::Create(int numColors)
+{
+       return new GrayScaleColorMap(numColors);
+}
 
 void GrayScaleColorMap::fill()
 {

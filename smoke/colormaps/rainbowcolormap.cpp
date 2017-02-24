@@ -6,6 +6,11 @@
 #include <QImage>
 #include <QColor>
 
+AbstractColorMap *RainbowColorMap::Create(int numColors)
+{
+    return new RainbowColorMap(numColors);
+}
+
 RainbowColorMap::RainbowColorMap(int numColors, float dx):
     AbstractColorMap(numColors),
     dx(dx)

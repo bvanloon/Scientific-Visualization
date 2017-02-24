@@ -2,8 +2,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QImage>
-#include <colormaps/rainbowcolormap.h>
-#include <colormaps/grayscalecolormap.h>
+#include "colormaps/colormapfactory.h"
 #include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
@@ -86,7 +85,9 @@ void Canvas::initializeUniforms()
 
 
     qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
-    setTexture(GrayScaleColorMap(256));
+
+
+    setTexture(*ColorMapFactory::get()->createColorMap(ColorMapFactory::colorMaps::grayScale,256));
 
     initializeColorMapInfo();
 }

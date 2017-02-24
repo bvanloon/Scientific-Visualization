@@ -6,9 +6,6 @@
 #include <QImage>
 #include <QColor>
 
-HeatColorMap::HeatColorMap(int numColors, float dx):
-    AbstractColorMap(numColors),
-    dx(dx)
 {
     fill();
 }

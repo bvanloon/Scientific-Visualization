@@ -7,9 +7,12 @@
 class RainbowColorMap : public AbstractColorMap
 {
 public:
-    RainbowColorMap(int numColors, float dx = 0.8);
+    static AbstractColorMap* Create(int numColors);
 
 private:
+
+    RainbowColorMap(int numColors, float dx = 0.8);
+
     void fill();
     QRgb toRainbowColor(float i);
 
