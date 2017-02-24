@@ -58,5 +58,9 @@ void ColorMapTab::setUpConnections()
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)
 {
-    qDebug() << "ColorMapTab::clampingUISetDisabled: Disable the sliders";
+    this->ui->clampingMinimumLabel->setDisabled(disabled);
+    this->ui->clampingMinimumSlider->setDisabled(disabled);
+
+    this->ui->clampingMaximumLabel->setDisabled(disabled);
+    this->ui->clampingMaximumSlider->setDisabled(disabled);
 }
