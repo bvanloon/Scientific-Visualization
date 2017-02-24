@@ -84,12 +84,6 @@ void Canvas::initializeShaders()
 void Canvas::initializeUniforms()
 {
     setMVPMatrix();
-
-    qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
-
-
-    setTexture(*ColorMapFactory::get()->createColorMap(ColorMapFactory::colorMaps::grayScale,256));
-
     initializeColorMapInfo();
 }
 
