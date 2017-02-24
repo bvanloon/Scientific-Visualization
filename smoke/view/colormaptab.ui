@@ -23,10 +23,22 @@
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="clampingMinimumLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
      <property name="text">
-      <string>Minimum</string>
+      <string>Clamp min</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="FloatSlider" name="clampingMinimumSlider" native="true"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="clampingMaximumLabel">
@@ -37,14 +49,10 @@
       </size>
      </property>
      <property name="text">
-      <string>Maximum</string>
+      <string>Clamp max</string>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QSlider" name="clampingMinimumSlider">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
