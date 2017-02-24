@@ -27,9 +27,9 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     maximumFactor(Settings::defaults::visualization::colormap::clampMax)
 {
     ui->setupUi(this);
-    colorMapImage = *(ColorMapFactory::get()->createColorMap(
-                Settings::defaults::visualization::colormap::colormap,
-                Settings::defaults::visualization::colormap::numColors));
+    setColorMap(*(ColorMapFactory::get()->createColorMap(
+                      Settings::defaults::visualization::colormap::colormap,
+                      Settings::defaults::visualization::colormap::numColors)));
     numberOfColors = Settings::defaults::visualization::colormap::numColors;
     numberOfTicks = qMin(numberOfColors, (float) maximumNumberOfTicks);
 }
@@ -75,11 +75,7 @@ void ColorMapLegend::paintEvent(QPaintEvent *event)
 void ColorMapLegend::drawColorMapImage()
 {
     QPainter painter(this);
-    QTransform rotating;
-    rotating.rotate(90);
-    QImage rotatedImage = colorMapImage.transformed(rotating);
-
-    painter.drawImage(colorBar, rotatedImage);
+    painter.drawImage(colorBar, colorMapImage);
 }
 
 int ColorMapLegend::getDescriptionLabelHeight()
@@ -129,7 +125,12 @@ void ColorMapLegend::drawLabel(QPointF left, float labelValue)
     painter.drawText(left + textOffset, valueStr);
 }
 
-void ColorMapLegend::setColorMap(AbstractColorMap colorMapImage)
+void ColorMapLegend::setColorMap(AbstractColorMap colorMap)
 {
-
+    QTransform rotating;
+    rotating.rotate(90);
+    this->colorMapImage = colorMap.transformed(rotating);
+    this->numberOfColors = colorMap.getNumColors();
 }
+
+
