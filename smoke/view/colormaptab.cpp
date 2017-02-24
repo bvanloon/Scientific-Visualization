@@ -10,6 +10,7 @@ ColorMapTab::ColorMapTab(QWidget *parent) :
     ui->setupUi(this);
 
     setUItoDefaults();
+    setUpConnections();
 }
 
 ColorMapTab::~ColorMapTab()
@@ -29,6 +30,10 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
     qDebug() << "ColorMapTab::on_clampingCheckBox_clicked: emit the clamping range.";
 }
 
+void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
+    qDebug() << "ColorMapTab::on_clampingMaximumSlider_valueChanged " << value;
+}
+
 
 void ColorMapTab::setUItoDefaults()
 {
@@ -39,6 +44,12 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::clampEnd,
                 Settings::defaults::visualization::clampEnd);
     qDebug() << "ColorMapTab::setUItoDefaults(): Set the sliders to the correct values.";
+}
+
+void ColorMapTab::setUpConnections()
+{
+    connect(this->ui->clampingMaximumSlider, SIGNAL(valueChanged(float)),
+            this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
 }
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)

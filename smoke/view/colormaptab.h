@@ -23,11 +23,13 @@ public slots:
 
 private slots:
     void on_clampingCheckBox_clicked(bool checked);
+    void on_clampingMaximumSlider_valueChanged(float value);
 
 private:
     Ui::ColorMapTab *ui;
 
     void setUItoDefaults();
+    void setUpConnections();
 
     void clampingUISetDisabled(bool disabled);
 };

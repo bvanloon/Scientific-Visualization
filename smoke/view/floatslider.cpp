@@ -58,6 +58,7 @@ void FloatSlider::on_slider_sliderMoved(int position)
                              (float)this->ui->slider->minimum(), (float)this->ui->slider->maximum(),
                              this->minimum, this->maximum);
     setLabel(this->ui->valueLabel, value);
+    emit valueChanged(value);
 }
 
 void FloatSlider::setLabel(QLabel* label, float value){

@@ -22,6 +22,9 @@ public:
     void setRange(float minimum, float maximum);
     void setValue(float value);
 
+signals:
+    void valueChanged(float value);
+
 private slots:
     void on_slider_sliderMoved(int position);
 
