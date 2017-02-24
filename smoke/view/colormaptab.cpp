@@ -23,12 +23,9 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 {
     clampingUISetDisabled(!checked);
     emit setClamping(checked);
-    if (checked){
-        emit setClampingRange(this->ui->clampingMinimumSlider->value(),
-                                  this->ui->clampingMaximumSlider->value());
-    } else {
-        emit setClampingRange(0.0f, 1.0f);
-    }
+    float minimum = checked ? this->ui->clampingMinimumSlider->value() : 0.0f;
+    float maximum = checked ? this->ui->clampingMaximumSlider->value() : 1.0f;
+    emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
