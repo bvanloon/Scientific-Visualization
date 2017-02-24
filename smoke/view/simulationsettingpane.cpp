@@ -24,8 +24,8 @@ void SimulationSettingPane::on_forceSlider_valueChanged(int value)
 
 void SimulationSettingPane::setUItoDefaults()
 {
-    ui->forceSlider->init(Settings::defaults::simulation::valueRangeMin,
-                          Settings::defaults::simulation::valueRangeMax,
+    ui->forceSlider->init(Settings::defaults::simulation::forceMin,
+                          Settings::defaults::simulation::forceMax,
                           Settings::simulation().force);
 }
 
