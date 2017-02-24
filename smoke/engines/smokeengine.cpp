@@ -47,8 +47,6 @@ void SmokeEngine::initBuffers()
     glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, 0);
 
     this->vao.release();
-
-
 }
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
