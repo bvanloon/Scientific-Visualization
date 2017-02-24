@@ -64,14 +64,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QSlider" name="maximumLabel">
+      <widget class="QSlider" name="slider">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="maximumLabel">
        <property name="minimumSize">
         <size>
          <width>25</width>
