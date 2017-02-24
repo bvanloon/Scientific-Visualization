@@ -3,8 +3,8 @@
 struct colorMapInfoStruct {
     float minimum;
     float maximum;
-    float clampStart;
-    float clampEnd;
+    float clampMin;
+    float clampMax;
     bool clampingOn;
 };
 
@@ -41,11 +41,11 @@ float clampTextureCoordinates(float inputTextureCoordinate){
 
     //Clamp the normalized texture coordinate
     normalizedTextureCoordinate = clamp(normalizedTextureCoordinate,
-                                        colorMapInfo.clampStart, colorMapInfo.clampEnd);
+                                        colorMapInfo.clampMin, colorMapInfo.clampMax);
 
     //Map the range [clampStart, clampEnd] to [0.0, 1.0]
     return mapToRange(normalizedTextureCoordinate,
-                      colorMapInfo.clampStart, colorMapInfo.clampEnd,
+                      colorMapInfo.clampMin, colorMapInfo.clampMax,
                       0.0, 1.0);
 }
 
