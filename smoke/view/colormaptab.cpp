@@ -31,12 +31,18 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 }
 
 void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
-    emit setClampingRange(this->ui->clampingMinimumSlider->value(), value);
+    float minimum = this->ui->clampingMinimumSlider->value();
+    float maximum = qMax(value, minimum);
+    this->ui->clampingMaximumSlider->setValue(maximum);
+    emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
 {
-    emit setClampingRange(value, this->ui->clampingMaximumSlider->value());
+    float maximum = this->ui->clampingMaximumSlider->value();
+    float minimum = qMin(value, maximum);
+    this->ui->clampingMinimumSlider->setValue(minimum);
+    emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::setUItoDefaults()
@@ -47,9 +53,10 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::clampStart,
                 Settings::defaults::visualization::clampEnd,
                 Settings::defaults::visualization::clampEnd);
-    this->ui->clampingMinimumSlider->init(Settings::defaults::visualization::clampStart,
-                                          Settings::defaults::visualization::clampEnd,
-                                          Settings::defaults::visualization::clampStart);
+    this->ui->clampingMinimumSlider->init(
+                Settings::defaults::visualization::clampStart,
+                Settings::defaults::visualization::clampEnd,
+                Settings::defaults::visualization::clampStart);
 }
 
 void ColorMapTab::setUpConnections()
