@@ -38,7 +38,8 @@ private:
     int numberOfTicks;
     float minimumValue;
     float maximumValue;
-
+    float minimumFactor;
+    float maximumFactor;
 
     static const int colorMapImageWidth;
     static const int tickWidth;
