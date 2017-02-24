@@ -18,11 +18,6 @@ ColorMapTab::~ColorMapTab()
     delete ui;
 }
 
-void ColorMapTab::onValueRangeChanged(float minimum, float maximum)
-{
-    qDebug() << "ColorMapTab::onValueRangeChanged: do something, possibly set the range of the sliders.";
-}
-
 void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 {
     clampingUISetDisabled(!checked);

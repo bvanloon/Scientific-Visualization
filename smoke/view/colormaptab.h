@@ -20,7 +20,6 @@ signals:
     void setClampingRange(float minimum, float maximum);
 
 public slots:
-    void onValueRangeChanged(float minimum, float maximum);
 
 private slots:
     void on_clampingCheckBox_clicked(bool checked);
