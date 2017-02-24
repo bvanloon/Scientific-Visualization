@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     settings/canvass.cpp \
     settings/visualizations.cpp \
     settings/settings.cpp \
-    view/colormaptab.cpp
+    view/colormaptab.cpp \
+    view/floatslider.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -53,12 +54,14 @@ HEADERS  += main.ih\
     settings/canvass.h \
     settings/visualizations.h \
     settings/settings.h \
-    view/colormaptab.h
+    view/colormaptab.h \
+    view/floatslider.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
     view/simulationsettingpane.ui \
-    view/colormaptab.ui
+    view/colormaptab.ui \
+    view/floatslider.ui
 
 RESOURCES += \
     shaders.qrc

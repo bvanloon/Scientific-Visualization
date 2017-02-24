@@ -81,9 +81,6 @@ void Canvas::initializeUniforms()
 {
     setMVPMatrix();
 
-    qDebug() << "Canvas::setUniformsToDefaults setRange needs a default in the settings object.";
-
-
     qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
     setTexture(RainbowColorMap(255));
 

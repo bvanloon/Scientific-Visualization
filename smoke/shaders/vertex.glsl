@@ -25,16 +25,28 @@ float mapToUnitRange(float value, float oldMin, float oldMax)
     return slope * (value - oldMin);
 }
 
-float clampTextureCoordinates(float inputTextureCoordinate){
-    //Clamping
-    inputTextureCoordinate = max(inputTextureCoordinate, colorMapInfo.clampStart);
-    inputTextureCoordinate = min(inputTextureCoordinate, colorMapInfo.clampEnd);
-
-    return mapToUnitRange(inputTextureCoordinate, colorMapInfo.clampStart, colorMapInfo.clampEnd);
+float mapToRange(float value, float oldMin, float oldMax, float newMin, float newMax)
+{
+    float slope = (newMax - newMin) / ((oldMax - oldMin));
+    return newMin + slope * (value - oldMin);
 }
 
 float scaleTextureCoordinates(float inputTextureCoordinate){
         return mapToUnitRange(inputTextureCoordinate, colorMapInfo.minimum, colorMapInfo.maximum);
+}
+
+float clampTextureCoordinates(float inputTextureCoordinate){
+    //Scale the texture coordinate to the range [0, 1]
+    float normalizedTextureCoordinate = scaleTextureCoordinates(inputTextureCoordinate);
+
+    //Clamp the normalized texture coordinate
+    normalizedTextureCoordinate = clamp(normalizedTextureCoordinate,
+                                        colorMapInfo.clampStart, colorMapInfo.clampEnd);
+
+    //Map the range [clampStart, clampEnd] to [0.0, 1.0]
+    return mapToRange(normalizedTextureCoordinate,
+                      colorMapInfo.clampStart, colorMapInfo.clampEnd,
+                      0.0, 1.0);
 }
 
 float computeTextureCoordinate(float inputTextureCoordinate){
