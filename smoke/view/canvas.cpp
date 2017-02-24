@@ -2,7 +2,6 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QImage>
-#include "colormaps/colormapfactory.h"
 #include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
@@ -42,6 +41,11 @@ void Canvas::onSetClamping(bool clampingOn)
 void Canvas::onsetClampingRange(float minimum, float maximum)
 {
     setColorMapClampRange(minimum, maximum);
+}
+
+void Canvas::onColorMapChanged(AbstractColorMap colormap)
+{
+    setTexture(colormap);
 }
 
 void Canvas::idleLoop()
