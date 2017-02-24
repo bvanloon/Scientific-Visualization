@@ -30,8 +30,6 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     setColorMap(*(ColorMapFactory::get()->createColorMap(
                       Settings::defaults::visualization::colormap::colormap,
                       Settings::defaults::visualization::colormap::numColors)));
-    numberOfColors = Settings::defaults::visualization::colormap::numColors;
-    numberOfTicks = qMin(numberOfColors, (float) maximumNumberOfTicks);
 }
 
 ColorMapLegend::~ColorMapLegend()
@@ -41,8 +39,7 @@ ColorMapLegend::~ColorMapLegend()
 
 void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 {
-    numberOfTicks = std::min(colorMap.getNumColors(), maximumNumberOfTicks);
-    qDebug() << "void ColorMapLegend::onColorMapChanged: setColorMap";
+    setColorMap(colorMap);
     update();
 }
 
@@ -131,6 +128,7 @@ void ColorMapLegend::setColorMap(AbstractColorMap colorMap)
     rotating.rotate(90);
     this->colorMapImage = colorMap.transformed(rotating);
     this->numberOfColors = colorMap.getNumColors();
+    this->numberOfTicks = std::min(colorMap.getNumColors(), maximumNumberOfTicks);
 }
 
 
