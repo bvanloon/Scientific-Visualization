@@ -2,6 +2,7 @@
 #define INTSLIDER_H
 
 #include <QWidget>
+#include <QLabel>
 
 namespace Ui {
 class IntSlider;
@@ -17,8 +18,14 @@ public:
 
     void init(int minimum, int maximum, int value);
 
+    void setMinimum(int minimum);
+    void setMaximum(int maximum);
+    void setValue(int value);
+
 private:
     Ui::IntSlider *ui;
+
+    void setLabel(QLabel *label, int value);
 };
 
 #endif // INTSLIDER_H
