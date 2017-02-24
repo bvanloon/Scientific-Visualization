@@ -77,6 +77,8 @@ void MainWindow::connectColorMapTabAndColorMapLegend()
 {
     connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
             this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
+    connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+            this->colorMapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
 
