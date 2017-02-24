@@ -10,7 +10,7 @@ class SimulationRealization
 public:
     SimulationRealization();
 
-    int addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
+    void addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
     void do_one_simulation_step(void);
 
     //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
