@@ -69,12 +69,16 @@ void MainWindow::connectCanvasAndColorMapTab()
             this->canvas, SLOT(onSetClamping(bool)));
     connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
             this->canvas, SLOT(onsetClampingRange(float,float)));
+    connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+            this->canvas, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
 void MainWindow::connectColorMapTabAndColorMapLegend()
 {
     connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
             this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
+    connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+            this->colorMapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
 
