@@ -14,43 +14,97 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <widget class="QCheckBox" name="clampingCheckBox">
      <property name="text">
       <string>Clamping</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="clampingMinimumLabel">
-     <property name="text">
-      <string>Minimum</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0">
-    <widget class="QLabel" name="clampingMaximumLabel">
-     <property name="text">
-      <string>Maximum</string>
+    <widget class="QLabel" name="clampingMinimumLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QSlider" name="clampingMinimumSlider">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="text">
+      <string>Clamp min</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
-    <widget class="QSlider" name="clampingMaximumSlider">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+    <widget class="FloatSlider" name="clampingMinimumSlider" native="true"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="clampingMaximumLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Clamp max</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="FloatSlider" name="clampingMaximumSlider" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="numColorsLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Number of colors</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="IntSlider" name="numColorsSlider" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FloatSlider</class>
+   <extends>QWidget</extends>
+   <header>view/floatslider.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>IntSlider</class>
+   <extends>QWidget</extends>
+   <header location="global">view/intslider.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

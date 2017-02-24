@@ -38,7 +38,9 @@ SOURCES += main.cpp\
     view/colormaptab.cpp \
     colormaps/grayscalecolormap.cpp \
     colormaps/heatcolormap.cpp \
-    colormaps/colormapfactory.cpp
+    colormaps/colormapfactory.cpp \
+    view/floatslider.cpp \
+    view/intslider.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -56,15 +58,14 @@ HEADERS  += main.ih\
     settings/canvass.h \
     settings/visualizations.h \
     settings/settings.h \
-    view/colormaptab.h \
-    colormaps/grayscalecolormap.h \
-    colormaps/heatcolormap.h \
-    colormaps/colormapfactory.h
+    view/colormaptab.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
     view/simulationsettingpane.ui \
-    view/colormaptab.ui
+    view/colormaptab.ui \
+    view/floatslider.ui \
+    view/intslider.ui
 
 RESOURCES += \
     shaders.qrc

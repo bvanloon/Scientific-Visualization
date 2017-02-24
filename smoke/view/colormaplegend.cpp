@@ -9,6 +9,7 @@
 #include "ui_colormaplegend.h"
 #include "utilities.h"
 #include "colormaps/colormapfactory.h"
+#include "settings/settings.h"
 
 
 const int ColorMapLegend::colorMapImageWidth = 10;
@@ -22,8 +23,10 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     colorMap(ColorMapFactory::get()->createColorMap(ColorMapFactory::colorMaps::grayScale,256)),
     colorBar(0, 0, colorMapImageWidth, 524),
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
-    minimumValue(0),
-    maximumValue(20)
+    minimumValue(Settings::defaults::simulation::valueRangeMin),
+    maximumValue(Settings::defaults::simulation::valueRangeMax),
+    minimumFactor(Settings::defaults::visualization::colormap::clampMin),
+    maximumFactor(Settings::defaults::visualization::colormap::clampMax)
 {
     ui->setupUi(this);
 }
@@ -51,8 +54,8 @@ void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
 
 void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
 {
-    this->minimumValue = minimum;
-    this->maximumValue = maximum;
+    this->minimumFactor = minimum;
+    this->maximumFactor = maximum;
     update();
 }
 
@@ -89,17 +92,24 @@ void ColorMapLegend::drawTicksAndLabels()
     float colorBoxHeight = colorBar.height() / (float) colorMap->getNumColors();
     float colorBoxesPerTick = colorMap->getNumColors() / (float) (numberOfTicks - 1);
 
+    float minimumLabel = mapToRange(minimumFactor, 0.0f, 1.0f,
+                                    minimumValue, maximumValue);
+    float maximumLabel = mapToRange(maximumFactor, 0.0f, 1.0f,
+                                    minimumValue, maximumValue);
+
     float value, y, currentColorBox = 0;
     for(int currentTickNumber = 0; currentTickNumber < (numberOfTicks - 1); currentTickNumber++)
     {
         y = colorBar.top() + colorBoxHeight * round(currentColorBox);
 
-        value = mapToRange(y, (float) colorBar.top(), (float) colorBar.bottom(), minimumValue, maximumValue);
+        value = mapToRange(y,
+                           (float) colorBar.top(), (float) colorBar.bottom(),
+                           minimumLabel, maximumLabel);
         drawTickandLabel(QPointF(0, y), value);
 
         currentColorBox += colorBoxesPerTick;
     }
-    drawTickandLabel(QPointF(0, colorBar.bottom()), maximumValue);
+    drawTickandLabel(QPointF(0, colorBar.bottom()), maximumLabel);
 }
 
 void ColorMapLegend::drawTickandLabel(QPointF left, float value)
@@ -114,6 +124,6 @@ void ColorMapLegend::drawTickandLabel(QPointF left, float value)
 void ColorMapLegend::drawLabel(QPointF left, float labelValue)
 {
     QPainter painter(this);
-    QString valueStr = QString().setNum(labelValue, 'g', 2);
+    QString valueStr = QString().setNum(labelValue, 'f', 3);
     painter.drawText(left + textOffset, valueStr);
 }
