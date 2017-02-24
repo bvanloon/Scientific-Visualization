@@ -14,14 +14,14 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <item row="3" column="0">
+   <item row="4" column="0">
     <widget class="QCheckBox" name="clampingCheckBox">
      <property name="text">
       <string>Clamping</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="5" column="0">
     <widget class="QLabel" name="clampingMinimumLabel">
      <property name="minimumSize">
       <size>
@@ -37,10 +37,10 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
+   <item row="5" column="1">
     <widget class="FloatSlider" name="clampingMinimumSlider" native="true"/>
    </item>
-   <item row="5" column="0">
+   <item row="6" column="0">
     <widget class="QLabel" name="clampingMaximumLabel">
      <property name="minimumSize">
       <size>
@@ -56,7 +56,7 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
+   <item row="6" column="1">
     <widget class="FloatSlider" name="clampingMaximumSlider" native="true">
      <property name="minimumSize">
       <size>
@@ -66,7 +66,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="3" column="0">
     <widget class="QLabel" name="numColorsLabel">
      <property name="minimumSize">
       <size>
@@ -79,7 +79,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="3" column="1">
     <widget class="IntSlider" name="numColorsSlider" native="true">
      <property name="minimumSize">
       <size>
@@ -98,6 +98,16 @@
    </item>
    <item row="0" column="1">
     <widget class="QComboBox" name="colormapSelector"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="variableSelectorLabel">
+     <property name="text">
+      <string>Variable</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="variableSelector"/>
    </item>
   </layout>
  </widget>
