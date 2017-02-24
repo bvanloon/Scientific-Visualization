@@ -58,7 +58,9 @@ HEADERS  += main.ih\
     settings/canvass.h \
     settings/visualizations.h \
     settings/settings.h \
-    view/colormaptab.h
+    view/colormaptab.h \
+    view/floatslider.h \
+    view/intslider.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
