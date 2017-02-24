@@ -17,14 +17,15 @@ namespace Settings {
             static const float valueRangeMax = 20.0f;
         }
         namespace visualization {
-            static const float clampStart = 0.0f;
-            static const float clampEnd = 1.0f;
-            static const bool clampingOn = false;
-            static const float clampEpsilon = 0.01;
             namespace colormap {
-                static int numColors = 256;
-                static int minNumColors = 2;
-                static int maxNumColors = 256;
+                static const float clampMin = 0.0f;
+                static const float clampMax = 1.0f;
+                static const bool clampingOn = false;
+                static const float clampEpsilon = 0.01;
+
+                static const int numColors = 256;
+                static const int minNumColors = 2;
+                static const int maxNumColors = 256;
             }
         }
     }

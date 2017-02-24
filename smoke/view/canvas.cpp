@@ -90,8 +90,8 @@ void Canvas::initializeUniforms()
 void Canvas::initializeColorMapInfo()
 {
     setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
-    setColorMapClampRange(Settings::defaults::visualization::clampStart, Settings::defaults::visualization::clampEnd);
-    setColorMapClampingTo(Settings::defaults::visualization::clampingOn);
+    setColorMapClampRange(Settings::defaults::visualization::colormap::clampMin, Settings::defaults::visualization::colormap::clampMax);
+    setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
 }
 
 void Canvas::paintGL()

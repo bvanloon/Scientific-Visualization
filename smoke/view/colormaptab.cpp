@@ -30,7 +30,7 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 
 void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
     float minimum = this->ui->clampingMinimumSlider->value();
-    float maximum = qMax(value, minimum + Settings::defaults::visualization::clampEpsilon);
+    float maximum = qMax(value, minimum + Settings::defaults::visualization::colormap::clampEpsilon);
     this->ui->clampingMaximumSlider->setValue(maximum);
     emit setClampingRange(minimum, maximum);
 }
@@ -38,23 +38,23 @@ void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
 void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
 {
     float maximum = this->ui->clampingMaximumSlider->value();
-    float minimum = qMin(value, maximum + Settings::defaults::visualization::clampEpsilon);
+    float minimum = qMin(value, maximum + Settings::defaults::visualization::colormap::clampEpsilon);
     this->ui->clampingMinimumSlider->setValue(minimum);
     emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::setUItoDefaults()
 {
-    this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::clampingOn);
-    clampingUISetDisabled(!Settings::defaults::visualization::clampingOn);
+    this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::colormap::clampingOn);
+    clampingUISetDisabled(!Settings::defaults::visualization::colormap::clampingOn);
     this->ui->clampingMaximumSlider->init(
-                Settings::defaults::visualization::clampStart,
-                Settings::defaults::visualization::clampEnd,
-                Settings::defaults::visualization::clampEnd);
+                Settings::defaults::visualization::colormap::clampMin,
+                Settings::defaults::visualization::colormap::clampMax,
+                Settings::defaults::visualization::colormap::clampMax);
     this->ui->clampingMinimumSlider->init(
-                Settings::defaults::visualization::clampStart,
-                Settings::defaults::visualization::clampEnd,
-                Settings::defaults::visualization::clampStart);
+                Settings::defaults::visualization::colormap::clampMin,
+                Settings::defaults::visualization::colormap::clampMax,
+                Settings::defaults::visualization::colormap::clampMin);
     this->ui->numColorsSlider->init(
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
