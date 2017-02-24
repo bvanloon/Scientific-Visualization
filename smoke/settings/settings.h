@@ -16,7 +16,7 @@ namespace Settings {
             static const float valueRangeMin = 0.0f;
             static const float valueRangeMax = 20.0f;
 
-            static const int forceMin = 1.0;
+            static const int forceMin = 1;
             static const int forceMax = 100;
         }
         namespace visualization {
