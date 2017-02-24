@@ -9,6 +9,12 @@ class Settings::Visualization : public QObject
     Q_OBJECT
 public:
 
+    enum scalarVarible {
+        fluidDensity,
+        fluidVelocity,
+        forceFieldMagnitude
+    };
+
     static const Visualization &instance();
 
     float vectorScale;
