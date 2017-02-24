@@ -143,8 +143,8 @@ void Canvas::setColorMapValueRange(float min, float max)
 void Canvas::setColorMapClampRange(float startClamp, float endClamp)
 {
     this->shaderProgram->bind();
-    this->shaderProgram->setUniformValue("colorMapInfo.clampStart", startClamp);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampEnd", endClamp);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampMin", startClamp);
+    this->shaderProgram->setUniformValue("colorMapInfo.clampMax", endClamp);
     this->shaderProgram->release();
 }
 
