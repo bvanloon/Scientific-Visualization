@@ -16,6 +16,7 @@ IntSlider::~IntSlider()
 void IntSlider::init(int minimum, int maximum, int value)
 {
     setMinimum(minimum);
+    setMaximum(maximum);
 }
 
 void IntSlider::setMinimum(int minimum)
@@ -26,7 +27,8 @@ void IntSlider::setMinimum(int minimum)
 
 void IntSlider::setMaximum(int maximum)
 {
-
+    setLabel(ui->maximumLabel, maximum);
+    ui->slider->setMaximum(maximum);
 }
 
 void IntSlider::setValue(int value)
