@@ -2,6 +2,7 @@
 #include "ui_colormaptab.h"
 #include "settings/settings.h"
 
+
 #include <QDebug>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
@@ -59,6 +60,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
                 Settings::defaults::visualization::colormap::numColors);
+    this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
 }
 
 void ColorMapTab::setUpConnections()
@@ -76,4 +78,13 @@ void ColorMapTab::clampingUISetDisabled(bool disabled)
 
     this->ui->clampingMaximumLabel->setDisabled(disabled);
     this->ui->clampingMaximumSlider->setDisabled(disabled);
+}
+
+void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
+{
+    AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
+                static_cast<ColorMapFactory::colorMaps>(index),
+                ui->numColorsSlider->value());
+
+    emit colorMapChanged(*newColormap);
 }

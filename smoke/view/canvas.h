@@ -15,6 +15,7 @@
 #include "engines/vectorengine.h"
 #include "engines/smokeengine.h"
 #include "simulation/simulation.h"
+#include "colormaps/colormapfactory.h"
 
 
 
@@ -36,6 +37,8 @@ public slots:
     void onValueRangeChanged(float minimum, float maximum);
     void onSetClamping(bool clampingOn);
     void onsetClampingRange(float minimum, float maximum);
+    void onColorMapChanged(AbstractColorMap colormap);
+
 
 private slots:
     void idleLoop();

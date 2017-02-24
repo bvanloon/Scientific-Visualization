@@ -2,7 +2,6 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QImage>
-#include <colormaps/rainbowcolormap.h>
 #include "settings/simulations.h"
 
 Canvas::Canvas(QWidget* parent) :
@@ -44,6 +43,11 @@ void Canvas::onsetClampingRange(float minimum, float maximum)
     setColorMapClampRange(minimum, maximum);
 }
 
+void Canvas::onColorMapChanged(AbstractColorMap colormap)
+{
+    setTexture(colormap);
+}
+
 void Canvas::idleLoop()
 {
     if(!Settings::simulation().frozen)
@@ -82,13 +86,17 @@ void Canvas::initializeUniforms()
     setMVPMatrix();
 
     qDebug() << "Canvas::setUniformsToDefaults setTexture needs a default in the settings object.";
-    setTexture(RainbowColorMap(255));
+
+
+    setTexture(*ColorMapFactory::get()->createColorMap(ColorMapFactory::colorMaps::grayScale,256));
 
     initializeColorMapInfo();
 }
 
 void Canvas::initializeColorMapInfo()
 {
+    setTexture(*ColorMapFactory::get()->createColorMap(Settings::defaults::visualization::colormap::colormap,
+                                                      Settings::defaults::visualization::colormap::numColors));
     setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
     setColorMapClampRange(Settings::defaults::visualization::colormap::clampMin, Settings::defaults::visualization::colormap::clampMax);
     setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);

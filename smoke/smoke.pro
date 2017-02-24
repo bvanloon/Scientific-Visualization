@@ -36,6 +36,9 @@ SOURCES += main.cpp\
     settings/visualizations.cpp \
     settings/settings.cpp \
     view/colormaptab.cpp \
+    colormaps/grayscalecolormap.cpp \
+    colormaps/heatcolormap.cpp \
+    colormaps/colormapfactory.cpp \
     view/floatslider.cpp \
     view/intslider.cpp
 

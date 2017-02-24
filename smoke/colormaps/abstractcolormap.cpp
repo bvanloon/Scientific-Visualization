@@ -1,7 +1,7 @@
 #include "abstractcolormap.h"
 
 #include <QDebug>
-#include <QColor>
+
 
 AbstractColorMap::AbstractColorMap(int numColors):
     QImage(numColors, 1, QImage::Format_ARGB32),
