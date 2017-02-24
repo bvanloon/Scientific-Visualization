@@ -2,7 +2,7 @@
 #define GRAYSCALECOLORMAP_H
 
 #include "colormaps/abstractcolormap.h"
-#include <QRgb>
+
 
 class GrayScaleColorMap : public AbstractColorMap
 {

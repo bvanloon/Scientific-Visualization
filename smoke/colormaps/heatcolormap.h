@@ -2,7 +2,6 @@
 #define HEATCOLORMAP_H
 
 #include "colormaps/abstractcolormap.h"
-#include <QRgb>
 
 class HeatColorMap : public AbstractColorMap
 {
@@ -14,8 +13,6 @@ private:
 
     void fill();
     QRgb toHeatColor(float f);
-
-    float dx;
 };
 
 #endif // HEATCOLORMAP_H

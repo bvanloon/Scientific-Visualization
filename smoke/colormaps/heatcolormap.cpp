@@ -3,8 +3,6 @@
 #include <math.h>
 
 #include <QDebug>
-#include <QImage>
-#include <QColor>
 
 
 AbstractColorMap *HeatColorMap::Create(int numColors)

@@ -1,9 +1,5 @@
 #include "grayscalecolormap.h"
 
-#include <QDebug>
-#include <QImage>
-#include <QColor>
-
 GrayScaleColorMap::GrayScaleColorMap(int numColors):
     AbstractColorMap(numColors)
 

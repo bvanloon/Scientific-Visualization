@@ -1,10 +1,7 @@
 #include "rainbowcolormap.h"
 
 #include <math.h>
-
 #include <QDebug>
-#include <QImage>
-#include <QColor>
 
 AbstractColorMap *RainbowColorMap::Create(int numColors)
 {

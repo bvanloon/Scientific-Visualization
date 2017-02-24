@@ -2,6 +2,8 @@
 #define ABSTRACTCOLORMAP_H
 
 #include <QImage>
+#include <QColor>
+#include <QRgb>
 
 class AbstractColorMap : public QImage
 {
