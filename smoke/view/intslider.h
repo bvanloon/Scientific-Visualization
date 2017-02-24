@@ -18,9 +18,17 @@ public:
 
     void init(int minimum, int maximum, int value);
 
+    int value() const;
+
     void setMinimum(int minimum);
     void setMaximum(int maximum);
     void setValue(int value);
+
+signals:
+    void valueChanged(int value);
+
+private slots:
+    void on_slider_sliderMoved(int position);
 
 private:
     Ui::IntSlider *ui;

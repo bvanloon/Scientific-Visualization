@@ -20,6 +20,11 @@ void IntSlider::init(int minimum, int maximum, int value)
     setValue(value);
 }
 
+int IntSlider::value() const
+{
+    return ui->slider->value();
+}
+
 void IntSlider::setMinimum(int minimum)
 {
     setLabel(ui->minimumLabel, minimum);
@@ -41,4 +46,10 @@ void IntSlider::setValue(int value)
 void IntSlider::setLabel(QLabel *label, int value)
 {
     label->setText(QString::number(value, 'f', 0));
+}
+
+void IntSlider::on_slider_sliderMoved(int position)
+{
+    setValue(position);
+    emit valueChanged(position);
 }
