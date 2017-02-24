@@ -1,6 +1,7 @@
 #include "colormaptab.h"
 #include "ui_colormaptab.h"
 #include "settings/settings.h"
+#include "colormaps/colormapfactory.h"
 
 #include <QDebug>
 
@@ -59,6 +60,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
                 Settings::defaults::visualization::colormap::numColors);
+    this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
 }
 
 void ColorMapTab::setUpConnections()

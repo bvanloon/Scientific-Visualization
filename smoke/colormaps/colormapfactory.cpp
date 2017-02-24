@@ -1,7 +1,13 @@
 #include "colormapfactory.h"
 
+#include <QStringList>
+#include <QDebug>
+
+
 ColorMapFactory::ColorMapFactory()
+
 {
+
     registerColorMap(ColorMapFactory::colorMaps::rainbow, &RainbowColorMap::Create);
     registerColorMap(ColorMapFactory::colorMaps::grayScale , &GrayScaleColorMap::Create);
     registerColorMap(ColorMapFactory::colorMaps::heat, &HeatColorMap::Create);
@@ -10,6 +16,15 @@ ColorMapFactory::ColorMapFactory()
 ColorMapFactory::~ColorMapFactory()
 {
 
+}
+
+QStringList ColorMapFactory::getColorMapNames()
+{
+    QStringList colormapNamesList;
+
+   colormapNamesList << "Rainbow" << "Hot" << "Grayscale" ;
+
+    return colormapNamesList;
 }
 
 void ColorMapFactory::registerColorMap(const ColorMapFactory::colorMaps colormap, CreateColorMapFn pfnCreate)
