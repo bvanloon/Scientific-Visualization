@@ -40,8 +40,8 @@ float clampTextureCoordinates(float inputTextureCoordinate){
     float normalizedTextureCoordinate = scaleTextureCoordinates(inputTextureCoordinate);
 
     //Clamp the normalized texture coordinate
-    normalizedTextureCoordinate = max(normalizedTextureCoordinate, colorMapInfo.clampStart);
-    normalizedTextureCoordinate = min(normalizedTextureCoordinate, colorMapInfo.clampEnd);
+    normalizedTextureCoordinate = clamp(normalizedTextureCoordinate,
+                                        colorMapInfo.clampStart, colorMapInfo.clampEnd);
 
     //Map the range [clampStart, clampEnd] to [0.0, 1.0]
     return mapToRange(normalizedTextureCoordinate,
