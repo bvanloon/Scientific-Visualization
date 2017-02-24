@@ -129,11 +129,7 @@ void ColorMapLegend::drawLabel(QPointF left, float labelValue)
     painter.drawText(left + textOffset, valueStr);
 }
 
-void ColorMapLegend::setColorMapImage(AbstractColorMap colorMap)
-{
-}
-
-void ColorMapLegend::setNumberOfColors(int numberOfColors)
+void ColorMapLegend::setColorMap(AbstractColorMap colorMapImage)
 {
 
 }
