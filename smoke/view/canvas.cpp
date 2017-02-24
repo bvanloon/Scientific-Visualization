@@ -9,9 +9,6 @@ Canvas::Canvas(QWidget* parent) :
     texture(0),
     timer(new QTimer(this))
 {
-    //Ensure that the mouse is always tracked, even if we didn't click first.
-    this->setMouseTracking(true);
-
     modelViewMatrix.setToIdentity();
     this->initiateIdleLoop();
 }
