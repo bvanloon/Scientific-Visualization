@@ -42,7 +42,7 @@ void SimulationRealization::FFT(int direction,void* vx)
 }
 
 
-int SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePosition )
+void SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePosition )
 {
     QPointF mouseDiff = QPointF(newMousePosition - oldMousePosition);
     double length = sqrt(QPointF::dotProduct(mouseDiff, mouseDiff));
