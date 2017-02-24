@@ -19,9 +19,9 @@ HeatColorMap::HeatColorMap(int numColors):
 
 void HeatColorMap::fill()
 {
-    float stepSize = 1.0/(numColors - 1);
+    float stepSize = 1.0 / (numColors - 1);
     float f = 0;
-    for(int i = 0; i < numColors; f+=stepSize, i++){
+    for(int i = 0; i < numColors; f+= stepSize, i++){
         setPixel(i, 0, toHeatColor(f));
     }
 }

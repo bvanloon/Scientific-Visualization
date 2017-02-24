@@ -18,9 +18,9 @@ RainbowColorMap::RainbowColorMap(int numColors, float dx):
 
 void RainbowColorMap::fill()
 {
-    float stepSize = 1.0/(numColors - 1);
+    float stepSize = 1.0 / (numColors - 1);
     float f = 0;
-    for(int i = 0; i < numColors; f+=stepSize, i++){
+    for(int i = 0; i < numColors; f+= stepSize, i++){
         setPixel(i, 0, toRainbowColor(f));
     }
 }
