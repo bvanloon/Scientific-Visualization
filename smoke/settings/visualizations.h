@@ -3,13 +3,14 @@
 
 #include <QObject>
 #include "settings.h"
+#include "simulation/simulation.h"
 
 class Settings::Visualization : public QObject
 {
     Q_OBJECT
 public:
 
-    enum scalarVarible {
+    enum ScalarVarible {
         fluidDensity,
         fluidVelocity,
         forceFieldMagnitude
@@ -17,6 +18,7 @@ public:
 
     static const Visualization &instance();
 
+    ::Simulation::textureCoordinateGetter textureGetter;
     float vectorScale;
 
 signals:

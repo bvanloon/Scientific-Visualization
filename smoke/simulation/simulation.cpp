@@ -80,7 +80,7 @@ QVector<QVector3D> Simulation::getGridTriangulation()
     return gridTriangles;
 }
 
-QVector<float> Simulation::getTextureCoordinates()
+QVector<float> Simulation::getTextureCoordinatesSmokeDensity()
 {
     QVector<float> textureCoordinates;
 
@@ -109,7 +109,19 @@ QVector<float> Simulation::getTextureCoordinates()
     return textureCoordinates;
 }
 
+QVector<float> Simulation::getTextureCoordinatesVelocity()
+{
+    QVector<float> textureCoordinates;
+    qDebug() << "QVector<float> Simulation::getTextureCoordinatesVelocity";
+    return textureCoordinates;
+}
 
+QVector<float> Simulation::getTextureCoordinatesForceField()
+{
+    QVector<float> textureCoordinates;
+    qDebug() << "QVector<float> Simulation::getTextureCoordinatesForceField";
+    return textureCoordinates;
+}
 
 void Simulation::step()
 {

@@ -18,7 +18,11 @@ public:
 
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
-    QVector<float> getTextureCoordinates();
+    QVector<float> getTextureCoordinatesSmokeDensity();
+    QVector<float> getTextureCoordinatesVelocity();
+    QVector<float> getTextureCoordinatesForceField();
+
+    typedef QVector<float> (Simulation::*textureCoordinateGetter)(void);
 
     SimulationRealization *realization;
 

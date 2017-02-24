@@ -3,8 +3,11 @@
 
 Settings::Visualization::Visualization(QObject *parent):
     QObject(parent),
+    textureGetter(&::Simulation::getTextureCoordinatesForceField),
     vectorScale(1000)
-{}
+{
+
+}
 
 const Settings::Visualization &Settings::Visualization::instance()
 {

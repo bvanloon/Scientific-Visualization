@@ -7,6 +7,8 @@
 #include <QOpenGLVertexArrayObject>
 
 #include "simulation/simulation.h"
+#include "settings/settings.h"
+#include "settings/visualizations.h"
 
 class SmokeEngine : protected QOpenGLFunctions
 {
