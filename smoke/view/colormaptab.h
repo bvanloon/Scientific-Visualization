@@ -27,7 +27,7 @@ private slots:
     void on_clampingCheckBox_clicked(bool checked);
     void on_clampingMaximumSlider_valueChanged(float value);
     void on_clampingMinimumSlider_valueChanged(float value);
-
+    void on_numColorsSlider_valueChanged(int value);
     void on_colormapSelector_currentIndexChanged(int index);
 
 private:
