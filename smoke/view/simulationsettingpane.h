@@ -25,6 +25,7 @@ private:
     Ui::SimulationSettingPane *ui;
 
     void setUItoDefaults();
+    void setUpConnections();
 };
 
 #endif // SIMULATIONSETTINGPANE_H

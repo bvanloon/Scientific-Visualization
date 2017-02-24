@@ -24,5 +24,13 @@ void SimulationSettingPane::on_forceSlider_valueChanged(int value)
 
 void SimulationSettingPane::setUItoDefaults()
 {
-    this->ui->forceSlider->setValue(Settings::simulation().force);
+    ui->forceSlider->init(Settings::defaults::simulation::valueRangeMin,
+                          Settings::defaults::simulation::valueRangeMax,
+                          Settings::simulation().force);
+}
+
+void SimulationSettingPane::setUpConnections()
+{
+    connect(this->ui->forceSlider, SIGNAL(valueChanged(int)),
+            this, SLOT(on_forceSlider_valueChanged(int)));
 }
