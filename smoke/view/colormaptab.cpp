@@ -44,6 +44,15 @@ void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
     emit setClampingRange(minimum, maximum);
 }
 
+void ColorMapTab::on_numColorsSlider_valueChanged(int value)
+{
+    AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
+                static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
+                value);
+
+    emit colorMapChanged(*newColormap);
+}
+
 void ColorMapTab::setUItoDefaults()
 {
     this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::colormap::clampingOn);
@@ -69,6 +78,8 @@ void ColorMapTab::setUpConnections()
             this, SLOT(on_clampingMinimumSlider_valueChanged(float)));
     connect(this->ui->clampingMaximumSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
+    connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
+            this, SLOT(on_numColorsSlider_valueChanged(int)));
 }
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)
