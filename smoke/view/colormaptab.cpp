@@ -27,11 +27,13 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 {
     clampingUISetDisabled(!checked);
     emit setClamping(checked);
-    qDebug() << "ColorMapTab::on_clampingCheckBox_clicked: emit the clamping range.";
+    emit setClampingRange(this->ui->clampingMinimumSlider->value(),
+                              this->ui->clampingMaximumSlider->value());
 }
 
 void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
-    qDebug() << "ColorMapTab::on_clampingMaximumSlider_valueChanged " << value;
+    emit setClampingRange(
+                (float) this->ui->clampingMinimumSlider->value(), value);
 }
 
 

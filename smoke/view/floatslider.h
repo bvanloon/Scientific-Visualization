@@ -17,6 +17,9 @@ public:
     ~FloatSlider();
 
     void init(float minimum, float maximum, float value);
+
+    float value() const;
+
     void setMinimum(float minimum);
     void setMaximum(float maximum);
     void setRange(float minimum, float maximum);

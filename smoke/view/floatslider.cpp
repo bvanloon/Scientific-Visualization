@@ -23,6 +23,15 @@ void FloatSlider::init(float minimum, float maximum, float value)
     setValue(value);
 }
 
+float FloatSlider::value() const
+{
+    int position = this->ui->slider->value();
+    float value = mapToRange((float) position,
+                             (float) this->ui->slider->minimum(), (float) this->ui->slider->maximum(),
+                             this->minimum, this->maximum);
+    return value;
+}
+
 void FloatSlider::setMinimum(float minimum)
 {
     this->minimum = minimum;

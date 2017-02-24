@@ -17,6 +17,7 @@ public:
 
 signals:
     void setClamping(bool clampingOn);
+    void setClampingRange(float minimum, float maximum);
 
 public slots:
     void onValueRangeChanged(float minimum, float maximum);
