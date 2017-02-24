@@ -17,6 +17,7 @@ void IntSlider::init(int minimum, int maximum, int value)
 {
     setMinimum(minimum);
     setMaximum(maximum);
+    setValue(value);
 }
 
 void IntSlider::setMinimum(int minimum)
@@ -33,7 +34,8 @@ void IntSlider::setMaximum(int maximum)
 
 void IntSlider::setValue(int value)
 {
-
+    setLabel(ui->valueLabel, value);
+    ui->slider->setValue(value);
 }
 
 void IntSlider::setLabel(QLabel *label, int value)
