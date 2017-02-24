@@ -31,13 +31,16 @@ protected:
 private:
     Ui::ColorMapLegend *ui;
 
-    AbstractColorMap* colorMap;
+    AbstractColorMap colorMap;
+    float numberOfColors;
 
     QRect colorBar;
 
     int numberOfTicks;
+
     float minimumValue;
     float maximumValue;
+
     float minimumFactor;
     float maximumFactor;
 
@@ -50,6 +53,9 @@ private:
     void drawTicksAndLabels();
     void drawTickandLabel(QPointF left, float value);
     void drawLabel(QPointF left, float labelValue);
+
+    void setColorMapImage(AbstractColorMap colorMap);
+    void setNumberOfColors(int numberOfColors);
 
     int getDescriptionLabelHeight();
 };
