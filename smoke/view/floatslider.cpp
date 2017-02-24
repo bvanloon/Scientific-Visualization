@@ -61,6 +61,14 @@ void FloatSlider::setValue(float value)
     this->ui->slider->setValue(position);
 }
 
+void FloatSlider::setDisabled(bool disabled)
+{
+    this->ui->minimumLabel->setDisabled(disabled);
+    this->ui->maximumLabel->setDisabled(disabled);
+    this->ui->valueLabel->setDisabled(disabled);
+    this->ui->slider->setDisabled(disabled);
+}
+
 void FloatSlider::on_slider_sliderMoved(int position)
 {
     float value = mapToRange((float) position,

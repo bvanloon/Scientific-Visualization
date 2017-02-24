@@ -24,6 +24,7 @@ public:
     void setMaximum(float maximum);
     void setRange(float minimum, float maximum);
     void setValue(float value);
+    void setDisabled(bool disabled);
 
 signals:
     void valueChanged(float value);
