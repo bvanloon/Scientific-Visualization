@@ -24,8 +24,8 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     numberOfTicks(std::min(colorMap->getNumColors(), maximumNumberOfTicks)),
     minimumValue(Settings::defaults::simulation::valueRangeMin),
     maximumValue(Settings::defaults::simulation::valueRangeMax),
-    minimumFactor(Settings::defaults::visualization::clampStart),
-    maximumFactor(Settings::defaults::visualization::clampEnd)
+    minimumFactor(Settings::defaults::visualization::colormap::clampMin),
+    maximumFactor(Settings::defaults::visualization::colormap::clampMax)
 {
     ui->setupUi(this);
 }
