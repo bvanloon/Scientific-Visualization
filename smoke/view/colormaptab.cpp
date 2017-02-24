@@ -1,6 +1,7 @@
 #include "colormaptab.h"
 #include "ui_colormaptab.h"
 #include "settings/settings.h"
+
 #include <QDebug>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
@@ -32,7 +33,7 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 
 void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
     float minimum = this->ui->clampingMinimumSlider->value();
-    float maximum = qMax(value, minimum);
+    float maximum = qMax(value, minimum + Settings::defaults::visualization::clampEpsilon);
     this->ui->clampingMaximumSlider->setValue(maximum);
     emit setClampingRange(minimum, maximum);
 }
@@ -40,7 +41,7 @@ void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
 void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
 {
     float maximum = this->ui->clampingMaximumSlider->value();
-    float minimum = qMin(value, maximum);
+    float minimum = qMin(value, maximum + Settings::defaults::visualization::clampEpsilon);
     this->ui->clampingMinimumSlider->setValue(minimum);
     emit setClampingRange(minimum, maximum);
 }
