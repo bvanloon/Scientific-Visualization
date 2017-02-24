@@ -113,6 +113,6 @@ void ColorMapLegend::drawTickandLabel(QPointF left, float value)
 void ColorMapLegend::drawLabel(QPointF left, float labelValue)
 {
     QPainter painter(this);
-    QString valueStr = QString().setNum(labelValue, 'g', 2);
+    QString valueStr = QString().setNum(labelValue, 'f', 3);
     painter.drawText(left + textOffset, valueStr);
 }
