@@ -3,6 +3,7 @@
 #include <QResizeEvent>
 #include <QWidget>
 #include <QRect>
+#include <QImage>
 
 #include <colormaps/abstractcolormap.h>
 #include <colormaps/rainbowcolormap.h>
@@ -31,7 +32,7 @@ protected:
 private:
     Ui::ColorMapLegend *ui;
 
-    AbstractColorMap colorMap;
+    QImage colorMap;
     float numberOfColors;
 
     QRect colorBar;
