@@ -20,6 +20,7 @@ namespace Settings {
             static const float clampStart = 0.0f;
             static const float clampEnd = 1.0f;
             static const bool clampingOn = false;
+            static const float clampEpsilon = 0.01;
         }
     }
 }
