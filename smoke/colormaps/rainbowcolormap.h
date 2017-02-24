@@ -14,7 +14,7 @@ private:
     RainbowColorMap(int numColors, float dx = 0.8);
 
     void fill();
-    QRgb toRainbowColor(float i);
+    QColor toRainbowColor(float i);
 
 };
 

@@ -14,6 +14,8 @@ public:
 
 protected:
     int numColors;
+
+    QRgb setSaturation(QColor color, double saturation);
 };
 
 #endif // ABSTRACTCOLORMAP_H
