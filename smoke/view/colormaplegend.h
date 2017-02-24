@@ -21,7 +21,7 @@ public:
     ~ColorMapLegend();
 
 public slots:
-    void onColorMapChanged(AbstractColorMap colorMap);
+    void onColorMapChanged(AbstractColorMap colorMapImage);
     void onValueRangeChanged(float minimum, float maximum);
     void onClampRangeChanged(float minimum, float maximum);
 
@@ -32,7 +32,7 @@ protected:
 private:
     Ui::ColorMapLegend *ui;
 
-    QImage colorMap;
+    QImage colorMapImage;
     float numberOfColors;
 
     QRect colorBar;
@@ -55,7 +55,7 @@ private:
     void drawTickandLabel(QPointF left, float value);
     void drawLabel(QPointF left, float labelValue);
 
-    void setColorMapImage(AbstractColorMap colorMap);
+    void setColorMapImage(AbstractColorMap colorMapImage);
     void setNumberOfColors(int numberOfColors);
 
     int getDescriptionLabelHeight();

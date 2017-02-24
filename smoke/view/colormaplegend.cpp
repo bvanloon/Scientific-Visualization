@@ -27,7 +27,7 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     maximumFactor(Settings::defaults::visualization::colormap::clampMax)
 {
     ui->setupUi(this);
-    colorMap = *(ColorMapFactory::get()->createColorMap(
+    colorMapImage = *(ColorMapFactory::get()->createColorMap(
                 Settings::defaults::visualization::colormap::colormap,
                 Settings::defaults::visualization::colormap::numColors));
     numberOfColors = Settings::defaults::visualization::colormap::numColors;
@@ -77,7 +77,7 @@ void ColorMapLegend::drawColorMapImage()
     QPainter painter(this);
     QTransform rotating;
     rotating.rotate(90);
-    QImage rotatedImage = colorMap.transformed(rotating);
+    QImage rotatedImage = colorMapImage.transformed(rotating);
 
     painter.drawImage(colorBar, rotatedImage);
 }
