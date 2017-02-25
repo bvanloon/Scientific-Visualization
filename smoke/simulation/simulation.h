@@ -38,7 +38,9 @@ private:
 
     int to1DIndex(int i, int j);
 
+    QVector2D getFluidVelocityAt(int i, int j);
     QVector2D getFluidVelocityAt(int idx);
+
 };
 
 #endif // SMOKE_H
