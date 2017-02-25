@@ -10,6 +10,7 @@
 #include "utilities.h"
 #include "colormaps/colormapfactory.h"
 #include "settings/settings.h"
+#include "settings/visualizations.h"
 
 
 const int ColorMapLegend::colorMapImageWidth = 10;
@@ -55,6 +56,16 @@ void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
     this->minimumFactor = minimum;
     this->maximumFactor = maximum;
     update();
+}
+
+void ColorMapLegend::onForceChanged(float force)
+{
+    qDebug() << "ColorMapLegend::onForceChanged(float force) " << force;
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        this->minimumValue = 0.0f;
+        this->maximumValue = force;
+        update();
+    }
 }
 
 void ColorMapLegend::resizeEvent(QResizeEvent *event)

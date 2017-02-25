@@ -68,6 +68,8 @@ void MainWindow::connectColorMapLegendAndSettings()
 
     connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
             this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            this->colorMapLegend, SLOT(onForceChanged(float)));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
