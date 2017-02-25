@@ -123,10 +123,10 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * Settings::simulation().dimension) + i;
-            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
-            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
-            idx3 = (j * Settings::simulation().dimension) + i + 1;
+            idx0 = to1DIndex(i, j);
+            idx1 = to1DIndex(i, j + 1);
+            idx2 = to1DIndex(i + 1, j + 1);
+            idx3 = to1DIndex(i + 1, j);
 
             vec0 = getFluidVelocityAt(idx0);
             vec1 = getFluidVelocityAt(idx1);
@@ -164,6 +164,16 @@ void Simulation::onMouseMoved(QPoint newPosition)
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;
+}
+
+int Simulation::to1DIndex(int i, int j)
+{
+    return (j * Settings::simulation().dimension) + i;
+}
+
+QVector2D Simulation::getFluidVelocityAt(int i, int)
+{
+
 }
 
 QVector2D Simulation::getFluidVelocityAt(int idx)
