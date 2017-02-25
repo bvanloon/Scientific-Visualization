@@ -69,6 +69,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::clampMin);
 
     this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
+    this->ui->colormapSelector->setCurrentIndex(Settings::defaults::visualization::colormap::colormap);
 
     this->ui->numColorsSlider->init(
                 Settings::defaults::visualization::colormap::minNumColors,
