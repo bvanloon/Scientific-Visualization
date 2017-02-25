@@ -1,5 +1,5 @@
-#include "simulationsettingpane.h"
-#include "ui_simulationsettingpane.h"
+#include "simulationtab.h"
+#include "ui_simulationtab.h"
 #include "settings/simulationsettings.h"
 #include "settings/settings.h"
 #include <QDebug>

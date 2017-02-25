@@ -6,7 +6,7 @@
 #include <view/canvas.h>
 #include "simulation/simulation.h"
 #include "colormaplegend.h"
-#include "view/simulationsettingpane.h"
+#include "view/simulationtab.h"
 #include "view/colormaptab.h"
 
 namespace Ui {
