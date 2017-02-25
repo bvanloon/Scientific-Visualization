@@ -77,6 +77,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::numColors);
 
     this->ui->variableSelector->addItems(Settings::Visualization::getScalarVariableNames());
+    this->ui->variableSelector->setCurrentIndex(Settings::visualization().scalar);
 }
 
 void ColorMapTab::setUpConnections()
