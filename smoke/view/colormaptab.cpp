@@ -40,7 +40,7 @@ void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
 void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
 {
     float maximum = this->ui->clampingMaximumSlider->value();
-    float minimum = qMin(value, maximum + Settings::defaults::visualization::colormap::clampEpsilon);
+    float minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
     this->ui->clampingMinimumSlider->setValue(minimum);
     emit setClampingRange(minimum, maximum);
 }
