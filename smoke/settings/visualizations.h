@@ -21,6 +21,8 @@ public:
     static QStringList getScalarVariableNames();
 
     ::Simulation::textureCoordinateGetter textureGetter;
+    ScalarVariable scalar;
+
     float vectorScale;
 
 signals:

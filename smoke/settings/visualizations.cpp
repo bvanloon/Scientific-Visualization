@@ -5,20 +5,22 @@
 Settings::Visualization::Visualization(QObject *parent):
     QObject(parent),
     textureGetter(&::Simulation::getTexCoordFluidDensity),
+    scalar(ScalarVariable::fluidDensity),
     vectorScale(1000)
 {
-
 }
 
 void Settings::Visualization::setScalarVariableToFluidDensity()
 {
     this->textureGetter = &::Simulation::getTexCoordFluidDensity;
+    this->scalar = Settings::Visualization::ScalarVariable::fluidDensity;
     emit valueRangeChanged(0.0f, Settings::simulation().force);
 }
 
 void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 {
     this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
+    this->scalar = Settings::Visualization::ScalarVariable::fluidVelocityMagnitude;
     emit valueRangeChanged(Settings::simulation().fluidVelocityMagnitudeMinimum,
                            Settings::simulation().fluidVelocityMagnitudeMaximum);
 }
@@ -26,6 +28,7 @@ void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
 {
     this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
+    this->scalar = Settings::Visualization::ScalarVariable::forceFieldMagnitude;
     emit valueRangeChanged(Settings::simulation().forceFieldMagnitudeMinimum,
                            Settings::simulation().forceFieldMagnitudeMaximum);
 }
