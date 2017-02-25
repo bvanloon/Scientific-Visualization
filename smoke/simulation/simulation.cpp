@@ -225,5 +225,25 @@ float Simulation::getFluidVelocityMagnitudeAt(int idx)
     return getFluidVelocityAt(idx).length();
 }
 
+QVector2D Simulation::getForceAt(int i, int j)
+{
+
+}
+
+QVector2D Simulation::getForceAt(int idx)
+{
+
+}
+
+float Simulation::getForceMagnitudeAt(int i, int j)
+{
+
+}
+
+float Simulation::getForceMagnitudeAt(int idx)
+{
+
+}
+
 
 

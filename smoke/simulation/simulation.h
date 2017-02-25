@@ -45,6 +45,11 @@ private:
     float getFluidVelocityMagnitudeAt(int i, int j);
     float getFluidVelocityMagnitudeAt(int idx);
 
+    QVector2D getForceAt(int i, int j);
+    QVector2D getForceAt(int idx);
+
+    float getForceMagnitudeAt(int i, int j);
+    float getForceMagnitudeAt(int idx);
 };
 
 #endif // SMOKE_H
