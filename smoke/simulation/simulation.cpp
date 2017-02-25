@@ -128,14 +128,10 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
             idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
             idx3 = (j * Settings::simulation().dimension) + i + 1;
 
-            vec0 = QVector2D(this->realization->vx[idx0],
-                             this->realization->vy[idx0]);
-            vec1 = QVector2D(this->realization->vx[idx1],
-                             this->realization->vy[idx1]);
-            vec2 = QVector2D(this->realization->vx[idx2],
-                             this->realization->vy[idx2]);
-            vec3 = QVector2D(this->realization->vx[idx3],
-                             this->realization->vy[idx3]);
+            vec0 = getFluidVelocityAt(idx0);
+            vec1 = getFluidVelocityAt(idx1);
+            vec2 = getFluidVelocityAt(idx2);
+            vec3 = getFluidVelocityAt(idx3);
 
             textureCoordinates.append(vec0.length());
             textureCoordinates.append(vec1.length());
@@ -168,6 +164,12 @@ void Simulation::onMouseMoved(QPoint newPosition)
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;
+}
+
+QVector2D Simulation::getFluidVelocityAt(int idx)
+{
+    return QVector2D(this->realization->vx[idx],
+                     this->realization->vy[idx]);
 }
 
 
