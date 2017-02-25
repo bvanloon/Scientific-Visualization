@@ -153,17 +153,13 @@ QVector<float> Simulation::getTexCoordForceFieldMagnitude()
             idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
             idx3 = (j * Settings::simulation().dimension) + i + 1;
 
-            force0 = QVector2D(this->realization->fx[idx0],
-                               this->realization->fy[idx0]);
+            force0 = getForceAt(idx0);
 
-            force1 = QVector2D(this->realization->fx[idx1],
-                               this->realization->fy[idx1]);
+            force1 = getForceAt(idx1);
 
-            force2 = QVector2D(this->realization->fx[idx2],
-                               this->realization->fy[idx2]);
+            force2 = getForceAt(idx2);
 
-            force3 = QVector2D(this->realization->fx[idx3],
-                               this->realization->fy[idx3]);
+            force3 = getForceAt(idx3);
 
             textureCoordinates.append(force0.length());
             textureCoordinates.append(force1.length());
@@ -232,7 +228,8 @@ QVector2D Simulation::getForceAt(int i, int j)
 
 QVector2D Simulation::getForceAt(int idx)
 {
-
+    return QVector2D(this->realization->fx[idx],
+                     this->realization->fy[idx]);
 }
 
 float Simulation::getForceMagnitudeAt(int i, int j)
