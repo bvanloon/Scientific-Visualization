@@ -24,6 +24,7 @@ public:
     float vectorScale;
 
 signals:
+    void valueRangeChanged(float minimum, float maximum);
 
 public slots:
     void onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable);
@@ -34,7 +35,9 @@ private:
     Visualization(Visualization const&) = delete;
     void operator=(Visualization const&) = delete;
 
-    void setTextureGetter(Settings::Visualization::ScalarVariable scalar);
+    void setScalarVariableToFluidDensity();
+    void setScalarVariableToFluidVelocityMagnitude();
+    void setScalarVariableToForceFieldMagnitude();
 };
 
 #endif // VISUALIZATIONS_H

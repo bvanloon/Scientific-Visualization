@@ -1,5 +1,6 @@
 #include "visualizations.h"
 #include <QDebug>
+#include "settings/simulations.h"
 
 Settings::Visualization::Visualization(QObject *parent):
     QObject(parent),
@@ -9,23 +10,22 @@ Settings::Visualization::Visualization(QObject *parent):
 
 }
 
-void Settings::Visualization::setTextureGetter(Settings::Visualization::ScalarVariable scalar)
+void Settings::Visualization::setScalarVariableToFluidDensity()
 {
-    switch (scalar) {
-    case fluidDensity:
-        this->textureGetter = &::Simulation::getTexCoordFluidDensity;
-        break;
-    case fluidVelocity:
-        this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
-        break;
-    case forceFieldMagnitude:
-        this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
-        break;
-    default:
-        qDebug() << "Invalid scalar variable, going with the default: fluidDensity.";
-        this->textureGetter = &::Simulation::getTexCoordFluidDensity;
-        break;
-    }
+    this->textureGetter = &::Simulation::getTexCoordFluidDensity;
+    emit valueRangeChanged(0.0f, Settings::simulation().force);
+}
+
+void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
+{
+    this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
+    emit valueRangeChanged(0.0f, 0.1f);
+}
+
+void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
+{
+    this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
+    emit valueRangeChanged(0.0f, 1.0f);
 }
 
 const Settings::Visualization &Settings::Visualization::instance()
@@ -45,6 +45,19 @@ QStringList Settings::Visualization::getScalarVariableNames()
 
 void Settings::Visualization::onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable)
 {
-    qDebug() << "Settings::Visualization::onScalarVariableChanged";
-    setTextureGetter(scalarVariable);
+    switch (scalarVariable) {
+    case fluidDensity:
+        setScalarVariableToFluidDensity();
+        break;
+    case fluidVelocityMagnitude:
+        setScalarVariableToFluidVelocityMagnitude();
+        break;
+    case forceFieldMagnitude:
+        setScalarVariableToForceFieldMagnitude();
+        break;
+    default:
+        qDebug() << "Invalid scalar variable, going with the default: fluidDensity.";
+        setScalarVariableToFluidDensity();
+        break;
+    }
 }

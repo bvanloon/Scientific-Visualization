@@ -48,6 +48,9 @@ void MainWindow::connectCanvasAndSettings()
     connect(&Settings::simulation(),SIGNAL(valueRangeChanged(float,float)),
             this->canvas, SLOT(onValueRangeChanged(float,float)));
 
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->canvas, SLOT(onValueRangeChanged(float,float)));
+
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::canvas(), SLOT(onWindowResized(int, int)));
 
@@ -58,6 +61,9 @@ void MainWindow::connectCanvasAndSettings()
 void MainWindow::connectColorMapLegendAndSettings()
 {
     connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
+            this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
+
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
             this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
 }
 
