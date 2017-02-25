@@ -8,6 +8,7 @@
 #include "colormaplegend.h"
 #include "view/simulationtab.h"
 #include "view/colormaptab.h"
+#include "keyboardhandler.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +30,9 @@ private:
     ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationTab;
     ColorMapTab *colorMapTab;
+    KeyboardHandler* keyboardHandler;
+
+    void setUpConnections();
 
     void connectCanvasAndSimulation();
     void connectCanvasAndSettings();
@@ -38,9 +42,12 @@ private:
 
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
+    void connectSimulationTabAndKeyboardHandler();
 
     void connectColorMapTabAndColorMapLegend();
     void connectColorMapTabAndSettings();
+
+    void connectKeyBoardHandlerAndSimulation();
 };
 
 #endif // MAINWINDOW_H

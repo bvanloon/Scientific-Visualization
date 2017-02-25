@@ -7,7 +7,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    keyboardHandler(new KeyboardHandler(this))
 {
     ui->setupUi(this);
 
@@ -15,27 +16,40 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
+
     this->colorMapLegend = ui->colorMapLegend;
+
     this->simulationTab = ui->simulationTab;
+
     this->colorMapTab = ui->colormapTab;
 
-    connectCanvasAndSimulation();
-    connectCanvasAndSettings();
-    connectCanvasAndColorMapTab();
+    this->installEventFilter(this->keyboardHandler);
 
-    connectSimulationTabAndSettings();
-    connectSimulationTabAndSimulation();
-
-    connectColorMapTabAndColorMapLegend();
-    connectColorMapTabAndSettings();
-
-    connectColorMapLegendAndSettings();
+    setUpConnections();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete this->simulation;
+}
+
+void MainWindow::setUpConnections()
+{
+    connectCanvasAndSimulation();
+    connectCanvasAndSettings();
+    connectCanvasAndColorMapTab();
+
+    connectSimulationTabAndSettings();
+    connectSimulationTabAndSimulation();
+    connectSimulationTabAndKeyboardHandler();
+
+    connectColorMapTabAndColorMapLegend();
+    connectColorMapTabAndSettings();
+
+    connectColorMapLegendAndSettings();
+
+    connectKeyBoardHandlerAndSimulation();
 }
 
 void MainWindow::connectCanvasAndSimulation()
@@ -87,6 +101,12 @@ void MainWindow::connectSimulationTabAndSimulation()
             this->simulation, SLOT(onStep()));
 }
 
+void MainWindow::connectSimulationTabAndKeyboardHandler()
+{
+    connect(this->keyboardHandler, SIGNAL(toggleFrozen()),
+            this->simulationTab, SLOT(onToggleFrozen()));
+}
+
 void MainWindow::connectCanvasAndColorMapTab()
 {
     connect(this->colorMapTab, SIGNAL(setClamping(bool)),
@@ -109,6 +129,12 @@ void MainWindow::connectColorMapTabAndSettings()
 {
     connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
             &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+}
+
+void MainWindow::connectKeyBoardHandlerAndSimulation()
+{
+    connect(this->keyboardHandler, SIGNAL(step()),
+            this->simulation, SLOT(onStep()));
 }
 
 
