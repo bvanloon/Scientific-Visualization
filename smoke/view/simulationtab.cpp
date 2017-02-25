@@ -27,6 +27,7 @@ void SimulationSettingPane::setUItoDefaults()
     ui->forceSlider->init(Settings::defaults::simulation::forceMin,
                           Settings::defaults::simulation::forceMax,
                           Settings::simulation().force);
+    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 }
 
 void SimulationSettingPane::setUpConnections()
