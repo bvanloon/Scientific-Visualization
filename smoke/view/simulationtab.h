@@ -18,10 +18,13 @@ public:
 signals:
     void forceChanged(float force);
     void toggleFrozen();
+    void step();
 
 private slots:
     void on_forceSlider_valueChanged(int value);
     void on_freezeButton_clicked();
+
+    void on_stepButton_clicked();
 
 private:
     Ui::SimulationSettingPane *ui;

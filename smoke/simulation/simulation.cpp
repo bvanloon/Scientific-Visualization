@@ -174,6 +174,11 @@ void Simulation::onMouseMoved(QPoint newPosition)
     this->lastMousePosition = newPosition;
 }
 
+void Simulation::onStep()
+{
+    this->step();
+}
+
 int Simulation::to1DIndex(int i, int j)
 {
     return (j * Settings::simulation().dimension) + i;

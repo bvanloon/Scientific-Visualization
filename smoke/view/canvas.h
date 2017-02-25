@@ -40,7 +40,6 @@ public slots:
     void onColorMapChanged(AbstractColorMap colormap);
     void onForceChanged(float force);
 
-
 private slots:
     void idleLoop();
 

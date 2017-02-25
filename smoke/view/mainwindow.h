@@ -37,6 +37,7 @@ private:
     void connectColorMapLegendAndSettings();
 
     void connectSimulationTabAndSettings();
+    void connectSimulationTabAndSimulation();
 
     void connectColorMapTabAndColorMapLegend();
     void connectColorMapTabAndSettings();

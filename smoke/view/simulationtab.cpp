@@ -47,3 +47,8 @@ void SimulationSettingPane::on_freezeButton_clicked()
     this->ui->stepButton->setDisabled(!Settings::simulation().frozen);
     setFreezeButtonLabel();
 }
+
+void SimulationSettingPane::on_stepButton_clicked()
+{
+    emit step();
+}

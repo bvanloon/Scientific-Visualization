@@ -33,6 +33,7 @@ signals:
 
 public slots:
     void onMouseMoved(QPoint newPosition);
+    void onStep();
 
 private:
     QPoint lastMousePosition;
