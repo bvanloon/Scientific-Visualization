@@ -25,7 +25,7 @@ void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
 {
     this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
-    emit valueRangeChanged(0.0f, 1.0f);
+    emit valueRangeChanged(0.0f, 0.5f);
 }
 
 const Settings::Visualization &Settings::Visualization::instance()

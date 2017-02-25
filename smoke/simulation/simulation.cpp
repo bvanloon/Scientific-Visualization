@@ -104,8 +104,6 @@ QVector<float> Simulation::getTexCoordFluidDensity()
             textureCoordinates.append(this->realization->rho[idx3] );
         }
     }
-
-
     return textureCoordinates;
 }
 
@@ -139,7 +137,49 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
 QVector<float> Simulation::getTexCoordForceFieldMagnitude()
 {
     QVector<float> textureCoordinates;
-    qDebug() << "QVector<float> Simulation::getTextureCoordinatesForceField";
+    QVector2D force0, force1, force2, force3;
+
+    int idx0, idx1, idx2, idx3;
+
+    static float minimum = 1000.0f;
+    static float maximum = -1000.0f;
+
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
+    {
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
+        {
+            idx0 = (j * Settings::simulation().dimension) + i;
+            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
+            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
+            idx3 = (j * Settings::simulation().dimension) + i + 1;
+
+            force0 = QVector2D(this->realization->fx[idx0],
+                               this->realization->fy[idx0]);
+
+            force1 = QVector2D(this->realization->fx[idx1],
+                               this->realization->fy[idx1]);
+
+            force2 = QVector2D(this->realization->fx[idx2],
+                               this->realization->fy[idx2]);
+
+            force3 = QVector2D(this->realization->fx[idx3],
+                               this->realization->fy[idx3]);
+
+            textureCoordinates.append(force0.length());
+            textureCoordinates.append(force1.length());
+            textureCoordinates.append(force2.length());
+
+            textureCoordinates.append(force0.length());
+            textureCoordinates.append(force2.length());
+            textureCoordinates.append(force3.length());
+        }
+    }
+
+    minimum = std::min(minimum,
+                   *std::min_element(textureCoordinates.constBegin(), textureCoordinates.constEnd()));
+    maximum = std::max(maximum,
+                   *std::max_element(textureCoordinates.constBegin(), textureCoordinates.constEnd()));
+    qDebug() << "getTexCoordForceFieldMagnitude [" << minimum << ", " << maximum << "]";
     return textureCoordinates;
 }
 
