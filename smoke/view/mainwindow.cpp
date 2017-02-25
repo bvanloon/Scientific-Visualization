@@ -7,7 +7,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    keyboardHandler(new KeyboardHandler(this))
 {
     ui->setupUi(this);
 
@@ -15,10 +16,26 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
+
     this->colorMapLegend = ui->colorMapLegend;
+
     this->simulationTab = ui->simulationTab;
+
     this->colorMapTab = ui->colormapTab;
 
+    this->installEventFilter(this->keyboardHandler);
+
+    setUpConnections();
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+    delete this->simulation;
+}
+
+void MainWindow::setUpConnections()
+{
     connectCanvasAndSimulation();
     connectCanvasAndSettings();
     connectCanvasAndColorMapTab();
@@ -30,12 +47,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connectColorMapTabAndSettings();
 
     connectColorMapLegendAndSettings();
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-    delete this->simulation;
 }
 
 void MainWindow::connectCanvasAndSimulation()

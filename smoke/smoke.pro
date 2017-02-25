@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     settings/canvassettings.cpp \
     settings/simulationsettings.cpp \
     settings/visualizationsettings.cpp \
-    view/simulationtab.cpp
+    view/simulationtab.cpp \
+    keyboardhandler.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -57,7 +58,8 @@ HEADERS  += main.ih\
     settings/canvassettings.h \
     settings/simulationsettings.h \
     settings/visualizationsettings.h \
-    view/simulationtab.h
+    view/simulationtab.h \
+    keyboardhandler.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
