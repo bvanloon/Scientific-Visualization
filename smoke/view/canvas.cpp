@@ -140,7 +140,6 @@ void Canvas::setTexture(QImage image)
 
 void Canvas::setColorMapValueRange(float min, float max)
 {
-    qDebug() << "Canvas::setColorMapValueRange: " << min << ", " << max;
     this->shaderProgram->bind();
     this->shaderProgram->setUniformValue("colorMapInfo.minimum", min);
     this->shaderProgram->setUniformValue("colorMapInfo.maximum", max);
