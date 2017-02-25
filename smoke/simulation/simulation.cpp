@@ -113,28 +113,24 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
 {
     QVector<float> textureCoordinates;
 
-    static float magnitudeMin = 1.0f;
-    static float magnitudeMax = 0.0f;
-
-    int idx0, idx1, idx2, idx3;
-    float vec0, vec1, vec2, vec3;
+    float velocity0, velocity1, velocity2, velocity3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            vec0 = getFluidVelocityMagnitudeAt(i, j);
-            vec1 = getFluidVelocityMagnitudeAt(i, j + 1);
-            vec2 = getFluidVelocityMagnitudeAt(i + 1, j + 1);
-            vec3 = getFluidVelocityMagnitudeAt(i + 1, j);
+            velocity0 = getFluidVelocityMagnitudeAt(i, j);
+            velocity1 = getFluidVelocityMagnitudeAt(i, j + 1);
+            velocity2 = getFluidVelocityMagnitudeAt(i + 1, j + 1);
+            velocity3 = getFluidVelocityMagnitudeAt(i + 1, j);
 
-            textureCoordinates.append(vec0);
-            textureCoordinates.append(vec1);
-            textureCoordinates.append(vec2);
+            textureCoordinates.append(velocity0);
+            textureCoordinates.append(velocity1);
+            textureCoordinates.append(velocity2);
 
-            textureCoordinates.append(vec0);
-            textureCoordinates.append(vec2);
-            textureCoordinates.append(vec3);
+            textureCoordinates.append(velocity0);
+            textureCoordinates.append(velocity2);
+            textureCoordinates.append(velocity3);
         }
     }
     return textureCoordinates;
