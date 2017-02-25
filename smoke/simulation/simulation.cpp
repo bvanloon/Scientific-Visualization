@@ -112,7 +112,40 @@ QVector<float> Simulation::getTexCoordFluidDensity()
 QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
 {
     QVector<float> textureCoordinates;
-    qDebug() << "QVector<float> Simulation::getTextureCoordinatesVelocity";
+
+    static float magnitudeMin = 1.0f;
+    static float magnitudeMax = 0.0f;
+
+    int idx0, idx1, idx2, idx3;
+    QVector2D vec0, vec1, vec2, vec3;
+
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
+    {
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
+        {
+            idx0 = (j * Settings::simulation().dimension) + i;
+            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
+            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
+            idx3 = (j * Settings::simulation().dimension) + i + 1;
+
+            vec0 = QVector2D(this->realization->vx[idx0],
+                             this->realization->vy[idx0]);
+            vec1 = QVector2D(this->realization->vx[idx1],
+                             this->realization->vy[idx1]);
+            vec2 = QVector2D(this->realization->vx[idx2],
+                             this->realization->vy[idx2]);
+            vec3 = QVector2D(this->realization->vx[idx3],
+                             this->realization->vy[idx3]);
+
+            textureCoordinates.append(vec0.length());
+            textureCoordinates.append(vec1.length());
+            textureCoordinates.append(vec2.length());
+
+            textureCoordinates.append(vec0.length());
+            textureCoordinates.append(vec2.length());
+            textureCoordinates.append(vec3.length());
+        }
+    }
     return textureCoordinates;
 }
 
