@@ -38,6 +38,7 @@ public slots:
     void onSetClamping(bool clampingOn);
     void onsetClampingRange(float minimum, float maximum);
     void onColorMapChanged(AbstractColorMap colormap);
+    void onForceChanged(float force);
 
 
 private slots:

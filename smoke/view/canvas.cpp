@@ -45,6 +45,13 @@ void Canvas::onColorMapChanged(AbstractColorMap colormap)
     setTexture(colormap);
 }
 
+void Canvas::onForceChanged(float force)
+{
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        setColorMapValueRange(0.0f, force);
+    }
+}
+
 void Canvas::idleLoop()
 {
     if(!Settings::simulation().frozen)
@@ -101,8 +108,8 @@ void Canvas::paintGL()
 
     this->texture->bind();
 
-//    vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
+//    vectorEngine->draw(this->simulation);
 
     this->texture->release();
 

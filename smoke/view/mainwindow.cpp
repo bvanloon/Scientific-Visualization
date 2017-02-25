@@ -21,10 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connectCanvasAndSimulation();
     connectCanvasAndSettings();
-    connectSettingsAndColorMapLegend();
-    connectColorMapTabAndColorMapLegend();
-    connectSettingAndSimulationTab();
     connectCanvasAndColorMapTab();
+
+    connectSimulationTabAndSettings();
+
+    connectColorMapTabAndColorMapLegend();
+    connectColorMapTabAndSettings();
+
+    connectColorMapLegendAndSettings();
 }
 
 MainWindow::~MainWindow()
@@ -44,20 +48,31 @@ void MainWindow::connectCanvasAndSettings()
     connect(&Settings::simulation(),SIGNAL(valueRangeChanged(float,float)),
             this->canvas, SLOT(onValueRangeChanged(float,float)));
 
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->canvas, SLOT(onValueRangeChanged(float,float)));
+
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::canvas(), SLOT(onWindowResized(int, int)));
 
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::simulation(), SLOT(onWindowResized(int, int)));
+
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            this->canvas, SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectSettingsAndColorMapLegend()
+void MainWindow::connectColorMapLegendAndSettings()
 {
     connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
             this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
+
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            this->colorMapLegend, SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectSettingAndSimulationTab()
+void MainWindow::connectSimulationTabAndSettings()
 {
     connect(this->simulationTab, SIGNAL(forceChanged(float)),
             &Settings::simulation(), SLOT(onForceChanged(float)));
@@ -79,6 +94,12 @@ void MainWindow::connectColorMapTabAndColorMapLegend()
             this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
     connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
             this->colorMapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
+}
+
+void MainWindow::connectColorMapTabAndSettings()
+{
+    connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
+            &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
 }
 
 

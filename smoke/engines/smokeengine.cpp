@@ -47,14 +47,14 @@ void SmokeEngine::initBuffers()
     glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, 0);
 
     this->vao.release();
-
-
 }
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
     QVector<QVector3D> triangles = simulation->getGridTriangulation();
-    QVector<float> textureCoordinates = simulation->getTextureCoordinates();
+//    QVector<float> textureCoordinates = simulation->getTexCoordFluidDensity();
+
+    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)();
 
     updateBuffer(this->vertexBuffer, triangles);
     updateBuffer(this->textureCoordinateBuffer,textureCoordinates);

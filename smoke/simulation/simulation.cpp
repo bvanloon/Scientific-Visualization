@@ -80,7 +80,7 @@ QVector<QVector3D> Simulation::getGridTriangulation()
     return gridTriangles;
 }
 
-QVector<float> Simulation::getTextureCoordinates()
+QVector<float> Simulation::getTexCoordFluidDensity()
 {
     QVector<float> textureCoordinates;
 
@@ -104,12 +104,61 @@ QVector<float> Simulation::getTextureCoordinates()
             textureCoordinates.append(this->realization->rho[idx3] );
         }
     }
-
-
     return textureCoordinates;
 }
 
+QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
+{
+    QVector<float> textureCoordinates;
 
+    float velocity0, velocity1, velocity2, velocity3;
+
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
+    {
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
+        {
+            velocity0 = getFluidVelocityMagnitudeAt(i, j);
+            velocity1 = getFluidVelocityMagnitudeAt(i, j + 1);
+            velocity2 = getFluidVelocityMagnitudeAt(i + 1, j + 1);
+            velocity3 = getFluidVelocityMagnitudeAt(i + 1, j);
+
+            textureCoordinates.append(velocity0);
+            textureCoordinates.append(velocity1);
+            textureCoordinates.append(velocity2);
+
+            textureCoordinates.append(velocity0);
+            textureCoordinates.append(velocity2);
+            textureCoordinates.append(velocity3);
+        }
+    }
+    return textureCoordinates;
+}
+
+QVector<float> Simulation::getTexCoordForceFieldMagnitude()
+{
+    QVector<float> textureCoordinates;
+    float force0, force1, force2, force3;
+
+    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
+    {
+        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
+        {
+            force0 = getForceMagnitudeAt(i, j);
+            force1 = getForceMagnitudeAt(i, j + 1);
+            force2 = getForceMagnitudeAt(i + 1, j + 1);
+            force3 = getForceMagnitudeAt(i + 1, j);
+
+            textureCoordinates.append(force0);
+            textureCoordinates.append(force1);
+            textureCoordinates.append(force2);
+
+            textureCoordinates.append(force0);
+            textureCoordinates.append(force2);
+            textureCoordinates.append(force3);
+        }
+    }
+    return textureCoordinates;
+}
 
 void Simulation::step()
 {
@@ -123,6 +172,56 @@ void Simulation::onMouseMoved(QPoint newPosition)
 
     this->realization->addForceAt(newPosition, this->lastMousePosition);
     this->lastMousePosition = newPosition;
+}
+
+int Simulation::to1DIndex(int i, int j)
+{
+    return (j * Settings::simulation().dimension) + i;
+}
+
+QVector2D Simulation::getFluidVelocityAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidVelocityAt(idx);
+}
+
+QVector2D Simulation::getFluidVelocityAt(int idx)
+{
+    return QVector2D(this->realization->vx[idx],
+                     this->realization->vy[idx]);
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidVelocityMagnitudeAt(idx);
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(int idx)
+{
+    return getFluidVelocityAt(idx).length();
+}
+
+QVector2D Simulation::getForceAt(int i, int j)
+{
+    int idx = to1DIndex(i, j);
+    return getForceAt(idx);
+}
+
+QVector2D Simulation::getForceAt(int idx)
+{
+    return QVector2D(this->realization->fx[idx],
+                     this->realization->fy[idx]);
+}
+
+float Simulation::getForceMagnitudeAt(int i, int j)
+{
+    return getForceAt(i, j).length();
+}
+
+float Simulation::getForceMagnitudeAt(int idx)
+{
+    return getForceAt(idx).length();
 }
 
 
