@@ -45,6 +45,13 @@ void Canvas::onColorMapChanged(AbstractColorMap colormap)
     setTexture(colormap);
 }
 
+void Canvas::onForceChanged(float force)
+{
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        setColorMapValueRange(0.0f, force);
+    }
+}
+
 void Canvas::idleLoop()
 {
     if(!Settings::simulation().frozen)
@@ -133,6 +140,7 @@ void Canvas::setTexture(QImage image)
 
 void Canvas::setColorMapValueRange(float min, float max)
 {
+    qDebug() << "Canvas::setColorMapValueRange: " << min << ", " << max;
     this->shaderProgram->bind();
     this->shaderProgram->setUniformValue("colorMapInfo.minimum", min);
     this->shaderProgram->setUniformValue("colorMapInfo.maximum", max);
