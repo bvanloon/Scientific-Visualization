@@ -104,7 +104,6 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
 
 void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 {
-    qDebug() << "ColorMapTab::on_variableSelector_currentIndexChanged: emit scalarVariableChanged";
     emit scalarVariableChanged(
                 static_cast<Settings::Visualization::ScalarVariable>(index));
 }
