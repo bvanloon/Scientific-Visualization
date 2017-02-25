@@ -138,7 +138,7 @@ void ColorMapLegend::setColorMap(AbstractColorMap colorMap)
     rotating.rotate(90);
     this->colorMapImage = colorMap.transformed(rotating);
     this->numberOfColors = colorMap.getNumColors();
-    this->numberOfTicks = std::min(colorMap.getNumColors(), maximumNumberOfTicks);
+    this->numberOfTicks = std::min(colorMap.getNumColors() + 1, maximumNumberOfTicks);
     update();
 }
 
