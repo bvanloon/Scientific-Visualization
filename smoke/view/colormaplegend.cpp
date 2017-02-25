@@ -41,7 +41,6 @@ ColorMapLegend::~ColorMapLegend()
 void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 {
     setColorMap(colorMap);
-    update();
 }
 
 void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
@@ -140,6 +139,7 @@ void ColorMapLegend::setColorMap(AbstractColorMap colorMap)
     this->colorMapImage = colorMap.transformed(rotating);
     this->numberOfColors = colorMap.getNumColors();
     this->numberOfTicks = std::min(colorMap.getNumColors(), maximumNumberOfTicks);
+    update();
 }
 
 
