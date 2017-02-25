@@ -56,6 +56,7 @@ private:
     void drawTickandLabel(QPointF left, float value);
     void drawLabel(QPointF left, float labelValue);
 
+    void setRange(float minimum, float maximum);
     void setColorMap(AbstractColorMap colorMap);
 
     int getDescriptionLabelHeight();

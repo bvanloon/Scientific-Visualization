@@ -46,25 +46,26 @@ void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 
 void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
 {
-    this->minimumValue = minimum;
-    this->maximumValue = maximum;
-    update();
+    setRange(minimum, maximum);
 }
 
 void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
 {
-    this->minimumFactor = minimum;
-    this->maximumFactor = maximum;
-    update();
+    setRange(minimum, maximum);
 }
 
 void ColorMapLegend::onForceChanged(float force)
 {
     if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
-        this->minimumValue = 0.0f;
-        this->maximumValue = force;
-        update();
+        setRange(0.0f, force);
     }
+}
+
+void ColorMapLegend::setRange(float minimum, float maximum)
+{
+    this->minimumFactor = minimum;
+    this->maximumFactor = maximum;
+    update();
 }
 
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
