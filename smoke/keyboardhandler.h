@@ -15,12 +15,17 @@ public:
     ~KeyboardHandler();
 
 signals:
+    void toggleFrozen();
 
 public slots:
 
 private:
     bool eventFilter(QObject *object, QEvent *event);
+
     bool handleEvent(QKeyEvent *event);
+    void handleSpaceBar(QKeyEvent * event);
+
+    void setUpConnections();
 };
 
 #endif // KEYBOARDHANDLER_H

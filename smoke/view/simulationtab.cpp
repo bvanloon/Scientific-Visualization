@@ -10,6 +10,9 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
 {
     ui->setupUi(this);
     setUItoDefaults();
+
+    connect(this, SIGNAL(toggleFrozen()),
+            this, SLOT(onToggleFrozen()));
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -45,11 +48,15 @@ void SimulationSettingPane::setFreezeButtonLabel()
 void SimulationSettingPane::on_freezeButton_clicked()
 {
     emit toggleFrozen();
-    this->ui->stepButton->setDisabled(!Settings::simulation().frozen);
-    setFreezeButtonLabel();
 }
 
 void SimulationSettingPane::on_stepButton_clicked()
 {
     emit step();
+}
+
+void SimulationSettingPane::onToggleFrozen()
+{
+    this->ui->stepButton->setDisabled(!Settings::simulation().frozen);
+    setFreezeButtonLabel();
 }
