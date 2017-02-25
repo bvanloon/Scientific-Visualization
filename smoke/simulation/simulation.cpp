@@ -153,13 +153,13 @@ QVector<float> Simulation::getTexCoordForceFieldMagnitude()
             idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
             idx3 = (j * Settings::simulation().dimension) + i + 1;
 
-            force0 = getForceAt(idx0);
+            force0 = getForceAt(i, j);
 
-            force1 = getForceAt(idx1);
+            force1 = getForceAt(i, j + 1);
 
-            force2 = getForceAt(idx2);
+            force2 = getForceAt(i + 1, j + 1);
 
-            force3 = getForceAt(idx3);
+            force3 = getForceAt(i + 1, j);
 
             textureCoordinates.append(force0.length());
             textureCoordinates.append(force1.length());
@@ -223,7 +223,8 @@ float Simulation::getFluidVelocityMagnitudeAt(int idx)
 
 QVector2D Simulation::getForceAt(int i, int j)
 {
-
+    int idx = to1DIndex(i, j);
+    return getForceAt(idx);
 }
 
 QVector2D Simulation::getForceAt(int idx)
