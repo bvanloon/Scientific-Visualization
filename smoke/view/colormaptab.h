@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "colormaps/colormapfactory.h"
+#include "settings/visualizations.h"
 
 namespace Ui {
 class ColorMapTab;
@@ -20,6 +21,7 @@ signals:
     void setClamping(bool clampingOn);
     void setClampingRange(float minimum, float maximum);
     void colorMapChanged(AbstractColorMap colormap);
+    void scalarVariableChanged(Settings::Visualization::ScalarVariable variable);
 
 public slots:
 
@@ -29,6 +31,8 @@ private slots:
     void on_clampingMinimumSlider_valueChanged(float value);
     void on_numColorsSlider_valueChanged(int value);
     void on_colormapSelector_currentIndexChanged(int index);
+
+    void on_variableSelector_currentIndexChanged(int index);
 
 private:
     Ui::ColorMapTab *ui;

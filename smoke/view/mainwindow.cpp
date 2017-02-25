@@ -85,5 +85,12 @@ void MainWindow::connectColorMapTabAndColorMapLegend()
             this->colorMapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
+void MainWindow::connectColorMapTabAndSettings()
+{
+    qDebug() << "void MainWindow::connectColorMapTabAndSettings()";
+    connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
+            &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+}
+
 
 

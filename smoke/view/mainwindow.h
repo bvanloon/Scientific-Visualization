@@ -39,6 +39,7 @@ private:
     void connectSimulationTabAndSettings();
 
     void connectColorMapTabAndColorMapLegend();
+    void connectColorMapTabAndSettings();
 };
 
 #endif // MAINWINDOW_H

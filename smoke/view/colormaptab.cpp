@@ -3,6 +3,7 @@
 #include "settings/settings.h"
 
 
+
 #include <QDebug>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
@@ -70,6 +71,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::maxNumColors,
                 Settings::defaults::visualization::colormap::numColors);
     this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
+    this->ui->variableSelector->addItems(Settings::Visualization::getScalarVariableNames());
 }
 
 void ColorMapTab::setUpConnections()
@@ -98,4 +100,11 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
                 ui->numColorsSlider->value());
 
     emit colorMapChanged(*newColormap);
+}
+
+void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
+{
+    qDebug() << "ColorMapTab::on_variableSelector_currentIndexChanged: emit scalarVariableChanged";
+    emit scalarVariableChanged(
+                static_cast<Settings::Visualization::ScalarVariable>(index));
 }
