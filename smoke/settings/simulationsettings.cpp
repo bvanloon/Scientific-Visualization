@@ -8,7 +8,8 @@ Settings::Simulation::Simulation(QObject *parent):
     dimension(50),
     frozen(false),
     force(10.0f),
-    cellSize(-1, -1)
+    cellSize(-1, -1),
+    timestep(0.4)
 {}
 
 const Settings::Simulation &Settings::Simulation::instance()
