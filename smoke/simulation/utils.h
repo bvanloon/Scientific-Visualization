@@ -2,7 +2,7 @@
 #define UTILS_H
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
+#include "settings/simulationsettings.h"
 
 #include <QPoint>
 

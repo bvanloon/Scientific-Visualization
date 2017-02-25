@@ -1,6 +1,6 @@
-#include "visualizations.h"
+#include "visualizationsettings.h"
 #include <QDebug>
-#include "settings/simulations.h"
+#include "settings/simulationsettings.h"
 
 Settings::Visualization::Visualization(QObject *parent):
     QObject(parent),

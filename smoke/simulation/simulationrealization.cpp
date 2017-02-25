@@ -5,7 +5,7 @@
 #include <QPointF>
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
+#include "settings/simulationsettings.h"
 
 SimulationRealization::SimulationRealization():
     dt(0.4), visc(0.001),

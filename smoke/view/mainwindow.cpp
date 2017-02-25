@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
-#include "settings/canvass.h"
+#include "settings/simulationsettings.h"
+#include "settings/canvassettings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

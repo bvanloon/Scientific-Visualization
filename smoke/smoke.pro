@@ -28,16 +28,16 @@ SOURCES += main.cpp\
     engines/smokeengine.cpp \
     view/colormaplegend.cpp utilities.cpp \
     view/simulationsettingpane.cpp \
-    settings/simulations.cpp \
-    settings/canvass.cpp \
-    settings/visualizations.cpp \
     settings/settings.cpp \
     view/colormaptab.cpp \
     colormaps/grayscalecolormap.cpp \
     colormaps/heatcolormap.cpp \
     colormaps/colormapfactory.cpp \
     view/floatslider.cpp \
-    view/intslider.cpp
+    view/intslider.cpp \
+    settings/canvassettings.cpp \
+    settings/simulationsettings.cpp \
+    settings/visualizationsettings.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -51,13 +51,13 @@ HEADERS  += main.ih\
     colormaps/rainbowcolormap.h \
     view/colormaplegend.h utilities.h \
     view/simulationsettingpane.h \
-    settings/simulations.h \
-    settings/canvass.h \
-    settings/visualizations.h \
     settings/settings.h \
     view/colormaptab.h \
     view/floatslider.h \
-    view/intslider.h
+    view/intslider.h \
+    settings/canvassettings.h \
+    settings/simulationsettings.h \
+    settings/visualizationsettings.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

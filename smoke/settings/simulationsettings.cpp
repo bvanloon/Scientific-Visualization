@@ -1,5 +1,5 @@
-#include "simulations.h"
-#include "settings/canvass.h"
+#include "simulationsettings.h"
+#include "settings/canvassettings.h"
 #include "fftw.h"
 #include <QDebug>
 

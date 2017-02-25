@@ -1,4 +1,4 @@
-#include "canvass.h"
+#include "canvassettings.h"
 #include <QDebug>
 
 Settings::Canvas::Canvas(QObject *parent) :
