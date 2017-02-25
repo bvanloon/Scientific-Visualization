@@ -29,6 +29,8 @@ bool KeyboardHandler::handleEvent(QKeyEvent *event)
     case Qt::Key_Space:
         handleSpaceBar(event);
         break;
+    case Qt::Key_S:
+        handleS(event);
     default:
         break;
     }
@@ -38,6 +40,11 @@ bool KeyboardHandler::handleEvent(QKeyEvent *event)
 void KeyboardHandler::handleSpaceBar(QKeyEvent *event)
 {
     emit toggleFrozen();
+}
+
+void KeyboardHandler::handleS(QKeyEvent *event)
+{
+    emit step();
 }
 
 void KeyboardHandler::setUpConnections()

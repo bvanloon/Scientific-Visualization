@@ -46,6 +46,8 @@ private:
 
     void connectColorMapTabAndColorMapLegend();
     void connectColorMapTabAndSettings();
+
+    void connectKeyBoardHandlerAndSimulation();
 };
 
 #endif // MAINWINDOW_H

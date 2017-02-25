@@ -48,6 +48,8 @@ void MainWindow::setUpConnections()
     connectColorMapTabAndSettings();
 
     connectColorMapLegendAndSettings();
+
+    connectKeyBoardHandlerAndSimulation();
 }
 
 void MainWindow::connectCanvasAndSimulation()
@@ -127,6 +129,12 @@ void MainWindow::connectColorMapTabAndSettings()
 {
     connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
             &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+}
+
+void MainWindow::connectKeyBoardHandlerAndSimulation()
+{
+    connect(this->keyboardHandler, SIGNAL(step()),
+            this->simulation, SLOT(onStep()));
 }
 
 

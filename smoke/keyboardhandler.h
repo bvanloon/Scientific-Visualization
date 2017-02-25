@@ -16,6 +16,7 @@ public:
 
 signals:
     void toggleFrozen();
+    void step();
 
 public slots:
 
@@ -24,6 +25,7 @@ private:
 
     bool handleEvent(QKeyEvent *event);
     void handleSpaceBar(QKeyEvent * event);
+    void handleS(QKeyEvent * event);
 
     void setUpConnections();
 };
