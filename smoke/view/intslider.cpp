@@ -1,6 +1,8 @@
 #include "intslider.h"
 #include "ui_intslider.h"
 
+#include <QDebug>
+
 IntSlider::IntSlider(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::IntSlider)
@@ -48,7 +50,7 @@ void IntSlider::setLabel(QLabel *label, int value)
     label->setText(QString::number(value, 'f', 0));
 }
 
-void IntSlider::on_slider_sliderMoved(int position)
+void IntSlider::on_slider_valueChanged(int position)
 {
     setValue(position);
     emit valueChanged(position);

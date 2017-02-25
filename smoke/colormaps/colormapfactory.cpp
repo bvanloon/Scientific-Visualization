@@ -7,7 +7,6 @@
 ColorMapFactory::ColorMapFactory()
 
 {
-
     registerColorMap(ColorMapFactory::colorMaps::rainbow, &RainbowColorMap::Create);
     registerColorMap(ColorMapFactory::colorMaps::grayScale , &GrayScaleColorMap::Create);
     registerColorMap(ColorMapFactory::colorMaps::heat, &HeatColorMap::Create);

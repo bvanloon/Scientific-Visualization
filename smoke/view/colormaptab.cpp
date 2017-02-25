@@ -66,11 +66,11 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::clampMin,
                 Settings::defaults::visualization::colormap::clampMax,
                 Settings::defaults::visualization::colormap::clampMin);
+    this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
     this->ui->numColorsSlider->init(
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
                 Settings::defaults::visualization::colormap::numColors);
-    this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
     this->ui->variableSelector->addItems(Settings::Visualization::getScalarVariableNames());
 }
 

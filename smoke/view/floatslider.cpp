@@ -1,6 +1,7 @@
 #include "floatslider.h"
 #include "ui_floatslider.h"
 
+#include <QDebug>
 #include <QString>
 #include "utilities.h"
 
@@ -69,15 +70,15 @@ void FloatSlider::setDisabled(bool disabled)
     this->ui->slider->setDisabled(disabled);
 }
 
-void FloatSlider::on_slider_sliderMoved(int position)
+void FloatSlider::setLabel(QLabel* label, float value){
+    label->setText(QString::number(value, 'f', 2));
+}
+
+void FloatSlider::on_slider_valueChanged(int position)
 {
     float value = mapToRange((float) position,
                              (float)this->ui->slider->minimum(), (float)this->ui->slider->maximum(),
                              this->minimum, this->maximum);
     setLabel(this->ui->valueLabel, value);
     emit valueChanged(value);
-}
-
-void FloatSlider::setLabel(QLabel* label, float value){
-    label->setText(QString::number(value, 'f', 2));
 }
