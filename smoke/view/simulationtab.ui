@@ -59,6 +59,29 @@
      <item row="0" column="1">
       <widget class="IntSlider" name="forceSlider" native="true"/>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="timeSteplabel">
+       <property name="text">
+        <string>Time Step</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="timeStepBox">
+       <property name="correctionMode">
+        <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+       </property>
+       <property name="decimals">
+        <number>3</number>
+       </property>
+       <property name="singleStep">
+        <double>0.001000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.400000000000000</double>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
   </layout>

@@ -19,12 +19,14 @@ signals:
     void forceChanged(float force);
     void toggleFrozen();
     void step();
+    void timeStepChanged(float timeStep);
 
 private slots:
     void on_forceSlider_valueChanged(int value);
     void on_freezeButton_clicked();
     void on_stepButton_clicked();
     void onToggleFrozen();
+    void on_doubleSpinBox_valueChanged(double value);
 
 private:
     Ui::SimulationSettingPane *ui;

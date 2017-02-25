@@ -93,6 +93,8 @@ void MainWindow::connectSimulationTabAndSettings()
             &Settings::simulation(), SLOT(onForceChanged(float)));
     connect(this->simulationTab, SIGNAL(toggleFrozen()),
             &Settings::simulation(), SLOT(onToggleFrozen()));
+    connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
+            &Settings::simulation(), SLOT(onTimeStepChanged(float)));
 }
 
 void MainWindow::connectSimulationTabAndSimulation()

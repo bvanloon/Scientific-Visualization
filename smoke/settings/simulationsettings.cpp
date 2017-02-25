@@ -40,6 +40,11 @@ void Settings::Simulation::onToggleFrozen()
     this->frozen = !this->frozen;
 }
 
+void Settings::Simulation::onTimeStepChanged(float value)
+{
+    this->timestep = value;
+}
+
 void Settings::Simulation::updateGridCellSize()
 {
     updateGridCellSize(Settings::canvas().size.width(), Settings::canvas().size.height());

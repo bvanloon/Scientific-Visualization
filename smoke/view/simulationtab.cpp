@@ -60,3 +60,8 @@ void SimulationSettingPane::onToggleFrozen()
     this->ui->stepButton->setDisabled(!Settings::simulation().frozen);
     setFreezeButtonLabel();
 }
+
+void SimulationSettingPane::on_doubleSpinBox_valueChanged(double value)
+{
+    emit timeStepChanged(value);
+}
