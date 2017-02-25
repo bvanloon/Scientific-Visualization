@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QVector>
 #include <QVector3D>
+#include <QVector2D>
 #include <QPoint>
 #include <float.h>
 
@@ -40,6 +41,9 @@ private:
 
     QVector2D getFluidVelocityAt(int i, int j);
     QVector2D getFluidVelocityAt(int idx);
+
+    float getFluidVelocityMagnitudeAt(int i, int j);
+    float getFluidVelocityMagnitudeAt(int idx);
 
 };
 

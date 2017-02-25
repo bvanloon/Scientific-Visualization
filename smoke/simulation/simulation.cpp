@@ -117,29 +117,24 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
     static float magnitudeMax = 0.0f;
 
     int idx0, idx1, idx2, idx3;
-    QVector2D vec0, vec1, vec2, vec3;
+    float vec0, vec1, vec2, vec3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-//            idx0 = to1DIndex(i, j);
-//            idx1 = to1DIndex(i, j + 1);
-//            idx2 = to1DIndex(i + 1, j + 1);
-//            idx3 = to1DIndex(i + 1, j);
+            vec0 = getFluidVelocityMagnitudeAt(i, j);
+            vec1 = getFluidVelocityMagnitudeAt(i, j + 1);
+            vec2 = getFluidVelocityMagnitudeAt(i + 1, j + 1);
+            vec3 = getFluidVelocityMagnitudeAt(i + 1, j);
 
-            vec0 = getFluidVelocityAt(i, j);
-            vec1 = getFluidVelocityAt(i, j + 1);
-            vec2 = getFluidVelocityAt(i + 1, j + 1);
-            vec3 = getFluidVelocityAt(i + 1, j);
+            textureCoordinates.append(vec0);
+            textureCoordinates.append(vec1);
+            textureCoordinates.append(vec2);
 
-            textureCoordinates.append(vec0.length());
-            textureCoordinates.append(vec1.length());
-            textureCoordinates.append(vec2.length());
-
-            textureCoordinates.append(vec0.length());
-            textureCoordinates.append(vec2.length());
-            textureCoordinates.append(vec3.length());
+            textureCoordinates.append(vec0);
+            textureCoordinates.append(vec2);
+            textureCoordinates.append(vec3);
         }
     }
     return textureCoordinates;
@@ -181,6 +176,17 @@ QVector2D Simulation::getFluidVelocityAt(int idx)
 {
     return QVector2D(this->realization->vx[idx],
                      this->realization->vy[idx]);
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidVelocityMagnitudeAt(idx);
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(int idx)
+{
+    return getFluidVelocityAt(idx).length();
 }
 
 
