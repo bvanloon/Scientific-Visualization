@@ -19,13 +19,15 @@ void Settings::Visualization::setScalarVariableToFluidDensity()
 void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 {
     this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
-    emit valueRangeChanged(0.0f, 0.1f);
+    emit valueRangeChanged(Settings::simulation().fluidVelocityMagnitudeMinimum,
+                           Settings::simulation().fluidVelocityMagnitudeMaximum);
 }
 
 void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
 {
     this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
-    emit valueRangeChanged(0.0f, 0.5f);
+    emit valueRangeChanged(Settings::simulation().forceFieldMagnitudeMinimum,
+                           Settings::simulation().forceFieldMagnitudeMaximum);
 }
 
 const Settings::Visualization &Settings::Visualization::instance()

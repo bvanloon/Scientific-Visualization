@@ -17,6 +17,12 @@ public:
     float force;
     QSizeF cellSize;
 
+    const float fluidVelocityMagnitudeMinimum = 0.0f;
+    const float fluidVelocityMagnitudeMaximum = 0.1f;
+
+    const float forceFieldMagnitudeMinimum = 0.0f;
+    const float forceFieldMagnitudeMaximum = 0.5f;
+
 signals:
     void valueRangeChanged(float minimum, float maximum);
 
