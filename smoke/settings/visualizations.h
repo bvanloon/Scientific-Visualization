@@ -12,7 +12,7 @@ public:
 
     enum ScalarVariable {
         fluidDensity,
-        fluidVelocity,
+        fluidVelocityMagnitude,
         forceFieldMagnitude
     };
 
