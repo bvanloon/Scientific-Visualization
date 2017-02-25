@@ -52,9 +52,9 @@ void SmokeEngine::initBuffers()
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
     QVector<QVector3D> triangles = simulation->getGridTriangulation();
-    QVector<float> textureCoordinates = simulation->getTextureCoordinatesSmokeDensity();
+//    QVector<float> textureCoordinates = simulation->getTexCoordFluidDensity();
 
-//    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)();
+    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)();
 
     updateBuffer(this->vertexBuffer, triangles);
     updateBuffer(this->textureCoordinateBuffer,textureCoordinates);
