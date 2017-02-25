@@ -76,6 +76,8 @@ void MainWindow::connectSimulationTabAndSettings()
 {
     connect(this->simulationTab, SIGNAL(forceChanged(float)),
             &Settings::simulation(), SLOT(onForceChanged(float)));
+    connect(this->simulationTab, SIGNAL(toggleFrozen()),
+            &Settings::simulation(), SLOT(onToggleFrozen()));
 }
 
 void MainWindow::connectCanvasAndColorMapTab()

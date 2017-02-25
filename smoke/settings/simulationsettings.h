@@ -31,6 +31,7 @@ public slots:
     void onDimensionChanged(int newDimension);
     void onForceChanged(float newForce);
     void onWindowResized(int width, int height);
+    void onToggleFrozen();
 
 private:
     explicit Simulation(QObject *parent = 0);

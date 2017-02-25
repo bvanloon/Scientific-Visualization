@@ -183,6 +183,8 @@ void Canvas::resizeGL(int width, int height)
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    QPointF mousePosition = event->localPos();
-    emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+    if(!Settings::simulation().frozen){
+        QPointF mousePosition = event->localPos();
+        emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+    }
 }

@@ -17,15 +17,19 @@ public:
 
 signals:
     void forceChanged(float force);
+    void toggleFrozen();
 
 private slots:
     void on_forceSlider_valueChanged(int value);
+    void on_freezeButton_clicked();
 
 private:
     Ui::SimulationSettingPane *ui;
 
     void setUItoDefaults();
     void setUpConnections();
+
+    void setFreezeButtonLabel();
 };
 
 #endif // SIMULATIONSETTINGPANE_H

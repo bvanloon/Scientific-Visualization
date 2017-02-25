@@ -34,6 +34,11 @@ void Settings::Simulation::onWindowResized(int width, int height)
     updateGridCellSize(width, height);
 }
 
+void Settings::Simulation::onToggleFrozen()
+{
+    this->frozen = !this->frozen;
+}
+
 void Settings::Simulation::updateGridCellSize()
 {
     updateGridCellSize(Settings::canvas().size.width(), Settings::canvas().size.height());
