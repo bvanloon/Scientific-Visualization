@@ -60,7 +60,6 @@ void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
 
 void ColorMapLegend::onForceChanged(float force)
 {
-    qDebug() << "ColorMapLegend::onForceChanged(float force) " << force;
     if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
         this->minimumValue = 0.0f;
         this->maximumValue = force;
