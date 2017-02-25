@@ -27,17 +27,17 @@ SOURCES += main.cpp\
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
     view/colormaplegend.cpp utilities.cpp \
-    view/simulationsettingpane.cpp \
-    settings/simulations.cpp \
-    settings/canvass.cpp \
-    settings/visualizations.cpp \
     settings/settings.cpp \
     view/colormaptab.cpp \
     colormaps/grayscalecolormap.cpp \
     colormaps/heatcolormap.cpp \
     colormaps/colormapfactory.cpp \
     view/floatslider.cpp \
-    view/intslider.cpp
+    view/intslider.cpp \
+    settings/canvassettings.cpp \
+    settings/simulationsettings.cpp \
+    settings/visualizationsettings.cpp \
+    view/simulationtab.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -50,21 +50,21 @@ HEADERS  += main.ih\
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
     view/colormaplegend.h utilities.h \
-    view/simulationsettingpane.h \
-    settings/simulations.h \
-    settings/canvass.h \
-    settings/visualizations.h \
     settings/settings.h \
     view/colormaptab.h \
     view/floatslider.h \
-    view/intslider.h
+    view/intslider.h \
+    settings/canvassettings.h \
+    settings/simulationsettings.h \
+    settings/visualizationsettings.h \
+    view/simulationtab.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
-    view/simulationsettingpane.ui \
     view/colormaptab.ui \
     view/floatslider.ui \
-    view/intslider.ui
+    view/intslider.ui \
+    view/simulationtab.ui
 
 RESOURCES += \
     shaders.qrc

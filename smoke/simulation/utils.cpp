@@ -1,8 +1,8 @@
 #include "utils.h"
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
-#include "settings/canvass.h"
+#include "settings/simulationsettings.h"
+#include "settings/canvassettings.h"
 
 int cursorLocationToArrayIndex(QPoint newMousePosition)
 {

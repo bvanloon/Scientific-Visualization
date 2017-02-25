@@ -2,7 +2,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QImage>
-#include "settings/simulations.h"
+#include "settings/simulationsettings.h"
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),

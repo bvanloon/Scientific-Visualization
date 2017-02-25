@@ -10,7 +10,7 @@
 #include "utilities.h"
 #include "colormaps/colormapfactory.h"
 #include "settings/settings.h"
-#include "settings/visualizations.h"
+#include "settings/visualizationsettings.h"
 
 
 const int ColorMapLegend::colorMapImageWidth = 10;

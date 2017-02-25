@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "colormaps/colormapfactory.h"
-#include "settings/visualizations.h"
+#include "settings/visualizationsettings.h"
 
 namespace Ui {
 class ColorMapTab;

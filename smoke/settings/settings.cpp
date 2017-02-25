@@ -1,7 +1,7 @@
 #include "settings.h"
-#include "settings/simulations.h"
-#include "settings/canvass.h"
-#include "settings/visualizations.h"
+#include "settings/simulationsettings.h"
+#include "settings/canvassettings.h"
+#include "settings/visualizationsettings.h"
 
 const Settings::Simulation &Settings::simulation()
 {
