@@ -25,6 +25,7 @@ public:
 
 signals:
     void valueRangeChanged(float minimum, float maximum);
+    void forceChanged(float force);
 
 public slots:
     void onDimensionChanged(int newDimension);

@@ -137,45 +137,26 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
 QVector<float> Simulation::getTexCoordForceFieldMagnitude()
 {
     QVector<float> textureCoordinates;
-    QVector2D force0, force1, force2, force3;
-
-    int idx0, idx1, idx2, idx3;
-
-    static float minimum = 1000.0f;
-    static float maximum = -1000.0f;
+    float force0, force1, force2, force3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * Settings::simulation().dimension) + i;
-            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
-            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
-            idx3 = (j * Settings::simulation().dimension) + i + 1;
+            force0 = getForceMagnitudeAt(i, j);
+            force1 = getForceMagnitudeAt(i, j + 1);
+            force2 = getForceMagnitudeAt(i + 1, j + 1);
+            force3 = getForceMagnitudeAt(i + 1, j);
 
-            force0 = getForceAt(i, j);
+            textureCoordinates.append(force0);
+            textureCoordinates.append(force1);
+            textureCoordinates.append(force2);
 
-            force1 = getForceAt(i, j + 1);
-
-            force2 = getForceAt(i + 1, j + 1);
-
-            force3 = getForceAt(i + 1, j);
-
-            textureCoordinates.append(force0.length());
-            textureCoordinates.append(force1.length());
-            textureCoordinates.append(force2.length());
-
-            textureCoordinates.append(force0.length());
-            textureCoordinates.append(force2.length());
-            textureCoordinates.append(force3.length());
+            textureCoordinates.append(force0);
+            textureCoordinates.append(force2);
+            textureCoordinates.append(force3);
         }
     }
-
-    minimum = std::min(minimum,
-                   *std::min_element(textureCoordinates.constBegin(), textureCoordinates.constEnd()));
-    maximum = std::max(maximum,
-                   *std::max_element(textureCoordinates.constBegin(), textureCoordinates.constEnd()));
-    qDebug() << "getTexCoordForceFieldMagnitude [" << minimum << ", " << maximum << "]";
     return textureCoordinates;
 }
 
@@ -235,12 +216,12 @@ QVector2D Simulation::getForceAt(int idx)
 
 float Simulation::getForceMagnitudeAt(int i, int j)
 {
-
+    return getForceAt(i, j).length();
 }
 
 float Simulation::getForceMagnitudeAt(int idx)
 {
-
+    return getForceAt(idx).length();
 }
 
 
