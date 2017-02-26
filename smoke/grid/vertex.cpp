@@ -12,7 +12,7 @@ const QVector3D *Vertex::getPosition() const
 QDebug operator<<(QDebug stream, const Vertex &vertex)
 {
     stream << "Vertex ["
-           << "\tposition: "    << *vertex.position
+           << " position: "    << *vertex.position
            << "]";
     return stream;
 }
