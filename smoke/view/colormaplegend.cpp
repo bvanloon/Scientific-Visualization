@@ -53,13 +53,6 @@ void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
     setFactorRange(minimum, maximum);
 }
 
-void ColorMapLegend::onForceChanged(float force)
-{
-    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
-        setValueRange(0.0f, force);
-    }
-}
-
 void ColorMapLegend::setFactorRange(float minimum, float maximum)
 {
     this->minimumFactor = minimum;

@@ -22,8 +22,11 @@ signals:
     void setClampingRange(float minimum, float maximum);
     void colorMapChanged(AbstractColorMap colormap);
     void scalarVariableChanged(Settings::Visualization::ScalarVariable variable);
+    void valueRangeChanged(float minimum, float maximum);
 
 public slots:
+    void onValueRangeChanged(float minimum, float maximum);
+    void onForceChanged(float force);
 
 private slots:
     void on_clampingCheckBox_clicked(bool checked);
@@ -31,7 +34,6 @@ private slots:
     void on_clampingMinimumSlider_valueChanged(float value);
     void on_numColorsSlider_valueChanged(int value);
     void on_colormapSelector_currentIndexChanged(int index);
-
     void on_variableSelector_currentIndexChanged(int index);
 
 private:

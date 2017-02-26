@@ -29,9 +29,8 @@ private:
 
     Canvas *canvas;
     Simulation *simulation;
-    ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationTab;
-    ColorMapTab *colorMapTab;
+    ColorMapTab *smokeColorMapTab;
 
     void setUpConnections();
 
@@ -39,13 +38,10 @@ private:
     void connectCanvasAndSettings();
     void connectCanvasAndColorMapTab();
 
-    void connectColorMapLegendAndSettings();
-
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
 
-    void connectColorMapTabAndColorMapLegend();
-    void connectColorMapTabAndSettings();
+    void connectSmokeColorMapTabAndSettings();
 
     void connectKeyBoardHandlerAndSimulation();
 };
