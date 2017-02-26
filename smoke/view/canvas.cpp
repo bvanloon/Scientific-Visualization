@@ -110,7 +110,7 @@ void Canvas::paintGL()
     this->texture->bind();
 
     smokeEngine->draw(this->simulation);
-    vectorEngine->draw(this->simulation);
+//    vectorEngine->draw(this->simulation);
 
     this->texture->release();
 
