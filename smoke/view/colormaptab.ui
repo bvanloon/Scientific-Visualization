@@ -14,6 +14,49 @@
    <string>Form</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="colormapSelectorLabel">
+     <property name="text">
+      <string>Color map</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="colormapSelector"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="variableSelectorLabel">
+     <property name="text">
+      <string>Variable</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="variableSelector"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="numColorsLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>Number of colors</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="IntSlider" name="numColorsSlider" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>72</height>
+      </size>
+     </property>
+    </widget>
+   </item>
    <item row="4" column="0">
     <widget class="QCheckBox" name="clampingCheckBox">
      <property name="text">
@@ -66,62 +109,29 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="numColorsLabel">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Number of colors</string>
+      <string>Saturation</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="1">
-    <widget class="IntSlider" name="numColorsSlider" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="colormapSelectorLabel">
-     <property name="text">
-      <string>Color map</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QComboBox" name="colormapSelector"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="variableSelectorLabel">
-     <property name="text">
-      <string>Variable</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QComboBox" name="variableSelector"/>
+   <item row="8" column="0">
+    <widget class="FloatSlider" name="saturationSlider" native="true"/>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FloatSlider</class>
+   <class>IntSlider</class>
    <extends>QWidget</extends>
-   <header>view/floatslider.h</header>
+   <header>view/intslider.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>IntSlider</class>
+   <class>FloatSlider</class>
    <extends>QWidget</extends>
-   <header location="global">view/intslider.h</header>
+   <header location="global">view/floatslider.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
