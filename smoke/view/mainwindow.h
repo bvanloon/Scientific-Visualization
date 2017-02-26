@@ -43,7 +43,6 @@ private:
 
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
-    void connectSimulationTabAndKeyboardHandler();
 
     void connectColorMapTabAndColorMapLegend();
     void connectColorMapTabAndSettings();

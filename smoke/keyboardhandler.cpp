@@ -13,9 +13,12 @@ KeyboardHandler::~KeyboardHandler()
 
 bool KeyboardHandler::eventFilter(QObject *object, QEvent *event)
 {
+    bool handled;
     switch(event->type()){
     case QEvent::KeyPress:
-        return handleKeyEvent(static_cast<QKeyEvent *>(event));
+        handled = handleKeyEvent(static_cast<QKeyEvent *>(event));
+        if (handled) return handled;
+        //else fall through
     default:
         return QObject::eventFilter(object, event);
     }
@@ -32,8 +35,9 @@ bool KeyboardHandler::handleKeyEvent(QKeyEvent *event)
         break;
     case Qt::Key_S:
         stepSimulation(event);
-    default:
         break;
+    default:
+        return false;
     }
     return true;
 }
@@ -51,6 +55,6 @@ void KeyboardHandler::stepSimulation(QKeyEvent *event)
 void KeyboardHandler::setUpConnections()
 {
     connect(this, SIGNAL(toggleFrozen()),
-            &Settings::simulation(), SLOT(onToggleFrozen()));
+            &Settings::simulation(), SLOT(onToggleFrozenKeyboard()));
 }
 

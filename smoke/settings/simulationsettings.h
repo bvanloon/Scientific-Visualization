@@ -30,12 +30,14 @@ public:
 signals:
     void valueRangeChanged(float minimum, float maximum);
     void forceChanged(float force);
+    void toggleFrozen();
 
 public slots:
     void onDimensionChanged(int newDimension);
     void onForceChanged(float newForce);
     void onWindowResized(int width, int height);
     void onToggleFrozen();
+    void onToggleFrozenKeyboard();
     void onTimeStepChanged(float value);
 
 private:

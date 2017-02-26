@@ -43,7 +43,6 @@ void MainWindow::setUpConnections()
 
     connectSimulationTabAndSettings();
     connectSimulationTabAndSimulation();
-    connectSimulationTabAndKeyboardHandler();
 
     connectColorMapTabAndColorMapLegend();
     connectColorMapTabAndSettings();
@@ -94,6 +93,8 @@ void MainWindow::connectSimulationTabAndSettings()
             &Settings::simulation(), SLOT(onForceChanged(float)));
     connect(this->simulationTab, SIGNAL(toggleFrozen()),
             &Settings::simulation(), SLOT(onToggleFrozen()));
+    connect(&Settings::simulation(), SIGNAL(toggleFrozen()),
+            this->simulationTab, SLOT(onToggleFrozen()));
     connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
             &Settings::simulation(), SLOT(onTimeStepChanged(float)));
 }
@@ -102,12 +103,6 @@ void MainWindow::connectSimulationTabAndSimulation()
 {
     connect(this->simulationTab, SIGNAL(step()),
             this->simulation, SLOT(onStep()));
-}
-
-void MainWindow::connectSimulationTabAndKeyboardHandler()
-{
-    connect(this->keyboardHandler, SIGNAL(toggleFrozen()),
-            this->simulationTab, SLOT(onToggleFrozen()));
 }
 
 void MainWindow::connectCanvasAndColorMapTab()
