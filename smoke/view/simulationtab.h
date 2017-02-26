@@ -26,7 +26,7 @@ private slots:
     void on_freezeButton_clicked();
     void on_stepButton_clicked();
     void onToggleFrozen();
-    void on_doubleSpinBox_valueChanged(double value);
+    void on_timeStepBox_valueChanged(double value);
 
 private:
     Ui::SimulationSettingPane *ui;
