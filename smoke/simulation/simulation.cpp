@@ -155,6 +155,13 @@ int Simulation::to1DIndex(int i, int j)
     return (j * Settings::simulation().dimension) + i;
 }
 
+int Simulation::to1DIndex(QVector3D position)
+{
+    int i = qRound((position.x() / Settings::simulation().cellSize.width()) - 1);
+    int j = qRound((position.y() / Settings::simulation().cellSize.height()) - 1);
+    return to1DIndex(i, j);
+}
+
 float Simulation::getFluidDensityAt(int i, int j)
 {
     int idx = to1DIndex(i,j);
@@ -164,6 +171,12 @@ float Simulation::getFluidDensityAt(int i, int j)
 float Simulation::getFluidDensityAt(int idx)
 {
     return this->realization->rho[idx];
+}
+
+float Simulation::getFluidDensityAt(QVector3D position)
+{
+    int idx = to1DIndex(position);
+    return getFluidDensityAt(idx);
 }
 
 QVector2D Simulation::getFluidVelocityAt(int i, int j)
