@@ -5,7 +5,6 @@
 KeyboardHandler::KeyboardHandler(QObject *parent) :
     QObject(parent)
 {
-    qDebug() << "KeyBoardHandler constructor";
     setUpConnections();
 }
 

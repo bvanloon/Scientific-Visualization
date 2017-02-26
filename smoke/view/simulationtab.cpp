@@ -11,8 +11,6 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
     ui->setupUi(this);
     setUItoDefaults();
 
-//    this->ui->timeStepBox->installEventFilter(this->parent()->parent()->ke);
-
     connect(this, SIGNAL(toggleFrozen()),
             this, SLOT(onToggleFrozen()));
 }
