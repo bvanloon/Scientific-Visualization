@@ -5,6 +5,7 @@
 KeyboardHandler::KeyboardHandler(QObject *parent) :
     QObject(parent)
 {
+    qDebug() << "KeyBoardHandler constructor";
     setUpConnections();
 }
 
@@ -15,14 +16,15 @@ bool KeyboardHandler::eventFilter(QObject *object, QEvent *event)
 {
     switch(event->type()){
     case QEvent::KeyPress:
-        return handleEvent(static_cast<QKeyEvent *>(event));
+        return handleKeyEvent(static_cast<QKeyEvent *>(event));
     default:
         return QObject::eventFilter(object, event);
     }
 }
 
-bool KeyboardHandler::handleEvent(QKeyEvent *event)
+bool KeyboardHandler::handleKeyEvent(QKeyEvent *event)
 {
+    qDebug() << "KeyboardHandler::handleKeyEvent: Key Press: " << event->key();
     switch (event->key()) {
     case Qt::Key_A:
         //Fall through

@@ -23,7 +23,7 @@ public slots:
 private:
     bool eventFilter(QObject *object, QEvent *event);
 
-    bool handleEvent(QKeyEvent *event);
+    bool handleKeyEvent(QKeyEvent *event);
     void handleSpaceBar(QKeyEvent * event);
     void handleS(QKeyEvent * event);
 
