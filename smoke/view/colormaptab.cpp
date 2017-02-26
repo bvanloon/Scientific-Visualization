@@ -88,6 +88,10 @@ void ColorMapTab::setUpConnections()
             this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
     connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_numColorsSlider_valueChanged(int)));
+    connect(this, SIGNAL(setClampingRange(float,float)),
+            this->ui->colormapLegend, SLOT(onClampRangeChanged(float,float)));
+    connect(this, SIGNAL(colorMapChanged(AbstractColorMap)),
+            this->ui->colormapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)
