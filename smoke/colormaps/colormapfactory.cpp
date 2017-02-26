@@ -10,6 +10,7 @@ ColorMapFactory::ColorMapFactory()
     registerColorMap(ColorMapFactory::colorMaps::rainbow, &RainbowColorMap::Create);
     registerColorMap(ColorMapFactory::colorMaps::grayScale , &GrayScaleColorMap::Create);
     registerColorMap(ColorMapFactory::colorMaps::heat, &HeatColorMap::Create);
+    registerColorMap(ColorMapFactory::colorMaps::zebra, &ZebraMap::Create);
 }
 
 ColorMapFactory::~ColorMapFactory()
@@ -21,7 +22,7 @@ QStringList ColorMapFactory::getColorMapNames()
 {
     QStringList colormapNamesList;
 
-   colormapNamesList << "Rainbow" << "Hot" << "Grayscale" ;
+   colormapNamesList << "Rainbow" << "Hot" << "Grayscale" << "Zebra" ;
 
     return colormapNamesList;
 }
