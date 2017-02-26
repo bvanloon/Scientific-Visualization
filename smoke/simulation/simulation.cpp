@@ -83,23 +83,16 @@ QVector<QVector3D> Simulation::getGridTriangulation()
 QVector<float> Simulation::getTexCoordFluidDensity()
 {
     QVector<float> textureCoordinates;
-
-    int idx0, idx1, idx2, idx3;
     float density0, density1, density2, density3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * Settings::simulation().dimension) + i;
-            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
-            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
-            idx3 = (j * Settings::simulation().dimension) + i + 1;
-
-            density0 = getFluidDensityAt(idx0);
-            density1 = getFluidDensityAt(idx1);
-            density2 = getFluidDensityAt(idx2);
-            density3 = getFluidDensityAt(idx3);
+            density0 = getFluidDensityAt(i, j);
+            density1 = getFluidDensityAt(i, j + 1);
+            density2 = getFluidDensityAt(i + 1, j + 1);
+            density3 = getFluidDensityAt(i + 1, j);
 
             textureCoordinates.append(density0);
             textureCoordinates.append(density1);
@@ -192,7 +185,8 @@ int Simulation::to1DIndex(int i, int j)
 
 float Simulation::getFluidDensityAt(int i, int j)
 {
-
+    int idx = to1DIndex(i,j);
+    return getFluidDensityAt(idx);
 }
 
 float Simulation::getFluidDensityAt(int idx)
