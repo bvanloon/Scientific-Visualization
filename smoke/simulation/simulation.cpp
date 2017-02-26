@@ -144,6 +144,12 @@ void Simulation::onStep()
     this->step();
 }
 
+void Simulation::onWindowResized(int width, int height)
+{
+    delete this->grid;
+    this->grid = new UniformGrid(Settings::simulation().dimension);
+}
+
 int Simulation::to1DIndex(int i, int j)
 {
     return (j * Settings::simulation().dimension) + i;
