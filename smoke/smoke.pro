@@ -40,7 +40,10 @@ SOURCES += main.cpp\
     view/simulationtab.cpp \
     keyboardhandler.cpp \
     colormaps/zebramap.cpp \
-    colormaps/coldcolormap.cpp
+    colormaps/coldcolormap.cpp \
+    grid/vertex.cpp \
+    grid/uniformgrid.cpp \
+    grid/grid.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -63,7 +66,10 @@ HEADERS  += main.ih\
     view/simulationtab.h \
     keyboardhandler.h \
     colormaps/zebramap.h \
-    colormaps/coldcolormap.h
+    colormaps/coldcolormap.h \
+    grid/vertex.h \
+    grid/uniformgrid.h \
+    grid/grid.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
