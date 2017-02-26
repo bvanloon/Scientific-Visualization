@@ -7,7 +7,8 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    keyboardHandler(new KeyboardHandler(this))
 {
     ui->setupUi(this);
 
@@ -15,26 +16,40 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
+
     this->colorMapLegend = ui->colorMapLegend;
+
     this->simulationTab = ui->simulationTab;
+
     this->colorMapTab = ui->colormapTab;
 
-    connectCanvasAndSimulation();
-    connectCanvasAndSettings();
-    connectCanvasAndColorMapTab();
+    this->installEventFilter(this->keyboardHandler);
 
-    connectSimulationTabAndSettings();
-
-    connectColorMapTabAndColorMapLegend();
-    connectColorMapTabAndSettings();
-
-    connectColorMapLegendAndSettings();
+    setUpConnections();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete this->simulation;
+    delete this->keyboardHandler;
+}
+
+void MainWindow::setUpConnections()
+{
+    connectCanvasAndSimulation();
+    connectCanvasAndSettings();
+    connectCanvasAndColorMapTab();
+
+    connectSimulationTabAndSettings();
+    connectSimulationTabAndSimulation();
+
+    connectColorMapTabAndColorMapLegend();
+    connectColorMapTabAndSettings();
+
+    connectColorMapLegendAndSettings();
+
+    connectKeyBoardHandlerAndSimulation();
 }
 
 void MainWindow::connectCanvasAndSimulation()
@@ -76,6 +91,18 @@ void MainWindow::connectSimulationTabAndSettings()
 {
     connect(this->simulationTab, SIGNAL(forceChanged(float)),
             &Settings::simulation(), SLOT(onForceChanged(float)));
+    connect(this->simulationTab, SIGNAL(toggleFrozen()),
+            &Settings::simulation(), SLOT(onToggleFrozen()));
+    connect(&Settings::simulation(), SIGNAL(toggleFrozen(bool)),
+            this->simulationTab, SLOT(onToggleFrozen(bool)));
+    connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
+            &Settings::simulation(), SLOT(onTimeStepChanged(float)));
+}
+
+void MainWindow::connectSimulationTabAndSimulation()
+{
+    connect(this->simulationTab, SIGNAL(step()),
+            this->simulation, SLOT(onStep()));
 }
 
 void MainWindow::connectCanvasAndColorMapTab()
@@ -100,6 +127,12 @@ void MainWindow::connectColorMapTabAndSettings()
 {
     connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
             &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+}
+
+void MainWindow::connectKeyBoardHandlerAndSimulation()
+{
+    connect(this->keyboardHandler, SIGNAL(step()),
+            this->simulation, SLOT(onStep()));
 }
 
 

@@ -8,7 +8,8 @@ Settings::Simulation::Simulation(QObject *parent):
     dimension(50),
     frozen(false),
     force(10.0f),
-    cellSize(-1, -1)
+    cellSize(-1, -1),
+    timestep(0.4)
 {}
 
 const Settings::Simulation &Settings::Simulation::instance()
@@ -32,6 +33,22 @@ void Settings::Simulation::onForceChanged(float newForce)
 void Settings::Simulation::onWindowResized(int width, int height)
 {
     updateGridCellSize(width, height);
+}
+
+void Settings::Simulation::onToggleFrozen()
+{
+    this->frozen = !this->frozen;
+}
+
+void Settings::Simulation::onToggleFrozenKeyboard()
+{
+    this->frozen = !this->frozen;
+    emit toggleFrozen(this->frozen);
+}
+
+void Settings::Simulation::onTimeStepChanged(float value)
+{
+    this->timestep = value;
 }
 
 void Settings::Simulation::updateGridCellSize()
