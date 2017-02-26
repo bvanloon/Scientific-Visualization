@@ -24,8 +24,8 @@ private:
     bool eventFilter(QObject *object, QEvent *event);
 
     bool handleKeyEvent(QKeyEvent *event);
-    void handleSpaceBar(QKeyEvent * event);
-    void handleS(QKeyEvent * event);
+    void freezeSimulation(QKeyEvent * event);
+    void stepSimulation(QKeyEvent * event);
 
     void setUpConnections();
 };

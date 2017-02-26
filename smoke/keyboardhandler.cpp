@@ -28,22 +28,22 @@ bool KeyboardHandler::handleKeyEvent(QKeyEvent *event)
     case Qt::Key_A:
         //Fall through
     case Qt::Key_Space:
-        handleSpaceBar(event);
+        freezeSimulation(event);
         break;
     case Qt::Key_S:
-        handleS(event);
+        stepSimulation(event);
     default:
         break;
     }
     return true;
 }
 
-void KeyboardHandler::handleSpaceBar(QKeyEvent *event)
+void KeyboardHandler::freezeSimulation(QKeyEvent *event)
 {
     emit toggleFrozen();
 }
 
-void KeyboardHandler::handleS(QKeyEvent *event)
+void KeyboardHandler::stepSimulation(QKeyEvent *event)
 {
     emit step();
 }
