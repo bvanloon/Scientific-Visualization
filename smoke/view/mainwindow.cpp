@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->simulationTab = ui->simulationTab;
 
-    this->colorMapTab = ui->colormapTab;
+    this->smokeColorMapTab = ui->smokeColormapTab;
 
     this->installEventFilter(this->keyboardHandler);
 
@@ -42,7 +42,7 @@ void MainWindow::setUpConnections()
     connectSimulationTabAndSettings();
     connectSimulationTabAndSimulation();
 
-    connectColorMapTabAndSettings();
+    connectSmokeColorMapTabAndSettings();
 
     connectKeyBoardHandlerAndSimulation();
 }
@@ -91,24 +91,24 @@ void MainWindow::connectSimulationTabAndSimulation()
 
 void MainWindow::connectCanvasAndColorMapTab()
 {
-    connect(this->colorMapTab, SIGNAL(setClamping(bool)),
+    connect(this->smokeColorMapTab, SIGNAL(setClamping(bool)),
             this->canvas, SLOT(onSetClamping(bool)));
-    connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
+    connect(this->smokeColorMapTab, SIGNAL(setClampingRange(float,float)),
             this->canvas, SLOT(onsetClampingRange(float,float)));
-    connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+    connect(this->smokeColorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
             this->canvas, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
-void MainWindow::connectColorMapTabAndSettings()
+void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-    connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
+    connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
             &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
     connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-            this->colorMapTab, SLOT(onValueRangeChanged(float,float)));
+            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
     connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
-            this->colorMapTab, SLOT(onValueRangeChanged(float,float)));
+            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
     connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            this->colorMapTab, SLOT(onForceChanged(float)));
+            this->smokeColorMapTab, SLOT(onForceChanged(float)));
 }
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()

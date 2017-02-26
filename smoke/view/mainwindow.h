@@ -30,7 +30,7 @@ private:
     Canvas *canvas;
     Simulation *simulation;
     SimulationSettingPane *simulationTab;
-    ColorMapTab *colorMapTab;
+    ColorMapTab *smokeColorMapTab;
 
     void setUpConnections();
 
@@ -41,7 +41,7 @@ private:
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
 
-    void connectColorMapTabAndSettings();
+    void connectSmokeColorMapTabAndSettings();
 
     void connectKeyBoardHandlerAndSimulation();
 };
