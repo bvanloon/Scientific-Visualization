@@ -6,12 +6,13 @@
 #include "rainbowcolormap.h"
 #include "grayscalecolormap.h"
 #include "heatcolormap.h"
+#include "zebramap.h"
 
 
 class ColorMapFactory
 {
 public:
-    enum colorMaps { rainbow, heat, grayScale };
+    enum colorMaps { rainbow, heat, grayScale, zebra };
 
     ~ColorMapFactory();
 
