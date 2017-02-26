@@ -6,118 +6,150 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>340</width>
-    <height>500</height>
+    <width>698</width>
+    <height>799</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0">
-    <widget class="QLabel" name="colormapSelectorLabel">
-     <property name="text">
-      <string>Color map</string>
-     </property>
-    </widget>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <widget class="ColorMapLegend" name="colormapLegend" native="true"/>
    </item>
-   <item row="0" column="1">
-    <widget class="QComboBox" name="colormapSelector"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="variableSelectorLabel">
-     <property name="text">
-      <string>Variable</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QComboBox" name="variableSelector"/>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="numColorsLabel">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Number of colors</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="IntSlider" name="numColorsSlider" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QCheckBox" name="clampingCheckBox">
-     <property name="text">
-      <string>Clamping</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="clampingMinimumLabel">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Clamp min</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="FloatSlider" name="clampingMinimumSlider" native="true"/>
-   </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="clampingMaximumLabel">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Clamp max</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="FloatSlider" name="clampingMaximumSlider" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>72</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Saturation</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
-    <widget class="FloatSlider" name="saturationSlider" native="true"/>
+   <item>
+    <layout class="QVBoxLayout" name="UIElementsLayout">
+     <item>
+      <layout class="QFormLayout" name="ColorMapParameterisationLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="variableSelectorLabel">
+         <property name="toolTip">
+          <string>the scalar variable to use to determine the color</string>
+         </property>
+         <property name="text">
+          <string>Variable</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="variableSelector"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="colormapSelectorLabel">
+         <property name="toolTip">
+          <string>the colormap to be used</string>
+         </property>
+         <property name="text">
+          <string>Color map</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="colormapSelector"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="numColorsLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>72</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>the number of colors in the colormap</string>
+         </property>
+         <property name="text">
+          <string>Number of colors</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="IntSlider" name="numColorsSlider" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>72</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="clampingGroupBox">
+       <property name="title">
+        <string>Clamping</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="clampingCheckBox">
+          <property name="toolTip">
+           <string>enable clamping</string>
+          </property>
+          <property name="text">
+           <string>enable</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="clampingFormLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="clampingMinimumLabel">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>72</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>minimum clamping factor, this factor is multiplied with the mininum value of the current scalar to determine the final clamping value.</string>
+            </property>
+            <property name="text">
+             <string>Clamp min</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="FloatSlider" name="clampingMinimumSlider" native="true"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="clampingMaximumLabel">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>72</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>maximum clamping factor, this factor is multiplied with the maximum value of the current scalar to determine the final clamping value.</string>
+            </property>
+            <property name="text">
+             <string>Clamp max</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="FloatSlider" name="clampingMaximumSlider" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>72</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -125,13 +157,19 @@
   <customwidget>
    <class>IntSlider</class>
    <extends>QWidget</extends>
-   <header>view/intslider.h</header>
+   <header location="global">view/floatslider.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>FloatSlider</class>
    <extends>QWidget</extends>
    <header location="global">view/floatslider.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColorMapLegend</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormaplegend.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

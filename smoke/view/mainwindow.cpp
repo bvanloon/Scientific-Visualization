@@ -2,12 +2,13 @@
 #include "ui_mainwindow.h"
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
-#include "settings/canvass.h"
+#include "settings/simulationsettings.h"
+#include "settings/canvassettings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    keyboardHandler(new KeyboardHandler(this))
 {
     ui->setupUi(this);
 
@@ -15,22 +16,35 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
-    this->colorMapLegend = ui->colorMapLegend;
-    this->simulationTab = ui->simulationTab;
-    this->colorMapTab = ui->colormapTab;
 
-    connectCanvasAndSimulation();
-    connectCanvasAndSettings();
-    connectSettingsAndColorMapLegend();
-    connectColorMapTabAndColorMapLegend();
-    connectSettingAndSimulationTab();
-    connectCanvasAndColorMapTab();
+    this->simulationTab = ui->simulationTab;
+
+    this->smokeColorMapTab = ui->smokeColormapTab;
+
+    this->installEventFilter(this->keyboardHandler);
+
+    setUpConnections();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete this->simulation;
+    delete this->keyboardHandler;
+}
+
+void MainWindow::setUpConnections()
+{
+    connectCanvasAndSimulation();
+    connectCanvasAndSettings();
+    connectCanvasAndColorMapTab();
+
+    connectSimulationTabAndSettings();
+    connectSimulationTabAndSimulation();
+
+    connectSmokeColorMapTabAndSettings();
+
+    connectKeyBoardHandlerAndSimulation();
 }
 
 void MainWindow::connectCanvasAndSimulation()
@@ -44,41 +58,63 @@ void MainWindow::connectCanvasAndSettings()
     connect(&Settings::simulation(),SIGNAL(valueRangeChanged(float,float)),
             this->canvas, SLOT(onValueRangeChanged(float,float)));
 
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->canvas, SLOT(onValueRangeChanged(float,float)));
+
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::canvas(), SLOT(onWindowResized(int, int)));
 
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::simulation(), SLOT(onWindowResized(int, int)));
+
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            this->canvas, SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectSettingsAndColorMapLegend()
-{
-    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-            this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
-}
-
-void MainWindow::connectSettingAndSimulationTab()
+void MainWindow::connectSimulationTabAndSettings()
 {
     connect(this->simulationTab, SIGNAL(forceChanged(float)),
             &Settings::simulation(), SLOT(onForceChanged(float)));
+    connect(this->simulationTab, SIGNAL(toggleFrozen()),
+            &Settings::simulation(), SLOT(onToggleFrozen()));
+    connect(&Settings::simulation(), SIGNAL(toggleFrozen(bool)),
+            this->simulationTab, SLOT(onToggleFrozen(bool)));
+    connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
+            &Settings::simulation(), SLOT(onTimeStepChanged(float)));
+}
+
+void MainWindow::connectSimulationTabAndSimulation()
+{
+    connect(this->simulationTab, SIGNAL(step()),
+            this->simulation, SLOT(onStep()));
 }
 
 void MainWindow::connectCanvasAndColorMapTab()
 {
-    connect(this->colorMapTab, SIGNAL(setClamping(bool)),
+    connect(this->smokeColorMapTab, SIGNAL(setClamping(bool)),
             this->canvas, SLOT(onSetClamping(bool)));
-    connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
+    connect(this->smokeColorMapTab, SIGNAL(setClampingRange(float,float)),
             this->canvas, SLOT(onsetClampingRange(float,float)));
-    connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+    connect(this->smokeColorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
             this->canvas, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
-void MainWindow::connectColorMapTabAndColorMapLegend()
+void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-    connect(this->colorMapTab, SIGNAL(setClampingRange(float,float)),
-            this->colorMapLegend, SLOT(onClampRangeChanged(float,float)));
-    connect(this->colorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
-            this->colorMapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
+    connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
+            &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
+            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            this->smokeColorMapTab, SLOT(onForceChanged(float)));
+}
+
+void MainWindow::connectKeyBoardHandlerAndSimulation()
+{
+    connect(this->keyboardHandler, SIGNAL(step()),
+            this->simulation, SLOT(onStep()));
 }
 
 

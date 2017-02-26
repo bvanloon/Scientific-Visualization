@@ -5,10 +5,10 @@
 #include <QPointF>
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
+#include "settings/simulationsettings.h"
 
 SimulationRealization::SimulationRealization():
-    dt(0.4), visc(0.001),
+    visc(0.001),
     color_dir(0), draw_smoke(0), draw_vecs(1),
     COLOR_BLACKWHITE(0), COLOR_RAINBOW(1), COLOR_BANDS(2),
     scalar_col(0)
@@ -163,6 +163,6 @@ void SimulationRealization::set_forces(void)
 void SimulationRealization::do_one_simulation_step(void)
 {
       set_forces();
-      solve(Settings::simulation().dimension, vx, vy, vx0, vy0, visc, dt);
-      diffuse_matter(Settings::simulation().dimension, vx, vy, rho, rho0, dt);
+      solve(Settings::simulation().dimension, vx, vy, vx0, vy0, visc, Settings::simulation().timestep);
+      diffuse_matter(Settings::simulation().dimension, vx, vy, rho, rho0, Settings::simulation().timestep);
 }

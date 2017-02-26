@@ -30,7 +30,7 @@ signals:
     void valueChanged(float value);
 
 private slots:
-    void on_slider_sliderMoved(int position);
+    void on_slider_valueChanged(int position);
 
 private:
     Ui::FloatSlider *ui;

@@ -10,6 +10,7 @@
 #include "utilities.h"
 #include "colormaps/colormapfactory.h"
 #include "settings/settings.h"
+#include "settings/visualizationsettings.h"
 
 
 const int ColorMapLegend::colorMapImageWidth = 10;
@@ -42,20 +43,29 @@ ColorMapLegend::~ColorMapLegend()
 void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 {
     setColorMap(colorMap);
-    update();
 }
 
 void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
 {
-    this->minimumValue = minimum;
-    this->maximumValue = maximum;
-    update();
+    setValueRange(minimum, maximum);
 }
 
 void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
 {
+    setFactorRange(minimum, maximum);
+}
+
+void ColorMapLegend::setFactorRange(float minimum, float maximum)
+{
     this->minimumFactor = minimum;
     this->maximumFactor = maximum;
+    update();
+}
+
+void ColorMapLegend::setValueRange(float minimum, float maximum)
+{
+    this->minimumValue = minimum;
+    this->maximumValue = maximum;
     update();
 }
 
@@ -130,7 +140,8 @@ void ColorMapLegend::setColorMap(AbstractColorMap colorMap)
     rotating.rotate(90);
     this->colorMapImage = colorMap.transformed(rotating);
     this->numberOfColors = colorMap.getNumColors();
-    this->numberOfTicks = std::min(colorMap.getNumColors(), maximumNumberOfTicks);
+    this->numberOfTicks = std::min(colorMap.getNumColors() + 1, maximumNumberOfTicks);
+    update();
 }
 
 

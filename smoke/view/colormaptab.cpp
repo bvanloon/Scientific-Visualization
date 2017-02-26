@@ -3,6 +3,7 @@
 #include "settings/settings.h"
 
 
+
 #include <QDebug>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
@@ -39,7 +40,7 @@ void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value){
 void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
 {
     float maximum = this->ui->clampingMaximumSlider->value();
-    float minimum = qMin(value, maximum + Settings::defaults::visualization::colormap::clampEpsilon);
+    float minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
     this->ui->clampingMinimumSlider->setValue(minimum);
     emit setClampingRange(minimum, maximum);
 
@@ -74,10 +75,15 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::clampMin,
                 Settings::defaults::visualization::colormap::clampMax,
                 Settings::defaults::visualization::colormap::clampMax);
+
     this->ui->clampingMinimumSlider->init(
                 Settings::defaults::visualization::colormap::clampMin,
                 Settings::defaults::visualization::colormap::clampMax,
                 Settings::defaults::visualization::colormap::clampMin);
+
+    this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
+    this->ui->colormapSelector->setCurrentIndex(Settings::defaults::visualization::colormap::colormap);
+
     this->ui->numColorsSlider->init(
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
@@ -88,16 +94,28 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::saturation);
 
     this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
+
+    this->ui->variableSelector->addItems(Settings::Visualization::getScalarVariableNames());
+    this->ui->variableSelector->setCurrentIndex(Settings::visualization().scalar);
 }
 
 void ColorMapTab::setUpConnections()
 {
     connect(this->ui->clampingMinimumSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_clampingMinimumSlider_valueChanged(float)));
+
     connect(this->ui->clampingMaximumSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
+
     connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_numColorsSlider_valueChanged(int)));
+
+    connect(this, SIGNAL(setClampingRange(float,float)),
+            this->ui->colormapLegend, SLOT(onClampRangeChanged(float,float)));
+    connect(this, SIGNAL(colorMapChanged(AbstractColorMap)),
+            this->ui->colormapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
+    connect(this, SIGNAL(valueRangeChanged(float,float)),
+            this->ui->colormapLegend, SLOT(onValueRangeChanged(float,float)));
     connect(this->ui->saturationSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_saturationSlider_valueChanged(float)));
 }
@@ -118,4 +136,22 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
                 ui->numColorsSlider->value(),
                 ui->saturationSlider->value());
     emit colorMapChanged(*newColormap);
+}
+
+void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
+{
+    emit scalarVariableChanged(
+                static_cast<Settings::Visualization::ScalarVariable>(index));
+}
+
+void ColorMapTab::onValueRangeChanged(float minimum, float maximum)
+{
+    emit valueRangeChanged(minimum, maximum);
+}
+
+void ColorMapTab::onForceChanged(float force)
+{
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        emit valueRangeChanged(0.0f, force);
+    }
 }

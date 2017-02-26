@@ -2,7 +2,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 #include <QImage>
-#include "settings/simulations.h"
+#include "settings/simulationsettings.h"
 
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
@@ -43,6 +43,13 @@ void Canvas::onsetClampingRange(float minimum, float maximum)
 void Canvas::onColorMapChanged(AbstractColorMap colormap)
 {
     setTexture(colormap);
+}
+
+void Canvas::onForceChanged(float force)
+{
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        setColorMapValueRange(0.0f, force);
+    }
 }
 
 void Canvas::idleLoop()
@@ -102,8 +109,8 @@ void Canvas::paintGL()
 
     this->texture->bind();
 
-//    vectorEngine->draw(this->simulation);
     smokeEngine->draw(this->simulation);
+//    vectorEngine->draw(this->simulation);
 
     this->texture->release();
 
@@ -177,6 +184,8 @@ void Canvas::resizeGL(int width, int height)
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    QPointF mousePosition = event->localPos();
-    emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+    if(!Settings::simulation().frozen){
+        QPointF mousePosition = event->localPos();
+        emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+    }
 }

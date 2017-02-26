@@ -6,8 +6,9 @@
 #include <view/canvas.h>
 #include "simulation/simulation.h"
 #include "colormaplegend.h"
-#include "view/simulationsettingpane.h"
+#include "view/simulationtab.h"
 #include "view/colormaptab.h"
+#include "keyboardhandler.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,21 +22,28 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    KeyboardHandler* keyboardHandler;
+
 private:
     Ui::MainWindow *ui;
 
     Canvas *canvas;
     Simulation *simulation;
-    ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationTab;
-    ColorMapTab *colorMapTab;
+    ColorMapTab *smokeColorMapTab;
+
+    void setUpConnections();
 
     void connectCanvasAndSimulation();
     void connectCanvasAndSettings();
     void connectCanvasAndColorMapTab();
-    void connectSettingsAndColorMapLegend();
-    void connectSettingAndSimulationTab();
-    void connectColorMapTabAndColorMapLegend();
+
+    void connectSimulationTabAndSettings();
+    void connectSimulationTabAndSimulation();
+
+    void connectSmokeColorMapTabAndSettings();
+
+    void connectKeyBoardHandlerAndSimulation();
 };
 
 #endif // MAINWINDOW_H

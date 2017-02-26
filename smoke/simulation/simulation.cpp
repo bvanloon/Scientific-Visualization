@@ -1,9 +1,9 @@
 #include "simulation.h"
 
 #include "settings/settings.h"
-#include "settings/simulations.h"
-#include "settings/canvass.h"
-#include "settings/visualizations.h"
+#include "settings/simulationsettings.h"
+#include "settings/canvassettings.h"
+#include "settings/visualizationsettings.h"
 
 #include <QDebug>
 
@@ -80,36 +80,47 @@ QVector<QVector3D> Simulation::getGridTriangulation()
     return gridTriangles;
 }
 
-QVector<float> Simulation::getTextureCoordinates()
+QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter)
 {
     QVector<float> textureCoordinates;
-
-    int idx0, idx1, idx2, idx3;
+    float coordinate0, coordinate1, coordinate2, coordinate3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * Settings::simulation().dimension) + i;
-            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
-            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
-            idx3 = (j * Settings::simulation().dimension) + i + 1;
 
-            textureCoordinates.append(this->realization->rho[idx0] );
-            textureCoordinates.append(this->realization->rho[idx1] );
-            textureCoordinates.append(this->realization->rho[idx2] );
+            coordinate0 = (this->*getter)(i, j);
+            coordinate1 = (this->*getter)(i, j + 1);
+            coordinate2 = (this->*getter)(i + 1, j + 1);
+            coordinate3 = (this->*getter)(i + 1, j);
 
-            textureCoordinates.append(this->realization->rho[idx0] );
-            textureCoordinates.append(this->realization->rho[idx2] );
-            textureCoordinates.append(this->realization->rho[idx3] );
+            textureCoordinates.append(coordinate0);
+            textureCoordinates.append(coordinate1);
+            textureCoordinates.append(coordinate2);
+
+            textureCoordinates.append(coordinate0);
+            textureCoordinates.append(coordinate2);
+            textureCoordinates.append(coordinate3);
         }
     }
-
-
     return textureCoordinates;
 }
 
+QVector<float> Simulation::getTexCoordFluidDensity()
+{
+    return getTexCoord(&Simulation::getFluidDensityAt);
+}
 
+QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
+{
+    return getTexCoord(&Simulation::getFluidVelocityMagnitudeAt);
+}
+
+QVector<float> Simulation::getTexCoordForceFieldMagnitude()
+{
+    return getTexCoord(&Simulation::getForceMagnitudeAt);
+}
 
 void Simulation::step()
 {
@@ -125,5 +136,68 @@ void Simulation::onMouseMoved(QPoint newPosition)
     this->lastMousePosition = newPosition;
 }
 
+void Simulation::onStep()
+{
+    this->step();
+}
 
+int Simulation::to1DIndex(int i, int j)
+{
+    return (j * Settings::simulation().dimension) + i;
+}
 
+float Simulation::getFluidDensityAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidDensityAt(idx);
+}
+
+float Simulation::getFluidDensityAt(int idx)
+{
+    return this->realization->rho[idx];
+}
+
+QVector2D Simulation::getFluidVelocityAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidVelocityAt(idx);
+}
+
+QVector2D Simulation::getFluidVelocityAt(int idx)
+{
+    return QVector2D(this->realization->vx[idx],
+                     this->realization->vy[idx]);
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidVelocityMagnitudeAt(idx);
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(int idx)
+{
+    return getFluidVelocityAt(idx).length();
+}
+
+QVector2D Simulation::getForceAt(int i, int j)
+{
+    int idx = to1DIndex(i, j);
+    return getForceAt(idx);
+}
+
+QVector2D Simulation::getForceAt(int idx)
+{
+    return QVector2D(this->realization->fx[idx],
+                     this->realization->fy[idx]);
+}
+
+float Simulation::getForceMagnitudeAt(int i, int j)
+{
+    return getForceAt(i, j).length();
+}
+
+float Simulation::getForceMagnitudeAt(int idx)
+{
+    return getForceAt(idx).length();
+}
