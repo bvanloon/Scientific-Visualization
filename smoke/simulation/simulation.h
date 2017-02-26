@@ -18,15 +18,15 @@ public:
     explicit Simulation(QObject *parent = 0);
     ~Simulation();
 
-    typedef QVector<float> (Simulation::*textureCoordinateGetter)(void);
+    typedef QVector<float> (Simulation::*textureCoordinateGetter)(QVector<QVector3D>);
     typedef float (Simulation::*textureCoordinateGetterSimple)(int, int);
 
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
 
-    QVector<float> getTexCoordFluidDensity();
-    QVector<float> getTexCoordFluidVelocityMagnitude();
-    QVector<float> getTexCoordForceFieldMagnitude();
+    QVector<float> getTexCoordFluidDensity(QVector<QVector3D> vertexPositions);
+    QVector<float> getTexCoordFluidVelocityMagnitude(QVector<QVector3D> vertexPositions);
+    QVector<float> getTexCoordForceFieldMagnitude(QVector<QVector3D> vertexPositions);
 
     SimulationRealization *realization;
 
@@ -43,7 +43,7 @@ private:
     QPoint lastMousePosition;
     UniformGrid* grid;
 
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter);
+    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions);
 
     int to1DIndex(int i, int j);
     int to1DIndex(QVector3D position);
