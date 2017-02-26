@@ -94,7 +94,8 @@ void Canvas::initializeUniforms()
 void Canvas::initializeColorMapInfo()
 {
     setTexture(*ColorMapFactory::get()->createColorMap(Settings::defaults::visualization::colormap::colormap,
-                                                      Settings::defaults::visualization::colormap::numColors));
+                                                      Settings::defaults::visualization::colormap::numColors,
+                                                      Settings::defaults::visualization::colormap::saturation));
     setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
     setColorMapClampRange(Settings::defaults::visualization::colormap::clampMin, Settings::defaults::visualization::colormap::clampMax);
     setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);

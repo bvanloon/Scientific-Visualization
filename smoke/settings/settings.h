@@ -32,6 +32,9 @@ namespace Settings {
                 static const int numColors = 256;
                 static const int minNumColors = 2;
                 static const int maxNumColors = 256;
+                static const float saturation = 1.0f;
+                static const float minSaturation = 0.0f;
+                static const float maxSaturation = 1.0f;
 
             }
         }

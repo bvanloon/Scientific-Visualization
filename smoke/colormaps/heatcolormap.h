@@ -6,10 +6,10 @@
 class HeatColorMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap * Create(int numColors);
+    static AbstractColorMap * Create(int numColors, float saturation);
 
 private:
-    HeatColorMap(int numColors);
+    HeatColorMap(int numColors, float saturation);
 
     void fill();
     QRgb toHeatColor(float f);

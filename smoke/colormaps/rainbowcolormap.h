@@ -6,15 +6,15 @@
 class RainbowColorMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap* Create(int numColors);
+    static AbstractColorMap* Create(int numColors, float saturation);
 
 private:
     float dx;
 
-    RainbowColorMap(int numColors, float dx = 0.8);
+    RainbowColorMap(int numColors, float saturation, float dx = 0.8);
 
     void fill();
-    QRgb toRainbowColor(float i);
+    QColor toRainbowColor(float i);
 
 };
 
