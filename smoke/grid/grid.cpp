@@ -9,3 +9,8 @@ const QVector<QVector3D> &Grid::getVertexPositions() const
 {
     return this->vertexPositions;
 }
+
+const int &Grid::numVertices() const
+{
+    return this->vertexPositions.size();
+}
