@@ -18,6 +18,6 @@ void GrayScaleColorMap::fill()
     float f = 0;
     //Scale grayscale with 255 (total number of available steps in RGB
     for(int i = 0; i < numColors; f += stepSize * 255, i++){
-        setPixel(i, 0, setSaturation(qRgb(f,f,f), saturation));
+        setPixel(i, 0, qRgb(f,f,f));
     }
 }

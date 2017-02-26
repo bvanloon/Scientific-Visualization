@@ -19,6 +19,6 @@ void ZebraMap::fill()
 
     //Scale grayscale with 255 (total number of available steps in RGB
     for(int i = 0; i < numColors; i +=2 ){
-        setPixel(i, 0, setSaturation(qRgb(1,1,1), saturation));
+        setPixel(i, 0, qRgb(1,1,1));
     }
 }
