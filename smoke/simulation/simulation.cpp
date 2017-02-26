@@ -85,6 +85,7 @@ QVector<float> Simulation::getTexCoordFluidDensity()
     QVector<float> textureCoordinates;
 
     int idx0, idx1, idx2, idx3;
+    float density0, density1, density2, density3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
@@ -95,13 +96,18 @@ QVector<float> Simulation::getTexCoordFluidDensity()
             idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
             idx3 = (j * Settings::simulation().dimension) + i + 1;
 
-            textureCoordinates.append(this->realization->rho[idx0] );
-            textureCoordinates.append(this->realization->rho[idx1] );
-            textureCoordinates.append(this->realization->rho[idx2] );
+            density0 = getFluidDensityAt(idx0);
+            density1 = getFluidDensityAt(idx1);
+            density2 = getFluidDensityAt(idx2);
+            density3 = getFluidDensityAt(idx3);
 
-            textureCoordinates.append(this->realization->rho[idx0] );
-            textureCoordinates.append(this->realization->rho[idx2] );
-            textureCoordinates.append(this->realization->rho[idx3] );
+            textureCoordinates.append(density0);
+            textureCoordinates.append(density1);
+            textureCoordinates.append(density2);
+
+            textureCoordinates.append(density0);
+            textureCoordinates.append(density2);
+            textureCoordinates.append(density3);
         }
     }
     return textureCoordinates;
@@ -184,6 +190,16 @@ int Simulation::to1DIndex(int i, int j)
     return (j * Settings::simulation().dimension) + i;
 }
 
+float Simulation::getFluidDensityAt(int i, int j)
+{
+
+}
+
+float Simulation::getFluidDensityAt(int idx)
+{
+    return this->realization->rho[idx];
+}
+
 QVector2D Simulation::getFluidVelocityAt(int i, int j)
 {
     int idx = to1DIndex(i,j);
@@ -228,6 +244,3 @@ float Simulation::getForceMagnitudeAt(int idx)
 {
     return getForceAt(idx).length();
 }
-
-
-

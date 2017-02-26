@@ -40,6 +40,9 @@ private:
 
     int to1DIndex(int i, int j);
 
+    float getFluidDensityAt(int i, int j);
+    float getFluidDensityAt(int idx);
+
     QVector2D getFluidVelocityAt(int i, int j);
     QVector2D getFluidVelocityAt(int idx);
 
