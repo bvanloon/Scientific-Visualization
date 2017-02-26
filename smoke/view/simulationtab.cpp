@@ -58,7 +58,7 @@ void SimulationSettingPane::on_stepButton_clicked()
 
 void SimulationSettingPane::onToggleFrozen(bool frozen)
 {
-    this->ui->stepButton->setDisabled(!frozen);
+    this->ui->stepButton->setDisabled(! frozen);
     setFreezeButtonLabel(frozen);
 }
 
