@@ -42,9 +42,8 @@ void Settings::Simulation::onToggleFrozen()
 
 void Settings::Simulation::onToggleFrozenKeyboard()
 {
-    qDebug() << "Settings::Simulation::onToggleFrozenKeyboard";
     this->frozen = !this->frozen;
-    emit toggleFrozen();
+    emit toggleFrozen(this->frozen);
 }
 
 void Settings::Simulation::onTimeStepChanged(float value)

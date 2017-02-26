@@ -30,7 +30,7 @@ public:
 signals:
     void valueRangeChanged(float minimum, float maximum);
     void forceChanged(float force);
-    void toggleFrozen();
+    void toggleFrozen(bool frozen);
 
 public slots:
     void onDimensionChanged(int newDimension);
