@@ -80,84 +80,46 @@ QVector<QVector3D> Simulation::getGridTriangulation()
     return gridTriangles;
 }
 
-QVector<float> Simulation::getTexCoordFluidDensity()
+QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter)
 {
     QVector<float> textureCoordinates;
-
-    int idx0, idx1, idx2, idx3;
+    float coordinate0, coordinate1, coordinate2, coordinate3;
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
         for (int i = 0; i < Settings::simulation().dimension - 1; i++)
         {
-            idx0 = (j * Settings::simulation().dimension) + i;
-            idx1 = ((j  + 1)* Settings::simulation().dimension) + i;
-            idx2 = ((j  + 1)* Settings::simulation().dimension) + i + 1;
-            idx3 = (j * Settings::simulation().dimension) + i + 1;
 
-            textureCoordinates.append(this->realization->rho[idx0] );
-            textureCoordinates.append(this->realization->rho[idx1] );
-            textureCoordinates.append(this->realization->rho[idx2] );
+            coordinate0 = (this->*getter)(i, j);
+            coordinate1 = (this->*getter)(i, j + 1);
+            coordinate2 = (this->*getter)(i + 1, j + 1);
+            coordinate3 = (this->*getter)(i + 1, j);
 
-            textureCoordinates.append(this->realization->rho[idx0] );
-            textureCoordinates.append(this->realization->rho[idx2] );
-            textureCoordinates.append(this->realization->rho[idx3] );
+            textureCoordinates.append(coordinate0);
+            textureCoordinates.append(coordinate1);
+            textureCoordinates.append(coordinate2);
+
+            textureCoordinates.append(coordinate0);
+            textureCoordinates.append(coordinate2);
+            textureCoordinates.append(coordinate3);
         }
     }
     return textureCoordinates;
+}
+
+QVector<float> Simulation::getTexCoordFluidDensity()
+{
+    return getTexCoord(&Simulation::getFluidDensityAt);
 }
 
 QVector<float> Simulation::getTexCoordFluidVelocityMagnitude()
 {
-    QVector<float> textureCoordinates;
-
-    float velocity0, velocity1, velocity2, velocity3;
-
-    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
-    {
-        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
-        {
-            velocity0 = getFluidVelocityMagnitudeAt(i, j);
-            velocity1 = getFluidVelocityMagnitudeAt(i, j + 1);
-            velocity2 = getFluidVelocityMagnitudeAt(i + 1, j + 1);
-            velocity3 = getFluidVelocityMagnitudeAt(i + 1, j);
-
-            textureCoordinates.append(velocity0);
-            textureCoordinates.append(velocity1);
-            textureCoordinates.append(velocity2);
-
-            textureCoordinates.append(velocity0);
-            textureCoordinates.append(velocity2);
-            textureCoordinates.append(velocity3);
-        }
-    }
-    return textureCoordinates;
+    return getTexCoord(&Simulation::getFluidVelocityMagnitudeAt);
 }
 
 QVector<float> Simulation::getTexCoordForceFieldMagnitude()
 {
-    QVector<float> textureCoordinates;
-    float force0, force1, force2, force3;
-
-    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
-    {
-        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
-        {
-            force0 = getForceMagnitudeAt(i, j);
-            force1 = getForceMagnitudeAt(i, j + 1);
-            force2 = getForceMagnitudeAt(i + 1, j + 1);
-            force3 = getForceMagnitudeAt(i + 1, j);
-
-            textureCoordinates.append(force0);
-            textureCoordinates.append(force1);
-            textureCoordinates.append(force2);
-
-            textureCoordinates.append(force0);
-            textureCoordinates.append(force2);
-            textureCoordinates.append(force3);
-        }
-    }
-    return textureCoordinates;
+    return getTexCoord(&Simulation::getForceMagnitudeAt);
 }
 
 void Simulation::step()
@@ -182,6 +144,17 @@ void Simulation::onStep()
 int Simulation::to1DIndex(int i, int j)
 {
     return (j * Settings::simulation().dimension) + i;
+}
+
+float Simulation::getFluidDensityAt(int i, int j)
+{
+    int idx = to1DIndex(i,j);
+    return getFluidDensityAt(idx);
+}
+
+float Simulation::getFluidDensityAt(int idx)
+{
+    return this->realization->rho[idx];
 }
 
 QVector2D Simulation::getFluidVelocityAt(int i, int j)
@@ -228,6 +201,3 @@ float Simulation::getForceMagnitudeAt(int idx)
 {
     return getForceAt(idx).length();
 }
-
-
-
