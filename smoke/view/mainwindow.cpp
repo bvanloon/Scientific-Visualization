@@ -32,6 +32,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete this->simulation;
+    delete this->keyboardHandler;
 }
 
 void MainWindow::setUpConnections()
