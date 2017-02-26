@@ -7,6 +7,7 @@
 #include <QVector2D>
 #include <QPoint>
 #include <float.h>
+#include "grid/uniformgrid.h"
 
 #include "simulation/simulationrealization.h"
 
@@ -39,6 +40,7 @@ public slots:
 
 private:
     QPoint lastMousePosition;
+    UniformGrid* grid;
 
     QVector<float> getTexCoord(textureCoordinateGetterSimple getter);
 

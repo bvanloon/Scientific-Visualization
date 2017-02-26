@@ -8,7 +8,9 @@
 #include <QDebug>
 
 Simulation::Simulation(QObject *parent) :
-    QObject(parent), lastMousePosition(0.0f, 0.0f)
+    QObject(parent),
+    lastMousePosition(0.0f, 0.0f),
+    grid(new UniformGrid(Settings::simulation().dimension))
 {
     this->realization = new SimulationRealization();
 }
@@ -16,6 +18,7 @@ Simulation::Simulation(QObject *parent) :
 Simulation::~Simulation()
 {
     delete this->realization;
+    delete this->grid;
 }
 
 
