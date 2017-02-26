@@ -22,7 +22,7 @@ public:
 
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter);
+
     QVector<float> getTexCoordFluidDensity();
     QVector<float> getTexCoordFluidVelocityMagnitude();
     QVector<float> getTexCoordForceFieldMagnitude();
@@ -39,6 +39,8 @@ public slots:
 
 private:
     QPoint lastMousePosition;
+
+    QVector<float> getTexCoord(textureCoordinateGetterSimple getter);
 
     int to1DIndex(int i, int j);
 
