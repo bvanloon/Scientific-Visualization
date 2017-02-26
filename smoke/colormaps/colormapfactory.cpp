@@ -31,7 +31,7 @@ void ColorMapFactory::registerColorMap(const ColorMapFactory::colorMaps colormap
     colorMapMapping[colormap] = pfnCreate;
 }
 
-AbstractColorMap *ColorMapFactory::createColorMap(const ColorMapFactory::colorMaps colormap, int numColors, int saturation)
+AbstractColorMap *ColorMapFactory::createColorMap(const ColorMapFactory::colorMaps colormap, int numColors, float saturation)
 {
     static AbstractColorMap* currentColormap;
     std::map<colorMaps, CreateColorMapFn>::iterator it = colorMapMapping.find(colormap);

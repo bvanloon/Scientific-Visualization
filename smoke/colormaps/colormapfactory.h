@@ -22,7 +22,7 @@ public:
 
     static QStringList getColorMapNames();
 
-    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, int saturation);
+    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, float saturation);
 
 private:
     typedef AbstractColorMap* (*CreateColorMapFn)(int, float);
