@@ -46,21 +46,27 @@ private:
     QVector<float> getTexCoord(textureCoordinateGetterSimple getter);
 
     int to1DIndex(int i, int j);
+    int to1DIndex(QVector3D position);
 
     float getFluidDensityAt(int i, int j);
     float getFluidDensityAt(int idx);
+    float getFluidDensityAt(QVector3D position);
 
     QVector2D getFluidVelocityAt(int i, int j);
     QVector2D getFluidVelocityAt(int idx);
+    QVector2D getFluidVelocityAt(QVector3D position);
 
     float getFluidVelocityMagnitudeAt(int i, int j);
     float getFluidVelocityMagnitudeAt(int idx);
+    float getFluidVelocityMagnitudeAt(QVector3D position);
 
     QVector2D getForceAt(int i, int j);
     QVector2D getForceAt(int idx);
+    QVector2D getForceAt(QVector3D position);
 
     float getForceMagnitudeAt(int i, int j);
     float getForceMagnitudeAt(int idx);
+    float getForceMagnitudeAt(QVector3D position);
 };
 
 #endif // SMOKE_H
