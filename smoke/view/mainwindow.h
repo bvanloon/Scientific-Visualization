@@ -29,7 +29,6 @@ private:
 
     Canvas *canvas;
     Simulation *simulation;
-    ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationTab;
     ColorMapTab *colorMapTab;
 
@@ -38,8 +37,6 @@ private:
     void connectCanvasAndSimulation();
     void connectCanvasAndSettings();
     void connectCanvasAndColorMapTab();
-
-    void connectColorMapLegendAndSettings();
 
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();

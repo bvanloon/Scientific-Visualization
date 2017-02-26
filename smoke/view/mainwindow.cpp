@@ -17,8 +17,6 @@ MainWindow::MainWindow(QWidget *parent) :
     this->canvas = ui->openGLWidget;
     this->canvas->setSimulation(this->simulation);
 
-    this->colorMapLegend = ui->colorMapLegend;
-
     this->simulationTab = ui->simulationTab;
 
     this->colorMapTab = ui->colormapTab;
@@ -46,8 +44,6 @@ void MainWindow::setUpConnections()
 
     connectColorMapTabAndSettings();
 
-    connectColorMapLegendAndSettings();
-
     connectKeyBoardHandlerAndSimulation();
 }
 
@@ -73,17 +69,6 @@ void MainWindow::connectCanvasAndSettings()
 
     connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
             this->canvas, SLOT(onForceChanged(float)));
-}
-
-void MainWindow::connectColorMapLegendAndSettings()
-{
-    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-            this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
-
-    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
-            this->colorMapLegend, SLOT(onValueRangeChanged(float,float)));
-    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            this->colorMapLegend, SLOT(onForceChanged(float)));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
@@ -118,6 +103,12 @@ void MainWindow::connectColorMapTabAndSettings()
 {
     connect(this->colorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
             &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
+            this->colorMapTab, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->colorMapTab, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            this->colorMapTab, SLOT(onForceChanged(float)));
 }
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()

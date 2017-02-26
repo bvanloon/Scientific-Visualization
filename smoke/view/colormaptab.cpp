@@ -84,14 +84,19 @@ void ColorMapTab::setUpConnections()
 {
     connect(this->ui->clampingMinimumSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_clampingMinimumSlider_valueChanged(float)));
+
     connect(this->ui->clampingMaximumSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
+
     connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_numColorsSlider_valueChanged(int)));
+
     connect(this, SIGNAL(setClampingRange(float,float)),
             this->ui->colormapLegend, SLOT(onClampRangeChanged(float,float)));
     connect(this, SIGNAL(colorMapChanged(AbstractColorMap)),
             this->ui->colormapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
+    connect(this, SIGNAL(valueRangeChanged(float,float)),
+            this->ui->colormapLegend, SLOT(onValueRangeChanged(float,float)));
 }
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)
@@ -116,4 +121,16 @@ void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 {
     emit scalarVariableChanged(
                 static_cast<Settings::Visualization::ScalarVariable>(index));
+}
+
+void ColorMapTab::onValueRangeChanged(float minimum, float maximum)
+{
+    emit valueRangeChanged(minimum, maximum);
+}
+
+void ColorMapTab::onForceChanged(float force)
+{
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        emit valueRangeChanged(0.0f, force);
+    }
 }

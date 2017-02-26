@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>910</width>
+    <width>1104</width>
     <height>524</height>
    </rect>
   </property>
@@ -50,16 +50,6 @@
      </widget>
     </item>
     <item>
-     <widget class="ColorMapLegend" name="colorMapLegend" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
@@ -69,7 +59,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>550</width>
+        <width>400</width>
         <height>0</height>
        </size>
       </property>
@@ -103,12 +93,6 @@
    <class>Canvas</class>
    <extends>QOpenGLWidget</extends>
    <header location="global">view/canvas.h</header>
-  </customwidget>
-  <customwidget>
-   <class>ColorMapLegend</class>
-   <extends>QWidget</extends>
-   <header location="global">view/colormaplegend.h</header>
-   <container>1</container>
   </customwidget>
   <customwidget>
    <class>SimulationSettingPane</class>
