@@ -22,10 +22,10 @@ public:
 
     static QStringList getColorMapNames();
 
-    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors);
+    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, int saturation);
 
 private:
-    typedef AbstractColorMap* (*CreateColorMapFn)(int);
+    typedef AbstractColorMap* (*CreateColorMapFn)(int, float);
 
     std::map<colorMaps,CreateColorMapFn > colorMapMapping;
 

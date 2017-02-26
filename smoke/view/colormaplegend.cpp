@@ -29,7 +29,9 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
     ui->setupUi(this);
     setColorMap(*(ColorMapFactory::get()->createColorMap(
                       Settings::defaults::visualization::colormap::colormap,
-                      Settings::defaults::visualization::colormap::numColors)));
+                      Settings::defaults::visualization::colormap::numColors,
+                      Settings::defaults::visualization::colormap::saturation
+                      )));
 }
 
 ColorMapLegend::~ColorMapLegend()

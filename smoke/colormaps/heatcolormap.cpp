@@ -5,13 +5,13 @@
 #include <QDebug>
 
 
-AbstractColorMap *HeatColorMap::Create(int numColors)
+AbstractColorMap *HeatColorMap::Create(int numColors, float saturation)
 {
-     return new HeatColorMap(numColors);
+     return new HeatColorMap(numColors, saturation);
 }
 
-HeatColorMap::HeatColorMap(int numColors):
-    AbstractColorMap(numColors)
+HeatColorMap::HeatColorMap(int numColors, float saturation):
+    AbstractColorMap(numColors, saturation)
 {
     fill();
 }

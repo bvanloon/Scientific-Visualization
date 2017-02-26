@@ -3,13 +3,13 @@
 #include <math.h>
 #include <QDebug>
 
-AbstractColorMap *RainbowColorMap::Create(int numColors)
+AbstractColorMap *RainbowColorMap::Create(int numColors, float saturation)
 {
-    return new RainbowColorMap(numColors);
+    return new RainbowColorMap(numColors, saturation);
 }
 
-RainbowColorMap::RainbowColorMap(int numColors, float dx):
-    AbstractColorMap(numColors),
+RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx ):
+    AbstractColorMap(numColors, saturation),
     dx(dx)
 { 
     fill();
@@ -20,7 +20,7 @@ void RainbowColorMap::fill()
     float stepSize = 1.0 / (numColors - 1);
     float f = 0;
     for(int i = 0; i < numColors; f+= stepSize, i++){
-        setPixel(i, 0, setSaturation(toRainbowColor(f),1.0));
+        setPixel(i, 0, setSaturation(toRainbowColor(f), saturation));
     }
 }
 

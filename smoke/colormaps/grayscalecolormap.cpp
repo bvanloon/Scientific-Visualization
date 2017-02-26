@@ -1,15 +1,15 @@
 #include "grayscalecolormap.h"
 
-GrayScaleColorMap::GrayScaleColorMap(int numColors):
-    AbstractColorMap(numColors)
+GrayScaleColorMap::GrayScaleColorMap(int numColors, float saturation):
+    AbstractColorMap(numColors, saturation)
 
 {
     fill();
 }
 
-AbstractColorMap *GrayScaleColorMap::Create(int numColors)
+AbstractColorMap *GrayScaleColorMap::Create(int numColors, float saturation)
 {
-       return new GrayScaleColorMap(numColors);
+       return new GrayScaleColorMap(numColors, saturation);
 }
 
 void GrayScaleColorMap::fill()
