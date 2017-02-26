@@ -112,10 +112,13 @@ void ColorMapTab::setUpConnections()
 
     connect(this, SIGNAL(setClampingRange(float,float)),
             this->ui->colormapLegend, SLOT(onClampRangeChanged(float,float)));
+
     connect(this, SIGNAL(colorMapChanged(AbstractColorMap)),
             this->ui->colormapLegend, SLOT(onColorMapChanged(AbstractColorMap)));
+
     connect(this, SIGNAL(valueRangeChanged(float,float)),
             this->ui->colormapLegend, SLOT(onValueRangeChanged(float,float)));
+
     connect(this->ui->saturationSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_saturationSlider_valueChanged(float)));
 }
