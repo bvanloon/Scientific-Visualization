@@ -38,7 +38,10 @@ SOURCES += main.cpp\
     settings/simulationsettings.cpp \
     settings/visualizationsettings.cpp \
     view/simulationtab.cpp \
-    keyboardhandler.cpp
+    keyboardhandler.cpp \
+    grid/vertex.cpp \
+    grid/uniformgrid.cpp \
+    grid/grid.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -59,7 +62,10 @@ HEADERS  += main.ih\
     settings/simulationsettings.h \
     settings/visualizationsettings.h \
     view/simulationtab.h \
-    keyboardhandler.h
+    keyboardhandler.h \
+    grid/vertex.h \
+    grid/uniformgrid.h \
+    grid/grid.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
