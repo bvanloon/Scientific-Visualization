@@ -86,7 +86,15 @@ QVector<QVector3D> Simulation::getGridTriangulation()
 QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)
 {
     QVector<float> textureCoordinates;
+    QVector<float> textureCoordinates2;
     float coordinate0, coordinate1, coordinate2, coordinate3;
+
+    qDebug() << "Simulation::getTexCoord: " << "Texturecoordinates2 seem correct for fluidDensity, but incorrect for forceMagnitude";
+
+    for(int i = 0; i < vertexPositions.size(); i++){
+        textureCoordinates2.append(getForceMagnitudeAt(vertexPositions.at(i)));
+    }
+//        textureCoordinates.append((this->*getter)(i, j));
 
     for (int j = 0; j < Settings::simulation().dimension - 1; j++)
     {
@@ -214,6 +222,12 @@ QVector2D Simulation::getForceAt(int idx)
                      this->realization->fy[idx]);
 }
 
+QVector2D Simulation::getForceAt(QVector3D position)
+{
+    int idx = to1DIndex(position);
+    return getForceAt(idx);
+}
+
 float Simulation::getForceMagnitudeAt(int i, int j)
 {
     return getForceAt(i, j).length();
@@ -222,4 +236,9 @@ float Simulation::getForceMagnitudeAt(int i, int j)
 float Simulation::getForceMagnitudeAt(int idx)
 {
     return getForceAt(idx).length();
+}
+
+float Simulation::getForceMagnitudeAt(QVector3D position)
+{
+    return getForceAt(position).length();
 }
