@@ -42,14 +42,27 @@ void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
     float minimum = qMin(value, maximum + Settings::defaults::visualization::colormap::clampEpsilon);
     this->ui->clampingMinimumSlider->setValue(minimum);
     emit setClampingRange(minimum, maximum);
+
+}
+
+
+void ColorMapTab::on_saturationSlider_valueChanged(float value)
+{
+    this->ui->saturationSlider->setValue(value);
+    AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
+                static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
+                this->ui->numColorsSlider->value(),
+                value);
+
+    emit colorMapChanged(*newColormap);
 }
 
 void ColorMapTab::on_numColorsSlider_valueChanged(int value)
 {
     AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
-                value);
-
+                value,
+                this->ui->saturationSlider->value());
     emit colorMapChanged(*newColormap);
 }
 
@@ -69,6 +82,11 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
                 Settings::defaults::visualization::colormap::numColors);
+    this->ui->saturationSlider->init(
+                Settings::defaults::visualization::colormap::minSaturation,
+                Settings::defaults::visualization::colormap::maxSaturation,
+                Settings::defaults::visualization::colormap::saturation);
+
     this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
 }
 
@@ -80,6 +98,8 @@ void ColorMapTab::setUpConnections()
             this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
     connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_numColorsSlider_valueChanged(int)));
+    connect(this->ui->saturationSlider, SIGNAL(valueChanged(float)),
+            this, SLOT(on_saturationSlider_valueChanged(float)));
 }
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)
@@ -95,7 +115,7 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
 {
     AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(index),
-                ui->numColorsSlider->value());
-
+                ui->numColorsSlider->value(),
+                ui->saturationSlider->value());
     emit colorMapChanged(*newColormap);
 }

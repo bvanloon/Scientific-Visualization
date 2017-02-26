@@ -29,6 +29,7 @@ private slots:
     void on_clampingMinimumSlider_valueChanged(float value);
     void on_numColorsSlider_valueChanged(int value);
     void on_colormapSelector_currentIndexChanged(int index);
+    void on_saturationSlider_valueChanged(float value);
 
 private:
     Ui::ColorMapTab *ui;
