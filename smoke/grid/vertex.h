@@ -2,15 +2,20 @@
 #define VERTEX_H
 
 #include <QVector3D>
+#include <QDebug>
 
 class Vertex
 {
 public:
-    Vertex(QVector3D* position = NULL);
+    Vertex(const QVector3D *position = NULL);
+
+    const QVector3D* getPosition() const;
+
+    friend QDebug operator<<(QDebug stream, const Vertex &vertex);
+    friend QDebug operator<<(QDebug stream, Vertex *vertex);
 
 private:
-
-    QVector3D *position;
+    const QVector3D *position;
 
 };
 
