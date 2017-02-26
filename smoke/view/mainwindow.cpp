@@ -51,6 +51,8 @@ void MainWindow::connectCanvasAndSimulation()
 {
     connect(this->canvas, SIGNAL(mouseMoved(QPoint)),
             this->simulation, SLOT(onMouseMoved(QPoint)));
+    connect(this->canvas, SIGNAL(windowResized(int,int)),
+            this->simulation, SLOT(onWindowResized(int,int)));
 }
 
 void MainWindow::connectCanvasAndSettings()

@@ -37,6 +37,7 @@ signals:
 public slots:
     void onMouseMoved(QPoint newPosition);
     void onStep();
+    void onWindowResized(int width, int height);
 
 private:
     QPoint lastMousePosition;
