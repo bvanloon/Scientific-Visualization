@@ -22,6 +22,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    KeyboardHandler* keyboardHandler;
+
 private:
     Ui::MainWindow *ui;
 
@@ -30,7 +32,6 @@ private:
     ColorMapLegend *colorMapLegend;
     SimulationSettingPane *simulationTab;
     ColorMapTab *colorMapTab;
-    KeyboardHandler* keyboardHandler;
 
     void setUpConnections();
 
