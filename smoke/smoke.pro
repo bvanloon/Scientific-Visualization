@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     settings/simulationsettings.cpp \
     settings/visualizationsettings.cpp \
     view/simulationtab.cpp \
-    keyboardhandler.cpp
+    keyboardhandler.cpp \
+    colormaps/zebramap.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -59,7 +60,8 @@ HEADERS  += main.ih\
     settings/simulationsettings.h \
     settings/visualizationsettings.h \
     view/simulationtab.h \
-    keyboardhandler.h
+    keyboardhandler.h \
+    colormaps/zebramap.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
