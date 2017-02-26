@@ -52,7 +52,6 @@ void SmokeEngine::initBuffers()
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
     QVector<QVector3D> triangles = simulation->getGridTriangulation();
-//    QVector<float> textureCoordinates = simulation->getTexCoordFluidDensity();
 
     QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(triangles);
 
