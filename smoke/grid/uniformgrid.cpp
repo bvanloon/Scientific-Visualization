@@ -25,6 +25,7 @@ void UniformGrid::create()
                         Settings::simulation().cellSize.height() + (double)j * Settings::simulation().cellSize.height(),
                         0.0f);
             this->vertexPositions.replace(idx, position);
+            this->vertices.replace(idx, Vertex(&this->vertexPositions.at(idx)));
         }
     }
 }
