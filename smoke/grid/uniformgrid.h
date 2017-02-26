@@ -13,6 +13,8 @@ private:
     int dimension;
 
     void create();
+
+    int to1Dindex(int i, int j);
 };
 
 #endif // UNIFORMGRID_H
