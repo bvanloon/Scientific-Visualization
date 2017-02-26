@@ -17,13 +17,15 @@ public:
     explicit Simulation(QObject *parent = 0);
     ~Simulation();
 
+    typedef QVector<float> (Simulation::*textureCoordinateGetter)(void);
+    typedef float (Simulation::*textureCoordinateGetterSimple)(int, int);
+
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
+    QVector<float> getTexCoord(textureCoordinateGetterSimple getter);
     QVector<float> getTexCoordFluidDensity();
     QVector<float> getTexCoordFluidVelocityMagnitude();
     QVector<float> getTexCoordForceFieldMagnitude();
-
-    typedef QVector<float> (Simulation::*textureCoordinateGetter)(void);
 
     SimulationRealization *realization;
 
