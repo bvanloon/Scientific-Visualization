@@ -89,7 +89,7 @@ QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple
     QVector<float> textureCoordinates2;
     float coordinate0, coordinate1, coordinate2, coordinate3;
 
-    qDebug() << "Simulation::getTexCoord: " << "Texturecoordinates2 seem correct for fluidDensity, but incorrect for forceMagnitude";
+    qDebug() << "Simulation::getTexCoord: " << "Texturecoordinates2 seem correct for fluidDensity, and forceMagnitude";
 
     for(int i = 0; i < vertexPositions.size(); i++){
         textureCoordinates2.append(getForceMagnitudeAt(vertexPositions.at(i)));
