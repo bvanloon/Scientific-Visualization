@@ -10,7 +10,7 @@
 Simulation::Simulation(QObject *parent) :
     QObject(parent),
     lastMousePosition(0.0f, 0.0f),
-    grid(new UniformGrid(Settings::simulation().dimension))
+    grid(new UniformGrid(Settings::simulation().dimension, Settings::canvas().size))
 {
     this->realization = new SimulationRealization();
 }
@@ -129,7 +129,9 @@ void Simulation::onStep()
 void Simulation::onWindowResized(int width, int height)
 {
     delete this->grid;
-    this->grid = new UniformGrid(Settings::simulation().dimension);
+    this->grid = new UniformGrid(
+                Settings::simulation().dimension,
+                QSizeF(width, height));
 }
 
 int Simulation::to1DIndex(int i, int j)

@@ -3,11 +3,17 @@
 #include "settings/simulationsettings.h"
 #include <QDebug>
 
-UniformGrid::UniformGrid(int dimension):
+UniformGrid::UniformGrid(int dimension, QSizeF size, bool padding):
     Grid(dimension * dimension),
     dimension(dimension)
 {
+    cellSize = size / ((float) (dimension + 1));
     this->create();
+}
+
+const QVector<QVector3D> &UniformGrid::getVertexPositions() const
+{
+    return this->vertexPositions;
 }
 
 void UniformGrid::create()
@@ -19,13 +25,14 @@ void UniformGrid::create()
         {
             idx = to1Dindex(i, j);
             position = QVector3D(
-                        Settings::simulation().cellSize.width() + (double)i * Settings::simulation().cellSize.width(),
-                        Settings::simulation().cellSize.height() + (double)j * Settings::simulation().cellSize.height(),
+                        cellSize.width() + (double)i * cellSize.width(),
+                        cellSize.height() + (double)j * cellSize.height(),
                         0.0f);
             this->vertexPositions.replace(idx, position);
             this->vertices.replace(idx, Vertex(&this->vertexPositions.at(idx)));
         }
     }
+    qDebug() << this->vertexPositions;
 }
 
 int UniformGrid::to1Dindex(int i, int j)
