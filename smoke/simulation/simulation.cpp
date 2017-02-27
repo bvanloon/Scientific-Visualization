@@ -86,34 +86,8 @@ QVector<QVector3D> Simulation::getGridTriangulation()
 QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)
 {
     QVector<float> textureCoordinates;
-    QVector<float> textureCoordinates2;
-    float coordinate0, coordinate1, coordinate2, coordinate3;
-
-    qDebug() << "Simulation::getTexCoord: " << "Texturecoordinates2 seem correct for fluidDensity, and forceMagnitude";
-
     for(int i = 0; i < vertexPositions.size(); i++){
-        textureCoordinates2.append(getForceMagnitudeAt(vertexPositions.at(i)));
-    }
-//        textureCoordinates.append((this->*getter)(i, j));
-
-    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
-    {
-        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
-        {
-
-            coordinate0 = (this->*getter)(i, j);
-            coordinate1 = (this->*getter)(i, j + 1);
-            coordinate2 = (this->*getter)(i + 1, j + 1);
-            coordinate3 = (this->*getter)(i + 1, j);
-
-            textureCoordinates.append(coordinate0);
-            textureCoordinates.append(coordinate1);
-            textureCoordinates.append(coordinate2);
-
-            textureCoordinates.append(coordinate0);
-            textureCoordinates.append(coordinate2);
-            textureCoordinates.append(coordinate3);
-        }
+        textureCoordinates.append((this->*getter)(vertexPositions.at(i)));
     }
     return textureCoordinates;
 }
@@ -199,6 +173,12 @@ QVector2D Simulation::getFluidVelocityAt(int idx)
                      this->realization->vy[idx]);
 }
 
+QVector2D Simulation::getFluidVelocityAt(QVector3D position)
+{
+    int idx = to1DIndex(position);
+    return getFluidVelocityAt(idx);
+}
+
 float Simulation::getFluidVelocityMagnitudeAt(int i, int j)
 {
     int idx = to1DIndex(i,j);
@@ -208,6 +188,11 @@ float Simulation::getFluidVelocityMagnitudeAt(int i, int j)
 float Simulation::getFluidVelocityMagnitudeAt(int idx)
 {
     return getFluidVelocityAt(idx).length();
+}
+
+float Simulation::getFluidVelocityMagnitudeAt(QVector3D position)
+{
+    return getFluidVelocityAt(position).length();
 }
 
 QVector2D Simulation::getForceAt(int i, int j)

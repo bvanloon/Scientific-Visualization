@@ -19,7 +19,6 @@ public:
     ~Simulation();
 
     typedef QVector<float> (Simulation::*textureCoordinateGetter)(QVector<QVector3D>);
-    typedef float (Simulation::*textureCoordinateGetterSimple)(int, int);
 
     QVector<QVector3D> getGridVertices();
     QVector<QVector3D> getGridTriangulation();
@@ -43,6 +42,7 @@ private:
     QPoint lastMousePosition;
     UniformGrid* grid;
 
+    typedef float (Simulation::*textureCoordinateGetterSimple)(QVector3D);
     QVector<float> getTexCoord(textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions);
 
     int to1DIndex(int i, int j);
