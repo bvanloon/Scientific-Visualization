@@ -51,12 +51,12 @@ void UniformGrid::recomputeVertexPositions()
 
 QSizeF UniformGrid::computeCellSize(QSizeF area)
 {
-    return area / ((float) (dimension + 1));
+    return area / ((float) (dimension + (padding ? 1.0 : -1.0)));
 }
 
 UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, SimulationRealization* simulation)
 {
-    UniformGrid* grid = new UniformGrid(dimension, size, false);
+    UniformGrid* grid = new UniformGrid(dimension, size, true);
     QVector3D position;
     Vertex* vertex;
     int idx;
@@ -87,9 +87,9 @@ void UniformGrid::changeGridArea(QSizeF newArea)
 
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
 {
-    return QVector3D(cellSize.width() + (double)i * cellSize.width(),
-              cellSize.height() + (double)j * cellSize.height(),
-              0.0f);
+    return QVector3D(padding * cellSize.width() + (double)i * cellSize.width(),
+                     padding * cellSize.height() + (double)j * cellSize.height(),
+                     0.0f);
 }
 
 Vertex *UniformGrid::getVertexAt(int idx) const
