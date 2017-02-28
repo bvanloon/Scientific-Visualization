@@ -7,7 +7,9 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool padding):
     Grid(dimension * dimension, padding),
     dimension(dimension),
     cellSize(computeCellSize(areaSize))
-{}
+{
+    cells.resize((dimension - 1) * (dimension - 1));
+}
 
 const QVector<QVector3D> &UniformGrid::getVertexPositions() const
 {

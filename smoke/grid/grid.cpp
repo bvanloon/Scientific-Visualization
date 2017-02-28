@@ -11,6 +11,9 @@ Grid::~Grid()
     for(int i = 0; i < vertices.size(); i++){
         delete vertices[i];
     }
+    for(int i = 0; i < cells.size(); i++){
+        delete cells[i];
+    }
 }
 
 const QVector<QVector3D> &Grid::getVertexPositions() const
