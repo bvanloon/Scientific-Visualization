@@ -41,3 +41,11 @@ void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
     buffer->allocate(data.data(), data.size() * sizeof(data[0]));
     buffer->release();
 }
+
+void AbstractEngine::drawWithMode(Simulation *Simulation, int mode, int bufferLength )
+{
+    this->vao.bind();
+    glDrawArrays(mode, 0, bufferLength);
+    this->vao.release();
+}
+
