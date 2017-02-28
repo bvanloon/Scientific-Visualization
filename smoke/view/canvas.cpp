@@ -49,11 +49,8 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 void Canvas::initializeGL()
 {
     initializeOpenGLFunctions();
-
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
     glEnable(GL_DEPTH_TEST);
-
 
     //this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
@@ -62,7 +59,6 @@ void Canvas::initializeGL()
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
-
     smokeEngine->draw(this->simulation);
 //    vectorEngine->draw(this->simulation);
 
