@@ -20,6 +20,7 @@ public:
 protected:
     QOpenGLVertexArrayObject vao;
     QOpenGLBuffer* vertexBuffer;
+    QOpenGLBuffer* textureCoordinateBuffer;
 
     void initBuffers();
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);

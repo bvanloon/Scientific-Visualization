@@ -7,7 +7,6 @@ class SmokeEngine : AbstractEngine
 {
 public:
     SmokeEngine();
-    virtual ~SmokeEngine();
 
     void draw(Simulation* simulation);
 
@@ -16,7 +15,7 @@ private:
 
     int updateBuffers(Simulation* simulation);
 
-    QOpenGLBuffer* textureCoordinateBuffer;
+
 };
 
 

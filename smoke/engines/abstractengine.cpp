@@ -3,6 +3,7 @@
 AbstractEngine::AbstractEngine()
 {
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+    this->textureCoordinateBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
     initializeOpenGLFunctions();
 
@@ -11,6 +12,7 @@ AbstractEngine::AbstractEngine()
 AbstractEngine::~AbstractEngine()
 {
     this->vertexBuffer->destroy();
+    this->textureCoordinateBuffer->destroy();
     this->vao.destroy();
 }
 
@@ -25,6 +27,14 @@ void AbstractEngine::initBuffers()
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    this->textureCoordinateBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+    this->textureCoordinateBuffer->create();
+    this->textureCoordinateBuffer->bind();
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, 0);
+
     this->vao.release();
 }
 
