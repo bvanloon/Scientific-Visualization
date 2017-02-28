@@ -6,7 +6,7 @@
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
 
-class AbstractEngine : QOpenGLFunctions
+class AbstractEngine : protected QOpenGLFunctions
 {
 public:
     AbstractEngine();
