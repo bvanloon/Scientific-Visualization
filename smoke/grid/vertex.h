@@ -5,6 +5,7 @@
 #include <QVector2D>
 #include <QDebug>
 
+class Cell;
 class Vertex
 {
 public:
@@ -40,5 +41,18 @@ private:
     double* vx;
     double* vy;
 };
+
+class VisualizationVertex: public Vertex
+{
+public:
+    VisualizationVertex(const QVector3D *position, Cell* cell);
+
+    friend QDebug operator<<(QDebug stream, const VisualizationVertex &vertex);
+    friend QDebug operator<<(QDebug stream, VisualizationVertex *vertex);
+
+private:
+    Cell* cell;
+};
+
 
 #endif // VERTEX_H

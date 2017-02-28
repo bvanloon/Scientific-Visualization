@@ -1,4 +1,5 @@
 #include "vertex.h"
+#include "cell.h"
 
 Vertex::Vertex(const QVector3D *position):
     position(position)
@@ -21,7 +22,6 @@ QDebug operator<<(QDebug stream, const Vertex &vertex)
            << "]";
     return stream;
 }
-
 
 QDebug operator<<(QDebug stream, Vertex *vertex)
 {
@@ -60,3 +60,23 @@ QDebug operator<<(QDebug stream, SimulationVertex *vertex)
     stream << *vertex;
     return stream;
 }
+
+QDebug operator<<(QDebug stream, const VisualizationVertex &vertex)
+{
+    stream << "VisualizationVertex ["
+           << " position: " << *vertex.position
+           << " cell: "     << *vertex.cell
+           << "]";
+    return stream;
+}
+
+QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
+{
+    stream << *vertex;
+    return stream;
+}
+
+VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
+    position(position),
+    cell(cell)
+{}
