@@ -19,6 +19,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
 {
     UniformGrid* grid = new UniformGrid(dimension, size);
     QVector3D position;
+    Vertex* vertex;
     int idx;
     for (int i = 0; i < dimension; i++){
         for (int j = 0; j < dimension; j++)
@@ -29,7 +30,9 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
                         grid->cellSize.height() + (double)j * grid->cellSize.height(),
                         0.0f);
             grid->vertexPositions.replace(idx, position);
-            grid->vertices.replace(idx, new Vertex(&grid->vertexPositions.at(idx)));
+            vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
+                                          &simulation->vx[idx], &simulation->vy[idx]);
+            grid->vertices.replace(idx, vertex);
         }
     }
     return grid;
