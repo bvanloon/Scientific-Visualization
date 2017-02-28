@@ -8,7 +8,7 @@
 class Grid
 {
 public:
-    Grid(int numberOfVertices);
+    Grid(int numberOfVertices, bool padding = true);
     ~Grid();
 
     QVector<QVector3D> const& getVertexPositions() const;
@@ -18,6 +18,7 @@ public:
 protected:
     QVector<Vertex*> vertices;
     QVector<QVector3D> vertexPositions;
+    bool padding;
 };
 
 #endif // ABSTRACTGRID_H
