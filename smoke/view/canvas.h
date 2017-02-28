@@ -57,7 +57,6 @@ private:
     void initializeUniforms();
     void initializeColorMapInfo();
 
-    void setMVPMatrix();
 
     void setTexture(QImage image);
     void setColorMapValueRange(float min, float max);
