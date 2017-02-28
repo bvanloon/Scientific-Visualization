@@ -34,7 +34,7 @@ public:
     friend QDebug operator<<(QDebug stream, SimulationVertex *vertex);
 
     virtual QVector2D getFluidVelocity() const;
-    virtual QVector2D getFluidVelocityMagnitude() const;
+    virtual float getFluidVelocityMagnitude() const;
 
 private:
     double* vx;

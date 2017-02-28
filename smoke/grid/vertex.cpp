@@ -41,7 +41,7 @@ QVector2D SimulationVertex::getFluidVelocity() const
     return QVector2D(*(vx), *(vy));
 }
 
-QVector2D SimulationVertex::getFluidVelocityMagnitude() const
+float SimulationVertex::getFluidVelocityMagnitude() const
 {
     return getFluidVelocity().length();
 }
