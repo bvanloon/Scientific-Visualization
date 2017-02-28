@@ -18,8 +18,6 @@ private:
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
 
-    QOpenGLVertexArrayObject vao;
-    QOpenGLBuffer* vertexBuffer;
     QOpenGLBuffer* textureCoordinateBuffer;
 };
 

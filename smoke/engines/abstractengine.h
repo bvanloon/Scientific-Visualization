@@ -15,6 +15,8 @@ class AbstractEngine : protected QOpenGLFunctions
 public:
     AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
+    QOpenGLVertexArrayObject vao;
+    QOpenGLBuffer* vertexBuffer;
 };
 
 #endif // ABSTRACTENGINE_H
