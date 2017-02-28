@@ -11,6 +11,7 @@ public:
     Grid(int numberOfVertices);
 
     QVector<QVector3D> const& getVertexPositions() const;
+    QVector<Vertex> const& getVertices() const;
     int const& numVertices() const;
 
 protected:
