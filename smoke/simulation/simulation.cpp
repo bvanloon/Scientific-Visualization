@@ -12,22 +12,23 @@ Simulation::Simulation(QObject *parent) :
     lastMousePosition(0.0f, 0.0f)
 {
     this->realization = new SimulationRealization();
-    this->grid = UniformGrid::createSimulationGrid(Settings::simulation().dimension, Settings::canvas().size, this->realization);
+    this->simulationGrid = UniformGrid::createSimulationGrid(Settings::simulation().dimension, Settings::canvas().size, this->realization);
+    this->visualizationGrid = UniformGrid::createVisualizationGrid(5, Settings::canvas().size, this->simulationGrid);
 }
 
 Simulation::~Simulation()
 {
     delete this->realization;
-    delete this->grid;
+    delete this->simulationGrid;
 }
 
 
 QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 {
-    QVector<QVector3D> hedgeHodgeVertices(grid->numVertices() * 2);
-    QVector<Vertex*>::const_iterator currentVertex = grid->getVertices().begin();
+    QVector<QVector3D> hedgeHodgeVertices(simulationGrid->numVertices() * 2);
+    QVector<Vertex*>::const_iterator currentVertex = simulationGrid->getVertices().begin();
     QVector3D position;
-    for(int i = 0; currentVertex != grid->getVertices().end(); currentVertex++){
+    for(int i = 0; currentVertex != simulationGrid->getVertices().end(); currentVertex++){
         position = *((*currentVertex)->getPosition());
         hedgeHodgeVertices[i++] = position;
         hedgeHodgeVertices[i++] = position +
@@ -38,7 +39,7 @@ QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 
 QVector<QVector3D> Simulation::getGridTriangulation()
 {
-    return grid->getTriangulation();
+    return simulationGrid->getTriangulation();
 }
 
 QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)
@@ -86,7 +87,8 @@ void Simulation::onStep()
 
 void Simulation::onWindowResized(int width, int height)
 {
-    grid->changeGridArea(QSizeF(width, height));
+    simulationGrid->changeGridArea(QSizeF(width, height));
+    visualizationGrid->changeGridArea(QSizeF(width, height));
 }
 
 int Simulation::to1DIndex(int i, int j)
