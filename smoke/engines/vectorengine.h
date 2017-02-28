@@ -17,6 +17,7 @@ private:
     int updateBuffers(Simulation* simulation);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
+
 };
 
 #endif // VECTORENGINE_H
