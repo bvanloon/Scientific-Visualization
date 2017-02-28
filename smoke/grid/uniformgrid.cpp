@@ -1,15 +1,14 @@
 #include "uniformgrid.h"
 #include "settings/settings.h"
 #include "settings/simulationsettings.h"
+#include "grid/cell.h"
 #include <QDebug>
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool padding):
     Grid(dimension * dimension, padding),
     dimension(dimension),
     cellSize(computeCellSize(areaSize))
-{
-    cells.resize((dimension - 1) * (dimension - 1));
-}
+{}
 
 const QVector<QVector3D> &UniformGrid::getVertexPositions() const
 {
@@ -60,6 +59,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
 {
     UniformGrid* grid = new UniformGrid(dimension, size, true);
     createVertices(grid, simulation);
+    createCells(grid);
     return grid;
 }
 
@@ -77,6 +77,23 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
                                           &simulation->vx[idx], &simulation->vy[idx]);
             grid->vertices.replace(idx, vertex);
+        }
+    }
+}
+
+void UniformGrid::createCells(UniformGrid *grid)
+{
+    Cell* cell;
+    Vertex* vertex, *rightBelow, *right, *below;
+    for(int rowIdx = 0; rowIdx < grid->dimension - 1; rowIdx++){
+        for(int colIdx = 0; colIdx < grid->dimension - 1; colIdx++){
+            vertex = grid->getVertexAt(colIdx, rowIdx);
+            right = grid->getVertexAt(colIdx + 1, rowIdx);
+            below = grid->getVertexAt(colIdx, rowIdx + 1);
+            rightBelow = grid->getVertexAt(colIdx + 1, rowIdx + 1);
+
+            cell = new StructuredCell(vertex, right, below, rightBelow);
+            grid->cells.append(cell);
         }
     }
 }
