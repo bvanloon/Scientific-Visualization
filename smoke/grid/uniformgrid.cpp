@@ -50,6 +50,14 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
     return grid;
 }
 
+UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid)
+{
+    UniformGrid* grid = new UniformGrid(dimension, size, false);
+    createVertices(grid, simulationGrid);
+    createCells(grid);
+    return grid;
+}
+
 void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simulation)
 {
     QVector3D position;
@@ -66,6 +74,11 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
             grid->vertices.replace(idx, vertex);
         }
     }
+}
+
+void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid)
+{
+
 }
 
 void UniformGrid::createCells(UniformGrid *grid)

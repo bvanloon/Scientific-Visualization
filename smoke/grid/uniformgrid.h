@@ -14,6 +14,7 @@ public:
     void changeGridArea(QSizeF newArea);
 
     static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
+    static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid* simulationGrid);
 
 private:
     int dimension;
