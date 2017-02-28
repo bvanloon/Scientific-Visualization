@@ -1,16 +1,13 @@
 #ifndef SMOKEENGINE_H
 #define SMOKEENGINE_H
 
-#include <QOpenGLFunctions>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLBuffer>
-#include <QOpenGLVertexArrayObject>
+#include "abstractengine.h"
 
 #include "simulation/simulation.h"
 #include "settings/settings.h"
 #include "settings/visualizationsettings.h"
 
-class SmokeEngine : protected QOpenGLFunctions
+class SmokeEngine : AbstractEngine
 {
 public:
     SmokeEngine();
