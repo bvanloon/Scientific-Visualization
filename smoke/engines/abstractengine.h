@@ -21,7 +21,7 @@ protected:
     QOpenGLVertexArrayObject vao;
     QOpenGLBuffer* vertexBuffer;
 
-     void initBuffers();
+    void initBuffers();
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
 };
