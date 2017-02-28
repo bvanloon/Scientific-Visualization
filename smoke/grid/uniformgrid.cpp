@@ -3,12 +3,11 @@
 #include "settings/simulationsettings.h"
 #include <QDebug>
 
-UniformGrid::UniformGrid(int dimension, QSizeF size, bool padding):
+UniformGrid::UniformGrid(int dimension, QSizeF size):
     Grid(dimension * dimension),
     dimension(dimension)
 {
     cellSize = size / ((float) (dimension + 1));
-    this->create();
 }
 
 const QVector<QVector3D> &UniformGrid::getVertexPositions() const
@@ -16,23 +15,24 @@ const QVector<QVector3D> &UniformGrid::getVertexPositions() const
     return this->vertexPositions;
 }
 
-void UniformGrid::create()
+UniformGrid *UniformGrid::create(int dimension, QSizeF size)
 {
+    UniformGrid* grid = new UniformGrid(dimension, size);
     QVector3D position;
     int idx;
     for (int i = 0; i < dimension; i++){
         for (int j = 0; j < dimension; j++)
         {
-            idx = to1Dindex(i, j);
+            idx = grid->to1Dindex(i, j);
             position = QVector3D(
-                        cellSize.width() + (double)i * cellSize.width(),
-                        cellSize.height() + (double)j * cellSize.height(),
+                        grid->cellSize.width() + (double)i * grid->cellSize.width(),
+                        grid->cellSize.height() + (double)j * grid->cellSize.height(),
                         0.0f);
-            this->vertexPositions.replace(idx, position);
-            this->vertices.replace(idx, Vertex(&this->vertexPositions.at(idx)));
+            grid->vertexPositions.replace(idx, position);
+            grid->vertices.replace(idx, Vertex(&grid->vertexPositions.at(idx)));
         }
     }
-    qDebug() << this->vertexPositions;
+    return grid;
 }
 
 int UniformGrid::to1Dindex(int i, int j)

@@ -7,15 +7,17 @@
 class UniformGrid : public Grid
 {
 public:
-    UniformGrid(int dimension, QSizeF size, bool padding = true);
+    UniformGrid(int dimension, QSizeF size);
 
     QVector<QVector3D> const& getVertexPositions() const;
+
+    static UniformGrid *create(int dimension, QSizeF size);
 
 private:
     int dimension;
     QSizeF cellSize;
 
-    void create();
+
 
     int to1Dindex(int i, int j);
 };
