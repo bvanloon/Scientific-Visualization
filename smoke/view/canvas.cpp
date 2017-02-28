@@ -9,7 +9,6 @@ Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
     timer(new QTimer(this))
 {
-
     this->initiateIdleLoop();
 }
 
@@ -18,10 +17,6 @@ Canvas::~Canvas()
     delete this->timer;
 }
 
-void Canvas::setSimulation(Simulation *simulation)
-{
-    this->simulation = simulation;
-}
 
 void Canvas::idleLoop()
 {
@@ -38,14 +33,6 @@ void Canvas::initiateIdleLoop()
    connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
 }
 
-void Canvas::mouseMoveEvent(QMouseEvent *event)
-{
-    if(!Settings::simulation().frozen){
-        QPointF mousePosition = event->localPos();
-        emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
-    }
-}
-
 void Canvas::initializeGL()
 {
     initializeOpenGLFunctions();
@@ -54,6 +41,19 @@ void Canvas::initializeGL()
 
     //this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
+}
+
+void Canvas::setSimulation(Simulation *simulation)
+{
+    this->simulation = simulation;
+}
+
+void Canvas::mouseMoveEvent(QMouseEvent *event)
+{
+    if(!Settings::simulation().frozen){
+        QPointF mousePosition = event->localPos();
+        emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+    }
 }
 
 void Canvas::paintGL()
@@ -71,12 +71,11 @@ void Canvas::resizeGL(int width, int height)
     float nearClippingPlane = -1.0f;
     float farClippingPlane = 1.0f;
 
-
-   this->smokeEngine->setProjectionMatrix(width, height, nearClippingPlane,farClippingPlane);
+    this->smokeEngine->AbstractEngine::setProjectionMatrix(width, height, nearClippingPlane, farClippingPlane);
 
     emit windowResized(width, height);
-    //change to signal slot construction
 
+    //change to signal slot construction
     this->smokeEngine->AbstractEngine::setMVPMatrix();
 }
 
@@ -112,9 +111,6 @@ void Canvas::onForceChanged(float force)
         setColorMapValueRange(0.0f, force);
     }
 }
-
-
-
 
 void Canvas::setColorMapValueRange(float min, float max)
 {
