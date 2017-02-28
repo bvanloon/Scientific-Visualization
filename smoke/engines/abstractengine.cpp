@@ -22,3 +22,16 @@ void AbstractEngine::initBuffers()
     this->vao.release();
 }
 
+void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
+{
+    buffer->bind();
+    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
+    buffer->release();
+}
+
+void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
+{
+    buffer->bind();
+    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
+    buffer->release();
+}

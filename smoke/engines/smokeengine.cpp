@@ -47,17 +47,3 @@ int SmokeEngine::updateBuffers(Simulation *simulation)
     updateBuffer(this->textureCoordinateBuffer,textureCoordinates);
     return triangles.length();
 }
-
-void SmokeEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
-{
-    buffer->bind();
-    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
-    buffer->release();
-}
-
-void SmokeEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
-{
-    buffer->bind();
-    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
-    buffer->release();
-}

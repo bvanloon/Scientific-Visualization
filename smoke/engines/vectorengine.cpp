@@ -30,11 +30,3 @@ int VectorEngine::updateBuffers(Simulation *simulation)
     updateBuffer(this->vertexBuffer, vertices);
     return vertices.length();
 }
-
-void VectorEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
-{
-    buffer->bind();
-    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
-    buffer->release();
-}
-
