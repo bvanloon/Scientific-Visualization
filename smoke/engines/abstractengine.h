@@ -24,6 +24,8 @@ protected:
     void initBuffers();
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
+    void drawWithMode(Simulation* Simulation, int mode, int bufferLength);
+
 };
 
 #endif // ABSTRACTENGINE_H
