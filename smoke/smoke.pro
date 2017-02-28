@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     colormaps/coldcolormap.cpp \
     grid/vertex.cpp \
     grid/uniformgrid.cpp \
-    grid/grid.cpp
+    grid/grid.cpp \
+    engines/abstractengine.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -69,7 +70,8 @@ HEADERS  += main.ih\
     colormaps/coldcolormap.h \
     grid/vertex.h \
     grid/uniformgrid.h \
-    grid/grid.h
+    grid/grid.h \
+    engines/abstractengine.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
