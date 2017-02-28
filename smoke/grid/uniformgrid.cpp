@@ -58,6 +58,13 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, Un
     return grid;
 }
 
+Cell *UniformGrid::findCellContaining(QVector3D position)
+{
+    qDebug() << "UniformGrid::findCellContaining(QVector3D position) IMPLEMENT";
+    return cells.at(0);
+
+}
+
 void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simulation)
 {
     QVector3D position;
@@ -78,7 +85,22 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
 
 void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid)
 {
-
+    QVector3D position;
+    Vertex* vertex;
+    Cell* cell;
+    int idx;
+    for (int i = 0; i < grid->dimension; i++){
+        for (int j = 0; j < grid->dimension; j++)
+        {
+            idx = grid->to1Dindex(i, j);
+            position = grid->computeVertexPosition(i, j);
+            grid->vertexPositions.replace(idx, position);
+            cell = simulationGrid->findCellContaining(position);
+            vertex = new VisualizationVertex(&grid->vertexPositions.at(idx),
+                                          cell);
+            grid->vertices.replace(idx, vertex);
+        }
+    }
 }
 
 void UniformGrid::createCells(UniformGrid *grid)

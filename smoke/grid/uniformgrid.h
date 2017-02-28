@@ -20,6 +20,8 @@ private:
     int dimension;
     QSizeF cellSize;
 
+    Cell* findCellContaining(QVector3D position);
+
     UniformGrid(int dimension, QSizeF areaSize, bool padding);
 
     void recomputeVertexPositions();
@@ -33,6 +35,7 @@ private:
     Vertex* getVertexAt(int coldIdx, int rowIdx) const;
 
     static void createVertices(UniformGrid* grid, SimulationRealization *simulation);
+    static void createVertices(UniformGrid* visualizationGrid, UniformGrid* simulationGrid);
     static void createCells(UniformGrid* grid);
 
 };
