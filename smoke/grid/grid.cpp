@@ -26,6 +26,11 @@ const QVector<Vertex *> &Grid::getVertices() const
     return this->vertices;
 }
 
+const QVector<Cell *> &Grid::getCells() const
+{
+    return this->cells;
+}
+
 int Grid::numVertices() const
 {
     return this->vertexPositions.size();

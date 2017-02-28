@@ -14,6 +14,7 @@ public:
 
     QVector<QVector3D> const& getVertexPositions() const;
     QVector<Vertex*> const& getVertices() const;
+    QVector<Cell*> const& getCells() const;
     int numVertices() const;
 
 protected:
