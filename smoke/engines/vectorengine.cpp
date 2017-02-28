@@ -8,9 +8,7 @@ VectorEngine::VectorEngine()
 void VectorEngine::draw(Simulation *simulation)
 {
     int bufferLength = this->updateBuffers(simulation);
-    this->vao.bind();
-    glDrawArrays(GL_LINES, 0, bufferLength);
-    this->vao.release();
+    drawWithMode(simulation, GL_LINES, bufferLength);
 }
 
 void VectorEngine::initBuffers()

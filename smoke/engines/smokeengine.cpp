@@ -15,10 +15,7 @@ SmokeEngine::~SmokeEngine()
 void SmokeEngine::draw(Simulation *simulation)
 {
     int bufferLength = this->updateBuffers(simulation);
-
-    this->vao.bind();
-    glDrawArrays(GL_TRIANGLES, 0, bufferLength);
-    this->vao.release();
+    drawWithMode(simulation, GL_TRIANGLES, bufferLength);
 }
 
 void SmokeEngine::initBuffers()
