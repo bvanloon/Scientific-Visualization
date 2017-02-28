@@ -3,6 +3,7 @@
 
 #include "grid/grid.h"
 #include <QSizeF>
+#include "simulation/simulationrealization.h"
 
 class UniformGrid : public Grid
 {
@@ -11,7 +12,7 @@ public:
 
     QVector<QVector3D> const& getVertexPositions() const;
 
-    static UniformGrid *createSimulationGrid(int dimension, QSizeF size);
+    static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
 
 private:
     int dimension;
