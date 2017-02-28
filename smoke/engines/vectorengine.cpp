@@ -21,17 +21,7 @@ void VectorEngine::draw(Simulation *simulation)
 
 void VectorEngine::initBuffers()
 {
-    this->vao.create();
-    this->vao.bind();
-
-    this->vertexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->vertexBuffer->create();
-    this->vertexBuffer->bind();
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    this->vao.release();
+    AbstractEngine::initBuffers();
 }
 
 int VectorEngine::updateBuffers(Simulation *simulation)
