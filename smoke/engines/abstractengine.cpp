@@ -8,7 +8,6 @@ AbstractEngine::AbstractEngine():
     this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     this->textureCoordinateBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     init();
-
 }
 
 AbstractEngine::~AbstractEngine()
@@ -18,6 +17,32 @@ AbstractEngine::~AbstractEngine()
     this->vertexBuffer->destroy();
     this->textureCoordinateBuffer->destroy();
     this->vao.destroy();
+}
+
+void AbstractEngine::init()
+{
+    initializeOpenGLFunctions();
+    initBuffers();
+    initializeShaders();
+    initializeUniforms();
+}
+
+void AbstractEngine::initializeUniforms()
+{
+    setMVPMatrix();
+    initializeColorMapInfo();
+}
+
+void AbstractEngine::initializeColorMapInfo()
+{
+    QImage image = *ColorMapFactory::get()->createColorMap(Settings::defaults::visualization::colormap::colormap,
+                                                           Settings::defaults::visualization::colormap::numColors,
+                                                           Settings::defaults::visualization::colormap::saturation);
+    setTexture(image);
+
+    setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
+    setColorMapClampRange(Settings::defaults::visualization::colormap::clampMin, Settings::defaults::visualization::colormap::clampMax);
+    setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
 
 }
 
@@ -26,7 +51,6 @@ void AbstractEngine::setProjectionMatrix(float width, float height, float nearCl
     projectionMatrix.setToIdentity();
     projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingplane);
 }
-
 
 
 void AbstractEngine::setMVPMatrix()
@@ -76,14 +100,7 @@ void AbstractEngine::setColorMapClampingTo(bool clampingOn)
     this->shaderProgram->release();
 }
 
-void AbstractEngine::init()
-{
-    initializeOpenGLFunctions();
-    initBuffers();
-    initializeShaders();
 
-    initializeUniforms();
-}
 
 /** Buffers **/
 void AbstractEngine::initBuffers()
@@ -134,24 +151,7 @@ void AbstractEngine::drawWithMode(Simulation *Simulation, int mode, int bufferLe
     this->shaderProgram->release();
 }
 
-void AbstractEngine::initializeUniforms()
-{
-    setMVPMatrix();
-    initializeColorMapInfo();
-}
 
-void AbstractEngine::initializeColorMapInfo()
-{
-    QImage image = *ColorMapFactory::get()->createColorMap(Settings::defaults::visualization::colormap::colormap,
-                                                           Settings::defaults::visualization::colormap::numColors,
-                                                           Settings::defaults::visualization::colormap::saturation);
-    setTexture(image);
-
-    setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
-    setColorMapClampRange(Settings::defaults::visualization::colormap::clampMin, Settings::defaults::visualization::colormap::clampMax);
-    setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
-
-}
 
 /** Shader Functions **/
 
