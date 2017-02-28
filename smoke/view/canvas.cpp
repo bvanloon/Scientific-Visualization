@@ -25,6 +25,78 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
+void Canvas::idleLoop()
+{
+    if(!Settings::simulation().frozen)
+    {
+        this->simulation->step();
+    }
+    update();
+}
+
+void Canvas::initiateIdleLoop()
+{
+   this->timer->start();
+   connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
+}
+
+void Canvas::mouseMoveEvent(QMouseEvent *event)
+{
+    if(!Settings::simulation().frozen){
+        QPointF mousePosition = event->localPos();
+        emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+    }
+}
+
+void Canvas::initializeGL()
+{
+    initializeOpenGLFunctions();
+
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    glEnable(GL_DEPTH_TEST);
+
+    initializeShaders(); //move
+
+    this->vectorEngine = new VectorEngine();
+    this->smokeEngine = new SmokeEngine();
+
+    initializeUniforms(); //move
+}
+
+void Canvas::paintGL()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    shaderProgram->bind(); //move
+
+    this->texture->bind(); //move
+
+    smokeEngine->draw(this->simulation);
+//    vectorEngine->draw(this->simulation);
+
+    this->texture->release(); //move
+
+    shaderProgram->release(); //move
+}
+
+void Canvas::resizeGL(int width, int height)
+{
+    glViewport(0.0f, 0.0f, (GLfloat) width, (GLfloat) height);
+
+    float nearClippingPlane = -1.0f;
+    float farClippingPlane = 1.0f;
+
+    projectionMatrix.setToIdentity();
+    projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
+
+    emit windowResized(width, height);
+    setMVPMatrix();//move
+}
+
+
+//// ----- REMOVE  ------
+
 void Canvas::onValueRangeChanged(float minimum, float maximum)
 {
     setColorMapValueRange(minimum, maximum);
@@ -52,31 +124,6 @@ void Canvas::onForceChanged(float force)
     }
 }
 
-void Canvas::idleLoop()
-{
-    if(!Settings::simulation().frozen)
-    {
-        this->simulation->step();
-    }
-    update();
-}
-
-void Canvas::initializeGL()
-{
-    initializeOpenGLFunctions();
-
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
-    glEnable(GL_DEPTH_TEST);
-
-    initializeShaders();
-
-    this->vectorEngine = new VectorEngine();
-    this->smokeEngine = new SmokeEngine();
-
-    initializeUniforms();
-}
-
 void Canvas::initializeShaders()
 {
     this->shaderProgram = new QOpenGLShaderProgram();
@@ -101,24 +148,10 @@ void Canvas::initializeColorMapInfo()
     setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
 }
 
-void Canvas::paintGL()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    shaderProgram->bind();
-
-    this->texture->bind();
-
-    smokeEngine->draw(this->simulation);
-//    vectorEngine->draw(this->simulation);
-
-    this->texture->release();
-
-    shaderProgram->release();
-}
 
 void Canvas::setMVPMatrix()
 {
+    //change to signal slot construction
     shaderProgram->bind();
     QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
 
@@ -162,30 +195,4 @@ void Canvas::setColorMapClampingTo(bool clampingOn)
     this->shaderProgram->release();
 }
 
-void Canvas::initiateIdleLoop()
-{
-   this->timer->start();
-   connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
-}
 
-void Canvas::resizeGL(int width, int height)
-{
-    glViewport(0.0f, 0.0f, (GLfloat) width, (GLfloat) height);
-
-    float nearClippingPlane = -1.0f;
-    float farClippingPlane = 1.0f;
-
-    projectionMatrix.setToIdentity();
-    projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
-
-    emit windowResized(width, height);
-    setMVPMatrix();
-}
-
-void Canvas::mouseMoveEvent(QMouseEvent *event)
-{
-    if(!Settings::simulation().frozen){
-        QPointF mousePosition = event->localPos();
-        emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
-    }
-}
