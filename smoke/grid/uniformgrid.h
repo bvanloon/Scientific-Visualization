@@ -9,7 +9,7 @@ class UniformGrid : public Grid
 {
 public:
     QVector<QVector3D> const& getVertexPositions() const;
-    QVector<QVector3D> const& getTriangulation() const;
+    QVector<QVector3D> getTriangulation() const;
 
     void changeGridArea(QSizeF newArea);
 
@@ -24,12 +24,12 @@ private:
     void recomputeVertexPositions();
     QSizeF computeCellSize(QSizeF area);
 
-    int to1Dindex(int i, int j) const;
+    int to1Dindex(int coldIdx, int rowIdx) const;
 
     QVector3D computeVertexPosition(int i, int j);
 
     Vertex* getVertexAt(int idx) const;
-    Vertex* getVertexAt(int i, int j) const;
+    Vertex* getVertexAt(int coldIdx, int rowIdx) const;
 
 };
 

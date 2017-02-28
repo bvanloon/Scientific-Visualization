@@ -38,37 +38,7 @@ QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 
 QVector<QVector3D> Simulation::getGridTriangulation()
 {
-    QVector<QVector3D> gridTriangles;
-
-    double px0, py0, px1, py1, px2, py2, px3, py3;
-
-    for (int j = 0; j < Settings::simulation().dimension - 1; j++)
-    {
-        for (int i = 0; i < Settings::simulation().dimension - 1; i++)
-        {
-            px0 = Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width();
-            py0 = Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height();
-
-            px1 = Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width();
-            py1 = Settings::simulation().cellSize.height()+ (fftw_real)(j + 1) * Settings::simulation().cellSize.height();
-
-            px2 = Settings::simulation().cellSize.width() + (fftw_real)(i + 1) * Settings::simulation().cellSize.width();
-            py2 = Settings::simulation().cellSize.height() + (fftw_real)(j + 1) * Settings::simulation().cellSize.height();
-
-            px3 = Settings::simulation().cellSize.width() + (fftw_real)(i + 1) * Settings::simulation().cellSize.width();
-            py3 = Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height();
-
-            gridTriangles.append(QVector3D(px0,py0,0.0f) );
-            gridTriangles.append(QVector3D(px1,py1,0.0f) );
-            gridTriangles.append(QVector3D(px2,py2,0.0f) );
-
-            gridTriangles.append(QVector3D(px0,py0,0.0f) );
-            gridTriangles.append(QVector3D(px2,py2,0.0f) );
-            gridTriangles.append(QVector3D(px3,py3,0.0f) );
-        }
-    }
-
-    return gridTriangles;
+    return grid->getTriangulation();
 }
 
 QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)

@@ -14,13 +14,24 @@ const QVector<QVector3D> &UniformGrid::getVertexPositions() const
     return this->vertexPositions;
 }
 
-const QVector<QVector3D> &UniformGrid::getTriangulation() const
+QVector<QVector3D> UniformGrid::getTriangulation() const
 {
     QVector<QVector3D> triangulation;
-    Vertex* vertex;
-    for(int i = 0; i < dimension - 1; i++){
-        for(int j = 0; j < dimension - 1; j++){
-            vertex = getVertexAt(i, j);
+    Vertex* vertex, *rightBelow, *right, *below;
+    for(int rowIdx = 0; rowIdx < dimension - 1; rowIdx++){
+        for(int colIdx = 0; colIdx < dimension - 1; colIdx++){
+            vertex = getVertexAt(colIdx, rowIdx);
+            right = getVertexAt(colIdx + 1, rowIdx);
+            below = getVertexAt(colIdx, rowIdx + 1);
+            rightBelow = getVertexAt(colIdx + 1, rowIdx + 1);
+
+            triangulation.append(*vertex->getPosition());
+            triangulation.append(*below->getPosition());
+            triangulation.append(*rightBelow->getPosition());
+
+            triangulation.append(*vertex->getPosition());
+            triangulation.append(*rightBelow->getPosition());
+            triangulation.append(*right->getPosition());
         }
     }
     return triangulation;
@@ -28,8 +39,6 @@ const QVector<QVector3D> &UniformGrid::getTriangulation() const
 
 void UniformGrid::recomputeVertexPositions()
 {
-    QVector3D position;
-    Vertex* vertex;
     int idx;
     for (int i = 0; i < dimension; i++){
         for (int j = 0; j < dimension; j++)
@@ -65,9 +74,9 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
     return grid;
 }
 
-int UniformGrid::to1Dindex(int i, int j) const
+int UniformGrid::to1Dindex(int coldIdx, int rowIdx) const
 {
-    return (j * this->dimension) + i;
+    return (rowIdx * this->dimension) + coldIdx;
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea)
@@ -88,8 +97,8 @@ Vertex *UniformGrid::getVertexAt(int idx) const
     return vertices.at(idx);
 }
 
-Vertex *UniformGrid::getVertexAt(int i, int j) const
+Vertex *UniformGrid::getVertexAt(int coldIdx, int rowIdx) const
 {
-    int idx = to1Dindex(i, j);
+    int idx = to1Dindex(coldIdx, rowIdx);
     return getVertexAt(idx);
 }
