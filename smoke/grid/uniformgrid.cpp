@@ -59,11 +59,17 @@ QSizeF UniformGrid::computeCellSize(QSizeF area)
 UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, SimulationRealization* simulation)
 {
     UniformGrid* grid = new UniformGrid(dimension, size, true);
+    createVertices(grid, simulation);
+    return grid;
+}
+
+void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simulation)
+{
     QVector3D position;
     Vertex* vertex;
     int idx;
-    for (int i = 0; i < dimension; i++){
-        for (int j = 0; j < dimension; j++)
+    for (int i = 0; i < grid->dimension; i++){
+        for (int j = 0; j < grid->dimension; j++)
         {
             idx = grid->to1Dindex(i, j);
             position = grid->computeVertexPosition(i, j);
@@ -73,7 +79,6 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
             grid->vertices.replace(idx, vertex);
         }
     }
-    return grid;
 }
 
 int UniformGrid::to1Dindex(int coldIdx, int rowIdx) const

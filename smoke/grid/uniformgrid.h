@@ -31,6 +31,8 @@ private:
     Vertex* getVertexAt(int idx) const;
     Vertex* getVertexAt(int coldIdx, int rowIdx) const;
 
+    static void createVertices(UniformGrid* grid, SimulationRealization *simulation);
+
 };
 
 #endif // UNIFORMGRID_H
