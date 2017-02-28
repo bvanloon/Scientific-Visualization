@@ -3,10 +3,6 @@
 
 #include "abstractengine.h"
 
-#include "simulation/simulation.h"
-#include "settings/settings.h"
-#include "settings/visualizationsettings.h"
-
 class SmokeEngine : AbstractEngine
 {
 public:

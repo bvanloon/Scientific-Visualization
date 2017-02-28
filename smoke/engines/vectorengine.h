@@ -2,7 +2,6 @@
 #define VECTORENGINE_H
 
 #include "abstractengine.h"
-#include "simulation/simulation.h"
 
 class VectorEngine : AbstractEngine
 {
