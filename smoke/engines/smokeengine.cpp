@@ -3,7 +3,6 @@
 SmokeEngine::SmokeEngine()
 {
 
-    this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
     this->textureCoordinateBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
     initializeOpenGLFunctions();
