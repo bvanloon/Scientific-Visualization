@@ -4,20 +4,18 @@
 #include <QImage>
 #include "settings/simulationsettings.h"
 
+
 Canvas::Canvas(QWidget* parent) :
     QOpenGLWidget(parent),
-    texture(0),
     timer(new QTimer(this))
 {
-    modelViewMatrix.setToIdentity();
+
     this->initiateIdleLoop();
 }
 
 Canvas::~Canvas()
 {
-    delete this->shaderProgram;
     delete this->timer;
-    delete this->texture;
 }
 
 void Canvas::setSimulation(Simulation *simulation)
@@ -56,28 +54,18 @@ void Canvas::initializeGL()
 
     glEnable(GL_DEPTH_TEST);
 
-    initializeShaders(); //move
 
-    this->vectorEngine = new VectorEngine();
+    //this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
-
-    initializeUniforms(); //move
 }
 
 void Canvas::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    shaderProgram->bind(); //move
-
-    this->texture->bind(); //move
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
 
     smokeEngine->draw(this->simulation);
 //    vectorEngine->draw(this->simulation);
 
-    this->texture->release(); //move
-
-    shaderProgram->release(); //move
 }
 
 void Canvas::resizeGL(int width, int height)
@@ -87,8 +75,8 @@ void Canvas::resizeGL(int width, int height)
     float nearClippingPlane = -1.0f;
     float farClippingPlane = 1.0f;
 
-    projectionMatrix.setToIdentity();
-    projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
+
+   this->smokeEngine->setProjectionMatrix(width, height, nearClippingPlane,farClippingPlane);
 
     emit windowResized(width, height);
     setMVPMatrix();//move
@@ -114,7 +102,10 @@ void Canvas::onsetClampingRange(float minimum, float maximum)
 
 void Canvas::onColorMapChanged(AbstractColorMap colormap)
 {
-    setTexture(colormap);
+    if(isValid()){
+        this->smokeEngine->AbstractEngine::setTexture(colormap);
+    }
+
 }
 
 void Canvas::onForceChanged(float force)
@@ -124,75 +115,32 @@ void Canvas::onForceChanged(float force)
     }
 }
 
-void Canvas::initializeShaders()
-{
-    this->shaderProgram = new QOpenGLShaderProgram();
-    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shaders/shaders/vertex.glsl");
-    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shaders/shaders/fragment.glsl");
-    this->shaderProgram->link();
-}
 
-void Canvas::initializeUniforms()
-{
-    setMVPMatrix();
-    initializeColorMapInfo();
-}
 
-void Canvas::initializeColorMapInfo()
-{
-    setTexture(*ColorMapFactory::get()->createColorMap(Settings::defaults::visualization::colormap::colormap,
-                                                      Settings::defaults::visualization::colormap::numColors,
-                                                      Settings::defaults::visualization::colormap::saturation));
-    setColorMapValueRange(Settings::defaults::simulation::valueRangeMin, Settings::defaults::simulation::valueRangeMax);
-    setColorMapClampRange(Settings::defaults::visualization::colormap::clampMin, Settings::defaults::visualization::colormap::clampMax);
-    setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
-}
 
 
 void Canvas::setMVPMatrix()
 {
     //change to signal slot construction
-    shaderProgram->bind();
-    QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
 
-    this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
-    shaderProgram->release();
+    this->smokeEngine->AbstractEngine::setMVPMatrix();
+
 }
 
-void Canvas::setTexture(QImage image)
-{
-    if(isValid()){
-        if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
-        if (texture->isCreated()) texture->destroy();
-
-        texture->create();
-        texture->setData(image.mirrored());
-        texture->setMagnificationFilter(QOpenGLTexture::Nearest);
-        texture->setWrapMode(QOpenGLTexture::ClampToEdge);
-    }
-}
 
 void Canvas::setColorMapValueRange(float min, float max)
 {
-    this->shaderProgram->bind();
-    this->shaderProgram->setUniformValue("colorMapInfo.minimum", min);
-    this->shaderProgram->setUniformValue("colorMapInfo.maximum", max);
-    this->shaderProgram->release();
+    this->smokeEngine->AbstractEngine::setColorMapValueRange(min,max);
 }
 
 void Canvas::setColorMapClampRange(float startClamp, float endClamp)
 {
-    this->shaderProgram->bind();
-    this->shaderProgram->setUniformValue("colorMapInfo.clampMin", startClamp);
-    this->shaderProgram->setUniformValue("colorMapInfo.clampMax", endClamp);
-    this->shaderProgram->release();
+    this->smokeEngine->AbstractEngine::setColorMapClampRange(startClamp, endClamp);
 }
 
 void Canvas::setColorMapClampingTo(bool clampingOn)
 {
-    this->shaderProgram->bind();
-    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", clampingOn);
-    this->shaderProgram->release();
+    this->smokeEngine->AbstractEngine::setColorMapClampingTo(clampingOn);
 }
 
 
