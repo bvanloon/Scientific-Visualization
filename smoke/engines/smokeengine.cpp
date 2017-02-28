@@ -1,10 +1,8 @@
 #include "smokeengine.h"
 
-SmokeEngine::SmokeEngine()
-{
-    initBuffers();
+SmokeEngine::SmokeEngine() {
+    init();
 }
-
 
 void SmokeEngine::draw(Simulation *simulation)
 {
@@ -12,10 +10,6 @@ void SmokeEngine::draw(Simulation *simulation)
     drawWithMode(simulation, GL_TRIANGLES, bufferLength);
 }
 
-void SmokeEngine::initBuffers()
-{
-    AbstractEngine::initBuffers();
-}
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
@@ -26,3 +20,5 @@ int SmokeEngine::updateBuffers(Simulation *simulation)
     updateBuffer(this->textureCoordinateBuffer,textureCoordinates);
     return triangles.length();
 }
+
+

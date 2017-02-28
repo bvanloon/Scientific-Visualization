@@ -5,6 +5,10 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
 #include <QOpenGLVertexArrayObject>
+#include <QOpenGLTexture>
+#include <QObject>
+#include <QOpenGLWidget>
+#include <QMatrix4x4>
 
 #include "simulation/simulation.h"
 #include "settings/settings.h"
@@ -17,7 +21,27 @@ public:
     virtual ~AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
 
+    void setProjectionMatrix(float width, float height, float nearClippingPlane, float farClippingplane);
+    void setMVPMatrix();
+
+    void setTexture(QImage image);
+    void setColorMapValueRange(float min, float max);
+    void setColorMapClampRange(float startClamp, float endClamp);
+    void setColorMapClampingTo(bool clampingOn);
+
+
+
+    //Uniforms
+    QMatrix4x4 modelViewMatrix;
+    QMatrix4x4 projectionMatrix;
+
 protected:
+    //Shaders
+    QOpenGLShaderProgram *shaderProgram;
+    QOpenGLTexture *texture;
+
+
+    //Buffers
     QOpenGLVertexArrayObject vao;
     QOpenGLBuffer* vertexBuffer;
     QOpenGLBuffer* textureCoordinateBuffer;
@@ -29,7 +53,20 @@ protected:
     void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
     void drawWithMode(Simulation* Simulation, int mode, int bufferLength);
 
+
+
+private:
+    // OpenGL initialization
+    void initializeUniforms();
+    void initializeColorMapInfo();
+
+    void initializeShaders();
     void initBuffers();
+
+
+
+
+
 };
 
 #endif // ABSTRACTENGINE_H

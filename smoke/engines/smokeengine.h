@@ -3,16 +3,19 @@
 
 #include "abstractengine.h"
 
-class SmokeEngine : AbstractEngine
+class SmokeEngine : public AbstractEngine
 {
 public:
     SmokeEngine();
 
     void draw(Simulation* simulation);
 
-private:
-    void initBuffers();
+    void setTexture(QImage image);
+    void setColorMapValueRange(float min, float max);
+    void setColorMapClampRange(float startClamp, float endClamp);
+    void setColorMapClampingTo(bool clampingOn);
 
+private:
     int updateBuffers(Simulation* simulation);
 
 

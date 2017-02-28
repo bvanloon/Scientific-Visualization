@@ -29,6 +29,9 @@ public:
 
     void setSimulation(Simulation *simulation);
 
+
+
+
 signals:
     void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
@@ -50,20 +53,9 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    //Shaders
-    QOpenGLShaderProgram *shaderProgram;
-
     // OpenGL initialization
-    void initializeShaders();
     void initializeUniforms();
     void initializeColorMapInfo();
-
-
-    //Uniforms
-    QMatrix4x4 modelViewMatrix;
-    QMatrix4x4 projectionMatrix;
-
-    QOpenGLTexture *texture;
 
     void setMVPMatrix();
 
