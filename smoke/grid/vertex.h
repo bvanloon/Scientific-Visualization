@@ -18,6 +18,8 @@ public:
 
     virtual QVector2D getFluidVelocity() const = 0;
 
+    virtual float getFluidVelocityMagnitude() const = 0;
+
 protected:
     const QVector3D *position;
 
@@ -32,6 +34,7 @@ public:
     friend QDebug operator<<(QDebug stream, SimulationVertex *vertex);
 
     virtual QVector2D getFluidVelocity() const;
+    virtual QVector2D getFluidVelocityMagnitude() const;
 
 private:
     double* vx;

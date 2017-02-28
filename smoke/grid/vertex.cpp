@@ -41,6 +41,11 @@ QVector2D SimulationVertex::getFluidVelocity() const
     return QVector2D(*(vx), *(vy));
 }
 
+QVector2D SimulationVertex::getFluidVelocityMagnitude() const
+{
+    return getFluidVelocity().length();
+}
+
 QDebug operator<<(QDebug stream, const SimulationVertex &vertex)
 {
     stream << "SimulationVertex ["
