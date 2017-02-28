@@ -2,15 +2,9 @@
 
 SmokeEngine::SmokeEngine()
 {
-    this->textureCoordinateBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-
     initBuffers();
 }
 
-SmokeEngine::~SmokeEngine()
-{
-    this->textureCoordinateBuffer->destroy();
-}
 
 void SmokeEngine::draw(Simulation *simulation)
 {
@@ -21,22 +15,11 @@ void SmokeEngine::draw(Simulation *simulation)
 void SmokeEngine::initBuffers()
 {
     AbstractEngine::initBuffers();
-    this->vao.bind();
-
-    this->textureCoordinateBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->textureCoordinateBuffer->create();
-    this->textureCoordinateBuffer->bind();
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, 0);
-
-    this->vao.release();
 }
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
     QVector<QVector3D> triangles = simulation->getGridTriangulation();
-
     QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(triangles);
 
     updateBuffer(this->vertexBuffer, triangles);
