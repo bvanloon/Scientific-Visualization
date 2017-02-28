@@ -19,7 +19,7 @@ private:
     int dimension;
     QSizeF cellSize;
 
-    UniformGrid(int dimension, QSizeF areaSize);
+    UniformGrid(int dimension, QSizeF areaSize, bool padding);
 
     void recomputeVertexPositions();
     QSizeF computeCellSize(QSizeF area);

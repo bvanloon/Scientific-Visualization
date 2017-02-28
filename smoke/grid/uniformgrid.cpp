@@ -3,8 +3,8 @@
 #include "settings/simulationsettings.h"
 #include <QDebug>
 
-UniformGrid::UniformGrid(int dimension, QSizeF areaSize):
-    Grid(dimension * dimension),
+UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool padding):
+    Grid(dimension * dimension, padding),
     dimension(dimension),
     cellSize(computeCellSize(areaSize))
 {}
@@ -56,7 +56,7 @@ QSizeF UniformGrid::computeCellSize(QSizeF area)
 
 UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, SimulationRealization* simulation)
 {
-    UniformGrid* grid = new UniformGrid(dimension, size);
+    UniformGrid* grid = new UniformGrid(dimension, size, false);
     QVector3D position;
     Vertex* vertex;
     int idx;
