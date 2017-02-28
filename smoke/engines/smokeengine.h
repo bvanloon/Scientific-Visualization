@@ -15,8 +15,6 @@ private:
     void initBuffers();
 
     int updateBuffers(Simulation* simulation);
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
 
     QOpenGLBuffer* textureCoordinateBuffer;
 };
