@@ -17,8 +17,6 @@ private:
     int dimension;
     QSizeF cellSize;
 
-
-
     int to1Dindex(int i, int j);
 };
 

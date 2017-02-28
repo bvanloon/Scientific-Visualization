@@ -9,13 +9,14 @@ class Grid
 {
 public:
     Grid(int numberOfVertices);
+    ~Grid();
 
     QVector<QVector3D> const& getVertexPositions() const;
-    QVector<Vertex> const& getVertices() const;
+    QVector<Vertex*> const& getVertices() const;
     int const& numVertices() const;
 
 protected:
-    QVector<Vertex> vertices;
+    QVector<Vertex*> vertices;
     QVector<QVector3D> vertexPositions;
 };
 

@@ -29,7 +29,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size)
                         grid->cellSize.height() + (double)j * grid->cellSize.height(),
                         0.0f);
             grid->vertexPositions.replace(idx, position);
-            grid->vertices.replace(idx, Vertex(&grid->vertexPositions.at(idx)));
+            grid->vertices.replace(idx, new Vertex(&grid->vertexPositions.at(idx)));
         }
     }
     return grid;
