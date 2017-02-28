@@ -14,6 +14,7 @@ class AbstractEngine : protected QOpenGLFunctions
 {
 public:
     AbstractEngine();
+    virtual ~AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
 
 protected:

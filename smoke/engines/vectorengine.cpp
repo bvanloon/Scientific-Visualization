@@ -5,12 +5,6 @@ VectorEngine::VectorEngine()
     initBuffers();
 }
 
-VectorEngine::~VectorEngine()
-{
-    this->vertexBuffer->destroy();
-    this->vao.destroy();
-}
-
 void VectorEngine::draw(Simulation *simulation)
 {
     int bufferLength = this->updateBuffers(simulation);

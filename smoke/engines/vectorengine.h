@@ -7,7 +7,6 @@ class VectorEngine : AbstractEngine
 {
 public:
     VectorEngine();
-    virtual ~VectorEngine();
 
     void draw(Simulation* simulation);
 

@@ -8,6 +8,12 @@ AbstractEngine::AbstractEngine()
 
 }
 
+AbstractEngine::~AbstractEngine()
+{
+    this->vertexBuffer->destroy();
+    this->vao.destroy();
+}
+
 void AbstractEngine::initBuffers()
 {
     this->vao.create();

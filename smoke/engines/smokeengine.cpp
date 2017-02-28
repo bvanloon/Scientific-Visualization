@@ -9,8 +9,7 @@ SmokeEngine::SmokeEngine()
 
 SmokeEngine::~SmokeEngine()
 {
-    this->vertexBuffer->destroy();
-    this->vao.destroy();
+    this->textureCoordinateBuffer->destroy();
 }
 
 void SmokeEngine::draw(Simulation *simulation)
