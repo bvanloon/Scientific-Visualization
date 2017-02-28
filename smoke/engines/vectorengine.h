@@ -1,14 +1,10 @@
 #ifndef VECTORENGINE_H
 #define VECTORENGINE_H
 
-#include <QOpenGLFunctions>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLBuffer>
-#include <QOpenGLVertexArrayObject>
-
+#include "abstractengine.h"
 #include "simulation/simulation.h"
 
-class VectorEngine : protected QOpenGLFunctions
+class VectorEngine : AbstractEngine
 {
 public:
     VectorEngine();
