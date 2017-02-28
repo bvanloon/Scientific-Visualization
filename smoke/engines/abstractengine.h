@@ -31,6 +31,16 @@ public:
 
 
 protected:
+    QOpenGLBuffer* vertexBuffer;
+    QOpenGLBuffer* textureCoordinateBuffer;
+
+    void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
+    void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
+    void drawWithMode(Simulation* Simulation, int mode, int bufferLength);
+
+private:
+    void init();
+
     //Shaders
     QOpenGLShaderProgram *shaderProgram;
     QOpenGLTexture *texture;
@@ -38,19 +48,7 @@ protected:
 
     //Buffers
     QOpenGLVertexArrayObject vao;
-    QOpenGLBuffer* vertexBuffer;
-    QOpenGLBuffer* textureCoordinateBuffer;
 
-
-    void init();
-
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
-    void drawWithMode(Simulation* Simulation, int mode, int bufferLength);
-
-
-
-private:
     // OpenGL initialization
     void initializeUniforms();
     void initializeColorMapInfo();
