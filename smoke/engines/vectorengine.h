@@ -11,8 +11,6 @@ public:
     void draw(Simulation* simulation);
 
 private:
-    void initBuffers();
-
     int updateBuffers(Simulation* simulation);
 
 

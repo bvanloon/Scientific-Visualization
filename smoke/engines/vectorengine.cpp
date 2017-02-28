@@ -1,19 +1,11 @@
 #include "vectorengine.h"
 
-VectorEngine::VectorEngine()
-{
-    initBuffers();
-}
+VectorEngine::VectorEngine(){}
 
 void VectorEngine::draw(Simulation *simulation)
 {
     int bufferLength = this->updateBuffers(simulation);
     drawWithMode(simulation, GL_LINES, bufferLength);
-}
-
-void VectorEngine::initBuffers()
-{
-    AbstractEngine::initBuffers();
 }
 
 int VectorEngine::updateBuffers(Simulation *simulation)

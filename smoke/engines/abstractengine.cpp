@@ -6,6 +6,7 @@ AbstractEngine::AbstractEngine()
     this->textureCoordinateBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
 
     initializeOpenGLFunctions();
+    init();
 
 }
 
@@ -16,8 +17,15 @@ AbstractEngine::~AbstractEngine()
     this->vao.destroy();
 }
 
+void AbstractEngine::init()
+{
+    initBuffers();
+}
+
+/** Buffers **/
 void AbstractEngine::initBuffers()
 {
+
     this->vao.create();
     this->vao.bind();
 
