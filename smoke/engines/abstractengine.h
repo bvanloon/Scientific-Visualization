@@ -7,7 +7,6 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
 #include <QObject>
-#include <QOpenGLWidget>
 #include <QMatrix4x4>
 
 #include "simulation/simulation.h"
