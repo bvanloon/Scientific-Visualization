@@ -1,7 +1,6 @@
 #include "smokeengine.h"
 
 SmokeEngine::SmokeEngine() {
-    init();
 }
 
 void SmokeEngine::draw(Simulation *simulation)
