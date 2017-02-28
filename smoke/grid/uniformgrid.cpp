@@ -18,22 +18,9 @@ const QVector<QVector3D> &UniformGrid::getVertexPositions() const
 QVector<QVector3D> UniformGrid::getTriangulation() const
 {
     QVector<QVector3D> triangulation;
-    Vertex* vertex, *rightBelow, *right, *below;
-    for(int rowIdx = 0; rowIdx < dimension - 1; rowIdx++){
-        for(int colIdx = 0; colIdx < dimension - 1; colIdx++){
-            vertex = getVertexAt(colIdx, rowIdx);
-            right = getVertexAt(colIdx + 1, rowIdx);
-            below = getVertexAt(colIdx, rowIdx + 1);
-            rightBelow = getVertexAt(colIdx + 1, rowIdx + 1);
-
-            triangulation.append(*vertex->getPosition());
-            triangulation.append(*below->getPosition());
-            triangulation.append(*rightBelow->getPosition());
-
-            triangulation.append(*vertex->getPosition());
-            triangulation.append(*rightBelow->getPosition());
-            triangulation.append(*right->getPosition());
-        }
+    QVector<Cell*>::const_iterator currentCell = cells.begin();
+    while(currentCell != cells.end()){
+        triangulation.append((*currentCell++)->triangulate());
     }
     return triangulation;
 }

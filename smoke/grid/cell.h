@@ -2,22 +2,27 @@
 #define CELL_H
 
 #include "grid/vertex.h"
+#include <QVector>
+#include <QVector3D>
 
 class Cell
 {
 public:
     Cell();
-    ~Cell();
+    virtual ~Cell();
+
+    virtual QVector<QVector3D> triangulate() = 0;
 };
 
 class StructuredCell : public Cell
 {
 public:
     StructuredCell(Vertex* upperLeft, Vertex* upperRight, Vertex* lowerLeft, Vertex* lowerRight);
-    ~StructuredCell();
 
     friend QDebug operator<<(QDebug stream, const StructuredCell &cell);
     friend QDebug operator<<(QDebug stream, StructuredCell *cell);
+
+    virtual QVector<QVector3D> triangulate();
 
 private:
     Vertex* upperLeft;

@@ -6,7 +6,6 @@ Cell::Cell()
 Cell::~Cell()
 {}
 
-
 StructuredCell::StructuredCell(Vertex *upperLeft, Vertex *upperRight, Vertex *lowerLeft, Vertex *lowerRight):
     Cell(),
     upperLeft(upperLeft),
@@ -14,6 +13,19 @@ StructuredCell::StructuredCell(Vertex *upperLeft, Vertex *upperRight, Vertex *lo
     lowerLeft(lowerLeft),
     lowerRight(lowerRight)
 {}
+
+QVector<QVector3D> StructuredCell::triangulate()
+{
+    QVector<QVector3D> triangulation;
+    triangulation.append(*upperLeft->getPosition());
+    triangulation.append(*lowerLeft->getPosition());
+    triangulation.append(*lowerRight->getPosition());
+
+    triangulation.append(*upperLeft->getPosition());
+    triangulation.append(*lowerRight->getPosition());
+    triangulation.append(*upperRight->getPosition());
+    return triangulation;
+}
 
 QDebug operator<<(QDebug stream, const StructuredCell &cell)
 {
