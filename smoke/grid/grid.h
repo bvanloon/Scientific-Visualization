@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QVector3D>
 #include "grid/vertex.h"
+#include "grid/cell.h"
 
 class Grid
 {
@@ -18,6 +19,7 @@ public:
 protected:
     QVector<Vertex*> vertices;
     QVector<QVector3D> vertexPositions;
+    QVector<Cell* > cells;
     bool padding;
 };
 
