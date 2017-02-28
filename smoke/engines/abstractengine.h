@@ -19,6 +19,8 @@ public:
 protected:
     QOpenGLVertexArrayObject vao;
     QOpenGLBuffer* vertexBuffer;
+
+     void initBuffers();
 };
 
 #endif // ABSTRACTENGINE_H
