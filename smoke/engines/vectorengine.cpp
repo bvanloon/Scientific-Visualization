@@ -40,7 +40,7 @@ void VectorEngine::initBuffers()
 
 int VectorEngine::updateBuffers(Simulation *simulation)
 {
-    QVector<QVector3D> vertices = simulation->getGridVertices();
+    QVector<QVector3D> vertices = simulation->getSimpleHedgeHodges();
     updateBuffer(this->vertexBuffer, vertices);
     return vertices.length();
 }

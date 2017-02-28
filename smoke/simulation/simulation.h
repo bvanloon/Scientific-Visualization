@@ -20,7 +20,7 @@ public:
 
     typedef QVector<float> (Simulation::*textureCoordinateGetter)(QVector<QVector3D>);
 
-    QVector<QVector3D> getGridVertices();
+    QVector<QVector3D> getSimpleHedgeHodges();
     QVector<QVector3D> getGridTriangulation();
 
     QVector<float> getTexCoordFluidDensity(QVector<QVector3D> vertexPositions);

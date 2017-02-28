@@ -22,7 +22,7 @@ Simulation::~Simulation()
 }
 
 
-QVector<QVector3D> Simulation::getGridVertices()
+QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 {
     QVector<QVector3D> gridVertices;
     int idx;
