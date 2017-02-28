@@ -24,16 +24,8 @@ void SmokeEngine::draw(Simulation *simulation)
 
 void SmokeEngine::initBuffers()
 {
-    this->vao.create();
+    AbstractEngine::initBuffers();
     this->vao.bind();
-
-    this->vertexBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
-    this->vertexBuffer->create();
-    this->vertexBuffer->bind();
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
 
     this->textureCoordinateBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
     this->textureCoordinateBuffer->create();
