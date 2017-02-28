@@ -30,11 +30,6 @@ public:
     void setColorMapClampingTo(bool clampingOn);
 
 
-
-    //Uniforms
-    QMatrix4x4 modelViewMatrix;
-    QMatrix4x4 projectionMatrix;
-
 protected:
     //Shaders
     QOpenGLShaderProgram *shaderProgram;
@@ -63,8 +58,9 @@ private:
     void initializeShaders();
     void initBuffers();
 
-
-
+    //Uniforms
+    QMatrix4x4 modelViewMatrix;
+    QMatrix4x4 projectionMatrix;
 
 
 };
