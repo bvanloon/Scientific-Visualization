@@ -22,7 +22,7 @@ const QVector<Vertex *> &Grid::getVertices() const
     return this->vertices;
 }
 
-const int &Grid::numVertices() const
+int Grid::numVertices() const
 {
     return this->vertexPositions.size();
 }
