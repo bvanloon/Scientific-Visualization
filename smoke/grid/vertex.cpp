@@ -23,3 +23,8 @@ QDebug operator<<(QDebug stream, Vertex *vertex)
     stream << *vertex;
     return stream;
 }
+
+QVector2D SimulationVertex::getFluidVelocity()
+{
+    return QVector2D(*this->vx, *this->vy);
+}

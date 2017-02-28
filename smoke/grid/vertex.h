@@ -19,4 +19,14 @@ private:
 
 };
 
+class SimulationVertex : public Vertex
+{
+public:
+    QVector2D getFluidVelocity();
+
+private:
+    double* vx;
+    double* vy;
+};
+
 #endif // VERTEX_H
