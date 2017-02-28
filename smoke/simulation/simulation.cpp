@@ -116,8 +116,7 @@ void Simulation::onStep()
 
 void Simulation::onWindowResized(int width, int height)
 {
-    delete this->grid;
-    this->grid = UniformGrid::createSimulationGrid(Settings::simulation().dimension, QSizeF(width, height), this->realization);
+    grid->changeGridArea(QSizeF(width, height));
 }
 
 int Simulation::to1DIndex(int i, int j)
