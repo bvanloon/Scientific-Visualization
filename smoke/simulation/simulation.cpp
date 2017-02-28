@@ -24,28 +24,15 @@ Simulation::~Simulation()
 
 QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 {
-    QVector<QVector3D> gridVertices;
-    int idx;
-    QVector3D gridPoint;
-    QVector3D offset;
-
-    for (int i = 0; i < Settings::simulation().dimension; i++){
-        for (int j = 0; j < Settings::simulation().dimension; j++)
-        {
-            idx = (j * Settings::simulation().dimension) + i;
-            gridPoint = QVector3D(
-                        Settings::simulation().cellSize.width() + (fftw_real)i * Settings::simulation().cellSize.width(),
-                        Settings::simulation().cellSize.height() + (fftw_real)j * Settings::simulation().cellSize.height(),
-                        0.0f);
-            offset = QVector3D(
-                        Settings::visualization().vectorScale * this->realization->vx[idx],
-                        Settings::visualization().vectorScale * this->realization->vy[idx],
-                        0.0f);
-            gridVertices.append(gridPoint);
-            gridVertices.append(gridPoint + offset);
-        }
+    QVector<QVector3D> hedgeHodgeVertices(grid->numVertices() * 2);
+    QVector<Vertex>::const_iterator currentVertex = grid->getVertices().begin();
+    int simulationIdx = 0;
+    for(int i = 0; currentVertex != grid->getVertices().end(); currentVertex++){
+        hedgeHodgeVertices[i++] = *(currentVertex->getPosition());
+        hedgeHodgeVertices[i++] = *(currentVertex->getPosition()) +
+                Settings::visualization().vectorScale * QVector3D(this->realization->vx[simulationIdx], this->realization->vy[simulationIdx++], 0.0f);
     }
-    return gridVertices;
+    return hedgeHodgeVertices;
 }
 
 QVector<QVector3D> Simulation::getGridTriangulation()
