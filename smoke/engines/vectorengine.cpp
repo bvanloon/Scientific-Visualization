@@ -2,9 +2,6 @@
 
 VectorEngine::VectorEngine()
 {
-
-    initializeOpenGLFunctions();
-
     initBuffers();
 }
 
