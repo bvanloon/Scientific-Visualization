@@ -15,7 +15,7 @@ const QVector<QVector3D> &UniformGrid::getVertexPositions() const
     return this->vertexPositions;
 }
 
-UniformGrid *UniformGrid::create(int dimension, QSizeF size)
+UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size)
 {
     UniformGrid* grid = new UniformGrid(dimension, size);
     QVector3D position;

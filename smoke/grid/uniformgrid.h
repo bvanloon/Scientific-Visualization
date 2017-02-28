@@ -11,7 +11,7 @@ public:
 
     QVector<QVector3D> const& getVertexPositions() const;
 
-    static UniformGrid *create(int dimension, QSizeF size);
+    static UniformGrid *createSimulationGrid(int dimension, QSizeF size);
 
 private:
     int dimension;
