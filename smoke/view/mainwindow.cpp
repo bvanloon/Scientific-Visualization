@@ -6,9 +6,10 @@
 #include "settings/canvassettings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
+
     QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    keyboardHandler(new KeyboardHandler(this))
+    keyboardHandler(new KeyboardHandler(this)),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
