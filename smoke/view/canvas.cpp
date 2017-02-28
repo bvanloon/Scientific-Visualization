@@ -75,7 +75,9 @@ void Canvas::resizeGL(int width, int height)
    this->smokeEngine->setProjectionMatrix(width, height, nearClippingPlane,farClippingPlane);
 
     emit windowResized(width, height);
-    setMVPMatrix();//move
+    //change to signal slot construction
+
+    this->smokeEngine->AbstractEngine::setMVPMatrix();
 }
 
 
@@ -112,16 +114,6 @@ void Canvas::onForceChanged(float force)
 }
 
 
-
-
-
-void Canvas::setMVPMatrix()
-{
-    //change to signal slot construction
-
-    this->smokeEngine->AbstractEngine::setMVPMatrix();
-
-}
 
 
 void Canvas::setColorMapValueRange(float min, float max)
