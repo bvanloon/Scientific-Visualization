@@ -77,6 +77,6 @@ QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
 }
 
 VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
-    position(position),
+    Vertex(position),
     cell(cell)
 {}
