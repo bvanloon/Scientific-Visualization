@@ -4,10 +4,15 @@
 #include "grid/cell.h"
 #include <QDebug>
 
-UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool padding):
-    Grid(dimension * dimension, padding),
+UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding):
+    Grid(dimension * dimension, hasPadding),
     dimension(dimension),
-    cellSize(computeCellSize(areaSize))
+    cellSize(computeCellSize(areaSize)),
+    padding(0, 0)
+{
+    if(hasPadding) padding = cellSize;
+}
+
 {}
 
 const QVector<QVector3D> &UniformGrid::getVertexPositions() const
@@ -39,7 +44,8 @@ void UniformGrid::recomputeVertexPositions()
 
 QSizeF UniformGrid::computeCellSize(QSizeF area)
 {
-    return area / ((float) (dimension + (padding ? 1.0 : -1.0)));
+    return area / ((float) (dimension + (hasPadding ? 1.0 : -1.0)));
+}
 }
 
 UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, SimulationRealization* simulation)

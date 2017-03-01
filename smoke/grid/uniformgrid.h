@@ -19,10 +19,12 @@ public:
 private:
     int dimension;
     QSizeF cellSize;
+    QSizeF padding;
 
     Cell* findCellContaining(QVector3D position);
 
-    UniformGrid(int dimension, QSizeF areaSize, bool padding);
+    UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
+    UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
 
     void recomputeVertexPositions();
     QSizeF computeCellSize(QSizeF area);
