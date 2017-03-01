@@ -106,16 +106,15 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *si
     Vertex* vertex;
     Cell* cell;
     int idx;
-    for (int i = 0; i < grid->dimension; i++){
-        for (int j = 0; j < grid->dimension; j++)
+    for (int i = 0; i < visualizationGrid->dimension; i++){
+        for (int j = 0; j < visualizationGrid->dimension; j++)
         {
-            idx = grid->to1Dindex(i, j);
-            position = grid->computeVertexPosition(i, j);
-            grid->vertexPositions.replace(idx, position);
+            idx = visualizationGrid->to1Dindex(i, j);
+            position = visualizationGrid->computeVertexPosition(i, j);
+            visualizationGrid->vertexPositions.replace(idx, position);
             cell = simulationGrid->findCellContaining(position);
-            vertex = new VisualizationVertex(&grid->vertexPositions.at(idx),
-                                          cell);
-            grid->vertices.replace(idx, vertex);
+            vertex = new VisualizationVertex(&visualizationGrid->vertexPositions.at(idx), cell);
+            visualizationGrid->vertices.replace(idx, vertex);
         }
     }
 }
