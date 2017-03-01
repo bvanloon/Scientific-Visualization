@@ -65,7 +65,6 @@ QDebug operator<<(QDebug stream, const VisualizationVertex &vertex)
 {
     stream << "VisualizationVertex ["
            << " position: " << *vertex.position
-           << " cell: "     << *vertex.cell
            << "]";
     return stream;
 }
