@@ -51,6 +51,12 @@ QSizeF UniformGrid::computeCellSize(QSizeF area)
 {
     return area / ((float) (dimension + (hasPadding ? 1.0 : -1.0)));
 }
+
+QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
+{
+    QSizeF usedArea = (area - padding * 2);
+    QSizeF cellSize = usedArea / ((float) dimension);
+    return cellSize;
 }
 
 UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, SimulationRealization* simulation)
