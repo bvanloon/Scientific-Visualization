@@ -28,10 +28,13 @@ private:
 
     void recomputeVertexPositions();
     QSizeF computeCellSize(QSizeF area);
+    QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
     int to1Dindex(int coldIdx, int rowIdx) const;
 
     QVector3D computeVertexPosition(int i, int j);
+
+    QSizeF const& getPadding() const;
 
     Vertex* getVertexAt(int idx) const;
     Vertex* getVertexAt(int coldIdx, int rowIdx) const;

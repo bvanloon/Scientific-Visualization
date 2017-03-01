@@ -13,6 +13,11 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding):
     if(hasPadding) padding = cellSize;
 }
 
+UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding):
+    Grid(dimension * dimension, true),
+    dimension(dimension),
+    cellSize(computeCellSize(areaSize, padding)),
+    padding(padding)
 {}
 
 const QVector<QVector3D> &UniformGrid::getVertexPositions() const
@@ -58,7 +63,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
 
 UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid)
 {
-    UniformGrid* grid = new UniformGrid(dimension, size, false);
+    UniformGrid* grid = new UniformGrid(dimension, size, simulationGrid->padding);
     createVertices(grid, simulationGrid);
     createCells(grid);
     return grid;
@@ -139,9 +144,14 @@ void UniformGrid::changeGridArea(QSizeF newArea)
 
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
 {
-    return QVector3D(padding * cellSize.width() + (double)i * cellSize.width(),
-                     padding * cellSize.height() + (double)j * cellSize.height(),
+    return QVector3D(padding.width() + (double)i * cellSize.width(),
+                     padding.height() + (double)j * cellSize.height(),
                      0.0f);
+}
+
+const QSizeF &UniformGrid::getPadding() const
+{
+    return padding;
 }
 
 Vertex *UniformGrid::getVertexAt(int idx) const
