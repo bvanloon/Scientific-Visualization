@@ -50,6 +50,9 @@ public:
     friend QDebug operator<<(QDebug stream, const VisualizationVertex &vertex);
     friend QDebug operator<<(QDebug stream, VisualizationVertex *vertex);
 
+    virtual QVector2D getFluidVelocity() const;
+    virtual float getFluidVelocityMagnitude() const;
+
 private:
     Cell* cell;
 };

@@ -79,3 +79,13 @@ VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
     Vertex(position),
     cell(cell)
 {}
+
+QVector2D VisualizationVertex::getFluidVelocity() const
+{
+    qDebug() << "VisualizationVertex::getFluidVelocity(): not yet implemented";
+}
+
+float VisualizationVertex::getFluidVelocityMagnitude() const
+{
+    qDebug() << "VisualizationVertex::getFluidVelocityMagnitude(): not yet implemented";
+}
