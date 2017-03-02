@@ -87,16 +87,19 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
     QVector3D position;
     Vertex* vertex;
     int idx;
-    for (int i = 0; i < grid->dimension; i++){
-        for (int j = 0; j < grid->dimension; j++)
+    for (int y = 0; y < grid->dimension; y++){
+        for (int x = 0; x < grid->dimension; x++)
         {
-            idx = grid->to1Dindex(i, j);
-            position = grid->computeVertexPosition(i, j);
+            idx = grid->to1Dindex(x, y);
+
+            qDebug() << "x: " << x << "y: " << y << "idx: " << idx;
+
+            position = grid->computeVertexPosition(x, y);
             grid->vertexPositions.replace(idx, position);
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
                                           &simulation->vx[idx], &simulation->vy[idx]);
             grid->vertices.replace(idx, vertex);
-            grid->vertexMap.insert(QPair<int, int>(i, j), vertex);
+            grid->vertexMap.insert(QPair<int, int>(x, y), vertex);
         }
     }
 }
