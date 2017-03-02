@@ -55,7 +55,7 @@ QSizeF UniformGrid::computeCellSize(QSizeF area)
 QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
 {
     QSizeF usedArea = (area - padding * 2);
-    QSizeF cellSize = usedArea / ((float) dimension);
+    QSizeF cellSize = usedArea / ((float) (dimension - 1));
     return cellSize;
 }
 
