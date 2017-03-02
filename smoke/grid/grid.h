@@ -3,6 +3,8 @@
 
 #include <QVector>
 #include <QVector3D>
+#include <QMultiMap>
+#include <QPair>
 #include "grid/vertex.h"
 #include "grid/cell.h"
 
@@ -19,6 +21,7 @@ public:
 
 protected:
     QVector<Vertex*> vertices;
+    QMultiMap<QPair<int, int>, Vertex *> vertexMap;
     QVector<QVector3D> vertexPositions;
     QVector<Cell* > cells;
     bool hasPadding;
