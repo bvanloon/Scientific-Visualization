@@ -3,6 +3,7 @@
 #include "settings/simulationsettings.h"
 #include "grid/cell.h"
 #include <QDebug>
+#include <QtMath>
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding):
     Grid(dimension * dimension, hasPadding),
@@ -77,9 +78,11 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, Un
 
 Cell *UniformGrid::findCellContaining(QVector3D position)
 {
+    int upperLeftX = qFloor((position.x() - padding.width()) / cellSize.width());
+    int upperLeftY = qFloor((position.y() - padding.width()) / cellSize.width());
+    Vertex* upperLeftVertex = vertexMap.find(QPair<int, int>(upperLeftX, upperLeftY)).value();
     qDebug() << "UniformGrid::findCellContaining(QVector3D position) IMPLEMENT";
     return cells.at(0);
-
 }
 
 void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simulation)
