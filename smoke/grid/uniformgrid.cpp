@@ -138,9 +138,9 @@ void UniformGrid::createCells(UniformGrid *grid)
     }
 }
 
-int UniformGrid::to1Dindex(int coldIdx, int rowIdx) const
+int UniformGrid::to1Dindex(int x, int y) const
 {
-    return (rowIdx * this->dimension) + coldIdx;
+    return x + (y * this->dimension);
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea)

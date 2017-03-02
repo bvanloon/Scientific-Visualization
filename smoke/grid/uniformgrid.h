@@ -30,7 +30,7 @@ private:
     QSizeF computeCellSize(QSizeF area);
     QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
-    int to1Dindex(int coldIdx, int rowIdx) const;
+    int to1Dindex(int x, int y) const;
 
     QVector3D computeVertexPosition(int i, int j);
 
