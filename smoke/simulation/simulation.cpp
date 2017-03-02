@@ -14,6 +14,9 @@ Simulation::Simulation(QObject *parent) :
     this->realization = new SimulationRealization();
     this->simulationGrid = UniformGrid::createSimulationGrid(Settings::simulation().dimension, Settings::canvas().size, this->realization);
     this->visualizationGrid = UniformGrid::createVisualizationGrid(5, Settings::canvas().size, this->simulationGrid);
+
+    //    this->simulationGrid = UniformGrid::createSimulationGrid(3, QSize(676, 525), this->realization);
+    //    this->visualizationGrid = UniformGrid::createVisualizationGrid(4, QSize(676, 525), this->simulationGrid);
 }
 
 Simulation::~Simulation()
