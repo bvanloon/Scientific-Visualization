@@ -36,8 +36,7 @@ private:
 
     QSizeF const& getPadding() const;
 
-    Vertex* getVertexAt(int idx) const;
-    Vertex* getVertexAt(int coldIdx, int rowIdx) const;
+    Vertex* getVertexAt(int x, int y) const;
 
     static void createVertices(UniformGrid* grid, SimulationRealization *simulation);
     static void createVertices(UniformGrid* visualizationGrid, UniformGrid* simulationGrid);

@@ -161,13 +161,7 @@ const QSizeF &UniformGrid::getPadding() const
     return padding;
 }
 
-Vertex *UniformGrid::getVertexAt(int idx) const
+Vertex *UniformGrid::getVertexAt(int x, int y) const
 {
-    return vertices.at(idx);
-}
-
-Vertex *UniformGrid::getVertexAt(int coldIdx, int rowIdx) const
-{
-    int idx = to1Dindex(coldIdx, rowIdx);
-    return getVertexAt(idx);
+    return vertexMap.find(QPair<int, int>(x, y)).value();
 }
