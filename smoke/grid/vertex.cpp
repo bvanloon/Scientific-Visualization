@@ -89,3 +89,7 @@ float VisualizationVertex::getFluidVelocityMagnitude() const
 {
     qDebug() << "VisualizationVertex::getFluidVelocityMagnitude(): not yet implemented";
 }
+
+StructuredGridVertex::StructuredGridVertex(const QVector3D *position):
+    Vertex(position)
+{}

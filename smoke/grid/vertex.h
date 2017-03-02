@@ -18,12 +18,18 @@ public:
     friend QDebug operator<<(QDebug stream, Vertex *vertex);
 
     virtual QVector2D getFluidVelocity() const = 0;
-
     virtual float getFluidVelocityMagnitude() const = 0;
 
 protected:
     const QVector3D *position;
 
+};
+
+class StructuredGridVertex: public Vertex{
+    StructuredGridVertex(const QVector3D *position);
+
+    virtual QVector2D getFluidVelocity() const = 0;
+    virtual float getFluidVelocityMagnitude() const = 0;
 };
 
 class SimulationVertex: public Vertex
