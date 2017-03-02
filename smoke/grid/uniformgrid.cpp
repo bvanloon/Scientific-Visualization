@@ -92,8 +92,6 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
         {
             idx = grid->to1Dindex(x, y);
 
-            qDebug() << "x: " << x << "y: " << y << "idx: " << idx;
-
             position = grid->computeVertexPosition(x, y);
             grid->vertexPositions.replace(idx, position);
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
