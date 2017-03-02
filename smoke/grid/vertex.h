@@ -50,7 +50,7 @@ private:
     double* vy;
 };
 
-class VisualizationVertex: public Vertex
+class VisualizationVertex: public StructuredGridVertex
 {
 public:
     VisualizationVertex(const QVector3D *position, Cell* cell);

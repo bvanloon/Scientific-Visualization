@@ -76,7 +76,7 @@ QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
 }
 
 VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
-    Vertex(position),
+    StructuredGridVertex(position),
     cell(cell)
 {}
 
