@@ -124,15 +124,15 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *si
 void UniformGrid::createCells(UniformGrid *grid)
 {
     Cell* cell;
-    Vertex* vertex, *rightBelow, *right, *below;
-    for(int rowIdx = 0; rowIdx < grid->dimension - 1; rowIdx++){
-        for(int colIdx = 0; colIdx < grid->dimension - 1; colIdx++){
-            vertex = grid->getVertexAt(colIdx, rowIdx);
-            right = grid->getVertexAt(colIdx + 1, rowIdx);
-            below = grid->getVertexAt(colIdx, rowIdx + 1);
-            rightBelow = grid->getVertexAt(colIdx + 1, rowIdx + 1);
+    Vertex* leftUpper, *rightLower, *rightUpper, *leftLower;
+    for(int x = 0; x < grid->dimension - 1; x++){
+        for(int y = 0; y < grid->dimension - 1; y++){
+            leftUpper = grid->getVertexAt(x, y);
+            rightUpper = grid->getVertexAt(x + 1, y);
+            leftLower = grid->getVertexAt(x, y + 1);
+            rightLower = grid->getVertexAt(x + 1, y + 1);
 
-            cell = new StructuredCell(vertex, right, below, rightBelow);
+            cell = new StructuredCell(leftUpper, rightUpper, leftLower, rightLower);
             grid->cells.append(cell);
         }
     }
