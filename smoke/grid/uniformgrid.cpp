@@ -96,6 +96,7 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
                                           &simulation->vx[idx], &simulation->vy[idx]);
             grid->vertices.replace(idx, vertex);
+            grid->vertexMap.insert(QPair<int, int>(i, j), vertex);
         }
     }
 }
@@ -115,6 +116,7 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *si
             cell = simulationGrid->findCellContaining(position);
             vertex = new VisualizationVertex(&visualizationGrid->vertexPositions.at(idx), cell);
             visualizationGrid->vertices.replace(idx, vertex);
+            visualizationGrid->vertexMap.insert(QPair<int, int>(i, j), vertex);
         }
     }
 }
