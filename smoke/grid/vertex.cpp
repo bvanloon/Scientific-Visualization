@@ -30,7 +30,7 @@ QDebug operator<<(QDebug stream, Vertex *vertex)
 }
 
 SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy):
-    Vertex(position)
+    StructuredGridVertex(position)
 {
     this->vx = vx;
     this->vy = vy;

@@ -26,13 +26,15 @@ protected:
 };
 
 class StructuredGridVertex: public Vertex{
-    StructuredGridVertex(const QVector3D *position);
-
+public:
     virtual QVector2D getFluidVelocity() const = 0;
     virtual float getFluidVelocityMagnitude() const = 0;
+
+protected:
+    StructuredGridVertex(const QVector3D *position);
 };
 
-class SimulationVertex: public Vertex
+class SimulationVertex: public StructuredGridVertex
 {
 public:
     SimulationVertex(const QVector3D *position, double *vx, double *vy);
