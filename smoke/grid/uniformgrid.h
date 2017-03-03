@@ -21,8 +21,6 @@ private:
     QSizeF cellSize;
     QSizeF padding;
 
-    Cell* findCellContaining(QVector3D position);
-
     UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
     UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
 
@@ -31,6 +29,8 @@ private:
     QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
     int to1Dindex(int x, int y) const;
+
+    Cell* findCellContaining(QVector3D position);
 
     QVector3D computeVertexPosition(int i, int j);
 
@@ -41,7 +41,6 @@ private:
     static void createVertices(UniformGrid* grid, SimulationRealization *simulation);
     static void createVertices(UniformGrid* visualizationGrid, UniformGrid* simulationGrid);
     static void createCells(UniformGrid* grid);
-
 };
 
 #endif // UNIFORMGRID_H
