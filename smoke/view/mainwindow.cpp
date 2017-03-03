@@ -35,16 +35,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-    connectEngineAndColorMapTab();
-    connectCanvasAndSettings();
+    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine));
+    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine));
+
+    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
+    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
 }
 
 void MainWindow::setUpConnections()
 {
 
+    connectCanvasAndThis();
     connectCanvasAndSimulation();
     connectCanvasAndSettings();
-    connectCanvasAndColorMapTab();
 
     connectSimulationTabAndSettings();
     connectSimulationTabAndSimulation();
@@ -70,20 +73,12 @@ void MainWindow::connectCanvasAndSimulation()
 
 void MainWindow::connectCanvasAndSettings()
 {
-    connect(&Settings::simulation(),SIGNAL(valueRangeChanged(float,float)),
-            this->canvas, SLOT(onValueRangeChanged(float,float)));
-
-    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
-            this->canvas, SLOT(onValueRangeChanged(float,float)));
-
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::canvas(), SLOT(onWindowResized(int, int)));
 
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::simulation(), SLOT(onWindowResized(int, int)));
 
-    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            this->canvas, SLOT(onForceChanged(float)));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
@@ -104,29 +99,28 @@ void MainWindow::connectSimulationTabAndSimulation()
             this->simulation, SLOT(onStep()));
 }
 
-void MainWindow::connectCanvasAndColorMapTab()
-{
-    connect(this->smokeColorMapTab, SIGNAL(setClamping(bool)),
-            this->canvas, SLOT(onSetClamping(bool)));
-    connect(this->smokeColorMapTab, SIGNAL(setClampingRange(float,float)),
-            this->canvas, SLOT(onsetClampingRange(float,float)));
-    connect(this->smokeColorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
-            this->canvas, SLOT(onColorMapChanged(AbstractColorMap)));
-}
-
-
-void MainWindow::connectEngineAndSettings()
+void MainWindow::connectEngineAndSettings(AbstractEngine* currentEngine)
 {
     connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-             this->canvas->smokeEngine, SLOT(onValueRangeChanged(float,float)));
+             currentEngine, SLOT(onValueRangeChanged(float,float)));
     connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
-            this->canvas->smokeEngine, SLOT(onValueRangeChanged(float,float)));
+            currentEngine, SLOT(onValueRangeChanged(float,float)));
+
+    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+            currentEngine, SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectEngineAndColorMapTab()
+void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine)
 {
-
+    connect(this->smokeColorMapTab, SIGNAL(setClamping(bool)),
+            currentEngine, SLOT(onSetClamping(bool)));
+    connect(this->smokeColorMapTab, SIGNAL(setClampingRange(float,float)),
+            currentEngine, SLOT(onsetClampingRange(float,float)));
+    connect(this->smokeColorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+            currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
 }
+
+
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
