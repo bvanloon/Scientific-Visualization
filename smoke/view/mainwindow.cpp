@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     this->smokeColorMapTab = ui->smokeColormapTab;
 
+    this->glyphsTab = ui->glyphsTab;
+
     this->installEventFilter(this->keyboardHandler);
 
     setUpConnections();
@@ -36,10 +38,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine));
+    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine), this->smokeColorMapTab);
     connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine));
 
-    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
+    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine), this->glyphsTab->getColorMapWidget());
     connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
 }
 
@@ -111,13 +113,13 @@ void MainWindow::connectEngineAndSettings(AbstractEngine* currentEngine)
             currentEngine, SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine)
+void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine, ColorMapTab *colormap)
 {
-    connect(this->smokeColorMapTab, SIGNAL(setClamping(bool)),
+    connect(colormap, SIGNAL(setClamping(bool)),
             currentEngine, SLOT(onSetClamping(bool)));
-    connect(this->smokeColorMapTab, SIGNAL(setClampingRange(float,float)),
+    connect(colormap, SIGNAL(setClampingRange(float,float)),
             currentEngine, SLOT(onsetClampingRange(float,float)));
-    connect(this->smokeColorMapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+    connect(colormap, SIGNAL(colorMapChanged(AbstractColorMap)),
             currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 

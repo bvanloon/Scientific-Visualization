@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "view/colormaptab.h"
+
 namespace Ui {
 class GlyphsTab;
 }
@@ -14,6 +16,8 @@ class GlyphsTab : public QWidget
 public:
     explicit GlyphsTab(QWidget *parent = 0);
     ~GlyphsTab();
+
+    ColorMapTab* getColorMapWidget();
 
 private:
     Ui::GlyphsTab *ui;

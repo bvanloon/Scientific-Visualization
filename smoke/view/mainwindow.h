@@ -8,6 +8,7 @@
 #include "colormaplegend.h"
 #include "view/simulationtab.h"
 #include "view/colormaptab.h"
+#include "view/glyphstab.h"
 #include "keyboardhandler.h"
 
 namespace Ui {
@@ -34,6 +35,7 @@ private:
     Simulation *simulation;
     SimulationSettingPane *simulationTab;
     ColorMapTab *smokeColorMapTab;
+    GlyphsTab *glyphsTab;
 
     void setUpConnections();
 
@@ -42,7 +44,7 @@ private:
     void connectCanvasAndSettings();
 
     void connectEngineAndSettings(AbstractEngine *currentEngine);
-    void connectEngineAndColorMapTab(AbstractEngine* currentEngine);
+    void connectEngineAndColorMapTab(AbstractEngine* currentEngine, ColorMapTab* colormap);
 
 
     void connectSimulationTabAndSettings();

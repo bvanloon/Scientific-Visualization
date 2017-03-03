@@ -12,3 +12,8 @@ GlyphsTab::~GlyphsTab()
 {
     delete ui;
 }
+
+ColorMapTab *GlyphsTab::getColorMapWidget()
+{
+    return ui->colorMapGlyphs;
+}

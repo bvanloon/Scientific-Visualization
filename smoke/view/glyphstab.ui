@@ -27,7 +27,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="ColorMapTab" name="widget" native="true"/>
+       <widget class="ColorMapTab" name="colorMapGlyphs" native="true"/>
       </item>
      </layout>
     </widget>
