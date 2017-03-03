@@ -102,6 +102,13 @@ void MainWindow::connectCanvasAndColorMapTab()
             this->canvas, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
+void MainWindow::connectColorMapTabAndEngine()
+{
+
+    connect(this->smokeColorMapTab, SIGNAL(valueRangeChanged(float,float)),
+             this->canvas->smokeEngine, SLOT(onValueRangeChanged(float,float)));
+}
+
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
     connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
