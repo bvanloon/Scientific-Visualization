@@ -23,6 +23,8 @@ public:
     virtual QVector2D getForce() const = 0;
     virtual float getForceMagnitude() const = 0;
 
+    virtual float getFluidDensity() const = 0;
+
 protected:
     const QVector3D *position;
 
@@ -35,6 +37,8 @@ public:
 
     virtual QVector2D getForce() const = 0;
     virtual float getForceMagnitude() const = 0;
+
+    virtual float getFluidDensity() const = 0;
 
     Cell *getLowerRightCell() const;
     void setLowerRightCell(Cell *value);
@@ -49,7 +53,7 @@ protected:
 class SimulationVertex: public StructuredGridVertex
 {
 public:
-    SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy);
+    SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho);
 
     friend QDebug operator<<(QDebug stream, const SimulationVertex &vertex);
     friend QDebug operator<<(QDebug stream, SimulationVertex *vertex);
@@ -60,9 +64,12 @@ public:
     virtual QVector2D getForce() const;
     virtual float getForceMagnitude() const;
 
+    virtual float getFluidDensity() const;
+
 private:
     double *vx, *vy;
     double *fx, *fy;
+    double *rho;
 
 };
 
@@ -79,6 +86,8 @@ public:
 
     virtual QVector2D getForce() const;
     virtual float getForceMagnitude() const;
+
+    virtual float getFluidDensity() const;
 
 private:
     Cell* cell;

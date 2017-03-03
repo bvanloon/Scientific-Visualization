@@ -57,7 +57,13 @@ QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple
 
 QVector<float> Simulation::getTexCoordFluidDensity(Triangulation triangulation)
 {
-    return getTexCoord(&Simulation::getFluidDensityAt, triangulation.getVertexPositions());
+    QVector<float> textureCoordinates;
+    Vertex* vertex;
+    for(int i = 0; i < triangulation.numVertices(); i++){
+        vertex = triangulation.getVertices().at(i);
+        textureCoordinates.append(vertex->getFluidDensity());
+    }
+    return textureCoordinates;
 }
 
 QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(Triangulation triangulation)

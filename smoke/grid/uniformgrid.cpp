@@ -118,7 +118,8 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
             grid->vertexPositions.replace(idx, position);
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
                                           &simulation->vx[idx], &simulation->vy[idx],
-                                          &simulation->fx[idx], &simulation->fy[idx]);
+                                          &simulation->fx[idx], &simulation->fy[idx],
+                                          &simulation->rho[idx]);
             grid->vertices.replace(idx, vertex);
             grid->vertexMap.insert(QPair<int, int>(x, y), vertex);
         }
