@@ -1,6 +1,7 @@
 #include "abstractengine.h"
 
 AbstractEngine::AbstractEngine():
+    QOpenGLFunctions(),
     texture(0)
 
 {
