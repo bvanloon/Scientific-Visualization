@@ -33,8 +33,15 @@ MainWindow::~MainWindow()
     delete this->keyboardHandler;
 }
 
+void MainWindow::onOpenGLReady()
+{
+    connectEngineAndColorMapTab();
+    connectCanvasAndSettings();
+}
+
 void MainWindow::setUpConnections()
 {
+
     connectCanvasAndSimulation();
     connectCanvasAndSettings();
     connectCanvasAndColorMapTab();
@@ -45,6 +52,12 @@ void MainWindow::setUpConnections()
     connectSmokeColorMapTabAndSettings();
 
     connectKeyBoardHandlerAndSimulation();
+}
+
+void MainWindow::connectCanvasAndThis()
+{
+    connect(this->canvas, SIGNAL(openGlReady()),
+            this, SLOT(onOpenGLReady()));
 }
 
 void MainWindow::connectCanvasAndSimulation()

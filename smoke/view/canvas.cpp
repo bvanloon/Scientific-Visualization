@@ -41,6 +41,7 @@ void Canvas::initializeGL()
 
     //this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
+    emit openGlReady();
 }
 
 void Canvas::setSimulation(Simulation *simulation)
