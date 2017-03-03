@@ -26,15 +26,14 @@ const QVector<QVector3D> &UniformGrid::getVertexPositions() const
     return this->vertexPositions;
 }
 
-QVector<QVector3D> UniformGrid::getTriangulation() const
+Triangulation UniformGrid::getTriangulation() const
 {
-    QVector<QVector3D> triangulationPoints;
+    Triangulation triangulation;
     QVector<Cell*>::const_iterator currentCell = cells.begin();
     while(currentCell != cells.end()){
-        Triangulation triangulation = (*currentCell++)->triangulate();
-        triangulationPoints.append(triangulation.getVertexPositions());
+        triangulation.extend((*currentCell++)->triangulate());
     }
-    return triangulationPoints;
+    return triangulation;
 }
 
 void UniformGrid::recomputeVertexPositions()

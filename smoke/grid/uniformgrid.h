@@ -9,7 +9,7 @@ class UniformGrid : public Grid
 {
 public:
     QVector<QVector3D> const& getVertexPositions() const;
-    QVector<QVector3D> getTriangulation() const;
+    Triangulation getTriangulation() const;
 
     void changeGridArea(QSizeF newArea);
 

@@ -43,7 +43,7 @@ QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 
 QVector<QVector3D> Simulation::getGridTriangulation()
 {
-    return simulationGrid->getTriangulation();
+    return simulationGrid->getTriangulation().getVertexPositions();
 }
 
 QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)
