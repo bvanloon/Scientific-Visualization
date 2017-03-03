@@ -40,9 +40,10 @@ private:
     void connectCanvasAndThis();
     void connectCanvasAndSimulation();
     void connectCanvasAndSettings();
-    void connectCanvasAndColorMapTab();
 
-    void connectColorMapTabAndEngine();
+    void connectEngineAndSettings(AbstractEngine *currentEngine);
+    void connectEngineAndColorMapTab(AbstractEngine* currentEngine);
+
 
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
