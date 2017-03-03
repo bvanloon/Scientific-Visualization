@@ -60,7 +60,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
-    //smokeEngine->draw(this->simulation);
+    smokeEngine->draw(this->simulation);
     vectorEngine->draw(this->simulation);
 
 }
@@ -73,9 +73,10 @@ void Canvas::resizeGL(int width, int height)
     float farClippingPlane = 1.0f;
 
     this->smokeEngine->AbstractEngine::setProjectionMatrix(width, height, nearClippingPlane, farClippingPlane);
-
+    this->vectorEngine->AbstractEngine::setProjectionMatrix(width, height, nearClippingPlane, farClippingPlane);
     emit windowResized(width, height);
 
     //change to signal slot construction
     this->smokeEngine->AbstractEngine::setMVPMatrix();
+    this->vectorEngine->AbstractEngine::setMVPMatrix();
 }

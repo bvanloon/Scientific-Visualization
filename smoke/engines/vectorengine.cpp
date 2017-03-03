@@ -1,5 +1,6 @@
 #include "vectorengine.h"
 
+
 VectorEngine::VectorEngine() :
     AbstractEngine() {
 
@@ -15,5 +16,8 @@ int VectorEngine::updateBuffers(Simulation *simulation)
 {
     QVector<QVector3D> vertices = simulation->getSimpleHedgeHodges();
     updateBuffer(this->vertexBuffer, vertices);
+    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(vertices);
+    //updateBuffer(this->textureCoordinateBuffer,QVector<float>(vertices.size(), 0.5f));
+    updateBuffer(this->textureCoordinateBuffer,textureCoordinates);
     return vertices.length();
 }
