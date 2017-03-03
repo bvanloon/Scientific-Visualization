@@ -78,11 +78,20 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, Un
 
 Cell *UniformGrid::findCellContaining(QVector3D position)
 {
-    int upperLeftX = qFloor((position.x() - padding.width()) / cellSize.width());
-    int upperLeftY = qFloor((position.y() - padding.width()) / cellSize.width());
-    Vertex* upperLeftVertex = vertexMap.find(QPair<int, int>(upperLeftX, upperLeftY)).value();
-    qDebug() << "UniformGrid::findCellContaining(QVector3D position) IMPLEMENT";
-    return cells.at(0);
+    QPair<int, int> coordinates = findUpperLeftVertexOfContainingCell(position);
+    StructuredGridVertex* upperLeftVertex = dynamic_cast<StructuredGridVertex*>(vertexMap.find(coordinates).value());
+    Cell* containingCell = upperLeftVertex->getLowerRightCell();
+    return containingCell;
+}
+
+QPair<int, int> UniformGrid::findUpperLeftVertexOfContainingCell(QVector3D position){
+    int x = qFloor((position.x() - padding.width()) / cellSize.width());
+    int y = qFloor((position.y() - padding.height()) / cellSize.height());
+
+    //Account for the borders
+    if(y == (dimension - 1)) y--;
+    if(x == (dimension - 1)) x--;
+    return QPair<int, int>(x, y);
 }
 
 void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simulation)
