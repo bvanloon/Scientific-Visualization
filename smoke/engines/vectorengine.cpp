@@ -1,7 +1,7 @@
 #include "vectorengine.h"
 
 VectorEngine::VectorEngine() :
-AbstractEngine() {
+    AbstractEngine() {
 
 }
 
