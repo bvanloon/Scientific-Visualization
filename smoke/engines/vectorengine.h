@@ -3,7 +3,7 @@
 
 #include "abstractengine.h"
 
-class VectorEngine : AbstractEngine
+class VectorEngine : public AbstractEngine
 {
 public:
     VectorEngine();
@@ -12,8 +12,6 @@ public:
 
 private:
     int updateBuffers(Simulation* simulation);
-
-
 
 };
 
