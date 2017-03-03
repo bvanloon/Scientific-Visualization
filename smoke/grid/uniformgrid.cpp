@@ -26,12 +26,12 @@ const QVector<QVector3D> &UniformGrid::getVertexPositions() const
     return this->vertexPositions;
 }
 
-QVector<QVector3D> UniformGrid::getTriangulation() const
+Triangulation UniformGrid::getTriangulation() const
 {
-    QVector<QVector3D> triangulation;
+    Triangulation triangulation;
     QVector<Cell*>::const_iterator currentCell = cells.begin();
     while(currentCell != cells.end()){
-        triangulation.append((*currentCell++)->triangulate());
+        triangulation.extend((*currentCell++)->triangulate());
     }
     return triangulation;
 }
@@ -76,6 +76,16 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, Un
     return grid;
 }
 
+QSizeF UniformGrid::getCellSize() const
+{
+    return cellSize;
+}
+
+int UniformGrid::getDimension() const
+{
+    return dimension;
+}
+
 Cell *UniformGrid::findCellContaining(QVector3D position)
 {
     QPair<int, int> coordinates = findUpperLeftVertexOfContainingCell(position);
@@ -107,7 +117,9 @@ void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simul
             position = grid->computeVertexPosition(x, y);
             grid->vertexPositions.replace(idx, position);
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
-                                          &simulation->vx[idx], &simulation->vy[idx]);
+                                          &simulation->vx[idx], &simulation->vy[idx],
+                                          &simulation->fx[idx], &simulation->fy[idx],
+                                          &simulation->rho[idx]);
             grid->vertices.replace(idx, vertex);
             grid->vertexMap.insert(QPair<int, int>(x, y), vertex);
         }
