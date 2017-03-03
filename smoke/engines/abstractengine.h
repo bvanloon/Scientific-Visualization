@@ -21,8 +21,6 @@ public:
     virtual ~AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
 
-    void setProjectionMatrix(float width, float height);
-    void setMVPMatrix();
 
 
 
@@ -72,6 +70,8 @@ private:
 
     void setColorMapClampRange(float startClamp, float endClamp);
 
+    void setProjectionMatrix(float width, float height);
+    void setMVPMatrix();
     static const float nearClippingPlane;
     static const  float farClippingPlane;
 
