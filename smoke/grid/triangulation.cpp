@@ -37,3 +37,8 @@ void Triangulation::addVertex(Vertex *value)
     vertices.append(value);
     vertexPositions.append(*(value->getPosition()));
 }
+
+int Triangulation::numVertices()
+{
+    return this->vertices.size();
+}

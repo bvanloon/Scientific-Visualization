@@ -17,6 +17,8 @@ public:
 
     void addVertex(Vertex *value);
 
+    int numVertices();
+
     QVector<QVector3D> getVertexPositions() const;
     QVector<Vertex *> getVertices() const;
 
