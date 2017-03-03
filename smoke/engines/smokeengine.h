@@ -10,10 +10,6 @@ public:
 
     void draw(Simulation* simulation);
 
-    void setTexture(QImage image);
-    void setColorMapValueRange(float min, float max);
-    void setColorMapClampRange(float startClamp, float endClamp);
-    void setColorMapClampingTo(bool clampingOn);
 
 private:
     int updateBuffers(Simulation* simulation);
