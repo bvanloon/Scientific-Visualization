@@ -115,11 +115,18 @@ void MainWindow::connectCanvasAndColorMapTab()
             this->canvas, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
-void MainWindow::connectColorMapTabAndEngine()
+
+void MainWindow::connectEngineAndSettings()
+{
+    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
+             this->canvas->smokeEngine, SLOT(onValueRangeChanged(float,float)));
+    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+            this->canvas->smokeEngine, SLOT(onValueRangeChanged(float,float)));
+}
+
+void MainWindow::connectEngineAndColorMapTab()
 {
 
-    connect(this->smokeColorMapTab, SIGNAL(valueRangeChanged(float,float)),
-             this->canvas->smokeEngine, SLOT(onValueRangeChanged(float,float)));
 }
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
