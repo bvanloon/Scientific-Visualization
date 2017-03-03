@@ -16,6 +16,10 @@ public:
     static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
     static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid* simulationGrid);
 
+    QSizeF getCellSize() const;
+
+    int getDimension() const;
+
 private:
     int dimension;
     QSizeF cellSize;

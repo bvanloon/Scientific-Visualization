@@ -76,6 +76,16 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, Un
     return grid;
 }
 
+QSizeF UniformGrid::getCellSize() const
+{
+    return cellSize;
+}
+
+int UniformGrid::getDimension() const
+{
+    return dimension;
+}
+
 Cell *UniformGrid::findCellContaining(QVector3D position)
 {
     QPair<int, int> coordinates = findUpperLeftVertexOfContainingCell(position);
