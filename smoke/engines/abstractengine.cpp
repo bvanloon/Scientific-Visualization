@@ -1,8 +1,9 @@
 #include "abstractengine.h"
 
-AbstractEngine::AbstractEngine():
-    QOpenGLFunctions(),
+AbstractEngine::AbstractEngine(QObject *parent):
+    QObject(parent),
     texture(0)
+
 
 {
     modelViewMatrix.setToIdentity();
