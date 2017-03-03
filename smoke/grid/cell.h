@@ -4,6 +4,7 @@
 #include "grid/vertex.h"
 #include <QVector>
 #include <QVector3D>
+#include <grid/triangulation.h>
 
 class Cell
 {
@@ -11,7 +12,7 @@ public:
     Cell();
     virtual ~Cell();
 
-    virtual QVector<QVector3D> triangulate() = 0;
+    virtual Triangulation triangulate() = 0;
 };
 
 class StructuredCell : public Cell
@@ -22,13 +23,16 @@ public:
     friend QDebug operator<<(QDebug stream, const StructuredCell &cell);
     friend QDebug operator<<(QDebug stream, StructuredCell *cell);
 
-    virtual QVector<QVector3D> triangulate();
+    virtual Triangulation triangulate();
 
 private:
     Vertex* upperLeft;
     Vertex* upperRight;
     Vertex* lowerLeft;
     Vertex* lowerRight;
+
+    Triangulation lowerLeftTriangle();
+    Triangulation upperRightTriangle();
 };
 
 #endif // CELL_H
