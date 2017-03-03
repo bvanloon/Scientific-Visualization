@@ -66,9 +66,38 @@ void AbstractEngine::setMVPMatrix()
 
 
 
+/** Slots **/
+void AbstractEngine::onValueRangeChanged(float min, float max) {
+    setColorMapValueRange(min,max);
+}
+
+void AbstractEngine::onSetClamping(bool clampingOn)
+{
+    setColorMapClampingTo(clampingOn);
+}
+
+void AbstractEngine::onsetClampingRange(float minimum, float maximum)
+{
+    setColorMapClampRange(minimum, maximum);
+}
+
+void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
+{
+    setTexture(colormap);
+}
+
+void AbstractEngine::onForceChanged(float force)
+{
+    if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
+        setColorMapValueRange(0.0f, force);
+    }
+}
+
+
+
+/** Set functions **/
 void AbstractEngine::setTexture(QImage image)
 {
-
     //TODO isValid?
     if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
     if (texture->isCreated()) texture->destroy();
@@ -102,9 +131,6 @@ void AbstractEngine::setColorMapClampingTo(bool clampingOn)
     this->shaderProgram->release();
 }
 
-void AbstractEngine::onValueRangeChanged(float min, float max) {
-    setColorMapValueRange(min,max);
-}
 
 /** Buffers **/
 void AbstractEngine::initBuffers()

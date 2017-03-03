@@ -24,14 +24,15 @@ public:
     void setProjectionMatrix(float width, float height, float nearClippingPlane, float farClippingplane);
     void setMVPMatrix();
 
-    void setTexture(QImage image);
 
-    void setColorMapClampRange(float startClamp, float endClamp);
-    void setColorMapClampingTo(bool clampingOn);
 
 
 public slots:
     void onValueRangeChanged(float min, float max);
+    void onSetClamping(bool clampingOn);
+    void onsetClampingRange(float minimum, float maximum);
+    void onColorMapChanged(AbstractColorMap colormap);
+    void onForceChanged(float force);
 
 protected:
     QOpenGLBuffer* vertexBuffer;
