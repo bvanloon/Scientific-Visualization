@@ -30,8 +30,13 @@ public:
     virtual QVector2D getFluidVelocity() const = 0;
     virtual float getFluidVelocityMagnitude() const = 0;
 
+    Cell *getLowerRightCell() const;
+    void setLowerRightCell(Cell *value);
+
 protected:
     StructuredGridVertex(const QVector3D *position);
+
+    Cell *lowerRightCell;
 };
 
 class SimulationVertex: public StructuredGridVertex

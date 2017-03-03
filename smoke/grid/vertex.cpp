@@ -93,3 +93,13 @@ float VisualizationVertex::getFluidVelocityMagnitude() const
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position):
     Vertex(position)
 {}
+
+Cell *StructuredGridVertex::getLowerRightCell() const
+{
+    return lowerRightCell;
+}
+
+void StructuredGridVertex::setLowerRightCell(Cell *value)
+{
+    lowerRightCell = value;
+}
