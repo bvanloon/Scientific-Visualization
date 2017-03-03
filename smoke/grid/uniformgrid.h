@@ -12,6 +12,7 @@ public:
     Triangulation getTriangulation() const;
 
     void changeGridArea(QSizeF newArea);
+    void changeGridArea(QSizeF newArea, QSizeF padding);
 
     static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
     static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid* simulationGrid);

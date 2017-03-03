@@ -91,5 +91,5 @@ void Simulation::onStep()
 void Simulation::onWindowResized(int width, int height)
 {
     simulationGrid->changeGridArea(QSizeF(width, height));
-    visualizationGrid->changeGridArea(QSizeF(width, height));
+    visualizationGrid->changeGridArea(QSizeF(width, height), simulationGrid->getPadding());
 }
