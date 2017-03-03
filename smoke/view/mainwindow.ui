@@ -76,7 +76,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideMiddle</enum>
@@ -92,6 +92,11 @@
       <widget class="ColorMapTab" name="smokeColormapTab">
        <attribute name="title">
         <string>Smoke Color Map</string>
+       </attribute>
+      </widget>
+      <widget class="GlyphsTab" name="glyphsTab">
+       <attribute name="title">
+        <string>Glyphs</string>
        </attribute>
       </widget>
      </widget>
@@ -116,6 +121,12 @@
    <class>ColorMapTab</class>
    <extends>QWidget</extends>
    <header location="global">view/colormaptab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GlyphsTab</class>
+   <extends>QWidget</extends>
+   <header location="global">view/glyphstab.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
