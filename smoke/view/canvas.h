@@ -39,6 +39,7 @@ public:
 signals:
     void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
+    void openGlReady();
 
 public slots:
     void onValueRangeChanged(float minimum, float maximum);
