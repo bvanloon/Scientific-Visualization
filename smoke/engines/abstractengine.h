@@ -33,6 +33,7 @@ public slots:
     void onsetClampingRange(float minimum, float maximum);
     void onColorMapChanged(AbstractColorMap colormap);
     void onForceChanged(float force);
+    void onWindowChanged(int width, int height);
 
 protected:
     QOpenGLBuffer* vertexBuffer;

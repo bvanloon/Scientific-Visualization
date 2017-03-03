@@ -20,7 +20,13 @@ Canvas::~Canvas()
 void Canvas::initiateIdleLoop()
 {
    this->timer->start();
-   connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
+}
+
+void Canvas::connectThisAndEngine(AbstractEngine* engine)
+{
+    connect(this, SIGNAL(windowResized(int,int)),
+            engine, SLOT(onWindowChanged(int,int)));
 }
 
 void Canvas::initializeGL()
@@ -31,7 +37,12 @@ void Canvas::initializeGL()
 
     this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
+
     emit openGlReady();
+
+
+    connectThisAndEngine(this->vectorEngine);
+    connectThisAndEngine(this->smokeEngine);
 }
 
 
@@ -69,14 +80,5 @@ void Canvas::resizeGL(int width, int height)
 {
     glViewport(0.0f, 0.0f, (GLfloat) width, (GLfloat) height);
 
-    float nearClippingPlane = -1.0f;
-    float farClippingPlane = 1.0f;
-
-    this->smokeEngine->AbstractEngine::setProjectionMatrix(width, height, nearClippingPlane, farClippingPlane);
-    this->vectorEngine->AbstractEngine::setProjectionMatrix(width, height, nearClippingPlane, farClippingPlane);
     emit windowResized(width, height);
-
-    //change to signal slot construction
-    this->smokeEngine->AbstractEngine::setMVPMatrix();
-    this->vectorEngine->AbstractEngine::setMVPMatrix();
 }

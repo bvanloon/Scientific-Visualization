@@ -64,6 +64,7 @@ private:
     void initializeColorMapInfo();
 
 
+    void connectThisAndEngine(AbstractEngine* engine);
 
 
 
