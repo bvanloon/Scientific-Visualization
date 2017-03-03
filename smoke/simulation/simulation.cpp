@@ -41,9 +41,9 @@ QVector<QVector3D> Simulation::getSimpleHedgeHodges()
     return hedgeHodgeVertices;
 }
 
-QVector<QVector3D> Simulation::getGridTriangulation()
+Triangulation Simulation::getGridTriangulation()
 {
-    return simulationGrid->getTriangulation().getVertexPositions();
+    return simulationGrid->getTriangulation();
 }
 
 QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)
@@ -55,19 +55,19 @@ QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple
     return textureCoordinates;
 }
 
-QVector<float> Simulation::getTexCoordFluidDensity(QVector<QVector3D> vertexPositions)
+QVector<float> Simulation::getTexCoordFluidDensity(Triangulation triangulation)
 {
-    return getTexCoord(&Simulation::getFluidDensityAt, vertexPositions);
+    return getTexCoord(&Simulation::getFluidDensityAt, triangulation.getVertexPositions());
 }
 
-QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(QVector<QVector3D> vertexPositions)
+QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(Triangulation triangulation)
 {
-    return getTexCoord(&Simulation::getFluidVelocityMagnitudeAt, vertexPositions);
+    return getTexCoord(&Simulation::getFluidVelocityMagnitudeAt, triangulation.getVertexPositions());
 }
 
-QVector<float> Simulation::getTexCoordForceFieldMagnitude(QVector<QVector3D> vertexPositions)
+QVector<float> Simulation::getTexCoordForceFieldMagnitude(Triangulation triangulation)
 {
-    return getTexCoord(&Simulation::getForceMagnitudeAt, vertexPositions);
+    return getTexCoord(&Simulation::getForceMagnitudeAt, triangulation.getVertexPositions());
 }
 
 void Simulation::step()

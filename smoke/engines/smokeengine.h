@@ -9,6 +9,7 @@
 #include "simulation/simulation.h"
 #include "settings/settings.h"
 #include "settings/visualizationsettings.h"
+#include "grid/triangulation.h"
 
 class SmokeEngine : protected QOpenGLFunctions
 {

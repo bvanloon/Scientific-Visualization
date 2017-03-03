@@ -10,6 +10,7 @@
 #include "grid/uniformgrid.h"
 
 #include "simulation/simulationrealization.h"
+#include "grid/triangulation.h"
 
 class Simulation : public QObject
 {
@@ -18,14 +19,14 @@ public:
     explicit Simulation(QObject *parent = 0);
     ~Simulation();
 
-    typedef QVector<float> (Simulation::*textureCoordinateGetter)(QVector<QVector3D>);
+    typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
 
     QVector<QVector3D> getSimpleHedgeHodges();
-    QVector<QVector3D> getGridTriangulation();
+    Triangulation getGridTriangulation();
 
-    QVector<float> getTexCoordFluidDensity(QVector<QVector3D> vertexPositions);
-    QVector<float> getTexCoordFluidVelocityMagnitude(QVector<QVector3D> vertexPositions);
-    QVector<float> getTexCoordForceFieldMagnitude(QVector<QVector3D> vertexPositions);
+    QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
+    QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
+    QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
 
     SimulationRealization *realization;
 
