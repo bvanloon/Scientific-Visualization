@@ -38,6 +38,8 @@ private:
     void connectCanvasAndSettings();
     void connectCanvasAndColorMapTab();
 
+    void connectColorMapTabAndEngine();
+
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
 
