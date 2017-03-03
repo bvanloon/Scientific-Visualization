@@ -13,10 +13,11 @@
 #include "settings/settings.h"
 #include "settings/visualizationsettings.h"
 
-class AbstractEngine : protected QOpenGLFunctions
+class AbstractEngine :  public QObject, protected QOpenGLFunctions
 {
+    Q_OBJECT
 public:
-    AbstractEngine();
+    explicit AbstractEngine(QObject *parent = 0);
     virtual ~AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
 
