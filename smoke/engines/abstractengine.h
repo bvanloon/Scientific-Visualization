@@ -30,6 +30,9 @@ public:
     void setColorMapClampingTo(bool clampingOn);
 
 
+public slots:
+    void onValueRangeChanged(float min, float max);
+
 protected:
     QOpenGLBuffer* vertexBuffer;
     QOpenGLBuffer* textureCoordinateBuffer;

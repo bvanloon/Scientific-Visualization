@@ -10,9 +10,6 @@ public:
 
     void draw(Simulation* simulation);
 
-public slots:
-    void onValueRangeChanged(float min, float max);
-
 private:
     int updateBuffers(Simulation* simulation);
 
