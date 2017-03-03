@@ -21,7 +21,7 @@ public:
     virtual ~AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
 
-    void setProjectionMatrix(float width, float height, float nearClippingPlane, float farClippingplane);
+    void setProjectionMatrix(float width, float height);
     void setMVPMatrix();
 
 
@@ -70,6 +70,9 @@ private:
     void setTexture(QImage image);
 
     void setColorMapClampRange(float startClamp, float endClamp);
+
+    static const float nearClippingPlane;
+    static const  float farClippingPlane;
 
 
 

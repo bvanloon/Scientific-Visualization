@@ -99,6 +99,12 @@ void AbstractEngine::onForceChanged(float force)
     }
 }
 
+void AbstractEngine::onWindowChanged(int width, int height)
+{
+    setProjectionMatrix(width, height);
+    setMVPMatrix();
+}
+
 
 
 /** Set functions **/
