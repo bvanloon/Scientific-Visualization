@@ -44,7 +44,8 @@ SOURCES += main.cpp\
     grid/vertex.cpp \
     grid/uniformgrid.cpp \
     grid/grid.cpp \
-    grid/cell.cpp
+    grid/cell.cpp \
+    grid/triangulation.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -71,7 +72,8 @@ HEADERS  += main.ih\
     grid/vertex.h \
     grid/uniformgrid.h \
     grid/grid.h \
-    grid/cell.h
+    grid/cell.h \
+    grid/triangulation.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

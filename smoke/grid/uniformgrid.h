@@ -9,12 +9,16 @@ class UniformGrid : public Grid
 {
 public:
     QVector<QVector3D> const& getVertexPositions() const;
-    QVector<QVector3D> getTriangulation() const;
+    Triangulation getTriangulation() const;
 
     void changeGridArea(QSizeF newArea);
 
     static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
     static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid* simulationGrid);
+
+    QSizeF getCellSize() const;
+
+    int getDimension() const;
 
 private:
     int dimension;

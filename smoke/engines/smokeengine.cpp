@@ -51,9 +51,10 @@ void SmokeEngine::initBuffers()
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
-    QVector<QVector3D> triangles = simulation->getGridTriangulation();
+    Triangulation triangulation = simulation->getGridTriangulation();
+    QVector<QVector3D> triangles = triangulation.getVertexPositions();
 
-    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(triangles);
+    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(triangulation);
 
     updateBuffer(this->vertexBuffer, triangles);
     updateBuffer(this->textureCoordinateBuffer,textureCoordinates);
