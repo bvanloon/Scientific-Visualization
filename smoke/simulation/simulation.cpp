@@ -21,8 +21,9 @@ Simulation::Simulation(QObject *parent) :
 
 Simulation::~Simulation()
 {
-    delete this->realization;
-    delete this->simulationGrid;
+    delete realization;
+    delete simulationGrid;
+    delete visualizationGrid;
 }
 
 
