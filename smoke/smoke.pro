@@ -45,6 +45,7 @@ SOURCES += main.cpp\
     grid/uniformgrid.cpp \
     grid/grid.cpp \
     grid/cell.cpp \
+    grid/triangulation.cpp \
     engines/abstractengine.cpp
 
 HEADERS  += main.ih\
@@ -73,6 +74,7 @@ HEADERS  += main.ih\
     grid/uniformgrid.h \
     grid/grid.h \
     grid/cell.h \
+    grid/triangulation.h \
     engines/abstractengine.h
 
 FORMS    += view/mainwindow.ui \

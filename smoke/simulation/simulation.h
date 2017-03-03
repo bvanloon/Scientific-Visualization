@@ -10,6 +10,7 @@
 #include "grid/uniformgrid.h"
 
 #include "simulation/simulationrealization.h"
+#include "grid/triangulation.h"
 
 class Simulation : public QObject
 {
@@ -18,14 +19,14 @@ public:
     explicit Simulation(QObject *parent = 0);
     ~Simulation();
 
-    typedef QVector<float> (Simulation::*textureCoordinateGetter)(QVector<QVector3D>);
+    typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
 
     QVector<QVector3D> getSimpleHedgeHodges();
-    QVector<QVector3D> getGridTriangulation();
+    Triangulation getGridTriangulation();
 
-    QVector<float> getTexCoordFluidDensity(QVector<QVector3D> vertexPositions);
-    QVector<float> getTexCoordFluidVelocityMagnitude(QVector<QVector3D> vertexPositions);
-    QVector<float> getTexCoordForceFieldMagnitude(QVector<QVector3D> vertexPositions);
+    QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
+    QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
+    QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
 
     SimulationRealization *realization;
 
@@ -43,31 +44,8 @@ private:
     UniformGrid* simulationGrid;
     UniformGrid* visualizationGrid;
 
-    typedef float (Simulation::*textureCoordinateGetterSimple)(QVector3D);
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions);
-
-    int to1DIndex(int i, int j);
-    int to1DIndex(QVector3D position);
-
-    float getFluidDensityAt(int i, int j);
-    float getFluidDensityAt(int idx);
-    float getFluidDensityAt(QVector3D position);
-
-    QVector2D getFluidVelocityAt(int i, int j);
-    QVector2D getFluidVelocityAt(int idx);
-    QVector2D getFluidVelocityAt(QVector3D position);
-
-    float getFluidVelocityMagnitudeAt(int i, int j);
-    float getFluidVelocityMagnitudeAt(int idx);
-    float getFluidVelocityMagnitudeAt(QVector3D position);
-
-    QVector2D getForceAt(int i, int j);
-    QVector2D getForceAt(int idx);
-    QVector2D getForceAt(QVector3D position);
-
-    float getForceMagnitudeAt(int i, int j);
-    float getForceMagnitudeAt(int idx);
-    float getForceMagnitudeAt(QVector3D position);
+    typedef float (Vertex::*textureCoordinateGetterSimple)() const;
+    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, Triangulation triangulation);
 };
 
 #endif // SMOKE_H
