@@ -29,16 +29,19 @@ public:
 
     void setSimulation(Simulation *simulation);
 
+    //Engines
+    VectorEngine *vectorEngine;
+    SmokeEngine *smokeEngine;
+
+
+
+
 signals:
     void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
+    void openGlReady();
 
-public slots:
-    void onValueRangeChanged(float minimum, float maximum);
-    void onSetClamping(bool clampingOn);
-    void onsetClampingRange(float minimum, float maximum);
-    void onColorMapChanged(AbstractColorMap colormap);
-    void onForceChanged(float force);
+
 
 private slots:
     void idleLoop();
@@ -50,39 +53,21 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    //Shaders
-    QOpenGLShaderProgram *shaderProgram;
-
-    // OpenGL initialization
-    void initializeShaders();
-    void initializeUniforms();
-    void initializeColorMapInfo();
-
-
-    //Uniforms
-    QMatrix4x4 modelViewMatrix;
-    QMatrix4x4 projectionMatrix;
-
-    QOpenGLTexture *texture;
-
-    void setMVPMatrix();
-
-    void setTexture(QImage image);
-    void setColorMapValueRange(float min, float max);
-    void setColorMapClampRange(float startClamp, float endClamp);
-    void setColorMapClampingTo(bool clampingOn);
-
-
     Simulation* simulation;
-
-    //Engines
-    VectorEngine *vectorEngine;
-    SmokeEngine *smokeEngine;
-
 
     //Idle Loop
     QTimer* timer;
     void initiateIdleLoop();
+
+    // OpenGL initialization
+    void initializeUniforms();
+    void initializeColorMapInfo();
+
+
+    void connectThisAndEngine(AbstractEngine* engine);
+
+
+
 };
 
 #endif // CANVAS_H

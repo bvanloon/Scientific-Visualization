@@ -24,6 +24,9 @@ public:
 
     KeyboardHandler* keyboardHandler;
 
+public slots:
+    void onOpenGLReady();
+
 private:
     Ui::MainWindow *ui;
 
@@ -34,9 +37,13 @@ private:
 
     void setUpConnections();
 
+    void connectCanvasAndThis();
     void connectCanvasAndSimulation();
     void connectCanvasAndSettings();
-    void connectCanvasAndColorMapTab();
+
+    void connectEngineAndSettings(AbstractEngine *currentEngine);
+    void connectEngineAndColorMapTab(AbstractEngine* currentEngine);
+
 
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
