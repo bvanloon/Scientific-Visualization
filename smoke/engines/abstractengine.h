@@ -24,7 +24,7 @@ public:
     void setMVPMatrix();
 
     void setTexture(QImage image);
-    void setColorMapValueRange(float min, float max);
+
     void setColorMapClampRange(float startClamp, float endClamp);
     void setColorMapClampingTo(bool clampingOn);
 
@@ -35,6 +35,7 @@ protected:
 
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
+    void setColorMapValueRange(float min, float max);
     void drawWithMode(Simulation* Simulation, int mode, int bufferLength);
 
 private:
