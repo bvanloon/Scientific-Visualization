@@ -127,9 +127,7 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *si
 
 void UniformGrid::createCells(UniformGrid *grid)
 {
-    Cell* cell;
     Vertex* leftUpper, *rightLower, *rightUpper, *leftLower;
-    StructuredGridVertex* vertex;
     for(int x = 0; x < grid->dimension - 1; x++){
         for(int y = 0; y < grid->dimension - 1; y++){
             leftUpper = grid->getVertexAt(x, y);
@@ -137,10 +135,9 @@ void UniformGrid::createCells(UniformGrid *grid)
             leftLower = grid->getVertexAt(x, y + 1);
             rightLower = grid->getVertexAt(x + 1, y + 1);
 
-            cell = new StructuredCell(leftUpper, rightUpper, leftLower, rightLower);
-            grid->cells.append(cell);
-            vertex = dynamic_cast<StructuredGridVertex*>(leftUpper);
-            vertex->setLowerRightCell(grid->cells.last());
+            grid->cells.append(new StructuredCell(leftUpper, rightUpper, leftLower, rightLower));
+
+            dynamic_cast<StructuredGridVertex*>(leftUpper)->setLowerRightCell(grid->cells.last());
         }
     }
 }
