@@ -1,6 +1,9 @@
 #include "vectorengine.h"
 
-VectorEngine::VectorEngine(){}
+VectorEngine::VectorEngine() :
+AbstractEngine() {
+
+}
 
 void VectorEngine::draw(Simulation *simulation)
 {
