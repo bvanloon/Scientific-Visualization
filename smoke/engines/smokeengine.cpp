@@ -11,6 +11,11 @@ void SmokeEngine::draw(Simulation *simulation)
     drawWithMode(simulation, GL_TRIANGLES, bufferLength);
 }
 
+void SmokeEngine::onValueRangeChanged(float min, float max)
+{
+    setColorMapValueRange(min,max);
+}
+
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
