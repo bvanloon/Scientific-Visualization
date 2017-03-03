@@ -6,6 +6,7 @@
 #include <QDebug>
 
 class Cell;
+
 class Vertex
 {
 public:

@@ -23,6 +23,7 @@ protected:
     QVector<Vertex*> vertices;
     QMultiMap<QPair<int, int>, Vertex *> vertexMap;
     QVector<QVector3D> vertexPositions;
+
     QVector<Cell* > cells;
     bool hasPadding;
 
