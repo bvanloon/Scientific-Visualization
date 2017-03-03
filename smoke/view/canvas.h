@@ -29,6 +29,10 @@ public:
 
     void setSimulation(Simulation *simulation);
 
+    //Engines
+    VectorEngine *vectorEngine;
+    SmokeEngine *smokeEngine;
+
 
 
 
@@ -66,9 +70,6 @@ private:
 
     Simulation* simulation;
 
-    //Engines
-    VectorEngine *vectorEngine;
-    SmokeEngine *smokeEngine;
 
 
     //Idle Loop
