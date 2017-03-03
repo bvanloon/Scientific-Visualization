@@ -102,7 +102,9 @@ void AbstractEngine::setColorMapClampingTo(bool clampingOn)
     this->shaderProgram->release();
 }
 
-
+void AbstractEngine::onValueRangeChanged(float min, float max) {
+    setColorMapValueRange(min,max);
+}
 
 /** Buffers **/
 void AbstractEngine::initBuffers()
