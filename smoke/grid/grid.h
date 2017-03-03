@@ -3,13 +3,15 @@
 
 #include <QVector>
 #include <QVector3D>
+#include <QMultiMap>
+#include <QPair>
 #include "grid/vertex.h"
 #include "grid/cell.h"
 
 class Grid
 {
 public:
-    Grid(int numberOfVertices, bool padding = true);
+    Grid(int numberOfVertices, bool hasPadding = true);
     ~Grid();
 
     QVector<QVector3D> const& getVertexPositions() const;
@@ -19,9 +21,11 @@ public:
 
 protected:
     QVector<Vertex*> vertices;
+    QMultiMap<QPair<int, int>, Vertex *> vertexMap;
     QVector<QVector3D> vertexPositions;
     QVector<Cell* > cells;
-    bool padding;
+    bool hasPadding;
+
 };
 
 #endif // ABSTRACTGRID_H

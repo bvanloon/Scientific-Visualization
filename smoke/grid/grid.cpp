@@ -1,9 +1,9 @@
 #include "grid.h"
 
-Grid::Grid(int numberOfVertices, bool padding):
+Grid::Grid(int numberOfVertices, bool hasPadding):
     vertices(numberOfVertices),
     vertexPositions(numberOfVertices),
-    padding(padding)
+    hasPadding(hasPadding)
 {}
 
 Grid::~Grid()

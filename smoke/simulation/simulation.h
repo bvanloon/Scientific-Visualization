@@ -40,7 +40,8 @@ public slots:
 
 private:
     QPoint lastMousePosition;
-    UniformGrid* grid;
+    UniformGrid* simulationGrid;
+    UniformGrid* visualizationGrid;
 
     typedef float (Simulation::*textureCoordinateGetterSimple)(QVector3D);
     QVector<float> getTexCoord(textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions);

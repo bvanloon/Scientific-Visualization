@@ -5,6 +5,7 @@
 #include <QVector2D>
 #include <QDebug>
 
+class Cell;
 class Vertex
 {
 public:
@@ -17,7 +18,6 @@ public:
     friend QDebug operator<<(QDebug stream, Vertex *vertex);
 
     virtual QVector2D getFluidVelocity() const = 0;
-
     virtual float getFluidVelocityMagnitude() const = 0;
 
 protected:
@@ -25,7 +25,22 @@ protected:
 
 };
 
-class SimulationVertex: public Vertex
+class StructuredGridVertex: public Vertex{
+public:
+    virtual QVector2D getFluidVelocity() const = 0;
+    virtual float getFluidVelocityMagnitude() const = 0;
+
+    Cell *getLowerRightCell() const;
+    void setLowerRightCell(Cell *value);
+    bool hasLowerRightCell();
+
+protected:
+    StructuredGridVertex(const QVector3D *position);
+
+    Cell *lowerRightCell;
+};
+
+class SimulationVertex: public StructuredGridVertex
 {
 public:
     SimulationVertex(const QVector3D *position, double *vx, double *vy);
@@ -40,5 +55,21 @@ private:
     double* vx;
     double* vy;
 };
+
+class VisualizationVertex: public StructuredGridVertex
+{
+public:
+    VisualizationVertex(const QVector3D *position, Cell* cell);
+
+    friend QDebug operator<<(QDebug stream, const VisualizationVertex &vertex);
+    friend QDebug operator<<(QDebug stream, VisualizationVertex *vertex);
+
+    virtual QVector2D getFluidVelocity() const;
+    virtual float getFluidVelocityMagnitude() const;
+
+private:
+    Cell* cell;
+};
+
 
 #endif // VERTEX_H

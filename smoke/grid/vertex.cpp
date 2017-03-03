@@ -1,4 +1,5 @@
 #include "vertex.h"
+#include "cell.h"
 
 Vertex::Vertex(const QVector3D *position):
     position(position)
@@ -22,7 +23,6 @@ QDebug operator<<(QDebug stream, const Vertex &vertex)
     return stream;
 }
 
-
 QDebug operator<<(QDebug stream, Vertex *vertex)
 {
     stream << *vertex;
@@ -30,7 +30,7 @@ QDebug operator<<(QDebug stream, Vertex *vertex)
 }
 
 SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy):
-    Vertex(position)
+    StructuredGridVertex(position)
 {
     this->vx = vx;
     this->vy = vy;
@@ -59,4 +59,52 @@ QDebug operator<<(QDebug stream, SimulationVertex *vertex)
 {
     stream << *vertex;
     return stream;
+}
+
+QDebug operator<<(QDebug stream, const VisualizationVertex &vertex)
+{
+    stream << "VisualizationVertex ["
+           << " position: " << *vertex.position
+           << "]";
+    return stream;
+}
+
+QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
+{
+    stream << *vertex;
+    return stream;
+}
+
+VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
+    StructuredGridVertex(position),
+    cell(cell)
+{}
+
+QVector2D VisualizationVertex::getFluidVelocity() const
+{
+    qDebug() << "VisualizationVertex::getFluidVelocity(): not yet implemented";
+}
+
+float VisualizationVertex::getFluidVelocityMagnitude() const
+{
+    qDebug() << "VisualizationVertex::getFluidVelocityMagnitude(): not yet implemented";
+}
+
+StructuredGridVertex::StructuredGridVertex(const QVector3D *position):
+    Vertex(position)
+{}
+
+Cell *StructuredGridVertex::getLowerRightCell() const
+{
+    return lowerRightCell;
+}
+
+void StructuredGridVertex::setLowerRightCell(Cell *value)
+{
+    lowerRightCell = value;
+}
+
+bool StructuredGridVertex::hasLowerRightCell()
+{
+    return lowerRightCell != nullptr;
 }

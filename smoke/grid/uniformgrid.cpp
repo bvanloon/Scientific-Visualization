@@ -3,11 +3,22 @@
 #include "settings/simulationsettings.h"
 #include "grid/cell.h"
 #include <QDebug>
+#include <QtMath>
 
-UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool padding):
-    Grid(dimension * dimension, padding),
+UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding):
+    Grid(dimension * dimension, hasPadding),
     dimension(dimension),
-    cellSize(computeCellSize(areaSize))
+    cellSize(computeCellSize(areaSize)),
+    padding(0, 0)
+{
+    if(hasPadding) padding = cellSize;
+}
+
+UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding):
+    Grid(dimension * dimension, true),
+    dimension(dimension),
+    cellSize(computeCellSize(areaSize, padding)),
+    padding(padding)
 {}
 
 const QVector<QVector3D> &UniformGrid::getVertexPositions() const
@@ -39,7 +50,14 @@ void UniformGrid::recomputeVertexPositions()
 
 QSizeF UniformGrid::computeCellSize(QSizeF area)
 {
-    return area / ((float) (dimension + (padding ? 1.0 : -1.0)));
+    return area / ((float) (dimension + (hasPadding ? 1.0 : -1.0)));
+}
+
+QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
+{
+    QSizeF usedArea = (area - padding * 2);
+    QSizeF cellSize = usedArea / ((float) (dimension - 1));
+    return cellSize;
 }
 
 UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, SimulationRealization* simulation)
@@ -50,44 +68,92 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension, QSizeF size, Simul
     return grid;
 }
 
+UniformGrid *UniformGrid::createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid)
+{
+    UniformGrid* grid = new UniformGrid(dimension, size, simulationGrid->padding);
+    createVertices(grid, simulationGrid);
+    createCells(grid);
+    return grid;
+}
+
+Cell *UniformGrid::findCellContaining(QVector3D position)
+{
+    QPair<int, int> coordinates = findUpperLeftVertexOfContainingCell(position);
+    StructuredGridVertex* upperLeftVertex = dynamic_cast<StructuredGridVertex*>(vertexMap.find(coordinates).value());
+    Cell* containingCell = upperLeftVertex->getLowerRightCell();
+    return containingCell;
+}
+
+QPair<int, int> UniformGrid::findUpperLeftVertexOfContainingCell(QVector3D position){
+    int x = qFloor((position.x() - padding.width()) / cellSize.width());
+    int y = qFloor((position.y() - padding.height()) / cellSize.height());
+
+    //Account for the borders
+    if(y == (dimension - 1)) y--;
+    if(x == (dimension - 1)) x--;
+    return QPair<int, int>(x, y);
+}
+
 void UniformGrid::createVertices(UniformGrid *grid, SimulationRealization *simulation)
 {
     QVector3D position;
     Vertex* vertex;
     int idx;
-    for (int i = 0; i < grid->dimension; i++){
-        for (int j = 0; j < grid->dimension; j++)
+    for (int y = 0; y < grid->dimension; y++){
+        for (int x = 0; x < grid->dimension; x++)
         {
-            idx = grid->to1Dindex(i, j);
-            position = grid->computeVertexPosition(i, j);
+            idx = grid->to1Dindex(x, y);
+
+            position = grid->computeVertexPosition(x, y);
             grid->vertexPositions.replace(idx, position);
             vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
                                           &simulation->vx[idx], &simulation->vy[idx]);
             grid->vertices.replace(idx, vertex);
+            grid->vertexMap.insert(QPair<int, int>(x, y), vertex);
+        }
+    }
+}
+
+void UniformGrid::createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid)
+{
+    QVector3D position;
+    Vertex* vertex;
+    Cell* cell;
+    int idx;
+    for (int i = 0; i < visualizationGrid->dimension; i++){
+        for (int j = 0; j < visualizationGrid->dimension; j++)
+        {
+            idx = visualizationGrid->to1Dindex(i, j);
+            position = visualizationGrid->computeVertexPosition(i, j);
+            visualizationGrid->vertexPositions.replace(idx, position);
+            cell = simulationGrid->findCellContaining(position);
+            vertex = new VisualizationVertex(&visualizationGrid->vertexPositions.at(idx), cell);
+            visualizationGrid->vertices.replace(idx, vertex);
+            visualizationGrid->vertexMap.insert(QPair<int, int>(i, j), vertex);
         }
     }
 }
 
 void UniformGrid::createCells(UniformGrid *grid)
 {
-    Cell* cell;
-    Vertex* vertex, *rightBelow, *right, *below;
-    for(int rowIdx = 0; rowIdx < grid->dimension - 1; rowIdx++){
-        for(int colIdx = 0; colIdx < grid->dimension - 1; colIdx++){
-            vertex = grid->getVertexAt(colIdx, rowIdx);
-            right = grid->getVertexAt(colIdx + 1, rowIdx);
-            below = grid->getVertexAt(colIdx, rowIdx + 1);
-            rightBelow = grid->getVertexAt(colIdx + 1, rowIdx + 1);
+    Vertex* leftUpper, *rightLower, *rightUpper, *leftLower;
+    for(int x = 0; x < grid->dimension - 1; x++){
+        for(int y = 0; y < grid->dimension - 1; y++){
+            leftUpper = grid->getVertexAt(x, y);
+            rightUpper = grid->getVertexAt(x + 1, y);
+            leftLower = grid->getVertexAt(x, y + 1);
+            rightLower = grid->getVertexAt(x + 1, y + 1);
 
-            cell = new StructuredCell(vertex, right, below, rightBelow);
-            grid->cells.append(cell);
+            grid->cells.append(new StructuredCell(leftUpper, rightUpper, leftLower, rightLower));
+
+            dynamic_cast<StructuredGridVertex*>(leftUpper)->setLowerRightCell(grid->cells.last());
         }
     }
 }
 
-int UniformGrid::to1Dindex(int coldIdx, int rowIdx) const
+int UniformGrid::to1Dindex(int x, int y) const
 {
-    return (rowIdx * this->dimension) + coldIdx;
+    return x + (y * this->dimension);
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea)
@@ -98,18 +164,17 @@ void UniformGrid::changeGridArea(QSizeF newArea)
 
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
 {
-    return QVector3D(padding * cellSize.width() + (double)i * cellSize.width(),
-                     padding * cellSize.height() + (double)j * cellSize.height(),
+    return QVector3D(padding.width() + (double)i * cellSize.width(),
+                     padding.height() + (double)j * cellSize.height(),
                      0.0f);
 }
 
-Vertex *UniformGrid::getVertexAt(int idx) const
+const QSizeF &UniformGrid::getPadding() const
 {
-    return vertices.at(idx);
+    return padding;
 }
 
-Vertex *UniformGrid::getVertexAt(int coldIdx, int rowIdx) const
+Vertex *UniformGrid::getVertexAt(int x, int y) const
 {
-    int idx = to1Dindex(coldIdx, rowIdx);
-    return getVertexAt(idx);
+    return vertexMap.find(QPair<int, int>(x, y)).value();
 }
