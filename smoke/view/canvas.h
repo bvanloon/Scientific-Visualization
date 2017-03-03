@@ -41,12 +41,7 @@ signals:
     void windowResized(int width, int height);
     void openGlReady();
 
-public slots:
-    void onValueRangeChanged(float minimum, float maximum);
-    void onSetClamping(bool clampingOn);
-    void onsetClampingRange(float minimum, float maximum);
-    void onColorMapChanged(AbstractColorMap colormap);
-    void onForceChanged(float force);
+
 
 private slots:
     void idleLoop();
@@ -66,8 +61,6 @@ private:
     void setTexture(QImage image);
     void setColorMapValueRange(float min, float max);
     void setColorMapClampRange(float startClamp, float endClamp);
-    void setColorMapClampingTo(bool clampingOn);
-
 
     Simulation* simulation;
 
