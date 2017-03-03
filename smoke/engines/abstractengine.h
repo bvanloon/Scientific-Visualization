@@ -65,6 +65,13 @@ private:
     QMatrix4x4 modelViewMatrix;
     QMatrix4x4 projectionMatrix;
 
+    void setColorMapClampingTo(bool clampingOn);
+    void setColorMapValueRange(float min, float max);
+    void setTexture(QImage image);
+
+    void setColorMapClampRange(float startClamp, float endClamp);
+
+
 
 };
 
