@@ -1,5 +1,11 @@
 #include "abstractengine.h"
 
+const float AbstractEngine::farClippingPlane = 1.0f;
+const float AbstractEngine::nearClippingPlane = -1.0f;
+
+
+
+
 AbstractEngine::AbstractEngine(QObject *parent):
     QObject(parent),
     texture(0)
@@ -48,10 +54,10 @@ void AbstractEngine::initializeColorMapInfo()
 
 }
 
-void AbstractEngine::setProjectionMatrix(float width, float height, float nearClippingPlane, float farClippingplane)
+void AbstractEngine::setProjectionMatrix(float width, float height)
 {
     projectionMatrix.setToIdentity();
-    projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingplane);
+    projectionMatrix.ortho(0.0, width, 0.0, height, nearClippingPlane, farClippingPlane);
 }
 
 
