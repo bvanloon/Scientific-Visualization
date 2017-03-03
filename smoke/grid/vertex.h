@@ -32,6 +32,7 @@ public:
 
     Cell *getLowerRightCell() const;
     void setLowerRightCell(Cell *value);
+    bool hasLowerRightCell();
 
 protected:
     StructuredGridVertex(const QVector3D *position);

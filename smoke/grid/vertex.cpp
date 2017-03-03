@@ -103,3 +103,8 @@ void StructuredGridVertex::setLowerRightCell(Cell *value)
 {
     lowerRightCell = value;
 }
+
+bool StructuredGridVertex::hasLowerRightCell()
+{
+    return lowerRightCell != nullptr;
+}
