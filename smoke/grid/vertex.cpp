@@ -29,12 +29,11 @@ QDebug operator<<(QDebug stream, Vertex *vertex)
     return stream;
 }
 
-SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy):
-    StructuredGridVertex(position)
-{
-    this->vx = vx;
-    this->vy = vy;
-}
+SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy):
+    StructuredGridVertex(position),
+    vx(vx), vy(vy),
+    fx(fx), fy(fy)
+{}
 
 QVector2D SimulationVertex::getFluidVelocity() const
 {
@@ -46,11 +45,22 @@ float SimulationVertex::getFluidVelocityMagnitude() const
     return getFluidVelocity().length();
 }
 
+QVector2D SimulationVertex::getForce() const
+{
+    return QVector2D(*(fx), *(fy));
+}
+
+float SimulationVertex::getForceMagnitude() const
+{
+    return getForce().length();
+}
+
 QDebug operator<<(QDebug stream, const SimulationVertex &vertex)
 {
     stream << "SimulationVertex ["
            << " position: "    << *vertex.position
            << " (vx, vy): (" << *vertex.vx << ", " << *vertex.vy << ")"
+           << " (fx, fy): (" << *vertex.fx << ", " << *vertex.fy << ")"
            << "]";
     return stream;
 }
@@ -88,6 +98,16 @@ QVector2D VisualizationVertex::getFluidVelocity() const
 float VisualizationVertex::getFluidVelocityMagnitude() const
 {
     qDebug() << "VisualizationVertex::getFluidVelocityMagnitude(): not yet implemented";
+}
+
+QVector2D VisualizationVertex::getForce() const
+{
+    qDebug() << "VisualizationVertex::getForceField(): not yet implemented";
+}
+
+float VisualizationVertex::getForceMagnitude() const
+{
+    qDebug() << "VisualizationVertex::getForceFieldMagnitude(): not yet implemented";
 }
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position):
