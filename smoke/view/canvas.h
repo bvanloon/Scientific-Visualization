@@ -53,22 +53,20 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
+    Simulation* simulation;
+
+    //Idle Loop
+    QTimer* timer;
+    void initiateIdleLoop();
+
     // OpenGL initialization
     void initializeUniforms();
     void initializeColorMapInfo();
 
 
-    void setTexture(QImage image);
-    void setColorMapValueRange(float min, float max);
-    void setColorMapClampRange(float startClamp, float endClamp);
-
-    Simulation* simulation;
 
 
 
-    //Idle Loop
-    QTimer* timer;
-    void initiateIdleLoop();
 };
 
 #endif // CANVAS_H
