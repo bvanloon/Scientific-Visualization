@@ -44,8 +44,8 @@ private:
     UniformGrid* simulationGrid;
     UniformGrid* visualizationGrid;
 
-    typedef float (Simulation::*textureCoordinateGetterSimple)(QVector3D);
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions);
+    typedef float (Vertex::*textureCoordinateGetterSimple)() const;
+    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, Triangulation triangulation);
 
     int to1DIndex(int i, int j);
     int to1DIndex(QVector3D position);

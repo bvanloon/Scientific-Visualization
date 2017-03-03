@@ -46,46 +46,30 @@ Triangulation Simulation::getGridTriangulation()
     return simulationGrid->getTriangulation();
 }
 
-QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, QVector<QVector3D> vertexPositions)
+QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, Triangulation triangulation)
 {
     QVector<float> textureCoordinates;
-    for(int i = 0; i < vertexPositions.size(); i++){
-        textureCoordinates.append((this->*getter)(vertexPositions.at(i)));
+    Vertex* vertex;
+    for(int i = 0; i < triangulation.numVertices(); i++){
+        vertex = triangulation.getVertices().at(i);
+        textureCoordinates.append((vertex->*getter)());
     }
     return textureCoordinates;
 }
 
 QVector<float> Simulation::getTexCoordFluidDensity(Triangulation triangulation)
 {
-    QVector<float> textureCoordinates;
-    Vertex* vertex;
-    for(int i = 0; i < triangulation.numVertices(); i++){
-        vertex = triangulation.getVertices().at(i);
-        textureCoordinates.append(vertex->getFluidDensity());
-    }
-    return textureCoordinates;
+    return getTexCoord(&Vertex::getFluidDensity, triangulation);
 }
 
 QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(Triangulation triangulation)
 {
-    QVector<float> textureCoordinates;
-    Vertex* vertex;
-    for(int i = 0; i < triangulation.numVertices(); i++){
-        vertex = triangulation.getVertices().at(i);
-        textureCoordinates.append(vertex->getFluidVelocityMagnitude());
-    }
-    return textureCoordinates;
+    return getTexCoord(&Vertex::getFluidVelocityMagnitude, triangulation);
 }
 
 QVector<float> Simulation::getTexCoordForceFieldMagnitude(Triangulation triangulation)
 {
-    QVector<float> textureCoordinates;
-    Vertex* vertex;
-    for(int i = 0; i < triangulation.numVertices(); i++){
-        vertex = triangulation.getVertices().at(i);
-        textureCoordinates.append(vertex->getForceMagnitude());
-    }
-    return textureCoordinates;
+    return getTexCoord(&Vertex::getForceMagnitude, triangulation);
 }
 
 void Simulation::step()
