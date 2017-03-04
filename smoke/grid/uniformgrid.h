@@ -17,6 +17,7 @@ public:
     static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
     static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid* simulationGrid);
 
+    QSizeF const& getPadding() const;
     QSizeF getCellSize() const;
 
     int getDimension() const;
@@ -39,8 +40,6 @@ private:
     Cell* findCellContaining(QVector3D position);
 
     QVector3D computeVertexPosition(int i, int j);
-
-    QSizeF const& getPadding() const;
 
     Vertex* getVertexAt(int x, int y) const;
 
