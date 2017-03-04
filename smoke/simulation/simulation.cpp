@@ -27,14 +27,14 @@ Simulation::~Simulation()
 QVector<QVector3D> Simulation::getSimpleHedgeHodges()
 {
     QVector<QVector3D> hedgeHodgeVertices(simulationGrid->numVertices() * 2);
-    QVector<Vertex*>::const_iterator currentVertex = simulationGrid->getVertices().begin();
-    QVector3D position;
-    for(int i = 0; currentVertex != simulationGrid->getVertices().end(); currentVertex++){
-        position = *((*currentVertex)->getPosition());
-        hedgeHodgeVertices[i++] = position;
-        hedgeHodgeVertices[i++] = position +
-                Settings::visualization().vectorScale * QVector3D((*currentVertex)->getFluidVelocity(), 0.0f);
-    }
+//    QVector<Vertex*>::const_iterator currentVertex = simulationGrid->getVertices().begin();
+//    QVector3D position;
+//    for(int i = 0; currentVertex != simulationGrid->getVertices().end(); currentVertex++){
+//        position = *((*currentVertex)->getPosition());
+//        hedgeHodgeVertices[i++] = position;
+//        hedgeHodgeVertices[i++] = position +
+//                Settings::visualization().vectorScale * QVector3D((*currentVertex)->getFluidVelocity(), 0.0f);
+//    }
     return hedgeHodgeVertices;
 }
 
