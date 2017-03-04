@@ -11,10 +11,16 @@ public:
     GlyphData();
     GlyphData(int numGlyphs);
 
+    int numGlyphs();
+
     void extend(GlyphData* other);
     void extend(GlyphData other);
 
     void addGlyph(QVector3D position, QVector2D vector, float scalar);
+
+    QVector<QVector3D> getPositions() const;
+    QVector<QVector3D> getVectors() const;
+    QVector<float> getScalars() const;
 
 private:
 
