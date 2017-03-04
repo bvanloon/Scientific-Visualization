@@ -18,8 +18,7 @@ Grid::~Grid()
 
 GlyphData Grid::getGlyphData() const
 {
-    qDebug() << "Grid::getGlyphData(): use variable getters.";
-    qDebug() << "Grid::getGlyphData(): actually get the vector instead of setting it to (0, 0)";
+    qDebug() << "Grid::getGlyphData(): use variable getters for float and vector.";
     GlyphData data = GlyphData(this->numVertices());
     QVector<Vertex*>::const_iterator currentVertex = vertices.begin();
     QVector3D position;
@@ -27,7 +26,7 @@ GlyphData Grid::getGlyphData() const
     float scalar;
     for(; currentVertex != vertices.end(); currentVertex++){
         position = *((*currentVertex)->getPosition());
-        vector = QVector2D(0, 0);
+        vector = ((*currentVertex)->getFluidVelocity());
         scalar = (*currentVertex)->getFluidDensity();
         data.addGlyph(position, vector, scalar);
     }
