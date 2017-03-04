@@ -4,6 +4,7 @@
 #include "grid/vertex.h"
 #include <QVector>
 #include <QVector3D>
+#include <QSizeF>
 #include <grid/triangulation.h>
 
 class Cell
@@ -24,6 +25,8 @@ public:
     friend QDebug operator<<(QDebug stream, StructuredCell *cell);
 
     virtual Triangulation triangulate();
+
+    QSizeF getSize() const;
 
 private:
     Vertex* upperLeft;

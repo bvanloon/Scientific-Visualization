@@ -22,6 +22,13 @@ Triangulation StructuredCell::triangulate()
     return triangulation;
 }
 
+QSizeF StructuredCell::getSize() const
+{
+    float width = upperRight->getPosition()->x() - upperLeft->getPosition()->x();
+    float height = lowerLeft->getPosition()->y() - upperLeft->getPosition()->y();
+    return QSizeF(width, height);
+}
+
 Triangulation StructuredCell::lowerLeftTriangle()
 {
     Triangulation triangulation(3);
