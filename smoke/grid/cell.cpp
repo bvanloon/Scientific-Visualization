@@ -40,19 +40,6 @@ Triangulation StructuredCell::upperRightTriangle()
     return triangulation;
 }
 
-//QVector<QVector3D> StructuredCell::triangulate()
-//{
-//    QVector<QVector3D> triangulation;
-//    triangulation.append(*upperLeft->getPosition());
-//    triangulation.append(*lowerLeft->getPosition());
-//    triangulation.append(*lowerRight->getPosition());
-
-//    triangulation.append(*upperLeft->getPosition());
-//    triangulation.append(*lowerRight->getPosition());
-//    triangulation.append(*upperRight->getPosition());
-//    return triangulation;
-//}
-
 QDebug operator<<(QDebug stream, const StructuredCell &cell)
 {
     stream << "StructuredCell ["
