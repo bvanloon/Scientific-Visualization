@@ -94,7 +94,7 @@ QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
 
 VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
     StructuredGridVertex(position),
-    cell(cell)
+    containingCell(cell)
 {}
 
 QVector2D VisualizationVertex::getFluidVelocity() const
