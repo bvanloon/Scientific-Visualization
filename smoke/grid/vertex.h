@@ -77,7 +77,7 @@ private:
 class VisualizationVertex: public StructuredGridVertex
 {
 public:
-    VisualizationVertex(const QVector3D *position, Cell* cell);
+    VisualizationVertex(const QVector3D *position, Cell* containingCell);
 
     friend QDebug operator<<(QDebug stream, const VisualizationVertex &vertex);
     friend QDebug operator<<(QDebug stream, VisualizationVertex *vertex);
@@ -91,7 +91,7 @@ public:
     virtual float getFluidDensity() const;
 
 private:
-    Cell* cell;
+    Cell* containingCell;
 };
 
 
