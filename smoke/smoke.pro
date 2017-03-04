@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     grid/grid.cpp \
     grid/cell.cpp \
     grid/triangulation.cpp \
-    engines/abstractengine.cpp
+    engines/abstractengine.cpp \
+    grid/glyphdata.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -75,7 +76,8 @@ HEADERS  += main.ih\
     grid/grid.h \
     grid/cell.h \
     grid/triangulation.h \
-    engines/abstractengine.h
+    engines/abstractengine.h \
+    grid/glyphdata.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
