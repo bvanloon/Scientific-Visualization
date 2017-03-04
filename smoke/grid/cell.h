@@ -26,6 +26,9 @@ public:
 
     virtual Triangulation triangulate();
 
+    float interpolateScalar(QVector3D position, Vertex::scalarGetter getter);
+    QVector3D interpolate3DVector(QVector3D position, Vertex::vectorGetter getter);
+
     QSizeF getSize() const;
 
 private:
@@ -33,6 +36,8 @@ private:
     Vertex* upperRight;
     Vertex* lowerLeft;
     Vertex* lowerRight;
+
+    QVector3D normalizePosition(const QVector3D position);
 
     Triangulation lowerLeftTriangle();
     Triangulation upperRightTriangle();
