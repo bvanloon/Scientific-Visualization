@@ -14,6 +14,7 @@ public:
     virtual ~Vertex();
 
     typedef float (Vertex::*scalarGetter)() const;
+    typedef QVector3D (Vertex::*vectorGetter)() const;
 
     const QVector3D* getPosition() const;
 
