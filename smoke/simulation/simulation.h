@@ -8,6 +8,7 @@
 #include <QPoint>
 #include <float.h>
 #include "grid/uniformgrid.h"
+#include "grid/glyphdata.h"
 
 #include "simulation/simulationrealization.h"
 #include "grid/triangulation.h"
@@ -21,7 +22,7 @@ public:
 
     typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
 
-    QVector<QVector3D> getSimpleHedgeHodges();
+    GlyphData getGlyphData();
     Triangulation getGridTriangulation();
 
     QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
