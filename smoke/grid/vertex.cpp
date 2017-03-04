@@ -119,7 +119,8 @@ float VisualizationVertex::getForceMagnitude() const
 
 float VisualizationVertex::getFluidDensity() const
 {
-    qDebug() << "VisualizationVertex::getFluidDensity(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolateScalar(*position, &Vertex::getFluidDensity);
 }
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position):
