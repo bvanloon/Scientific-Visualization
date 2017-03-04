@@ -43,7 +43,7 @@ Triangulation Simulation::getGridTriangulation()
     return simulationGrid->getTriangulation();
 }
 
-QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, Triangulation triangulation)
+QVector<float> Simulation::getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation)
 {
     QVector<float> textureCoordinates;
     Vertex* vertex;

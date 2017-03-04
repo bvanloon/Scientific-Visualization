@@ -44,8 +44,7 @@ private:
     UniformGrid* simulationGrid;
     UniformGrid* visualizationGrid;
 
-    typedef float (Vertex::*textureCoordinateGetterSimple)() const;
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, Triangulation triangulation);
+    QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
 };
 
 #endif // SMOKE_H

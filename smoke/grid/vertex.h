@@ -13,6 +13,8 @@ public:
     Vertex(const QVector3D *position = NULL);
     virtual ~Vertex();
 
+    typedef float (Vertex::*scalarGetter)() const;
+
     const QVector3D* getPosition() const;
 
     friend QDebug operator<<(QDebug stream, const Vertex &vertex);
@@ -54,6 +56,7 @@ protected:
 class SimulationVertex: public StructuredGridVertex
 {
 public:
+
     SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho);
 
     friend QDebug operator<<(QDebug stream, const SimulationVertex &vertex);
