@@ -51,9 +51,11 @@ void MainWindow::setUpConnections()
     connectCanvasAndThis();
     connectCanvasAndSimulation();
     connectCanvasAndSettings();
+    connectCanvasAndSimulationTab();
 
     connectSimulationTabAndSettings();
     connectSimulationTabAndSimulation();
+
 
     connectSmokeColorMapTabAndSettings();
 
@@ -82,6 +84,15 @@ void MainWindow::connectCanvasAndSettings()
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::simulation(), SLOT(onWindowResized(int, int)));
 
+}
+
+void MainWindow::connectCanvasAndSimulationTab()
+{
+    connect(this->simulationTab, SIGNAL(glyphsEngineToggled(bool)),
+            this->canvas, SLOT(onGlyphsEngineToggled(bool)));
+
+    connect(this->simulationTab, SIGNAL(smokeEngineToggled(bool)),
+                    this->canvas, SLOT(onSmokeEngineToggled(bool)));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
