@@ -45,6 +45,11 @@ public:
 
     EngineMap enginemap; //Public since mainwindow accesses it to setup connections
 
+public slots:
+    void onGlyphsEngineToggled(bool checked);
+    void onSmokeEngineToggled(bool checked);
+
+
 signals:
     void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
@@ -52,6 +57,7 @@ signals:
 
 private slots:
     void idleLoop();
+
 
 protected:
     void initializeGL() Q_DECL_OVERRIDE;
