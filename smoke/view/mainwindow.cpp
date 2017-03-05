@@ -38,11 +38,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine), this->smokeColorMapTab);
-    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->smokeEngine));
+    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second), this->smokeColorMapTab);
+    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second));
 
-    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine), this->glyphsTab->getColorMapWidget());
-    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
+    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second), this->glyphsTab->getColorMapWidget());
+    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second));
 }
 
 void MainWindow::setUpConnections()

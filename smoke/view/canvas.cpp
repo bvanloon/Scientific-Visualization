@@ -35,8 +35,6 @@ void Canvas::initializeGL()
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
-    this->vectorEngine = new VectorEngine();
-    this->smokeEngine = new SmokeEngine();
     enginemap.insert(EnginePair(EnginesEnum::glyphs, new VectorEngine()));
     enginemap.insert(EnginePair(EnginesEnum::smoke, new SmokeEngine()));
 
@@ -73,8 +71,6 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
-    smokeEngine->draw(this->simulation);
-//    vectorEngine->draw(this->simulation);
 
 }
 
