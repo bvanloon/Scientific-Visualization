@@ -105,17 +105,20 @@ QVector2D VisualizationVertex::getFluidVelocity() const
 
 float VisualizationVertex::getFluidVelocityMagnitude() const
 {
-    qDebug() << "VisualizationVertex::getFluidVelocityMagnitude(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolateScalar(*position, &Vertex::getFluidVelocityMagnitude);
 }
 
 QVector2D VisualizationVertex::getForce() const
 {
-    qDebug() << "VisualizationVertex::getForceField(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolate2DVector(*position, &Vertex::getForce);
 }
 
 float VisualizationVertex::getForceMagnitude() const
 {
-    qDebug() << "VisualizationVertex::getForceFieldMagnitude(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolateScalar(*position, &Vertex::getForceMagnitude);
 }
 
 float VisualizationVertex::getFluidDensity() const
