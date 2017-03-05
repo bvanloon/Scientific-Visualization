@@ -23,6 +23,7 @@ public:
     typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
 
     GlyphData getGlyphData();
+    GlyphData getGlyphData(Grid* visualizationGrid);
     Triangulation getGridTriangulation();
 
     QVector<float> getTexCoordFluidDensity(Triangulation triangulation);

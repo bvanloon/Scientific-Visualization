@@ -23,11 +23,14 @@ Simulation::~Simulation()
     delete visualizationGrid;
 }
 
-
 GlyphData Simulation::getGlyphData()
 {
-    GlyphData data = simulationGrid->getGlyphData();
-    return data;
+    return getGlyphData(simulationGrid);
+}
+
+GlyphData Simulation::getGlyphData(Grid *visualizationGrid)
+{
+    return visualizationGrid->getGlyphData();
 }
 
 Triangulation Simulation::getGridTriangulation()
