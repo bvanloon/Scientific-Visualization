@@ -35,8 +35,18 @@ float StructuredCell::interpolateScalar(QVector3D position, Vertex::scalarGetter
 
 QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vectorGetter getter)
 {
-    qDebug() << "StructuredCell::interpolate3DVector not yet implemented";
-    return QVector2D(0.5, 0.5);
+    QVector3D normalizedPosition = normalizePosition(position);
+    float x = interpolateBilinearly(normalizedPosition,
+                          (upperLeft->*getter)().x(),
+                          (upperRight->*getter)().x(),
+                          (lowerLeft->*getter)().x(),
+                          (lowerRight->*getter)().x());
+    float y = interpolateBilinearly(normalizedPosition,
+                          (upperLeft->*getter)().y(),
+                          (upperRight->*getter)().y(),
+                          (lowerLeft->*getter)().y(),
+                          (lowerRight->*getter)().y());
+    return QVector2D(x, y);
 }
 
 QSizeF StructuredCell::getSize() const
