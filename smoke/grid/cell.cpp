@@ -33,9 +33,10 @@ float StructuredCell::interpolateScalar(QVector3D position, Vertex::scalarGetter
                           (lowerRight->*getter)());
 }
 
-QVector3D StructuredCell::interpolate3DVector(QVector3D position, Vertex::vectorGetter getter)
+QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vectorGetter getter)
 {
     qDebug() << "StructuredCell::interpolate3DVector not yet implemented";
+    return QVector2D(0.5, 0.5);
 }
 
 QSizeF StructuredCell::getSize() const

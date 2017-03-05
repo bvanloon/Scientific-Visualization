@@ -4,6 +4,7 @@
 #include "grid/vertex.h"
 #include <QVector>
 #include <QVector3D>
+#include <QVector2D>
 #include <QSizeF>
 #include <grid/triangulation.h>
 
@@ -27,7 +28,7 @@ public:
     virtual Triangulation triangulate();
 
     float interpolateScalar(QVector3D position, Vertex::scalarGetter getter);
-    QVector3D interpolate3DVector(QVector3D position, Vertex::vectorGetter getter);
+    QVector2D interpolate2DVector(QVector3D position, Vertex::vectorGetter getter);
 
     QSizeF getSize() const;
 
