@@ -24,6 +24,7 @@ public:
     ScalarVariable scalar;
 
     float vectorScale;
+    QSize gridSize;
 
 signals:
     void valueRangeChanged(float minimum, float maximum);
