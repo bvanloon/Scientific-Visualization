@@ -8,6 +8,7 @@
 #include <QPoint>
 #include <float.h>
 #include "grid/uniformgrid.h"
+#include "grid/glyphdata.h"
 
 #include "simulation/simulationrealization.h"
 #include "grid/triangulation.h"
@@ -21,7 +22,8 @@ public:
 
     typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
 
-    QVector<QVector3D> getSimpleHedgeHodges();
+    GlyphData getGlyphData();
+    GlyphData getGlyphData(Grid* visualizationGrid);
     Triangulation getGridTriangulation();
 
     QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
@@ -44,8 +46,7 @@ private:
     UniformGrid* simulationGrid;
     UniformGrid* visualizationGrid;
 
-    typedef float (Vertex::*textureCoordinateGetterSimple)() const;
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, Triangulation triangulation);
+    QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
 };
 
 #endif // SMOKE_H

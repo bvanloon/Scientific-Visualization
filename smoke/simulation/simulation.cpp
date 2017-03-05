@@ -13,7 +13,7 @@ Simulation::Simulation(QObject *parent) :
 {
     this->realization = new SimulationRealization();
     this->simulationGrid = UniformGrid::createSimulationGrid(Settings::simulation().dimension, Settings::canvas().size, this->realization);
-    this->visualizationGrid = UniformGrid::createVisualizationGrid(5, Settings::canvas().size, this->simulationGrid);
+    this->visualizationGrid = UniformGrid::createVisualizationGrid(25, Settings::canvas().size, this->simulationGrid);
 }
 
 Simulation::~Simulation()
@@ -23,19 +23,14 @@ Simulation::~Simulation()
     delete visualizationGrid;
 }
 
-
-QVector<QVector3D> Simulation::getSimpleHedgeHodges()
+GlyphData Simulation::getGlyphData()
 {
-    QVector<QVector3D> hedgeHodgeVertices(simulationGrid->numVertices() * 2);
-    QVector<Vertex*>::const_iterator currentVertex = simulationGrid->getVertices().begin();
-    QVector3D position;
-    for(int i = 0; currentVertex != simulationGrid->getVertices().end(); currentVertex++){
-        position = *((*currentVertex)->getPosition());
-        hedgeHodgeVertices[i++] = position;
-        hedgeHodgeVertices[i++] = position +
-                Settings::visualization().vectorScale * QVector3D((*currentVertex)->getFluidVelocity(), 0.0f);
-    }
-    return hedgeHodgeVertices;
+    return getGlyphData(simulationGrid);
+}
+
+GlyphData Simulation::getGlyphData(Grid *visualizationGrid)
+{
+    return visualizationGrid->getGlyphData();
 }
 
 Triangulation Simulation::getGridTriangulation()
@@ -43,7 +38,7 @@ Triangulation Simulation::getGridTriangulation()
     return simulationGrid->getTriangulation();
 }
 
-QVector<float> Simulation::getTexCoord(Simulation::textureCoordinateGetterSimple getter, Triangulation triangulation)
+QVector<float> Simulation::getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation)
 {
     QVector<float> textureCoordinates;
     Vertex* vertex;
@@ -91,5 +86,5 @@ void Simulation::onStep()
 void Simulation::onWindowResized(int width, int height)
 {
     simulationGrid->changeGridArea(QSizeF(width, height));
-    visualizationGrid->changeGridArea(QSizeF(width, height));
+    visualizationGrid->changeGridArea(QSizeF(width, height), simulationGrid->getPadding());
 }

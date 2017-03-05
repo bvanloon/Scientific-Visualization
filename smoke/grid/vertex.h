@@ -6,11 +6,15 @@
 #include <QDebug>
 
 class Cell;
+
 class Vertex
 {
 public:
     Vertex(const QVector3D *position = NULL);
     virtual ~Vertex();
+
+    typedef float (Vertex::*scalarGetter)() const;
+    typedef QVector2D (Vertex::*vectorGetter)() const;
 
     const QVector3D* getPosition() const;
 
@@ -53,6 +57,7 @@ protected:
 class SimulationVertex: public StructuredGridVertex
 {
 public:
+
     SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho);
 
     friend QDebug operator<<(QDebug stream, const SimulationVertex &vertex);
@@ -76,7 +81,7 @@ private:
 class VisualizationVertex: public StructuredGridVertex
 {
 public:
-    VisualizationVertex(const QVector3D *position, Cell* cell);
+    VisualizationVertex(const QVector3D *position, Cell* containingCell);
 
     friend QDebug operator<<(QDebug stream, const VisualizationVertex &vertex);
     friend QDebug operator<<(QDebug stream, VisualizationVertex *vertex);
@@ -90,7 +95,7 @@ public:
     virtual float getFluidDensity() const;
 
 private:
-    Cell* cell;
+    Cell* containingCell;
 };
 
 
