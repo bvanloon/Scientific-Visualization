@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     grid/cell.cpp \
     grid/triangulation.cpp \
     engines/abstractengine.cpp \
-    view/glyphstab.cpp
+    view/glyphstab.cpp \
+    grid/glyphdata.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -77,7 +78,8 @@ HEADERS  += main.ih\
     grid/cell.h \
     grid/triangulation.h \
     engines/abstractengine.h \
-    view/glyphstab.h
+    view/glyphstab.h \
+    grid/glyphdata.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

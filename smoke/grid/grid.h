@@ -5,6 +5,7 @@
 #include <QVector3D>
 #include <QMultiMap>
 #include <QPair>
+#include "grid/glyphdata.h"
 #include "grid/vertex.h"
 #include "grid/cell.h"
 
@@ -13,6 +14,8 @@ class Grid
 public:
     Grid(int numberOfVertices, bool hasPadding = true);
     ~Grid();
+
+    GlyphData getGlyphData() const;
 
     QVector<QVector3D> const& getVertexPositions() const;
     QVector<Vertex*> const& getVertices() const;
@@ -23,6 +26,7 @@ protected:
     QVector<Vertex*> vertices;
     QMultiMap<QPair<int, int>, Vertex *> vertexMap;
     QVector<QVector3D> vertexPositions;
+
     QVector<Cell* > cells;
     bool hasPadding;
 
