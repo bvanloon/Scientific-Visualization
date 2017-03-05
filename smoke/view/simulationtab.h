@@ -21,6 +21,8 @@ signals:
     void toggleFrozen(bool frozen);
     void step();
     void timeStepChanged(float timeStep);
+    void glyphsEngineToggled(bool checked);
+    void smokeEngineToggled(bool checked);
 
 private slots:
     void on_forceSlider_valueChanged(int value);
@@ -28,6 +30,10 @@ private slots:
     void on_stepButton_clicked();
     void onToggleFrozen(bool frozen);
     void on_timeStepBox_valueChanged(double value);
+
+    void on_glyphsCheckBox_toggled(bool checked);
+
+    void on_smokeCheckBox_toggled(bool checked);
 
 private:
     Ui::SimulationSettingPane *ui;

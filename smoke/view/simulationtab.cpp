@@ -66,3 +66,13 @@ void SimulationSettingPane::on_timeStepBox_valueChanged(double value)
 {
     emit timeStepChanged(value);
 }
+
+void SimulationSettingPane::on_glyphsCheckBox_toggled(bool checked)
+{
+    emit glyphsEngineToggled(checked);
+}
+
+void SimulationSettingPane::on_smokeCheckBox_toggled(bool checked)
+{
+    emit smokeEngineToggled(checked);
+}
