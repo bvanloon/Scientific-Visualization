@@ -37,12 +37,14 @@ void Canvas::initializeGL()
 
     this->vectorEngine = new VectorEngine();
     this->smokeEngine = new SmokeEngine();
+    enginemap.insert(EnginePair(EnginesEnum::glyphs, new VectorEngine()));
+    enginemap.insert(EnginePair(EnginesEnum::smoke, new SmokeEngine()));
 
     emit openGlReady();
 
+    connectThisAndEngine(enginemap.find(EnginesEnum::smoke)->second);
+    connectThisAndEngine(enginemap.find(EnginesEnum::glyphs)->second);
 
-    connectThisAndEngine(this->vectorEngine);
-    connectThisAndEngine(this->smokeEngine);
 }
 
 

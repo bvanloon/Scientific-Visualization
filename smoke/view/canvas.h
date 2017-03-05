@@ -33,8 +33,17 @@ public:
     VectorEngine *vectorEngine;
     SmokeEngine *smokeEngine;
 
+    enum EnginesEnum {
+        smoke,
+        glyphs,
+        nrOfEngine
+    };
+
+    typedef std::map<EnginesEnum, AbstractEngine*> EngineMap;
+    typedef std::pair<EnginesEnum, AbstractEngine*> EnginePair;
 
 
+    EngineMap enginemap; //Public since mainwindow accesses it to setup connections
 
 signals:
     void mouseMoved(QPoint newPosition);
