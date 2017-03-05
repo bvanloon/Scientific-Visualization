@@ -71,6 +71,16 @@ void Canvas::setSimulation(Simulation *simulation)
     this->simulation = simulation;
 }
 
+void Canvas::onGlyphsEngineToggled(bool checked)
+{
+    activeEngines[EnginesEnum::glyphs] = checked;
+}
+
+void Canvas::onSmokeEngineToggled(bool checked)
+{
+    activeEngines[EnginesEnum::smoke] = checked;
+}
+
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     if(!Settings::simulation().frozen){
@@ -92,3 +102,5 @@ void Canvas::resizeGL(int width, int height)
 
     emit windowResized(width, height);
 }
+
+
