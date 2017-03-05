@@ -99,7 +99,8 @@ VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
 
 QVector2D VisualizationVertex::getFluidVelocity() const
 {
-    qDebug() << "VisualizationVertex::getFluidVelocity(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolate3DVector(*position, &Vertex::getFluidVelocity);
 }
 
 float VisualizationVertex::getFluidVelocityMagnitude() const
