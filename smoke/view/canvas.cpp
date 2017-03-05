@@ -29,6 +29,17 @@ void Canvas::connectThisAndEngine(AbstractEngine* engine)
             engine, SLOT(onWindowChanged(int,int)));
 }
 
+void Canvas::enginesDraw()
+{
+    for(int i = 0; i < EnginesEnum::nrOfEngine; i++){
+        if (activeEngines[i])
+        {
+            EnginesEnum engine = static_cast<EnginesEnum>(i);
+            enginemap.find(engine)->second->draw(this->simulation);
+        }
+    }
+}
+
 void Canvas::initializeGL()
 {
     initializeOpenGLFunctions();
@@ -71,6 +82,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 void Canvas::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);   
+    enginesDraw();
 
 }
 

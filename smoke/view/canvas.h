@@ -19,6 +19,7 @@
 
 
 
+
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
@@ -42,15 +43,12 @@ public:
     typedef std::map<EnginesEnum, AbstractEngine*> EngineMap;
     typedef std::pair<EnginesEnum, AbstractEngine*> EnginePair;
 
-
     EngineMap enginemap; //Public since mainwindow accesses it to setup connections
 
 signals:
     void mouseMoved(QPoint newPosition);
     void windowResized(int width, int height);
     void openGlReady();
-
-
 
 private slots:
     void idleLoop();
@@ -64,15 +62,18 @@ protected:
 private:
     Simulation* simulation;
 
+    //Active Engines
+    bool activeEngines[EnginesEnum::nrOfEngine] = {true, false};
+    void enginesDraw();
+
     //Idle Loop
     QTimer* timer;
     void initiateIdleLoop();
 
+
     // OpenGL initialization
     void initializeUniforms();
     void initializeColorMapInfo();
-
-
     void connectThisAndEngine(AbstractEngine* engine);
 
 
