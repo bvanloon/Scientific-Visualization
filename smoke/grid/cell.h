@@ -4,6 +4,8 @@
 #include "grid/vertex.h"
 #include <QVector>
 #include <QVector3D>
+#include <QVector2D>
+#include <QSizeF>
 #include <grid/triangulation.h>
 
 class Cell
@@ -25,11 +27,18 @@ public:
 
     virtual Triangulation triangulate();
 
+    float interpolateScalar(QVector3D position, Vertex::scalarGetter getter);
+    QVector2D interpolate2DVector(QVector3D position, Vertex::vectorGetter getter);
+
+    QSizeF getSize() const;
+
 private:
     Vertex* upperLeft;
     Vertex* upperRight;
     Vertex* lowerLeft;
     Vertex* lowerRight;
+
+    QVector3D normalizePosition(const QVector3D position);
 
     Triangulation lowerLeftTriangle();
     Triangulation upperRightTriangle();

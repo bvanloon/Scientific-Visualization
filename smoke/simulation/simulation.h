@@ -23,6 +23,7 @@ public:
     typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
 
     GlyphData getGlyphData();
+    GlyphData getGlyphData(Grid* visualizationGrid);
     Triangulation getGridTriangulation();
 
     QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
@@ -45,8 +46,7 @@ private:
     UniformGrid* simulationGrid;
     UniformGrid* visualizationGrid;
 
-    typedef float (Vertex::*textureCoordinateGetterSimple)() const;
-    QVector<float> getTexCoord(textureCoordinateGetterSimple getter, Triangulation triangulation);
+    QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
 };
 
 #endif // SMOKE_H

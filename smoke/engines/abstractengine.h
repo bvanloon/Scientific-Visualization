@@ -22,9 +22,6 @@ public:
     virtual void draw(Simulation* Simulation) = 0;
 
 
-
-
-
 public slots:
     void onValueRangeChanged(float min, float max);
     void onSetClamping(bool clampingOn);
@@ -74,8 +71,6 @@ private:
     void setMVPMatrix();
     static const float nearClippingPlane;
     static const  float farClippingPlane;
-
-
 
 };
 

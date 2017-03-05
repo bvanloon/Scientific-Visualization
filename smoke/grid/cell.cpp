@@ -1,4 +1,5 @@
 #include "cell.h"
+#include "utilities.h"
 
 Cell::Cell()
 {}
@@ -22,6 +23,46 @@ Triangulation StructuredCell::triangulate()
     return triangulation;
 }
 
+float StructuredCell::interpolateScalar(QVector3D position, Vertex::scalarGetter getter)
+{
+    QVector3D normalizedPosition = normalizePosition(position);
+    return interpolateBilinearly(normalizedPosition,
+                          (upperLeft->*getter)(),
+                          (upperRight->*getter)(),
+                          (lowerLeft->*getter)(),
+                          (lowerRight->*getter)());
+}
+
+QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vectorGetter getter)
+{
+    QVector3D normalizedPosition = normalizePosition(position);
+    float x = interpolateBilinearly(normalizedPosition,
+                          (upperLeft->*getter)().x(),
+                          (upperRight->*getter)().x(),
+                          (lowerLeft->*getter)().x(),
+                          (lowerRight->*getter)().x());
+    float y = interpolateBilinearly(normalizedPosition,
+                          (upperLeft->*getter)().y(),
+                          (upperRight->*getter)().y(),
+                          (lowerLeft->*getter)().y(),
+                          (lowerRight->*getter)().y());
+    return QVector2D(x, y);
+}
+
+QSizeF StructuredCell::getSize() const
+{
+    float width = upperRight->getPosition()->x() - upperLeft->getPosition()->x();
+    float height = lowerLeft->getPosition()->y() - upperLeft->getPosition()->y();
+    return QSizeF(width, height);
+}
+
+QVector3D StructuredCell::normalizePosition(const QVector3D position)
+{
+    float x = (position.x() - upperLeft->getPosition()->x()) / getSize().width();
+    float y = (position.y() - upperLeft->getPosition()->y()) / getSize().height();
+    return QVector3D(x, y, 0.0);
+}
+
 Triangulation StructuredCell::lowerLeftTriangle()
 {
     Triangulation triangulation(3);
@@ -39,19 +80,6 @@ Triangulation StructuredCell::upperRightTriangle()
     triangulation.addVertex(upperRight);
     return triangulation;
 }
-
-//QVector<QVector3D> StructuredCell::triangulate()
-//{
-//    QVector<QVector3D> triangulation;
-//    triangulation.append(*upperLeft->getPosition());
-//    triangulation.append(*lowerLeft->getPosition());
-//    triangulation.append(*lowerRight->getPosition());
-
-//    triangulation.append(*upperLeft->getPosition());
-//    triangulation.append(*lowerRight->getPosition());
-//    triangulation.append(*upperRight->getPosition());
-//    return triangulation;
-//}
 
 QDebug operator<<(QDebug stream, const StructuredCell &cell)
 {

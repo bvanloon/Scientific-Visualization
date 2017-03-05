@@ -94,32 +94,37 @@ QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
 
 VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell):
     StructuredGridVertex(position),
-    cell(cell)
+    containingCell(cell)
 {}
 
 QVector2D VisualizationVertex::getFluidVelocity() const
 {
-    qDebug() << "VisualizationVertex::getFluidVelocity(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolate2DVector(*position, &Vertex::getFluidVelocity);
 }
 
 float VisualizationVertex::getFluidVelocityMagnitude() const
 {
-    qDebug() << "VisualizationVertex::getFluidVelocityMagnitude(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolateScalar(*position, &Vertex::getFluidVelocityMagnitude);
 }
 
 QVector2D VisualizationVertex::getForce() const
 {
-    qDebug() << "VisualizationVertex::getForceField(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolate2DVector(*position, &Vertex::getForce);
 }
 
 float VisualizationVertex::getForceMagnitude() const
 {
-    qDebug() << "VisualizationVertex::getForceFieldMagnitude(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolateScalar(*position, &Vertex::getForceMagnitude);
 }
 
 float VisualizationVertex::getFluidDensity() const
 {
-    qDebug() << "VisualizationVertex::getFluidDensity(): not yet implemented";
+    StructuredCell* cell = dynamic_cast<StructuredCell*>(containingCell);
+    return cell->interpolateScalar(*position, &Vertex::getFluidDensity);
 }
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position):

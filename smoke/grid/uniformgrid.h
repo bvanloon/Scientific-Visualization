@@ -19,7 +19,6 @@ public:
 
     QSizeF const& getPadding() const;
     QSizeF getCellSize() const;
-
     int getDimension() const;
 
 private:
