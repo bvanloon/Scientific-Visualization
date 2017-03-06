@@ -16,6 +16,7 @@ public:
 public slots:
 
    void onRecomputeVertexPositions(QSizeF cellSize);
+   void onGridDimensionChanged(int width, int height);
 
 private:
 
