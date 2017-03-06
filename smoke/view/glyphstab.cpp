@@ -24,3 +24,15 @@ void GlyphsTab::setUpConnections()
 {
 
 }
+
+void GlyphsTab::on_gridHeightSpinBox_valueChanged(int height)
+{
+    int width = ui->gridWidthSpinBox->value();
+    emit gridDimensionChanged(width, height);
+}
+
+void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
+{
+    int height = ui->gridHeightSpinBox->value();
+    emit gridDimensionChanged(width, height);
+}
