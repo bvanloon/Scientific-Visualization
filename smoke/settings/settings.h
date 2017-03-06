@@ -2,6 +2,7 @@
 #define SETTINGSNS_H
 
 #include "colormaps/colormapfactory.h"
+#include "QSize"
 
 namespace Settings {
     class Simulation;
@@ -35,7 +36,10 @@ namespace Settings {
                 static const float saturation = 1.0f;
                 static const float minSaturation = 0.0f;
                 static const float maxSaturation = 1.0f;
+            }
 
+            namespace glyphs{
+                static const QSize gridSize = QSize(50, 40);
             }
         }
     }

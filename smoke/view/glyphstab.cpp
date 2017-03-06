@@ -21,8 +21,8 @@ ColorMapTab *GlyphsTab::getColorMapWidget()
 
 void GlyphsTab::setUiToDefaults()
 {
-    ui->gridHeightSpinBox->setValue(Settings::visualization().gridSize.height());
-    ui->gridWidthSpinBox->setValue(Settings::visualization().gridSize.width());
+    ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.height());
+    ui->gridWidthSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
 }
 
 void GlyphsTab::setUpConnections()
