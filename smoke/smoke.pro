@@ -105,3 +105,6 @@ INCLUDEPATH += $$PWD/fftw-2.1.5/include
 DEPENDPATH += $$PWD/fftw-2.1.5/include
 
 unix: PRE_TARGETDEPS += $$PWD/fftw-2.1.5/lib/libfftw.a
+
+DISTFILES += \
+    uncrustify.cfg

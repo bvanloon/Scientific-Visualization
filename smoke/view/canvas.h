@@ -21,53 +21,49 @@
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    Canvas(QWidget* parent);
-    ~Canvas();
+   Canvas(QWidget *parent);
+   ~Canvas();
 
-    void setSimulation(Simulation *simulation);
+   void setSimulation(Simulation *simulation);
 
-    //Engines
-    VectorEngine *vectorEngine;
-    SmokeEngine *smokeEngine;
-
+   //Engines
+   VectorEngine *vectorEngine;
+   SmokeEngine *smokeEngine;
 
 
 
 signals:
-    void mouseMoved(QPoint newPosition);
-    void windowResized(int width, int height);
-    void openGlReady();
+   void mouseMoved(QPoint newPosition);
+   void windowResized(int width, int height);
+   void openGlReady();
 
 
 
 private slots:
-    void idleLoop();
+   void idleLoop();
 
 protected:
-    void initializeGL() Q_DECL_OVERRIDE;
-    void paintGL() Q_DECL_OVERRIDE;
-    void resizeGL(int width, int height) Q_DECL_OVERRIDE;
-    void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+   void initializeGL() Q_DECL_OVERRIDE;
+   void paintGL() Q_DECL_OVERRIDE;
+   void resizeGL(int width, int height) Q_DECL_OVERRIDE;
+   void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
 private:
-    Simulation* simulation;
+   Simulation *simulation;
 
-    //Idle Loop
-    QTimer* timer;
-    void initiateIdleLoop();
+   //Idle Loop
+   QTimer *timer;
+   void initiateIdleLoop();
 
-    // OpenGL initialization
-    void initializeUniforms();
-    void initializeColorMapInfo();
-
-
-    void connectThisAndEngine(AbstractEngine* engine);
+   // OpenGL initialization
+   void initializeUniforms();
+   void initializeColorMapInfo();
 
 
-
+   void connectThisAndEngine(AbstractEngine *engine);
 };
 
 #endif // CANVAS_H

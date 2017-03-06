@@ -41,7 +41,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="gridLabel">
           <property name="text">
            <string>Grid</string>
           </property>
@@ -61,9 +61,21 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="gridHeightSpinBo">
+         <widget class="QSpinBox" name="gridHeightSpinBox">
+          <property name="keyboardTracking">
+           <bool>false</bool>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
           <property name="value">
            <number>15</number>
+          </property>
+          <property name="displayIntegerBase">
+           <number>10</number>
           </property>
          </widget>
         </item>
@@ -79,6 +91,15 @@
         </item>
         <item>
          <widget class="QSpinBox" name="gridWidthSpinBox">
+          <property name="keyboardTracking">
+           <bool>false</bool>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
           <property name="value">
            <number>10</number>
           </property>

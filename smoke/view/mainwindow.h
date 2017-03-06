@@ -16,41 +16,42 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+   explicit MainWindow(QWidget *parent = 0);
+   ~MainWindow();
 
-    KeyboardHandler* keyboardHandler;
+   KeyboardHandler *keyboardHandler;
 
 public slots:
-    void onOpenGLReady();
+   void onOpenGLReady();
 
 private:
-    Ui::MainWindow *ui;
+   Ui::MainWindow *ui;
 
-    Canvas *canvas;
-    Simulation *simulation;
-    SimulationSettingPane *simulationTab;
-    ColorMapTab *smokeColorMapTab;
+   Canvas *canvas;
+   Simulation *simulation;
+   SimulationSettingPane *simulationTab;
+   ColorMapTab *smokeColorMapTab;
 
-    void setUpConnections();
+   void setUpConnections();
 
-    void connectCanvasAndThis();
-    void connectCanvasAndSimulation();
-    void connectCanvasAndSettings();
+   void connectCanvasAndThis();
+   void connectCanvasAndSimulation();
+   void connectCanvasAndSettings();
 
-    void connectEngineAndSettings(AbstractEngine *currentEngine);
-    void connectEngineAndColorMapTab(AbstractEngine* currentEngine);
+   void connectEngineAndSettings(AbstractEngine *currentEngine);
+   void connectEngineAndColorMapTab(AbstractEngine *currentEngine);
+   void connectVectorEngineAndGlyphTab();
+   void connectVectorEngineAndSettings();
 
+   void connectKeyBoardHandlerAndSimulation();
 
-    void connectSimulationTabAndSettings();
-    void connectSimulationTabAndSimulation();
+   void connectSimulationTabAndSettings();
+   void connectSimulationTabAndSimulation();
 
-    void connectSmokeColorMapTabAndSettings();
-
-    void connectKeyBoardHandlerAndSimulation();
+   void connectSmokeColorMapTabAndSettings();
 };
 
 #endif // MAINWINDOW_H

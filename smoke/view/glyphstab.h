@@ -15,8 +15,18 @@ public:
     explicit GlyphsTab(QWidget *parent = 0);
     ~GlyphsTab();
 
+signals:
+    void gridDimensionChanged(int widht, int height);
+
+private slots:
+    void on_gridHeightSpinBox_valueChanged(int height);
+    void on_gridWidthSpinBox_valueChanged(int width);
+
 private:
     Ui::GlyphsTab *ui;
+
+    void setUiToDefaults();
+    void setUpConnections();
 };
 
 #endif // GLYPHSTAB_H
