@@ -6,8 +6,7 @@ Settings::Visualization::Visualization(QObject *parent):
     QObject(parent),
     textureGetter(&::Simulation::getTexCoordFluidDensity),
     scalar(ScalarVariable::fluidDensity),
-    vectorScale(10),
-    gridSize(25, 25)
+    vectorScale(10)
 {
 }
 
