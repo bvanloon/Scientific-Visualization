@@ -39,7 +39,6 @@ void Settings::Simulation::onForceChanged(float newForce)
 void Settings::Simulation::onWindowResized(int width, int height)
 {
    updateGridCellSize(width, height);
-   qDebug() << "Settings::Simulation::onWindowResized: Notify the visualization grid of the changed cell size";
 }
 
 
@@ -72,4 +71,5 @@ void Settings::Simulation::updateGridCellSize(int width, int height)
 {
    cellSize.setHeight((fftw_real)height / (fftw_real)(dimension + 1));
    cellSize.setWidth((fftw_real)width / (fftw_real)(dimension + 1));
+   emit recomputeVertexPositions(QSize(width, height), cellSize);
 }
