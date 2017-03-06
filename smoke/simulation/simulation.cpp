@@ -13,7 +13,7 @@ Simulation::Simulation(QObject *parent) :
 {
     this->realization = new SimulationRealization();
     this->simulationGrid = UniformGrid::createSimulationGrid(Settings::simulation().dimension, Settings::canvas().size, this->realization);
-    this->visualizationGrid = UniformGrid::createVisualizationGrid(25, Settings::canvas().size, this->simulationGrid);
+    this->visualizationGrid = UniformGrid::createVisualizationGrid(10, Settings::canvas().size, this->simulationGrid);
 }
 
 Simulation::~Simulation()
@@ -25,12 +25,12 @@ Simulation::~Simulation()
 
 GlyphData Simulation::getGlyphData()
 {
-    return getGlyphData(simulationGrid);
+    return getGlyphData(visualizationGrid);
 }
 
-GlyphData Simulation::getGlyphData(Grid *visualizationGrid)
+GlyphData Simulation::getGlyphData(Grid *grid)
 {
-    return visualizationGrid->getGlyphData();
+    return grid->getGlyphData();
 }
 
 Triangulation Simulation::getGridTriangulation()
@@ -87,4 +87,9 @@ void Simulation::onWindowResized(int width, int height)
 {
     simulationGrid->changeGridArea(QSizeF(width, height));
     visualizationGrid->changeGridArea(QSizeF(width, height), simulationGrid->getPadding());
+}
+
+UniformGrid *Simulation::getSimulationGrid() const
+{
+    return simulationGrid;
 }
