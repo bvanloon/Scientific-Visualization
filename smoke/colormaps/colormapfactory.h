@@ -8,13 +8,16 @@
 #include "heatcolormap.h"
 #include "coldcolormap.h"
 #include "zebramap.h"
+#include "huecolormap.h"
+
+
 
 
 
 class ColorMapFactory
 {
 public:
-    enum colorMaps { rainbow, heat, cold, grayScale, zebra };
+    enum colorMaps { rainbow, heat, cold, grayScale, zebra, hue };
 
     ~ColorMapFactory();
 
@@ -25,10 +28,10 @@ public:
 
     static QStringList getColorMapNames();
 
-    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, float saturation);
+    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, float saturation, float hue = no_hue);
 
 private:
-    typedef AbstractColorMap* (*CreateColorMapFn)(int, float);
+    typedef AbstractColorMap* (*CreateColorMapFn)(int, float, float);
 
     std::map<colorMaps,CreateColorMapFn > colorMapMapping;
 
