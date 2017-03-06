@@ -53,7 +53,7 @@ void ColorMapTab::on_saturationSlider_valueChanged(float value)
     AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
                 this->ui->numColorsSlider->value(),
-                value);
+                value, 0.5f);
 
     emit colorMapChanged(*newColormap);
 }
@@ -135,7 +135,9 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
     AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(index),
                 ui->numColorsSlider->value(),
-                ui->saturationSlider->value());
+                ui->saturationSlider->value(), 0.5f);
+
+
     emit colorMapChanged(*newColormap);
 }
 
