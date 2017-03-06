@@ -4,21 +4,25 @@
 #include <QObject>
 #include "abstractengine.h"
 
-class VectorEngine : public AbstractEngine
-{
-    Q_OBJECT
+class VectorEngine : public AbstractEngine {
+  Q_OBJECT
 
 public:
-    VectorEngine();
 
-    void draw(Simulation* simulation);
+  VectorEngine(UniformGrid *simulationGrid);
+
+  void draw(Simulation *simulation);
 
 public slots:
-    void onGridDimensionChanged(int width, int height);
+
+  void onGridDimensionChanged(int width,
+                              int height);
 
 private:
-    int updateBuffers(Simulation* simulation);
 
+  int updateBuffers(Simulation *simulation);
+
+  Grid *visualizationGrid;
 };
 
 #endif // VECTORENGINE_H
