@@ -6,7 +6,7 @@
 class RainbowColorMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap* Create(int numColors, float saturation);
+    static AbstractColorMap* Create(int numColors, float saturation, float hue);
 
 private:
     float dx;

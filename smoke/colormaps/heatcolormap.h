@@ -6,7 +6,7 @@
 class HeatColorMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap * Create(int numColors, float saturation);
+    static AbstractColorMap * Create(int numColors, float saturation, float hue);
 
 private:
     HeatColorMap(int numColors, float saturation);

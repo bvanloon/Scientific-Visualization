@@ -6,7 +6,7 @@
 class Coldcolormap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap * Create(int numColors, float saturation);
+    static AbstractColorMap * Create(int numColors, float saturation, float hue);
 
 private:
     Coldcolormap(int numColors, float saturation);
