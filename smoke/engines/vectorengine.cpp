@@ -30,6 +30,12 @@ void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 }
 
 
+void VectorEngine::onGridDimensionChanged(int width, int height)
+{
+   qDebug() << "VectorEngine::onGridDimensionChanged: Handle the change in the dimension of the visualization grid.";
+}
+
+
 int VectorEngine::updateBuffers(Simulation *simulation)
 {
    GlyphData data = visualizationGrid->getGlyphData();
