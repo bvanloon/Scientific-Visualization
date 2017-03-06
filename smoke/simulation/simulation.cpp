@@ -16,9 +16,6 @@ Simulation::Simulation(QObject *parent) :
     Settings::simulation().dimension,
     Settings::canvas().size,
     this->realization);
-   this->visualizationGrid = UniformGrid::createVisualizationGrid(10,
-                                                                 Settings::canvas().size,
-                                                                 this->simulationGrid);
 }
 
 
@@ -26,13 +23,12 @@ Simulation::~Simulation()
 {
    delete realization;
    delete simulationGrid;
-   delete visualizationGrid;
 }
 
 
 GlyphData Simulation::getGlyphData()
 {
-   return getGlyphData(visualizationGrid);
+   return getGlyphData(simulationGrid);
 }
 
 
@@ -107,8 +103,6 @@ void Simulation::onStep()
 void Simulation::onWindowResized(int width, int height)
 {
    simulationGrid->changeGridArea(QSizeF(width, height));
-   visualizationGrid->changeGridArea(QSizeF(width, height),
-                                     simulationGrid->getPadding());
 }
 
 

@@ -14,45 +14,46 @@
 #include "grid/triangulation.h"
 
 class Simulation : public QObject {
-  Q_OBJECT
+   Q_OBJECT
 
 public:
 
-  explicit Simulation(QObject *parent = 0);
-  ~Simulation();
+   explicit Simulation(QObject *parent = 0);
+   ~Simulation();
 
-  typedef QVector<float>(Simulation::*textureCoordinateGetter)(Triangulation);
+   typedef QVector<float>(Simulation::*textureCoordinateGetter)(Triangulation);
 
-  GlyphData     getGlyphData();
-  GlyphData     getGlyphData(Grid *grid);
-  Triangulation getGridTriangulation();
-  UniformGrid * getSimulationGrid() const;
+   GlyphData getGlyphData();
+   GlyphData getGlyphData(Grid *grid);
+   Triangulation getGridTriangulation();
+   UniformGrid *getSimulationGrid() const;
 
-  QVector<float>getTexCoordFluidDensity(Triangulation triangulation);
-  QVector<float>getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
-  QVector<float>getTexCoordForceFieldMagnitude(Triangulation triangulation);
+   QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
 
-  SimulationRealization *realization;
+   QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
 
-  void step();
+   QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
+
+   SimulationRealization *realization;
+
+   void step();
 
 signals:
 
 public slots:
 
-  void onMouseMoved(QPoint newPosition);
-  void onStep();
-  void onWindowResized(int width,
-                       int height);
+   void onMouseMoved(QPoint newPosition);
+   void onStep();
+   void onWindowResized(int width,
+                        int height);
 
 private:
 
-  QPoint lastMousePosition;
-  UniformGrid *simulationGrid;
-  UniformGrid *visualizationGrid;
+   QPoint lastMousePosition;
+   UniformGrid *simulationGrid;
 
-  QVector<float>getTexCoord(Vertex::scalarGetter getter,
-                            Triangulation        triangulation);
+   QVector<float> getTexCoord(Vertex::scalarGetter getter,
+                              Triangulation        triangulation);
 };
 
 #endif // SMOKE_H
