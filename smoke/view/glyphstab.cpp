@@ -6,6 +6,7 @@ GlyphsTab::GlyphsTab(QWidget *parent) :
     ui(new Ui::GlyphsTab)
 {
     ui->setupUi(this);
+    setUiToDefaults();
 }
 
 GlyphsTab::~GlyphsTab()
@@ -16,4 +17,15 @@ GlyphsTab::~GlyphsTab()
 ColorMapTab *GlyphsTab::getColorMapWidget()
 {
     return ui->colorMapGlyphs;
+}
+
+void GlyphsTab::setUiToDefaults()
+{
+    ui->gridHeightSpinBox->setValue(Settings::visualization().gridSize.height());
+    ui->gridWidthSpinBox->setValue(Settings::visualization().gridSize.width());
+}
+
+void GlyphsTab::setUpConnections()
+{
+
 }

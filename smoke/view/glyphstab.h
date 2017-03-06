@@ -21,6 +21,9 @@ public:
 
 private:
     Ui::GlyphsTab *ui;
+
+    void setUiToDefaults();
+    void setUpConnections();
 };
 
 #endif // GLYPHSTAB_H
