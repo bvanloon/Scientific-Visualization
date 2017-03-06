@@ -43,14 +43,15 @@ private:
 
     void connectEngineAndSettings(AbstractEngine *currentEngine);
     void connectEngineAndColorMapTab(AbstractEngine* currentEngine);
+    void connectVectorEngineAndGlyphTab();
 
+    void connectKeyBoardHandlerAndSimulation();
 
     void connectSimulationTabAndSettings();
     void connectSimulationTabAndSimulation();
 
     void connectSmokeColorMapTabAndSettings();
 
-    void connectKeyBoardHandlerAndSimulation();
 };
 
 #endif // MAINWINDOW_H

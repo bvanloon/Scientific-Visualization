@@ -41,6 +41,8 @@ void MainWindow::onOpenGLReady()
 
     connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
     connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->vectorEngine));
+
+    connectVectorEngineAndGlyphTab();
 }
 
 void MainWindow::setUpConnections()
@@ -76,7 +78,6 @@ void MainWindow::connectCanvasAndSettings()
 {
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::canvas(), SLOT(onWindowResized(int, int)));
-
     connect(this->canvas, SIGNAL(windowResized(int, int)),
             &Settings::simulation(), SLOT(onWindowResized(int, int)));
 
@@ -121,7 +122,11 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine)
             currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
-
+void MainWindow::connectVectorEngineAndGlyphTab()
+{
+    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
+            this->canvas->vectorEngine, SLOT(onGridDimensionChanged(int,int)));
+}
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
