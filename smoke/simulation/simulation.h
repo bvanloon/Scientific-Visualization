@@ -13,41 +13,46 @@
 #include "simulation/simulationrealization.h"
 #include "grid/triangulation.h"
 
-class Simulation : public QObject
-{
-    Q_OBJECT
+class Simulation : public QObject {
+  Q_OBJECT
+
 public:
-    explicit Simulation(QObject *parent = 0);
-    ~Simulation();
 
-    typedef QVector<float> (Simulation::*textureCoordinateGetter)(Triangulation);
+  explicit Simulation(QObject *parent = 0);
+  ~Simulation();
 
-    GlyphData getGlyphData();
-    GlyphData getGlyphData(Grid* grid);
-    Triangulation getGridTriangulation();
-    UniformGrid *getSimulationGrid() const;
+  typedef QVector<float>(Simulation::*textureCoordinateGetter)(Triangulation);
 
-    QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
-    QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
-    QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
+  GlyphData     getGlyphData();
+  GlyphData     getGlyphData(Grid *grid);
+  Triangulation getGridTriangulation();
+  UniformGrid * getSimulationGrid() const;
 
-    SimulationRealization *realization;
+  QVector<float>getTexCoordFluidDensity(Triangulation triangulation);
+  QVector<float>getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
+  QVector<float>getTexCoordForceFieldMagnitude(Triangulation triangulation);
 
-    void step();
+  SimulationRealization *realization;
+
+  void step();
 
 signals:
 
 public slots:
-    void onMouseMoved(QPoint newPosition);
-    void onStep();
-    void onWindowResized(int width, int height);
+
+  void onMouseMoved(QPoint newPosition);
+  void onStep();
+  void onWindowResized(int width,
+                       int height);
 
 private:
-    QPoint lastMousePosition;
-    UniformGrid* simulationGrid;
-    UniformGrid* visualizationGrid;
 
-    QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
+  QPoint lastMousePosition;
+  UniformGrid *simulationGrid;
+  UniformGrid *visualizationGrid;
+
+  QVector<float>getTexCoord(Vertex::scalarGetter getter,
+                            Triangulation        triangulation);
 };
 
 #endif // SMOKE_H
