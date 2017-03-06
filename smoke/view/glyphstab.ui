@@ -61,7 +61,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="gridHeightSpinBo">
+         <widget class="QSpinBox" name="gridHeightSpinBox">
           <property name="value">
            <number>15</number>
           </property>
