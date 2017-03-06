@@ -14,6 +14,11 @@ void VectorEngine::draw(Simulation *simulation)
     drawWithMode(simulation, GL_LINES, bufferLength);
 }
 
+void VectorEngine::onGridDimensionChanged(int width, int height)
+{
+    qDebug() << "Grid dimension changed: " << width << " x " << height;
+}
+
 int VectorEngine::updateBuffers(Simulation *simulation)
 {
     GlyphData data = simulation->getGlyphData();
