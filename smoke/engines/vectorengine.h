@@ -5,24 +5,23 @@
 #include "abstractengine.h"
 
 class VectorEngine : public AbstractEngine {
-  Q_OBJECT
+   Q_OBJECT
 
 public:
 
-  VectorEngine(UniformGrid *simulationGrid);
+   VectorEngine(UniformGrid *simulationGrid);
 
-  void draw(Simulation *simulation);
+   void draw(Simulation *simulation);
 
 public slots:
 
-  void onGridDimensionChanged(int width,
-                              int height);
+   void onRecomputeVertexPositions(QSizeF cellSize);
 
 private:
 
-  int updateBuffers(Simulation *simulation);
+   int updateBuffers(Simulation *simulation);
 
-  Grid *visualizationGrid;
+   Grid *visualizationGrid;
 };
 
 #endif // VECTORENGINE_H
