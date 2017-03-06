@@ -142,7 +142,7 @@ void MainWindow::connectVectorEngineAndGlyphTab()
 void MainWindow::connectVectorEngineAndSettings()
 {
    connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
-            this->canvas->vectorEngine, SLOT(onRecomputeVertexPositions(QSizeF)));
+            this->canvas->vectorEngine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
 }
 
 
