@@ -21,6 +21,8 @@ namespace Settings {
 
         QStringList getScalarVariableNames();
 
+        class ColorMap;
+
         class Smoke;
         const Smoke& smoke();
 

@@ -39,16 +39,6 @@ const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance
    return instance;
 }
 
-//QStringList Settings::VisualizationClassOld::getScalarVariableNamesOld()
-//{
-//   QStringList scalarVariableNames;
-
-//   scalarVariableNames << "Fluid density"
-//                       << "Fluid velocity magnitude"
-//                       << "Force field magnitude";
-//   return scalarVariableNames;
-//}
-
 void Settings::VisualizationClassOld::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {
    switch (scalarVariable)
@@ -92,4 +82,8 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent)
+{}
+
+Settings::visualization::ColorMap::ColorMap() :
+   scalar(visualization::ScalarVariable::fluidDensity)
 {}
