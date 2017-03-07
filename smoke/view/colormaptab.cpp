@@ -156,7 +156,7 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
 void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 {
    emit scalarVariableChanged(
-      static_cast<Settings::Visualization::ScalarVariable>(index));
+      static_cast<Settings::visualization::ScalarVariable>(index));
 }
 
 
@@ -168,7 +168,7 @@ void ColorMapTab::onValueRangeChanged(float minimum, float maximum)
 
 void ColorMapTab::onForceChanged(float force)
 {
-   if (Settings::getVisualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity)
+   if (Settings::getVisualization().scalar == Settings::visualization::ScalarVariable::fluidDensity)
    {
       emit valueRangeChanged(0.0f, force);
    }

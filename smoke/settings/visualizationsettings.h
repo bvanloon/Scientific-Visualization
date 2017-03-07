@@ -18,19 +18,12 @@ class Settings::Visualization : public QObject
    Q_OBJECT
    public:
 
-      enum ScalarVariable
-      {
-         fluidDensity,
-         fluidVelocityMagnitude,
-         forceFieldMagnitude
-      };
-
       static const Visualization& instance();
 
       static QStringList getScalarVariableNames();
 
       ::Simulation::textureCoordinateGetter textureGetter;
-      ScalarVariable scalar;
+      visualization::ScalarVariable scalar;
 
       float vectorScale;
 
@@ -38,7 +31,7 @@ class Settings::Visualization : public QObject
       void valueRangeChanged(float minimum, float maximum);
 
    public slots:
-      void onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable);
+      void onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
 
    private:
       explicit Visualization(QObject *parent = 0);

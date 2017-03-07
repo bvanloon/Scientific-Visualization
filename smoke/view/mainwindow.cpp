@@ -162,8 +162,8 @@ void MainWindow::connectVectorEngineAndSettings()
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-   connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
-            &Settings::getVisualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+   connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::visualization::ScalarVariable)),
+            &Settings::getVisualization(), SLOT(onScalarVariableChanged(Settings::visualization::ScalarVariable)));
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
    connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),

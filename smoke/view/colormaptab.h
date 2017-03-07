@@ -24,7 +24,7 @@ signals:
    void setClamping(bool clampingOn);
    void setClampingRange(float minimum, float maximum);
    void colorMapChanged(AbstractColorMap colormap);
-   void scalarVariableChanged(Settings::Visualization::ScalarVariable variable);
+   void scalarVariableChanged(Settings::visualization::ScalarVariable variable);
    void valueRangeChanged(float minimum, float maximum);
 
 public slots:

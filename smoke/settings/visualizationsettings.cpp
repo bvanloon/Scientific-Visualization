@@ -5,7 +5,7 @@
 Settings::Visualization::Visualization(QObject *parent) :
    QObject(parent),
    textureGetter(&::Simulation::getTexCoordFluidDensity),
-   scalar(ScalarVariable::fluidDensity),
+   scalar(visualization::ScalarVariable::fluidDensity),
    vectorScale(10)
 {
 }
@@ -14,7 +14,7 @@ Settings::Visualization::Visualization(QObject *parent) :
 void Settings::Visualization::setScalarVariableToFluidDensity()
 {
    this->textureGetter = &::Simulation::getTexCoordFluidDensity;
-   this->scalar = Settings::Visualization::ScalarVariable::fluidDensity;
+   this->scalar = Settings::visualization::ScalarVariable::fluidDensity;
    emit valueRangeChanged(0.0f, Settings::simulation().force);
 }
 
@@ -22,7 +22,7 @@ void Settings::Visualization::setScalarVariableToFluidDensity()
 void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
-   this->scalar = Settings::Visualization::ScalarVariable::fluidVelocityMagnitude;
+   this->scalar = Settings::visualization::ScalarVariable::fluidVelocityMagnitude;
    emit valueRangeChanged(Settings::simulation().fluidVelocityMagnitudeMinimum,
                           Settings::simulation().fluidVelocityMagnitudeMaximum);
 }
@@ -31,7 +31,7 @@ void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
-   this->scalar = Settings::Visualization::ScalarVariable::forceFieldMagnitude;
+   this->scalar = Settings::visualization::ScalarVariable::forceFieldMagnitude;
    emit valueRangeChanged(Settings::simulation().forceFieldMagnitudeMinimum,
                           Settings::simulation().forceFieldMagnitudeMaximum);
 }
@@ -56,19 +56,19 @@ QStringList Settings::Visualization::getScalarVariableNames()
 }
 
 
-void Settings::Visualization::onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable)
+void Settings::Visualization::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {
    switch (scalarVariable)
    {
-   case fluidDensity:
+   case Settings::visualization::fluidDensity:
       setScalarVariableToFluidDensity();
       break;
 
-   case fluidVelocityMagnitude:
+   case Settings::visualization::fluidVelocityMagnitude:
       setScalarVariableToFluidVelocityMagnitude();
       break;
 
-   case forceFieldMagnitude:
+   case Settings::visualization::forceFieldMagnitude:
       setScalarVariableToForceFieldMagnitude();
       break;
 
