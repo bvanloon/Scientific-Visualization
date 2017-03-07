@@ -51,6 +51,32 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="gridWidthLabel">
+          <property name="text">
+           <string>width:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="gridWidthSpinBox">
+          <property name="keyboardTracking">
+           <bool>false</bool>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
+          <property name="value">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="gridHeightLabel">
           <property name="text">
            <string>height:</string>
@@ -75,32 +101,6 @@
            <number>15</number>
           </property>
           <property name="displayIntegerBase">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="gridWidthLabel">
-          <property name="text">
-           <string>width:</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="gridWidthSpinBox">
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>1000</number>
-          </property>
-          <property name="value">
            <number>10</number>
           </property>
          </widget>
