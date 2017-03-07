@@ -20,7 +20,7 @@ public slots:
 
 private:
 
-   int updateBuffers(Simulation *simulation);
+   int updateBuffers();
 
    Grid *visualizationGrid;
    UniformGrid* simulationGrid;

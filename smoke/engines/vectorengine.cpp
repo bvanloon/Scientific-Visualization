@@ -18,7 +18,7 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
 
 void VectorEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers(simulation);
+   int bufferLength = this->updateBuffers();
 
    drawWithMode(simulation, GL_LINES, bufferLength);
 }
@@ -30,7 +30,7 @@ void VectorEngine::onGridDimensionChanged(int width, int height)
 {
    visualizationGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
 }
-int VectorEngine::updateBuffers(Simulation *simulation)
+int VectorEngine::updateBuffers()
 {
    GlyphData data = visualizationGrid->getGlyphData();
 
