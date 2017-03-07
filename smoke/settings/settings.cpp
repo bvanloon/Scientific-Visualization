@@ -19,7 +19,9 @@ const Settings::Visualization& Settings::getVisualization()
 }
 
 const Settings::visualization::Smoke& Settings::visualization::smoke()
-{}
+{
+    return Settings::visualization::Smoke::instance();
+}
 
 const Settings::visualization::Glyphs& Settings::visualization::glyphs()
 {}
