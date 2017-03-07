@@ -5,41 +5,70 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 
-class Settings::Visualization : public QObject
+class Settings::visualization::ColorMap {
+   public:
+      ColorMap();
+
+      Settings::visualization::ScalarVariable scalar;
+};
+
+class Settings::visualization::Smoke : public QObject {
+   Q_OBJECT
+   public:
+      static const Smoke& instance();
+
+   private:
+      explicit Smoke(QObject *parent = 0);
+
+      Settings::visualization::ColorMap colorMap;
+
+      Smoke(Smoke const&) = delete;
+      void operator=(Smoke const&) = delete;
+};
+
+class Settings::visualization::Glyphs : public QObject {
+   Q_OBJECT
+   public:
+      static const Glyphs& instance();
+
+   private:
+      explicit Glyphs(QObject *parent = 0);
+
+      Settings::visualization::ColorMap colorMap;
+
+      Glyphs(Glyphs const&) = delete;
+      void operator=(Glyphs const&) = delete;
+};
+
+class Settings::VisualizationClassOld : public QObject
 {
-    Q_OBJECT
-public:
+   Q_OBJECT
+   public:
 
-    enum ScalarVariable {
-        fluidDensity,
-        fluidVelocityMagnitude,
-        forceFieldMagnitude
-    };
+      static const VisualizationClassOld& instance();
 
-    static const Visualization &instance();
+      ::Simulation::textureCoordinateGetter textureGetter;
+      visualization::ScalarVariable scalar;
 
-    static QStringList getScalarVariableNames();
+      float vectorScale;
 
-    ::Simulation::textureCoordinateGetter textureGetter;
-    ScalarVariable scalar;
+   signals:
+      void valueRangeChanged(float minimum, float maximum);
 
-    float vectorScale;
+   public slots:
+      void onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
 
-signals:
-    void valueRangeChanged(float minimum, float maximum);
+   private:
+      explicit VisualizationClassOld(QObject *parent = 0);
 
-public slots:
-    void onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable);
+      VisualizationClassOld(VisualizationClassOld const&) = delete;
+      void operator=(VisualizationClassOld const&) = delete;
 
-private:
-    explicit Visualization(QObject *parent = 0);
+      void setScalarVariableToFluidDensity();
 
-    Visualization(Visualization const&) = delete;
-    void operator=(Visualization const&) = delete;
+      void setScalarVariableToFluidVelocityMagnitude();
 
-    void setScalarVariableToFluidDensity();
-    void setScalarVariableToFluidVelocityMagnitude();
-    void setScalarVariableToForceFieldMagnitude();
+      void setScalarVariableToForceFieldMagnitude();
 };
 
 #endif // VISUALIZATIONS_H

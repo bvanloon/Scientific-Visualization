@@ -11,8 +11,27 @@ namespace Settings {
     class Canvas;
     const Canvas& canvas();
 
-    class Visualization;
-    const Visualization& visualization();
+    namespace visualization {
+        enum ScalarVariable
+        {
+           fluidDensity,
+           fluidVelocityMagnitude,
+           forceFieldMagnitude
+        };
+
+        QStringList getScalarVariableNames();
+
+        class ColorMap;
+
+        class Smoke;
+        const Smoke& smoke();
+
+        class Glyphs;
+        const Glyphs& glyphs();
+    }
+
+    class VisualizationClassOld;
+    const VisualizationClassOld& getVisualization();
 
     namespace defaults {
         namespace simulation {
@@ -25,15 +44,15 @@ namespace Settings {
         namespace visualization {
             namespace colormap {
                 static const ColorMapFactory::colorMaps colormap = ColorMapFactory::colorMaps::rainbow;
-                static const float clampMin     = 0.0f;
-                static const float clampMax     = 1.0f;
-                static const bool  clampingOn   = false;
+                static const float clampMin = 0.0f;
+                static const float clampMax = 1.0f;
+                static const bool clampingOn = false;
                 static const float clampEpsilon = 0.01;
 
-                static const int   numColors     = 256;
-                static const int   minNumColors  = 2;
-                static const int   maxNumColors  = 256;
-                static const float saturation    = 1.0f;
+                static const int numColors = 256;
+                static const int minNumColors = 2;
+                static const int maxNumColors = 256;
+                static const float saturation = 1.0f;
                 static const float minSaturation = 0.0f;
                 static const float maxSaturation = 1.0f;
             }

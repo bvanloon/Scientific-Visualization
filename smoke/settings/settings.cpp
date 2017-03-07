@@ -8,14 +8,32 @@ const Settings::Simulation& Settings::simulation()
    return Simulation::instance();
 }
 
-
 const Settings::Canvas& Settings::canvas()
 {
    return Canvas::instance();
 }
 
-
-const Settings::Visualization& Settings::visualization()
+const Settings::VisualizationClassOld& Settings::getVisualization()
 {
-   return Visualization::instance();
+   return VisualizationClassOld::instance();
+}
+
+const Settings::visualization::Smoke& Settings::visualization::smoke()
+{
+   return Settings::visualization::Smoke::instance();
+}
+
+const Settings::visualization::Glyphs& Settings::visualization::glyphs()
+{
+   return Settings::visualization::Glyphs::instance();
+}
+
+QStringList Settings::visualization::getScalarVariableNames()
+{
+   QStringList scalarVariableNames;
+
+   scalarVariableNames << "Fluid density"
+                       << "Fluid velocity magnitude"
+                       << "Force field magnitude";
+   return scalarVariableNames;
 }
