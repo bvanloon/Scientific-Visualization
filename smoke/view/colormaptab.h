@@ -2,6 +2,9 @@
 #define COLORMAPTAB_H
 
 #include <QWidget>
+#include <QColor>
+#include <QColorDialog>
+
 #include "colormaps/colormapfactory.h"
 #include "settings/visualizationsettings.h"
 
@@ -36,6 +39,8 @@ private slots:
     void on_colormapSelector_currentIndexChanged(int index);
     void on_saturationSlider_valueChanged(float value);
     void on_variableSelector_currentIndexChanged(int index);
+
+    void on_colorPickerButton_clicked();
 
 private:
     Ui::ColorMapTab *ui;
