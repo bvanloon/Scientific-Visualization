@@ -5,41 +5,52 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 
+class Settings::visualization::Smoke : public QObject {
+   Q_OBJECT
+};
+
+class Settings::visualization::Glyphs : public QObject {
+   Q_OBJECT
+};
+
 class Settings::Visualization : public QObject
 {
-    Q_OBJECT
-public:
+   Q_OBJECT
+   public:
 
-    enum ScalarVariable {
-        fluidDensity,
-        fluidVelocityMagnitude,
-        forceFieldMagnitude
-    };
+      enum ScalarVariable
+      {
+         fluidDensity,
+         fluidVelocityMagnitude,
+         forceFieldMagnitude
+      };
 
-    static const Visualization &instance();
+      static const Visualization& instance();
 
-    static QStringList getScalarVariableNames();
+      static QStringList getScalarVariableNames();
 
-    ::Simulation::textureCoordinateGetter textureGetter;
-    ScalarVariable scalar;
+      ::Simulation::textureCoordinateGetter textureGetter;
+      ScalarVariable scalar;
 
-    float vectorScale;
+      float vectorScale;
 
-signals:
-    void valueRangeChanged(float minimum, float maximum);
+   signals:
+      void valueRangeChanged(float minimum, float maximum);
 
-public slots:
-    void onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable);
+   public slots:
+      void onScalarVariableChanged(Settings::Visualization::ScalarVariable scalarVariable);
 
-private:
-    explicit Visualization(QObject *parent = 0);
+   private:
+      explicit Visualization(QObject *parent = 0);
 
-    Visualization(Visualization const&) = delete;
-    void operator=(Visualization const&) = delete;
+      Visualization(Visualization const&) = delete;
+      void operator=(Visualization const&) = delete;
 
-    void setScalarVariableToFluidDensity();
-    void setScalarVariableToFluidVelocityMagnitude();
-    void setScalarVariableToForceFieldMagnitude();
+      void setScalarVariableToFluidDensity();
+
+      void setScalarVariableToFluidVelocityMagnitude();
+
+      void setScalarVariableToForceFieldMagnitude();
 };
 
 #endif // VISUALIZATIONS_H
