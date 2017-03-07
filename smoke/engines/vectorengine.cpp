@@ -28,7 +28,7 @@ void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 }
 void VectorEngine::onGridDimensionChanged(int width, int height)
 {
-   Grid *newGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
+   visualizationGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
 }
 int VectorEngine::updateBuffers(Simulation *simulation)
 {
