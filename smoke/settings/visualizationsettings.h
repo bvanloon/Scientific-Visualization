@@ -36,8 +36,6 @@ class Settings::VisualizationClassOld : public QObject
 
       static const VisualizationClassOld& instance();
 
-      static QStringList getScalarVariableNames();
-
       ::Simulation::textureCoordinateGetter textureGetter;
       visualization::ScalarVariable scalar;
 

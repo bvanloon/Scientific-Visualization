@@ -39,15 +39,15 @@ const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance
    return instance;
 }
 
-QStringList Settings::VisualizationClassOld::getScalarVariableNames()
-{
-   QStringList scalarVariableNames;
+//QStringList Settings::VisualizationClassOld::getScalarVariableNamesOld()
+//{
+//   QStringList scalarVariableNames;
 
-   scalarVariableNames << "Fluid density"
-                       << "Fluid velocity magnitude"
-                       << "Force field magnitude";
-   return scalarVariableNames;
-}
+//   scalarVariableNames << "Fluid density"
+//                       << "Fluid velocity magnitude"
+//                       << "Force field magnitude";
+//   return scalarVariableNames;
+//}
 
 void Settings::VisualizationClassOld::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {

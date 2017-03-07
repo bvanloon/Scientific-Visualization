@@ -19,6 +19,8 @@ namespace Settings {
            forceFieldMagnitude
         };
 
+        QStringList getScalarVariableNames();
+
         class Smoke;
         const Smoke& smoke();
 

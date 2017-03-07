@@ -101,7 +101,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::maxSaturation,
                 Settings::defaults::visualization::colormap::saturation);
 
-   this->ui->variableSelector->addItems(Settings::VisualizationClassOld::getScalarVariableNames());
+   this->ui->variableSelector->addItems(Settings::visualization::getScalarVariableNames());
    this->ui->variableSelector->setCurrentIndex(Settings::getVisualization().scalar);
 }
 

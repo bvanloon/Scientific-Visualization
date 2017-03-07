@@ -20,10 +20,20 @@ const Settings::VisualizationClassOld& Settings::getVisualization()
 
 const Settings::visualization::Smoke& Settings::visualization::smoke()
 {
-    return Settings::visualization::Smoke::instance();
+   return Settings::visualization::Smoke::instance();
 }
 
 const Settings::visualization::Glyphs& Settings::visualization::glyphs()
 {
-    return Settings::visualization::Glyphs::instance();
+   return Settings::visualization::Glyphs::instance();
+}
+
+QStringList Settings::visualization::getScalarVariableNames()
+{
+   QStringList scalarVariableNames;
+
+   scalarVariableNames << "Fluid density"
+                       << "Fluid velocity magnitude"
+                       << "Force field magnitude";
+   return scalarVariableNames;
 }
