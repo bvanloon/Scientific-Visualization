@@ -155,7 +155,7 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
 
 void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 {
-   emit scalarVariableChanged(
+   emit textureVariableChanged(
       static_cast<Settings::visualization::ScalarVariable>(index));
 }
 

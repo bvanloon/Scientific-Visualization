@@ -39,7 +39,7 @@ const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance
    return instance;
 }
 
-void Settings::VisualizationClassOld::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+void Settings::VisualizationClassOld::onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {
    switch (scalarVariable)
    {
