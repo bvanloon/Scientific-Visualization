@@ -84,6 +84,7 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent)
 {}
 
-Settings::visualization::ColorMap::ColorMap() :
+Settings::visualization::ColorMap::ColorMap(QObject *parent) :
+   QObject(parent),
    scalar(visualization::ScalarVariable::fluidDensity)
 {}

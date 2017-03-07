@@ -5,9 +5,10 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 
-class Settings::visualization::ColorMap {
+class Settings::visualization::ColorMap : public QObject {
+   Q_OBJECT
    public:
-      ColorMap();
+      explicit ColorMap(QObject *parent = 0);
 
       Settings::visualization::ScalarVariable scalar;
 };
