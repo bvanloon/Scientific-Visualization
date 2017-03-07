@@ -5,7 +5,7 @@
 #include <QDebug>
 
 
-AbstractColorMap *HeatColorMap::Create(int numColors, float saturation)
+AbstractColorMap *HeatColorMap::Create(int numColors, float saturation, float hue = no_hue)
 {
      return new HeatColorMap(numColors, saturation);
 }

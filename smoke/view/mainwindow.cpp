@@ -7,34 +7,36 @@
 
 MainWindow::MainWindow(QWidget *parent) :
 
-    QMainWindow(parent),
-    keyboardHandler(new KeyboardHandler(this)),
-    ui(new Ui::MainWindow)
+   QMainWindow(parent),
+   keyboardHandler(new KeyboardHandler(this)),
+   ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+   ui->setupUi(this);
 
-    this->simulation = new Simulation();
+   this->simulation = new Simulation();
 
-    this->canvas = ui->openGLWidget;
-    this->canvas->setSimulation(this->simulation);
+   this->canvas = ui->openGLWidget;
+   this->canvas->setSimulation(this->simulation);
 
-    this->simulationTab = ui->simulationTab;
+   this->simulationTab = ui->simulationTab;
 
-    this->smokeColorMapTab = ui->smokeColormapTab;
+   this->smokeColorMapTab = ui->smokeColormapTab;
 
     this->glyphsTab = ui->glyphsTab;
 
     this->installEventFilter(this->keyboardHandler);
 
-    setUpConnections();
+   setUpConnections();
 }
+
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    delete this->simulation;
-    delete this->keyboardHandler;
+   delete ui;
+   delete this->simulation;
+   delete this->keyboardHandler;
 }
+
 
 void MainWindow::onOpenGLReady()
 {
@@ -45,36 +47,37 @@ void MainWindow::onOpenGLReady()
     connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second));
 }
 
+
 void MainWindow::setUpConnections()
 {
+   connectCanvasAndThis();
+   connectCanvasAndSimulation();
+   connectCanvasAndSettings();
 
-    connectCanvasAndThis();
-    connectCanvasAndSimulation();
-    connectCanvasAndSettings();
-    connectCanvasAndSimulationTab();
+   connectSimulationTabAndSettings();
+   connectSimulationTabAndSimulation();
 
-    connectSimulationTabAndSettings();
-    connectSimulationTabAndSimulation();
+   connectSmokeColorMapTabAndSettings();
 
-
-    connectSmokeColorMapTabAndSettings();
-
-    connectKeyBoardHandlerAndSimulation();
+   connectKeyBoardHandlerAndSimulation();
 }
+
 
 void MainWindow::connectCanvasAndThis()
 {
-    connect(this->canvas, SIGNAL(openGlReady()),
+   connect(this->canvas, SIGNAL(openGlReady()),
             this, SLOT(onOpenGLReady()));
 }
 
+
 void MainWindow::connectCanvasAndSimulation()
 {
-    connect(this->canvas, SIGNAL(mouseMoved(QPoint)),
+   connect(this->canvas, SIGNAL(mouseMoved(QPoint)),
             this->simulation, SLOT(onMouseMoved(QPoint)));
-    connect(this->canvas, SIGNAL(windowResized(int,int)),
+   connect(this->canvas, SIGNAL(windowResized(int,int)),
             this->simulation, SLOT(onWindowResized(int,int)));
 }
+
 
 void MainWindow::connectCanvasAndSettings()
 {
@@ -97,30 +100,32 @@ void MainWindow::connectCanvasAndSimulationTab()
 
 void MainWindow::connectSimulationTabAndSettings()
 {
-    connect(this->simulationTab, SIGNAL(forceChanged(float)),
+   connect(this->simulationTab, SIGNAL(forceChanged(float)),
             &Settings::simulation(), SLOT(onForceChanged(float)));
-    connect(this->simulationTab, SIGNAL(toggleFrozen()),
+   connect(this->simulationTab, SIGNAL(toggleFrozen()),
             &Settings::simulation(), SLOT(onToggleFrozen()));
-    connect(&Settings::simulation(), SIGNAL(toggleFrozen(bool)),
+   connect(&Settings::simulation(), SIGNAL(toggleFrozen(bool)),
             this->simulationTab, SLOT(onToggleFrozen(bool)));
-    connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
+   connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
             &Settings::simulation(), SLOT(onTimeStepChanged(float)));
 }
 
+
 void MainWindow::connectSimulationTabAndSimulation()
 {
-    connect(this->simulationTab, SIGNAL(step()),
+   connect(this->simulationTab, SIGNAL(step()),
             this->simulation, SLOT(onStep()));
 }
 
-void MainWindow::connectEngineAndSettings(AbstractEngine* currentEngine)
+
+void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
 {
-    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
              currentEngine, SLOT(onValueRangeChanged(float,float)));
-    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+   connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
             currentEngine, SLOT(onValueRangeChanged(float,float)));
 
-    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+   connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
             currentEngine, SLOT(onForceChanged(float)));
 }
 
@@ -135,24 +140,35 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine, Colo
 }
 
 
+void MainWindow::connectVectorEngineAndGlyphTab()
+{
+   connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
+            this->canvas->vectorEngine, SLOT(onGridDimensionChanged(int,int)));
+}
+
+
+void MainWindow::connectVectorEngineAndSettings()
+{
+   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
+            this->canvas->vectorEngine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+}
+
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-    connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
+   connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
             &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
-    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-    connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+   connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
+   connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
             this->smokeColorMapTab, SLOT(onForceChanged(float)));
 }
 
+
 void MainWindow::connectKeyBoardHandlerAndSimulation()
 {
-    connect(this->keyboardHandler, SIGNAL(step()),
+   connect(this->keyboardHandler, SIGNAL(step()),
             this->simulation, SLOT(onStep()));
 }
-
-
-

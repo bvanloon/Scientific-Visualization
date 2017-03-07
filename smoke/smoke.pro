@@ -48,7 +48,8 @@ SOURCES += main.cpp\
     grid/triangulation.cpp \
     engines/abstractengine.cpp \
     view/glyphstab.cpp \
-    grid/glyphdata.cpp
+    grid/glyphdata.cpp \
+    colormaps/huecolormap.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -79,7 +80,8 @@ HEADERS  += main.ih\
     grid/triangulation.h \
     engines/abstractengine.h \
     view/glyphstab.h \
-    grid/glyphdata.h
+    grid/glyphdata.h \
+    colormaps/huecolormap.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
@@ -105,3 +107,6 @@ INCLUDEPATH += $$PWD/fftw-2.1.5/include
 DEPENDPATH += $$PWD/fftw-2.1.5/include
 
 unix: PRE_TARGETDEPS += $$PWD/fftw-2.1.5/lib/libfftw.a
+
+DISTFILES += \
+    uncrustify.cfg

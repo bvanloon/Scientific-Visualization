@@ -7,7 +7,7 @@ GrayScaleColorMap::GrayScaleColorMap(int numColors, float saturation):
     fill();
 }
 
-AbstractColorMap *GrayScaleColorMap::Create(int numColors, float saturation)
+AbstractColorMap *GrayScaleColorMap::Create(int numColors, float saturation, float hue = no_hue)
 {
        return new GrayScaleColorMap(numColors, saturation);
 }

@@ -3,12 +3,12 @@
 #include <math.h>
 #include <QDebug>
 
-AbstractColorMap *RainbowColorMap::Create(int numColors, float saturation)
+AbstractColorMap *RainbowColorMap::Create(int numColors, float saturation, float hue = no_hue)
 {
     return new RainbowColorMap(numColors, saturation);
 }
 
-RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx ):
+RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx):
     AbstractColorMap(numColors, saturation),
     dx(dx)
 { 

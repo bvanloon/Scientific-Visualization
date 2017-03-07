@@ -43,9 +43,7 @@ void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
     float minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
     this->ui->clampingMinimumSlider->setValue(minimum);
     emit setClampingRange(minimum, maximum);
-
 }
-
 
 void ColorMapTab::on_saturationSlider_valueChanged(float value)
 {
@@ -53,7 +51,7 @@ void ColorMapTab::on_saturationSlider_valueChanged(float value)
     AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
                 this->ui->numColorsSlider->value(),
-                value);
+                value, 0.5f);
 
     emit colorMapChanged(*newColormap);
 }
@@ -135,7 +133,9 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
     AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(index),
                 ui->numColorsSlider->value(),
-                ui->saturationSlider->value());
+                ui->saturationSlider->value(), 0.5f);
+
+
     emit colorMapChanged(*newColormap);
 }
 
@@ -155,4 +155,23 @@ void ColorMapTab::onForceChanged(float force)
     if(Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity){
         emit valueRangeChanged(0.0f, force);
     }
+}
+
+void ColorMapTab::on_colorPickerButton_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::green, this, "Choose Hue for Hue Color Map");
+    if(color.isValid())
+    {
+        double h, s,v;
+        qreal a;
+        color.getHsvF(&h, &s, &v, &a);
+        AbstractColorMap* newColormap = ColorMapFactory::get()->createColorMap(
+                    static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
+                    ui->numColorsSlider->value(),
+                    ui->saturationSlider->value(), h );
+
+
+        emit colorMapChanged(*newColormap);
+    }
+
 }

@@ -3,10 +3,11 @@
 #include <QDebug>
 #include <QColor>
 
-AbstractColorMap::AbstractColorMap(int numColors, float saturation):
+AbstractColorMap::AbstractColorMap(int numColors, float saturation, float hue):
     QImage(numColors, 1, QImage::Format_ARGB32),
     numColors(numColors),
-    saturation(saturation)
+    saturation(saturation),
+    hue(hue)
 {
     fill(QColor(Qt::white).rgb());
 }

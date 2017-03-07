@@ -10,9 +10,7 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
 {
     ui->setupUi(this);
     setUItoDefaults();
-
-    connect(this, SIGNAL(toggleFrozen(bool)),
-            this, SLOT(onToggleFrozen(bool)));
+    setUpConnections();
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -35,6 +33,8 @@ void SimulationSettingPane::setUItoDefaults()
 
 void SimulationSettingPane::setUpConnections()
 {
+    connect(this, SIGNAL(toggleFrozen(bool)),
+            this, SLOT(onToggleFrozen(bool)));
     connect(this->ui->forceSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_forceSlider_valueChanged(int)));
 }

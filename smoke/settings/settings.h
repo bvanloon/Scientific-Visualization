@@ -2,16 +2,17 @@
 #define SETTINGSNS_H
 
 #include "colormaps/colormapfactory.h"
+#include "QSize"
 
 namespace Settings {
     class Simulation;
     const Simulation& simulation();
 
     class Canvas;
-    const Canvas &canvas();
+    const Canvas& canvas();
 
     class Visualization;
-    const Visualization &visualization();
+    const Visualization& visualization();
 
     namespace defaults {
         namespace simulation {
@@ -24,18 +25,21 @@ namespace Settings {
         namespace visualization {
             namespace colormap {
                 static const ColorMapFactory::colorMaps colormap = ColorMapFactory::colorMaps::rainbow;
-                static const float clampMin = 0.0f;
-                static const float clampMax = 1.0f;
-                static const bool clampingOn = false;
+                static const float clampMin     = 0.0f;
+                static const float clampMax     = 1.0f;
+                static const bool  clampingOn   = false;
                 static const float clampEpsilon = 0.01;
 
-                static const int numColors = 256;
-                static const int minNumColors = 2;
-                static const int maxNumColors = 256;
-                static const float saturation = 1.0f;
+                static const int   numColors     = 256;
+                static const int   minNumColors  = 2;
+                static const int   maxNumColors  = 256;
+                static const float saturation    = 1.0f;
                 static const float minSaturation = 0.0f;
                 static const float maxSaturation = 1.0f;
+            }
 
+            namespace glyphs {
+                static const QSize gridSize = QSize(10, 15);
             }
         }
     }
