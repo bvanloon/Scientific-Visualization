@@ -82,3 +82,14 @@ const Settings::visualization::Smoke& Settings::visualization::Smoke::instance()
 Settings::visualization::Smoke::Smoke(QObject *parent) :
    QObject(parent)
 {}
+
+const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
+{
+   static Glyphs instance;
+
+   return instance;
+}
+
+Settings::visualization::Glyphs::Glyphs(QObject *parent) :
+   QObject(parent)
+{}
