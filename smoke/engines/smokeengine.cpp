@@ -3,9 +3,7 @@
 
 SmokeEngine::SmokeEngine() :
    AbstractEngine()
-{
-}
-
+{}
 
 void SmokeEngine::draw(Simulation *simulation)
 {
@@ -13,7 +11,6 @@ void SmokeEngine::draw(Simulation *simulation)
 
    drawWithMode(GL_TRIANGLES, bufferLength);
 }
-
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
