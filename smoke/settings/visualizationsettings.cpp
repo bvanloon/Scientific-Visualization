@@ -70,10 +70,11 @@ const Settings::visualization::Smoke& Settings::visualization::Smoke::instance()
 }
 
 Settings::visualization::Smoke::Smoke(QObject *parent) :
-   QObject(parent)
+   QObject(parent),
+   colorMap(new ColorMap())
 {}
 
-Settings::visualization::ColorMap Smoke::getColorMap() const
+Settings::visualization::ColorMap *Settings::visualization::Smoke::getColorMap() const
 {
     return colorMap;
 }
@@ -86,25 +87,22 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 }
 
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
-   QObject(parent)
+   QObject(parent),
+   colorMap(new ColorMap())
 {}
 
-Settings::visualization::ColorMap Glyphs::getColorMap() const
+Settings::visualization::ColorMap *Settings::visualization::Glyphs::getColorMap() const
 {
     return colorMap;
 }
 
-Settings::visualization::ColorMap Glyphs::getColorMap() const
-{
-    return colorMap;
-}
-
-void Glyphs::setColorMap(const Settings::visualization::ColorMap &value)
-{
-    colorMap = value;
-}
 
 Settings::visualization::ColorMap::ColorMap(QObject *parent) :
     QObject(parent),
     scalar(visualization::ScalarVariable::fluidDensity)
 {}
+
+void Settings::visualization::ColorMap::onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+{
+    qDebug() << "Settings::visualization::ColorMap::onTextureVariableChanged: " << scalarVariable;
+}

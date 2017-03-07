@@ -61,6 +61,8 @@ void MainWindow::setUpConnections()
    connectSimulationTabAndSettings();
    connectSimulationTabAndSimulation();
 
+   connectGlyphTabAndSettings();
+
    connectSmokeColorMapTabAndSettings();
 
    connectKeyBoardHandlerAndSimulation();
@@ -119,7 +121,12 @@ void MainWindow::connectSimulationTabAndSettings()
 void MainWindow::connectSimulationTabAndSimulation()
 {
    connect(this->simulationTab, SIGNAL(step()),
-            this->simulation, SLOT(onStep()));
+           this->simulation, SLOT(onStep()));
+}
+
+void MainWindow::connectGlyphTabAndSettings()
+{
+    this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
 }
 
 

@@ -53,6 +53,8 @@ private:
    void connectSimulationTabAndSettings();
    void connectSimulationTabAndSimulation();
 
+   void connectGlyphTabAndSettings();
+
    void connectSmokeColorMapTabAndSettings();
 
    void connectKeyBoardHandlerAndSimulation();

@@ -11,6 +11,9 @@ class Settings::visualization::ColorMap : public QObject {
       explicit ColorMap(QObject *parent = 0);
 
       Settings::visualization::ScalarVariable scalar;
+
+public slots:
+      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {
@@ -18,15 +21,14 @@ class Settings::visualization::Smoke : public QObject {
    public:
       static const Smoke& instance();
 
-      Settings::visualization::ColorMap getColorMap() const;
+      Settings::visualization::ColorMap *getColorMap() const;
 
 private:
       explicit Smoke(QObject *parent = 0);
-
-      Settings::visualization::ColorMap colorMap;
-
       Smoke(Smoke const&) = delete;
       void operator=(Smoke const&) = delete;
+
+      Settings::visualization::ColorMap* colorMap;
 };
 
 class Settings::visualization::Glyphs : public QObject {
@@ -34,15 +36,14 @@ class Settings::visualization::Glyphs : public QObject {
    public:
       static const Glyphs& instance();
 
-      Settings::visualization::ColorMap getColorMap() const;
+      Settings::visualization::ColorMap *getColorMap() const;
 
 private:
       explicit Glyphs(QObject *parent = 0);
-
-      Settings::visualization::ColorMap colorMap;
-
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
+
+      Settings::visualization::ColorMap* colorMap;
 };
 
 class Settings::VisualizationClassOld : public QObject
