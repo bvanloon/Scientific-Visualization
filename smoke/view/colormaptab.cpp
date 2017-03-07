@@ -19,7 +19,14 @@ ColorMapTab::ColorMapTab(QWidget *parent) :
 
 ColorMapTab::~ColorMapTab()
 {
-   delete ui;
+    delete ui;
+}
+
+void ColorMapTab::connectToColorMapSettings(Settings::visualization::ColorMap *colorMap)
+{
+    qDebug() << "ColorMapTab::connectToColorMapSettings";
+    connect(this, SIGNAL(textureVariableChanged(Settings::visualization::ScalarVariable)),
+            colorMap, SLOT(onTextureVariableChanged(Settings::visualization::ScalarVariable)));
 }
 
 
