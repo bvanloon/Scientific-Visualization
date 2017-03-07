@@ -3,6 +3,7 @@
 #include "settings/simulationsettings.h"
 #include "grid/cell.h"
 #include <QDebug>
+#include <assert.h>
 #include <QtMath>
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
@@ -91,9 +92,11 @@ int UniformGrid::getDimension() const
 Cell *UniformGrid::findCellContaining(QVector3D position)
 {
    QPair<int, int> coordinates = findUpperLeftOfContainingCell(position);
-   StructuredGridVertex *upperLeftVertex =
-      dynamic_cast<StructuredGridVertex *>(vertexMap.find(coordinates).value());
+   StructuredGridVertex *upperLeftVertex = dynamic_cast<StructuredGridVertex *>(vertexMap.find(coordinates).value());
    Cell *containingCell = upperLeftVertex->getLowerRightCell();
+
+   assert(dynamic_cast<StructuredCell*>(containingCell)->isInCell(position));
+
    return containingCell;
 }
 QPair<int,
