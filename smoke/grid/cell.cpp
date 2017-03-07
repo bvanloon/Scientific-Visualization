@@ -2,14 +2,10 @@
 #include "utilities.h"
 
 Cell::Cell()
-{
-}
-
+{}
 
 Cell::~Cell()
-{
-}
-
+{}
 
 StructuredCell::StructuredCell(Vertex *upperLeft, Vertex *upperRight, Vertex *lowerLeft, Vertex *lowerRight) :
    Cell(),
@@ -17,9 +13,7 @@ StructuredCell::StructuredCell(Vertex *upperLeft, Vertex *upperRight, Vertex *lo
    upperRight(upperRight),
    lowerLeft(lowerLeft),
    lowerRight(lowerRight)
-{
-}
-
+{}
 
 Triangulation StructuredCell::triangulate()
 {
@@ -29,7 +23,6 @@ Triangulation StructuredCell::triangulate()
    triangulation.extend(upperRightTriangle());
    return triangulation;
 }
-
 
 float StructuredCell::interpolateScalar(QVector3D position, Vertex::scalarGetter getter)
 {
@@ -41,7 +34,6 @@ float StructuredCell::interpolateScalar(QVector3D position, Vertex::scalarGetter
                                 (lowerLeft->*getter)(),
                                 (lowerRight->*getter)());
 }
-
 
 QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vectorGetter getter)
 {
@@ -78,7 +70,6 @@ QVector3D StructuredCell::normalizePosition(const QVector3D position)
    return QVector3D(x, y, 0.0);
 }
 
-
 Triangulation StructuredCell::lowerLeftTriangle()
 {
    Triangulation triangulation(3);
@@ -88,7 +79,6 @@ Triangulation StructuredCell::lowerLeftTriangle()
    triangulation.addVertex(lowerRight);
    return triangulation;
 }
-
 
 Triangulation StructuredCell::upperRightTriangle()
 {
@@ -100,7 +90,6 @@ Triangulation StructuredCell::upperRightTriangle()
    return triangulation;
 }
 
-
 QDebug operator<<(QDebug stream, const StructuredCell& cell)
 {
    stream << "StructuredCell ["
@@ -111,7 +100,6 @@ QDebug operator<<(QDebug stream, const StructuredCell& cell)
           << "]";
    return stream;
 }
-
 
 QDebug operator<<(QDebug stream, StructuredCell *cell)
 {
