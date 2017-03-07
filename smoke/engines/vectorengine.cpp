@@ -22,20 +22,14 @@ void VectorEngine::draw(Simulation *simulation)
 
    drawWithMode(simulation, GL_LINES, bufferLength);
 }
-
-
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
 }
-
-
 void VectorEngine::onGridDimensionChanged(int width, int height)
 {
-//   Grid* newVisualizationGrd = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, si)
+   Grid *newGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
 }
-
-
 int VectorEngine::updateBuffers(Simulation *simulation)
 {
    GlyphData data = visualizationGrid->getGlyphData();
