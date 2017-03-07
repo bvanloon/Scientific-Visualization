@@ -102,7 +102,7 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::saturation);
 
    this->ui->variableSelector->addItems(Settings::Visualization::getScalarVariableNames());
-   this->ui->variableSelector->setCurrentIndex(Settings::visualization().scalar);
+   this->ui->variableSelector->setCurrentIndex(Settings::getVisualization().scalar);
 }
 
 
@@ -168,7 +168,7 @@ void ColorMapTab::onValueRangeChanged(float minimum, float maximum)
 
 void ColorMapTab::onForceChanged(float force)
 {
-   if (Settings::visualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity)
+   if (Settings::getVisualization().scalar == Settings::Visualization::ScalarVariable::fluidDensity)
    {
       emit valueRangeChanged(0.0f, force);
    }

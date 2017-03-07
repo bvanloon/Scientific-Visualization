@@ -12,7 +12,7 @@ namespace Settings {
     const Canvas& canvas();
 
     class Visualization;
-    const Visualization& visualization();
+    const Visualization& getVisualization();
 
     namespace defaults {
         namespace simulation {

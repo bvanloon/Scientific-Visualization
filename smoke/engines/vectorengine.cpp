@@ -41,7 +41,7 @@ int VectorEngine::updateBuffers()
    {
       vertices.append(data.getPositions().at(i));
       vertices.append(data.getPositions().at(
-                      i) + Settings::visualization().vectorScale *
+                      i) + Settings::getVisualization().vectorScale *
                     data.getVectors().at(i));
 
       textureCoordinates.append(data.getScalars().at(i));

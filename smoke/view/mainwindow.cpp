@@ -127,7 +127,7 @@ void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
 {
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
              currentEngine, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+   connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
             currentEngine, SLOT(onValueRangeChanged(float,float)));
 
    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
@@ -163,10 +163,10 @@ void MainWindow::connectVectorEngineAndSettings()
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
    connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::Visualization::ScalarVariable)),
-            &Settings::visualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
+            &Settings::getVisualization(), SLOT(onScalarVariableChanged(Settings::Visualization::ScalarVariable)));
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::visualization(), SIGNAL(valueRangeChanged(float,float)),
+   connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
             this->smokeColorMapTab, SLOT(onForceChanged(float)));

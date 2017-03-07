@@ -8,14 +8,12 @@ const Settings::Simulation& Settings::simulation()
    return Simulation::instance();
 }
 
-
 const Settings::Canvas& Settings::canvas()
 {
    return Canvas::instance();
 }
 
-
-const Settings::Visualization& Settings::visualization()
+const Settings::Visualization& Settings::getVisualization()
 {
    return Visualization::instance();
 }
