@@ -73,6 +73,11 @@ Settings::visualization::Smoke::Smoke(QObject *parent) :
    QObject(parent)
 {}
 
+Settings::visualization::ColorMap Smoke::getColorMap() const
+{
+    return colorMap;
+}
+
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
 {
    static Glyphs instance;
@@ -84,7 +89,22 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent)
 {}
 
+Settings::visualization::ColorMap Glyphs::getColorMap() const
+{
+    return colorMap;
+}
+
+Settings::visualization::ColorMap Glyphs::getColorMap() const
+{
+    return colorMap;
+}
+
+void Glyphs::setColorMap(const Settings::visualization::ColorMap &value)
+{
+    colorMap = value;
+}
+
 Settings::visualization::ColorMap::ColorMap(QObject *parent) :
-   QObject(parent),
-   scalar(visualization::ScalarVariable::fluidDensity)
+    QObject(parent),
+    scalar(visualization::ScalarVariable::fluidDensity)
 {}

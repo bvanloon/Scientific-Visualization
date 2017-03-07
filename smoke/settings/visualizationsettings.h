@@ -18,7 +18,9 @@ class Settings::visualization::Smoke : public QObject {
    public:
       static const Smoke& instance();
 
-   private:
+      Settings::visualization::ColorMap getColorMap() const;
+
+private:
       explicit Smoke(QObject *parent = 0);
 
       Settings::visualization::ColorMap colorMap;
@@ -32,7 +34,9 @@ class Settings::visualization::Glyphs : public QObject {
    public:
       static const Glyphs& instance();
 
-   private:
+      Settings::visualization::ColorMap getColorMap() const;
+
+private:
       explicit Glyphs(QObject *parent = 0);
 
       Settings::visualization::ColorMap colorMap;
