@@ -17,3 +17,9 @@ const Settings::Visualization& Settings::getVisualization()
 {
    return Visualization::instance();
 }
+
+const Settings::visualization::Smoke& Settings::visualization::smoke()
+{}
+
+const Settings::visualization::Glyphs& Settings::visualization::glyphs()
+{}

@@ -11,6 +11,14 @@ namespace Settings {
     class Canvas;
     const Canvas& canvas();
 
+    namespace visualization {
+        class Smoke;
+        const Smoke& smoke();
+
+        class Glyphs;
+        const Glyphs& glyphs();
+    }
+
     class Visualization;
     const Visualization& getVisualization();
 
