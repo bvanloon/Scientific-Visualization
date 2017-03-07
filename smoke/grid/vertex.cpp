@@ -3,13 +3,11 @@
 
 Vertex::Vertex(const QVector3D *position) :
    position(position)
-{
-}
+{}
 
 
 Vertex::~Vertex()
-{
-}
+{}
 
 
 const QVector3D *Vertex::getPosition() const
@@ -40,8 +38,7 @@ SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double
    vx(vx), vy(vy),
    fx(fx), fy(fy),
    rho(rho)
-{
-}
+{}
 
 
 QVector2D SimulationVertex::getFluidVelocity() const
@@ -112,14 +109,12 @@ QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
 VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell) :
    StructuredGridVertex(position),
    containingCell(cell)
-{
-}
+{}
 
 
 QVector2D VisualizationVertex::getFluidVelocity() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
-
    return cell->interpolate2DVector(*position, &Vertex::getFluidVelocity);
 }
 
@@ -158,8 +153,7 @@ float VisualizationVertex::getFluidDensity() const
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position) :
    Vertex(position)
-{
-}
+{}
 
 
 Cell *StructuredGridVertex::getLowerRightCell() const

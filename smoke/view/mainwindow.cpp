@@ -48,6 +48,7 @@ void MainWindow::onOpenGLReady()
 
    connectCanvasAndSimulationTab();
    connectVectorEngineAndGlyphTab();
+   connectVectorEngineAndSettings();
 }
 
 

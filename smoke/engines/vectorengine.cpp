@@ -12,8 +12,7 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
          Settings::canvas().size,
          simulationGrid)
       )
-{
-}
+{}
 
 
 void VectorEngine::draw(Simulation *simulation)
