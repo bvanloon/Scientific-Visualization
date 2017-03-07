@@ -2,21 +2,21 @@
 #include <QDebug>
 #include "settings/simulationsettings.h"
 
-Settings::Visualization::Visualization(QObject *parent) :
+Settings::VisualizationClassOld::VisualizationClassOld(QObject *parent) :
    QObject(parent),
    textureGetter(&::Simulation::getTexCoordFluidDensity),
    scalar(visualization::ScalarVariable::fluidDensity),
    vectorScale(10)
 {}
 
-void Settings::Visualization::setScalarVariableToFluidDensity()
+void Settings::VisualizationClassOld::setScalarVariableToFluidDensity()
 {
    this->textureGetter = &::Simulation::getTexCoordFluidDensity;
    this->scalar = Settings::visualization::ScalarVariable::fluidDensity;
    emit valueRangeChanged(0.0f, Settings::simulation().force);
 }
 
-void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
+void Settings::VisualizationClassOld::setScalarVariableToFluidVelocityMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
    this->scalar = Settings::visualization::ScalarVariable::fluidVelocityMagnitude;
@@ -24,7 +24,7 @@ void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
                           Settings::simulation().fluidVelocityMagnitudeMaximum);
 }
 
-void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
+void Settings::VisualizationClassOld::setScalarVariableToForceFieldMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
    this->scalar = Settings::visualization::ScalarVariable::forceFieldMagnitude;
@@ -32,14 +32,14 @@ void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
                           Settings::simulation().forceFieldMagnitudeMaximum);
 }
 
-const Settings::Visualization& Settings::Visualization::instance()
+const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance()
 {
-   static Visualization instance;
+   static VisualizationClassOld instance;
 
    return instance;
 }
 
-QStringList Settings::Visualization::getScalarVariableNames()
+QStringList Settings::VisualizationClassOld::getScalarVariableNames()
 {
    QStringList scalarVariableNames;
 
@@ -49,7 +49,7 @@ QStringList Settings::Visualization::getScalarVariableNames()
    return scalarVariableNames;
 }
 
-void Settings::Visualization::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+void Settings::VisualizationClassOld::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {
    switch (scalarVariable)
    {

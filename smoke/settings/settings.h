@@ -26,8 +26,8 @@ namespace Settings {
         const Glyphs& glyphs();
     }
 
-    class Visualization;
-    const Visualization& getVisualization();
+    class VisualizationClassOld;
+    const VisualizationClassOld& getVisualization();
 
     namespace defaults {
         namespace simulation {

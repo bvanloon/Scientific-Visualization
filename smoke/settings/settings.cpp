@@ -13,9 +13,9 @@ const Settings::Canvas& Settings::canvas()
    return Canvas::instance();
 }
 
-const Settings::Visualization& Settings::getVisualization()
+const Settings::VisualizationClassOld& Settings::getVisualization()
 {
-   return Visualization::instance();
+   return VisualizationClassOld::instance();
 }
 
 const Settings::visualization::Smoke& Settings::visualization::smoke()

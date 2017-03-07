@@ -29,12 +29,12 @@ private:
    void operator=(Glyphs const&) = delete;
 };
 
-class Settings::Visualization : public QObject
+class Settings::VisualizationClassOld : public QObject
 {
    Q_OBJECT
    public:
 
-      static const Visualization& instance();
+      static const VisualizationClassOld& instance();
 
       static QStringList getScalarVariableNames();
 
@@ -50,10 +50,10 @@ class Settings::Visualization : public QObject
       void onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
 
    private:
-      explicit Visualization(QObject *parent = 0);
+      explicit VisualizationClassOld(QObject *parent = 0);
 
-      Visualization(Visualization const&) = delete;
-      void operator=(Visualization const&) = delete;
+      VisualizationClassOld(VisualizationClassOld const&) = delete;
+      void operator=(VisualizationClassOld const&) = delete;
 
       void setScalarVariableToFluidDensity();
 
