@@ -11,14 +11,10 @@ int cursorLocationToArrayIndex(QPoint newMousePosition)
    int yi = (int)clamp((double)(Settings::simulation().dimension + 1) * ((double)newMousePosition.y() / (double)Settings::canvas().size.height()));
 
    //Bound array index to canvas dimensions
-   if (xi > (Settings::simulation().dimension - 1))
-      xi = Settings::simulation().dimension - 1;
-   if (yi > (Settings::simulation().dimension - 1))
-      yi = Settings::simulation().dimension - 1;
-   if (xi < 0)
-      xi = 0;
-   if (yi < 0)
-      yi = 0;
+   if (xi > (Settings::simulation().dimension - 1)) xi = Settings::simulation().dimension - 1;
+   if (yi > (Settings::simulation().dimension - 1)) yi = Settings::simulation().dimension - 1;
+   if (xi < 0) xi = 0;
+   if (yi < 0) yi = 0;
 
    return yi * Settings::simulation().dimension + xi;
 }
