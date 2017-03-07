@@ -77,8 +77,8 @@ QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
 }
 
 
-UniformGrid *UniformGrid::createSimulationGrid(int                   dimension,
-                                               QSizeF                size,
+UniformGrid *UniformGrid::createSimulationGrid(int dimension,
+                                               QSizeF size,
                                                SimulationRealization *simulation)
 {
    UniformGrid *grid = new UniformGrid(dimension, size, true);
@@ -89,8 +89,8 @@ UniformGrid *UniformGrid::createSimulationGrid(int                   dimension,
 }
 
 
-UniformGrid *UniformGrid::createVisualizationGrid(int         dimension,
-                                                  QSizeF      size,
+UniformGrid *UniformGrid::createVisualizationGrid(int dimension,
+                                                  QSizeF size,
                                                   UniformGrid *simulationGrid)
 {
    UniformGrid *grid = new UniformGrid(dimension, size, simulationGrid->padding);
@@ -144,12 +144,12 @@ QPair<int,
 }
 
 
-void UniformGrid::createVertices(UniformGrid           *grid,
+void UniformGrid::createVertices(UniformGrid *grid,
                                  SimulationRealization *simulation)
 {
    QVector3D position;
-   Vertex    *vertex;
-   int       idx;
+   Vertex *vertex;
+   int idx;
 
    for (int y = 0; y < grid->dimension; y++)
    {
@@ -174,18 +174,18 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid,
                                  UniformGrid *simulationGrid)
 {
    QVector3D position;
-   Vertex    *vertex;
-   Cell      *cell;
-   int       idx;
+   Vertex *vertex;
+   Cell *cell;
+   int idx;
 
    for (int i = 0; i < visualizationGrid->dimension; i++)
    {
       for (int j = 0; j < visualizationGrid->dimension; j++)
       {
-         idx      = visualizationGrid->to1Dindex(i, j);
+         idx = visualizationGrid->to1Dindex(i, j);
          position = visualizationGrid->computeVertexPosition(i, j);
          visualizationGrid->vertexPositions.replace(idx, position);
-         cell   = simulationGrid->findCellContaining(position);
+         cell = simulationGrid->findCellContaining(position);
          vertex = new VisualizationVertex(&visualizationGrid->vertexPositions.at(
                                          idx), cell);
          visualizationGrid->vertices.replace(idx, vertex);
@@ -203,9 +203,9 @@ void UniformGrid::createCells(UniformGrid *grid)
    {
       for (int y = 0; y < grid->dimension - 1; y++)
       {
-         leftUpper  = grid->getVertexAt(x, y);
+         leftUpper = grid->getVertexAt(x, y);
          rightUpper = grid->getVertexAt(x + 1, y);
-         leftLower  = grid->getVertexAt(x, y + 1);
+         leftLower = grid->getVertexAt(x, y + 1);
          rightLower = grid->getVertexAt(x + 1, y + 1);
 
          grid->cells.append(new StructuredCell(leftUpper, rightUpper, leftLower,

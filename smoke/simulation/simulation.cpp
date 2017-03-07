@@ -11,7 +11,7 @@ Simulation::Simulation(QObject *parent) :
    QObject(parent),
    lastMousePosition(0.0f, 0.0f)
 {
-   this->realization    = new SimulationRealization();
+   this->realization = new SimulationRealization();
    this->simulationGrid = UniformGrid::createSimulationGrid(
     Settings::simulation().dimension,
     Settings::canvas().size,
@@ -47,7 +47,7 @@ Triangulation Simulation::getGridTriangulation()
 QVector<float> Simulation::getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation)
 {
    QVector<float> textureCoordinates;
-   Vertex         *vertex;
+   Vertex *vertex;
 
    for (int i = 0; i < triangulation.numVertices(); i++)
    {

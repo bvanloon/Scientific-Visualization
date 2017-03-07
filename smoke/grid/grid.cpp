@@ -29,7 +29,7 @@ GlyphData Grid::getGlyphData() const
    QVector<Vertex *>::const_iterator currentVertex = vertices.begin();
    QVector3D position;
    QVector2D vector;
-   float     scalar;
+   float scalar;
 
 
 
@@ -37,8 +37,8 @@ GlyphData Grid::getGlyphData() const
          currentVertex != vertices.end(); currentVertex++)
    {
       position = *((*currentVertex)->getPosition());
-      vector   = ((*currentVertex)->getFluidVelocity());
-      scalar   = (*currentVertex)->getFluidDensity();
+      vector = ((*currentVertex)->getFluidVelocity());
+      scalar = (*currentVertex)->getFluidDensity();
       data.addGlyph(position, vector, scalar);
    }
    return data;

@@ -41,7 +41,7 @@ int VectorEngine::updateBuffers(Simulation *simulation)
    GlyphData data = visualizationGrid->getGlyphData();
 
    QVector<QVector3D> vertices;
-   QVector<float>     textureCoordinates;
+   QVector<float> textureCoordinates;
 
    for (int i = 0; i < data.numGlyphs(); i++)
    {

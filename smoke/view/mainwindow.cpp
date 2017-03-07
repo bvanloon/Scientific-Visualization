@@ -154,10 +154,9 @@ void MainWindow::connectVectorEngineAndGlyphTab()
 
 void MainWindow::connectVectorEngineAndSettings()
 {
-   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)), 
+   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
    this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
 }
-
 
 
 void MainWindow::connectSmokeColorMapTabAndSettings()

@@ -2,24 +2,27 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication application(argc, argv);
-    application.setQuitOnLastWindowClosed(true);
+   QApplication application(argc, argv);
 
-    setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
+   application.setQuitOnLastWindowClosed(true);
 
-    MainWindow mainWindow;
-    mainWindow.show();
+   setOpenGLVersion(majorOpenGLVersion, minorOpenGLVersion);
 
-    return application.exec();
+   MainWindow mainWindow;
+   mainWindow.show();
+
+   return application.exec();
 }
+
 
 void setOpenGLVersion(int const majorVersion, int const minorVersion)
 {
-    QSurfaceFormat glFormat;
-    glFormat.setProfile(QSurfaceFormat::CoreProfile);
+   QSurfaceFormat glFormat;
 
-    glFormat.setVersion(majorVersion, minorVersion);
-    glFormat.setOption(QSurfaceFormat::DebugContext);
+   glFormat.setProfile(QSurfaceFormat::CoreProfile);
 
-    QSurfaceFormat::setDefaultFormat(glFormat);
+   glFormat.setVersion(majorVersion, minorVersion);
+   glFormat.setOption(QSurfaceFormat::DebugContext);
+
+   QSurfaceFormat::setDefaultFormat(glFormat);
 }

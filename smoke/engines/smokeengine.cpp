@@ -2,27 +2,28 @@
 #include "grid/triangulation.h"
 
 SmokeEngine::SmokeEngine() :
-    AbstractEngine() {
-
+   AbstractEngine()
+{
 }
+
 
 void SmokeEngine::draw(Simulation *simulation)
 {
-    int bufferLength = this->updateBuffers(simulation);
-    drawWithMode(simulation, GL_TRIANGLES, bufferLength);
+   int bufferLength = this->updateBuffers(simulation);
+
+   drawWithMode(simulation, GL_TRIANGLES, bufferLength);
 }
 
 
 int SmokeEngine::updateBuffers(Simulation *simulation)
 {
-    Triangulation triangulation = simulation->getGridTriangulation();
-    QVector<QVector3D> triangles = triangulation.getVertexPositions();
+   Triangulation triangulation = simulation->getGridTriangulation();
 
-    QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(triangulation);
+   QVector<QVector3D> triangles = triangulation.getVertexPositions();
 
-    updateBuffer(this->vertexBuffer, triangles);
-    updateBuffer(this->textureCoordinateBuffer,textureCoordinates);
-    return triangles.length();
+   QVector<float> textureCoordinates = (simulation->*Settings::visualization().textureGetter)(triangulation);
+
+   updateBuffer(this->vertexBuffer, triangles);
+   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
+   return triangles.length();
 }
-
-

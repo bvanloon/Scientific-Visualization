@@ -61,6 +61,7 @@ void Canvas::initializeGL()
    connectThisAndEngine(enginemap.find(EnginesEnum::glyphs)->second);
 }
 
+
 void Canvas::idleLoop()
 {
    if (!Settings::simulation().frozen)
