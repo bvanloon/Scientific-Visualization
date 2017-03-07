@@ -99,8 +99,9 @@ Cell *UniformGrid::findCellContaining(QVector3D position)
 QPair<int,
       int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
 {
-   int x = qFloor((position.x() - padding.width()) / cellSize.width());
-   int y = qFloor((position.y() - padding.height()) / cellSize.height());
+    //Fabs accounts for cases where (x - x) > 0.
+   int x = qFloor(qFabs((position.x() - padding.width()) / cellSize.width()));
+   int y = qFloor(qFabs((position.y() - padding.height()) / cellSize.height()));
 
    // Account for the borders
    if (y == (dimension - 1)) y--;
