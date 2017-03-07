@@ -5,6 +5,13 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 
+class Settings::visualization::ColorMap {
+   public:
+      ColorMap();
+
+      Settings::visualization::ScalarVariable scalar;
+};
+
 class Settings::visualization::Smoke : public QObject {
    Q_OBJECT
    public:
@@ -12,6 +19,8 @@ class Settings::visualization::Smoke : public QObject {
 
    private:
       explicit Smoke(QObject *parent = 0);
+
+      Settings::visualization::ColorMap colorMap;
 
       Smoke(Smoke const&) = delete;
       void operator=(Smoke const&) = delete;
@@ -25,15 +34,10 @@ class Settings::visualization::Glyphs : public QObject {
    private:
       explicit Glyphs(QObject *parent = 0);
 
+      Settings::visualization::ColorMap colorMap;
+
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
-};
-
-class Settings::visualization::ColorMap {
-   public:
-      ColorMap();
-
-      Settings::visualization::ScalarVariable scalar;
 };
 
 class Settings::VisualizationClassOld : public QObject
