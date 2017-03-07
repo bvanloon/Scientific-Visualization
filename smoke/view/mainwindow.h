@@ -12,48 +12,50 @@
 #include "keyboardhandler.h"
 
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+   explicit MainWindow(QWidget *parent = 0);
+   ~MainWindow();
 
-    KeyboardHandler* keyboardHandler;
+   KeyboardHandler *keyboardHandler;
 
 public slots:
-    void onOpenGLReady();
+   void onOpenGLReady();
 
 private:
-    Ui::MainWindow *ui;
+   Ui::MainWindow *ui;
 
-    Canvas *canvas;
-    Simulation *simulation;
-    SimulationSettingPane *simulationTab;
-    ColorMapTab *smokeColorMapTab;
-    GlyphsTab *glyphsTab;
+   Canvas *canvas;
+   Simulation *simulation;
+   SimulationSettingPane *simulationTab;
+   ColorMapTab *smokeColorMapTab;
+   GlyphsTab *glyphsTab;
 
-    void setUpConnections();
+   void setUpConnections();
 
-    void connectCanvasAndThis();
-    void connectCanvasAndSimulation();
-    void connectCanvasAndSettings();
-    void connectCanvasAndSimulationTab();
+   void connectCanvasAndThis();
+   void connectCanvasAndSimulation();
+   void connectCanvasAndSettings();
+   void connectCanvasAndSimulationTab();
 
-    void connectEngineAndSettings(AbstractEngine *currentEngine);
-    void connectEngineAndColorMapTab(AbstractEngine* currentEngine, ColorMapTab* colormap);
+   void connectVectorEngineAndGlyphTab();
+   void connectVectorEngineAndSettings();
 
+   void connectEngineAndSettings(AbstractEngine *currentEngine);
+   void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
 
-    void connectSimulationTabAndSettings();
-    void connectSimulationTabAndSimulation();
+   void connectSimulationTabAndSettings();
+   void connectSimulationTabAndSimulation();
 
-    void connectSmokeColorMapTabAndSettings();
+   void connectSmokeColorMapTabAndSettings();
 
-    void connectKeyBoardHandlerAndSimulation();
+   void connectKeyBoardHandlerAndSimulation();
 };
 
 #endif // MAINWINDOW_H

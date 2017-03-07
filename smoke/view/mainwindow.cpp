@@ -22,9 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
    this->smokeColorMapTab = ui->smokeColormapTab;
 
-    this->glyphsTab = ui->glyphsTab;
+   this->glyphsTab = ui->glyphsTab;
 
-    this->installEventFilter(this->keyboardHandler);
+   this->installEventFilter(this->keyboardHandler);
 
    setUpConnections();
 }
@@ -40,11 +40,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second), this->smokeColorMapTab);
-    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second), this->smokeColorMapTab);
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second));
 
-    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second), this->glyphsTab->getColorMapWidget());
-    connectEngineAndSettings(dynamic_cast<AbstractEngine*>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second), this->glyphsTab->getColorMapWidget());
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second));
+
+   connectCanvasAndSimulationTab();
 }
 
 
@@ -81,22 +83,23 @@ void MainWindow::connectCanvasAndSimulation()
 
 void MainWindow::connectCanvasAndSettings()
 {
-    connect(this->canvas, SIGNAL(windowResized(int, int)),
-            &Settings::canvas(), SLOT(onWindowResized(int, int)));
+   connect(this->canvas, SIGNAL(windowResized(int,int)),
+            &Settings::canvas(), SLOT(onWindowResized(int,int)));
 
-    connect(this->canvas, SIGNAL(windowResized(int, int)),
-            &Settings::simulation(), SLOT(onWindowResized(int, int)));
-
+   connect(this->canvas, SIGNAL(windowResized(int,int)),
+            &Settings::simulation(), SLOT(onWindowResized(int,int)));
 }
+
 
 void MainWindow::connectCanvasAndSimulationTab()
 {
-    connect(this->simulationTab, SIGNAL(glyphsEngineToggled(bool)),
+   connect(this->simulationTab, SIGNAL(glyphsEngineToggled(bool)),
             this->canvas, SLOT(onGlyphsEngineToggled(bool)));
 
-    connect(this->simulationTab, SIGNAL(smokeEngineToggled(bool)),
+   connect(this->simulationTab, SIGNAL(smokeEngineToggled(bool)),
                     this->canvas, SLOT(onSmokeEngineToggled(bool)));
 }
+
 
 void MainWindow::connectSimulationTabAndSettings()
 {
@@ -129,13 +132,14 @@ void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
             currentEngine, SLOT(onForceChanged(float)));
 }
 
-void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine, ColorMapTab *colormap)
+
+void MainWindow::connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap)
 {
-    connect(colormap, SIGNAL(setClamping(bool)),
+   connect(colormap, SIGNAL(setClamping(bool)),
             currentEngine, SLOT(onSetClamping(bool)));
-    connect(colormap, SIGNAL(setClampingRange(float,float)),
+   connect(colormap, SIGNAL(setClampingRange(float,float)),
             currentEngine, SLOT(onsetClampingRange(float,float)));
-    connect(colormap, SIGNAL(colorMapChanged(AbstractColorMap)),
+   connect(colormap, SIGNAL(colorMapChanged(AbstractColorMap)),
             currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
@@ -143,14 +147,13 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine* currentEngine, Colo
 void MainWindow::connectVectorEngineAndGlyphTab()
 {
    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
-            this->canvas->vectorEngine, SLOT(onGridDimensionChanged(int,int)));
+            this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second, SLOT(onGridDimensionChanged(int,int)));
 }
 
 
 void MainWindow::connectVectorEngineAndSettings()
 {
-   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
-            this->canvas->vectorEngine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)), this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
 }
 
 

@@ -19,7 +19,6 @@
 
 
 
-
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
    Q_OBJECT
@@ -31,23 +30,24 @@ public:
    void setSimulation(Simulation *simulation);
 
    //Engines
-   VectorEngine *vectorEngine;
-   SmokeEngine *smokeEngine;
+//   VectorEngine *vectorEngine;
+//   SmokeEngine *smokeEngine;
 
-    enum EnginesEnum {
-        smoke,
-        glyphs,
-        nrOfEngine
-    };
+   enum EnginesEnum
+   {
+      smoke,
+      glyphs,
+      nrOfEngine
+   };
 
-    typedef std::map<EnginesEnum, AbstractEngine*> EngineMap;
-    typedef std::pair<EnginesEnum, AbstractEngine*> EnginePair;
+   typedef std::map<EnginesEnum, AbstractEngine *> EngineMap;
+   typedef std::pair<EnginesEnum, AbstractEngine *> EnginePair;
 
-    EngineMap enginemap; //Public since mainwindow accesses it to setup connections
+   EngineMap enginemap;  //Public since mainwindow accesses it to setup connections
 
 public slots:
-    void onGlyphsEngineToggled(bool checked);
-    void onSmokeEngineToggled(bool checked);
+   void onGlyphsEngineToggled(bool checked);
+   void onSmokeEngineToggled(bool checked);
 
 
 signals:
@@ -68,22 +68,19 @@ protected:
 private:
    Simulation *simulation;
 
-    //Active Engines
-    bool activeEngines[EnginesEnum::nrOfEngine] = {true, false};
-    void enginesDraw();
+   //Active Engines
+   bool activeEngines[EnginesEnum::nrOfEngine] = { true, false };
+   void enginesDraw();
 
-    //Idle Loop
-    QTimer* timer;
-    void initiateIdleLoop();
-
-
-    // OpenGL initialization
-    void initializeUniforms();
-    void initializeColorMapInfo();
-    void connectThisAndEngine(AbstractEngine* engine);
+   //Idle Loop
+   QTimer *timer;
+   void initiateIdleLoop();
 
 
-
+   // OpenGL initialization
+   void initializeUniforms();
+   void initializeColorMapInfo();
+   void connectThisAndEngine(AbstractEngine *engine);
 };
 
 #endif // CANVAS_H
