@@ -65,9 +65,7 @@ void Canvas::initializeGL()
 void Canvas::idleLoop()
 {
    if (!Settings::simulation().frozen)
-   {
       this->simulation->step();
-   }
    update();
 }
 
