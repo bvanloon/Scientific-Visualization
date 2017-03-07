@@ -207,8 +207,7 @@ void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
 }
 
 
-void AbstractEngine::drawWithMode(Simulation *Simulation,
-                                  int mode,
+void AbstractEngine::drawWithMode(int mode,
                                   int bufferLength)
 {
    this->shaderProgram->bind();

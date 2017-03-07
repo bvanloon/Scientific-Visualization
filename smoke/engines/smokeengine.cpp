@@ -11,7 +11,7 @@ void SmokeEngine::draw(Simulation *simulation)
 {
    int bufferLength = this->updateBuffers(simulation);
 
-   drawWithMode(simulation, GL_TRIANGLES, bufferLength);
+   drawWithMode(GL_TRIANGLES, bufferLength);
 }
 
 

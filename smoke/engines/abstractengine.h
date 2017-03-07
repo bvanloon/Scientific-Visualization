@@ -37,7 +37,7 @@ protected:
     void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
     void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
 
-    void drawWithMode(Simulation* Simulation, int mode, int bufferLength);
+    void drawWithMode(int mode, int bufferLength);
 
 private:
     void init();

@@ -20,7 +20,7 @@ void VectorEngine::draw(Simulation *simulation)
 {
    int bufferLength = this->updateBuffers();
 
-   drawWithMode(simulation, GL_LINES, bufferLength);
+   drawWithMode(GL_LINES, bufferLength);
 }
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
