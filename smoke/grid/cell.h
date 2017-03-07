@@ -32,6 +32,8 @@ public:
 
     QSizeF getSize() const;
 
+    bool isInCell(QVector3D position);
+
 private:
     Vertex* upperLeft;
     Vertex* upperRight;

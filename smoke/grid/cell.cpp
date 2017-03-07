@@ -52,7 +52,6 @@ QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vector
    return QVector2D(x, y);
 }
 
-
 QSizeF StructuredCell::getSize() const
 {
    float width = upperRight->getPosition()->x() - upperLeft->getPosition()->x();
@@ -61,6 +60,13 @@ QSizeF StructuredCell::getSize() const
    return QSizeF(width, height);
 }
 
+bool StructuredCell::isInCell(QVector3D position)
+{
+   return position.x() >= upperLeft->getPosition()->x() &&
+          position.x() <= upperRight->getPosition()->x() &&
+          position.y() >= upperLeft->getPosition()->y() &&
+          position.y() <= lowerLeft->getPosition()->y();
+}
 
 QVector3D StructuredCell::normalizePosition(const QVector3D position)
 {
