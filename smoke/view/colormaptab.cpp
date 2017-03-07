@@ -1,9 +1,6 @@
 #include "colormaptab.h"
 #include "ui_colormaptab.h"
 #include "settings/settings.h"
-
-
-
 #include <QDebug>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
