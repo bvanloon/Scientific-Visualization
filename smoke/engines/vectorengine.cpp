@@ -11,7 +11,8 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
          Settings::defaults::visualization::glyphs::gridSize.width(),
          Settings::canvas().size,
          simulationGrid)
-      )
+      ),
+   simulationGrid(simulationGrid)
 {}
 
 
@@ -31,7 +32,7 @@ void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 
 void VectorEngine::onGridDimensionChanged(int width, int height)
 {
-   qDebug() << "VectorEngine::onGridDimensionChanged: Handle the change in the dimension of the visualization grid.";
+//   Grid* newVisualizationGrd = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, si)
 }
 
 

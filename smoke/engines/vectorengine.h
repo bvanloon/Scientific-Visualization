@@ -23,6 +23,7 @@ private:
    int updateBuffers(Simulation *simulation);
 
    Grid *visualizationGrid;
+   UniformGrid* simulationGrid;
 };
 
 #endif // VECTORENGINE_H
