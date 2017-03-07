@@ -10,14 +10,15 @@ Grid::Grid(int numberOfVertices, bool hasPadding) :
 
 Grid::~Grid()
 {
-   for (int i = 0; i < vertices.size(); i++)
-   {
-      delete vertices[i];
-   }
-   for (int i = 0; i < cells.size(); i++)
-   {
-      delete cells[i];
-   }
+//    Somehow distinguish between simulation grid and visualizationg rid.
+//   for (int i = 0; i < vertices.size(); i++)
+//   {
+//      delete vertices[i];
+//   }
+//   for (int i = 0; i < cells.size(); i++)
+//   {
+//      delete cells[i];
+//   }
 }
 
 
@@ -29,7 +30,11 @@ GlyphData Grid::getGlyphData() const
    QVector3D position;
    QVector2D vector;
    float     scalar;
-   for ( ; currentVertex != vertices.end(); currentVertex++)
+
+
+
+   for ( ;
+         currentVertex != vertices.end(); currentVertex++)
    {
       position = *((*currentVertex)->getPosition());
       vector   = ((*currentVertex)->getFluidVelocity());
