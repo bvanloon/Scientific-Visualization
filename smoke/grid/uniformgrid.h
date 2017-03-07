@@ -46,7 +46,7 @@ private:
    static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
    static void createCells(UniformGrid *grid);
 
-   QPair<int, int> findUpperLeftVertexOfContainingCell(QVector3D position);
+   QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 };
 
 #endif // UNIFORMGRID_H

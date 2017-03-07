@@ -12,27 +12,18 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
    padding(0, 0)
 {
    if (hasPadding)
-   {
       padding = cellSize;
-   }
 }
-
-
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding) :
    Grid(dimension * dimension, true),
    dimension(dimension),
    cellSize(computeCellSize(areaSize, padding)),
    padding(padding)
-{
-}
-
-
+{}
 const QVector<QVector3D>& UniformGrid::getVertexPositions() const
 {
    return this->vertexPositions;
 }
-
-
 Triangulation UniformGrid::getTriangulation() const
 {
    Triangulation triangulation;
@@ -45,8 +36,6 @@ Triangulation UniformGrid::getTriangulation() const
    }
    return triangulation;
 }
-
-
 void UniformGrid::recomputeVertexPositions()
 {
    int idx;
@@ -60,14 +49,10 @@ void UniformGrid::recomputeVertexPositions()
       }
    }
 }
-
-
 QSizeF UniformGrid::computeCellSize(QSizeF area)
 {
    return area / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
 }
-
-
 QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
 {
    QSizeF usedArea = (area - padding * 2);
@@ -75,8 +60,6 @@ QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
 
    return cellSize;
 }
-
-
 UniformGrid *UniformGrid::createSimulationGrid(int dimension,
                                                QSizeF size,
                                                SimulationRealization *simulation)
@@ -87,8 +70,6 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension,
    createCells(grid);
    return grid;
 }
-
-
 UniformGrid *UniformGrid::createVisualizationGrid(int dimension,
                                                   QSizeF size,
                                                   UniformGrid *simulationGrid)
@@ -99,51 +80,33 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension,
    createCells(grid);
    return grid;
 }
-
-
 QSizeF UniformGrid::getCellSize() const
 {
    return cellSize;
 }
-
-
 int UniformGrid::getDimension() const
 {
    return dimension;
 }
-
-
 Cell *UniformGrid::findCellContaining(QVector3D position)
 {
-   QPair<int, int> coordinates = findUpperLeftVertexOfContainingCell(
-    position);
+   QPair<int, int> coordinates = findUpperLeftOfContainingCell(position);
    StructuredGridVertex *upperLeftVertex =
       dynamic_cast<StructuredGridVertex *>(vertexMap.find(coordinates).value());
    Cell *containingCell = upperLeftVertex->getLowerRightCell();
    return containingCell;
 }
-
-
 QPair<int,
-      int> UniformGrid::findUpperLeftVertexOfContainingCell(QVector3D position)
+      int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
 {
    int x = qFloor((position.x() - padding.width()) / cellSize.width());
    int y = qFloor((position.y() - padding.height()) / cellSize.height());
 
    // Account for the borders
-   if (y == (dimension - 1))
-   {
-      y--;
-   }
-
-   if (x == (dimension - 1))
-   {
-      x--;
-   }
+   if (y == (dimension - 1)) y--;
+   if (x == (dimension - 1)) x--;
    return QPair<int, int>(x, y);
 }
-
-
 void UniformGrid::createVertices(UniformGrid *grid,
                                  SimulationRealization *simulation)
 {
@@ -168,8 +131,6 @@ void UniformGrid::createVertices(UniformGrid *grid,
       }
    }
 }
-
-
 void UniformGrid::createVertices(UniformGrid *visualizationGrid,
                                  UniformGrid *simulationGrid)
 {
@@ -193,8 +154,6 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid,
       }
    }
 }
-
-
 void UniformGrid::createCells(UniformGrid *grid)
 {
    Vertex *leftUpper, *rightLower, *rightUpper, *leftLower;
@@ -216,51 +175,35 @@ void UniformGrid::createCells(UniformGrid *grid)
       }
    }
 }
-
-
 int UniformGrid::to1Dindex(int x, int y) const
 {
    return x + (y * this->dimension);
 }
-
-
 void UniformGrid::changeGridArea(QSizeF newArea)
 {
    cellSize = computeCellSize(newArea);
 
    if (hasPadding)
-   {
       padding = cellSize;
-   }
    recomputeVertexPositions();
 }
-
-
 void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
 {
    if (hasPadding)
-   {
       this->padding = padding;
-   }
    cellSize = computeCellSize(newArea, padding);
    recomputeVertexPositions();
 }
-
-
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
 {
    return QVector3D(padding.width() + (double)i * cellSize.width(),
                    padding.height() + (double)j * cellSize.height(),
                    0.0f);
 }
-
-
 const QSizeF& UniformGrid::getPadding() const
 {
    return padding;
 }
-
-
 Vertex *UniformGrid::getVertexAt(int x, int y) const
 {
    return vertexMap.find(QPair<int, int>(x, y)).value();
