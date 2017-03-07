@@ -7,6 +7,14 @@
 
 class Settings::visualization::Smoke : public QObject {
    Q_OBJECT
+   public:
+      static const Smoke& instance();
+
+   private:
+      explicit Smoke(QObject *parent = 0);
+
+      Smoke(Smoke const&) = delete;
+      void operator=(Smoke const&) = delete;
 };
 
 class Settings::visualization::Glyphs : public QObject {

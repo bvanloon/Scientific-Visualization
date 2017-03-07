@@ -7,9 +7,7 @@ Settings::Visualization::Visualization(QObject *parent) :
    textureGetter(&::Simulation::getTexCoordFluidDensity),
    scalar(visualization::ScalarVariable::fluidDensity),
    vectorScale(10)
-{
-}
-
+{}
 
 void Settings::Visualization::setScalarVariableToFluidDensity()
 {
@@ -17,7 +15,6 @@ void Settings::Visualization::setScalarVariableToFluidDensity()
    this->scalar = Settings::visualization::ScalarVariable::fluidDensity;
    emit valueRangeChanged(0.0f, Settings::simulation().force);
 }
-
 
 void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
 {
@@ -27,7 +24,6 @@ void Settings::Visualization::setScalarVariableToFluidVelocityMagnitude()
                           Settings::simulation().fluidVelocityMagnitudeMaximum);
 }
 
-
 void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
@@ -36,14 +32,12 @@ void Settings::Visualization::setScalarVariableToForceFieldMagnitude()
                           Settings::simulation().forceFieldMagnitudeMaximum);
 }
 
-
 const Settings::Visualization& Settings::Visualization::instance()
 {
    static Visualization instance;
 
    return instance;
 }
-
 
 QStringList Settings::Visualization::getScalarVariableNames()
 {
@@ -54,7 +48,6 @@ QStringList Settings::Visualization::getScalarVariableNames()
                        << "Force field magnitude";
    return scalarVariableNames;
 }
-
 
 void Settings::Visualization::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {
@@ -78,3 +71,14 @@ void Settings::Visualization::onScalarVariableChanged(Settings::visualization::S
       break;
    }
 }
+
+const Settings::visualization::Smoke& Settings::visualization::Smoke::instance()
+{
+   static Smoke instance;
+
+   return instance;
+}
+
+Settings::visualization::Smoke::Smoke(QObject *parent) :
+   QObject(parent)
+{}
