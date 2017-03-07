@@ -13,7 +13,7 @@ class Grid
 {
 public:
    Grid(int numberOfVertices, bool hasPadding = true);
-   ~Grid();
+   virtual ~Grid();
 
    GlyphData getGlyphData() const;
 
