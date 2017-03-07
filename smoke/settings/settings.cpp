@@ -24,4 +24,6 @@ const Settings::visualization::Smoke& Settings::visualization::smoke()
 }
 
 const Settings::visualization::Glyphs& Settings::visualization::glyphs()
-{}
+{
+    return Settings::visualization::Glyphs::instance();
+}
