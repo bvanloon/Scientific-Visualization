@@ -13,7 +13,6 @@ AbstractEngine::AbstractEngine(QObject *parent) :
    init();
 }
 
-
 AbstractEngine::~AbstractEngine()
 {
    delete this->shaderProgram;
@@ -23,7 +22,6 @@ AbstractEngine::~AbstractEngine()
    this->vao.destroy();
 }
 
-
 void AbstractEngine::init()
 {
    initializeOpenGLFunctions();
@@ -32,13 +30,11 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
-
 void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
    initializeColorMapInfo();
 }
-
 
 void AbstractEngine::initializeColorMapInfo()
 {
@@ -56,7 +52,6 @@ void AbstractEngine::initializeColorMapInfo()
    setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
 }
 
-
 void AbstractEngine::setProjectionMatrix(float width, float height)
 {
    projectionMatrix.setToIdentity();
@@ -68,7 +63,6 @@ void AbstractEngine::setProjectionMatrix(float width, float height)
                          farClippingPlane);
 }
 
-
 void AbstractEngine::setMVPMatrix()
 {
    QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
@@ -78,31 +72,26 @@ void AbstractEngine::setMVPMatrix()
    this->shaderProgram->release();
 }
 
-
 /** Slots **/
 void AbstractEngine::onValueRangeChanged(float min, float max)
 {
    setColorMapValueRange(min, max);
 }
 
-
 void AbstractEngine::onSetClamping(bool clampingOn)
 {
    setColorMapClampingTo(clampingOn);
 }
-
 
 void AbstractEngine::onsetClampingRange(float minimum, float maximum)
 {
    setColorMapClampRange(minimum, maximum);
 }
 
-
 void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
 {
    setTexture(colormap);
 }
-
 
 void AbstractEngine::onForceChanged(float force)
 {
@@ -113,13 +102,11 @@ void AbstractEngine::onForceChanged(float force)
    }
 }
 
-
 void AbstractEngine::onWindowChanged(int width, int height)
 {
    setProjectionMatrix(width, height);
    setMVPMatrix();
 }
-
 
 /** Set functions **/
 void AbstractEngine::setTexture(QImage image)
@@ -140,7 +127,6 @@ void AbstractEngine::setTexture(QImage image)
    texture->setWrapMode(QOpenGLTexture::ClampToEdge);
 }
 
-
 void AbstractEngine::setColorMapValueRange(float min, float max)
 {
    this->shaderProgram->bind();
@@ -148,7 +134,6 @@ void AbstractEngine::setColorMapValueRange(float min, float max)
    this->shaderProgram->setUniformValue("colorMapInfo.maximum", max);
    this->shaderProgram->release();
 }
-
 
 void AbstractEngine::setColorMapClampRange(float startClamp, float endClamp)
 {
@@ -158,14 +143,12 @@ void AbstractEngine::setColorMapClampRange(float startClamp, float endClamp)
    this->shaderProgram->release();
 }
 
-
 void AbstractEngine::setColorMapClampingTo(bool clampingOn)
 {
    this->shaderProgram->bind();
    this->shaderProgram->setUniformValue("colorMapInfo.clampingOn", clampingOn);
    this->shaderProgram->release();
 }
-
 
 /** Buffers **/
 void AbstractEngine::initBuffers()
@@ -190,7 +173,6 @@ void AbstractEngine::initBuffers()
    this->vao.release();
 }
 
-
 void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data)
 {
    buffer->bind();
@@ -198,14 +180,12 @@ void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data
    buffer->release();
 }
 
-
 void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
 {
    buffer->bind();
    buffer->allocate(data.data(), data.size() * sizeof(data[0]));
    buffer->release();
 }
-
 
 void AbstractEngine::drawWithMode(int mode,
                                   int bufferLength)
@@ -219,7 +199,6 @@ void AbstractEngine::drawWithMode(int mode,
    this->shaderProgram->release();
 }
 
-
 /** Shader Functions **/
 
 void AbstractEngine::initializeShaders()
@@ -227,6 +206,8 @@ void AbstractEngine::initializeShaders()
    this->shaderProgram = new QOpenGLShaderProgram();
    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex,
                                                ":/shaders/shaders/vertex.glsl");
+   this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry,
+                                                ":/shaders/shaders/geometry.glsl");
    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment,
                                                ":/shaders/shaders/fragment.glsl");
    this->shaderProgram->link();
