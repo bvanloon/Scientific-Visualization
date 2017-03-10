@@ -22,14 +22,17 @@ void VectorEngine::draw(Simulation *simulation)
 
    drawWithMode(GL_LINES, bufferLength);
 }
+
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
 }
+
 void VectorEngine::onGridDimensionChanged(int width, int height)
 {
    visualizationGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
 }
+
 int VectorEngine::updateBuffers()
 {
    GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::hedgehog;

@@ -47,6 +47,8 @@ private:
    void connectVectorEngineAndGlyphTab();
    void connectVectorEngineAndSettings();
 
+   void connectSmokeEngineAndSettings();
+
    void connectEngineAndSettings(AbstractEngine *currentEngine);
    void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
 

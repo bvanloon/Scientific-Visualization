@@ -12,13 +12,6 @@ namespace Settings {
     const Canvas& canvas();
 
     namespace visualization {
-        enum ScalarVariable
-        {
-           fluidDensity,
-           fluidVelocityMagnitude,
-           forceFieldMagnitude
-        };
-
         QStringList getScalarVariableNames();
 
         class ColorMap;
@@ -32,6 +25,15 @@ namespace Settings {
 
     class VisualizationClassOld;
     const VisualizationClassOld& getVisualization();
+
+    namespace sim {
+        enum Scalar
+        {
+           fluidDensity,
+           fluidVelocityMagnitude,
+           forceFieldMagnitude
+        };
+    }
 
     namespace defaults {
         namespace simulation {

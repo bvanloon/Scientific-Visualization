@@ -36,7 +36,9 @@ SOURCES += main.cpp\
     view/intslider.cpp \
     settings/canvassettings.cpp \
     settings/simulationsettings.cpp \
-    settings/visualizationsettings.cpp \
+    settings/visualization/visualizationsettings.cpp \
+    settings/visualization/glyphsettings.cpp \
+    settings/visualization/smokesettings.cpp \
     view/simulationtab.cpp \
     keyboardhandler.cpp \
     colormaps/zebramap.cpp \
