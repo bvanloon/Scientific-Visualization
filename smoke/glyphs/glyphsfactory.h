@@ -12,7 +12,8 @@ class GlyphsFactory
    public:
       enum glyphs
       {
-         hedgehog
+         hedgehog,
+         triangles
       };
 
 
@@ -24,6 +25,8 @@ class GlyphsFactory
 
    private:
       GlyphsTriangulation createHedgehogs(GlyphData data);
+
+      GlyphsTriangulation createTriangles(GlyphData data);
 };
 
 #endif // GLYPHSFACTORY_H

@@ -16,6 +16,11 @@ GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, GlyphsFactory::g
 
       break;
 
+   case GlyphsFactory::glyphs::triangles:
+      return createTriangles(data);
+
+      break;
+
    default:
       return GlyphsTriangulation();
    }
@@ -34,13 +39,26 @@ GlyphsTriangulation GlyphsFactory::createHedgehogs(GlyphData data)
    }
    return triangulation;
 }
+
+GlyphsTriangulation GlyphsFactory::createTriangles(GlyphData data)
+{
+   GlyphsTriangulation triangulation;
+
+   for (int i = 0; i < data.numGlyphs(); ++i)
+   {
+      AbstractGlyph currentGlyph = Triangle(data.getPositions().at(i),
+                                             data.getVectors().at(i),
+                                             data.getScalars().at(i));
+      triangulation.extend(currentGlyph);
+   }
+   return triangulation;
 }
 
 QStringList GlyphsFactory::getGlyphsNames()
 {
    QStringList glyphsNamesList;
 
-   glyphsNamesList << "hedgehog ";
+   glyphsNamesList << "Hedgehogs" << "Triangles";
 
    return glyphsNamesList;
 }
