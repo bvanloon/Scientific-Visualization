@@ -50,8 +50,12 @@ SOURCES += main.cpp\
     view/glyphstab.cpp \
     grid/glyphdata.cpp \
     colormaps/huecolormap.cpp \
-    settings/visualization/glyphsettings.cpp \
-    settings/visualization/smokesettings.cpp
+    glyphs/glyphsfactory.cpp \
+    glyphs/abstractglyph.cpp \
+    glyphs/glyphstriangulation.cpp \
+    glyphs/glyphtriangle.cpp \
+    glyphs/hedgehog.cpp \
+    glyphs/triangle.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -63,6 +67,7 @@ HEADERS  += main.ih\
     engines/smokeengine.h \
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
+    colormaps/colormapfactory.h \
     view/colormaplegend.h utilities.h \
     settings/settings.h \
     view/colormaptab.h \
@@ -83,7 +88,13 @@ HEADERS  += main.ih\
     engines/abstractengine.h \
     view/glyphstab.h \
     grid/glyphdata.h \
-    colormaps/huecolormap.h
+    colormaps/huecolormap.h \
+    glyphs/glyphsfactory.h \
+    glyphs/abstractglyph.h \
+    glyphs/glyphstriangulation.h \
+    glyphs/glyphtriangle.h \
+    glyphs/hedgehog.h \
+    glyphs/triangle.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
