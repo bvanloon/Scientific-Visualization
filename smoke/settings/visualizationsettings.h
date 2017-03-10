@@ -4,16 +4,24 @@
 #include <QObject>
 #include "settings.h"
 #include "simulation/simulation.h"
+#include "grid/vertex.h"
 
 class Settings::visualization::ColorMap : public QObject {
    Q_OBJECT
    public:
       explicit ColorMap(QObject *parent = 0);
 
-      Settings::visualization::ScalarVariable scalar;
+      Settings::sim::Scalar scalar;
+      Vertex::scalarGetter textureGetter;
+
+signals:
+    void valueRangeChanged(Settings::sim::Scalar scalarVariable, float minimum, float maximum);
 
 public slots:
-      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
+      void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
+
+private:
+      Vertex::scalarGetter getTextureGetter(Settings::sim::Scalar scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {
@@ -56,13 +64,13 @@ class Settings::VisualizationClassOld : public QObject
       static const VisualizationClassOld& instance();
 
       ::Simulation::textureCoordinateGetter textureGetter;
-      visualization::ScalarVariable scalar;
+      ::Settings::sim::Scalar scalar;
 
    signals:
-      void valueRangeChanged(float minimum, float maximum);
+      void valueRangeChangedOld(float minimum, float maximum);
 
    public slots:
-      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
+      void onTextureVariableChangedOld(Settings::sim::Scalar scalarVariable);
 
    private:
       explicit VisualizationClassOld(QObject *parent = 0);

@@ -22,21 +22,21 @@ class ColorMapTab : public QWidget
 
       void connectToColorMapSettings(Settings::visualization::ColorMap *colorMap);
 
-   signals:
+      void setColormapSettings(Settings::visualization::ColorMap *value);
+
+signals:
       void setClamping(bool clampingOn);
 
       void setClampingRange(float minimum, float maximum);
 
       void colorMapChanged(AbstractColorMap colormap);
 
-      void textureVariableChanged(Settings::visualization::ScalarVariable variable);
+      void textureVariableChanged(Settings::sim::Scalar variable);
 
       void valueRangeChanged(float minimum, float maximum);
 
    public slots:
-      void onValueRangeChanged(float minimum, float maximum);
-
-      void onForceChanged(float force);
+      void onValueRangeChanged(Settings::sim::Scalar variable, float min, float max);
 
    private slots:
       void on_clampingCheckBox_clicked(bool checked);
@@ -57,6 +57,7 @@ class ColorMapTab : public QWidget
 
    private:
       Ui::ColorMapTab *ui;
+      Settings::visualization::ColorMap* colormapSettings;
 
       void setUItoDefaults();
 

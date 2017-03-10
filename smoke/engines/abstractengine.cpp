@@ -30,6 +30,11 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
+void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
+{
+   this->colorMap = value;
+}
+
 void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
@@ -55,12 +60,8 @@ void AbstractEngine::initializeColorMapInfo()
 void AbstractEngine::setProjectionMatrix(float width, float height)
 {
    projectionMatrix.setToIdentity();
-   projectionMatrix.ortho(0.0,
-                         width,
-                         0.0,
-                         height,
-                         nearClippingPlane,
-                         farClippingPlane);
+   projectionMatrix.ortho(0.0, width, 0.0, height,
+                         nearClippingPlane, farClippingPlane);
 }
 
 void AbstractEngine::setMVPMatrix()
@@ -73,9 +74,10 @@ void AbstractEngine::setMVPMatrix()
 }
 
 /** Slots **/
-void AbstractEngine::onValueRangeChanged(float min, float max)
+
+void AbstractEngine::onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max)
 {
-   setColorMapValueRange(min, max);
+   if (this->colorMap->scalar == scalar) setColorMapValueRange(min, max);
 }
 
 void AbstractEngine::onSetClamping(bool clampingOn)
@@ -91,15 +93,6 @@ void AbstractEngine::onsetClampingRange(float minimum, float maximum)
 void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
 {
    setTexture(colormap);
-}
-
-void AbstractEngine::onForceChanged(float force)
-{
-   if (Settings::getVisualization().scalar ==
-       Settings::visualization::ScalarVariable::fluidDensity)
-   {
-      setColorMapValueRange(0.0f, force);
-   }
 }
 
 void AbstractEngine::onWindowChanged(int width, int height)

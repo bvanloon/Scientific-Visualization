@@ -36,7 +36,7 @@ SOURCES += main.cpp\
     view/intslider.cpp \
     settings/canvassettings.cpp \
     settings/simulationsettings.cpp \
-    settings/visualizationsettings.cpp \
+    settings/visualization/visualizationsettings.cpp \
     view/simulationtab.cpp \
     keyboardhandler.cpp \
     colormaps/zebramap.cpp \
@@ -49,7 +49,9 @@ SOURCES += main.cpp\
     engines/abstractengine.cpp \
     view/glyphstab.cpp \
     grid/glyphdata.cpp \
-    colormaps/huecolormap.cpp
+    colormaps/huecolormap.cpp \
+    settings/visualization/glyphsettings.cpp \
+    settings/visualization/smokesettings.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \

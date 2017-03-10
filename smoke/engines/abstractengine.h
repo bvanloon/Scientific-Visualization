@@ -15,63 +15,75 @@
 
 class AbstractEngine :  public QObject, protected QOpenGLFunctions
 {
-    Q_OBJECT
-public:
-    explicit AbstractEngine(QObject *parent = 0);
-    virtual ~AbstractEngine();
-    virtual void draw(Simulation* Simulation) = 0;
+   Q_OBJECT
+   public:
+      explicit AbstractEngine(QObject *parent = 0);
+      virtual ~AbstractEngine();
+      virtual void draw(Simulation *Simulation) = 0;
 
+      void setColorMap(Settings::visualization::ColorMap *value);
 
-public slots:
-    void onValueRangeChanged(float min, float max);
-    void onSetClamping(bool clampingOn);
-    void onsetClampingRange(float minimum, float maximum);
-    void onColorMapChanged(AbstractColorMap colormap);
-    void onForceChanged(float force);
-    void onWindowChanged(int width, int height);
+   public slots:
 
-protected:
-    QOpenGLBuffer* vertexBuffer;
-    QOpenGLBuffer* textureCoordinateBuffer;
+      void onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max);
 
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
-    void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
+      void onSetClamping(bool clampingOn);
 
-    void drawWithMode(int mode, int bufferLength);
+      void onsetClampingRange(float minimum, float maximum);
 
-private:
-    void init();
+      void onColorMapChanged(AbstractColorMap colormap);
 
-    //Shaders
-    QOpenGLShaderProgram *shaderProgram;
-    QOpenGLTexture *texture;
+      void onWindowChanged(int width, int height);
 
+   protected:
+      QOpenGLBuffer *vertexBuffer;
+      QOpenGLBuffer *textureCoordinateBuffer;
 
-    //Buffers
-    QOpenGLVertexArrayObject vao;
+      void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
-    // OpenGL initialization
-    void initializeUniforms();
-    void initializeColorMapInfo();
+      void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
 
-    void initializeShaders();
-    void initBuffers();
+      void drawWithMode(int mode, int bufferLength);
 
-    //Uniforms
-    QMatrix4x4 modelViewMatrix;
-    QMatrix4x4 projectionMatrix;
+   private:
+      void init();
 
-    void setColorMapClampingTo(bool clampingOn);
-    void setColorMapValueRange(float min, float max);
-    void setTexture(QImage image);
+      Settings::visualization::ColorMap *colorMap;
 
-    void setColorMapClampRange(float startClamp, float endClamp);
+      //Shaders
+      QOpenGLShaderProgram *shaderProgram;
+      QOpenGLTexture *texture;
 
-    void setProjectionMatrix(float width, float height);
-    void setMVPMatrix();
-    static const float nearClippingPlane;
-    static const  float farClippingPlane;
+      //Buffers
+      QOpenGLVertexArrayObject vao;
 
+      // OpenGL initialization
+      void initializeUniforms();
+
+      void initializeColorMapInfo();
+
+      void initializeShaders();
+
+      void initBuffers();
+
+      //Uniforms
+      QMatrix4x4 modelViewMatrix;
+      QMatrix4x4 projectionMatrix;
+
+      void setColorMapClampingTo(bool clampingOn);
+
+      void setColorMapValueRange(float min, float max);
+
+      void setTexture(QImage image);
+
+      void setColorMapClampRange(float startClamp, float endClamp);
+
+      void setProjectionMatrix(float width, float height);
+
+      void setMVPMatrix();
+
+      static const float nearClippingPlane;
+      static const float farClippingPlane;
 };
 
 #endif // ABSTRACTENGINE_H

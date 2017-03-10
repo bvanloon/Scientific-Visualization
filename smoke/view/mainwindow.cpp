@@ -21,14 +21,15 @@ MainWindow::MainWindow(QWidget *parent) :
    this->simulationTab = ui->simulationTab;
 
    this->smokeColorMapTab = ui->smokeColormapTab;
+   this->smokeColorMapTab->setColormapSettings(Settings::visualization::smoke().getColorMap());
 
    this->glyphsTab = ui->glyphsTab;
+   this->glyphsTab->getColorMapWidget()->setColormapSettings(Settings::visualization::glyphs().getColorMap());
 
    this->installEventFilter(this->keyboardHandler);
 
    setUpConnections();
 }
-
 
 MainWindow::~MainWindow()
 {
@@ -36,7 +37,6 @@ MainWindow::~MainWindow()
    delete this->simulation;
    delete this->keyboardHandler;
 }
-
 
 void MainWindow::onOpenGLReady()
 {
@@ -47,10 +47,12 @@ void MainWindow::onOpenGLReady()
    connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second));
 
    connectCanvasAndSimulationTab();
+
    connectVectorEngineAndGlyphTab();
    connectVectorEngineAndSettings();
-}
 
+   connectSmokeEngineAndSettings();
+}
 
 void MainWindow::setUpConnections()
 {
@@ -68,13 +70,11 @@ void MainWindow::setUpConnections()
    connectKeyBoardHandlerAndSimulation();
 }
 
-
 void MainWindow::connectCanvasAndThis()
 {
    connect(this->canvas, SIGNAL(openGlReady()),
             this, SLOT(onOpenGLReady()));
 }
-
 
 void MainWindow::connectCanvasAndSimulation()
 {
@@ -83,7 +83,6 @@ void MainWindow::connectCanvasAndSimulation()
    connect(this->canvas, SIGNAL(windowResized(int,int)),
             this->simulation, SLOT(onWindowResized(int,int)));
 }
-
 
 void MainWindow::connectCanvasAndSettings()
 {
@@ -94,7 +93,6 @@ void MainWindow::connectCanvasAndSettings()
             &Settings::simulation(), SLOT(onWindowResized(int,int)));
 }
 
-
 void MainWindow::connectCanvasAndSimulationTab()
 {
    connect(this->simulationTab, SIGNAL(glyphsEngineToggled(bool)),
@@ -103,7 +101,6 @@ void MainWindow::connectCanvasAndSimulationTab()
    connect(this->simulationTab, SIGNAL(smokeEngineToggled(bool)),
                     this->canvas, SLOT(onSmokeEngineToggled(bool)));
 }
-
 
 void MainWindow::connectSimulationTabAndSettings()
 {
@@ -117,7 +114,6 @@ void MainWindow::connectSimulationTabAndSettings()
             &Settings::simulation(), SLOT(onTimeStepChanged(float)));
 }
 
-
 void MainWindow::connectSimulationTabAndSimulation()
 {
    connect(this->simulationTab, SIGNAL(step()),
@@ -126,21 +122,14 @@ void MainWindow::connectSimulationTabAndSimulation()
 
 void MainWindow::connectGlyphTabAndSettings()
 {
-    this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
+   this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::glyphs().getColorMap());
 }
-
 
 void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
 {
-   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-             currentEngine, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
-            currentEngine, SLOT(onValueRangeChanged(float,float)));
-
-   connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            currentEngine, SLOT(onForceChanged(float)));
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           currentEngine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
-
 
 void MainWindow::connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap)
 {
@@ -152,34 +141,44 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine *currentEngine, Colo
             currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
 }
 
-
 void MainWindow::connectVectorEngineAndGlyphTab()
 {
    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
             this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second, SLOT(onGridDimensionChanged(int,int)));
 }
 
-
 void MainWindow::connectVectorEngineAndSettings()
 {
+   AbstractEngine *engine = this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second;
+
+   engine->setColorMap(Settings::visualization::glyphs().getColorMap());
+
    connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
-   this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+           engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+   connect(Settings::visualization::glyphs().getColorMap(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
+void MainWindow::connectSmokeEngineAndSettings()
+{
+   AbstractEngine *engine = this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second;
+
+   engine->setColorMap(Settings::visualization::smoke().getColorMap());
+
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+   connect(Settings::visualization::smoke().getColorMap(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+}
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-   connect(this->smokeColorMapTab, SIGNAL(textureVariableChanged(Settings::visualization::ScalarVariable)),
-            &Settings::getVisualization(), SLOT(onTextureVariableChanged(Settings::visualization::ScalarVariable)));
-   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
-            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            this->smokeColorMapTab, SLOT(onForceChanged(float)));
+   connect(this->smokeColorMapTab, SIGNAL(textureVariableChanged(Settings::sim::Scalar)),
+            &Settings::getVisualization(), SLOT(onTextureVariableChangedOld(Settings::sim::Scalar)));
    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
 }
-
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()
 {

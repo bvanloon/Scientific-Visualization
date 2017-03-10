@@ -34,7 +34,6 @@ void SimulationSettingPane::setUItoDefaults()
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 }
 
-
 void SimulationSettingPane::setUpConnections()
 {
    connect(this, SIGNAL(toggleFrozen(bool)),
@@ -43,7 +42,6 @@ void SimulationSettingPane::setUpConnections()
             this, SLOT(on_forceSlider_valueChanged(int)));
 }
 
-
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
 {
    QString labelText = (frozen ? "Thaw" : "Freeze");
@@ -51,19 +49,16 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
    this->ui->freezeButton->setText(labelText);
 }
 
-
 void SimulationSettingPane::on_freezeButton_clicked()
 {
    emit toggleFrozen(!Settings::simulation().frozen);
    emit toggleFrozen();
 }
 
-
 void SimulationSettingPane::on_stepButton_clicked()
 {
    emit step();
 }
-
 
 void SimulationSettingPane::onToggleFrozen(bool frozen)
 {
@@ -71,18 +66,15 @@ void SimulationSettingPane::onToggleFrozen(bool frozen)
    setFreezeButtonLabel(frozen);
 }
 
-
 void SimulationSettingPane::on_timeStepBox_valueChanged(double value)
 {
    emit timeStepChanged(value);
 }
 
-
 void SimulationSettingPane::on_glyphsCheckBox_toggled(bool checked)
 {
    emit glyphsEngineToggled(checked);
 }
-
 
 void SimulationSettingPane::on_smokeCheckBox_toggled(bool checked)
 {
