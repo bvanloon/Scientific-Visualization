@@ -13,18 +13,16 @@ ColorMapTab::ColorMapTab(QWidget *parent) :
    setUpConnections();
 }
 
-
 ColorMapTab::~ColorMapTab()
 {
-    delete ui;
+   delete ui;
 }
 
 void ColorMapTab::connectToColorMapSettings(Settings::visualization::ColorMap *colorMap)
 {
-    connect(this, SIGNAL(textureVariableChanged(Settings::sim::Scalar)),
+   connect(this, SIGNAL(textureVariableChanged(Settings::sim::Scalar)),
             colorMap, SLOT(onTextureVariableChanged(Settings::sim::Scalar)));
 }
-
 
 void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
 {
@@ -35,7 +33,6 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
    emit setClampingRange(minimum, maximum);
 }
 
-
 void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value)
 {
    float minimum = this->ui->clampingMinimumSlider->value();
@@ -45,7 +42,6 @@ void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value)
    emit setClampingRange(minimum, maximum);
 }
 
-
 void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
 {
    float maximum = this->ui->clampingMaximumSlider->value();
@@ -54,7 +50,6 @@ void ColorMapTab::on_clampingMinimumSlider_valueChanged(float value)
    this->ui->clampingMinimumSlider->setValue(minimum);
    emit setClampingRange(minimum, maximum);
 }
-
 
 void ColorMapTab::on_saturationSlider_valueChanged(float value)
 {
@@ -67,7 +62,6 @@ void ColorMapTab::on_saturationSlider_valueChanged(float value)
    emit colorMapChanged(*newColormap);
 }
 
-
 void ColorMapTab::on_numColorsSlider_valueChanged(int value)
 {
    AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
@@ -76,7 +70,6 @@ void ColorMapTab::on_numColorsSlider_valueChanged(int value)
                 this->ui->saturationSlider->value());
    emit colorMapChanged(*newColormap);
 }
-
 
 void ColorMapTab::setUItoDefaults()
 {
@@ -108,7 +101,6 @@ void ColorMapTab::setUItoDefaults()
    this->ui->variableSelector->setCurrentIndex(Settings::getVisualization().scalar);
 }
 
-
 void ColorMapTab::setUpConnections()
 {
    connect(this->ui->clampingMinimumSlider, SIGNAL(valueChanged(float)),
@@ -133,7 +125,6 @@ void ColorMapTab::setUpConnections()
             this, SLOT(on_saturationSlider_valueChanged(float)));
 }
 
-
 void ColorMapTab::clampingUISetDisabled(bool disabled)
 {
    this->ui->clampingMinimumLabel->setDisabled(disabled);
@@ -143,18 +134,14 @@ void ColorMapTab::clampingUISetDisabled(bool disabled)
    this->ui->clampingMaximumSlider->setDisabled(disabled);
 }
 
-
 void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
 {
    AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
                 static_cast<ColorMapFactory::colorMaps>(index),
                 ui->numColorsSlider->value(),
                 ui->saturationSlider->value(), 0.5f);
-
-
    emit colorMapChanged(*newColormap);
 }
-
 
 void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 {
@@ -162,12 +149,10 @@ void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
       static_cast<Settings::sim::Scalar>(index));
 }
 
-
 void ColorMapTab::onValueRangeChangedOld(float minimum, float maximum)
 {
    emit valueRangeChanged(minimum, maximum);
 }
-
 
 void ColorMapTab::onForceChangedOld(float force)
 {
@@ -176,7 +161,6 @@ void ColorMapTab::onForceChangedOld(float force)
       emit valueRangeChanged(0.0f, force);
    }
 }
-
 
 void ColorMapTab::on_colorPickerButton_clicked()
 {
@@ -199,6 +183,6 @@ void ColorMapTab::on_colorPickerButton_clicked()
 
 void ColorMapTab::setColormapSettings(Settings::visualization::ColorMap *value)
 {
-    colormapSettings = value;
-    connectToColorMapSettings(value);
+   colormapSettings = value;
+   connectToColorMapSettings(value);
 }
