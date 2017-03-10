@@ -175,8 +175,6 @@ void MainWindow::connectSmokeEngineAndSettings()
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-   connect(this->smokeColorMapTab, SIGNAL(textureVariableChanged(Settings::sim::Scalar)),
-            &Settings::getVisualization(), SLOT(onTextureVariableChangedOld(Settings::sim::Scalar)));
    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().colorMap);
 }
 

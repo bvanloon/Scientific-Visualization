@@ -52,33 +52,4 @@ private:
       void operator=(Glyphs const&) = delete;
 };
 
-class Settings::VisualizationClassOld : public QObject
-{
-   Q_OBJECT
-   public:
-
-      static const VisualizationClassOld& instance();
-
-      ::Simulation::textureCoordinateGetter textureGetter;
-      ::Settings::sim::Scalar scalar;
-
-   signals:
-      void valueRangeChangedOld(float minimum, float maximum);
-
-   public slots:
-      void onTextureVariableChangedOld(Settings::sim::Scalar scalarVariable);
-
-   private:
-      explicit VisualizationClassOld(QObject *parent = 0);
-
-      VisualizationClassOld(VisualizationClassOld const&) = delete;
-      void operator=(VisualizationClassOld const&) = delete;
-
-      void setScalarVariableToFluidDensity();
-
-      void setScalarVariableToFluidVelocityMagnitude();
-
-      void setScalarVariableToForceFieldMagnitude();
-};
-
 #endif // VISUALIZATIONS_H
