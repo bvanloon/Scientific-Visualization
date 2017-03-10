@@ -4,6 +4,7 @@
 #include <QObject>
 #include "settings.h"
 #include "simulation/simulation.h"
+#include "grid/vertex.h"
 
 class Settings::visualization::ColorMap : public QObject {
    Q_OBJECT
@@ -11,9 +12,16 @@ class Settings::visualization::ColorMap : public QObject {
       explicit ColorMap(QObject *parent = 0);
 
       Settings::sim::Scalar scalar;
+      Vertex::scalarGetter textureGetter;
+
+signals:
+      void textureVariableChanged(Settings::sim::Scalar scalarVariable);
 
 public slots:
       void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
+
+private:
+      Vertex::scalarGetter getTextureGetter(Settings::sim::Scalar scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {
