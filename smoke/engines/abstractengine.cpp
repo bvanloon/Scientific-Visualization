@@ -97,7 +97,7 @@ void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
 void AbstractEngine::onForceChangedOld(float force)
 {
    if (Settings::getVisualization().scalar ==
-       Settings::visualization::ScalarVariable::fluidDensity)
+       Settings::sim::Scalar::fluidDensity)
    {
       setColorMapValueRange(0.0f, force);
    }

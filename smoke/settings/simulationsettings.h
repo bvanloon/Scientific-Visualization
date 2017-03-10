@@ -29,7 +29,7 @@ public:
    const float simulationTimeStepMaximum = 0.45;
 
 
-   QPair<float, float> getRange(Settings::visualization::ScalarVariable scalar) const;
+   QPair<float, float> getRange(Settings::sim::Scalar scalar) const;
 
 signals:
    void valueRangeChangedOld(float minimum, float maximum);
@@ -52,9 +52,9 @@ private:
    Simulation(Simulation const&)     = delete;
    void operator=(Simulation const&) = delete;
 
-   QMultiMap<Settings::visualization::ScalarVariable, QPair<float, float>> scalarRanges;
+   QMultiMap<Settings::sim::Scalar, QPair<float, float>> scalarRanges;
 
-   void updateRange(Settings::visualization::ScalarVariable scalar, float minimum, float maximum);
+   void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
 
    void updateGridCellSize();
    void updateGridCellSize(int width, int height);

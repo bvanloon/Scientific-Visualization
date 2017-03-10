@@ -5,20 +5,20 @@
 Settings::VisualizationClassOld::VisualizationClassOld(QObject *parent) :
    QObject(parent),
    textureGetter(&::Simulation::getTexCoordFluidDensity),
-   scalar(visualization::ScalarVariable::fluidDensity)
+   scalar(::Settings::sim::Scalar::fluidDensity)
 {}
 
 void Settings::VisualizationClassOld::setScalarVariableToFluidDensity()
 {
    this->textureGetter = &::Simulation::getTexCoordFluidDensity;
-   this->scalar = Settings::visualization::ScalarVariable::fluidDensity;
+   this->scalar = Settings::sim::Scalar::fluidDensity;
    emit valueRangeChangedOld(0.0f, Settings::simulation().force);
 }
 
 void Settings::VisualizationClassOld::setScalarVariableToFluidVelocityMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordFluidVelocityMagnitude;
-   this->scalar = Settings::visualization::ScalarVariable::fluidVelocityMagnitude;
+   this->scalar = Settings::sim::Scalar::fluidVelocityMagnitude;
    emit valueRangeChangedOld(Settings::simulation().fluidVelocityMagnitudeMinimum,
                           Settings::simulation().fluidVelocityMagnitudeMaximum);
 }
@@ -26,7 +26,7 @@ void Settings::VisualizationClassOld::setScalarVariableToFluidVelocityMagnitude(
 void Settings::VisualizationClassOld::setScalarVariableToForceFieldMagnitude()
 {
    this->textureGetter = &::Simulation::getTexCoordForceFieldMagnitude;
-   this->scalar = Settings::visualization::ScalarVariable::forceFieldMagnitude;
+   this->scalar = Settings::sim::Scalar::forceFieldMagnitude;
    emit valueRangeChangedOld(Settings::simulation().forceFieldMagnitudeMinimum,
                           Settings::simulation().forceFieldMagnitudeMaximum);
 }
@@ -38,19 +38,19 @@ const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance
    return instance;
 }
 
-void Settings::VisualizationClassOld::onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+void Settings::VisualizationClassOld::onTextureVariableChanged(sim::Scalar scalarVariable)
 {
    switch (scalarVariable)
    {
-   case Settings::visualization::fluidDensity:
+   case Settings::sim::Scalar::fluidDensity:
       setScalarVariableToFluidDensity();
       break;
 
-   case Settings::visualization::fluidVelocityMagnitude:
+   case Settings::sim::Scalar::fluidVelocityMagnitude:
       setScalarVariableToFluidVelocityMagnitude();
       break;
 
-   case Settings::visualization::forceFieldMagnitude:
+   case Settings::sim::Scalar::forceFieldMagnitude:
       setScalarVariableToForceFieldMagnitude();
       break;
 
@@ -64,10 +64,10 @@ void Settings::VisualizationClassOld::onTextureVariableChanged(Settings::visuali
 
 Settings::visualization::ColorMap::ColorMap(QObject *parent) :
     QObject(parent),
-    scalar(visualization::ScalarVariable::fluidDensity)
+    scalar(Settings::sim::Scalar::fluidDensity)
 {}
 
-void Settings::visualization::ColorMap::onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+void Settings::visualization::ColorMap::onTextureVariableChanged(sim::Scalar scalarVariable)
 {
     qDebug() << "Settings::visualization::ColorMap::onTextureVariableChanged: " << scalarVariable;
 }

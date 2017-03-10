@@ -10,10 +10,10 @@ class Settings::visualization::ColorMap : public QObject {
    public:
       explicit ColorMap(QObject *parent = 0);
 
-      Settings::visualization::ScalarVariable scalar;
+      Settings::sim::Scalar scalar;
 
 public slots:
-      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
+      void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {
@@ -56,13 +56,13 @@ class Settings::VisualizationClassOld : public QObject
       static const VisualizationClassOld& instance();
 
       ::Simulation::textureCoordinateGetter textureGetter;
-      visualization::ScalarVariable scalar;
+      ::Settings::sim::Scalar scalar;
 
    signals:
       void valueRangeChangedOld(float minimum, float maximum);
 
    public slots:
-      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
+      void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
 
    private:
       explicit VisualizationClassOld(QObject *parent = 0);

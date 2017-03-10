@@ -29,7 +29,7 @@ class ColorMapTab : public QWidget
 
       void colorMapChanged(AbstractColorMap colormap);
 
-      void textureVariableChanged(Settings::visualization::ScalarVariable variable);
+      void textureVariableChanged(Settings::sim::Scalar variable);
 
       void valueRangeChanged(float minimum, float maximum);
 

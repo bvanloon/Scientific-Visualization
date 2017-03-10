@@ -21,8 +21,8 @@ ColorMapTab::~ColorMapTab()
 
 void ColorMapTab::connectToColorMapSettings(Settings::visualization::ColorMap *colorMap)
 {
-    connect(this, SIGNAL(textureVariableChanged(Settings::visualization::ScalarVariable)),
-            colorMap, SLOT(onTextureVariableChanged(Settings::visualization::ScalarVariable)));
+    connect(this, SIGNAL(textureVariableChanged(Settings::sim::Scalar)),
+            colorMap, SLOT(onTextureVariableChanged(Settings::sim::Scalar)));
 }
 
 
@@ -159,7 +159,7 @@ void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
 void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 {
    emit textureVariableChanged(
-      static_cast<Settings::visualization::ScalarVariable>(index));
+      static_cast<Settings::sim::Scalar>(index));
 }
 
 
@@ -171,7 +171,7 @@ void ColorMapTab::onValueRangeChangedOld(float minimum, float maximum)
 
 void ColorMapTab::onForceChangedOld(float force)
 {
-   if (Settings::getVisualization().scalar == Settings::visualization::ScalarVariable::fluidDensity)
+   if (Settings::getVisualization().scalar == Settings::sim::Scalar::fluidDensity)
    {
       emit valueRangeChanged(0.0f, force);
    }
