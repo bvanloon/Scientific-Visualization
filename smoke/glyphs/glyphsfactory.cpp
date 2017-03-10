@@ -23,16 +23,17 @@ GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, GlyphsFactory::g
 
 GlyphsTriangulation GlyphsFactory::createHedgehogs(GlyphData data)
 {
-   GlyphsTriangulation glyphTriangles;
+   GlyphsTriangulation triangulation;
 
    for (int i = 0; i < data.numGlyphs(); ++i)
    {
       AbstractGlyph currentGlyph = HedgeHog(data.getPositions().at(i),
                                             data.getVectors().at(i),
                                             data.getScalars().at(i));
-      glyphTriangles.extend(currentGlyph);
+      triangulation.extend(currentGlyph);
    }
-   return glyphTriangles;
+   return triangulation;
+}
 }
 
 QStringList GlyphsFactory::getGlyphsNames()
