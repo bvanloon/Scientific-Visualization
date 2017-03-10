@@ -38,7 +38,7 @@ const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance
    return instance;
 }
 
-void Settings::VisualizationClassOld::onTextureVariableChanged(sim::Scalar scalarVariable)
+void Settings::VisualizationClassOld::onTextureVariableChangedOld(sim::Scalar scalarVariable)
 {
    switch (scalarVariable)
    {

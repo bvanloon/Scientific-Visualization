@@ -62,7 +62,7 @@ class Settings::VisualizationClassOld : public QObject
       void valueRangeChangedOld(float minimum, float maximum);
 
    public slots:
-      void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
+      void onTextureVariableChangedOld(Settings::sim::Scalar scalarVariable);
 
    private:
       explicit VisualizationClassOld(QObject *parent = 0);
