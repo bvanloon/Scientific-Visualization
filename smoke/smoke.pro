@@ -53,8 +53,9 @@ SOURCES += main.cpp\
     glyphs/glyphsfactory.cpp \
     glyphs/abstractglyph.cpp \
     glyphs/glyphstriangulation.cpp \
-    glyphs/glyphtriangle.cpp
+    glyphs/glyphtriangle.cpp \
     glyphs/hedgehog.cpp \
+    glyphs/triangle.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -91,8 +92,9 @@ HEADERS  += main.ih\
     glyphs/glyphsfactory.h \
     glyphs/abstractglyph.h \
     glyphs/glyphstriangulation.h \
-    glyphs/glyphtriangle.h
+    glyphs/glyphtriangle.h \
     glyphs/hedgehog.h \
+    glyphs/triangle.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
