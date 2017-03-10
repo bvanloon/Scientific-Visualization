@@ -33,8 +33,8 @@ GlyphsTriangulation GlyphsFactory::createHedgehogs(GlyphData data)
    for (int i = 0; i < data.numGlyphs(); ++i)
    {
       AbstractGlyph currentGlyph = HedgeHog(data.getPositions().at(i),
-                                            data.getVectors().at(i),
-                                            data.getScalars().at(i));
+                                            data.getDirections().at(i),
+                                            data.getTextureCoordinates().at(i));
       triangulation.extend(currentGlyph);
    }
    return triangulation;
@@ -47,8 +47,8 @@ GlyphsTriangulation GlyphsFactory::createTriangles(GlyphData data)
    for (int i = 0; i < data.numGlyphs(); ++i)
    {
       AbstractGlyph currentGlyph = Triangle(data.getPositions().at(i),
-                                             data.getVectors().at(i),
-                                             data.getScalars().at(i));
+                                             data.getDirections().at(i),
+                                             data.getTextureCoordinates().at(i));
       triangulation.extend(currentGlyph);
    }
    return triangulation;

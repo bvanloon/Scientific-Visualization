@@ -7,27 +7,29 @@
 
 class GlyphData
 {
-public:
-    GlyphData();
-    GlyphData(int numGlyphs);
+   public:
+      GlyphData();
+      GlyphData(int numGlyphs);
 
-    int numGlyphs();
+      int numGlyphs();
 
-    void extend(GlyphData* other);
-    void extend(GlyphData other);
+      void extend(GlyphData *other);
 
-    void addGlyph(QVector3D position, QVector2D vector, float scalar);
+      void extend(GlyphData other);
 
-    QVector<QVector3D> getPositions() const;
-    QVector<QVector3D> getVectors() const;
-    QVector<float> getScalars() const;
+      void addGlyph(QVector3D position, QVector2D direction, float textureCoordinate);
 
-private:
+      QVector<QVector3D> getPositions() const;
 
-    QVector<QVector3D> positions;
-    QVector<QVector3D> vectors;
-    QVector<float> scalars;
+      QVector<QVector3D> getDirections() const;
 
+      QVector<float> getTextureCoordinates() const;
+
+   private:
+
+      QVector<QVector3D> positions;
+      QVector<QVector3D> directions;
+      QVector<float> textureCoordinates;
 };
 
 #endif // GLYPHDATA_H
