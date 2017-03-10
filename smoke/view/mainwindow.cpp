@@ -160,6 +160,8 @@ void MainWindow::connectVectorEngineAndSettings()
            engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+   connect(Settings::visualization::glyphs().getColorMap(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
 void MainWindow::connectSmokeEngineAndSettings()
@@ -169,6 +171,8 @@ void MainWindow::connectSmokeEngineAndSettings()
    engine->setColorMap(Settings::visualization::smoke().getColorMap());
 
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+   connect(Settings::visualization::smoke().getColorMap(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 

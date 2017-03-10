@@ -15,7 +15,7 @@ class Settings::visualization::ColorMap : public QObject {
       Vertex::scalarGetter textureGetter;
 
 signals:
-      void textureVariableChanged(Settings::sim::Scalar scalarVariable);
+    void valueRangeChanged(Settings::sim::Scalar scalarVariable, float minimum, float maximum);
 
 public slots:
       void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
