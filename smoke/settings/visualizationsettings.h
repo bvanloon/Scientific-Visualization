@@ -19,9 +19,6 @@ signals:
 
 public slots:
       void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
-
-private:
-      Vertex::scalarGetter getTextureGetter(Settings::sim::Scalar scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {

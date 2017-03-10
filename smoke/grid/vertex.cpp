@@ -12,7 +12,22 @@ Vertex::~Vertex()
 
 const QVector3D *Vertex::getPosition() const
 {
-   return this->position;
+    return this->position;
+}
+
+Vertex::scalarGetter Vertex::getScalarGetter(Settings::sim::Scalar scalar)
+{
+    switch (scalar)
+    {
+    case Settings::sim::fluidDensity:
+       return &Vertex::getFluidDensity;
+
+    case Settings::sim::fluidVelocityMagnitude:
+       return &Vertex::getFluidVelocityMagnitude;
+
+    case Settings::sim::forceFieldMagnitude:
+       return &Vertex::getForceMagnitude;
+    }
 }
 
 
