@@ -23,64 +23,72 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
    Q_OBJECT
 
-public:
-   Canvas(QWidget *parent);
-   ~Canvas();
+   public:
+      Canvas(QWidget *parent);
+      ~Canvas();
 
-   void setSimulation(Simulation *simulation);
+      void setSimulation(Simulation *simulation);
 
-   //Engines
+      //Engines
 //   VectorEngine *vectorEngine;
 //   SmokeEngine *smokeEngine;
 
-   enum EnginesEnum
-   {
-      smoke,
-      glyphs,
-      nrOfEngine
-   };
+      enum EnginesEnum
+      {
+         glyphs,
+         smoke,
+         nrOfEngine
+      };
 
-   typedef std::map<EnginesEnum, AbstractEngine *> EngineMap;
-   typedef std::pair<EnginesEnum, AbstractEngine *> EnginePair;
+      typedef std::map<EnginesEnum, AbstractEngine *> EngineMap;
+      typedef std::pair<EnginesEnum, AbstractEngine *> EnginePair;
 
-   EngineMap enginemap;  //Public since mainwindow accesses it to setup connections
+      EngineMap enginemap; //Public since mainwindow accesses it to setup connections
 
-public slots:
-   void onGlyphsEngineToggled(bool checked);
-   void onSmokeEngineToggled(bool checked);
+   public slots:
+      void onGlyphsEngineToggled(bool checked);
 
-
-signals:
-   void mouseMoved(QPoint newPosition);
-   void windowResized(int width, int height);
-   void openGlReady();
-
-private slots:
-   void idleLoop();
+      void onSmokeEngineToggled(bool checked);
 
 
-protected:
-   void initializeGL() Q_DECL_OVERRIDE;
-   void paintGL() Q_DECL_OVERRIDE;
-   void resizeGL(int width, int height) Q_DECL_OVERRIDE;
-   void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+   signals:
+      void mouseMoved(QPoint newPosition);
 
-private:
-   Simulation *simulation;
+      void windowResized(int width, int height);
 
-   //Active Engines
-   bool activeEngines[EnginesEnum::nrOfEngine] = { true, false };
-   void enginesDraw();
+      void openGlReady();
 
-   //Idle Loop
-   QTimer *timer;
-   void initiateIdleLoop();
+   private slots:
+      void idleLoop();
 
 
-   // OpenGL initialization
-   void initializeUniforms();
-   void initializeColorMapInfo();
-   void connectThisAndEngine(AbstractEngine *engine);
+   protected:
+      void initializeGL() Q_DECL_OVERRIDE;
+
+      void paintGL() Q_DECL_OVERRIDE;
+
+      void resizeGL(int width, int height) Q_DECL_OVERRIDE;
+
+      void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+   private:
+      Simulation *simulation;
+
+      //Active Engines
+      bool activeEngines[EnginesEnum::nrOfEngine] = { true, false };
+      void enginesDraw();
+
+      //Idle Loop
+      QTimer *timer;
+      void initiateIdleLoop();
+
+
+      // OpenGL initialization
+      void initializeUniforms();
+
+      void initializeColorMapInfo();
+
+      void connectThisAndEngine(AbstractEngine *engine);
 };
 
 #endif // CANVAS_H
