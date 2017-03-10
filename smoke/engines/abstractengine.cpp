@@ -76,13 +76,11 @@ void AbstractEngine::setMVPMatrix()
 /** Slots **/
 void AbstractEngine::onValueRangeChangedOld(float min, float max)
 {
-   qDebug() << "AbstractEngine::onValueRangeChangedOld";
    setColorMapValueRange(min, max);
 }
 
 void AbstractEngine::onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max)
 {
-   qDebug() << "AbstractEngine::onValueRangeChanged:: " << scalar;
    if (this->colorMap->scalar == scalar) setColorMapValueRange(min, max);
 }
 
