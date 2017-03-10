@@ -9,7 +9,7 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    QVector3D normal = direction.normalized();
 
    QLineF line = QLineF(0.0f, 0.0f,
-                        direction.x(), direction.y());
+                        normal.x(), normal.y());
 
    //Given is vector dir with units A B C. We need to find a vector x,y,z such that A * x + B * y + C * z = 0.
    //Setting x, z on 1 we find y = -(A * x + C * z) / B with B != 0
@@ -21,5 +21,7 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    glyphPoints.append(position + (orth * 5));
    glyphPoints.append(position - (orth * 5));
 
-   glyphPoints.append(position + (normal * direction.length() * Settings::visualization::glyphs().vectorScale));
+
+
+   glyphPoints.append(position + (normal * direction.length() * 1000));
 }

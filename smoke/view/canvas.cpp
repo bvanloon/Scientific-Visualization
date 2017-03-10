@@ -12,12 +12,10 @@ Canvas::Canvas(QWidget *parent) :
    this->initiateIdleLoop();
 }
 
-
 Canvas::~Canvas()
 {
    delete this->timer;
 }
-
 
 void Canvas::initiateIdleLoop()
 {
@@ -25,13 +23,11 @@ void Canvas::initiateIdleLoop()
    connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
 }
 
-
 void Canvas::connectThisAndEngine(AbstractEngine *engine)
 {
    connect(this, SIGNAL(windowResized(int,int)),
           engine, SLOT(onWindowChanged(int,int)));
 }
-
 
 void Canvas::enginesDraw()
 {
@@ -45,15 +41,14 @@ void Canvas::enginesDraw()
    }
 }
 
-
 void Canvas::initializeGL()
 {
    initializeOpenGLFunctions();
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
    glEnable(GL_DEPTH_TEST);
-
-   enginemap.insert(EnginePair(EnginesEnum::glyphs, new VectorEngine(simulation->getSimulationGrid())));
    enginemap.insert(EnginePair(EnginesEnum::smoke, new SmokeEngine()));
+   enginemap.insert(EnginePair(EnginesEnum::glyphs, new VectorEngine(simulation->getSimulationGrid())));
+
 
    emit openGlReady();
 
@@ -61,32 +56,26 @@ void Canvas::initializeGL()
    connectThisAndEngine(enginemap.find(EnginesEnum::glyphs)->second);
 }
 
-
 void Canvas::idleLoop()
 {
-   if (!Settings::simulation().frozen)
-      this->simulation->step();
+   if (!Settings::simulation().frozen) this->simulation->step();
    update();
 }
-
 
 void Canvas::setSimulation(Simulation *simulation)
 {
    this->simulation = simulation;
 }
 
-
 void Canvas::onGlyphsEngineToggled(bool checked)
 {
    activeEngines[EnginesEnum::glyphs] = checked;
 }
 
-
 void Canvas::onSmokeEngineToggled(bool checked)
 {
    activeEngines[EnginesEnum::smoke] = checked;
 }
-
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
@@ -97,13 +86,11 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
    }
 }
 
-
 void Canvas::paintGL()
 {
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    enginesDraw();
 }
-
 
 void Canvas::resizeGL(int width, int height)
 {
