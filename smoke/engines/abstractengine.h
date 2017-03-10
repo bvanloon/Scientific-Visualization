@@ -23,11 +23,11 @@ public:
 
 
 public slots:
-    void onValueRangeChanged(float min, float max);
+    void onValueRangeChangedOld(float min, float max);
     void onSetClamping(bool clampingOn);
     void onsetClampingRange(float minimum, float maximum);
     void onColorMapChanged(AbstractColorMap colormap);
-    void onForceChanged(float force);
+    void onForceChangedOld(float force);
     void onWindowChanged(int width, int height);
 
 protected:

@@ -34,9 +34,9 @@ class ColorMapTab : public QWidget
       void valueRangeChanged(float minimum, float maximum);
 
    public slots:
-      void onValueRangeChanged(float minimum, float maximum);
+      void onValueRangeChangedOld(float minimum, float maximum);
 
-      void onForceChanged(float force);
+      void onForceChangedOld(float force);
 
    private slots:
       void on_clampingCheckBox_clicked(bool checked);

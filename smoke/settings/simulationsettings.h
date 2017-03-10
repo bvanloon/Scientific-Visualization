@@ -32,9 +32,9 @@ public:
    QPair<float, float> getRange(Settings::visualization::ScalarVariable scalar) const;
 
 signals:
-   void valueRangeChanged(float minimum, float maximum);
+   void valueRangeChangedOld(float minimum, float maximum);
 
-   void forceChanged(float force);
+   void forceChangedOld(float force);
    void toggleFrozen(bool frozen);
    void recomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 

@@ -73,7 +73,7 @@ void AbstractEngine::setMVPMatrix()
 }
 
 /** Slots **/
-void AbstractEngine::onValueRangeChanged(float min, float max)
+void AbstractEngine::onValueRangeChangedOld(float min, float max)
 {
    setColorMapValueRange(min, max);
 }
@@ -93,7 +93,8 @@ void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
    setTexture(colormap);
 }
 
-void AbstractEngine::onForceChanged(float force)
+
+void AbstractEngine::onForceChangedOld(float force)
 {
    if (Settings::getVisualization().scalar ==
        Settings::visualization::ScalarVariable::fluidDensity)

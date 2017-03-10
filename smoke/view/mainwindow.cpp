@@ -132,13 +132,13 @@ void MainWindow::connectGlyphTabAndSettings()
 
 void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
 {
-   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-             currentEngine, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
-            currentEngine, SLOT(onValueRangeChanged(float,float)));
+   connect(&Settings::simulation(), SIGNAL(valueRangeChangedOld(float,float)),
+             currentEngine, SLOT(onValueRangeChangedOld(float,float)));
+   connect(&Settings::getVisualization(), SIGNAL(valueRangeChangedOld(float,float)),
+            currentEngine, SLOT(onValueRangeChangedOld(float,float)));
 
-   connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            currentEngine, SLOT(onForceChanged(float)));
+   connect(&Settings::simulation(), SIGNAL(forceChangedOld(float)),
+            currentEngine, SLOT(onForceChangedOld(float)));
 }
 
 
@@ -171,12 +171,12 @@ void MainWindow::connectSmokeColorMapTabAndSettings()
 {
    connect(this->smokeColorMapTab, SIGNAL(textureVariableChanged(Settings::visualization::ScalarVariable)),
             &Settings::getVisualization(), SLOT(onTextureVariableChanged(Settings::visualization::ScalarVariable)));
-   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
-            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
-            this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
-   connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
-            this->smokeColorMapTab, SLOT(onForceChanged(float)));
+   connect(&Settings::simulation(), SIGNAL(valueRangeChangedOld(float,float)),
+            this->smokeColorMapTab, SLOT(onValueRangeChangedOld(float,float)));
+   connect(&Settings::getVisualization(), SIGNAL(valueRangeChangedOld(float,float)),
+            this->smokeColorMapTab, SLOT(onValueRangeChangedOld(float,float)));
+   connect(&Settings::simulation(), SIGNAL(forceChangedOld(float)),
+            this->smokeColorMapTab, SLOT(onForceChangedOld(float)));
    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
 }
 

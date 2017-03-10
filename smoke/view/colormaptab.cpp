@@ -163,13 +163,13 @@ void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 }
 
 
-void ColorMapTab::onValueRangeChanged(float minimum, float maximum)
+void ColorMapTab::onValueRangeChangedOld(float minimum, float maximum)
 {
    emit valueRangeChanged(minimum, maximum);
 }
 
 
-void ColorMapTab::onForceChanged(float force)
+void ColorMapTab::onForceChangedOld(float force)
 {
    if (Settings::getVisualization().scalar == Settings::visualization::ScalarVariable::fluidDensity)
    {
