@@ -61,6 +61,7 @@ HEADERS  += main.ih\
     engines/smokeengine.h \
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
+    colormaps/colormapfactory.h \
     view/colormaplegend.h utilities.h \
     settings/settings.h \
     view/colormaptab.h \
