@@ -20,7 +20,7 @@ void VectorEngine::draw(Simulation *simulation)
 {
    int bufferLength = this->updateBuffers();
 
-   drawWithMode(GL_LINES, bufferLength);
+   drawWithMode(GL_TRIANGLES, bufferLength);
 }
 
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
@@ -35,7 +35,7 @@ void VectorEngine::onGridDimensionChanged(int width, int height)
 
 int VectorEngine::updateBuffers()
 {
-   GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::hedgehog;
+   GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::triangles;
    GlyphData data = visualizationGrid->getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, glyphType);
    updateBuffer(this->vertexBuffer, glyphs.getVertices());
