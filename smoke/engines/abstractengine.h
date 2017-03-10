@@ -24,6 +24,7 @@ public:
 
 public slots:
     void onValueRangeChangedOld(float min, float max);
+    void onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max);
     void onSetClamping(bool clampingOn);
     void onsetClampingRange(float minimum, float maximum);
     void onColorMapChanged(AbstractColorMap colormap);
