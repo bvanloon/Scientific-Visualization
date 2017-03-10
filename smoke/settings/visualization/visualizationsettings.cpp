@@ -1,4 +1,4 @@
-#include "visualizationsettings.h"
+#include "../visualizationsettings.h"
 #include <QDebug>
 #include "settings/simulationsettings.h"
 
@@ -78,18 +78,7 @@ Settings::visualization::ColorMap *Settings::visualization::Smoke::getColorMap()
     return colorMap;
 }
 
-const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
-{
-   static Glyphs instance;
 
-   return instance;
-}
-
-Settings::visualization::Glyphs::Glyphs(QObject *parent) :
-   QObject(parent),
-   vectorScale(10),
-   colorMap(new ColorMap())
-{}
 
 Settings::visualization::ColorMap *Settings::visualization::Glyphs::getColorMap() const
 {
