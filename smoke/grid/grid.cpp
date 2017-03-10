@@ -21,19 +21,21 @@ Grid::~Grid()
 
 GlyphData Grid::getGlyphData() const
 {
-   qDebug() << "Grid::getGlyphData(): use variable getters for float and vector.";
    GlyphData data = GlyphData(this->numVertices());
+
    QVector<Vertex *>::const_iterator currentVertex = vertices.begin();
    QVector3D position;
-   QVector2D vector;
-   float scalar;
+   QVector2D direction;
+   Vertex *vertex;
+   float textureCoordinate;
 
    for ( ; currentVertex != vertices.end(); currentVertex++)
    {
-      position = *((*currentVertex)->getPosition());
-      vector = ((*currentVertex)->getFluidVelocity());
-      scalar = (*currentVertex)->getFluidDensity();
-      data.addGlyph(position, vector, scalar);
+      vertex = (*currentVertex);
+      position = *(vertex->getPosition());
+      direction = vertex->getFluidVelocity();
+      textureCoordinate = vertex->getFluidDensity();
+      data.addGlyph(position, direction, textureCoordinate);
    }
    return data;
 }
