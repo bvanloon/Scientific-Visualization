@@ -5,11 +5,15 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 
-class Settings::visualization::ColorMap {
+class Settings::visualization::ColorMap : public QObject {
+   Q_OBJECT
    public:
-      ColorMap();
+      explicit ColorMap(QObject *parent = 0);
 
       Settings::visualization::ScalarVariable scalar;
+
+public slots:
+      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {
@@ -17,13 +21,14 @@ class Settings::visualization::Smoke : public QObject {
    public:
       static const Smoke& instance();
 
-   private:
+      Settings::visualization::ColorMap *getColorMap() const;
+
+private:
       explicit Smoke(QObject *parent = 0);
-
-      Settings::visualization::ColorMap colorMap;
-
       Smoke(Smoke const&) = delete;
       void operator=(Smoke const&) = delete;
+
+      Settings::visualization::ColorMap* colorMap;
 };
 
 class Settings::visualization::Glyphs : public QObject {
@@ -31,13 +36,16 @@ class Settings::visualization::Glyphs : public QObject {
    public:
       static const Glyphs& instance();
 
-   private:
+      Settings::visualization::ColorMap *getColorMap() const;
+
+      float vectorScale;
+
+private:
       explicit Glyphs(QObject *parent = 0);
-
-      Settings::visualization::ColorMap colorMap;
-
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
+
+      Settings::visualization::ColorMap* colorMap;
 };
 
 class Settings::VisualizationClassOld : public QObject
@@ -50,13 +58,11 @@ class Settings::VisualizationClassOld : public QObject
       ::Simulation::textureCoordinateGetter textureGetter;
       visualization::ScalarVariable scalar;
 
-      float vectorScale;
-
    signals:
       void valueRangeChanged(float minimum, float maximum);
 
    public slots:
-      void onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
+      void onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable);
 
    private:
       explicit VisualizationClassOld(QObject *parent = 0);
