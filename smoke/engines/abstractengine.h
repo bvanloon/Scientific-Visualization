@@ -21,6 +21,7 @@ public:
     virtual ~AbstractEngine();
     virtual void draw(Simulation* Simulation) = 0;
 
+    void setColorMap(Settings::visualization::ColorMap *value);
 
 public slots:
     void onValueRangeChangedOld(float min, float max);
@@ -42,6 +43,8 @@ protected:
 
 private:
     void init();
+
+    Settings::visualization::ColorMap* colorMap;
 
     //Shaders
     QOpenGLShaderProgram *shaderProgram;
