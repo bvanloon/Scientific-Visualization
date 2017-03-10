@@ -4,6 +4,7 @@
 #include <QObject>
 #include "abstractengine.h"
 
+#include "glyphs/glyphsfactory.h"
 class VectorEngine : public AbstractEngine {
    Q_OBJECT
 
@@ -24,6 +25,7 @@ private:
 
    Grid *visualizationGrid;
    UniformGrid* simulationGrid;
+      GlyphsFactory factory;
 };
 
 #endif // VECTORENGINE_H
