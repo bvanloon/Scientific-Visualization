@@ -19,8 +19,12 @@ MainWindow::MainWindow(QWidget *parent) :
    this->canvas->setSimulation(this->simulation);
 
    this->simulationTab = ui->simulationTab;
+
    this->smokeColorMapTab = ui->smokeColormapTab;
+   this->smokeColorMapTab->setColormapSettings(Settings::visualization::smoke().getColorMap());
+
    this->glyphsTab = ui->glyphsTab;
+   this->glyphsTab->getColorMapWidget()->setColormapSettings(Settings::visualization::glyphs().getColorMap());
 
    this->installEventFilter(this->keyboardHandler);
 

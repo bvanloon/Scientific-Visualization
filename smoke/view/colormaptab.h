@@ -37,6 +37,7 @@ signals:
 
    public slots:
       void onValueRangeChangedOld(float minimum, float maximum);
+      void onValueRangeChanged(Settings::sim::Scalar variable, float min, float max);
 
       void onForceChangedOld(float force);
 
