@@ -13,6 +13,7 @@ namespace Settings {
 
     namespace visualization {
         QStringList getScalarVariableNames();
+        QStringList getVectorVariableNames();
 
         class ColorMap;
 
@@ -29,6 +30,12 @@ namespace Settings {
            fluidDensity,
            fluidVelocityMagnitude,
            forceFieldMagnitude
+        };
+
+        enum Vector
+        {
+            fluidVelocity,
+            force,
         };
     }
 
@@ -59,6 +66,7 @@ namespace Settings {
 
             namespace glyphs {
                 static const QSize gridSize = QSize(10, 15);
+                static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
             }
         }
     }
