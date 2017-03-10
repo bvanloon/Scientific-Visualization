@@ -12,24 +12,35 @@ Vertex::~Vertex()
 
 const QVector3D *Vertex::getPosition() const
 {
-    return this->position;
+   return this->position;
 }
 
 Vertex::scalarGetter Vertex::getScalarGetter(Settings::sim::Scalar scalar)
 {
-    switch (scalar)
-    {
-    case Settings::sim::fluidDensity:
-       return &Vertex::getFluidDensity;
+   switch (scalar)
+   {
+   case Settings::sim::fluidDensity:
+      return &Vertex::getFluidDensity;
 
-    case Settings::sim::fluidVelocityMagnitude:
-       return &Vertex::getFluidVelocityMagnitude;
+   case Settings::sim::fluidVelocityMagnitude:
+      return &Vertex::getFluidVelocityMagnitude;
 
-    case Settings::sim::forceFieldMagnitude:
-       return &Vertex::getForceMagnitude;
-    }
+   case Settings::sim::forceFieldMagnitude:
+      return &Vertex::getForceMagnitude;
+   }
 }
 
+Vertex::vectorGetter Vertex::getVectorGetter(Settings::sim::Vector vector)
+{
+   switch (vector)
+   {
+   case Settings::sim::fluidVelocity:
+      return &Vertex::getFluidVelocity;
+
+   case Settings::sim::force:
+      return &Vertex::getForce;
+   }
+}
 
 QDebug operator<<(QDebug stream, const Vertex& vertex)
 {
@@ -40,13 +51,11 @@ QDebug operator<<(QDebug stream, const Vertex& vertex)
    return stream;
 }
 
-
 QDebug operator<<(QDebug stream, Vertex *vertex)
 {
    stream << *vertex;
    return stream;
 }
-
 
 SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho) :
    StructuredGridVertex(position),
@@ -61,30 +70,25 @@ QVector2D SimulationVertex::getFluidVelocity() const
    return QVector2D(*(vx), *(vy));
 }
 
-
 float SimulationVertex::getFluidVelocityMagnitude() const
 {
    return getFluidVelocity().length();
 }
-
 
 QVector2D SimulationVertex::getForce() const
 {
    return QVector2D(*(fx), *(fy));
 }
 
-
 float SimulationVertex::getForceMagnitude() const
 {
    return getForce().length();
 }
 
-
 float SimulationVertex::getFluidDensity() const
 {
    return *rho;
 }
-
 
 QDebug operator<<(QDebug stream, const SimulationVertex& vertex)
 {
@@ -97,13 +101,11 @@ QDebug operator<<(QDebug stream, const SimulationVertex& vertex)
    return stream;
 }
 
-
 QDebug operator<<(QDebug stream, SimulationVertex *vertex)
 {
    stream << *vertex;
    return stream;
 }
-
 
 QDebug operator<<(QDebug stream, const VisualizationVertex& vertex)
 {
@@ -113,13 +115,11 @@ QDebug operator<<(QDebug stream, const VisualizationVertex& vertex)
    return stream;
 }
 
-
 QDebug operator<<(QDebug stream, VisualizationVertex *vertex)
 {
    stream << *vertex;
    return stream;
 }
-
 
 VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell) :
    StructuredGridVertex(position),
@@ -130,9 +130,9 @@ VisualizationVertex::VisualizationVertex(const QVector3D *position, Cell *cell) 
 QVector2D VisualizationVertex::getFluidVelocity() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
+
    return cell->interpolate2DVector(*position, &Vertex::getFluidVelocity);
 }
-
 
 float VisualizationVertex::getFluidVelocityMagnitude() const
 {
@@ -141,14 +141,12 @@ float VisualizationVertex::getFluidVelocityMagnitude() const
    return cell->interpolateScalar(*position, &Vertex::getFluidVelocityMagnitude);
 }
 
-
 QVector2D VisualizationVertex::getForce() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
    return cell->interpolate2DVector(*position, &Vertex::getForce);
 }
-
 
 float VisualizationVertex::getForceMagnitude() const
 {
@@ -157,14 +155,12 @@ float VisualizationVertex::getForceMagnitude() const
    return cell->interpolateScalar(*position, &Vertex::getForceMagnitude);
 }
 
-
 float VisualizationVertex::getFluidDensity() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
    return cell->interpolateScalar(*position, &Vertex::getFluidDensity);
 }
-
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position) :
    Vertex(position)
@@ -176,12 +172,10 @@ Cell *StructuredGridVertex::getLowerRightCell() const
    return lowerRightCell;
 }
 
-
 void StructuredGridVertex::setLowerRightCell(Cell *value)
 {
    lowerRightCell = value;
 }
-
 
 bool StructuredGridVertex::hasLowerRightCell()
 {
