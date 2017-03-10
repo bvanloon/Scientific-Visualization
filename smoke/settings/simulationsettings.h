@@ -35,7 +35,6 @@ signals:
    void valueRangeChangedOld(float minimum, float maximum);
    void valueRangeChanged(Settings::sim::Scalar scalar, float minimum, float maximum);
 
-   void forceChangedOld(float force);
    void toggleFrozen(bool frozen);
    void recomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 

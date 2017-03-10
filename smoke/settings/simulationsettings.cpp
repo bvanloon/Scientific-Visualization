@@ -46,7 +46,6 @@ void Settings::Simulation::onForceChanged(float newForce)
 {
    this->force = newForce;
    updateRange(Settings::sim::fluidDensity, 0.0f, newForce);
-   emit forceChangedOld(newForce);
 }
 
 void Settings::Simulation::onWindowResized(int width, int height)
