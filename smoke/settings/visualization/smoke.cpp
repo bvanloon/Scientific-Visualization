@@ -1,3 +1,5 @@
+#include "settings/visualizationsettings.h"
+
 const Settings::visualization::Smoke& Settings::visualization::Smoke::instance()
 {
    static Smoke instance;
