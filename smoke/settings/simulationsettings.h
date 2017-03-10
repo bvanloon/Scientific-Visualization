@@ -32,7 +32,6 @@ public:
    QPair<float, float> getRange(Settings::sim::Scalar scalar) const;
 
 signals:
-   void valueRangeChangedOld(float minimum, float maximum);
    void valueRangeChanged(Settings::sim::Scalar scalar, float minimum, float maximum);
 
    void toggleFrozen(bool frozen);

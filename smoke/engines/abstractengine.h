@@ -24,7 +24,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void setColorMap(Settings::visualization::ColorMap *value);
 
    public slots:
-      void onValueRangeChangedOld(float min, float max);
 
       void onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max);
 
