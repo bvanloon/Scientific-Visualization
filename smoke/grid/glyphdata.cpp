@@ -6,8 +6,8 @@ GlyphData::GlyphData()
 GlyphData::GlyphData(int numGlyphs)
 {
    positions.reserve(numGlyphs);
-   vectors.reserve(numGlyphs);
-   scalars.reserve(numGlyphs);
+   directions.reserve(numGlyphs);
+   textureCoordinates.reserve(numGlyphs);
 }
 
 int GlyphData::numGlyphs()
@@ -23,15 +23,15 @@ void GlyphData::extend(GlyphData *other)
 void GlyphData::extend(GlyphData other)
 {
    positions.append(other.positions);
-   vectors.append(other.vectors);
-   scalars.append(other.scalars);
+   directions.append(other.directions);
+   textureCoordinates.append(other.textureCoordinates);
 }
 
-void GlyphData::addGlyph(QVector3D position, QVector2D vector, float scalar)
+void GlyphData::addGlyph(QVector3D position, QVector2D direction, float textureCoordinate)
 {
-   positions.append(position);
-   vectors.append(vector);
-   scalars.append(scalar);
+   this->positions.append(position);
+   this->directions.append(direction);
+   this->textureCoordinates.append(textureCoordinate);
 }
 
 QVector<QVector3D> GlyphData::getPositions() const
@@ -39,12 +39,12 @@ QVector<QVector3D> GlyphData::getPositions() const
    return positions;
 }
 
-QVector<QVector3D> GlyphData::getVectors() const
+QVector<QVector3D> GlyphData::getDirections() const
 {
-   return vectors;
+   return directions;
 }
 
-QVector<float> GlyphData::getScalars() const
+QVector<float> GlyphData::getTextureCoordinates() const
 {
-   return scalars;
+   return textureCoordinates;
 }
