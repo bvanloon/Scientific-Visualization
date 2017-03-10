@@ -19,9 +19,6 @@ signals:
 
 public slots:
       void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
-
-private:
-      Vertex::scalarGetter getTextureGetter(Settings::sim::Scalar scalarVariable);
 };
 
 class Settings::visualization::Smoke : public QObject {
@@ -43,8 +40,12 @@ class Settings::visualization::Glyphs : public QObject {
       static const Glyphs& instance();
 
       Settings::visualization::ColorMap* colorMap;
+      Vertex::vectorGetter vectorGetter;
 
       float vectorScale;
+
+public slots:
+      void onVectorFieldChanged(Settings::sim::Vector vectorField);
 
 private:
       explicit Glyphs(QObject *parent = 0);

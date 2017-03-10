@@ -4,6 +4,7 @@
 #include <QVector3D>
 #include <QVector2D>
 #include <QDebug>
+#include "settings/simulationsettings.h"
 
 class Cell;
 
@@ -28,6 +29,9 @@ public:
     virtual float getForceMagnitude() const = 0;
 
     virtual float getFluidDensity() const = 0;
+
+    static Vertex::scalarGetter getScalarGetter(Settings::sim::Scalar scalar);
+    static Vertex::vectorGetter getVectorGetter(Settings::sim::Vector vector);
 
 protected:
     const QVector3D *position;

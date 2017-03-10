@@ -1,4 +1,5 @@
 #include "grid.h"
+#include "settings/visualizationsettings.h"
 
 Grid::Grid(int numberOfVertices, bool hasPadding) :
    vertices(numberOfVertices),
@@ -21,19 +22,26 @@ Grid::~Grid()
 
 GlyphData Grid::getGlyphData() const
 {
-   qDebug() << "Grid::getGlyphData(): use variable getters for float and vector.";
    GlyphData data = GlyphData(this->numVertices());
+
    QVector<Vertex *>::const_iterator currentVertex = vertices.begin();
    QVector3D position;
-   QVector2D vector;
-   float scalar;
+   QVector2D direction;
+   Vertex *vertex;
+   float textureCoordinate;
+
+   Vertex::vectorGetter getDirection = Settings::visualization::glyphs().vectorGetter;
+   Vertex::scalarGetter getTexCoord = Settings::visualization::glyphs().colorMap->textureGetter;
+
 
    for ( ; currentVertex != vertices.end(); currentVertex++)
    {
-      position = *((*currentVertex)->getPosition());
-      vector = ((*currentVertex)->getFluidVelocity());
-      scalar = (*currentVertex)->getFluidDensity();
-      data.addGlyph(position, vector, scalar);
+      vertex = (*currentVertex);
+      position = *(vertex->getPosition());
+      direction = (vertex->*(getDirection))();
+      textureCoordinate = (vertex->*(getTexCoord))();
+
+      data.addGlyph(position, direction, textureCoordinate);
    }
    return data;
 }
