@@ -25,7 +25,6 @@ void ColorMapTab::connectToColorMapSettings(Settings::visualization::ColorMap *c
             colorMap, SLOT(onTextureVariableChanged(Settings::sim::Scalar)));
    connect(colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            this, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
-
 }
 
 void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
@@ -128,7 +127,7 @@ void ColorMapTab::setUpConnections()
    connect(this->ui->saturationSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_saturationSlider_valueChanged(float)));
 
-    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
             this, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
@@ -156,13 +155,9 @@ void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
       static_cast<Settings::sim::Scalar>(index));
 }
 
-void ColorMapTab::onValueRangeChangedOld(float minimum, float maximum)
-{
-   emit valueRangeChanged(minimum, maximum);
-}
-
 void ColorMapTab::onValueRangeChanged(Settings::sim::Scalar variable, float min, float max)
 {
+   qDebug() << "ColorMapTab::onValueRangeChanged";
    if (colormapSettings->scalar == variable) emit valueRangeChanged(min, max);
 }
 
