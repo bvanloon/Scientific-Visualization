@@ -5,8 +5,7 @@
 Settings::VisualizationClassOld::VisualizationClassOld(QObject *parent) :
    QObject(parent),
    textureGetter(&::Simulation::getTexCoordFluidDensity),
-   scalar(visualization::ScalarVariable::fluidDensity),
-   vectorScale(10)
+   scalar(visualization::ScalarVariable::fluidDensity)
 {}
 
 void Settings::VisualizationClassOld::setScalarVariableToFluidDensity()
@@ -88,6 +87,7 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
+   vectorScale(10),
    colorMap(new ColorMap())
 {}
 

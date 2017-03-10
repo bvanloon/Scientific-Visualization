@@ -38,6 +38,8 @@ class Settings::visualization::Glyphs : public QObject {
 
       Settings::visualization::ColorMap *getColorMap() const;
 
+      float vectorScale;
+
 private:
       explicit Glyphs(QObject *parent = 0);
       Glyphs(Glyphs const&) = delete;
@@ -55,8 +57,6 @@ class Settings::VisualizationClassOld : public QObject
 
       ::Simulation::textureCoordinateGetter textureGetter;
       visualization::ScalarVariable scalar;
-
-      float vectorScale;
 
    signals:
       void valueRangeChanged(float minimum, float maximum);
