@@ -46,3 +46,13 @@ void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
    int height = ui->gridHeightSpinBox->value();
    emit gridDimensionChanged(width, height);
 }
+
+void GlyphsTab::on_vectorFieldComboBox_currentIndexChanged(int index)
+{
+
+}
+
+void GlyphsTab::on_scalarFieldComboBox_currentIndexChanged(int index)
+{
+
+}

@@ -16,44 +16,48 @@
 class Simulation : public QObject {
    Q_OBJECT
 
-public:
+   public:
 
-   explicit Simulation(QObject *parent = 0);
-   ~Simulation();
+      explicit Simulation(QObject *parent = 0);
+      ~Simulation();
 
-   typedef QVector<float>(Simulation::*textureCoordinateGetter)(Triangulation);
+      typedef QVector<float>(Simulation::*textureCoordinateGetter)(Triangulation);
 
-   GlyphData getGlyphData();
-   GlyphData getGlyphData(Grid *grid);
-   Triangulation getGridTriangulation();
-   UniformGrid *getSimulationGrid() const;
+      GlyphData getGlyphData();
 
-   QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
+      GlyphData getGlyphData(Grid *grid);
 
-   QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
+      Triangulation getGridTriangulation();
 
-   QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
+      UniformGrid *getSimulationGrid() const;
 
-   SimulationRealization *realization;
+      QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
 
-   void step();
+      QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
 
-signals:
+      QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
 
-public slots:
+      QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
 
-   void onMouseMoved(QPoint newPosition);
-   void onStep();
-   void onWindowResized(int width,
-                        int height);
+      SimulationRealization *realization;
 
-private:
+      void step();
 
-   QPoint lastMousePosition;
-   UniformGrid *simulationGrid;
+   signals:
 
-   QVector<float> getTexCoord(Vertex::scalarGetter getter,
-                              Triangulation        triangulation);
+   public slots:
+
+      void onMouseMoved(QPoint newPosition);
+
+      void onStep();
+
+      void onWindowResized(int width,
+                           int height);
+
+   private:
+
+      QPoint lastMousePosition;
+      UniformGrid *simulationGrid;
 };
 
 #endif // SMOKE_H

@@ -1,5 +1,6 @@
 #include "smokeengine.h"
 #include "grid/triangulation.h"
+#include "settings/visualizationsettings.h"
 
 SmokeEngine::SmokeEngine() :
    AbstractEngine()
@@ -18,7 +19,9 @@ int SmokeEngine::updateBuffers(Simulation *simulation)
 
    QVector<QVector3D> triangles = triangulation.getVertexPositions();
 
-   QVector<float> textureCoordinates = (simulation->*Settings::getVisualization().textureGetter)(triangulation);
+   QVector<float> textureCoordinates = simulation->getTexCoord(
+               Settings::visualization::smoke().colorMap->textureGetter,
+               triangulation);
 
    updateBuffer(this->vertexBuffer, triangles);
    updateBuffer(this->textureCoordinateBuffer, textureCoordinates);

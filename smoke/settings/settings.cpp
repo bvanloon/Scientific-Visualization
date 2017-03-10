@@ -13,11 +13,6 @@ const Settings::Canvas& Settings::canvas()
    return Canvas::instance();
 }
 
-const Settings::VisualizationClassOld& Settings::getVisualization()
-{
-   return VisualizationClassOld::instance();
-}
-
 const Settings::visualization::Smoke& Settings::visualization::smoke()
 {
    return Settings::visualization::Smoke::instance();
