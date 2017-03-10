@@ -32,23 +32,11 @@ void VectorEngine::onGridDimensionChanged(int width, int height)
 }
 int VectorEngine::updateBuffers()
 {
+   GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::hedgehog;
    GlyphData data = visualizationGrid->getGlyphData();
+   GlyphsTriangulation glyphs = factory.createGlyphs(data, glyphType);
+   updateBuffer(this->vertexBuffer, glyphs.getVertices());
+   updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
 
-   QVector<QVector3D> vertices;
-   QVector<float> textureCoordinates;
-
-   for (int i = 0; i < data.numGlyphs(); i++)
-   {
-      vertices.append(data.getPositions().at(i));
-      vertices.append(data.getPositions().at(
-                      i) + Settings::visualization::glyphs().vectorScale *
-                    data.getVectors().at(i));
-
-      textureCoordinates.append(data.getScalars().at(i));
-      textureCoordinates.append(data.getScalars().at(i));
-   }
-
-   updateBuffer(this->vertexBuffer, vertices);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   return vertices.length();
+   return glyphs.getVertices().length();
 }
