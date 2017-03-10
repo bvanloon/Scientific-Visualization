@@ -50,8 +50,8 @@ SOURCES += main.cpp\
     view/glyphstab.cpp \
     grid/glyphdata.cpp \
     colormaps/huecolormap.cpp \
-    settings/visualization/glyphs.cpp \
-    settings/visualization/smoke.cpp
+    settings/visualization/glyphsettings.cpp \
+    settings/visualization/smokesettings.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
