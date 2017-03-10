@@ -5,8 +5,7 @@
 Settings::VisualizationClassOld::VisualizationClassOld(QObject *parent) :
    QObject(parent),
    textureGetter(&::Simulation::getTexCoordFluidDensity),
-   scalar(visualization::ScalarVariable::fluidDensity),
-   vectorScale(10)
+   scalar(visualization::ScalarVariable::fluidDensity)
 {}
 
 void Settings::VisualizationClassOld::setScalarVariableToFluidDensity()
@@ -39,7 +38,7 @@ const Settings::VisualizationClassOld& Settings::VisualizationClassOld::instance
    return instance;
 }
 
-void Settings::VisualizationClassOld::onScalarVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+void Settings::VisualizationClassOld::onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
 {
    switch (scalarVariable)
    {
@@ -70,8 +69,14 @@ const Settings::visualization::Smoke& Settings::visualization::Smoke::instance()
 }
 
 Settings::visualization::Smoke::Smoke(QObject *parent) :
-   QObject(parent)
+   QObject(parent),
+   colorMap(new ColorMap())
 {}
+
+Settings::visualization::ColorMap *Settings::visualization::Smoke::getColorMap() const
+{
+    return colorMap;
+}
 
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
 {
@@ -81,9 +86,23 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 }
 
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
-   QObject(parent)
+   QObject(parent),
+   vectorScale(10),
+   colorMap(new ColorMap())
 {}
 
-Settings::visualization::ColorMap::ColorMap() :
-   scalar(visualization::ScalarVariable::fluidDensity)
+Settings::visualization::ColorMap *Settings::visualization::Glyphs::getColorMap() const
+{
+    return colorMap;
+}
+
+
+Settings::visualization::ColorMap::ColorMap(QObject *parent) :
+    QObject(parent),
+    scalar(visualization::ScalarVariable::fluidDensity)
 {}
+
+void Settings::visualization::ColorMap::onTextureVariableChanged(Settings::visualization::ScalarVariable scalarVariable)
+{
+    qDebug() << "Settings::visualization::ColorMap::onTextureVariableChanged: " << scalarVariable;
+}

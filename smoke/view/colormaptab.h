@@ -16,39 +16,53 @@ class ColorMapTab : public QWidget
 {
    Q_OBJECT
 
-public:
-   explicit ColorMapTab(QWidget *parent = 0);
-   ~ColorMapTab();
+   public:
+      explicit ColorMapTab(QWidget *parent = 0);
+      ~ColorMapTab();
 
-signals:
-   void setClamping(bool clampingOn);
-   void setClampingRange(float minimum, float maximum);
-   void colorMapChanged(AbstractColorMap colormap);
-   void scalarVariableChanged(Settings::visualization::ScalarVariable variable);
-   void valueRangeChanged(float minimum, float maximum);
+      void connectToColorMapSettings(Settings::visualization::ColorMap *colorMap);
 
-public slots:
-   void onValueRangeChanged(float minimum, float maximum);
-   void onForceChanged(float force);
+   signals:
+      void setClamping(bool clampingOn);
 
-private slots:
-   void on_clampingCheckBox_clicked(bool checked);
-   void on_clampingMaximumSlider_valueChanged(float value);
-   void on_clampingMinimumSlider_valueChanged(float value);
-   void on_numColorsSlider_valueChanged(int value);
-   void on_colormapSelector_currentIndexChanged(int index);
-   void on_saturationSlider_valueChanged(float value);
-   void on_variableSelector_currentIndexChanged(int index);
+      void setClampingRange(float minimum, float maximum);
 
-   void on_colorPickerButton_clicked();
+      void colorMapChanged(AbstractColorMap colormap);
 
-private:
-   Ui::ColorMapTab *ui;
+      void textureVariableChanged(Settings::visualization::ScalarVariable variable);
 
-   void setUItoDefaults();
-   void setUpConnections();
+      void valueRangeChanged(float minimum, float maximum);
 
-   void clampingUISetDisabled(bool disabled);
+   public slots:
+      void onValueRangeChanged(float minimum, float maximum);
+
+      void onForceChanged(float force);
+
+   private slots:
+      void on_clampingCheckBox_clicked(bool checked);
+
+      void on_clampingMaximumSlider_valueChanged(float value);
+
+      void on_clampingMinimumSlider_valueChanged(float value);
+
+      void on_numColorsSlider_valueChanged(int value);
+
+      void on_colormapSelector_currentIndexChanged(int index);
+
+      void on_saturationSlider_valueChanged(float value);
+
+      void on_variableSelector_currentIndexChanged(int index);
+
+      void on_colorPickerButton_clicked();
+
+   private:
+      Ui::ColorMapTab *ui;
+
+      void setUItoDefaults();
+
+      void setUpConnections();
+
+      void clampingUISetDisabled(bool disabled);
 };
 
 #endif // COLORMAPTAB_H

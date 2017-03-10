@@ -61,6 +61,8 @@ void MainWindow::setUpConnections()
    connectSimulationTabAndSettings();
    connectSimulationTabAndSimulation();
 
+   connectGlyphTabAndSettings();
+
    connectSmokeColorMapTabAndSettings();
 
    connectKeyBoardHandlerAndSimulation();
@@ -119,7 +121,12 @@ void MainWindow::connectSimulationTabAndSettings()
 void MainWindow::connectSimulationTabAndSimulation()
 {
    connect(this->simulationTab, SIGNAL(step()),
-            this->simulation, SLOT(onStep()));
+           this->simulation, SLOT(onStep()));
+}
+
+void MainWindow::connectGlyphTabAndSettings()
+{
+    this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
 }
 
 
@@ -162,14 +169,15 @@ void MainWindow::connectVectorEngineAndSettings()
 
 void MainWindow::connectSmokeColorMapTabAndSettings()
 {
-   connect(this->smokeColorMapTab, SIGNAL(scalarVariableChanged(Settings::visualization::ScalarVariable)),
-            &Settings::getVisualization(), SLOT(onScalarVariableChanged(Settings::visualization::ScalarVariable)));
+   connect(this->smokeColorMapTab, SIGNAL(textureVariableChanged(Settings::visualization::ScalarVariable)),
+            &Settings::getVisualization(), SLOT(onTextureVariableChanged(Settings::visualization::ScalarVariable)));
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
    connect(&Settings::getVisualization(), SIGNAL(valueRangeChanged(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChanged(float,float)));
    connect(&Settings::simulation(), SIGNAL(forceChanged(float)),
             this->smokeColorMapTab, SLOT(onForceChanged(float)));
+   this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
 }
 
 
