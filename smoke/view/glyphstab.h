@@ -29,8 +29,6 @@ class GlyphsTab : public QWidget
 
       void on_vectorFieldComboBox_currentIndexChanged(int index);
 
-      void on_scalarFieldComboBox_currentIndexChanged(int index);
-
    private:
       Ui::GlyphsTab *ui;
 
