@@ -33,6 +33,7 @@ public:
 
 signals:
    void valueRangeChanged(float minimum, float maximum);
+
    void forceChanged(float force);
    void toggleFrozen(bool frozen);
    void recomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
@@ -52,6 +53,8 @@ private:
    void operator=(Simulation const&) = delete;
 
    QMultiMap<Settings::visualization::ScalarVariable, QPair<float, float>> scalarRanges;
+
+   void updateRange(Settings::visualization::ScalarVariable scalar, float minimum, float maximum);
 
    void updateGridCellSize();
    void updateGridCellSize(int width, int height);

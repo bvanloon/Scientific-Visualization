@@ -16,6 +16,14 @@ Settings::Simulation::Simulation(QObject *parent) :
    scalarRanges.insert(Settings::visualization::ScalarVariable::forceFieldMagnitude, QPair<float, float>(0.0f, 0.5f));
 }
 
+void Settings::Simulation::updateRange(Settings::visualization::ScalarVariable scalar, float minimum, float maximum)
+{
+   QPair<float, float> range = scalarRanges.find(scalar).value();
+   range.first = minimum;
+   range.second = maximum;
+   qDebug() << "Settings::Simulation::updateRange: emit valueRangeChanged(scalar, minimum, maximum)";
+}
+
 const Settings::Simulation& Settings::Simulation::instance()
 {
    static Simulation instance;
@@ -37,7 +45,7 @@ void Settings::Simulation::onDimensionChanged(int newDimension)
 void Settings::Simulation::onForceChanged(float newForce)
 {
    this->force = newForce;
-   scalarRanges.find(Settings::visualization::ScalarVariable::forceFieldMagnitude).value().second = newForce;
+   updateRange(Settings::visualization::fluidDensity, 0.0f, newForce);
    emit forceChanged(newForce);
 }
 
