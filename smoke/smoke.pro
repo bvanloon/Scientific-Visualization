@@ -37,6 +37,8 @@ SOURCES += main.cpp\
     settings/canvassettings.cpp \
     settings/simulationsettings.cpp \
     settings/visualization/visualizationsettings.cpp \
+    settings/visualization/glyphsettings.cpp \
+    settings/visualization/smokesettings.cpp \
     view/simulationtab.cpp \
     keyboardhandler.cpp \
     colormaps/zebramap.cpp \
