@@ -10,14 +10,22 @@ Settings::Simulation::Simulation(QObject *parent) :
    force(10.0f),
    timestep(0.4),
    cellSize(-1, -1)
-{}
-
+{
+    scalarRanges.insert(Settings::visualization::ScalarVariable::fluidDensity, QPair<float, float>(0.0f, force));
+    scalarRanges.insert(Settings::visualization::ScalarVariable::fluidVelocityMagnitude, QPair<float, float>(0.0f, 0.1f));
+    scalarRanges.insert(Settings::visualization::ScalarVariable::forceFieldMagnitude, QPair<float, float>(0.0f, 0.5f));
+}
 
 const Settings::Simulation& Settings::Simulation::instance()
 {
-   static Simulation instance;
+    static Simulation instance;
 
-   return instance;
+    return instance;
+}
+
+QPair<float, float> Settings::Simulation::getRange(Settings::visualization::ScalarVariable scalar) const
+{
+    return this->scalarRanges.constFind(scalar).value();
 }
 
 

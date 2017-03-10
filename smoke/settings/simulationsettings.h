@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSizeF>
+#include <QMultiMap>
 #include "settings.h"
 
 class Settings::Simulation : public QObject
@@ -27,6 +28,9 @@ public:
    const float simulationTimeStepMinimum = 0.35;
    const float simulationTimeStepMaximum = 0.45;
 
+
+   QPair<float, float> getRange(Settings::visualization::ScalarVariable scalar) const;
+
 signals:
    void valueRangeChanged(float minimum, float maximum);
    void forceChanged(float force);
@@ -46,6 +50,8 @@ private:
 
    Simulation(Simulation const&)     = delete;
    void operator=(Simulation const&) = delete;
+
+   QMultiMap<Settings::visualization::ScalarVariable, QPair<float, float>> scalarRanges;
 
    void updateGridCellSize();
    void updateGridCellSize(int width, int height);
