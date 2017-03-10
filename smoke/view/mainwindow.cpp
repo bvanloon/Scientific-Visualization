@@ -118,7 +118,7 @@ void MainWindow::connectSimulationTabAndSimulation()
 
 void MainWindow::connectGlyphTabAndSettings()
 {
-   this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
+   this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::glyphs().getColorMap());
 }
 
 void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
