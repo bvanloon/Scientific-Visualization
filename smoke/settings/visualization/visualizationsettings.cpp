@@ -64,7 +64,8 @@ void Settings::VisualizationClassOld::onTextureVariableChangedOld(sim::Scalar sc
 
 Settings::visualization::ColorMap::ColorMap(QObject *parent) :
     QObject(parent),
-    scalar(Settings::sim::Scalar::fluidDensity)
+    scalar(Settings::sim::Scalar::fluidDensity),
+    textureGetter(&Vertex::getFluidDensity)
 {}
 
 void Settings::visualization::ColorMap::onTextureVariableChanged(sim::Scalar scalarVariable)
