@@ -1,4 +1,5 @@
 #include "grid.h"
+#include "settings/visualizationsettings.h"
 
 Grid::Grid(int numberOfVertices, bool hasPadding) :
    vertices(numberOfVertices),
@@ -29,12 +30,17 @@ GlyphData Grid::getGlyphData() const
    Vertex *vertex;
    float textureCoordinate;
 
+   Vertex::vectorGetter getDirection = Settings::visualization::glyphs().vectorGetter;
+   Vertex::scalarGetter getTexCoord = Settings::visualization::glyphs().colorMap->textureGetter;
+
+
    for ( ; currentVertex != vertices.end(); currentVertex++)
    {
       vertex = (*currentVertex);
       position = *(vertex->getPosition());
-      direction = vertex->getFluidVelocity();
-      textureCoordinate = vertex->getFluidDensity();
+      direction = (vertex->*(getDirection))();
+      textureCoordinate = (vertex->*(getTexCoord))();
+
       data.addGlyph(position, direction, textureCoordinate);
    }
    return data;

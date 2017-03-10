@@ -40,6 +40,7 @@ class Settings::visualization::Glyphs : public QObject {
       static const Glyphs& instance();
 
       Settings::visualization::ColorMap* colorMap;
+      Vertex::vectorGetter vectorGetter;
 
       float vectorScale;
 
