@@ -29,14 +29,13 @@ class Settings::visualization::Smoke : public QObject {
    public:
       static const Smoke& instance();
 
+    Settings::visualization::ColorMap* colorMap;
       Settings::visualization::ColorMap *getColorMap() const;
 
 private:
       explicit Smoke(QObject *parent = 0);
       Smoke(Smoke const&) = delete;
       void operator=(Smoke const&) = delete;
-
-      Settings::visualization::ColorMap* colorMap;
 };
 
 class Settings::visualization::Glyphs : public QObject {
@@ -44,6 +43,7 @@ class Settings::visualization::Glyphs : public QObject {
    public:
       static const Glyphs& instance();
 
+      Settings::visualization::ColorMap* colorMap;
       Settings::visualization::ColorMap *getColorMap() const;
 
       float vectorScale;
@@ -52,8 +52,6 @@ private:
       explicit Glyphs(QObject *parent = 0);
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
-
-      Settings::visualization::ColorMap* colorMap;
 };
 
 class Settings::VisualizationClassOld : public QObject
