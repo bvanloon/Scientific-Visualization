@@ -21,7 +21,6 @@ ColorMapTab::~ColorMapTab()
 
 void ColorMapTab::connectToColorMapSettings(Settings::visualization::ColorMap *colorMap)
 {
-    qDebug() << "ColorMapTab::connectToColorMapSettings";
     connect(this, SIGNAL(textureVariableChanged(Settings::visualization::ScalarVariable)),
             colorMap, SLOT(onTextureVariableChanged(Settings::visualization::ScalarVariable)));
 }
