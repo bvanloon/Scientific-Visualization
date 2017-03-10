@@ -206,8 +206,6 @@ void AbstractEngine::initializeShaders()
    this->shaderProgram = new QOpenGLShaderProgram();
    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Vertex,
                                                ":/shaders/shaders/vertex.glsl");
-   this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Geometry,
-                                                ":/shaders/shaders/geometry.glsl");
    this->shaderProgram->addShaderFromSourceFile(QOpenGLShader::Fragment,
                                                ":/shaders/shaders/fragment.glsl");
    this->shaderProgram->link();
