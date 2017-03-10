@@ -61,30 +61,6 @@ void Settings::VisualizationClassOld::onTextureVariableChanged(Settings::visuali
    }
 }
 
-const Settings::visualization::Smoke& Settings::visualization::Smoke::instance()
-{
-   static Smoke instance;
-
-   return instance;
-}
-
-Settings::visualization::Smoke::Smoke(QObject *parent) :
-   QObject(parent),
-   colorMap(new ColorMap())
-{}
-
-Settings::visualization::ColorMap *Settings::visualization::Smoke::getColorMap() const
-{
-    return colorMap;
-}
-
-
-
-Settings::visualization::ColorMap *Settings::visualization::Glyphs::getColorMap() const
-{
-    return colorMap;
-}
-
 
 Settings::visualization::ColorMap::ColorMap(QObject *parent) :
     QObject(parent),
