@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     colormaps/huecolormap.cpp \
     glyphs/glyphsfactory.cpp \
     glyphs/abstractglyph.cpp \
-    glyphs/glyphstriangulation.cpp
+    glyphs/glyphstriangulation.cpp \
+    glyphs/glyphtriangle.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -88,7 +89,8 @@ HEADERS  += main.ih\
     colormaps/huecolormap.h \
     glyphs/glyphsfactory.h \
     glyphs/abstractglyph.h \
-    glyphs/glyphstriangulation.h
+    glyphs/glyphstriangulation.h \
+    glyphs/glyphtriangle.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
