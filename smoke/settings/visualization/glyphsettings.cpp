@@ -14,3 +14,8 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 
    return instance;
 }
+
+void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector vectorField)
+{
+    qDebug() << "Settings::visualization::Glyphs::onVectorFieldChanged";
+}

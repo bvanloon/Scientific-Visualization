@@ -46,6 +46,9 @@ class Settings::visualization::Glyphs : public QObject {
 
       float vectorScale;
 
+public slots:
+      void onVectorFieldChanged(Settings::sim::Vector vectorField);
+
 private:
       explicit Glyphs(QObject *parent = 0);
       Glyphs(Glyphs const&) = delete;

@@ -52,5 +52,5 @@ void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
 
 void GlyphsTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 {
-    qDebug() <<  "GlyphsTab::on_vectorFieldComboBox_currentIndexChanged: do something!";
+    emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
 }

@@ -21,6 +21,7 @@ class GlyphsTab : public QWidget
 
    signals:
       void gridDimensionChanged(int widht, int height);
+      void vectorFieldChanged(Settings::sim::Vector vectorField);
 
    private slots:
       void on_gridHeightSpinBox_valueChanged(int height);
