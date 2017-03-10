@@ -11,8 +11,3 @@ Settings::visualization::Smoke::Smoke(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap())
 {}
-
-Settings::visualization::ColorMap *Settings::visualization::Smoke::getColorMap() const
-{
-   return colorMap;
-}

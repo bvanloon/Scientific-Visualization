@@ -23,9 +23,6 @@ namespace Settings {
         const Glyphs& glyphs();
     }
 
-    class VisualizationClassOld;
-    const VisualizationClassOld& getVisualization();
-
     namespace sim {
         enum Scalar
         {
@@ -50,6 +47,7 @@ namespace Settings {
                 static const float clampMax = 1.0f;
                 static const bool clampingOn = false;
                 static const float clampEpsilon = 0.01;
+                static const Settings::sim::Scalar scalar = Settings::sim::fluidDensity;
 
                 static const int numColors = 256;
                 static const int minNumColors = 2;
