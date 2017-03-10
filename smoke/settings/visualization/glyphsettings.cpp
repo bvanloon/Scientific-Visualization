@@ -14,8 +14,3 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 
    return instance;
 }
-
-Settings::visualization::ColorMap *Settings::visualization::Glyphs::getColorMap() const
-{
-   return colorMap;
-}
