@@ -22,7 +22,9 @@ class ColorMapTab : public QWidget
 
       void connectToColorMapSettings(Settings::visualization::ColorMap *colorMap);
 
-   signals:
+      void setColormapSettings(Settings::visualization::ColorMap *value);
+
+signals:
       void setClamping(bool clampingOn);
 
       void setClampingRange(float minimum, float maximum);
@@ -57,6 +59,7 @@ class ColorMapTab : public QWidget
 
    private:
       Ui::ColorMapTab *ui;
+      Settings::visualization::ColorMap* colormapSettings;
 
       void setUItoDefaults();
 

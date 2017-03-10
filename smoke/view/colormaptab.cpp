@@ -196,3 +196,9 @@ void ColorMapTab::on_colorPickerButton_clicked()
       emit colorMapChanged(*newColormap);
    }
 }
+
+void ColorMapTab::setColormapSettings(Settings::visualization::ColorMap *value)
+{
+    colormapSettings = value;
+    connectToColorMapSettings(value);
+}
