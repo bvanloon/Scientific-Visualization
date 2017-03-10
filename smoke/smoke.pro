@@ -49,7 +49,8 @@ SOURCES += main.cpp\
     engines/abstractengine.cpp \
     view/glyphstab.cpp \
     grid/glyphdata.cpp \
-    colormaps/huecolormap.cpp
+    colormaps/huecolormap.cpp \
+    glyphs/glyphsfactory.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -81,7 +82,8 @@ HEADERS  += main.ih\
     engines/abstractengine.h \
     view/glyphstab.h \
     grid/glyphdata.h \
-    colormaps/huecolormap.h
+    colormaps/huecolormap.h \
+    glyphs/glyphsfactory.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
