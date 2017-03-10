@@ -25,6 +25,7 @@ private:
 
    Grid *visualizationGrid;
    UniformGrid* simulationGrid;
+      GlyphsFactory factory;
 };
 
 #endif // VECTORENGINE_H
