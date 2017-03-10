@@ -188,8 +188,6 @@ void MainWindow::connectSmokeColorMapTabAndSettings()
             this->smokeColorMapTab, SLOT(onValueRangeChangedOld(float,float)));
    connect(&Settings::getVisualization(), SIGNAL(valueRangeChangedOld(float,float)),
             this->smokeColorMapTab, SLOT(onValueRangeChangedOld(float,float)));
-   connect(&Settings::simulation(), SIGNAL(forceChangedOld(float)),
-            this->smokeColorMapTab, SLOT(onForceChangedOld(float)));
    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().getColorMap());
 }
 

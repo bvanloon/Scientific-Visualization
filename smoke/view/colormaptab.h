@@ -39,8 +39,6 @@ signals:
       void onValueRangeChangedOld(float minimum, float maximum);
       void onValueRangeChanged(Settings::sim::Scalar variable, float min, float max);
 
-      void onForceChangedOld(float force);
-
    private slots:
       void on_clampingCheckBox_clicked(bool checked);
 

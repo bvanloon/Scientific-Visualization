@@ -1,6 +1,7 @@
 #include "colormaptab.h"
 #include "ui_colormaptab.h"
 #include "settings/settings.h"
+#include "settings/simulationsettings.h"
 #include <QDebug>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
@@ -24,6 +25,7 @@ void ColorMapTab::connectToColorMapSettings(Settings::visualization::ColorMap *c
             colorMap, SLOT(onTextureVariableChanged(Settings::sim::Scalar)));
    connect(colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            this, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+
 }
 
 void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
@@ -125,6 +127,9 @@ void ColorMapTab::setUpConnections()
 
    connect(this->ui->saturationSlider, SIGNAL(valueChanged(float)),
             this, SLOT(on_saturationSlider_valueChanged(float)));
+
+    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+            this, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
 void ColorMapTab::clampingUISetDisabled(bool disabled)
@@ -153,23 +158,13 @@ void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 
 void ColorMapTab::onValueRangeChangedOld(float minimum, float maximum)
 {
-    qDebug() << "ColorMapTab::onValueRangeChangedOld";
-    emit valueRangeChanged(minimum, maximum);
+   emit valueRangeChanged(minimum, maximum);
 }
 
 void ColorMapTab::onValueRangeChanged(Settings::sim::Scalar variable, float min, float max)
 {
     qDebug() << "ColorMapTab::onValueRangeChanged";
-    if(colormapSettings->scalar == variable) emit valueRangeChanged(min, max);
-}
-
-void ColorMapTab::onForceChangedOld(float force)
-{
-    qDebug() << "ColorMapTab::onForceChangedOld(float force)";
-   if (Settings::getVisualization().scalar == Settings::sim::Scalar::fluidDensity)
-   {
-      emit valueRangeChanged(0.0f, force);
-   }
+   if (colormapSettings->scalar == variable) emit valueRangeChanged(min, max);
 }
 
 void ColorMapTab::on_colorPickerButton_clicked()
