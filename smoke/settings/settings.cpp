@@ -32,3 +32,13 @@ QStringList Settings::visualization::getScalarVariableNames()
                        << "Force field magnitude";
    return scalarVariableNames;
 }
+
+QStringList Settings::visualization::getVectorVariableNames()
+{
+   QStringList vectorVariableNames;
+
+   vectorVariableNames << "Fluid velocity"
+                       << "Force";
+
+      return vectorVariableNames;
+}

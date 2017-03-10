@@ -24,6 +24,9 @@ void GlyphsTab::setUiToDefaults()
    ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.height());
    ui->gridWidthSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
 
+   ui->vectorFieldComboBox->addItems(Settings::visualization::getVectorVariableNames());
+   ui->vectorFieldComboBox->setCurrentIndex(Settings::defaults::visualization::glyphs::vector);
+
    //Temporary, until we have support for a rectalinear grid.
    ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
    ui->gridHeightSpinBox->setDisabled(true);
@@ -49,10 +52,5 @@ void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
 
 void GlyphsTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 {
-
-}
-
-void GlyphsTab::on_scalarFieldComboBox_currentIndexChanged(int index)
-{
-
+    qDebug() <<  "GlyphsTab::on_vectorFieldComboBox_currentIndexChanged: do something!";
 }
