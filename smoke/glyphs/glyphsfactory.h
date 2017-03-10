@@ -1,6 +1,11 @@
 #ifndef GLYPHSFACTORY_H
 #define GLYPHSFACTORY_H
 
+#include <QStringList>
+
+#include "glyphs/abstractglyph.h"
+#include "glyphstriangulation.h"
+#include "grid/glyphdata.h"
 
 class GlyphsFactory
 {
@@ -10,19 +15,15 @@ class GlyphsFactory
          hedgehog
       };
 
-      ~GlyphsFactory();
 
-      static GlyphsFactory *get()
-      {
-         static GlyphsFactory instance;
+      static QStringList getGlyphsNames();
 
-         return &instance;
-      }
+      GlyphsFactory();
+
+      GlyphsTriangulation createGlyphs(GlyphData data, GlyphsFactory::glyphs glypType);
 
    private:
-      GlyphsFactory();
-      GlyphsFactory(const GlyphsFactory&);
-      GlyphsFactory& operator =(const GlyphsFactory&) { return *this; }
+      GlyphsTriangulation createHedgehogs(GlyphData data);
 };
 
 #endif // GLYPHSFACTORY_H
