@@ -72,7 +72,8 @@ void Settings::visualization::ColorMap::onTextureVariableChanged(sim::Scalar sca
     qDebug() << "Settings::visualization::ColorMap::onTextureVariableChanged: " << scalarVariable;
     this->scalar = scalarVariable;
     this->textureGetter = getTextureGetter(scalarVariable);
-    emit textureVariableChanged(scalarVariable);
+    QPair<float, float> range = Settings::simulation().getRange(scalarVariable);
+    emit valueRangeChanged(scalarVariable, range.first, range.second);
 }
 
 Vertex::scalarGetter Settings::visualization::ColorMap::getTextureGetter(Settings::sim::Scalar scalarVariable)
