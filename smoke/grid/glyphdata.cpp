@@ -1,9 +1,7 @@
 #include "glyphdata.h"
 
 GlyphData::GlyphData()
-{
-}
-
+{}
 
 GlyphData::GlyphData(int numGlyphs)
 {
@@ -12,18 +10,15 @@ GlyphData::GlyphData(int numGlyphs)
    scalars.reserve(numGlyphs);
 }
 
-
 int GlyphData::numGlyphs()
 {
    return positions.size();
 }
 
-
 void GlyphData::extend(GlyphData *other)
 {
    extend(*other);
 }
-
 
 void GlyphData::extend(GlyphData other)
 {
@@ -32,26 +27,22 @@ void GlyphData::extend(GlyphData other)
    scalars.append(other.scalars);
 }
 
-
 void GlyphData::addGlyph(QVector3D position, QVector2D vector, float scalar)
 {
    positions.append(position);
-   vectors.append(vector.normalized());
+   vectors.append(vector);
    scalars.append(scalar);
 }
-
 
 QVector<QVector3D> GlyphData::getPositions() const
 {
    return positions;
 }
 
-
 QVector<QVector3D> GlyphData::getVectors() const
 {
    return vectors;
 }
-
 
 QVector<float> GlyphData::getScalars() const
 {
