@@ -157,7 +157,6 @@ void ColorMapTab::on_variableSelector_currentIndexChanged(int index)
 
 void ColorMapTab::onValueRangeChanged(Settings::sim::Scalar variable, float min, float max)
 {
-   qDebug() << "ColorMapTab::onValueRangeChanged";
    if (colormapSettings->scalar == variable) emit valueRangeChanged(min, max);
 }
 
