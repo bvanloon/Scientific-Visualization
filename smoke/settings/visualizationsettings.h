@@ -30,7 +30,6 @@ class Settings::visualization::Smoke : public QObject {
       static const Smoke& instance();
 
     Settings::visualization::ColorMap* colorMap;
-      Settings::visualization::ColorMap *getColorMap() const;
 
 private:
       explicit Smoke(QObject *parent = 0);
@@ -44,7 +43,6 @@ class Settings::visualization::Glyphs : public QObject {
       static const Glyphs& instance();
 
       Settings::visualization::ColorMap* colorMap;
-      Settings::visualization::ColorMap *getColorMap() const;
 
       float vectorScale;
 
