@@ -99,15 +99,6 @@ void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
    setTexture(colormap);
 }
 
-void AbstractEngine::onForceChangedOld(float force)
-{
-   if (Settings::getVisualization().scalar ==
-       Settings::sim::Scalar::fluidDensity)
-   {
-      setColorMapValueRange(0.0f, force);
-   }
-}
-
 void AbstractEngine::onWindowChanged(int width, int height)
 {
    setProjectionMatrix(width, height);

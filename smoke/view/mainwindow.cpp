@@ -131,9 +131,6 @@ void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
              currentEngine, SLOT(onValueRangeChangedOld(float,float)));
    connect(&Settings::getVisualization(), SIGNAL(valueRangeChangedOld(float,float)),
             currentEngine, SLOT(onValueRangeChangedOld(float,float)));
-
-   connect(&Settings::simulation(), SIGNAL(forceChangedOld(float)),
-            currentEngine, SLOT(onForceChangedOld(float)));
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            currentEngine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }

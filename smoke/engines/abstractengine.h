@@ -34,8 +34,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void onColorMapChanged(AbstractColorMap colormap);
 
-      void onForceChangedOld(float force);
-
       void onWindowChanged(int width, int height);
 
    protected:
