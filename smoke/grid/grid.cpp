@@ -4,9 +4,7 @@ Grid::Grid(int numberOfVertices, bool hasPadding) :
    vertices(numberOfVertices),
    vertexPositions(numberOfVertices),
    hasPadding(hasPadding)
-{
-}
-
+{}
 
 Grid::~Grid()
 {
@@ -21,7 +19,6 @@ Grid::~Grid()
 //   }
 }
 
-
 GlyphData Grid::getGlyphData() const
 {
    qDebug() << "Grid::getGlyphData(): use variable getters for float and vector.";
@@ -31,10 +28,7 @@ GlyphData Grid::getGlyphData() const
    QVector2D vector;
    float scalar;
 
-
-
-   for ( ;
-         currentVertex != vertices.end(); currentVertex++)
+   for ( ; currentVertex != vertices.end(); currentVertex++)
    {
       position = *((*currentVertex)->getPosition());
       vector = ((*currentVertex)->getFluidVelocity());
@@ -44,24 +38,20 @@ GlyphData Grid::getGlyphData() const
    return data;
 }
 
-
 const QVector<QVector3D>& Grid::getVertexPositions() const
 {
    return this->vertexPositions;
 }
-
 
 const QVector<Vertex *>& Grid::getVertices() const
 {
    return this->vertices;
 }
 
-
 const QVector<Cell *>& Grid::getCells() const
 {
    return this->cells;
 }
-
 
 int Grid::numVertices() const
 {
