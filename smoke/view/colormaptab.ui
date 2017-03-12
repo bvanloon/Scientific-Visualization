@@ -134,7 +134,7 @@
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>72</height>
+              <height>0</height>
              </size>
             </property>
             <property name="toolTip">
@@ -144,17 +144,7 @@
              <string>Clamp max</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="FloatSlider" name="clampingMaximumSlider" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>72</height>
-             </size>
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -167,7 +157,20 @@
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.100000000000000</double>
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="clampingMaximumFloatBox">
+            <property name="decimals">
+             <number>4</number>
+            </property>
+            <property name="maximum">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
             </property>
            </widget>
           </item>

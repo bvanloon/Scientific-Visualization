@@ -32,17 +32,13 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
    clampingUISetDisabled(!checked);
    emit setClamping(checked);
    float minimum = checked ? this->ui->clampingMinimumFloatBox->value() : 0.0f;
-   float maximum = checked ? this->ui->clampingMaximumSlider->value() : 1.0f;
+   float maximum = checked ? this->ui->clampingMaximumFloatBox->value() : 1.0f;
    emit setClampingRange(minimum, maximum);
 }
 
-void ColorMapTab::on_clampingMaximumSlider_valueChanged(float value)
+void ColorMapTab::on_clampingMaximumFloatBox_valueChanged(float value)
 {
-   float minimum = this->ui->clampingMinimumFloatBox->value();
-   float maximum = qMax(value, minimum + Settings::defaults::visualization::colormap::clampEpsilon);
 
-   this->ui->clampingMaximumSlider->setValue(maximum);
-   emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::on_saturationSlider_valueChanged(float value)
@@ -69,10 +65,10 @@ void ColorMapTab::setUItoDefaults()
 {
    this->ui->clampingCheckBox->setChecked(Settings::defaults::visualization::colormap::clampingOn);
    clampingUISetDisabled(!Settings::defaults::visualization::colormap::clampingOn);
-   this->ui->clampingMaximumSlider->init(
-                Settings::defaults::visualization::colormap::clampMin,
-                Settings::defaults::visualization::colormap::clampMax,
-                Settings::defaults::visualization::colormap::clampMax);
+
+   this->ui->clampingMaximumFloatBox->setMinimum(Settings::defaults::visualization::colormap::clampMin);
+   this->ui->clampingMaximumFloatBox->setMaximum(Settings::defaults::visualization::colormap::clampMax);
+   this->ui->clampingMaximumFloatBox->setValue(Settings::defaults::visualization::colormap::clampMax);
 
    this->ui->clampingMinimumFloatBox->setMinimum(Settings::defaults::visualization::colormap::clampMin);
    this->ui->clampingMinimumFloatBox->setMaximum(Settings::defaults::visualization::colormap::clampMax);
@@ -96,9 +92,6 @@ void ColorMapTab::setUItoDefaults()
 
 void ColorMapTab::setUpConnections()
 {
-   connect(this->ui->clampingMaximumSlider, SIGNAL(valueChanged(float)),
-            this, SLOT(on_clampingMaximumSlider_valueChanged(float)));
-
    connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_numColorsSlider_valueChanged(int)));
 
@@ -124,7 +117,7 @@ void ColorMapTab::clampingUISetDisabled(bool disabled)
    this->ui->clampingMinimumFloatBox->setDisabled(disabled);
 
    this->ui->clampingMaximumLabel->setDisabled(disabled);
-   this->ui->clampingMaximumSlider->setDisabled(disabled);
+   this->ui->clampingMaximumFloatBox->setDisabled(disabled);
 }
 
 void ColorMapTab::on_colormapSelector_currentIndexChanged(int index)
@@ -174,9 +167,18 @@ void ColorMapTab::setColormapSettings(Settings::visualization::ColorMap *value)
 
 void ColorMapTab::on_clampingMinimumFloatBox_valueChanged(double value)
 {
-    double maximum = (double) this->ui->clampingMaximumSlider->value();
-    float minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
+    double maximum = this->ui->clampingMaximumFloatBox->value();
+    double minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
 
     this->ui->clampingMinimumFloatBox->setValue(minimum);
+    emit setClampingRange(minimum, maximum);
+}
+
+void ColorMapTab::on_clampingMaximumFloatBox_valueChanged(double value)
+{
+    double minimum = this->ui->clampingMinimumFloatBox->value();
+    double maximum = qMax(value, minimum + Settings::defaults::visualization::colormap::clampEpsilon);
+
+    this->ui->clampingMaximumFloatBox->setValue(maximum);
     emit setClampingRange(minimum, maximum);
 }

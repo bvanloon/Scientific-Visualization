@@ -41,7 +41,7 @@ signals:
    private slots:
       void on_clampingCheckBox_clicked(bool checked);
 
-      void on_clampingMaximumSlider_valueChanged(float value);
+      void on_clampingMaximumFloatBox_valueChanged(float value);
 
       void on_numColorsSlider_valueChanged(int value);
 
@@ -54,6 +54,8 @@ signals:
       void on_colorPickerButton_clicked();
 
       void on_clampingMinimumFloatBox_valueChanged(double value);
+
+      void on_clampingMaximumFloatBox_valueChanged(double value);
 
 private:
       Ui::ColorMapTab *ui;
