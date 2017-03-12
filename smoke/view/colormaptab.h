@@ -43,8 +43,6 @@ signals:
 
       void on_clampingMaximumSlider_valueChanged(float value);
 
-      void on_clampingMinimumSlider_valueChanged(float value);
-
       void on_numColorsSlider_valueChanged(int value);
 
       void on_colormapSelector_currentIndexChanged(int index);
@@ -55,7 +53,9 @@ signals:
 
       void on_colorPickerButton_clicked();
 
-   private:
+      void on_clampingMinimumFloatBox_valueChanged(double value);
+
+private:
       Ui::ColorMapTab *ui;
       Settings::visualization::ColorMap* colormapSettings;
 
