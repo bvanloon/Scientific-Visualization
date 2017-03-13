@@ -4,11 +4,11 @@
 #include <QVector>
 #include <QVector3D>
 
-class GlyphTriangle
+class QTriangle
 {
    public:
-      GlyphTriangle();
-      GlyphTriangle(QVector3D a, QVector3D b, QVector3D c);
+      QTriangle();
+      QTriangle(QVector3D a, QVector3D b, QVector3D c);
       QVector3D getA();
 
       QVector3D getB();
