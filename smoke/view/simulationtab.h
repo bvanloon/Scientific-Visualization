@@ -4,44 +4,55 @@
 #include <QWidget>
 
 namespace Ui {
-class SimulationSettingPane;
+    class SimulationSettingPane;
 }
 
 class SimulationSettingPane : public QWidget
 {
-    Q_OBJECT
+   Q_OBJECT
 
-public:
-    explicit SimulationSettingPane(QWidget *parent = 0);
-    ~SimulationSettingPane();
+   public:
+      explicit SimulationSettingPane(QWidget *parent = 0);
+      ~SimulationSettingPane();
 
-signals:
-    void forceChanged(float force);
-    void toggleFrozen();
-    void toggleFrozen(bool frozen);
-    void step();
-    void timeStepChanged(float timeStep);
-    void glyphsEngineToggled(bool checked);
-    void smokeEngineToggled(bool checked);
+   signals:
+      void forceChanged(float force);
 
-private slots:
-    void on_forceSlider_valueChanged(int value);
-    void on_freezeButton_clicked();
-    void on_stepButton_clicked();
-    void onToggleFrozen(bool frozen);
-    void on_timeStepBox_valueChanged(double value);
+      void toggleFrozen();
 
-    void on_glyphsCheckBox_toggled(bool checked);
+      void toggleFrozen(bool frozen);
 
-    void on_smokeCheckBox_toggled(bool checked);
+      void step();
 
-private:
-    Ui::SimulationSettingPane *ui;
+      void timeStepChanged(float timeStep);
 
-    void setUItoDefaults();
-    void setUpConnections();
+      void glyphsEngineToggled(bool checked);
 
-    void setFreezeButtonLabel(bool frozen);
+      void smokeEngineToggled(bool checked);
+
+   private slots:
+      void on_freezeButton_clicked();
+
+      void on_stepButton_clicked();
+
+      void onToggleFrozen(bool frozen);
+
+      void on_timeStepBox_valueChanged(double value);
+
+      void on_glyphsCheckBox_toggled(bool checked);
+
+      void on_smokeCheckBox_toggled(bool checked);
+
+      void on_forceSlider_valueChanged(double value);
+
+   private:
+      Ui::SimulationSettingPane *ui;
+
+      void setUItoDefaults();
+
+      void setUpConnections();
+
+      void setFreezeButtonLabel(bool frozen);
 };
 
 #endif // SIMULATIONSETTINGPANE_H
