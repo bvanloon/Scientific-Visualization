@@ -53,7 +53,7 @@ namespace Settings {
                 static const float clampMin = 0.0f;
                 static const float clampMax = 1.0f;
                 static const bool clampingOn = false;
-                static const float clampEpsilon = 0.01;
+                static const float clampEpsilon = 0.0001;
                 static const Settings::sim::Scalar scalar = Settings::sim::fluidDensity;
 
                 static const int numColors = 256;

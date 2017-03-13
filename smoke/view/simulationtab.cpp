@@ -13,24 +13,17 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    setUpConnections();
 }
 
-
 SimulationSettingPane::~SimulationSettingPane()
 {
    delete ui;
 }
 
-
-void SimulationSettingPane::on_forceSlider_valueChanged(int value)
-{
-   emit forceChanged((float)value);
-}
-
-
 void SimulationSettingPane::setUItoDefaults()
 {
-   ui->forceSlider->init(Settings::defaults::simulation::forceMin,
-                          Settings::defaults::simulation::forceMax,
-                          Settings::simulation().force);
+   ui->forceSlider->setMinimum(Settings::defaults::simulation::forceMin);
+   ui->forceSlider->setMaximum(Settings::defaults::simulation::forceMax);
+   ui->forceSlider->setValue(Settings::simulation().force);
+
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 }
 
@@ -38,8 +31,6 @@ void SimulationSettingPane::setUpConnections()
 {
    connect(this, SIGNAL(toggleFrozen(bool)),
             this, SLOT(onToggleFrozen(bool)));
-   connect(this->ui->forceSlider, SIGNAL(valueChanged(int)),
-            this, SLOT(on_forceSlider_valueChanged(int)));
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -79,4 +70,9 @@ void SimulationSettingPane::on_glyphsCheckBox_toggled(bool checked)
 void SimulationSettingPane::on_smokeCheckBox_toggled(bool checked)
 {
    emit smokeEngineToggled(checked);
+}
+
+void SimulationSettingPane::on_forceSlider_valueChanged(double value)
+{
+   emit forceChanged(value);
 }
