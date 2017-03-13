@@ -16,6 +16,7 @@ layout(location = 2) in vec3 inputNormal;
 //Variable out
 layout(location = 0) out float vsTextureCoordinate;
 layout(location = 1) out vec3 vsNormal;
+layout(location = 2) out vec3 vsPosition;
 
 //Uniform in
 uniform mat4 mvpMatrix;
@@ -68,4 +69,5 @@ void main(void)
     vsNormal = toEyeCoordinates(inputNormal);
     vsTextureCoordinate = computeTextureCoordinate(inputTextureCoordinate);
     gl_Position = mvpMatrix * vec4(inputPosition, 1.0);
+    vsPosition = gl_Position.xyz;
 }
