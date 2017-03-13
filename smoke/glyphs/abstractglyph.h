@@ -14,15 +14,15 @@ class AbstractGlyph
 
       float getTextureCoordinate() const;
 
-      void setTextureCoordinate(float value);
-
       QVector<QVector3D> getVertices() const;
 
-      void setVertices(const QVector<QVector3D>& value);
-
    protected:
-      QVector<QVector3D> vertices;
       float textureCoordinate;
+      void addVertex(QVector3D vertex, QVector3D normal);
+
+    private:
+      QVector<QVector3D> normals;
+      QVector<QVector3D> vertices;
 };
 
 #endif // ABSTRACTGLYPH_H
