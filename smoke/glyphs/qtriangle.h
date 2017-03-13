@@ -23,9 +23,11 @@ class QTriangle
 
       void setVertexC(const QVector3D& value);
 
-      QVector3D computeFaceNormal();
+      QVector3D computeForwardPointingFaceNormal();
 
-   private:
+      bool hasCCWwindingOrder();
+
+   protected:
       QVector3D vertexA, vertexB, vertexC;
 };
 

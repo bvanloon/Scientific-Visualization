@@ -51,7 +51,18 @@ void QTriangle::setVertexC(const QVector3D& value)
     vertexC = value;
 }
 
-QVector3D QTriangle::computeFaceNormal()
+QVector3D QTriangle::computeForwardPointingFaceNormal()
 {
-    qDebug() << "QTriangle::computeFaceNormal: Not Implemented";
+    QVector3D ab = vertexB - vertexA;
+    QVector3D ac = vertexC - vertexA;
+    return QVector3D::crossProduct(ab, ac).normalized();
+}
+
+bool QTriangle::hasCCWwindingOrder()
+{
+    QVector3D ab = vertexB - vertexA;
+    QVector3D ac = vertexC - vertexA;
+    QVector3D crossproduct = QVector3D::crossProduct(ab, ac).normalized();
+    double crossProductZ = ab.x() * ac.y() - ab.y() * ac.x();
+    return crossProductZ < 0.0;
 }
