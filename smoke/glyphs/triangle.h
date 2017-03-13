@@ -12,7 +12,6 @@ class Triangle : public AbstractGlyph, protected QTriangle
 
 private:
       QVector3D computeOrthogonalVector(QVector3D vector);
-      QVector3D computeFaceNormal(QVector3D vertexA, QVector3D vertexB);
 };
 
 #endif // TRIANGLE_H
