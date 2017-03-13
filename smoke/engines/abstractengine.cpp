@@ -39,6 +39,7 @@ void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
+   setNormalMatrix();
    setLightModel();
    initializeColorMapInfo();
 }
@@ -77,9 +78,18 @@ void AbstractEngine::setMVPMatrix()
 
 void AbstractEngine::setLightModel()
 {
-    this->shaderProgram->bind();
-    this->shaderProgram->setUniformValue("lightModel", lightModel);
-    this->shaderProgram->release();
+   this->shaderProgram->bind();
+   this->shaderProgram->setUniformValue("lightModel", lightModel);
+   this->shaderProgram->release();
+}
+
+void AbstractEngine::setNormalMatrix()
+{
+   QMatrix4x4 mvpMatrix = projectionMatrix * modelViewMatrix;
+
+   this->shaderProgram->bind();
+   this->shaderProgram->setUniformValue("normalMatrix", mvpMatrix.normalMatrix());
+   this->shaderProgram->release();
 }
 
 /** Slots **/
@@ -108,6 +118,7 @@ void AbstractEngine::onWindowChanged(int width, int height)
 {
    setProjectionMatrix(width, height);
    setMVPMatrix();
+   setNormalMatrix();
 }
 
 /** Set functions **/

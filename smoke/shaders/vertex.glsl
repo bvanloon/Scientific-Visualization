@@ -11,12 +11,15 @@ struct colorMapInfoStruct {
 // Variable in
 layout(location = 0) in vec3 inputPosition;
 layout(location = 1) in float inputTextureCoordinate;
+layout(location = 2) in vec3 inputNormal;
 
 //Variable out
 layout(location = 0) out float vsTextureCoordinate;
+layout(location = 1) out vec3 vsNormal;
 
 //Uniform in
 uniform mat4 mvpMatrix;
+uniform mat3 normalMatrix;
 uniform colorMapInfoStruct colorMapInfo;
 
 float mapToUnitRange(float value, float oldMin, float oldMax)
@@ -56,8 +59,13 @@ float computeTextureCoordinate(float inputTextureCoordinate){
     return scaleTextureCoordinates(inputTextureCoordinate);
 }
 
+vec3 toEyeCoordinates(vec3 inputNormal){
+    return normalize(normalMatrix * inputNormal);
+}
+
 void main(void)
 {
+    vsNormal = toEyeCoordinates(inputNormal);
     vsTextureCoordinate = computeTextureCoordinate(inputTextureCoordinate);
     gl_Position = mvpMatrix * vec4(inputPosition, 1.0);
 }
