@@ -22,3 +22,8 @@ QVector3D Triangle::computeOrthogonalVector(QVector3D vector)
 
    return QVector3D(normalLine.x2(), normalLine.y2(), 0.0f);
 }
+
+QVector3D Triangle::computeFaceNormal(QVector3D vertexA, QVector3D vertexB)
+{
+
+}
