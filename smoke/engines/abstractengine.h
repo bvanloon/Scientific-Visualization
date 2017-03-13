@@ -38,6 +38,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
    protected:
       QOpenGLBuffer *vertexBuffer;
       QOpenGLBuffer *textureCoordinateBuffer;
+      QOpenGLBuffer *normalBuffer;
 
       enum lightModel { noLight = 0, phongLight = 1 };
 
