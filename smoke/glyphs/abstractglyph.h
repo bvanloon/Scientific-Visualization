@@ -18,6 +18,8 @@ class AbstractGlyph
 
       QVector<QVector3D> getNormals() const;
 
+      size_t numVertices();
+
    protected:
       float textureCoordinate;
       QVector<QVector3D> normals;
