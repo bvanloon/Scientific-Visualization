@@ -18,6 +18,8 @@ class GlyphsTriangulation
 
       QVector<QVector3D> getNormals() const;
 
+      int numVertices();
+
 private:
       QVector<QVector3D> vertices;
       QVector<float> textureCoordinates;

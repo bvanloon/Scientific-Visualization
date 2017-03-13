@@ -22,5 +22,10 @@ QVector<float> GlyphsTriangulation::getTextureCoordinates() const
 
 QVector<QVector3D> GlyphsTriangulation::getNormals() const
 {
-   return normals;
+    return normals;
+}
+
+int GlyphsTriangulation::numVertices()
+{
+    return this->vertices.length();
 }
