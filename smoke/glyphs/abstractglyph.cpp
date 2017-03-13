@@ -26,3 +26,9 @@ void AbstractGlyph::addVertex(QVector3D vertex, QVector3D normal)
     this->vertices.append(vertex);
     this->normals.append(normal);
 }
+
+void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector3D normal)
+{
+    this->vertices.append(vertices);
+    this->normals.insert(this->normals.end(), vertices.length(), normal);
+}
