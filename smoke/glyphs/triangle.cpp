@@ -2,7 +2,8 @@
 #include "settings/visualizationsettings.h"
 
 Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar)
+   AbstractGlyph(scalar),
+   QTriangle()
 {
    QVector3D orthogonalVector = computeOrthogonalVector(direction);
 
