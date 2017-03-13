@@ -18,10 +18,10 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
 
    QVector3D orth = QVector3D(normalLine.x2(), normalLine.y2(), 0.0f);
 
-   glyphPoints.append(position + (orth * 5));
-   glyphPoints.append(position - (orth * 5));
+   vertices.append(position + (orth * 5));
+   vertices.append(position - (orth * 5));
 
 
 
-   glyphPoints.append(position + (normal * direction.length() * 1000));
+   vertices.append(position + (normal * direction.length() * 1000));
 }

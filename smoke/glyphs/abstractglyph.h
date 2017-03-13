@@ -9,20 +9,20 @@
 class AbstractGlyph
 {
    public:
-      AbstractGlyph(float texture);
+      AbstractGlyph(float textureCoordinate);
       AbstractGlyph(QVector3D position, QVector3D direction, float scalar);
 
-      float getTexture() const;
+      float getTextureCoordinate() const;
 
-      void setTexture(float value);
+      void setTextureCoordinate(float value);
 
-      QVector<QVector3D> getGlyphPoints() const;
+      QVector<QVector3D> getVertices() const;
 
-      void setGlyphPoints(const QVector<QVector3D>& value);
+      void setVertices(const QVector<QVector3D>& value);
 
    protected:
-      QVector<QVector3D> glyphPoints;
-      float texture;
+      QVector<QVector3D> vertices;
+      float textureCoordinate;
 };
 
 #endif // ABSTRACTGLYPH_H

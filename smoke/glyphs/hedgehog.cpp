@@ -5,6 +5,6 @@
 HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
 {
-   glyphPoints.append(position);
-   glyphPoints.append((position + (direction * Settings::visualization::glyphs().vectorScale)));
+   vertices.append(position);
+   vertices.append((position + (direction * Settings::visualization::glyphs().vectorScale)));
 }
