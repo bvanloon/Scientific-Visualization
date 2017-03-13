@@ -5,8 +5,8 @@ const float AbstractEngine::nearClippingPlane = -1.0f;
 
 AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
    QObject(parent),
-   texture(0),
-   lightModel(lightModel)
+   lightModel(lightModel),
+   texture(0)
 {
    modelViewMatrix.setToIdentity();
    this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
