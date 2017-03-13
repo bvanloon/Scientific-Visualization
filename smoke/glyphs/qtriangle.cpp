@@ -5,47 +5,47 @@ QTriangle::QTriangle()
 
 QTriangle::QTriangle(QVector3D a, QVector3D b, QVector3D c)
 {
-   this->pointA = a;
-   this->pointB = b;
-   this->pointC = c;
+   this->vertexA = a;
+   this->vertexB = b;
+   this->vertexC = c;
 }
 
 QVector3D QTriangle::getA()
 {
-   return this->pointA;
+   return this->vertexA;
 }
 
 QVector3D QTriangle::getB()
 {
-   return this->pointB;
+   return this->vertexB;
 }
 
 QVector3D QTriangle::getC()
 {
-   return this->pointC;
+   return this->vertexC;
 }
 
-QVector<QVector3D> QTriangle::getVertices()
+QVector<QVector3D> QTriangle::getAllVertices()
 {
    QVector<QVector3D> vertices;
-   vertices.append(pointA);
-   vertices.append(pointB);
-   vertices.append(pointC);
+   vertices.append(vertexA);
+   vertices.append(vertexB);
+   vertices.append(vertexC);
 
    return vertices;
 }
 
-void QTriangle::setPointA(const QVector3D& value)
+void QTriangle::setVertexA(const QVector3D& value)
 {
-   pointA = value;
+   vertexA = value;
 }
 
-void QTriangle::setPointB(const QVector3D& value)
+void QTriangle::setVertexB(const QVector3D& value)
 {
-   pointB = value;
+   vertexB = value;
 }
 
-void QTriangle::setPointC(const QVector3D& value)
+void QTriangle::setVertexC(const QVector3D& value)
 {
-   pointC = value;
+   vertexC = value;
 }

@@ -15,16 +15,16 @@ class QTriangle
 
       QVector3D getC();
 
-      QVector<QVector3D> getVertices();
+      QVector<QVector3D> getAllVertices();
 
-      void setPointA(const QVector3D& value);
+      void setVertexA(const QVector3D& value);
 
-      void setPointB(const QVector3D& value);
+      void setVertexB(const QVector3D& value);
 
-      void setPointC(const QVector3D& value);
+      void setVertexC(const QVector3D& value);
 
    private:
-      QVector3D pointA, pointB, pointC;
+      QVector3D vertexA, vertexB, vertexC;
 };
 
 #endif // GLYPHTRIANGLE_H
