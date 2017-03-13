@@ -8,12 +8,18 @@ out vec4 fColor;
 
 //Uniform in
 uniform sampler1D colormap;
+uniform int lightModel;
 
-vec4 noLight(){
-    return texture(colormap, vsTextureCoordinate);
+void noLight(){
+    fColor =  texture(colormap, vsTextureCoordinate);
+}
+
+void phongLight(){
+    fColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
 
 void main(void)
 {
-    fColor = noLight();
+    if(lightModel == 0) noLight();
+    if(lightModel == 1) phongLight();
 }
