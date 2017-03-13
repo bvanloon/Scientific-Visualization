@@ -5,8 +5,7 @@
 HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
 {
-   QVector3D offSet = (direction * Settings::visualization::glyphs().vectorScale);
-
+   QVector3D offSet = computeOffSet(direction);
    QVector3D normal = computeNormal(direction);
 
    addVertex(position, normal);
@@ -23,4 +22,9 @@ QVector3D HedgeHog::computeNormal(QVector3D direction)
    QLineF normalLine = directionLine.normalVector();
 
    return QVector3D(normalLine.x2(), normalLine.y2(), 0.0f);
+}
+
+QVector3D HedgeHog::computeOffSet(QVector3D direction)
+{
+   return(direction * Settings::visualization::glyphs().vectorScale);
 }
