@@ -65,7 +65,7 @@ namespace Settings {
             }
 
             namespace glyphs {
-                static const QSize gridSize = QSize(10, 15);
+                static const QSize gridSize = QSize(20, 15);
                 static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
             }
         }
