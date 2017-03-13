@@ -37,7 +37,7 @@ QVector3D CCWTriangle::computeForwardPointingFaceNormal()
    QVector3D ab = vertexB - vertexA;
    QVector3D ac = vertexC - vertexA;
 
-   return QVector3D::crossProduct(ab, ac).normalized();
+   return QVector3D::crossProduct(ac, ab).normalized();
 }
 
 bool CCWTriangle::hasCCWwindingOrder()

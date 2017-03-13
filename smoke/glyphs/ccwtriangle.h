@@ -23,7 +23,7 @@ class CCWTriangle
    protected:
       QVector3D vertexA, vertexB, vertexC;
 
-    private:
+   private:
       void swapVertices();
 };
 
