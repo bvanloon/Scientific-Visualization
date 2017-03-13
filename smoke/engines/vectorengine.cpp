@@ -5,7 +5,7 @@
 
 
 VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(),
+   AbstractEngine(AbstractEngine::lightModel::phongLight),
    visualizationGrid(
       UniformGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),
