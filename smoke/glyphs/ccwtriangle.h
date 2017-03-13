@@ -4,24 +4,17 @@
 #include <QVector>
 #include <QVector3D>
 
-class QTriangle
+class CCWTriangle
 {
    public:
-      QTriangle();
-      QTriangle(QVector3D a, QVector3D b, QVector3D c);
+      CCWTriangle(QVector3D a, QVector3D b, QVector3D c);
       QVector3D getA();
 
       QVector3D getB();
 
       QVector3D getC();
 
-      QVector<QVector3D> getAllVertices();
-
-      void setVertexA(const QVector3D& value);
-
-      void setVertexB(const QVector3D& value);
-
-      void setVertexC(const QVector3D& value);
+      QVector<QVector3D> getVertices();
 
       QVector3D computeForwardPointingFaceNormal();
 
@@ -29,6 +22,9 @@ class QTriangle
 
    protected:
       QVector3D vertexA, vertexB, vertexC;
+
+    private:
+      void swapVertices();
 };
 
 #endif // GLYPHTRIANGLE_H
