@@ -9,7 +9,11 @@ out vec4 fColor;
 //Uniform in
 uniform sampler1D colormap;
 
+vec4 noLight(){
+    return texture(colormap, vsTextureCoordinate);
+}
+
 void main(void)
 {
-    fColor = texture(colormap, vsTextureCoordinate);
+    fColor = noLight();
 }
