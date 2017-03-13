@@ -2,10 +2,9 @@
 #define TRIANGLE_H
 
 #include "glyphs/abstractglyph.h"
-#include "glyphs/qtriangle.h"
 
 
-class Triangle : public AbstractGlyph, protected QTriangle
+class Triangle : public AbstractGlyph
 {
    public:
       Triangle(QVector3D position, QVector3D direction, float scalar);
