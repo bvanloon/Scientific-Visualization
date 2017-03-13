@@ -29,7 +29,7 @@ uniform int lightModel;
 
 //Constants
 vec3 eye = vec3(2.0, 5.0, 10.0);
-LightInfo light = LightInfo(vec3(-2.0, 5.0, 10.0), vec3(1.0), vec3(1.0), vec3(1.0));
+LightInfo light = LightInfo(vec3(-2.0, 5.0, -10.0), vec3(1.0), vec3(1.0), vec3(1.0));
 MaterialInfo material = MaterialInfo(0.3, 0.5, 0.9, 150.0);
 
 //Auxilary Functions
