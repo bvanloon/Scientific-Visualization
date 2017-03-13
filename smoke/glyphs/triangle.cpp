@@ -7,9 +7,11 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
 {
    QVector3D orthogonalVector = computeOrthogonalVector(direction);
 
-   vertices.append(position + (orthogonalVector * 5));
-   vertices.append(position - (orthogonalVector * 5));
-   vertices.append(position + (direction.normalized() * direction.length() * 1000));
+   setVertexA(position + (orthogonalVector * 5));
+   setVertexB(position - (orthogonalVector * 5));
+   setVertexC(position + (direction.normalized() * direction.length() * 1000));
+
+   vertices.append(this->getAllVertices());
 }
 
 QVector3D Triangle::computeOrthogonalVector(QVector3D vector)
@@ -25,6 +27,4 @@ QVector3D Triangle::computeOrthogonalVector(QVector3D vector)
 }
 
 QVector3D Triangle::computeFaceNormal(QVector3D vertexA, QVector3D vertexB)
-{
-
-}
+{}
