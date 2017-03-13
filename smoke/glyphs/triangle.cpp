@@ -14,9 +14,7 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
 
    QVector3D normal = triangle.computeForwardPointingFaceNormal();
 
-   this->addVertex(triangle.getA(), normal);
-   this->addVertex(triangle.getB(), normal);
-   this->addVertex(triangle.getC(), normal);
+   this->addVertices(triangle.getVertices(), normal);
 }
 
 QVector3D Triangle::computeOrthogonalVector(QVector3D vector)
