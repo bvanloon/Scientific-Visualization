@@ -38,8 +38,10 @@ int VectorEngine::updateBuffers()
    GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::triangles;
    GlyphData data = visualizationGrid->getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, glyphType);
+
    updateBuffer(this->vertexBuffer, glyphs.getVertices());
    updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
+   updateBuffer(this->normalBuffer, glyphs.getNormals());
 
-   return glyphs.getVertices().length();
+   return glyphs.numVertices();
 }

@@ -6,7 +6,8 @@ const float AbstractEngine::nearClippingPlane = -1.0f;
 AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
    QObject(parent),
    lightModel(lightModel),
-   texture(0)
+   texture(0),
+   normalBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
 {
    modelViewMatrix.setToIdentity();
    this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
@@ -20,6 +21,7 @@ AbstractEngine::~AbstractEngine()
    delete this->texture;
    this->vertexBuffer->destroy();
    this->textureCoordinateBuffer->destroy();
+   this->normalBuffer->destroy();
    this->vao.destroy();
 }
 
@@ -183,6 +185,13 @@ void AbstractEngine::initBuffers()
    glEnableVertexAttribArray(1);
    glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 0, 0);
 
+   this->normalBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+   this->normalBuffer->create();
+   this->normalBuffer->bind();
+
+   glEnableVertexAttribArray(2);
+   glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0, 0);
+
    this->vao.release();
 }
 
@@ -200,8 +209,7 @@ void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
    buffer->release();
 }
 
-void AbstractEngine::drawWithMode(int mode,
-                                  int bufferLength)
+void AbstractEngine::drawWithMode(int mode, int bufferLength)
 {
    this->shaderProgram->bind();
    this->texture->bind();

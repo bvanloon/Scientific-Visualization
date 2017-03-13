@@ -3,25 +3,37 @@
 
 AbstractGlyph::AbstractGlyph(float texture)
 {
-   this->texture = texture;
+   this->textureCoordinate = texture;
 }
 
-float AbstractGlyph::getTexture() const
+float AbstractGlyph::getTextureCoordinate() const
 {
-   return texture;
+   return textureCoordinate;
 }
 
-void AbstractGlyph::setTexture(float value)
+QVector<QVector3D> AbstractGlyph::getVertices() const
 {
-   texture = value;
+    return vertices;
 }
 
-QVector<QVector3D> AbstractGlyph::getGlyphPoints() const
+QVector<QVector3D> AbstractGlyph::getNormals() const
 {
-   return glyphPoints;
+    return normals;
 }
 
-void AbstractGlyph::setGlyphPoints(const QVector<QVector3D>& value)
+size_t AbstractGlyph::numVertices()
 {
-   glyphPoints = value;
+    return this->vertices.length();
+}
+
+void AbstractGlyph::addVertex(QVector3D vertex, QVector3D normal)
+{
+    this->vertices.append(vertex);
+    this->normals.append(normal);
+}
+
+void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector3D normal)
+{
+    this->vertices.append(vertices);
+    this->normals.insert(this->normals.end(), vertices.length(), normal);
 }
