@@ -41,13 +41,9 @@ signals:
    private slots:
       void on_clampingCheckBox_clicked(bool checked);
 
-      void on_clampingMaximumFloatBox_valueChanged(float value);
-
       void on_numColorsSlider_valueChanged(int value);
 
       void on_colormapSelector_currentIndexChanged(int index);
-
-      void on_saturationSlider_valueChanged(float value);
 
       void on_variableSelector_currentIndexChanged(int index);
 
@@ -56,6 +52,8 @@ signals:
       void on_clampingMinimumFloatBox_valueChanged(double value);
 
       void on_clampingMaximumFloatBox_valueChanged(double value);
+
+      void on_saturationSlider_valueChanged(double arg1);
 
 private:
       Ui::ColorMapTab *ui;

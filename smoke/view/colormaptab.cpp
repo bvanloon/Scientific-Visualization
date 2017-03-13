@@ -36,22 +36,6 @@ void ColorMapTab::on_clampingCheckBox_clicked(bool checked)
    emit setClampingRange(minimum, maximum);
 }
 
-void ColorMapTab::on_clampingMaximumFloatBox_valueChanged(float value)
-{
-
-}
-
-void ColorMapTab::on_saturationSlider_valueChanged(float value)
-{
-   this->ui->saturationSlider->setValue(value);
-   AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
-                static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
-                this->ui->numColorsSlider->value(),
-                value, 0.5f);
-
-   emit colorMapChanged(*newColormap);
-}
-
 void ColorMapTab::on_numColorsSlider_valueChanged(int value)
 {
    AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
@@ -81,10 +65,10 @@ void ColorMapTab::setUItoDefaults()
                 Settings::defaults::visualization::colormap::minNumColors,
                 Settings::defaults::visualization::colormap::maxNumColors,
                 Settings::defaults::visualization::colormap::numColors);
-   this->ui->saturationSlider->init(
-                Settings::defaults::visualization::colormap::minSaturation,
-                Settings::defaults::visualization::colormap::maxSaturation,
-                Settings::defaults::visualization::colormap::saturation);
+
+   this->ui->saturationSlider->setMinimum(Settings::defaults::visualization::colormap::minSaturation);
+   this->ui->saturationSlider->setMaximum(Settings::defaults::visualization::colormap::maxSaturation);
+   this->ui->saturationSlider->setValue(Settings::defaults::visualization::colormap::saturation);
 
    this->ui->variableSelector->addItems(Settings::visualization::getScalarVariableNames());
    this->ui->variableSelector->setCurrentIndex(Settings::defaults::visualization::colormap::scalar);
@@ -94,9 +78,6 @@ void ColorMapTab::setUpConnections()
 {
    connect(this->ui->numColorsSlider, SIGNAL(valueChanged(int)),
             this, SLOT(on_numColorsSlider_valueChanged(int)));
-
-   connect(this->ui->saturationSlider, SIGNAL(valueChanged(float)),
-            this, SLOT(on_saturationSlider_valueChanged(float)));
 
    connect(this, SIGNAL(setClampingRange(float,float)),
             this->ui->colormapLegend, SLOT(onClampRangeChanged(float,float)));
@@ -181,4 +162,15 @@ void ColorMapTab::on_clampingMaximumFloatBox_valueChanged(double value)
 
     this->ui->clampingMaximumFloatBox->setValue(maximum);
     emit setClampingRange(minimum, maximum);
+}
+
+void ColorMapTab::on_saturationSlider_valueChanged(double value)
+{
+    this->ui->saturationSlider->setValue(value);
+    AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
+                 static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
+                 this->ui->numColorsSlider->value(),
+                 value, 0.5f);
+
+    emit colorMapChanged(*newColormap);
 }
