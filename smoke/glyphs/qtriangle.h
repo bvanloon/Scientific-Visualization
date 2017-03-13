@@ -23,6 +23,8 @@ class QTriangle
 
       void setVertexC(const QVector3D& value);
 
+      QVector3D computeFaceNormal();
+
    private:
       QVector3D vertexA, vertexB, vertexC;
 };

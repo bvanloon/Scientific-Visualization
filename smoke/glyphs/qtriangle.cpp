@@ -1,4 +1,5 @@
 #include "qtriangle.h"
+#include "QDebug"
 
 QTriangle::QTriangle()
 {}
@@ -47,5 +48,10 @@ void QTriangle::setVertexB(const QVector3D& value)
 
 void QTriangle::setVertexC(const QVector3D& value)
 {
-   vertexC = value;
+    vertexC = value;
+}
+
+QVector3D QTriangle::computeFaceNormal()
+{
+    qDebug() << "QTriangle::computeFaceNormal: Not Implemented";
 }
