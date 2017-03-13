@@ -11,12 +11,16 @@ out vec4 fColor;
 uniform sampler1D colormap;
 uniform int lightModel;
 
+vec3 unitVectorToColor(vec3 vector){
+        return (vector + vec3(1)) / 2.0;
+}
+
 void noLight(){
     fColor =  texture(colormap, vsTextureCoordinate);
 }
 
 void phongLight(){
-    fColor = vec4(1.0, 0.0, 0.0, 1.0);
+    fColor = vec4(unitVectorToColor(vsNormal), 1.0);
 }
 
 void main(void)
