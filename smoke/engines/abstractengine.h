@@ -17,7 +17,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 {
    Q_OBJECT
    public:
-      explicit AbstractEngine(QObject *parent = 0);
+      explicit AbstractEngine(int lightModel, QObject *parent = 0);
       virtual ~AbstractEngine();
       virtual void draw(Simulation *Simulation) = 0;
 
@@ -39,6 +39,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       QOpenGLBuffer *vertexBuffer;
       QOpenGLBuffer *textureCoordinateBuffer;
 
+      enum lightModel {noLight = 0, phongLight = 1};
+
       void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
       void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
@@ -49,6 +51,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void init();
 
       Settings::visualization::ColorMap *colorMap;
+
+      int lightModel;
 
       //Shaders
       QOpenGLShaderProgram *shaderProgram;
@@ -81,6 +85,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void setProjectionMatrix(float width, float height);
 
       void setMVPMatrix();
+
+      void setLightModel();
 
       static const float nearClippingPlane;
       static const float farClippingPlane;

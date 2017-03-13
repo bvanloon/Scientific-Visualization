@@ -3,9 +3,10 @@
 const float AbstractEngine::farClippingPlane = 1.0f;
 const float AbstractEngine::nearClippingPlane = -1.0f;
 
-AbstractEngine::AbstractEngine(QObject *parent) :
+AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
    QObject(parent),
-   texture(0)
+   texture(0),
+   lightModel(lightModel)
 {
    modelViewMatrix.setToIdentity();
    this->vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
@@ -38,6 +39,7 @@ void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
+   setLightModel();
    initializeColorMapInfo();
 }
 
@@ -71,6 +73,13 @@ void AbstractEngine::setMVPMatrix()
    this->shaderProgram->bind();
    this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
    this->shaderProgram->release();
+}
+
+void AbstractEngine::setLightModel()
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("lightModel", lightModel);
+    this->shaderProgram->release();
 }
 
 /** Slots **/
