@@ -2,6 +2,7 @@
 
 //Variable in
 layout(location = 0) in float vsTextureCoordinate;
+layout(location = 1) in vec3 vsNormal;
 
 //Variable out
 out vec4 fColor;
