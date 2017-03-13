@@ -17,6 +17,7 @@ layout(location = 0) out float vsTextureCoordinate;
 
 //Uniform in
 uniform mat4 mvpMatrix;
+uniform mat3 normalMatrix;
 uniform colorMapInfoStruct colorMapInfo;
 
 float mapToUnitRange(float value, float oldMin, float oldMax)
