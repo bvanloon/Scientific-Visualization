@@ -16,13 +16,16 @@ class AbstractGlyph
 
       QVector<QVector3D> getVertices() const;
 
-   protected:
+      QVector<QVector3D> getNormals() const;
+
+protected:
       float textureCoordinate;
+      QVector<QVector3D> normals;
+      QVector<QVector3D> vertices;
       void addVertex(QVector3D vertex, QVector3D normal);
 
     private:
-      QVector<QVector3D> normals;
-      QVector<QVector3D> vertices;
+
 };
 
 #endif // ABSTRACTGLYPH_H
