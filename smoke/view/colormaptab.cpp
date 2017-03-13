@@ -61,10 +61,9 @@ void ColorMapTab::setUItoDefaults()
    this->ui->colormapSelector->addItems(ColorMapFactory::getColorMapNames());
    this->ui->colormapSelector->setCurrentIndex(Settings::defaults::visualization::colormap::colormap);
 
-   this->ui->numColorsSlider->init(
-                Settings::defaults::visualization::colormap::minNumColors,
-                Settings::defaults::visualization::colormap::maxNumColors,
-                Settings::defaults::visualization::colormap::numColors);
+   this->ui->numColorsSlider->setMinimum(Settings::defaults::visualization::colormap::minNumColors);
+   this->ui->numColorsSlider->setMaximum(Settings::defaults::visualization::colormap::maxNumColors);
+   this->ui->numColorsSlider->setValue(Settings::defaults::visualization::colormap::numColors);
 
    this->ui->saturationSlider->setMinimum(Settings::defaults::visualization::colormap::minSaturation);
    this->ui->saturationSlider->setMaximum(Settings::defaults::visualization::colormap::maxSaturation);

@@ -52,7 +52,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>72</height>
+           <height>0</height>
           </size>
          </property>
          <property name="toolTip">
@@ -63,18 +63,8 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="IntSlider" name="numColorsSlider" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>72</height>
-          </size>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0">
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="sautrationlabel">
          <property name="text">
           <string>Saturation</string>
          </property>
@@ -94,6 +84,16 @@
          </property>
          <property name="singleStep">
           <double>0.010000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="numColorsSlider">
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>256</number>
          </property>
         </widget>
        </item>
@@ -195,12 +195,6 @@
    <class>ColorMapLegend</class>
    <extends>QWidget</extends>
    <header location="global">view/colormaplegend.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>IntSlider</class>
-   <extends>QWidget</extends>
-   <header location="global">view/intslider.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
