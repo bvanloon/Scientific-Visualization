@@ -8,23 +8,24 @@
 class VectorEngine : public AbstractEngine {
    Q_OBJECT
 
-public:
+   public:
 
-   VectorEngine(UniformGrid *simulationGrid);
+      VectorEngine(UniformGrid *simulationGrid);
 
-   void draw(Simulation *simulation);
+      void draw(Simulation *simulation);
 
-public slots:
+   public slots:
 
-   void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
-   void onGridDimensionChanged(int width, int height);
+      void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
-private:
+      void onGridDimensionChanged(int width, int height);
 
-   int updateBuffers();
+   private:
 
-   Grid *visualizationGrid;
-   UniformGrid* simulationGrid;
+      int updateBuffers();
+
+      Grid *visualizationGrid;
+      UniformGrid *simulationGrid;
       GlyphsFactory factory;
 };
 

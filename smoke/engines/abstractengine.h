@@ -39,7 +39,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       QOpenGLBuffer *vertexBuffer;
       QOpenGLBuffer *textureCoordinateBuffer;
 
-      enum lightModel {noLight = 0, phongLight = 1};
+      enum lightModel { noLight = 0, phongLight = 1 };
 
       void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
