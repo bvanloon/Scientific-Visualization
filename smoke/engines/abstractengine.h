@@ -82,6 +82,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void setMVPMatrix();
 
+      void setLightModel();
+
       static const float nearClippingPlane;
       static const float farClippingPlane;
 };

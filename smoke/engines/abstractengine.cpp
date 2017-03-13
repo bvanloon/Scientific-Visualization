@@ -38,6 +38,7 @@ void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
+   setLightModel();
    initializeColorMapInfo();
 }
 
@@ -71,6 +72,13 @@ void AbstractEngine::setMVPMatrix()
    this->shaderProgram->bind();
    this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
    this->shaderProgram->release();
+}
+
+void AbstractEngine::setLightModel()
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("lightModel", 1);
+    this->shaderProgram->release();
 }
 
 /** Slots **/
