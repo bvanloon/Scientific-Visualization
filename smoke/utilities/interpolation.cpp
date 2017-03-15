@@ -1,26 +1,5 @@
-#include "utilities.h"
-#include <assert.h>
-
-void inUnitRange(float t)
-{
-   assert(t >= 0 && t <= 1);
-}
-
-
-void inUnitRange(QVector2D t)
-{
-   inUnitRange(t.x());
-   inUnitRange(t.y());
-}
-
-
-void inUnitRange(QVector3D t)
-{
-   inUnitRange(t.x());
-   inUnitRange(t.y());
-   inUnitRange(t.z());
-}
-
+#include "utilities/interpolation.h"
+#include "utilities/range.h"
 
 float interpolateBilinearly(QVector2D t, float upperLeft, float upperRight, float lowerLeft, float lowerRight)
 {
@@ -31,7 +10,6 @@ float interpolateBilinearly(QVector2D t, float upperLeft, float upperRight, floa
           + lowerLeft * (1 - t.x()) * t.y()
           + lowerRight * t.x() * t.y();
 }
-
 
 float interpolateBilinearly(QVector3D position, float upperLeft, float upperRight, float lowerLeft, float lowerRight)
 {

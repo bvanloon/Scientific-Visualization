@@ -7,7 +7,7 @@
 
 #include "colormaplegend.h"
 #include "ui_colormaplegend.h"
-#include "utilities.h"
+#include "utilities/range.h"
 #include "colormaps/colormapfactory.h"
 #include "settings/settings.h"
 #include "settings/visualizationsettings.h"

@@ -26,7 +26,7 @@ SOURCES += main.cpp\
     simulation/utils.cpp \
     engines/vectorengine.cpp \
     engines/smokeengine.cpp \
-    view/colormaplegend.cpp utilities.cpp \
+    view/colormaplegend.cpp \
     settings/settings.cpp \
     view/colormaptab.cpp \
     colormaps/grayscalecolormap.cpp \
@@ -58,7 +58,9 @@ SOURCES += main.cpp\
     glyphs/hedgehog.cpp \
     glyphs/triangle.cpp \
     glyphs/ccwtriangle.cpp \
-    glyphs/airplane.cpp
+    glyphs/airplane.cpp \
+    utilities/interpolation.cpp \
+    utilities/range.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -71,7 +73,7 @@ HEADERS  += main.ih\
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
     colormaps/colormapfactory.h \
-    view/colormaplegend.h utilities.h \
+    view/colormaplegend.h \
     settings/settings.h \
     view/colormaptab.h \
     view/floatslider.h \
@@ -98,7 +100,9 @@ HEADERS  += main.ih\
     glyphs/hedgehog.h \
     glyphs/triangle.h \
     glyphs/ccwtriangle.h \
-    glyphs/airplane.h
+    glyphs/airplane.h \
+    utilities/interpolation.h \
+    utilities/range.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

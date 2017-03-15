@@ -1,5 +1,5 @@
 #include "cell.h"
-#include "utilities.h"
+#include "utilities/interpolation.h"
 
 Cell::Cell()
 {}
