@@ -27,6 +27,7 @@ class AbstractGlyph
 
       void addVertex(QVector3D vertex, QVector3D normal);
       void addVertices(QVector<QVector3D> vertices, QVector3D normal);
+      void addVertices(QVector<QVector3D> vertices, QVector<QVector3D> normals);
 
    private:
 };

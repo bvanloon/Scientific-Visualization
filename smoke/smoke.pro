@@ -6,6 +6,9 @@
 
 QT       += core gui
 
+CONFIG += object_parallel_to_source
+OBJECTS_DIR = ../build/
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 QMAKE_CXXFLAGS += -std=c++11
@@ -60,7 +63,9 @@ SOURCES += main.cpp\
     glyphs/ccwtriangle.cpp \
     glyphs/airplane.cpp \
     utilities/interpolation.cpp \
-    utilities/range.cpp
+    utilities/range.cpp \
+    utilities/mesh.cpp \
+    utilities/vector.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -102,7 +107,9 @@ HEADERS  += main.ih\
     glyphs/ccwtriangle.h \
     glyphs/airplane.h \
     utilities/interpolation.h \
-    utilities/range.h
+    utilities/range.h \
+    utilities/mesh.h \
+    utilities/vector.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

@@ -1,4 +1,5 @@
 #include "abstractglyph.h"
+#include <assert.h>
 
 
 AbstractGlyph::AbstractGlyph(float texture)
@@ -36,4 +37,11 @@ void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector3D normal)
 {
     this->vertices.append(vertices);
     this->normals.insert(this->normals.end(), vertices.length(), normal);
+}
+
+void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector<QVector3D> normals)
+{
+    assert(vertices.length() == normals.length());
+    this->vertices.append(vertices);
+    this->normals.append(normals);
 }
