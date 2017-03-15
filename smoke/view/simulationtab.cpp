@@ -25,6 +25,9 @@ void SimulationSettingPane::setUItoDefaults()
    ui->forceSlider->setValue(Settings::simulation().force);
 
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
+
+   ui->glyphsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::glyphs]);
+   ui->smokeCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::smoke]);
 }
 
 void SimulationSettingPane::setUpConnections()

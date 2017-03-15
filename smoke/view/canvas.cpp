@@ -10,6 +10,7 @@ Canvas::Canvas(QWidget *parent) :
    timer(new QTimer(this))
 {
    this->initiateIdleLoop();
+   this->initializeActiveEngines();
 }
 
 Canvas::~Canvas()
@@ -23,6 +24,14 @@ void Canvas::initiateIdleLoop()
    connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
 }
 
+void Canvas::initializeActiveEngines()
+{
+   for (int i = 0; i < Settings::engines::EnginesTypes::numberOfEngines; i++)
+   {
+      activeEngines[static_cast<Settings::engines::EnginesTypes>(i)] = Settings::defaults::engines::activeEngines[i];
+   }
+}
+
 void Canvas::connectThisAndEngine(AbstractEngine *engine)
 {
    connect(this, SIGNAL(windowResized(int,int)),
@@ -31,12 +40,11 @@ void Canvas::connectThisAndEngine(AbstractEngine *engine)
 
 void Canvas::enginesDraw()
 {
-   for (int i = 0; i < EnginesEnum::nrOfEngine; i++)
+   for (auto const& engine : activeEngines)
    {
-      if (activeEngines[i])
+      if (engine.second)
       {
-         EnginesEnum engine = static_cast<EnginesEnum>(i);
-         enginemap.find(engine)->second->draw(this->simulation);
+         enginemap.find(engine.first)->second->draw(this->simulation);
       }
    }
 }
@@ -46,14 +54,14 @@ void Canvas::initializeGL()
    initializeOpenGLFunctions();
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
    glEnable(GL_DEPTH_TEST);
-   enginemap.insert(EnginePair(EnginesEnum::smoke, new SmokeEngine()));
-   enginemap.insert(EnginePair(EnginesEnum::glyphs, new VectorEngine(simulation->getSimulationGrid())));
+   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smoke, new SmokeEngine()));
+   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new VectorEngine(simulation->getSimulationGrid())));
 
 
    emit openGlReady();
 
-   connectThisAndEngine(enginemap.find(EnginesEnum::smoke)->second);
-   connectThisAndEngine(enginemap.find(EnginesEnum::glyphs)->second);
+   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::smoke)->second);
+   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::glyphs)->second);
 }
 
 void Canvas::idleLoop()
@@ -69,12 +77,12 @@ void Canvas::setSimulation(Simulation *simulation)
 
 void Canvas::onGlyphsEngineToggled(bool checked)
 {
-   activeEngines[EnginesEnum::glyphs] = checked;
+   activeEngines[Settings::engines::EnginesTypes::glyphs] = checked;
 }
 
 void Canvas::onSmokeEngineToggled(bool checked)
 {
-   activeEngines[EnginesEnum::smoke] = checked;
+   activeEngines[Settings::engines::EnginesTypes::smoke] = checked;
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
