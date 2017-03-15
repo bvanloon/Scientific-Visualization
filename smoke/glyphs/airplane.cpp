@@ -1,6 +1,7 @@
 #include "airplane.h"
 #include "utilities/vector.h"
 #include "utilities/range.h"
+#include "settings/visualizationsettings.h"
 
 #include <QDebug>
 
@@ -11,19 +12,18 @@ const double Airplane::AirplaneBuilder::maxCellRatio = 2;
 Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
 {
-   AirplaneBuilder builder = AirplaneBuilder(position, direction);
+   AirplaneBuilder builder = AirplaneBuilder(position, direction, computeNormalizedMagnitude(direction));
 
    addVertices(builder.getVertices(), builder.getNormals());
 }
 
-Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction) :
+Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude) :
    direction(direction.normalized()),
    orthogonalDirection(computeOrthogonalVector(direction)),
    position(position),
+    normalizedMagnitude(normalizedMagnitude),
    mesh(4, 2)
 {
-   normalizedMagnitude = computeNormalizedMagnitude(direction);
-
    determineSizeRange();
 
    mesh::Vertex *tail = mesh.addVertex(computeBase());
@@ -91,6 +91,7 @@ QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
 
 void Airplane::AirplaneBuilder::determineSizeRange()
 {
-    QSizeF cellSize = Settings::visualization::glyphs().cellSize;
-    this->baseSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
+   QSizeF cellSize = Settings::visualization::glyphs().cellSize;
+
+   this->baseSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
 }

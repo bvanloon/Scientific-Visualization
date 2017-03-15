@@ -16,7 +16,7 @@ class Airplane : public AbstractGlyph
 
 class Airplane::AirplaneBuilder {
    public:
-      AirplaneBuilder(QVector3D position, QVector3D direction);
+      AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude);
 
       QVector<QVector3D> getNormals();
 
