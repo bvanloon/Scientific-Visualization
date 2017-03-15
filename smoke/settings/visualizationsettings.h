@@ -52,6 +52,7 @@ class Settings::visualization::Glyphs : public QObject {
       Settings::sim::GlyphsType glyph;
       GLint drawMode;
 
+    QPair<float, float> getCurrentMagnitudeRange() const;
 
    public slots:
       void onVectorFieldChanged(Settings::sim::Vector vectorField);
@@ -62,6 +63,10 @@ class Settings::visualization::Glyphs : public QObject {
       explicit Glyphs(QObject *parent = 0);
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
+
+      void setMagnitude(Settings::sim::Vector vectorField);
+
+    Settings::sim::Scalar magnitude;
 };
 
 #endif // VISUALIZATIONS_H
