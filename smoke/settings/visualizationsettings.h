@@ -5,7 +5,11 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 #include "grid/vertex.h"
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
 #include <GL/gl.h>
+#endif
 
 class Settings::visualization::ColorMap : public QObject {
    Q_OBJECT

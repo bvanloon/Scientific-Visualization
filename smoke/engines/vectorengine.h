@@ -2,7 +2,11 @@
 #define VECTORENGINE_H
 
 #include <QObject>
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
 #include <GL/gl.h>
+#endif
 #include "abstractengine.h"
 
 

@@ -3,7 +3,14 @@
 
 #include "colormaps/colormapfactory.h"
 #include "QSize"
+
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
 #include <GL/gl.h>
+#endif
+
+
 
 namespace Settings {
     class Simulation;
