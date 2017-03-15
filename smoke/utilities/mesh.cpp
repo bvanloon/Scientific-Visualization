@@ -4,6 +4,11 @@ mesh::Vertex::Vertex(QVector3D *position) :
    positionPtr(position)
 {}
 
+mesh::Triangle::Triangle(Vertex *vertexA, Vertex *vertexB, Vertex *vertexC) :
+   vertexA(vertexA), vertexB(vertexB), vertexC(vertexC)
+{
+    if (!hasCCWwindingOrder()) swapVertices();
+}
 QVector3D mesh::Vertex::position() const
 {
    return *positionPtr;
@@ -51,6 +56,12 @@ mesh::Vertex *mesh::TriangleMesh::addVertex(QVector3D position)
    return newVertex;
 }
 
+mesh::Triangle *mesh::TriangleMesh::addTriangle(mesh::Vertex *a, mesh::Vertex *b, mesh::Vertex *c)
+{
+   Triangle *triangle = new Triangle(a, b, c);
+
+   this->triangles.append(triangle);
+}
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)
 {
    this->vertices.append(vertex);

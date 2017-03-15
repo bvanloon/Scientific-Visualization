@@ -14,10 +14,12 @@ namespace mesh {
           TriangleMesh();
 
           Vertex *addVertex(QVector3D position);
+          Triangle *addTriangle(Vertex *a, Vertex *b, Vertex *c);
 
        private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
+          QVector<Triangle *> triangles;
 
           Vertex *addVertex(Vertex *vertex);
     };
