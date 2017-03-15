@@ -22,7 +22,9 @@ Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D directi
    position(position),
    mesh(4, 2)
 {
-   qDebug() << "Compute the normalized magnitude to scale.";
+   qDebug() << "Get the actual range from the settings";
+//   normalizedMagnitude = mapToUnitRange(direction.length(), ?, ?);
+   normalizedMagnitude = 1;
 
    mesh::Vertex *tail = mesh.addVertex(position);
    mesh::Vertex *nose = mesh.addVertex(computeNose());
