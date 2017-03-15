@@ -47,5 +47,10 @@ void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector
 void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType glyph)
 {
    this->glyph = glyph;
-   this->drawMode = Settings::sim::drawModes.at(glyph);
+    this->drawMode = Settings::sim::drawModes.at(glyph);
+}
+
+void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
+{
+    this->cellSize = newSize;
 }

@@ -4,6 +4,7 @@
 #include <QObject>
 #include "settings.h"
 #include "simulation/simulation.h"
+#include <QSizeF>
 #include "grid/vertex.h"
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -51,6 +52,7 @@ class Settings::visualization::Glyphs : public QObject {
 
       Settings::sim::GlyphsType glyph;
       GLint drawMode;
+      QSizeF cellSize;
 
     QPair<float, float> getCurrentMagnitudeRange() const;
 
@@ -58,6 +60,8 @@ class Settings::visualization::Glyphs : public QObject {
       void onVectorFieldChanged(Settings::sim::Vector vectorField);
 
       void onGlyphChanged(Settings::sim::GlyphsType glyph);
+
+      void onCellSizeChanged(QSizeF newSize);
 
    private:
       explicit Glyphs(QObject *parent = 0);
