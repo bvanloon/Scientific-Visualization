@@ -13,6 +13,7 @@ namespace Settings {
 
     namespace visualization {
         QStringList getScalarVariableNames();
+
         QStringList getVectorVariableNames();
 
         class ColorMap;
@@ -34,8 +35,8 @@ namespace Settings {
 
         enum Vector
         {
-            fluidVelocity,
-            force,
+           fluidVelocity,
+           force,
         };
     }
 

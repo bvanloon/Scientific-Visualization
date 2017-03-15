@@ -29,9 +29,6 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void setSimulation(Simulation *simulation);
 
-      //Engines
-//   VectorEngine *vectorEngine;
-//   SmokeEngine *smokeEngine;
 
       enum EnginesEnum
       {
@@ -44,7 +41,6 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       typedef std::pair<EnginesEnum, AbstractEngine *> EnginePair;
 
       EngineMap enginemap; //Public since mainwindow accesses it to setup connections
-
    public slots:
       void onGlyphsEngineToggled(bool checked);
 
