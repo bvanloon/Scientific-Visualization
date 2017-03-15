@@ -64,7 +64,8 @@ SOURCES += main.cpp\
     glyphs/airplane.cpp \
     utilities/interpolation.cpp \
     utilities/range.cpp \
-    utilities/mesh.cpp
+    utilities/mesh.cpp \
+    utilities/vector.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -107,7 +108,8 @@ HEADERS  += main.ih\
     glyphs/airplane.h \
     utilities/interpolation.h \
     utilities/range.h \
-    utilities/mesh.h
+    utilities/mesh.h \
+    utilities/vector.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
