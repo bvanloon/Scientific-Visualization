@@ -38,6 +38,13 @@ namespace Settings {
            fluidVelocity,
            force,
         };
+
+        enum GlyphsType
+        {
+           hedgehog,
+           triangles,
+           airplane,
+        };
     }
 
     namespace engines {
@@ -77,6 +84,7 @@ namespace Settings {
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
                 static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
+                static const Settings::sim::GlyphsType defaultGlyph = Settings::sim::GlyphsType::hedgehog;
             }
         }
 

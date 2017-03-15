@@ -8,17 +8,17 @@
 GlyphsFactory::GlyphsFactory()
 {}
 
-GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, GlyphsFactory::glyphs glypType)
+GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, Settings::sim::GlyphsType glypType)
 {
    switch (glypType)
    {
-   case GlyphsFactory::glyphs::hedgehog:
+   case Settings::sim::GlyphsType::hedgehog:
       return createHedgehogs(data);
 
-   case GlyphsFactory::glyphs::triangles:
+   case Settings::sim::GlyphsType::triangles:
       return createTriangles(data);
 
-   case GlyphsFactory::glyphs::airplane:
+   case Settings::sim::GlyphsType::airplane:
       return createAirplanes(data);
 
    default:

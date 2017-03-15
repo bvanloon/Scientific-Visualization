@@ -21,3 +21,8 @@ void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector
 {
    vectorGetter = Vertex::getVectorGetter(vectorField);
 }
+
+void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType glyph)
+{
+   this->glyph = glyph;
+}

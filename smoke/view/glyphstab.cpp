@@ -30,6 +30,9 @@ void GlyphsTab::setUiToDefaults()
    //Temporary, until we have support for a rectalinear grid.
    ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
    ui->gridHeightSpinBox->setDisabled(true);
+
+   ui->glyphSelector->addItems(GlyphsFactory::getGlyphsNames());
+   ui->glyphSelector->setCurrentIndex(Settings::defaults::visualization::glyphs::defaultGlyph);
 }
 
 void GlyphsTab::setUpConnections()
@@ -43,8 +46,8 @@ void GlyphsTab::on_gridHeightSpinBox_valueChanged(int height)
 
 void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
 {
-    //Temporary, until we have support for a rectalinear grid.
-    ui->gridHeightSpinBox->setValue(width);
+   //Temporary, until we have support for a rectalinear grid.
+   ui->gridHeightSpinBox->setValue(width);
 
    int height = ui->gridHeightSpinBox->value();
    emit gridDimensionChanged(width, height);
@@ -52,5 +55,10 @@ void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
 
 void GlyphsTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 {
-    emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
+   emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
+}
+
+void GlyphsTab::on_glyphSelector_currentIndexChanged(int index)
+{
+   emit glyphChanged(static_cast<Settings::sim::GlyphsType>(index));
 }

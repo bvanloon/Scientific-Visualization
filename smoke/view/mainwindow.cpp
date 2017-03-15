@@ -125,6 +125,9 @@ void MainWindow::connectGlyphTabAndSettings()
    this->glyphsTab->getColorMapWidget()->connectToColorMapSettings(Settings::visualization::glyphs().colorMap);
    connect(this->glyphsTab, SIGNAL(vectorFieldChanged(Settings::sim::Vector)),
            &Settings::visualization::glyphs(), SLOT(onVectorFieldChanged(Settings::sim::Vector)));
+
+   connect(this->glyphsTab, SIGNAL(glyphChanged(Settings::sim::GlyphsType)),
+           &Settings::visualization::glyphs(), SLOT(onGlyphChanged(Settings::sim::GlyphsType)));
 }
 
 void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
