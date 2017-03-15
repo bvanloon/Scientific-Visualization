@@ -7,7 +7,7 @@
 #define SIN60    0.86602540378
 
 const float Airplane::AirplaneBuilder::minSize = 3;
-const float Airplane::AirplaneBuilder::maxSize = 20;
+const float Airplane::AirplaneBuilder::maxSize = 100;
 
 Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
@@ -64,12 +64,12 @@ QVector3D Airplane::AirplaneBuilder::computeNose()
 {
    float height = this->baseEdgeLength() * SIN60;
 
-   return this->position + height * this->direction;
+   return this->position + height * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeBase()
 {
-   return this->position + this->normalizedMagnitude * maxSize * this->direction;
+   return this->position + this->normalizedMagnitude * maxSize * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeLeftWing()
@@ -84,5 +84,7 @@ QVector3D Airplane::AirplaneBuilder::computeRightWing()
 
 QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
 {
-   return position + 0.5 * baseEdgeLength() * orthogonalDirection * direction;
+   float scalingFactor = Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
+
+   return position + 0.5 * baseEdgeLength() * orthogonalDirection * direction * scalingFactor + QVector3D(0.0, 0.0, scalingFactor);
 }
