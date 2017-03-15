@@ -1,6 +1,7 @@
 #include "hedgehog.h"
 #include "settings/visualizationsettings.h"
 
+const double HedgeHog::cellRatio = 5;
 
 HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
@@ -26,5 +27,5 @@ QVector3D HedgeHog::computeNormal(QVector3D direction)
 
 QVector3D HedgeHog::computeOffSet(QVector3D direction)
 {
-   return(direction * Settings::visualization::glyphs().vectorScale);
+   return(direction * Settings::visualization::glyphs().vectorScale * computeNormalizedMagnitude(direction) * computeBaseSize(cellRatio));
 }

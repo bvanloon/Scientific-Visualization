@@ -16,7 +16,7 @@ class Airplane : public AbstractGlyph
 
 class Airplane::AirplaneBuilder {
    public:
-      AirplaneBuilder(QVector3D position, QVector3D direction);
+      AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude);
 
       QVector<QVector3D> getNormals();
 
@@ -26,20 +26,24 @@ class Airplane::AirplaneBuilder {
       QVector3D direction;
       QVector3D orthogonalDirection;
       QVector3D position;
+
       float normalizedMagnitude;
+
+      double baseSize;
 
       mesh::TriangleMesh mesh;
 
       float baseEdgeLength();
 
-      static const float maxSize;
-      static const float minSize;
+      static const double maxCellRatio;
 
       QVector3D computeNose();
       QVector3D computeBase();
       QVector3D computeLeftWing();
       QVector3D computeRightWing();
       QVector3D computeWing(int direction);
+
+      void determineSizeRange();
 };
 
 #endif // AIRPLANE_H

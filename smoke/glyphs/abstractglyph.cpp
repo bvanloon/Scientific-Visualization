@@ -1,5 +1,7 @@
 #include "abstractglyph.h"
 #include <assert.h>
+#include "settings/visualizationsettings.h"
+#include "utilities/range.h"
 
 
 AbstractGlyph::AbstractGlyph(float texture)
@@ -41,7 +43,19 @@ void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector3D normal)
 
 void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector<QVector3D> normals)
 {
-    assert(vertices.length() == normals.length());
-    this->vertices.append(vertices);
-    this->normals.append(normals);
+   assert(vertices.length() == normals.length());
+   this->vertices.append(vertices);
+   this->normals.append(normals);
+}
+
+float AbstractGlyph::computeNormalizedMagnitude(QVector3D direction)
+{
+   QPair<float, float> range = Settings::visualization::glyphs().getCurrentMagnitudeRange();
+   return mapToUnitRange(direction.length(), range.first, range.second);
+}
+
+float AbstractGlyph::computeBaseSize(float cellRatio)
+{
+    QSizeF cellSize = Settings::visualization::glyphs().cellSize;
+    return cellRatio * qMax(cellSize.width(), cellSize.height());
 }
