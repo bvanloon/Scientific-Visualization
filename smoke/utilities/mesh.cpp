@@ -84,8 +84,13 @@ void mesh::Triangle::swapVertices()
    vertexB = temp;
 }
 
-mesh::TriangleMesh::TriangleMesh()
-{}
+mesh::TriangleMesh::TriangleMesh(int numVertices, int numFaces)
+{
+    //Avoid resizing while adding elements, which invalidates the pointer references.
+    vertices.reserve(numVertices);
+    vertexPositions.reserve(numVertices);
+    triangles.reserve(numFaces);
+}
 
 mesh::TriangleMesh::~TriangleMesh()
 {

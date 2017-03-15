@@ -12,7 +12,7 @@ namespace mesh {
     class TriangleMesh
     {
        public:
-          TriangleMesh();
+          TriangleMesh(int numVertices, int numFaces);
 
           ~TriangleMesh();
 
