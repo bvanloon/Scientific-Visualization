@@ -57,7 +57,8 @@ SOURCES += main.cpp\
     glyphs/glyphstriangulation.cpp \
     glyphs/hedgehog.cpp \
     glyphs/triangle.cpp \
-    glyphs/ccwtriangle.cpp
+    glyphs/ccwtriangle.cpp \
+    glyphs/airplane.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -96,7 +97,8 @@ HEADERS  += main.ih\
     glyphs/glyphstriangulation.h \
     glyphs/hedgehog.h \
     glyphs/triangle.h \
-    glyphs/ccwtriangle.h
+    glyphs/ccwtriangle.h \
+    glyphs/airplane.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
