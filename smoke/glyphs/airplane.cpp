@@ -1,5 +1,6 @@
 #include "airplane.h"
 #include "utilities/vector.h"
+#include "utilities/range.h"
 #include <QDebug>
 
 #define SIN60    0.86602540378
@@ -17,10 +18,12 @@ Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
 
 Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction) :
    direction(direction.normalized()),
-   position(position),
    orthogonalDirection(computeOrthogonalVector(direction)),
+   position(position),
    mesh(4, 2)
 {
+   qDebug() << "Compute the normalized magnitude to scale.";
+
    mesh::Vertex *tail = mesh.addVertex(position);
    mesh::Vertex *nose = mesh.addVertex(computeNose());
    mesh::Vertex *rightWing = mesh.addVertex(computeRightWing());
@@ -59,7 +62,7 @@ QVector3D Airplane::AirplaneBuilder::computeNose()
 {
    float height = this->baseEdgeLength() * SIN60;
 
-   return this->position + height * this->direction;
+   return this->position + normalizedMagnitude * height * this->direction;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeLeftWing()

@@ -26,6 +26,8 @@ class Airplane::AirplaneBuilder {
       QVector3D direction;
       QVector3D orthogonalDirection;
       QVector3D position;
+      float normalizedMagnitude;
+
       mesh::TriangleMesh mesh;
 
       float baseEdgeLength();
