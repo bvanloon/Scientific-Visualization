@@ -1,6 +1,7 @@
 #include "glyphsfactory.h"
 #include "glyphs/hedgehog.h"
 #include "glyphs/triangle.h"
+#include "glyphs/airplane.h"
 
 #include <QDebug>
 
@@ -14,12 +15,11 @@ GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, GlyphsFactory::g
    case GlyphsFactory::glyphs::hedgehog:
       return createHedgehogs(data);
 
-      break;
-
    case GlyphsFactory::glyphs::triangles:
       return createTriangles(data);
 
-      break;
+   case GlyphsFactory::glyphs::airplane:
+      return createAirplanes(data);
 
    default:
       return GlyphsTriangulation();
@@ -54,11 +54,25 @@ GlyphsTriangulation GlyphsFactory::createTriangles(GlyphData data)
    return triangulation;
 }
 
+GlyphsTriangulation GlyphsFactory::createAirplanes(GlyphData data)
+{
+   GlyphsTriangulation triangulation;
+
+   for (int i = 0; i < data.numGlyphs(); ++i)
+   {
+      AbstractGlyph currentGlyph = Airplane(data.getPositions().at(i),
+                                              data.getDirections().at(i),
+                                              data.getTextureCoordinates().at(i));
+      triangulation.extend(currentGlyph);
+   }
+   return triangulation;
+}
+
 QStringList GlyphsFactory::getGlyphsNames()
 {
    QStringList glyphsNamesList;
 
-   glyphsNamesList << "Hedgehogs" << "Triangles";
+   glyphsNamesList << "Hedgehogs" << "Triangles" << "Airplanes";
 
    return glyphsNamesList;
 }

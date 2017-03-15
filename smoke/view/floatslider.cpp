@@ -3,7 +3,7 @@
 
 #include <QDebug>
 #include <QString>
-#include "utilities.h"
+#include "utilities/range.h"
 
 FloatSlider::FloatSlider(QWidget *parent) :
    QWidget(parent),

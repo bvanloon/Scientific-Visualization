@@ -35,7 +35,7 @@ void VectorEngine::onGridDimensionChanged(int width, int height)
 
 int VectorEngine::updateBuffers()
 {
-   GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::triangles;
+   GlyphsFactory::glyphs glyphType = GlyphsFactory::glyphs::airplane;
    GlyphData data = visualizationGrid->getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, glyphType);
 
