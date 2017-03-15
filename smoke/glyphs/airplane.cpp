@@ -25,6 +25,8 @@ Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D directi
    qDebug() << "Get the actual range from the settings";
 //   normalizedMagnitude = mapToUnitRange(direction.length(), ?, ?);
    normalizedMagnitude = 1;
+   QPair<float, float> range = Settings::visualization::glyphs().getCurrentMagnitudeRange();
+   normalizedMagnitude = mapToUnitRange(direction.length(), range.first, range.second);
 
    mesh::Vertex *tail = mesh.addVertex(position);
    mesh::Vertex *nose = mesh.addVertex(computeNose());
