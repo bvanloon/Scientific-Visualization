@@ -6,23 +6,24 @@
 #include "glyphs/abstractglyph.h"
 #include "glyphstriangulation.h"
 #include "grid/glyphdata.h"
+#include "settings/settings.h"
 
 class GlyphsFactory
 {
    public:
-      enum glyphs
-      {
-         hedgehog,
-         triangles,
-         airplane
-      };
+//      enum glyphs
+//      {
+//         hedgehog,
+//         triangles,
+//         airplane
+//      };
 
 
       static QStringList getGlyphsNames();
 
       GlyphsFactory();
 
-      GlyphsTriangulation createGlyphs(GlyphData data, GlyphsFactory::glyphs glypType);
+      GlyphsTriangulation createGlyphs(GlyphData data, Settings::sim::GlyphsType glypType);
 
    private:
       GlyphsTriangulation createHedgehogs(GlyphData data);

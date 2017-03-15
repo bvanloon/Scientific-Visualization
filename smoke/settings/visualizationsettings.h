@@ -5,6 +5,7 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 #include "grid/vertex.h"
+#include <GL/gl.h>
 
 class Settings::visualization::ColorMap : public QObject {
    Q_OBJECT
@@ -14,10 +15,10 @@ class Settings::visualization::ColorMap : public QObject {
       Settings::sim::Scalar scalar;
       Vertex::scalarGetter textureGetter;
 
-signals:
-    void valueRangeChanged(Settings::sim::Scalar scalarVariable, float minimum, float maximum);
+   signals:
+      void valueRangeChanged(Settings::sim::Scalar scalarVariable, float minimum, float maximum);
 
-public slots:
+   public slots:
       void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);
 };
 
@@ -26,9 +27,9 @@ class Settings::visualization::Smoke : public QObject {
    public:
       static const Smoke& instance();
 
-    Settings::visualization::ColorMap* colorMap;
+      Settings::visualization::ColorMap *colorMap;
 
-private:
+   private:
       explicit Smoke(QObject *parent = 0);
       Smoke(Smoke const&) = delete;
       void operator=(Smoke const&) = delete;
@@ -39,15 +40,21 @@ class Settings::visualization::Glyphs : public QObject {
    public:
       static const Glyphs& instance();
 
-      Settings::visualization::ColorMap* colorMap;
-      Vertex::vectorGetter vectorGetter;
+      Settings::visualization::ColorMap *colorMap;
 
+      Vertex::vectorGetter vectorGetter;
       float vectorScale;
 
-public slots:
+      Settings::sim::GlyphsType glyph;
+      GLint drawMode;
+
+
+   public slots:
       void onVectorFieldChanged(Settings::sim::Vector vectorField);
 
-private:
+      void onGlyphChanged(Settings::sim::GlyphsType glyph);
+
+   private:
       explicit Glyphs(QObject *parent = 0);
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;

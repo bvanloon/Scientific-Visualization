@@ -112,7 +112,18 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout"/>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QLabel" name="glyphLabel">
+          <property name="text">
+           <string>Glyph</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="glyphSelector"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

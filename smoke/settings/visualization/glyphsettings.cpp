@@ -8,6 +8,7 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    vectorScale(1000)
 {
    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
+   this->drawMode = Settings::defaults::visualization::glyphs::defaultDrawMode;
 }
 
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
@@ -20,4 +21,10 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector vectorField)
 {
    vectorGetter = Vertex::getVectorGetter(vectorField);
+}
+
+void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType glyph)
+{
+   this->glyph = glyph;
+   this->drawMode = Settings::sim::drawModes.at(glyph);
 }

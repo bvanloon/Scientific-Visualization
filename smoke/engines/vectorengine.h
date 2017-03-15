@@ -2,7 +2,9 @@
 #define VECTORENGINE_H
 
 #include <QObject>
+#include <GL/gl.h>
 #include "abstractengine.h"
+
 
 #include "glyphs/glyphsfactory.h"
 class VectorEngine : public AbstractEngine {
