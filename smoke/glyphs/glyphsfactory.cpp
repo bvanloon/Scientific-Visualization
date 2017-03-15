@@ -75,7 +75,7 @@ QStringList GlyphsFactory::getGlyphsNames()
 {
    QStringList glyphsNamesList;
 
-   glyphsNamesList << "Hedgehogs" << "Triangles";
+   glyphsNamesList << "Hedgehogs" << "Triangles" << "Airplanes";
 
    return glyphsNamesList;
 }
