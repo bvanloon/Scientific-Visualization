@@ -60,7 +60,8 @@ SOURCES += main.cpp\
     glyphs/ccwtriangle.cpp \
     glyphs/airplane.cpp \
     utilities/interpolation.cpp \
-    utilities/range.cpp
+    utilities/range.cpp \
+    utilities/mesh.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -102,7 +103,8 @@ HEADERS  += main.ih\
     glyphs/ccwtriangle.h \
     glyphs/airplane.h \
     utilities/interpolation.h \
-    utilities/range.h
+    utilities/range.h \
+    utilities/mesh.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
