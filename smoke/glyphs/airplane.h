@@ -36,6 +36,7 @@ class Airplane::AirplaneBuilder {
       static const float minSize;
 
       QVector3D computeNose();
+      QVector3D computeBase();
       QVector3D computeLeftWing();
       QVector3D computeRightWing();
       QVector3D computeWing(int direction);

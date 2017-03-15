@@ -60,11 +60,11 @@ QVector<QVector3D> mesh::Triangle::getVertexPositions()
 
 QVector<QVector3D> mesh::Triangle::getVertexNormals()
 {
-    QVector<QVector3D> normals;
-    normals.append(vertexA->forwardPointingNormal());
-    normals.append(vertexB->forwardPointingNormal());
-    normals.append(vertexC->forwardPointingNormal());
-    return normals;
+   QVector<QVector3D> normals;
+   normals.append(vertexA->forwardPointingNormal());
+   normals.append(vertexB->forwardPointingNormal());
+   normals.append(vertexC->forwardPointingNormal());
+   return normals;
 }
 
 bool mesh::Triangle::hasCCWwindingOrder()
@@ -86,10 +86,10 @@ void mesh::Triangle::swapVertices()
 
 mesh::TriangleMesh::TriangleMesh(int numVertices, int numFaces)
 {
-    //Avoid resizing while adding elements, which invalidates the pointer references.
-    vertices.reserve(numVertices);
-    vertexPositions.reserve(numVertices);
-    triangles.reserve(numFaces);
+   //Avoid resizing while adding elements, which invalidates the pointer references.
+   vertices.reserve(numVertices);
+   vertexPositions.reserve(numVertices);
+   triangles.reserve(numFaces);
 }
 
 mesh::TriangleMesh::~TriangleMesh()
@@ -98,8 +98,9 @@ mesh::TriangleMesh::~TriangleMesh()
    {
       delete vertex;
    }
-   for (auto triangle : triangles){
-       delete triangle;
+   for (auto triangle : triangles)
+   {
+      delete triangle;
    }
 }
 
