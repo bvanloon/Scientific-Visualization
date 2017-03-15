@@ -24,6 +24,9 @@ int SmokeEngine::updateBuffers(Simulation *simulation)
                triangulation);
 
    updateBuffer(this->vertexBuffer, triangles);
+
+   //Fill normal buffer with triangles to make sure it is not empty.
+   updateBuffer(this->normalBuffer, triangles);
    updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
    return triangles.length();
 }

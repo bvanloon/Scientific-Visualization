@@ -10,7 +10,7 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    CCWTriangle triangle = CCWTriangle(
                position + (orthogonalVector * 5),
                position - (orthogonalVector * 5),
-               position + (direction.normalized() * direction.length() * 1000));
+               position + (direction.normalized() * direction.length() * Settings::visualization::glyphs().vectorScale));
 
    QVector3D normal = triangle.computeForwardPointingFaceNormal();
 

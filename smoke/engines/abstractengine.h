@@ -17,7 +17,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 {
    Q_OBJECT
    public:
-      explicit AbstractEngine(int lightModel, QObject *parent = 0);
+      explicit AbstractEngine(int engineLightModel, QObject *parent = 0);
       virtual ~AbstractEngine();
       virtual void draw(Simulation *Simulation) = 0;
 
@@ -53,7 +53,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       Settings::visualization::ColorMap *colorMap;
 
-      int lightModel;
+      int engineLightModel;
 
       //Shaders
       QOpenGLShaderProgram *shaderProgram;
