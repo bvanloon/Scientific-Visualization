@@ -7,17 +7,12 @@ mesh::Vertex::Vertex(QVector3D *position) :
 mesh::Triangle::Triangle(Vertex *vertexA, Vertex *vertexB, Vertex *vertexC) :
    vertexA(vertexA), vertexB(vertexB), vertexC(vertexC)
 {
-    if (!hasCCWwindingOrder()) swapVertices();
+   if (!hasCCWwindingOrder()) swapVertices();
 }
+
 QVector3D mesh::Vertex::position() const
 {
    return *positionPtr;
-}
-
-mesh::Triangle::Triangle(Vertex *vertexA, Vertex *vertexB, Vertex *vertexC) :
-   vertexA(vertexA), vertexB(vertexB), vertexC(vertexC)
-{
-   if (!hasCCWwindingOrder()) swapVertices();
 }
 
 QVector3D mesh::Triangle::computeForwardPointingFaceNormal()
@@ -62,6 +57,7 @@ mesh::Triangle *mesh::TriangleMesh::addTriangle(mesh::Vertex *a, mesh::Vertex *b
 
    this->triangles.append(triangle);
 }
+
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)
 {
    this->vertices.append(vertex);
