@@ -1,6 +1,7 @@
 #include "airplane.h"
 #include "utilities/vector.h"
 #include "utilities/range.h"
+#include "settings/visualizationsettings.h"
 #include <QDebug>
 
 #define SIN60    0.86602540378
@@ -22,9 +23,6 @@ Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D directi
    position(position),
    mesh(4, 2)
 {
-   qDebug() << "Get the actual range from the settings";
-//   normalizedMagnitude = mapToUnitRange(direction.length(), ?, ?);
-   normalizedMagnitude = 1;
    QPair<float, float> range = Settings::visualization::glyphs().getCurrentMagnitudeRange();
    normalizedMagnitude = mapToUnitRange(direction.length(), range.first, range.second);
 
