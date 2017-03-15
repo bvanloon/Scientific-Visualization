@@ -6,6 +6,9 @@
 
 QT       += core gui
 
+CONFIG += object_parallel_to_source
+OBJECTS_DIR = ../build/
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 QMAKE_CXXFLAGS += -std=c++11
