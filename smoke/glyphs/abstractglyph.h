@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QVector2D>
 #include <QVector3D>
+#include "settings/settings.h"
 
 
 class AbstractGlyph
@@ -26,6 +27,7 @@ class AbstractGlyph
       QVector<QVector3D> vertices;
 
       void addVertex(QVector3D vertex, QVector3D normal);
+
       void addVertices(QVector<QVector3D> vertices, QVector3D normal);
 
    private:

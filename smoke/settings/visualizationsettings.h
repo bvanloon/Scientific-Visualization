@@ -5,6 +5,7 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 #include "grid/vertex.h"
+#include <GL/gl.h>
 
 class Settings::visualization::ColorMap : public QObject {
    Q_OBJECT
@@ -40,10 +41,13 @@ class Settings::visualization::Glyphs : public QObject {
       static const Glyphs& instance();
 
       Settings::visualization::ColorMap *colorMap;
-      Settings::sim::GlyphsType glyph;
-      Vertex::vectorGetter vectorGetter;
 
+      Vertex::vectorGetter vectorGetter;
       float vectorScale;
+
+      Settings::sim::GlyphsType glyph;
+      GLint drawMode;
+
 
    public slots:
       void onVectorFieldChanged(Settings::sim::Vector vectorField);

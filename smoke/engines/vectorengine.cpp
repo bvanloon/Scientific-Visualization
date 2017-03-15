@@ -15,12 +15,11 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
    simulationGrid(simulationGrid)
 {}
 
-
 void VectorEngine::draw(Simulation *simulation)
 {
    int bufferLength = this->updateBuffers();
 
-   drawWithMode(GL_TRIANGLES, bufferLength);
+   drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
 }
 
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
