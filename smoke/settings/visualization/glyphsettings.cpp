@@ -5,9 +5,9 @@
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   vectorScale(10)
+   vectorScale(1000)
 {
-    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
+   vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
 }
 
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
@@ -19,5 +19,5 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 
 void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector vectorField)
 {
-    vectorGetter = Vertex::getVectorGetter(vectorField);
+   vectorGetter = Vertex::getVectorGetter(vectorField);
 }
