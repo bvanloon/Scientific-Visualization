@@ -5,7 +5,7 @@
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   vectorScale(1000),
+   vectorScale(0.5),
    magnitude(Settings::sim::fluidVelocityMagnitude)
 {
    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
