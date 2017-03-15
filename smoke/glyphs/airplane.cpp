@@ -6,8 +6,7 @@
 
 #define SIN60    0.86602540378
 
-const float Airplane::AirplaneBuilder::minSize = 3;
-const float Airplane::AirplaneBuilder::maxSize = 100;
+const double Airplane::AirplaneBuilder::maxCellRatio = 2;
 
 Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
@@ -25,6 +24,8 @@ Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D directi
 {
    QPair<float, float> range = Settings::visualization::glyphs().getCurrentMagnitudeRange();
    normalizedMagnitude = mapToUnitRange(direction.length(), range.first, range.second);
+
+   determineSizeRange();
 
    mesh::Vertex *tail = mesh.addVertex(computeBase());
    mesh::Vertex *nose = mesh.addVertex(computeNose());
@@ -57,7 +58,7 @@ QVector<QVector3D> Airplane::AirplaneBuilder::getVertices()
 
 float Airplane::AirplaneBuilder::baseEdgeLength()
 {
-   return maxSize;
+   return this->maximumSize;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeNose()
@@ -69,7 +70,7 @@ QVector3D Airplane::AirplaneBuilder::computeNose()
 
 QVector3D Airplane::AirplaneBuilder::computeBase()
 {
-   return this->position + this->normalizedMagnitude * maxSize * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
+   return this->position + this->normalizedMagnitude * this->maximumSize * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeLeftWing()
@@ -87,4 +88,10 @@ QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
    float scalingFactor = Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
 
    return position + 0.5 * baseEdgeLength() * orthogonalDirection * direction * scalingFactor + QVector3D(0.0, 0.0, scalingFactor);
+}
+
+void Airplane::AirplaneBuilder::determineSizeRange()
+{
+    QSizeF cellSize = Settings::visualization::glyphs().cellSize;
+    this->maximumSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
 }
