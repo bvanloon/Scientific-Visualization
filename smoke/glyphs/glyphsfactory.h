@@ -13,7 +13,8 @@ class GlyphsFactory
       enum glyphs
       {
          hedgehog,
-         triangles
+         triangles,
+         airplane
       };
 
 
@@ -27,6 +28,8 @@ class GlyphsFactory
       GlyphsTriangulation createHedgehogs(GlyphData data);
 
       GlyphsTriangulation createTriangles(GlyphData data);
+
+      GlyphsTriangulation createAirplanes(GlyphData data);
 };
 
 #endif // GLYPHSFACTORY_H
