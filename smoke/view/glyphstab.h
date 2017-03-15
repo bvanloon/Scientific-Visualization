@@ -27,6 +27,8 @@ class GlyphsTab : public QWidget
 
       void glyphChanged(Settings::sim::GlyphsType glyph);
 
+      void scaleChanged(double scale);
+
    private slots:
       void on_gridHeightSpinBox_valueChanged(int height);
 
@@ -36,12 +38,16 @@ class GlyphsTab : public QWidget
 
       void on_glyphSelector_currentIndexChanged(int index);
 
-   private:
+      void on_scale_valueChanged(double scale);
+
+private:
       Ui::GlyphsTab *ui;
 
       void setUiToDefaults();
 
       void setUpConnections();
+
+      void updateScaleSpinBoxConfiguration(double currentValue);
 };
 
 #endif // GLYPHSTAB_H

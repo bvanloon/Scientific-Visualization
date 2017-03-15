@@ -54,3 +54,8 @@ void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 {
     this->cellSize = newSize;
 }
+
+void Settings::visualization::Glyphs::onScaleChanged(double scale)
+{
+    this->vectorScale = scale;
+}

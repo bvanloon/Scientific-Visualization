@@ -128,6 +128,9 @@ void MainWindow::connectGlyphTabAndSettings()
 
    connect(this->glyphsTab, SIGNAL(glyphChanged(Settings::sim::GlyphsType)),
            &Settings::visualization::glyphs(), SLOT(onGlyphChanged(Settings::sim::GlyphsType)));
+
+   connect(this->glyphsTab, SIGNAL(scaleChanged(double)),
+           &Settings::visualization::glyphs(), SLOT(onScaleChanged(double)));
 }
 
 void MainWindow::connectEngineAndSettings(AbstractEngine *currentEngine)
