@@ -32,6 +32,7 @@ class AbstractGlyph
       void addVertices(QVector<QVector3D> vertices, QVector<QVector3D> normals);
 
       float computeNormalizedMagnitude(QVector3D direction);
+      float computeBaseSize(float cellRatio);
 
    private:
 };
