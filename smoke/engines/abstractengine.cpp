@@ -5,7 +5,7 @@ const float AbstractEngine::nearClippingPlane = -1.0f;
 
 AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
    QObject(parent),
-   lightModel(lightModel),
+   engineLightModel(lightModel),
    texture(0),
    normalBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer))
 {
@@ -81,7 +81,7 @@ void AbstractEngine::setMVPMatrix()
 void AbstractEngine::setLightModel()
 {
    this->shaderProgram->bind();
-   this->shaderProgram->setUniformValue("lightModel", lightModel);
+   this->shaderProgram->setUniformValue("lightModel", engineLightModel);
    this->shaderProgram->release();
 }
 
