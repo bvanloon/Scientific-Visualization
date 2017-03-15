@@ -99,8 +99,8 @@ namespace Settings {
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
                 static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
-                static const Settings::sim::GlyphsType defaultGlyph = Settings::sim::GlyphsType::hedgehog;
-                static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::defaultGlyph);
+                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::hedgehog;
+                static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
         }
 

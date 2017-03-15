@@ -48,7 +48,7 @@ class Settings::visualization::Glyphs : public QObject {
       Settings::visualization::ColorMap *colorMap;
 
       Vertex::vectorGetter vectorGetter;
-      float vectorScale;
+      float scale;
 
       Settings::sim::GlyphsType glyph;
       GLint drawMode;

@@ -27,12 +27,15 @@ void GlyphsTab::setUiToDefaults()
    ui->vectorFieldComboBox->addItems(Settings::visualization::getVectorVariableNames());
    ui->vectorFieldComboBox->setCurrentIndex(Settings::defaults::visualization::glyphs::vector);
 
+   ui->scale->setValue(Settings::visualization::glyphs().scale);
+   updateScaleSpinBoxConfiguration(Settings::visualization::glyphs().scale);
+
    //Temporary, until we have support for a rectalinear grid.
    ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
    ui->gridHeightSpinBox->setDisabled(true);
 
    ui->glyphSelector->addItems(GlyphsFactory::getGlyphsNames());
-   ui->glyphSelector->setCurrentIndex(Settings::defaults::visualization::glyphs::defaultGlyph);
+   ui->glyphSelector->setCurrentIndex(Settings::defaults::visualization::glyphs::glyphType);
 }
 
 void GlyphsTab::setUpConnections()

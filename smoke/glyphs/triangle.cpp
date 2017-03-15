@@ -3,15 +3,20 @@
 #include "glyphs/ccwtriangle.h"
 #include "utilities/vector.h"
 
+const double Triangle::cellRatio = 1;
+
 Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
 {
    QVector3D orthogonalVector = computeOrthogonalVector(direction);
 
+   double baseSize = this->computeBaseSize(cellRatio);
+   double scalingFactor = baseSize * Settings::visualization::glyphs().scale;
+
    CCWTriangle triangle = CCWTriangle(
-               position + (orthogonalVector * 5),
-               position - (orthogonalVector * 5),
-               position + (direction.normalized() * direction.length() * Settings::visualization::glyphs().vectorScale));
+               position + (orthogonalVector.normalized() * 0.5 * baseSize),
+               position - (orthogonalVector.normalized() * 0.5 * baseSize),
+               position + (direction.normalized() * this->computeNormalizedMagnitude(direction) * scalingFactor));
 
    QVector3D normal = triangle.computeForwardPointingFaceNormal();
 
