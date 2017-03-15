@@ -58,7 +58,7 @@ QVector<QVector3D> Airplane::AirplaneBuilder::getVertices()
 
 float Airplane::AirplaneBuilder::baseEdgeLength()
 {
-   return this->maximumSize;
+   return this->baseSize;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeNose()
@@ -70,7 +70,7 @@ QVector3D Airplane::AirplaneBuilder::computeNose()
 
 QVector3D Airplane::AirplaneBuilder::computeBase()
 {
-   return this->position + this->normalizedMagnitude * this->maximumSize * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
+   return this->position + this->normalizedMagnitude * this->baseSize * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeLeftWing()
@@ -93,5 +93,5 @@ QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
 void Airplane::AirplaneBuilder::determineSizeRange()
 {
     QSizeF cellSize = Settings::visualization::glyphs().cellSize;
-    this->maximumSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
+    this->baseSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
 }

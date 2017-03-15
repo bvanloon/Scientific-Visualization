@@ -29,7 +29,7 @@ class Airplane::AirplaneBuilder {
 
       float normalizedMagnitude;
 
-      double maximumSize;
+      double baseSize;
 
       mesh::TriangleMesh mesh;
 
