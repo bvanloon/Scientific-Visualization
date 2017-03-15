@@ -15,12 +15,37 @@ QVector3D mesh::Vertex::position() const
    return *positionPtr;
 }
 
-QVector3D mesh::Triangle::computeForwardPointingFaceNormal()
+void mesh::Vertex::addAdjacentFace(mesh::Triangle *face)
 {
-   QVector3D ab = vertexB->position() - vertexA->position();
-   QVector3D ac = vertexC->position() - vertexA->position();
+   this->adjacentFaces.append(face);
+}
+
+QVector3D mesh::Vertex::forwardPointingNormal()
+{
+   QVector3D normal;
+
+   for (auto face : adjacentFaces)
+   {
+      normal += face->forwardPointingNormal();
+   }
+   return normal.normalized();
+}
+
+QVector3D mesh::Triangle::forwardPointingNormal()
+{
+   QVector3D ab = vertexA->position() - vertexB->position();
+   QVector3D ac = vertexA->position() - vertexC->position();
 
    return QVector3D::crossProduct(ac, ab).normalized();
+}
+
+QList<mesh::Vertex *> mesh::Triangle::getVertices()
+{
+   QList<Vertex *> vertices;
+   vertices.append(vertexA);
+   vertices.append(vertexB);
+   vertices.append(vertexC);
+   return vertices;
 }
 
 bool mesh::Triangle::hasCCWwindingOrder()
@@ -29,7 +54,7 @@ bool mesh::Triangle::hasCCWwindingOrder()
    QVector3D ac = vertexC->position() - vertexA->position();
    double crossProductZ = ab.x() * ac.y() - ab.y() * ac.x();
 
-   return crossProductZ < 0.0;
+   return crossProductZ > 0.0;
 }
 
 void mesh::Triangle::swapVertices()
@@ -46,7 +71,8 @@ mesh::TriangleMesh::TriangleMesh()
 mesh::Vertex *mesh::TriangleMesh::addVertex(QVector3D position)
 {
    this->vertexPositions.append(position);
-   Vertex *newVertex = new Vertex(&vertexPositions.last());
+   QVector3D *positionPtr = &vertexPositions.last();
+   Vertex *newVertex = new Vertex(positionPtr);
    this->addVertex(newVertex);
    return newVertex;
 }
@@ -55,7 +81,16 @@ mesh::Triangle *mesh::TriangleMesh::addTriangle(mesh::Vertex *a, mesh::Vertex *b
 {
    Triangle *triangle = new Triangle(a, b, c);
 
+   a->addAdjacentFace(triangle);
+   b->addAdjacentFace(triangle);
+   c->addAdjacentFace(triangle);
    this->triangles.append(triangle);
+   return triangle;
+}
+
+QVector<mesh::Triangle *> mesh::TriangleMesh::getTriangles() const
+{
+   return triangles;
 }
 
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)

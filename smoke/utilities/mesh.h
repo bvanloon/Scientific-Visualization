@@ -3,6 +3,7 @@
 
 #include <QVector3D>
 #include <QVector>
+#include <QList>
 
 namespace mesh {
     class Vertex;
@@ -16,7 +17,9 @@ namespace mesh {
           Vertex *addVertex(QVector3D position);
           Triangle *addTriangle(Vertex *a, Vertex *b, Vertex *c);
 
-       private:
+          QVector<Triangle *> getTriangles() const;
+
+    private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
           QVector<Triangle *> triangles;
@@ -30,9 +33,13 @@ namespace mesh {
           Vertex(QVector3D *position);
 
           QVector3D position() const;
+          void addAdjacentFace(Triangle* face);
+
+          QVector3D forwardPointingNormal();
 
     private:
           QVector3D *positionPtr;
+          QList<Triangle*> adjacentFaces;
     };
 
     class Triangle
@@ -40,7 +47,9 @@ namespace mesh {
        public:
           Triangle(Vertex *vertexA, Vertex *vertexB, Vertex *vertexc);
 
-          QVector3D computeForwardPointingFaceNormal();
+          QVector3D forwardPointingNormal();
+
+          QList<Vertex*> getVertices();
 
        private:
           Vertex *vertexA;
