@@ -11,7 +11,7 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    QVector3D orthogonalVector = computeOrthogonalVector(direction);
 
    double baseSize = this->computeBaseSize(cellRatio);
-   double scalingFactor = baseSize * Settings::visualization::glyphs().vectorScale;
+   double scalingFactor = baseSize * Settings::visualization::glyphs().scale;
 
    CCWTriangle triangle = CCWTriangle(
                position + (orthogonalVector.normalized() * 0.5 * baseSize),

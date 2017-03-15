@@ -27,5 +27,5 @@ QVector3D HedgeHog::computeNormal(QVector3D direction)
 
 QVector3D HedgeHog::computeOffSet(QVector3D direction)
 {
-   return(direction.normalized() * Settings::visualization::glyphs().vectorScale * computeNormalizedMagnitude(direction) * computeBaseSize(cellRatio));
+   return(direction.normalized() * Settings::visualization::glyphs().scale * computeNormalizedMagnitude(direction) * computeBaseSize(cellRatio));
 }

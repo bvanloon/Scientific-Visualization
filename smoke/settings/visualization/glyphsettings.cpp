@@ -5,7 +5,7 @@
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   vectorScale(1),
+   scale(1),
    magnitude(Settings::sim::fluidVelocityMagnitude)
 {
    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
@@ -57,5 +57,5 @@ void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 
 void Settings::visualization::Glyphs::onScaleChanged(double scale)
 {
-    this->vectorScale = scale;
+    this->scale = scale;
 }

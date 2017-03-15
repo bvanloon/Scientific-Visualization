@@ -64,12 +64,12 @@ QVector3D Airplane::AirplaneBuilder::computeNose()
 {
    float height = this->baseEdgeLength() * SIN60;
 
-   return this->position + height * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
+   return this->position + height * this->direction * Settings::visualization::glyphs().scale * this->normalizedMagnitude;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeBase()
 {
-   return this->position + this->normalizedMagnitude * this->baseSize * this->direction * Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
+   return this->position + this->normalizedMagnitude * this->baseSize * this->direction * Settings::visualization::glyphs().scale * this->normalizedMagnitude;
 }
 
 QVector3D Airplane::AirplaneBuilder::computeLeftWing()
@@ -84,7 +84,7 @@ QVector3D Airplane::AirplaneBuilder::computeRightWing()
 
 QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
 {
-   float scalingFactor = Settings::visualization::glyphs().vectorScale * this->normalizedMagnitude;
+   float scalingFactor = Settings::visualization::glyphs().scale * this->normalizedMagnitude;
 
    return position + 0.5 * baseEdgeLength() * orthogonalDirection * direction * scalingFactor + QVector3D(0.0, 0.0, scalingFactor);
 }
