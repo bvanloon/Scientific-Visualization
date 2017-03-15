@@ -15,12 +15,9 @@ GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, GlyphsFactory::g
    case GlyphsFactory::glyphs::hedgehog:
       return createHedgehogs(data);
 
-      break;
-
    case GlyphsFactory::glyphs::triangles:
       return createTriangles(data);
 
-      break;
    case GlyphsFactory::glyphs::airplane:
       return createAirplanes(data);
 
