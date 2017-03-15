@@ -9,9 +9,12 @@ class HedgeHog : public AbstractGlyph
       HedgeHog();
       HedgeHog(QVector3D position, QVector3D direction, float scalar);
 
-private:
+   private:
       QVector3D computeOffSet(QVector3D direction);
+
       QVector3D computeNormal(QVector3D direction);
+
+      static const double cellRatio;
 };
 
 #endif // HEDGEHOG_H
