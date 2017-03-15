@@ -14,6 +14,8 @@ namespace mesh {
        public:
           TriangleMesh();
 
+          ~TriangleMesh();
+
           Vertex *addVertex(QVector3D position);
           Triangle *addTriangle(Vertex *a, Vertex *b, Vertex *c);
 
@@ -50,6 +52,7 @@ namespace mesh {
           QVector3D forwardPointingNormal();
 
           QList<Vertex*> getVertices();
+          QVector<QVector3D> getVertexPositions();
 
        private:
           Vertex *vertexA;

@@ -1,4 +1,5 @@
 #include "mesh.h"
+#include <QDebug>
 
 mesh::Vertex::Vertex(QVector3D *position) :
    positionPtr(position)
@@ -48,6 +49,15 @@ QList<mesh::Vertex *> mesh::Triangle::getVertices()
    return vertices;
 }
 
+QVector<QVector3D> mesh::Triangle::getVertexPositions()
+{
+   QVector<QVector3D> positions;
+   positions.append(vertexA->position());
+   positions.append(vertexB->position());
+   positions.append(vertexC->position());
+   return positions;
+}
+
 bool mesh::Triangle::hasCCWwindingOrder()
 {
    QVector3D ab = vertexB->position() - vertexA->position();
@@ -67,6 +77,17 @@ void mesh::Triangle::swapVertices()
 
 mesh::TriangleMesh::TriangleMesh()
 {}
+
+mesh::TriangleMesh::~TriangleMesh()
+{
+   for (auto vertex : vertices)
+   {
+      delete vertex;
+   }
+   for (auto triangle : triangles){
+       delete triangle;
+   }
+}
 
 mesh::Vertex *mesh::TriangleMesh::addVertex(QVector3D position)
 {
