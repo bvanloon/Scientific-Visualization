@@ -3,6 +3,7 @@
 
 #include <QVector3D>
 #include "glyphs/abstractglyph.h"
+#include "utilities/mesh.h"
 
 class Airplane : public AbstractGlyph
 {
@@ -18,11 +19,15 @@ class Airplane::AirplaneBuilder {
       AirplaneBuilder(QVector3D position, QVector3D direction);
 
       QVector<QVector3D> getNormals();
+
       QVector<QVector3D> getVertices();
 
    private:
-      QVector3D position;
       QVector3D direction;
+      mesh::TriangleMesh mesh;
+
+      static const float maxSize;
+      static const float minSize;
 };
 
 #endif // AIRPLANE_H
