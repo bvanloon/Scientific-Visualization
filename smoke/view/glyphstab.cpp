@@ -38,6 +38,17 @@ void GlyphsTab::setUiToDefaults()
 void GlyphsTab::setUpConnections()
 {}
 
+void GlyphsTab::updateScaleSpinBoxConfiguration(double currentValue)
+{
+    if(currentValue <= 1.0){
+        ui->scale->setDecimals(2);
+        ui->scale->setSingleStep(0.1);
+    } else {
+        ui->scale->setDecimals(0);
+        ui->scale->setSingleStep(1);
+    }
+}
+
 void GlyphsTab::on_gridHeightSpinBox_valueChanged(int height)
 {
    int width = ui->gridWidthSpinBox->value();
@@ -61,4 +72,10 @@ void GlyphsTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 void GlyphsTab::on_glyphSelector_currentIndexChanged(int index)
 {
    emit glyphChanged(static_cast<Settings::sim::GlyphsType>(index));
+}
+
+void GlyphsTab::on_scale_valueChanged(double scale)
+{
+    updateScaleSpinBoxConfiguration(scale);
+    emit scaleChanged(scale);
 }

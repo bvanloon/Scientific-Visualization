@@ -63,6 +63,8 @@ class Settings::visualization::Glyphs : public QObject {
 
       void onCellSizeChanged(QSizeF newSize);
 
+      void onScaleChanged(double scale);
+
    private:
       explicit Glyphs(QObject *parent = 0);
       Glyphs(Glyphs const&) = delete;
