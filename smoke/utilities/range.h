@@ -14,4 +14,10 @@ T mapToRange(const T& input, const T& input_start, const T& input_end, const T& 
     return output_start + slope * (input - input_start);
 }
 
+template <typename T>
+T mapToUnitRange(const T& input, const T& input_start, const T& input_end){
+    double slope = 1.0 / static_cast<double>((input_end - input_start));
+    return slope * (input - input_start);
+}
+
 #endif // RANGE_H
