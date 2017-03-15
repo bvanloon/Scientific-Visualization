@@ -40,11 +40,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second), this->smokeColorMapTab);
-   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second), this->smokeColorMapTab);
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second));
 
-   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second), this->glyphsTab->getColorMapWidget());
-   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second), this->glyphsTab->getColorMapWidget());
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second));
 
    connectCanvasAndSimulationTab();
 
@@ -151,7 +151,7 @@ void MainWindow::connectVectorEngineAndGlyphTab()
 
 void MainWindow::connectVectorEngineAndSettings()
 {
-   AbstractEngine *engine = this->canvas->enginemap.find(this->canvas->EnginesEnum::glyphs)->second;
+   AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second;
 
    engine->setColorMap(Settings::visualization::glyphs().colorMap);
 
@@ -165,7 +165,7 @@ void MainWindow::connectVectorEngineAndSettings()
 
 void MainWindow::connectSmokeEngineAndSettings()
 {
-   AbstractEngine *engine = this->canvas->enginemap.find(this->canvas->EnginesEnum::smoke)->second;
+   AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second;
 
    engine->setColorMap(Settings::visualization::smoke().colorMap);
 

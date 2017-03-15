@@ -29,18 +29,12 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void setSimulation(Simulation *simulation);
 
-
-      enum EnginesEnum
-      {
-         glyphs,
-         smoke,
-         nrOfEngine
-      };
-
-      typedef std::map<EnginesEnum, AbstractEngine *> EngineMap;
-      typedef std::pair<EnginesEnum, AbstractEngine *> EnginePair;
+      typedef std::map<Settings::engines::EnginesTypes, AbstractEngine *> EngineMap;
+      typedef std::pair<Settings::engines::EnginesTypes, AbstractEngine *> EnginePair;
+      typedef std::map<Settings::engines::EnginesTypes, bool> ActiveEnginesMap;
 
       EngineMap enginemap; //Public since mainwindow accesses it to setup connections
+      ActiveEnginesMap activeEngines;
    public slots:
       void onGlyphsEngineToggled(bool checked);
 
@@ -70,8 +64,11 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
    private:
       Simulation *simulation;
 
-      //Active Engines
-      bool activeEngines[EnginesEnum::nrOfEngine] = { true, false };
+      //Engines
+      void initializeActiveEngines();
+
+      void connectThisAndEngine(AbstractEngine *engine);
+
       void enginesDraw();
 
       //Idle Loop
@@ -83,8 +80,6 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void initializeUniforms();
 
       void initializeColorMapInfo();
-
-      void connectThisAndEngine(AbstractEngine *engine);
 };
 
 #endif // CANVAS_H

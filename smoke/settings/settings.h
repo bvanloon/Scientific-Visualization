@@ -40,6 +40,15 @@ namespace Settings {
         };
     }
 
+    namespace engines {
+        enum EnginesTypes
+        {
+           glyphs,
+           smoke,
+           numberOfEngines
+        };
+    }
+
     namespace defaults {
         namespace simulation {
             static const float valueRangeMin = 0.0f;
@@ -69,6 +78,10 @@ namespace Settings {
                 static const QSize gridSize = QSize(20, 15);
                 static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
             }
+        }
+
+        namespace engines {
+            static const bool activeEngines[2] = { true, false };
         }
     }
 }
