@@ -37,7 +37,7 @@ QVector3D mesh::Triangle::forwardPointingNormal()
    QVector3D ab = vertexA->position() - vertexB->position();
    QVector3D ac = vertexA->position() - vertexC->position();
 
-   return QVector3D::crossProduct(ac, ab).normalized();
+   return QVector3D::crossProduct(ab, ac).normalized();
 }
 
 QList<mesh::Vertex *> mesh::Triangle::getVertices()
@@ -56,6 +56,15 @@ QVector<QVector3D> mesh::Triangle::getVertexPositions()
    positions.append(vertexB->position());
    positions.append(vertexC->position());
    return positions;
+}
+
+QVector<QVector3D> mesh::Triangle::getVertexNormals()
+{
+    QVector<QVector3D> normals;
+    normals.append(vertexA->forwardPointingNormal());
+    normals.append(vertexB->forwardPointingNormal());
+    normals.append(vertexC->forwardPointingNormal());
+    return normals;
 }
 
 bool mesh::Triangle::hasCCWwindingOrder()

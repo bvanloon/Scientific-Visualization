@@ -53,6 +53,7 @@ namespace mesh {
 
           QList<Vertex*> getVertices();
           QVector<QVector3D> getVertexPositions();
+          QVector<QVector3D> getVertexNormals();
 
        private:
           Vertex *vertexA;
