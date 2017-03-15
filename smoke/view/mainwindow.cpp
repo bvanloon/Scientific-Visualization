@@ -156,6 +156,7 @@ void MainWindow::connectVectorEngineAndSettings()
 {
    AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second;
 
+
    engine->setColorMap(Settings::visualization::glyphs().colorMap);
 
    connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
@@ -164,6 +165,8 @@ void MainWindow::connectVectorEngineAndSettings()
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
    connect(Settings::visualization::glyphs().colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+   connect(dynamic_cast<VectorEngine*>(engine), SIGNAL(cellSizeChanged(QSizeF)),
+           &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 
 void MainWindow::connectSmokeEngineAndSettings()
