@@ -24,10 +24,19 @@ class Airplane::AirplaneBuilder {
 
    private:
       QVector3D direction;
+      QVector3D orthogonalDirection;
+      QVector3D position;
       mesh::TriangleMesh mesh;
+
+      float baseEdgeLength();
 
       static const float maxSize;
       static const float minSize;
+
+      QVector3D computeNose();
+      QVector3D computeLeftWing();
+      QVector3D computeRightWing();
+      QVector3D computeWing(int direction);
 };
 
 #endif // AIRPLANE_H

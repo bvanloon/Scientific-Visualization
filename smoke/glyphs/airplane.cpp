@@ -17,20 +17,17 @@ Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
 
 Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction) :
    direction(direction.normalized()),
+   position(position),
+   orthogonalDirection(computeOrthogonalVector(direction)),
    mesh(4, 2)
 {
-   float edgeLength = maxSize + minSize;
-   float height = edgeLength * SIN60;
+   mesh::Vertex *tail = mesh.addVertex(position);
+   mesh::Vertex *nose = mesh.addVertex(computeNose());
+   mesh::Vertex *rightWing = mesh.addVertex(computeRightWing());
+   mesh::Vertex *leftWing = mesh.addVertex(computeLeftWing());
 
-   QVector3D orthogonalDirection = computeOrthogonalVector(this->direction);
-
-   mesh::Vertex *d = mesh.addVertex(position);
-   mesh::Vertex *b = mesh.addVertex(d->position() + height * this->direction);
-   mesh::Vertex *c = mesh.addVertex(d->position() + 0.5 * edgeLength * orthogonalDirection);
-   mesh::Vertex *a = mesh.addVertex(d->position() - 0.5 * edgeLength * orthogonalDirection);
-
-   mesh.addTriangle(a, b, d);
-   mesh.addTriangle(d, b, c);
+   mesh.addTriangle(leftWing, nose, tail);
+   mesh.addTriangle(tail, nose, rightWing);
 }
 
 QVector<QVector3D> Airplane::AirplaneBuilder::getNormals()
@@ -51,4 +48,31 @@ QVector<QVector3D> Airplane::AirplaneBuilder::getVertices()
       vertices.append(triangle->getVertexPositions());
    }
    return vertices;
+}
+
+float Airplane::AirplaneBuilder::baseEdgeLength()
+{
+   return maxSize + minSize;
+}
+
+QVector3D Airplane::AirplaneBuilder::computeNose()
+{
+   float height = this->baseEdgeLength() * SIN60;
+
+   return this->position + height * this->direction;
+}
+
+QVector3D Airplane::AirplaneBuilder::computeLeftWing()
+{
+   return this->computeWing(-1);
+}
+
+QVector3D Airplane::AirplaneBuilder::computeRightWing()
+{
+   return this->computeWing(+1);
+}
+
+QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
+{
+   return position + 0.5 * baseEdgeLength() * orthogonalDirection * direction;
 }
