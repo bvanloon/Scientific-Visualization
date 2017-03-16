@@ -17,13 +17,14 @@ namespace mesh {
           ~TriangleMesh();
 
           Vertex *addVertex(QVector3D position);
+
           Triangle *addTriangle(Vertex *a, Vertex *b, Vertex *c);
 
           QVector<Triangle *> getTriangles() const;
 
           static TriangleMesh *buildUnitCone();
 
-    private:
+       private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
           QVector<Triangle *> triangles;
@@ -37,13 +38,14 @@ namespace mesh {
           Vertex(QVector3D *position);
 
           QVector3D position() const;
-          void addAdjacentFace(Triangle* face);
+
+          void addAdjacentFace(Triangle *face);
 
           QVector3D forwardPointingNormal();
 
-    private:
+       private:
           QVector3D *positionPtr;
-          QList<Triangle*> adjacentFaces;
+          QList<Triangle *> adjacentFaces;
     };
 
     class Triangle
@@ -53,8 +55,10 @@ namespace mesh {
 
           QVector3D forwardPointingNormal();
 
-          QList<Vertex*> getVertices();
+          QList<Vertex *> getVertices();
+
           QVector<QVector3D> getVertexPositions();
+
           QVector<QVector3D> getVertexNormals();
 
        private:
