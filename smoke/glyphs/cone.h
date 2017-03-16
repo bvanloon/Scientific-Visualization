@@ -17,8 +17,9 @@ private:
 
     float computeScalingFactor(QVector3D direction);
 
+    void transform(QVector3D position, QVector3D direction);
     void translate(QVector3D position);
-    void scale(float scalingFactor);
+    void scale(QVector3D direction);
     void rotate(QVector3D direction);
 };
 
