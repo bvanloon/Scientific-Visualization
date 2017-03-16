@@ -12,6 +12,8 @@ public:
 private:
 
     mesh::TriangleMesh* mesh;
+    QVector3D position;
+    QVector3D direction;
 
     static const double maxCellRatio;
 
