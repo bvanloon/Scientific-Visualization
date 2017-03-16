@@ -6,7 +6,8 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    scale(1),
-   magnitude(Settings::sim::fluidVelocityMagnitude)
+   magnitude(Settings::sim::fluidVelocityMagnitude),
+   glyph(Settings::defaults::visualization::glyphs::glyphType)
 {
    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
    this->drawMode = Settings::defaults::visualization::glyphs::defaultDrawMode;
