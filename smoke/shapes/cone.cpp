@@ -1,4 +1,5 @@
 #include "cone.h"
+#include <math.h>
 
 Cone::Cone() :
    center(QVector3D(0, 0, 0)),
@@ -8,29 +9,38 @@ Cone::Cone() :
 
 mesh::TriangleMesh *Cone::toTriangleMesh(int resolution)
 {
-    mesh::TriangleMesh mesh = mesh::TriangleMesh(
-                computeNumVertices(resolution),
-                computeNumFaces(resolution));
-    mesh::Vertex* top = mesh.addVertex(computeTop());
-    mesh::Vertex* bottomCenter = mesh.addVertex(computeBottomCenter());
+   Cone::MeshBuilder builder = MeshBuilder(this, resolution);
+   return builder.getMesh();
 }
 
-int Cone::computeNumFaces(int resolution)
+mesh::TriangleMesh *Cone::MeshBuilder::getMesh() const
 {
-   return 2 * resolution;
+   return mesh;
 }
 
-int Cone::computeNumVertices(int resolution)
+int Cone::MeshBuilder::computeNumFaces()
 {
-   return resolution + 2;
+   return 2 * this->resolution;
 }
 
-QVector3D Cone::computeTop()
+int Cone::MeshBuilder::computeNumVertices()
 {
-   return this->center + 0.5 * this->height * this->direction;
+   return this->resolution + 2;
 }
 
-QVector3D Cone::computeBottomCenter()
+Cone::MeshBuilder::MeshBuilder(Cone *cone, int resolution) :
+   cone(cone),
+   resolution(resolution)
 {
-   return this->center - 0.5 * this->height * this->direction;
+   mesh = new mesh::TriangleMesh(computeNumVertices(), computeNumFaces());
+}
+
+QVector3D Cone::MeshBuilder::computeTop()
+{
+   return this->cone->center + 0.5 * this->cone->height * this->cone->direction;
+}
+
+QVector3D Cone::MeshBuilder::computeBottomCenter()
+{
+   return this->cone->center - 0.5 * this->cone->height * this->cone->direction;
 }
