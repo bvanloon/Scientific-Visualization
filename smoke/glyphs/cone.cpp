@@ -1,10 +1,30 @@
 #include "cone.h"
+#include "settings/visualizationsettings.h"
 
-Cone::Cone(QVector3D position, QVector3D direction, float scalar):
-    AbstractGlyph(scalar)
+const mesh::TriangleMesh Cone::unitCone = shapes::Cone().toTriangleMesh();
+const double Cone::maxCellRatio = 1.0;
+
+Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
+   AbstractGlyph(scalar)
 {
-    this->addVertex(QVector3D(20, 20, 0), QVector3D(0.0, 0.0, 1.0));
-    this->addVertex(QVector3D(200, 100, 0), QVector3D(0.0, 0.0, 1.0));
-    this->addVertex(QVector3D(100, 150, 0), QVector3D(0.0, 0.0, 1.0));
+   cone = mesh::TriangleMesh(unitCone);
+   rotate(direction);
+   scale(direction);
+   translate(position);
 }
 
+void Cone::translate(QVector3D position)
+{}
+
+void Cone::scale(float scalingFactor)
+{}
+
+void Cone::rotate(QVector3D direction)
+{}
+
+float Cone::computeScalingFactor(QVector3D direction)
+{
+   return computeBaseSize(maxCellRatio) *
+          computeNormalizedMagnitude(direction) *
+          Settings::visualization::glyphs().scale;
+}
