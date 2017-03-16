@@ -66,7 +66,8 @@ SOURCES += main.cpp\
     utilities/range.cpp \
     utilities/mesh.cpp \
     utilities/vector.cpp \
-    glyphs/cone.cpp
+    glyphs/cone.cpp \
+    utilities/unitcone.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
