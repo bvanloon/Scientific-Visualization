@@ -129,6 +129,26 @@ QVector<mesh::Triangle *> mesh::TriangleMesh::getTriangles() const
    return triangles;
 }
 
+QVector<QVector3D> mesh::TriangleMesh::getVerticesAsVBO() const
+{
+   QVector<QVector3D> vertices;
+   for (auto triangle : this->triangles)
+   {
+      vertices.append(triangle->getVertexPositions());
+   }
+   return vertices;
+}
+
+QVector<QVector3D> mesh::TriangleMesh::getNormalsAsVBO() const
+{
+   QVector<QVector3D> normals;
+   for (auto triangle : this->triangles)
+   {
+      normals.append(triangle->getVertexNormals());
+   }
+   return normals;
+}
+
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)
 {
    this->vertices.append(vertex);

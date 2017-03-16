@@ -37,22 +37,12 @@ Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D directi
 
 QVector<QVector3D> Airplane::AirplaneBuilder::getNormals()
 {
-   QVector<QVector3D> normals;
-   for (auto triangle : mesh.getTriangles())
-   {
-      normals.append(triangle->getVertexNormals());
-   }
-   return normals;
+   return mesh.getNormalsAsVBO();
 }
 
 QVector<QVector3D> Airplane::AirplaneBuilder::getVertices()
 {
-   QVector<QVector3D> vertices;
-   for (auto triangle : mesh.getTriangles())
-   {
-      vertices.append(triangle->getVertexPositions());
-   }
-   return vertices;
+   return mesh.getVerticesAsVBO();
 }
 
 float Airplane::AirplaneBuilder::baseEdgeLength()
