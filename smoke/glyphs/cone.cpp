@@ -1,15 +1,15 @@
 #include "cone.h"
 #include "settings/visualizationsettings.h"
+#include "shapes/cone.h"
 
-const mesh::TriangleMesh Cone::unitCone = shapes::Cone().toTriangleMesh();
 const double Cone::maxCellRatio = 1.0;
 
 Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar)
+   AbstractGlyph(scalar),
+   mesh(::shapes::Cone().toTriangleMesh())
 {
-   cone = mesh::TriangleMesh(unitCone);
    rotate(direction);
-   scale(direction);
+   scale(computeNormalizedMagnitude(direction));
    translate(position);
 }
 

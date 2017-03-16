@@ -1,5 +1,5 @@
-#ifndef CONE_H
-#define CONE_H
+#ifndef SHAPES_CONE_H
+#define SHAPES_CONE_H
 
 #include "utilities/mesh.h"
 
@@ -54,4 +54,5 @@ namespace shapes {
           };
     };
 }
-#endif // CONE_H
+
+#endif // SHAPES_CONE_H
