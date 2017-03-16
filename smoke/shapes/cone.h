@@ -8,7 +8,7 @@ class Cone
    public:
       Cone();
 
-      mesh::TriangleMesh* toTriangleMesh(int resolution = 5);
+      mesh::TriangleMesh *toTriangleMesh(int resolution = 5);
 
    private:
 
@@ -16,10 +16,29 @@ class Cone
       QVector3D direction;
       float height;
 
-      int computeNumFaces(int resolution);
-      int computeNumVertices(int resolution);
-      QVector3D computeTop();
-      QVector3D computeBottomCenter();
+      class MeshBuilder {
+         public:
+            MeshBuilder(Cone *cone, int resolution);
+
+            mesh::TriangleMesh *getMesh() const;
+
+         private:
+            Cone *cone;
+            int resolution;
+
+            mesh::TriangleMesh *mesh;
+
+            mesh::Vertex* top;
+            mesh::Vertex* bottomCenter;
+
+            int computeNumFaces();
+
+            int computeNumVertices();
+
+            QVector3D computeTop();
+
+            QVector3D computeBottomCenter();
+      };
 };
 
 #endif // CONE_H
