@@ -11,13 +11,6 @@
 class GlyphsFactory
 {
    public:
-//      enum glyphs
-//      {
-//         hedgehog,
-//         triangles,
-//         airplane
-//      };
-
 
       static QStringList getGlyphsNames();
 
