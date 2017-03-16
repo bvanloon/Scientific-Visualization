@@ -4,6 +4,7 @@
 #include <QVector3D>
 #include <QVector>
 #include <QList>
+#include <QMatrix4x4>
 
 namespace mesh {
     class Vertex;
@@ -20,12 +21,15 @@ namespace mesh {
 
           Triangle *addTriangle(Vertex *a, Vertex *b, Vertex *c);
 
-          QVector<Triangle *> getTriangles() const;
-
           QVector<QVector3D> getVerticesAsVBO() const;
           QVector<QVector3D> getNormalsAsVBO() const;
+          QVector<QVector3D> getVertexPositions() const;
 
-       private:
+          void applyTransformation(QMatrix4x4 transformationMatrix);
+
+          int numVertices();
+
+    private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
           QVector<Triangle *> triangles;
