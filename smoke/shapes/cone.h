@@ -14,7 +14,9 @@ class Cone
 
       QVector3D center;
       QVector3D direction;
+
       float height;
+      float radius;
 
       class MeshBuilder {
          public:
@@ -26,18 +28,26 @@ class Cone
             Cone *cone;
             int resolution;
 
+            QVector3D perpendicularDirection;
+
             mesh::TriangleMesh *mesh;
 
-            mesh::Vertex* top;
-            mesh::Vertex* bottomCenter;
+            mesh::Vertex *top;
+            mesh::Vertex *bottomCenter;
 
             int computeNumFaces();
 
             int computeNumVertices();
 
-            QVector3D computeTop();
+            QVector3D computeTopPosition();
 
-            QVector3D computeBottomCenter();
+            QVector3D computeBottomCenterPosition();
+
+            void addFaces();
+
+            void addFacesWithEdge(mesh::Vertex* circleVertexA, mesh::Vertex* circleVertexB);
+            void addBottomFace(mesh::Vertex* circleVertexA, mesh::Vertex* circleVertexB);
+            void addSideFace(mesh::Vertex* circleVertexA, mesh::Vertex* circleVertexB);
       };
 };
 
