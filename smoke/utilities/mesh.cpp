@@ -126,7 +126,7 @@ mesh::Triangle *mesh::TriangleMesh::addTriangle(mesh::Vertex *a, mesh::Vertex *b
 
 QVector<mesh::Triangle *> mesh::TriangleMesh::getTriangles() const
 {
-   return triangles;
+    return triangles;
 }
 
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)
