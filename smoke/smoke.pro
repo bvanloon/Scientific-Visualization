@@ -68,7 +68,8 @@ SOURCES += main.cpp\
     utilities/approximation.cpp \
     settings/visualization/streamlines.cpp \
     view/streamlinestab.cpp \
-    engines/seedpointengine.cpp
+    engines/seedpointengine.cpp \
+    utilities/vector.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -112,6 +113,7 @@ HEADERS  += main.ih\
     utilities/range.h \
     utilities/mesh.h \
     utilities/vector.h \
+    glyphs/cone.h \
     unused.h \
     utilities/approximation.h \
     settings/visualization/streamlines.h \

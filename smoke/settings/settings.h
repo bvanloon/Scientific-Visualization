@@ -58,14 +58,16 @@ namespace Settings {
         {
            hedgehog,
            triangles,
-           airplane
+           airplane,
+           cone,
         };
 
         static const std::map<Settings::sim::GlyphsType, GLint> drawModes =
         {
            std::make_pair(Settings::sim::GlyphsType::hedgehog,  GL_LINES),
            std::make_pair(Settings::sim::GlyphsType::triangles, GL_TRIANGLES),
-           std::make_pair(Settings::sim::GlyphsType::airplane,  GL_TRIANGLES)
+           std::make_pair(Settings::sim::GlyphsType::airplane,  GL_TRIANGLES),
+           std::make_pair(Settings::sim::GlyphsType::cone,      GL_TRIANGLES)
         };
     }
 
