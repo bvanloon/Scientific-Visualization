@@ -17,30 +17,28 @@ Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
 
 void Cone::transform(QVector3D position, QVector3D direction)
 {
-   rotate(direction);
-   scale(direction);
-   translate(position);
+    QMatrix4x4 transformationMatrix = translate(position) * rotate(direction) * scale(direction);
+    this->mesh->applyTransformation(transformationMatrix);
 }
 
-void Cone::translate(QVector3D position)
+QMatrix4x4 Cone::translate(QVector3D position)
 {
    QMatrix4x4 translationMatrix;
 
    translationMatrix.translate(position);
-   mesh->applyTransformation(translationMatrix);
+   return translationMatrix;
 }
 
-void Cone::scale(QVector3D direction)
+QMatrix4x4 Cone::scale(QVector3D direction)
 {
    float scalingFactor = computeScalingFactor(direction);
-
    QMatrix4x4 scalingMatrix;
 
    scalingMatrix.scale(scalingFactor);
-   mesh->applyTransformation(scalingMatrix);
+   return scalingMatrix;
 }
 
-void Cone::rotate(QVector3D direction)
+QMatrix4x4 Cone::rotate(QVector3D direction)
 {
    //http://stackoverflow.com/questions/20177506/rotate-geometry-to-align-to-a-direction-vector
    //http://tonyobryan.com/index.php?article=28
@@ -50,7 +48,7 @@ void Cone::rotate(QVector3D direction)
    QMatrix4x4 rotationMatrix;
 
    rotationMatrix.rotate(rotationAngle, rotationAxis);
-   mesh->applyTransformation(rotationMatrix);
+   return rotationMatrix;
 }
 
 float Cone::computeScalingFactor(QVector3D direction)
