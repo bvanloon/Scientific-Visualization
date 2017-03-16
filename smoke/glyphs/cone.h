@@ -12,17 +12,18 @@ public:
 private:
 
     mesh::TriangleMesh* mesh;
+    float normalizedMagnitude;
     QVector3D position;
-    QVector3D direction;
+    QVector3D normalizedDirection;
 
     static const double maxCellRatio;
 
-    float computeScalingFactor(QVector3D direction);
+    float computeScalingFactor();
 
-    void transform(QVector3D position, QVector3D direction);
-    QMatrix4x4 translate(QVector3D position);
-    QMatrix4x4 scale(QVector3D direction);
-    QMatrix4x4 rotate(QVector3D direction);
+    void transform();
+    QMatrix4x4 translationMatrix();
+    QMatrix4x4 scalingMatrix();
+    QMatrix4x4 rotationMatrix();
 };
 
 #endif // GLYPHS_CONE_H
