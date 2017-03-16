@@ -21,6 +21,8 @@ namespace mesh {
 
           QVector<Triangle *> getTriangles() const;
 
+          static TriangleMesh *buildUnitCone();
+
     private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
