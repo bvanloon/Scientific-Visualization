@@ -22,6 +22,9 @@ namespace mesh {
 
           QVector<Triangle *> getTriangles() const;
 
+          QVector<QVector3D> getVerticesAsVBO() const;
+          QVector<QVector3D> getNormalsAsVBO() const;
+
        private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
