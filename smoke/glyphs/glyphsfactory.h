@@ -31,6 +31,8 @@ class GlyphsFactory
       GlyphsTriangulation createTriangles(GlyphData data);
 
       GlyphsTriangulation createAirplanes(GlyphData data);
+
+      GlyphsTriangulation createCones(GlyphData data);
 };
 
 #endif // GLYPHSFACTORY_H

@@ -2,6 +2,7 @@
 #include "glyphs/hedgehog.h"
 #include "glyphs/triangle.h"
 #include "glyphs/airplane.h"
+#include "glyphs/cone.h"
 
 #include <QDebug>
 
@@ -20,6 +21,9 @@ GlyphsTriangulation GlyphsFactory::createGlyphs(GlyphData data, Settings::sim::G
 
    case Settings::sim::GlyphsType::airplane:
       return createAirplanes(data);
+
+   case Settings::sim::GlyphsType::cone:
+      return createCones(data);
 
    default:
       return GlyphsTriangulation();
@@ -68,11 +72,28 @@ GlyphsTriangulation GlyphsFactory::createAirplanes(GlyphData data)
    return triangulation;
 }
 
+GlyphsTriangulation GlyphsFactory::createCones(GlyphData data)
+{
+   GlyphsTriangulation triangulation;
+
+   for (int i = 0; i < data.numGlyphs(); ++i)
+   {
+      AbstractGlyph currentGlyph = Cone(data.getPositions().at(i),
+                                               data.getDirections().at(i),
+                                               data.getTextureCoordinates().at(i));
+      triangulation.extend(currentGlyph);
+   }
+   return triangulation;
+}
+
 QStringList GlyphsFactory::getGlyphsNames()
 {
    QStringList glyphsNamesList;
 
-   glyphsNamesList << "Hedgehogs" << "Triangles" << "Airplanes";
+   glyphsNamesList << "Hedgehogs"
+                   << "Triangles"
+                   << "Airplanes"
+                   << "Cones";
 
    return glyphsNamesList;
 }
