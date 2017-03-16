@@ -70,6 +70,8 @@ SOURCES += main.cpp\
     view/streamlinestab.cpp \
     engines/seedpointengine.cpp \
     utilities/vector.cpp
+    glyphs/cone.cpp \
+    utilities/unitcone.cpp 
 
 HEADERS  += main.ih\
         view/mainwindow.h \
