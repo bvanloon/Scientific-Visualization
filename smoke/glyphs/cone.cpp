@@ -10,41 +10,43 @@ const double Cone::maxCellRatio = 2.0;
 Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar),
    mesh(::shapes::Cone().toTriangleMesh()),
-   direction(direction), position(position)
+   normalizedMagnitude(computeNormalizedMagnitude(direction)),
+   position(position),
+   normalizedDirection(direction.normalized())
 {
-   transform(position, direction);
+   transform();
    this->addVertices(this->mesh->getVerticesAsVBO(), this->mesh->getNormalsAsVBO());
 }
 
-void Cone::transform(QVector3D position, QVector3D direction)
+void Cone::transform()
 {
-    QMatrix4x4 transformationMatrix = translate(position) * rotate(direction) * scale(direction);
+    QMatrix4x4 transformationMatrix = translationMatrix() * rotationMatrix() * scalingMatrix();
     this->mesh->applyTransformation(transformationMatrix);
 }
 
-QMatrix4x4 Cone::translate(QVector3D position)
+QMatrix4x4 Cone::translationMatrix()
 {
    QMatrix4x4 translationMatrix;
 
-   translationMatrix.translate(position);
+   translationMatrix.translate(this->position);
    return translationMatrix;
 }
 
-QMatrix4x4 Cone::scale(QVector3D direction)
+QMatrix4x4 Cone::scalingMatrix()
 {
-   float scalingFactor = computeScalingFactor(direction);
+   float scalingFactor = computeScalingFactor();
    QMatrix4x4 scalingMatrix;
 
    scalingMatrix.scale(scalingFactor);
    return scalingMatrix;
 }
 
-QMatrix4x4 Cone::rotate(QVector3D direction)
+QMatrix4x4 Cone::rotationMatrix()
 {
    //http://stackoverflow.com/questions/20177506/rotate-geometry-to-align-to-a-direction-vector
    //http://tonyobryan.com/index.php?article=28
-   QVector3D rotationAxis = QVector3D::crossProduct(shapes::Cone::getDefaultDirection(), direction.normalized());
-   float rotationAngle = acos(QVector3D::dotProduct(rotationAxis.normalized(), direction.normalized()));
+   QVector3D rotationAxis = QVector3D::crossProduct(shapes::Cone::getDefaultDirection(), this->normalizedDirection);
+   float rotationAngle = acos(QVector3D::dotProduct(rotationAxis.normalized(), this->normalizedDirection));
 
    QMatrix4x4 rotationMatrix;
 
@@ -52,9 +54,9 @@ QMatrix4x4 Cone::rotate(QVector3D direction)
    return rotationMatrix;
 }
 
-float Cone::computeScalingFactor(QVector3D direction)
+float Cone::computeScalingFactor()
 {
    return computeBaseSize(maxCellRatio)
-          * computeNormalizedMagnitude(direction)
+          * normalizedMagnitude
           * Settings::visualization::glyphs().scale;
 }
