@@ -146,25 +146,27 @@ QVector<QVector3D> mesh::TriangleMesh::getNormalsAsVBO() const
 
 QVector<QVector3D> mesh::TriangleMesh::getVertexPositions() const
 {
-    return vertexPositions;
+   return vertexPositions;
 }
 
 void mesh::TriangleMesh::applyTransformation(QMatrix4x4 transformationMatrix)
 {
-    QVector4D transformedPosition;
-    for(int i = 0; i < numVertices(); i++){
-        transformedPosition = transformationMatrix * QVector4D(vertexPositions[i], 1.0);
-        vertexPositions.replace(i, transformedPosition.toVector3D());
-    }
+   QVector4D transformedPosition;
+
+   for (int i = 0; i < numVertices(); i++)
+   {
+      transformedPosition = transformationMatrix * QVector4D(vertexPositions[i], 1.0);
+      vertexPositions.replace(i, transformedPosition.toVector3D());
+   }
 }
 
 int mesh::TriangleMesh::numVertices()
 {
-    return this->vertexPositions.length();
+   return this->vertexPositions.length();
 }
 
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)
 {
-    this->vertices.append(vertex);
+   this->vertices.append(vertex);
    return vertex;
 }
