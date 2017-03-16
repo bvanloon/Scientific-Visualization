@@ -9,7 +9,9 @@ namespace shapes {
        public:
           Cone();
 
-          mesh::TriangleMesh *toTriangleMesh(int resolution = 5);
+          mesh::TriangleMesh *toTriangleMesh(int resolution = 4);
+
+          static QVector3D getDefaultDirection();
 
        private:
 
@@ -19,11 +21,14 @@ namespace shapes {
           float height;
           float radius;
 
+          static const QVector3D defaultDirection;
+
           class MeshBuilder {
              public:
                 MeshBuilder(Cone *cone, int resolution);
 
                 mesh::TriangleMesh *getMesh() const;
+
 
              private:
                 Cone *cone;
@@ -35,6 +40,8 @@ namespace shapes {
 
                 mesh::Vertex *top;
                 mesh::Vertex *bottomCenter;
+
+                static const QVector3D defaultPerpendicularDirection;
 
                 int computeNumFaces();
 
