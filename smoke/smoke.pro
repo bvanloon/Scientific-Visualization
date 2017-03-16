@@ -67,7 +67,7 @@ SOURCES += main.cpp\
     utilities/mesh.cpp \
     utilities/vector.cpp \
     glyphs/cone.cpp \
-    utilities/unitcone.cpp
+    shapes/cone.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -112,7 +112,8 @@ HEADERS  += main.ih\
     utilities/range.h \
     utilities/mesh.h \
     utilities/vector.h \
-    glyphs/cone.h
+    glyphs/cone.h \
+    shapes/cone.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
