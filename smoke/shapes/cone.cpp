@@ -4,37 +4,35 @@
 #include <QMatrix4x4>
 #include <QVector4D>
 
-using namespace shapes;
-
-Cone::Cone() :
+shapes::Cone::Cone() :
    center(QVector3D(0, 0, 0)),
    direction(QVector3D(0, 1, 0)),
    height(1.0f),
    radius(1.0f)
 {}
 
-mesh::TriangleMesh *Cone::toTriangleMesh(int resolution)
+mesh::TriangleMesh *shapes::Cone::toTriangleMesh(int resolution)
 {
    Cone::MeshBuilder builder = MeshBuilder(this, resolution);
    return builder.getMesh();
 }
 
-mesh::TriangleMesh *Cone::MeshBuilder::getMesh() const
+mesh::TriangleMesh *shapes::Cone::MeshBuilder::getMesh() const
 {
    return mesh;
 }
 
-int Cone::MeshBuilder::computeNumFaces()
+int shapes::Cone::MeshBuilder::computeNumFaces()
 {
    return 2 * this->resolution;
 }
 
-int Cone::MeshBuilder::computeNumVertices()
+int shapes::Cone::MeshBuilder::computeNumVertices()
 {
    return this->resolution + 2;
 }
 
-Cone::MeshBuilder::MeshBuilder(Cone *cone, int resolution) :
+shapes::Cone::MeshBuilder::MeshBuilder(shapes::Cone *cone, int resolution) :
    cone(cone),
    resolution(resolution)
 {
@@ -45,19 +43,20 @@ Cone::MeshBuilder::MeshBuilder(Cone *cone, int resolution) :
    this->addFaces();
 }
 
-QVector3D Cone::MeshBuilder::computeTopPosition()
+QVector3D shapes::Cone::MeshBuilder::computeTopPosition()
 {
    return this->cone->center + this->cone->height * this->cone->direction;
 }
 
-QVector3D Cone::MeshBuilder::computeBottomCenterPosition()
+QVector3D shapes::Cone::MeshBuilder::computeBottomCenterPosition()
 {
    return this->cone->center;
 }
 
-void Cone::MeshBuilder::addFaces()
+void shapes::Cone::MeshBuilder::addFaces()
 {
    QMatrix4x4 transformationMatrix;
+
    transformationMatrix.rotate(360.0 / this->resolution, this->cone->direction);
 
    QVector4D nextPosition = QVector4D(bottomCenter->position(), 1.0) + cone->radius * perpendicularDirection;
@@ -79,18 +78,18 @@ void Cone::MeshBuilder::addFaces()
    addFacesWithEdge(nextVertex, firstVertex);
 }
 
-void Cone::MeshBuilder::addFacesWithEdge(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB)
+void shapes::Cone::MeshBuilder::addFacesWithEdge(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB)
 {
-    addBottomFace(circleVertexA, circleVertexB);
-    addSideFace(circleVertexA, circleVertexB);
+   addBottomFace(circleVertexA, circleVertexB);
+   addSideFace(circleVertexA, circleVertexB);
 }
 
-void Cone::MeshBuilder::addBottomFace(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB)
+void shapes::Cone::MeshBuilder::addBottomFace(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB)
 {
-    this->mesh->addTriangle(circleVertexA, circleVertexB, this->bottomCenter);
+   this->mesh->addTriangle(circleVertexA, circleVertexB, this->bottomCenter);
 }
 
-void Cone::MeshBuilder::addSideFace(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB)
+void shapes::Cone::MeshBuilder::addSideFace(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB)
 {
-    this->mesh->addTriangle(circleVertexA, circleVertexB, this->top);
+   this->mesh->addTriangle(circleVertexA, circleVertexB, this->top);
 }
