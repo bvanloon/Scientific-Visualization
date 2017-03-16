@@ -9,7 +9,8 @@ const double Cone::maxCellRatio = 2.0;
 
 Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar),
-   mesh(::shapes::Cone().toTriangleMesh())
+   mesh(::shapes::Cone().toTriangleMesh()),
+   direction(direction), position(position)
 {
    transform(position, direction);
    this->addVertices(this->mesh->getVerticesAsVBO(), this->mesh->getNormalsAsVBO());
