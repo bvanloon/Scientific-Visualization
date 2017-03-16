@@ -3,52 +3,55 @@
 
 #include "utilities/mesh.h"
 
-class Cone
-{
-   public:
-      Cone();
+namespace shapes {
+    class Cone
+    {
+       public:
+          Cone();
 
-      mesh::TriangleMesh *toTriangleMesh(int resolution = 5);
+          mesh::TriangleMesh *toTriangleMesh(int resolution = 5);
 
-   private:
+       private:
 
-      QVector3D center;
-      QVector3D direction;
+          QVector3D center;
+          QVector3D direction;
 
-      float height;
-      float radius;
+          float height;
+          float radius;
 
-      class MeshBuilder {
-         public:
-            MeshBuilder(Cone *cone, int resolution);
+          class MeshBuilder {
+             public:
+                MeshBuilder(Cone *cone, int resolution);
 
-            mesh::TriangleMesh *getMesh() const;
+                mesh::TriangleMesh *getMesh() const;
 
-         private:
-            Cone *cone;
-            int resolution;
+             private:
+                Cone *cone;
+                int resolution;
 
-            QVector3D perpendicularDirection;
+                QVector3D perpendicularDirection;
 
-            mesh::TriangleMesh *mesh;
+                mesh::TriangleMesh *mesh;
 
-            mesh::Vertex *top;
-            mesh::Vertex *bottomCenter;
+                mesh::Vertex *top;
+                mesh::Vertex *bottomCenter;
 
-            int computeNumFaces();
+                int computeNumFaces();
 
-            int computeNumVertices();
+                int computeNumVertices();
 
-            QVector3D computeTopPosition();
+                QVector3D computeTopPosition();
 
-            QVector3D computeBottomCenterPosition();
+                QVector3D computeBottomCenterPosition();
 
-            void addFaces();
+                void addFaces();
 
-            void addFacesWithEdge(mesh::Vertex* circleVertexA, mesh::Vertex* circleVertexB);
-            void addBottomFace(mesh::Vertex* circleVertexA, mesh::Vertex* circleVertexB);
-            void addSideFace(mesh::Vertex* circleVertexA, mesh::Vertex* circleVertexB);
-      };
-};
+                void addFacesWithEdge(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB);
 
+                void addBottomFace(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB);
+
+                void addSideFace(mesh::Vertex *circleVertexA, mesh::Vertex *circleVertexB);
+          };
+    };
+}
 #endif // CONE_H

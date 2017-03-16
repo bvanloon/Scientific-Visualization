@@ -4,6 +4,8 @@
 #include <QMatrix4x4>
 #include <QVector4D>
 
+using namespace shapes;
+
 Cone::Cone() :
    center(QVector3D(0, 0, 0)),
    direction(QVector3D(0, 1, 0)),
