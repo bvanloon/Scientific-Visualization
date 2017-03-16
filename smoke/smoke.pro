@@ -71,7 +71,7 @@ SOURCES += main.cpp\
     engines/seedpointengine.cpp \
     utilities/vector.cpp
     glyphs/cone.cpp \
-    utilities/unitcone.cpp 
+    shapes/cone.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -116,6 +116,7 @@ HEADERS  += main.ih\
     utilities/mesh.h \
     utilities/vector.h \
     glyphs/cone.h \
+    shapes/cone.h
     unused.h \
     utilities/approximation.h \
     settings/visualization/streamlines.h \
