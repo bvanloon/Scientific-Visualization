@@ -30,14 +30,6 @@ QMatrix4x4 Cone::translationMatrix()
    QMatrix4x4 translationMatrix;
 
    translationMatrix.translate(this->position);
-   static bool printedWarning = false;
-
-   if (!printedWarning)
-   {
-      qDebug() << "Cone::translationMatrix: translation matrix is temporary hardcoded to the identity matrix.";
-      printedWarning = true;
-   }
-   translationMatrix.setToIdentity();
    return translationMatrix;
 }
 
@@ -54,8 +46,8 @@ QMatrix4x4 Cone::rotationMatrix()
 {
    //http://stackoverflow.com/questions/20177506/rotate-geometry-to-align-to-a-direction-vector
    //http://tonyobryan.com/index.php?article=28
-   QVector3D rotationAxis = QVector3D::crossProduct(shapes::Cone::getDefaultDirection(), this->normalizedDirection).normalized();
-   float rotationAngle = acos(QVector3D::dotProduct(rotationAxis.normalized(), this->normalizedDirection));
+   QVector3D rotationAxis = QVector3D::crossProduct(shapes::Cone::getDefaultDirection(), this->normalizedDirection);
+   float rotationAngle = radiansToDegrees(acos(QVector3D::dotProduct(rotationAxis.normalized(), this->normalizedDirection)));
    QMatrix4x4 rotationMatrix;
 
    rotationMatrix.rotate(rotationAngle, rotationAxis);
