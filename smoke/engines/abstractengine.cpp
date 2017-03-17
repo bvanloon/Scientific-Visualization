@@ -1,7 +1,7 @@
 #include "abstractengine.h"
 
-const float AbstractEngine::farClippingPlane = 1.0f;
-const float AbstractEngine::nearClippingPlane = -1.0f;
+const float AbstractEngine::farClippingPlane = 100000.0f;
+const float AbstractEngine::nearClippingPlane = -10000.0f;
 
 AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
    QObject(parent),
