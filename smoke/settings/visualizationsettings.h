@@ -56,7 +56,7 @@ class Settings::visualization::Glyphs : public QObject {
 
       Settings::sim::GlyphsType glyph;
       GLint drawMode;
-      QSizeF cellSize;
+      QSizeF approxCellSize;
 
       QPair<float, float> getCurrentMagnitudeRange() const;
 

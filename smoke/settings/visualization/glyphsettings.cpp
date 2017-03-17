@@ -62,7 +62,7 @@ void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType g
 
 void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 {
-   this->cellSize = newSize;
+   this->approxCellSize = newSize;
 }
 
 void Settings::visualization::Glyphs::onScaleChanged(double scale)
