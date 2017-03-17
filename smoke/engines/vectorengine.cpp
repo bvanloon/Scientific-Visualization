@@ -7,7 +7,7 @@
 VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::phongLight),
    visualizationGrid(
-      UniformGrid::createVisualizationGrid(
+      JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),
          Settings::canvas().size,
          simulationGrid)
@@ -32,7 +32,7 @@ void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 
 void VectorEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
-   visualizationGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
+   visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
