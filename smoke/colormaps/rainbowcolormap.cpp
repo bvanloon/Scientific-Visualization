@@ -3,11 +3,10 @@
 #include <math.h>
 #include <QDebug>
 
-AbstractColorMap *RainbowColorMap::Create(int numColors, float saturation, float hue = no_hue)
+AbstractColorMap *RainbowColorMap::Create(int numColors, float saturation, float UNUSED(hue))
 {
    return new RainbowColorMap(numColors, saturation);
 }
-
 
 RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx) :
    AbstractColorMap(numColors, saturation),
@@ -15,7 +14,6 @@ RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx) :
 {
    fill();
 }
-
 
 void RainbowColorMap::fill()
 {
@@ -27,7 +25,6 @@ void RainbowColorMap::fill()
       setPixel(i, 0, setSaturation(toRainbowColor(f), saturation));
    }
 }
-
 
 QColor RainbowColorMap::toRainbowColor(float f)
 {

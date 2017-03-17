@@ -8,6 +8,7 @@
 #include <GL/gl.h>
 #endif
 #include "abstractengine.h"
+#include "unused.h"
 
 
 #include "glyphs/glyphsfactory.h"
@@ -18,13 +19,13 @@ class VectorEngine : public AbstractEngine {
 
       VectorEngine(UniformGrid *simulationGrid);
 
-      void draw(Simulation *simulation);
+      void draw(Simulation *UNUSED(simulation));
 
    public slots:
 
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
-      void onGridDimensionChanged(int width, int height);
+      void onGridDimensionChanged(int width, int UNUSED(height));
 
 signals:
       void cellSizeChanged(QSizeF newSize);

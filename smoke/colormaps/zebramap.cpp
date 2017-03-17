@@ -10,7 +10,7 @@ ZebraMap::ZebraMap(int numColors, float saturation) :
 }
 
 
-AbstractColorMap *ZebraMap::Create(int numColors, float saturation, float hue = no_hue)
+AbstractColorMap *ZebraMap::Create(int numColors, float saturation, float UNUSED(hue))
 {
    return new ZebraMap(numColors, saturation);
 }

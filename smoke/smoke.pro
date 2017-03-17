@@ -109,7 +109,8 @@ HEADERS  += main.ih\
     utilities/interpolation.h \
     utilities/range.h \
     utilities/mesh.h \
-    utilities/vector.h
+    utilities/vector.h \
+    unused.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

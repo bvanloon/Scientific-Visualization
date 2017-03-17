@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QColor>
 #include <QRgb>
+#include "unused.h"
 
 #define no_hue -1.0f
 class AbstractColorMap : public QImage

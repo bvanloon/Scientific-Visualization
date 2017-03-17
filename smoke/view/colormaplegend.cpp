@@ -83,7 +83,7 @@ void ColorMapLegend::resizeEvent(QResizeEvent *event)
 }
 
 
-void ColorMapLegend::paintEvent(QPaintEvent *event)
+void ColorMapLegend::paintEvent(QPaintEvent *UNUSED(event))
 {
    drawColorMapImage();
    drawTicksAndLabels();
