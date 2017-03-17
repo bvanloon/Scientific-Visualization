@@ -19,6 +19,7 @@ private:
     static const double maxCellRatio;
 
     float computeScalingFactor();
+    float radiansToDegrees(float radians);
 
     void transform();
     QMatrix4x4 translationMatrix();
