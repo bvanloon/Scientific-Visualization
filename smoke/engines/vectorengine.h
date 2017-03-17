@@ -15,13 +15,11 @@ class VectorEngine : public AbstractEngine {
    Q_OBJECT
 
    public:
-
       VectorEngine(UniformGrid *simulationGrid);
 
       void draw(Simulation *UNUSED(simulation));
 
    public slots:
-
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
       void onGridDimensionChanged(int width, int UNUSED(height));
@@ -30,7 +28,6 @@ class VectorEngine : public AbstractEngine {
       void cellSizeChanged(QSizeF newSize);
 
    private:
-
       int updateBuffers();
 
       Grid *visualizationGrid;

@@ -228,6 +228,7 @@ int UniformGrid::to1Dindex(int x, int y) const
 void UniformGrid::changeGridArea(QSizeF newArea)
 {
    cellSize = computeCellSize(newArea);
+
    if (hasPadding) padding = cellSize;
    recomputeVertexPositions();
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
