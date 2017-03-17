@@ -9,25 +9,27 @@
 
 class KeyboardHandler : public QObject
 {
-    Q_OBJECT
-public:
-    explicit KeyboardHandler(QObject *parent = 0);
-    ~KeyboardHandler();
+   Q_OBJECT
+   public:
+      explicit KeyboardHandler(QObject *parent = 0);
+      ~KeyboardHandler();
 
-signals:
-    void toggleFrozen();
-    void step();
+   signals:
+      void toggleFrozen();
 
-public slots:
+      void step();
 
-private:
-    bool eventFilter(QObject *object, QEvent *event);
+   public slots:
 
-    bool handleKeyEvent(QKeyEvent *event);
-    void freezeSimulation(QKeyEvent * event);
-    void stepSimulation(QKeyEvent * event);
+   private:
+      bool eventFilter(QObject *object, QEvent *event);
 
-    void setUpConnections();
+      bool handleKeyEvent(QKeyEvent *event);
+
+      void freezeSimulation();
+      void stepSimulation();
+
+      void setUpConnections();
 };
 
 #endif // KEYBOARDHANDLER_H
