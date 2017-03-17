@@ -36,6 +36,7 @@ class UniformGrid : public Grid
 
       static void createCells(UniformGrid *grid);
 
+      virtual QVector3D computeVertexPosition(int i, int j);
    private:
       int dimension;
       QSizeF cellSize;
