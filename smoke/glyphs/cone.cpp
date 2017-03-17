@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <math.h>
 
-const double Cone::maxCellRatio = 1.5;
+const double Cone::maxCellRatio = 0.75;
 
 Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar),
@@ -38,7 +38,7 @@ QMatrix4x4 Cone::scalingMatrix()
    float scalingFactor = computeScalingFactor();
    QMatrix4x4 scalingMatrix;
 
-   scalingMatrix.scale(scalingFactor);
+   scalingMatrix.scale(scalingFactor, scalingFactor * 6, scalingFactor);
    return scalingMatrix;
 }
 
