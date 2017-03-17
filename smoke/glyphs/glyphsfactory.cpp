@@ -76,7 +76,7 @@ GlyphsTriangulation GlyphsFactory::createCones(GlyphData data)
 {
    GlyphsTriangulation triangulation;
 
-   AbstractGlyph currentGlyph = Cone(QVector3D(200, 100, 0), QVector3D(0.0, 0.1, 0.0), 0.0);
+   AbstractGlyph currentGlyph = Cone(QVector3D(200, 100, 0), QVector3D(0.1, 0.0, 0.0), 0.0);
    triangulation.extend(currentGlyph);
 
    static bool warningPrinted = false;
