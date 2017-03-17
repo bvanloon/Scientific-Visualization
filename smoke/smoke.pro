@@ -76,7 +76,8 @@ SOURCES += main.cpp\
     shapes/polyline.cpp \
     utilities/gpudata.cpp \
     streamobjects/streamline.cpp \
-    grid/utilities/streamlinebuilder.cpp
+    grid/utilities/streamlinebuilder.cpp \
+    grid/jittergrid.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -131,7 +132,8 @@ HEADERS  += main.ih\
     engines/streamlineengine.h \
     shapes/polyline.h \
     utilities/gpudata.h \
-    streamobjects/streamline.h
+    streamobjects/streamline.h \
+    grid/jittergrid.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
