@@ -6,7 +6,7 @@
 class ZebraMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap* Create(int numColors, float saturation, float hue);
+    static AbstractColorMap* Create(int numColors, float saturation, float UNUSED(hue));
 
 private:
     ZebraMap(int numColors, float saturation);
