@@ -14,7 +14,7 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
       ),
    simulationGrid(simulationGrid)
 {
-    emit cellSizeChanged(dynamic_cast<UniformGrid*>(visualizationGrid)->getCellSize());
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void VectorEngine::draw(Simulation *simulation)
@@ -27,13 +27,13 @@ void VectorEngine::draw(Simulation *simulation)
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
-   emit cellSizeChanged(dynamic_cast<UniformGrid*>(visualizationGrid)->getCellSize());
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void VectorEngine::onGridDimensionChanged(int width, int height)
 {
    visualizationGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
-   emit cellSizeChanged(dynamic_cast<UniformGrid*>(visualizationGrid)->getCellSize());
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 int VectorEngine::updateBuffers()

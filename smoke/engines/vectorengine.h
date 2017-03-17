@@ -15,22 +15,19 @@ class VectorEngine : public AbstractEngine {
    Q_OBJECT
 
    public:
-
       VectorEngine(UniformGrid *simulationGrid);
 
       void draw(Simulation *simulation);
 
    public slots:
-
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
       void onGridDimensionChanged(int width, int height);
 
-signals:
+   signals:
       void cellSizeChanged(QSizeF newSize);
 
    private:
-
       int updateBuffers();
 
       Grid *visualizationGrid;
