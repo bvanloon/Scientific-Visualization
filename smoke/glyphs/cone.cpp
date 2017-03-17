@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <math.h>
 
-const double Cone::maxCellRatio = 2.0;
+const double Cone::maxCellRatio = 1.5;
 
 Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar),
