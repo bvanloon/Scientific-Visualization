@@ -20,8 +20,9 @@ Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
 
 void Cone::transform()
 {
-    QMatrix4x4 transformationMatrix = translationMatrix() * rotationMatrix() * scalingMatrix();
-    this->mesh->applyTransformation(transformationMatrix);
+   QMatrix4x4 transformationMatrix = translationMatrix() * rotationMatrix() * scalingMatrix();
+
+   this->mesh->applyTransformation(transformationMatrix);
 }
 
 QMatrix4x4 Cone::translationMatrix()
@@ -47,16 +48,33 @@ QMatrix4x4 Cone::rotationMatrix()
    //http://tonyobryan.com/index.php?article=28
    QVector3D rotationAxis = QVector3D::crossProduct(shapes::Cone::getDefaultDirection(), this->normalizedDirection);
    float rotationAngle = acos(QVector3D::dotProduct(rotationAxis.normalized(), this->normalizedDirection));
-
    QMatrix4x4 rotationMatrix;
 
    rotationMatrix.rotate(rotationAngle, rotationAxis);
+   rotationMatrix.setToIdentity();
+
+
+   static bool printedWarning = false;
+
+   if (!printedWarning)
+   {
+      qDebug() << "Cone::rotationMatrix: rotation matrix is temporary hardcoded to the identity matrix.";
+      printedWarning = true;
+   }
    return rotationMatrix;
 }
 
 float Cone::computeScalingFactor()
 {
-   return computeBaseSize(maxCellRatio)
-          * normalizedMagnitude
-          * Settings::visualization::glyphs().scale;
+   static bool printedWarning = false;
+
+   if (!printedWarning)
+   {
+      qDebug() << "Cone::computeScalingFactor: scaling factor is temporary hardcoded.";
+      printedWarning = true;
+   }
+   return 30.0f;
+//   return computeBaseSize(maxCellRatio)
+//          * normalizedMagnitude
+//          * Settings::visualization::glyphs().scale;
 }
