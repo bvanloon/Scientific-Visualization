@@ -76,13 +76,22 @@ GlyphsTriangulation GlyphsFactory::createCones(GlyphData data)
 {
    GlyphsTriangulation triangulation;
 
-   for (int i = 0; i < data.numGlyphs(); ++i)
-   {
-      AbstractGlyph currentGlyph = Cone(data.getPositions().at(i),
-                                               data.getDirections().at(i),
-                                               data.getTextureCoordinates().at(i));
-      triangulation.extend(currentGlyph);
+   AbstractGlyph currentGlyph = Cone(QVector3D(200, 100, 0), QVector3D(0.0, 0.1, 0.0), 0.0);
+   triangulation.extend(currentGlyph);
+
+   static bool warningPrinted = false;
+   if(!warningPrinted){
+       qDebug() << "GlyphsFactory::createCones: Computing the triangluation of a single hardcoded cone";
+       warningPrinted = true;
    }
+
+//   for (int i = 0; i < data.numGlyphs(); ++i)
+//   {
+//      AbstractGlyph currentGlyph = Cone(data.getPositions().at(i),
+//                                               data.getDirections().at(i),
+//                                               data.getTextureCoordinates().at(i));
+//      triangulation.extend(currentGlyph);
+//   }
    return triangulation;
 }
 
