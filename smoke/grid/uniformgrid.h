@@ -26,13 +26,20 @@ class UniformGrid : public Grid
 
       int getDimension() const;
 
+   protected:
+      UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
+      UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
+
+      static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
+
+      static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
+
+      static void createCells(UniformGrid *grid);
+
    private:
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
-
-      UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
-      UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
 
       void recomputeVertexPositions();
 
@@ -47,12 +54,6 @@ class UniformGrid : public Grid
       QVector3D computeVertexPosition(int i, int j);
 
       Vertex *getVertexAt(int x, int y) const;
-
-      static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
-
-      static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
-
-      static void createCells(UniformGrid *grid);
 
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 };
