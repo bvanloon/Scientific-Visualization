@@ -8,14 +8,12 @@ AbstractColorMap *RainbowColorMap::Create(int numColors, float saturation, float
    return new RainbowColorMap(numColors, saturation);
 }
 
-
 RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx) :
    AbstractColorMap(numColors, saturation),
    dx(dx)
 {
    fill();
 }
-
 
 void RainbowColorMap::fill()
 {
@@ -27,7 +25,6 @@ void RainbowColorMap::fill()
       setPixel(i, 0, setSaturation(toRainbowColor(f), saturation));
    }
 }
-
 
 QColor RainbowColorMap::toRainbowColor(float f)
 {
