@@ -28,8 +28,8 @@ uniform sampler1D colormap;
 uniform int lightModel;
 
 //Constants
-vec3 eye = vec3(2.0, 5.0, 10.0);
-LightInfo light = LightInfo(vec3(-2.0, 5.0, -10.0), vec3(1.0), vec3(1.0), vec3(1.0));
+vec3 eye = vec3(400.0, 400.0, 800.0);
+LightInfo light = LightInfo(vec3(600.0, 600.0, 1200.0), vec3(1.0), vec3(1.0), vec3(1.0));
 MaterialInfo material = MaterialInfo(0.3, 0.5, 0.9, 150.0);
 
 //Auxilary Functions
