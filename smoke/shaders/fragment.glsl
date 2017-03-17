@@ -54,7 +54,7 @@ void phongLight(){
 
     vec3 materialColor = texture(colormap, vsTextureCoordinate).xyz;
 
-    float diffuseDotProduct = dot(vsNormal, lightVector);
+    float diffuseDotProduct = max(dot(vsNormal, lightVector), dot(-1 * vsNormal, lightVector));
 
     vec3 ambient = frontLightMaterial(material.ambientReflectionConstant, materialColor, light.ambientLightIntensity);
     vec3 diffuse = frontLightMaterial(material.diffuseReflectionConstant, materialColor, light.diffuseLightIntensity)
