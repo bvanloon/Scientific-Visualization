@@ -64,15 +64,12 @@ QMatrix4x4 Cone::rotationMatrix()
 
 float Cone::computeScalingFactor()
 {
-   static bool printedWarning = false;
+   return computeBaseSize(maxCellRatio)
+          * normalizedMagnitude
+          * Settings::visualization::glyphs().scale;
+}
 
-   if (!printedWarning)
-   {
-      qDebug() << "Cone::computeScalingFactor: scaling factor is temporary hardcoded.";
-      printedWarning = true;
-   }
-   return 1.0f;
-//   return computeBaseSize(maxCellRatio)
-//          * normalizedMagnitude
-//          * Settings::visualization::glyphs().scale;
+float Cone::radiansToDegrees(float radians)
+{
+   return radians * 180 / M_PI;
 }
