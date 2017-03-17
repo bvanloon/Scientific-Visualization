@@ -91,7 +91,7 @@ QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
 
 void Airplane::AirplaneBuilder::determineSizeRange()
 {
-   QSizeF cellSize = Settings::visualization::glyphs().cellSize;
+   QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
 
    this->baseSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
 }
