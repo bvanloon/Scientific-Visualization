@@ -34,14 +34,16 @@ class UniformGrid : public Grid
 
       static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
 
+
       static void createCells(UniformGrid *grid);
 
       virtual QVector3D computeVertexPosition(int i, int j);
-   private:
+
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
 
+   private:
       void recomputeVertexPositions();
 
       QSizeF computeCellSize(QSizeF area);
@@ -52,7 +54,7 @@ class UniformGrid : public Grid
 
       Cell *findCellContaining(QVector3D position);
 
-      QVector3D computeVertexPosition(int i, int j);
+
 
       Vertex *getVertexAt(int x, int y) const;
 

@@ -7,6 +7,7 @@
 #include <QtMath>
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
+
    Grid(dimension * dimension, hasPadding),
    dimension(dimension),
    cellSize(computeCellSize(areaSize)),
