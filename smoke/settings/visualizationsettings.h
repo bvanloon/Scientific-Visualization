@@ -70,6 +70,8 @@ class Settings::visualization::Glyphs : public QObject {
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
 
+      QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
+
       Settings::sim::Vector vectorField;
 };
 

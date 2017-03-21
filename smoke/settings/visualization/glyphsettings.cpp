@@ -12,6 +12,15 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    this->drawMode = Settings::defaults::visualization::glyphs::defaultDrawMode;
 }
 
+QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
+{
+   double maxX = maximumGradientValue / Settings::visualization::glyphs().cellSize.width();
+   double maxY = maximumGradientValue / Settings::visualization::glyphs().cellSize.height();
+
+   double maximum =  QVector2D(maxX, maxY).length();
+   return QPair<double, double>(0.0, maximum);
+}
+
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
 {
    static Glyphs instance;
@@ -28,6 +37,14 @@ QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() 
 
    case Settings::sim::Vector::force:
       return Settings::simulation().getRange(Settings::sim::Scalar::forceFieldMagnitude);
+
+   case Settings::sim::Vector::fluidDensityGradient:
+      return this->computeGradientMagnitudeRange(
+                   Settings::simulation().getRange(Settings::sim::Scalar::fluidDensity).first);
+
+   case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
+      return this->computeGradientMagnitudeRange(
+                    Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).first);
    }
 }
 
