@@ -79,6 +79,7 @@ class SimulationVertex : public StructuredGridVertex
 
       virtual float getFluidVelocityMagnitude() const;
 
+
       virtual QVector2D getForce() const;
 
       virtual float getForceMagnitude() const;
@@ -104,12 +105,15 @@ class VisualizationVertex : public StructuredGridVertex
 
       virtual float getFluidVelocityMagnitude() const;
 
+      QVector2D getFluidVelocityMagnitudeGradient() const;
+
       virtual QVector2D getForce() const;
 
       virtual float getForceMagnitude() const;
 
       virtual float getFluidDensity() const;
 
+      QVector2D getFluidDensityGradient() const;
 
    private:
       Cell *containingCell;

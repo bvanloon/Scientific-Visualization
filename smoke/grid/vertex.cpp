@@ -141,6 +141,12 @@ float VisualizationVertex::getFluidVelocityMagnitude() const
    return cell->interpolateScalar(*position, &Vertex::getFluidVelocityMagnitude);
 }
 
+QVector2D VisualizationVertex::getFluidVelocityMagnitudeGradient() const
+{
+   qDebug() << "VisualizationVertex::getFluidVelocityMagnitudeGradient()";
+   return QVector2D(0.0, 1.0);
+}
+
 QVector2D VisualizationVertex::getForce() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
@@ -160,6 +166,12 @@ float VisualizationVertex::getFluidDensity() const
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
    return cell->interpolateScalar(*position, &Vertex::getFluidDensity);
+}
+
+QVector2D VisualizationVertex::getFluidDensityGradient() const
+{
+   qDebug() << "VisualizationVertex::getFluidDensityGradient not implemeneted";
+   return QVector2D(1.0, 0.0);
 }
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position) :
