@@ -13,6 +13,10 @@ class JitterGrid : public UniformGrid
 
    protected:
       QVector3D computeVertexPosition(int i, int j);
+
+   private:
+      std::default_random_engine re;
+      double jitterFactor = 0.4;
 };
 
 #endif // JITTERGRID_H
