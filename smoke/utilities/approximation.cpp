@@ -1,4 +1,4 @@
-#include "utilities/interpolation.h"
+#include "utilities/approximation.h"
 #include "utilities/range.h"
 
 float interpolateBilinearly(QVector2D t, float upperLeft, float upperRight, float lowerLeft, float lowerRight)
