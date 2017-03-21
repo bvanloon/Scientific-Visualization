@@ -81,6 +81,7 @@ float SimulationVertex::getFluidVelocityMagnitude() const
 QVector2D SimulationVertex::getFluidVelocityMagnitudeGradient() const
 {
    std::logic_error("SimulationVertex::getFluidVelocityMagnitudeGradient is not implemented.");
+   return QVector2D();
 }
 
 QVector2D SimulationVertex::getForce() const
@@ -101,6 +102,7 @@ float SimulationVertex::getFluidDensity() const
 QVector2D SimulationVertex::getFluidDensityGradient() const
 {
    std::logic_error("SimulationVertex::getFluidDensityGradient is not implemented.");
+   return QVector2D();
 }
 
 QDebug operator<<(QDebug stream, const SimulationVertex& vertex)
