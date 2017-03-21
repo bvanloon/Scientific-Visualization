@@ -49,6 +49,9 @@ void MainWindow::onOpenGLReady()
    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second), this->glyphsTab->getColorMapWidget());
    connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second));
 
+   qDebug() << "connectStreamLineEngineAndColorMapTab";
+   qDebug() << "connectStreamLineEngineAndSettings";
+
    connectCanvasAndSimulationTab();
 
    connectVectorEngineAndGlyphTab();
