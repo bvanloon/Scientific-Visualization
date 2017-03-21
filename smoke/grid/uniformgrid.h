@@ -7,46 +7,54 @@
 
 class UniformGrid : public Grid
 {
-public:
-   QVector<QVector3D> const& getVertexPositions() const;
-   Triangulation getTriangulation() const;
+   public:
+      QVector<QVector3D> const& getVertexPositions() const;
 
-   virtual void changeGridArea(QSizeF newArea);
-   virtual void changeGridArea(QSizeF newArea, QSizeF padding);
+      Triangulation getTriangulation() const;
 
-   static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
-   static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid);
+      virtual void changeGridArea(QSizeF newArea);
 
-   QSizeF const& getPadding() const;
-   QSizeF getCellSize() const;
-   int getDimension() const;
+      virtual void changeGridArea(QSizeF newArea, QSizeF padding);
 
-private:
-   int dimension;
-   QSizeF cellSize;
-   QSizeF padding;
+      static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
 
-   UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
-   UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
+      static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid);
 
-   void recomputeVertexPositions();
+      QSizeF const& getPadding() const;
 
-   QSizeF computeCellSize(QSizeF area);
-   QSizeF computeCellSize(QSizeF area, QSizeF padding);
+      QSizeF getCellSize() const;
 
-   int to1Dindex(int x, int y) const;
+      int getDimension() const;
 
-   Cell *findCellContaining(QVector3D position);
+   private:
+      int dimension;
+      QSizeF cellSize;
+      QSizeF padding;
 
-   QVector3D computeVertexPosition(int i, int j);
+      UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
+      UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
 
-   Vertex *getVertexAt(int x, int y) const;
+      void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
 
-   static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
-   static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
-   static void createCells(UniformGrid *grid);
+      QSizeF computeCellSize(QSizeF area);
 
-   QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
+      QSizeF computeCellSize(QSizeF area, QSizeF padding);
+
+      int to1Dindex(int x, int y) const;
+
+      Cell *findCellContaining(QVector3D position);
+
+      QVector3D computeVertexPosition(int i, int j);
+
+      Vertex *getVertexAt(int x, int y) const;
+
+      static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
+
+      static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
+
+      static void createCells(UniformGrid *grid);
+
+      QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 };
 
 #endif // UNIFORMGRID_H
