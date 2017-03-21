@@ -45,6 +45,8 @@ namespace Settings {
         {
            fluidVelocity,
            force,
+           fluidDensityGradient,
+           fluidVelocityMagnitudeGradient
         };
 
         enum GlyphsType

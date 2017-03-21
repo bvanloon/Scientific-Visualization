@@ -21,7 +21,7 @@ Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D directi
    direction(direction.normalized()),
    orthogonalDirection(computeOrthogonalVector(direction)),
    position(position),
-    normalizedMagnitude(normalizedMagnitude),
+   normalizedMagnitude(normalizedMagnitude),
    mesh(4, 2)
 {
    determineSizeRange();
@@ -91,7 +91,7 @@ QVector3D Airplane::AirplaneBuilder::computeWing(int direction)
 
 void Airplane::AirplaneBuilder::determineSizeRange()
 {
-   QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
+   QSizeF cellSize = Settings::visualization::glyphs().cellSize;
 
    this->baseSize = maxCellRatio * qMax(cellSize.width(), cellSize.height());
 }

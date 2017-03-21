@@ -44,7 +44,6 @@ bool CCWTriangle::hasCCWwindingOrder()
 {
    QVector3D ab = vertexB - vertexA;
    QVector3D ac = vertexC - vertexA;
-   QVector3D crossproduct = QVector3D::crossProduct(ab, ac).normalized();
    double crossProductZ = ab.x() * ac.y() - ab.y() * ac.x();
 
    return crossProductZ < 0.0;

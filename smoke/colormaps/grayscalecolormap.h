@@ -7,7 +7,7 @@
 class GrayScaleColorMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap* Create(int numColors, float saturation, float hue);
+    static AbstractColorMap* Create(int numColors, float saturation, float UNUSED(hue));
 
 private:
     GrayScaleColorMap(int numColors, float saturation);

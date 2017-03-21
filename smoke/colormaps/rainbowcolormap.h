@@ -2,11 +2,12 @@
 #define RAINBOWCOLORMAP_H
 
 #include "colormaps/abstractcolormap.h"
+#include "unused.h"
 
 class RainbowColorMap : public AbstractColorMap
 {
 public:
-    static AbstractColorMap* Create(int numColors, float saturation, float hue);
+    static AbstractColorMap* Create(int numColors, float saturation, float UNUSED(hue));
 
 private:
     float dx;

@@ -6,7 +6,7 @@
 #include <QDebug>
 
 
-AbstractColorMap *Coldcolormap::Create(int numColors, float saturation, float hue = no_hue)
+AbstractColorMap *Coldcolormap::Create(int numColors, float saturation, float UNUSED(hue))
 {
    return new Coldcolormap(numColors, saturation);
 }

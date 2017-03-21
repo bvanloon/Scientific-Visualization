@@ -62,11 +62,11 @@ SOURCES += main.cpp\
     glyphs/triangle.cpp \
     glyphs/ccwtriangle.cpp \
     glyphs/airplane.cpp \
-    utilities/interpolation.cpp \
     utilities/range.cpp \
     utilities/mesh.cpp \
     utilities/vector.cpp \
-    grid/jittergrid.cpp
+    grid/jittergrid.cpp \
+    utilities/approximation.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -107,11 +107,12 @@ HEADERS  += main.ih\
     glyphs/triangle.h \
     glyphs/ccwtriangle.h \
     glyphs/airplane.h \
-    utilities/interpolation.h \
     utilities/range.h \
     utilities/mesh.h \
     utilities/vector.h \
-    grid/jittergrid.h
+    grid/jittergrid.h \
+    unused.h \
+    utilities/approximation.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

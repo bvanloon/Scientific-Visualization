@@ -6,24 +6,19 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    scale(1),
-   magnitude(Settings::sim::fluidVelocityMagnitude)
+   vectorField(Settings::sim::Vector::fluidVelocity)
 {
    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
    this->drawMode = Settings::defaults::visualization::glyphs::defaultDrawMode;
 }
 
-void Settings::visualization::Glyphs::setMagnitude(Settings::sim::Vector vectorField)
+QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
 {
-   switch (vectorField)
-   {
-   case Settings::sim::Vector::fluidVelocity:
-      this->magnitude = Settings::sim::Scalar::fluidVelocityMagnitude;
-      break;
+   double maxX = maximumGradientValue / Settings::visualization::glyphs().cellSize.width();
+   double maxY = maximumGradientValue / Settings::visualization::glyphs().cellSize.height();
 
-   case Settings::sim::Vector::force:
-      this->magnitude = Settings::sim::Scalar::forceFieldMagnitude;
-      break;
-   }
+   double maximum = QVector2D(maxX, maxY).length();
+   return QPair<double, double>(0.0, maximum);
 }
 
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
@@ -35,13 +30,28 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
 
 QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() const
 {
-   return Settings::simulation().getRange(this->magnitude);
+   switch (vectorField)
+   {
+   case Settings::sim::Vector::fluidVelocity:
+      return Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude);
+
+   case Settings::sim::Vector::force:
+      return Settings::simulation().getRange(Settings::sim::Scalar::forceFieldMagnitude);
+
+   case Settings::sim::Vector::fluidDensityGradient:
+      return this->computeGradientMagnitudeRange(
+                   Settings::simulation().getRange(Settings::sim::Scalar::fluidDensity).second);
+
+   case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
+      return this->computeGradientMagnitudeRange(
+                    Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).second);
+   }
 }
 
 void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector vectorField)
 {
+   this->vectorField = vectorField;
    vectorGetter = Vertex::getVectorGetter(vectorField);
-   this->setMagnitude(vectorField);
 }
 
 void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType glyph)
@@ -52,7 +62,7 @@ void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType g
 
 void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 {
-   this->approxCellSize = newSize;
+   this->cellSize = newSize;
 }
 
 void Settings::visualization::Glyphs::onScaleChanged(double scale)

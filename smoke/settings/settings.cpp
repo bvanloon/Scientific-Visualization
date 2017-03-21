@@ -38,7 +38,9 @@ QStringList Settings::visualization::getVectorVariableNames()
    QStringList vectorVariableNames;
 
    vectorVariableNames << "Fluid velocity"
-                       << "Force";
+                       << "Force"
+                       << "Fluid density gradient"
+                       << "Fluid velocity magnitude gradient";
 
       return vectorVariableNames;
 }

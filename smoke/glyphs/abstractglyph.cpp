@@ -56,6 +56,7 @@ float AbstractGlyph::computeNormalizedMagnitude(QVector3D direction)
 
 float AbstractGlyph::computeBaseSize(float cellRatio)
 {
-    QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
-    return cellRatio * qMax(cellSize.width(), cellSize.height());
+   QSizeF cellSize = Settings::visualization::glyphs().cellSize;
+
+   return cellRatio * qMax(cellSize.width(), cellSize.height());
 }
