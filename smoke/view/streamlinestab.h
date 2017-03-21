@@ -19,6 +19,8 @@ public:
     ColorMapTab *getColorMapWidget();
 private:
     Ui::StreamLinesTab *ui;
+
+    void setUiToDefaults();
 };
 
 #endif // STREAMLINESTAB_H

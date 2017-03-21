@@ -15,5 +15,10 @@ StreamLinesTab::~StreamLinesTab()
 
 ColorMapTab *StreamLinesTab::getColorMapWidget()
 {
-   return ui->colorMapWidget;
+    return ui->colorMapWidget;
+}
+
+void StreamLinesTab::setUiToDefaults()
+{
+    qDebug() << "Disable the scalar field of the colormapwidget.";
 }
