@@ -17,7 +17,7 @@ QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeR
    double maxX = maximumGradientValue / Settings::visualization::glyphs().cellSize.width();
    double maxY = maximumGradientValue / Settings::visualization::glyphs().cellSize.height();
 
-   double maximum =  QVector2D(maxX, maxY).length();
+   double maximum = QVector2D(maxX, maxY).length();
    return QPair<double, double>(0.0, maximum);
 }
 
@@ -40,11 +40,11 @@ QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() 
 
    case Settings::sim::Vector::fluidDensityGradient:
       return this->computeGradientMagnitudeRange(
-                   Settings::simulation().getRange(Settings::sim::Scalar::fluidDensity).first);
+                   Settings::simulation().getRange(Settings::sim::Scalar::fluidDensity).second);
 
    case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
       return this->computeGradientMagnitudeRange(
-                    Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).first);
+                    Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).second);
    }
 }
 
