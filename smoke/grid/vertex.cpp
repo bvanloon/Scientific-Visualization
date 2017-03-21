@@ -48,6 +48,7 @@ QDebug operator<<(QDebug stream, const Vertex& vertex)
           << " position: "
           << *vertex.position
           << "]";
+
    return stream;
 }
 
