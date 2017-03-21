@@ -1,5 +1,6 @@
 #include "cell.h"
 #include "utilities/approximation.h"
+#include <assert.h>
 
 Cell::Cell()
 {}
@@ -50,6 +51,22 @@ QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vector
                                    (lowerRight->*getter)().y());
 
    return QVector2D(x, y);
+}
+
+QVector2D StructuredCell::computeGradient(QVector3D position, Vertex::scalarGetter getter)
+{
+   assert(this->isInCell(position));
+   QVector3D normalizedPosition = this->normalizePosition(position);
+   float lowerLeftValue = (lowerLeft->*getter)();
+   float lowerRightValue = (lowerRight->*getter)();
+   float upperLeftValue = (upperLeft->*getter)();
+   float upperRightValue = (upperRight->*getter)();
+
+   float dx = (1 - normalizedPosition.y()) * ((lowerRightValue - lowerLeftValue) / (this->width())) +
+      normalizedPosition.y() * ((upperRightValue - upperLeftValue) / (this->width()));
+   float dy = (1 - normalizedPosition.x()) * ((upperLeftValue - lowerLeftValue) / (this->height())) +
+      normalizedPosition.x() * ((upperRightValue - lowerRightValue) / (this->height()));
+   return QVector2D(dx, dy);
 }
 
 QSizeF StructuredCell::getSize() const

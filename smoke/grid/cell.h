@@ -32,6 +32,7 @@ class StructuredCell : public Cell
 
       QVector2D interpolate2DVector(QVector3D position, Vertex::vectorGetter getter);
 
+      QVector2D computeGradient(QVector3D position, Vertex::scalarGetter getter);
 
       QSizeF getSize() const;
 
