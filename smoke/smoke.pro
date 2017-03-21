@@ -66,7 +66,8 @@ SOURCES += main.cpp\
     utilities/mesh.cpp \
     utilities/vector.cpp \
     utilities/approximation.cpp \
-    settings/visualization/streamlines.cpp
+    settings/visualization/streamlines.cpp \
+    view/streamlinestab.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -112,7 +113,8 @@ HEADERS  += main.ih\
     utilities/vector.h \
     unused.h \
     utilities/approximation.h \
-    settings/visualization/streamlines.h
+    settings/visualization/streamlines.h \
+    view/streamlinestab.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
@@ -120,7 +122,8 @@ FORMS    += view/mainwindow.ui \
     view/floatslider.ui \
     view/intslider.ui \
     view/simulationtab.ui \
-    view/glyphstab.ui
+    view/glyphstab.ui \
+    view/streamlinestab.ui
 
 RESOURCES += \
     shaders.qrc
