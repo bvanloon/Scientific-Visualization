@@ -45,11 +45,11 @@ Triangulation UniformGrid::getTriangulation() const
 
 void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize)
 {
-   qDebug() << "old" << oldCellSize << " new " << newCellSize;
    double xScaling = newCellSize.width() / oldCellSize.width();
    double yScaling = newCellSize.height() / oldCellSize.height();
 
    QMatrix4x4 scaleMatrix;
+
    scaleMatrix.scale(xScaling, yScaling, 0.0);
 
    QVector4D transformedPosition;
@@ -169,6 +169,7 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid,
          idx = visualizationGrid->to1Dindex(i, j);
          position = visualizationGrid->computeVertexPosition(i, j);
          visualizationGrid->vertexPositions.replace(idx, position);
+
          cell = simulationGrid->findCellContaining(position);
          vertex = new VisualizationVertex(&visualizationGrid->vertexPositions.at(
                                          idx), cell);
