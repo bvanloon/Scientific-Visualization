@@ -68,6 +68,16 @@ bool StructuredCell::isInCell(QVector3D position)
           position.y() <= lowerLeft->getPosition()->y();
 }
 
+float StructuredCell::width()
+{
+   return this->upperRight->getPosition()->x() - this->upperLeft->getPosition()->x();
+}
+
+float StructuredCell::height()
+{
+   return this->upperLeft->getPosition()->y() - this->lowerLeft->getPosition()->y();
+}
+
 QVector3D StructuredCell::normalizePosition(const QVector3D position)
 {
    float x = (position.x() - upperLeft->getPosition()->x()) / getSize().width();

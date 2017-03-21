@@ -36,6 +36,11 @@ class StructuredCell : public Cell
       QSizeF getSize() const;
 
       bool isInCell(QVector3D position);
+
+      float width();
+
+      float height();
+
    private:
       Vertex *upperLeft;
       Vertex *upperRight;
