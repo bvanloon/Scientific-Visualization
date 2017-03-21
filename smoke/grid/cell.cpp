@@ -66,7 +66,8 @@ QVector2D StructuredCell::computeGradient(QVector3D position, Vertex::scalarGett
       normalizedPosition.y() * ((upperRightValue - upperLeftValue) / (this->width()));
    float dy = (1 - normalizedPosition.x()) * ((upperLeftValue - lowerLeftValue) / (this->height())) +
       normalizedPosition.x() * ((upperRightValue - lowerRightValue) / (this->height()));
-   return QVector2D(dx, dy);
+   QVector2D gradient = QVector2D(dx, dy);
+   return gradient;
 }
 
 QSizeF StructuredCell::getSize() const
