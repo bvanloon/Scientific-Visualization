@@ -2,6 +2,7 @@
 #define STREAMLINESTAB_H
 
 #include <QWidget>
+#include "view/colormaptab.h"
 
 namespace Ui {
 class StreamLinesTab;
@@ -15,6 +16,7 @@ public:
     explicit StreamLinesTab(QWidget *parent = 0);
     ~StreamLinesTab();
 
+    ColorMapTab *getColorMapWidget();
 private:
     Ui::StreamLinesTab *ui;
 };

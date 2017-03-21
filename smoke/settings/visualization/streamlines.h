@@ -10,7 +10,7 @@ class Settings::visualization::StreamLines : public QObject
    public:
       static const StreamLines& instance();
 
-      Settings::visualization::ColorMap *ColorMap;
+      Settings::visualization::ColorMap *colorMap;
 
    signals:
 

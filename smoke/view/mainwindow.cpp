@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
    this->glyphsTab = ui->glyphsTab;
    this->glyphsTab->getColorMapWidget()->setColormapSettings(Settings::visualization::glyphs().colorMap);
 
+   this->streamLinesTab = ui->streamLinesTab;
+   this->streamLinesTab->getColorMapWidget()->setColormapSettings(Settings::visualization::streamLines().colorMap);
+
    this->installEventFilter(this->keyboardHandler);
 
    setUpConnections();
@@ -65,7 +68,7 @@ void MainWindow::setUpConnections()
 
    connectGlyphTabAndSettings();
 
-   connectSmokeColorMapTabAndSettings();
+   connectSmokeTabAndSettings();
 
    connectKeyBoardHandlerAndSimulation();
 }
@@ -184,9 +187,13 @@ void MainWindow::connectSmokeEngineAndSettings()
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
-void MainWindow::connectSmokeColorMapTabAndSettings()
+void MainWindow::connectSmokeTabAndSettings()
 {
-   this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().colorMap);
+    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().colorMap);
+}
+
+void MainWindow::connectStreamLinesTabAndSettings()
+{
 }
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()

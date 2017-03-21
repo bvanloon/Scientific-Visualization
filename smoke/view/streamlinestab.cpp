@@ -12,3 +12,8 @@ StreamLinesTab::~StreamLinesTab()
 {
     delete ui;
 }
+
+ColorMapTab *StreamLinesTab::getColorMapWidget()
+{
+   return ui->colorMapWidget;
+}

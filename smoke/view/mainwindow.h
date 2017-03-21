@@ -9,6 +9,7 @@
 #include "view/simulationtab.h"
 #include "view/colormaptab.h"
 #include "view/glyphstab.h"
+#include "view/streamlinestab.h"
 #include "keyboardhandler.h"
 
 namespace Ui {
@@ -34,8 +35,11 @@ private:
    Canvas *canvas;
    Simulation *simulation;
    SimulationSettingPane *simulationTab;
+
    ColorMapTab *smokeColorMapTab;
+
    GlyphsTab *glyphsTab;
+   StreamLinesTab *streamLinesTab;
 
    void setUpConnections();
 
@@ -57,7 +61,9 @@ private:
 
    void connectGlyphTabAndSettings();
 
-   void connectSmokeColorMapTabAndSettings();
+   void connectSmokeTabAndSettings();
+
+   void connectStreamLinesTabAndSettings();
 
    void connectKeyBoardHandlerAndSimulation();
 };
