@@ -33,6 +33,7 @@ class UniformGrid : public Grid
       static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
 
       static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
+      void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
 
 
       static void createCells(UniformGrid *grid);
@@ -44,7 +45,6 @@ class UniformGrid : public Grid
       QSizeF padding;
 
    private:
-      void recomputeVertexPositions();
 
       QSizeF computeCellSize(QSizeF area);
 

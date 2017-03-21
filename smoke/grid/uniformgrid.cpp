@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <assert.h>
 #include <QtMath>
+#include <QMatrix4x4>
+#include <QVector4D>
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
 
@@ -41,17 +43,20 @@ Triangulation UniformGrid::getTriangulation() const
    return triangulation;
 }
 
-void UniformGrid::recomputeVertexPositions()
+void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize)
 {
-   int idx;
+   qDebug() << "old" << oldCellSize << " new " << newCellSize;
+   double xScaling = newCellSize.width() / oldCellSize.width();
+   double yScaling = newCellSize.height() / oldCellSize.height();
 
-   for (int i = 0; i < dimension; i++)
+   QMatrix4x4 scaleMatrix;
+   scaleMatrix.scale(xScaling, yScaling, 0.0);
+
+   QVector4D transformedPosition;
+   for (int i = 0; i < this->numVertices(); i++)
    {
-      for (int j = 0; j < dimension; j++)
-      {
-         idx = to1Dindex(i, j);
-         vertexPositions.replace(idx, computeVertexPosition(i, j));
-      }
+      transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
+      this->vertexPositions.replace(i, transformedPosition.toVector3D());
    }
 }
 
@@ -202,17 +207,20 @@ int UniformGrid::to1Dindex(int x, int y) const
 
 void UniformGrid::changeGridArea(QSizeF newArea)
 {
+   QSizeF oldCellSize = cellSize;
+
    cellSize = computeCellSize(newArea);
 
    if (hasPadding) padding = cellSize;
-   recomputeVertexPositions();
+   recomputeVertexPositions(oldCellSize, cellSize);
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
 {
    if (hasPadding) this->padding = padding;
+   QSizeF oldCellSize = cellSize;
    cellSize = computeCellSize(newArea, padding);
-   recomputeVertexPositions();
+   recomputeVertexPositions(oldCellSize, cellSize);
 }
 
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
