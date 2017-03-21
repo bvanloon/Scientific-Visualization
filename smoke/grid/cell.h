@@ -10,40 +10,43 @@
 
 class Cell
 {
-public:
-    Cell();
-    virtual ~Cell();
+   public:
+      Cell();
+      virtual ~Cell();
 
-    virtual Triangulation triangulate() = 0;
+      virtual Triangulation triangulate() = 0;
 };
 
 class StructuredCell : public Cell
 {
-public:
-    StructuredCell(Vertex* upperLeft, Vertex* upperRight, Vertex* lowerLeft, Vertex* lowerRight);
+   public:
+      StructuredCell(Vertex *upperLeft, Vertex *upperRight, Vertex *lowerLeft, Vertex *lowerRight);
 
-    friend QDebug operator<<(QDebug stream, const StructuredCell &cell);
-    friend QDebug operator<<(QDebug stream, StructuredCell *cell);
+      friend QDebug operator<<(QDebug stream, const StructuredCell& cell);
 
-    virtual Triangulation triangulate();
+      friend QDebug operator<<(QDebug stream, StructuredCell *cell);
 
-    float interpolateScalar(QVector3D position, Vertex::scalarGetter getter);
-    QVector2D interpolate2DVector(QVector3D position, Vertex::vectorGetter getter);
+      virtual Triangulation triangulate();
 
-    QSizeF getSize() const;
+      float interpolateScalar(QVector3D position, Vertex::scalarGetter getter);
 
-    bool isInCell(QVector3D position);
+      QVector2D interpolate2DVector(QVector3D position, Vertex::vectorGetter getter);
 
-private:
-    Vertex* upperLeft;
-    Vertex* upperRight;
-    Vertex* lowerLeft;
-    Vertex* lowerRight;
 
-    QVector3D normalizePosition(const QVector3D position);
+      QSizeF getSize() const;
 
-    Triangulation lowerLeftTriangle();
-    Triangulation upperRightTriangle();
+      bool isInCell(QVector3D position);
+   private:
+      Vertex *upperLeft;
+      Vertex *upperRight;
+      Vertex *lowerLeft;
+      Vertex *lowerRight;
+
+      QVector3D normalizePosition(const QVector3D position);
+
+      Triangulation lowerLeftTriangle();
+
+      Triangulation upperRightTriangle();
 };
 
 #endif // CELL_H
