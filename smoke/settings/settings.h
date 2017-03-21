@@ -31,6 +31,9 @@ namespace Settings {
 
         class Glyphs;
         const Glyphs& glyphs();
+
+        class StreamLines;
+        const StreamLines& streamLines();
     }
 
     namespace sim {

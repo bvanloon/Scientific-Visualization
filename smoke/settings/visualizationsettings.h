@@ -5,6 +5,7 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 #include <QSizeF>
+#include "settings/visualization/streamlines.h"
 #include "grid/vertex.h"
 #ifdef __APPLE__
 #include <OpenGL/gl.h>

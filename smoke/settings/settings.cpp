@@ -3,6 +3,7 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
+
 const Settings::Simulation& Settings::simulation()
 {
    return Simulation::instance();
@@ -43,4 +44,9 @@ QStringList Settings::visualization::getVectorVariableNames()
                        << "Fluid velocity magnitude gradient";
 
       return vectorVariableNames;
+}
+
+const Settings::visualization::StreamLines &Settings::visualization::streamLines()
+{
+    return Settings::visualization::StreamLines::instance();
 }

@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     utilities/range.cpp \
     utilities/mesh.cpp \
     utilities/vector.cpp \
-    utilities/approximation.cpp
+    utilities/approximation.cpp \
+    settings/visualization/streamlines.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -110,7 +111,8 @@ HEADERS  += main.ih\
     utilities/mesh.h \
     utilities/vector.h \
     unused.h \
-    utilities/approximation.h
+    utilities/approximation.h \
+    settings/visualization/streamlines.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
