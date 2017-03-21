@@ -40,6 +40,8 @@ Vertex::vectorGetter Vertex::getVectorGetter(Settings::sim::Vector vector)
    case Settings::sim::force:
       return &Vertex::getForce;
    }
+   qDebug() << "Vertex::getVectorGetter: returning default vector getter.";
+   return &Vertex::getFluidVelocity;
 }
 
 QDebug operator<<(QDebug stream, const Vertex& vertex)
@@ -76,6 +78,11 @@ float SimulationVertex::getFluidVelocityMagnitude() const
    return getFluidVelocity().length();
 }
 
+QVector2D SimulationVertex::getFluidVelocityMagnitudeGradient() const
+{
+   std::logic_error("SimulationVertex::getFluidVelocityMagnitudeGradient is not implemented.");
+}
+
 QVector2D SimulationVertex::getForce() const
 {
    return QVector2D(*(fx), *(fy));
@@ -89,6 +96,11 @@ float SimulationVertex::getForceMagnitude() const
 float SimulationVertex::getFluidDensity() const
 {
    return *rho;
+}
+
+QVector2D SimulationVertex::getFluidDensityGradient() const
+{
+   std::logic_error("SimulationVertex::getFluidDensityGradient is not implemented.");
 }
 
 QDebug operator<<(QDebug stream, const SimulationVertex& vertex)

@@ -27,11 +27,15 @@ class Vertex
 
       virtual float getFluidVelocityMagnitude() const = 0;
 
+      virtual QVector2D getFluidVelocityMagnitudeGradient() const = 0;
+
       virtual QVector2D getForce() const = 0;
 
       virtual float getForceMagnitude() const = 0;
 
       virtual float getFluidDensity() const = 0;
+
+      virtual QVector2D getFluidDensityGradient() const = 0;
 
       static Vertex::scalarGetter getScalarGetter(Settings::sim::Scalar scalar);
 
@@ -47,11 +51,15 @@ class StructuredGridVertex : public Vertex {
 
       virtual float getFluidVelocityMagnitude() const = 0;
 
+      virtual QVector2D getFluidVelocityMagnitudeGradient() const = 0;
+
       virtual QVector2D getForce() const = 0;
 
       virtual float getForceMagnitude() const = 0;
 
       virtual float getFluidDensity() const = 0;
+
+      virtual QVector2D getFluidDensityGradient() const = 0;
 
       Cell *getLowerRightCell() const;
 
@@ -79,12 +87,15 @@ class SimulationVertex : public StructuredGridVertex
 
       virtual float getFluidVelocityMagnitude() const;
 
+      virtual QVector2D getFluidVelocityMagnitudeGradient() const;
 
       virtual QVector2D getForce() const;
 
       virtual float getForceMagnitude() const;
 
       virtual float getFluidDensity() const;
+
+      virtual QVector2D getFluidDensityGradient() const;
 
    private:
       double *vx, *vy;
@@ -105,7 +116,7 @@ class VisualizationVertex : public StructuredGridVertex
 
       virtual float getFluidVelocityMagnitude() const;
 
-      QVector2D getFluidVelocityMagnitudeGradient() const;
+      virtual QVector2D getFluidVelocityMagnitudeGradient() const;
 
       virtual QVector2D getForce() const;
 
@@ -113,7 +124,7 @@ class VisualizationVertex : public StructuredGridVertex
 
       virtual float getFluidDensity() const;
 
-      QVector2D getFluidDensityGradient() const;
+      virtual QVector2D getFluidDensityGradient() const;
 
    private:
       Cell *containingCell;
