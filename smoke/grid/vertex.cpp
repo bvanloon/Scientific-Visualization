@@ -39,9 +39,13 @@ Vertex::vectorGetter Vertex::getVectorGetter(Settings::sim::Vector vector)
 
    case Settings::sim::force:
       return &Vertex::getForce;
+
+   case Settings::sim::fluidDensityGradient:
+      return &Vertex::getFluidDensityGradient;
+
+   case Settings::sim::fluidVelocityMagnitudeGradient:
+      return &Vertex::getFluidVelocityMagnitudeGradient;
    }
-   qDebug() << "Vertex::getVectorGetter: returning default vector getter.";
-   return &Vertex::getFluidVelocity;
 }
 
 QDebug operator<<(QDebug stream, const Vertex& vertex)
