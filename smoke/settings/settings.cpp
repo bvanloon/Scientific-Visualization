@@ -34,7 +34,7 @@ QStringList Settings::visualization::getScalarVariableNames()
    return scalarVariableNames;
 }
 
-QStringList Settings::visualization::getVectorVariableNames()
+QStringList Settings::visualization::getAllVectorVariableNames()
 {
    QStringList vectorVariableNames;
 
@@ -43,10 +43,20 @@ QStringList Settings::visualization::getVectorVariableNames()
                        << "Fluid density gradient"
                        << "Fluid velocity magnitude gradient";
 
-      return vectorVariableNames;
+   return vectorVariableNames;
 }
 
-const Settings::visualization::StreamLines &Settings::visualization::streamLines()
+QStringList Settings::visualization::getNonDerivedVectorVariableNames()
 {
-    return Settings::visualization::StreamLines::instance();
+   QStringList vectorVariableNames;
+
+   vectorVariableNames << "Fluid velocity"
+                       << "Force";
+
+   return vectorVariableNames;
+}
+
+const Settings::visualization::StreamLines& Settings::visualization::streamLines()
+{
+   return Settings::visualization::StreamLines::instance();
 }

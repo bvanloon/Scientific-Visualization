@@ -1,11 +1,14 @@
 #include "streamlinestab.h"
 #include "ui_streamlinestab.h"
 
+#include "settings/visualizationsettings.h"
+
 StreamLinesTab::StreamLinesTab(QWidget *parent) :
    QWidget(parent),
    ui(new Ui::StreamLinesTab)
 {
    ui->setupUi(this);
+   fillUi();
    setUiToDefaults();
 }
 
@@ -18,6 +21,9 @@ ColorMapTab *StreamLinesTab::getColorMapWidget()
 {
    return ui->colorMapWidget;
 }
+
+void StreamLinesTab::fillUi()
+{}
 
 void StreamLinesTab::setUiToDefaults()
 {

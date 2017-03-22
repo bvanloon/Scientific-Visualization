@@ -73,6 +73,8 @@ void MainWindow::setUpConnections()
 
    connectSmokeTabAndSettings();
 
+   connectStreamLinesTabAndSettings();
+
    connectKeyBoardHandlerAndSimulation();
 }
 
@@ -174,7 +176,7 @@ void MainWindow::connectVectorEngineAndSettings()
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
    connect(Settings::visualization::glyphs().colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
-   connect(dynamic_cast<VectorEngine*>(engine), SIGNAL(cellSizeChanged(QSizeF)),
+   connect(dynamic_cast<VectorEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 
@@ -192,12 +194,11 @@ void MainWindow::connectSmokeEngineAndSettings()
 
 void MainWindow::connectSmokeTabAndSettings()
 {
-    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().colorMap);
+   this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().colorMap);
 }
 
 void MainWindow::connectStreamLinesTabAndSettings()
-{
-}
+{}
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()
 {

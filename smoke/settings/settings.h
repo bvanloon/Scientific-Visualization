@@ -22,7 +22,8 @@ namespace Settings {
     namespace visualization {
         QStringList getScalarVariableNames();
 
-        QStringList getVectorVariableNames();
+        QStringList getAllVectorVariableNames();
+        QStringList getNonDerivedVectorVariableNames();
 
         class ColorMap;
 

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "settings/settings.h"
+#include "grid/vertex.h"
 
 class Settings::visualization::StreamLines : public QObject
 {

@@ -18,10 +18,15 @@ class StreamLinesTab : public QWidget
 
       ColorMapTab *getColorMapWidget();
 
-   private:
-      Ui::StreamLinesTab *ui;
+    signals:
 
-      void setUiToDefaults();
+    private slots:
+
+    private:
+        Ui::StreamLinesTab *ui;
+
+        void fillUi();
+        void setUiToDefaults();
 };
 
 #endif // STREAMLINESTAB_H
