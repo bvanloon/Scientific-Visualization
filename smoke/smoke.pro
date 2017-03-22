@@ -69,9 +69,9 @@ SOURCES += main.cpp\
     settings/visualization/streamlines.cpp \
     view/streamlinestab.cpp \
     engines/seedpointengine.cpp \
-    utilities/vector.cpp
     glyphs/cone.cpp \
     shapes/cone.cpp
+    utilities/vector.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
