@@ -3,6 +3,7 @@
 
 #include "abstractengine.h"
 #include "unused.h"
+#include "utilities/mesh.h"
 
 class SeedPointEngine : public AbstractEngine
 {
@@ -17,10 +18,22 @@ class SeedPointEngine : public AbstractEngine
       int updateBuffers();
 
       void fillIntermediateBuffers();
+
+      void addSeedPoint(QPointF position);
+
+      void addSeedPointBorder(QPointF position);
+
+      void addSeedPointFill(QPointF position);
+
+      void addMesh(mesh::TriangleMesh* mesh, float textureCoordinate);
+
       void clearIntermediateBuffers();
+
       int intermediateBufferSize();
 
       static const int drawMode = GL_TRIANGLES;
+      static const double borderScale;
+      static const double fillScale;
 
       QVector<QVector3D> vertices;
       QVector<QVector3D> normals;
