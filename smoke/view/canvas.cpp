@@ -56,10 +56,10 @@ void Canvas::initializeGL()
    initializeOpenGLFunctions();
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
    glEnable(GL_DEPTH_TEST);
+
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smoke, new SmokeEngine()));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new VectorEngine(simulation->getSimulationGrid())));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::seedPoints, new SeedPointEngine()));
-
 
    emit openGlReady();
 
@@ -75,17 +75,17 @@ void Canvas::idleLoop()
 
 void Canvas::setSimulation(Simulation *simulation)
 {
-    this->simulation = simulation;
+   this->simulation = simulation;
 }
 
-AbstractEngine* Canvas::getEngine(Settings::engines::EnginesTypes engine)
+AbstractEngine *Canvas::getEngine(Settings::engines::EnginesTypes engine)
 {
-    return this->enginemap.find(engine)->second;
+   return this->enginemap.find(engine)->second;
 }
 
 void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-    activeEngines[engine] = checked;
+   activeEngines[engine] = checked;
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
