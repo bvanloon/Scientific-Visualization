@@ -35,7 +35,6 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       typedef std::map<Settings::engines::EnginesTypes, bool> ActiveEnginesMap;
 
       EngineMap enginemap; //Public since mainwindow accesses it to setup connections
-      ActiveEnginesMap activeEngines;
    public slots:
 
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
@@ -68,6 +67,7 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       Simulation *simulation;
 
       //Engines
+      ActiveEnginesMap activeEngines;
       void initializeActiveEngines();
 
       void connectThisAndEngine(AbstractEngine *engine);
