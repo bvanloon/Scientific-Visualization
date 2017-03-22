@@ -6,7 +6,9 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    colorMap(new ColorMap()),
    timeStep(1.0),
    edgeLengthFactor(0.5)
-{}
+{
+   colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
+}
 
 const Settings::visualization::StreamLines& Settings::visualization::StreamLines::instance()
 {
@@ -27,10 +29,10 @@ void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newF
 
 void Settings::visualization::StreamLines::onClearSeedPoints()
 {
-    this->seedPoints.clear();
+   this->seedPoints.clear();
 }
 
 void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint)
 {
-    this->seedPoints.append(newSeedPoint);
+   this->seedPoints.append(newSeedPoint);
 }
