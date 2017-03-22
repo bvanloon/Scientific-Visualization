@@ -28,6 +28,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void setSimulation(Simulation *simulation);
 
+      AbstractEngine* getEngine(Settings::engines::EnginesTypes engine);
+
       typedef std::map<Settings::engines::EnginesTypes, AbstractEngine *> EngineMap;
       typedef std::pair<Settings::engines::EnginesTypes, AbstractEngine *> EnginePair;
       typedef std::map<Settings::engines::EnginesTypes, bool> ActiveEnginesMap;
