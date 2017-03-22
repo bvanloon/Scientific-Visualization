@@ -6,6 +6,7 @@ StreamLinesTab::StreamLinesTab(QWidget *parent) :
    ui(new Ui::StreamLinesTab)
 {
    ui->setupUi(this);
+   setUiToDefaults();
 }
 
 StreamLinesTab::~StreamLinesTab()
@@ -20,5 +21,6 @@ ColorMapTab *StreamLinesTab::getColorMapWidget()
 
 void StreamLinesTab::setUiToDefaults()
 {
-   qDebug() << "Disable the scalar field of the colormapwidget.";
+   this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::sim::Scalar::fluidVelocityMagnitude);
+   this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
 }

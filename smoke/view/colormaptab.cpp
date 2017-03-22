@@ -145,6 +145,11 @@ void ColorMapTab::setColormapSettings(Settings::visualization::ColorMap *value)
    connectToColorMapSettings(value);
 }
 
+QComboBox *ColorMapTab::getVariableSelector() const
+{
+   return ui->variableSelector;
+}
+
 void ColorMapTab::on_clampingMinimumFloatBox_valueChanged(double value)
 {
     double maximum = this->ui->clampingMaximumFloatBox->value();

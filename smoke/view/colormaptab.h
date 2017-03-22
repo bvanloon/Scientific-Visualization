@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QColor>
 #include <QColorDialog>
+#include <QComboBox>
 
 #include "colormaps/colormapfactory.h"
 #include "settings/visualizationsettings.h"
@@ -23,6 +24,8 @@ class ColorMapTab : public QWidget
       void connectToColorMapSettings(Settings::visualization::ColorMap *colorMap);
 
       void setColormapSettings(Settings::visualization::ColorMap *value);
+
+      QComboBox *getVariableSelector() const;
 
    signals:
       void setClamping(bool clampingOn);
