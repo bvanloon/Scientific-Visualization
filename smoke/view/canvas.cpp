@@ -65,6 +65,7 @@ void Canvas::initializeGL()
 
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedPoints));
 }
 
 void Canvas::idleLoop()
