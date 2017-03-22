@@ -4,22 +4,27 @@ SeedPointEngine::SeedPointEngine() :
    AbstractEngine(AbstractEngine::lightModel::noLight)
 {}
 
-int SeedPointEngine::updateBuffers()
+int SeedPointEngine::updateBuffers(Simulation *simulation)
 {
-   QVector<QVector3D> vertices;
-   vertices.append(QVector3D(100, 200, 0));
-   vertices.append(QVector3D(400, 450, 0));
-   vertices.append(QVector3D(100, 200, 0));
-   updateBuffer(this->vertexBuffer, vertices);
-   updateBuffer(this->textureCoordinateBuffer, QVector<float>(vertices.size(), 0.5));
-   updateBuffer(this->normalBuffer, QVector<QVector3D>(vertices.size(), QVector3D(0.0, 0.0, 1.0)));
-   return vertices.size();
+    Triangulation triangulation = simulation->getGridTriangulation();
+
+    QVector<QVector3D> triangles = triangulation.getVertexPositions();
+
+    QVector<float> textureCoordinates = simulation->getTexCoord(
+                Settings::visualization::smoke().colorMap->textureGetter,
+                triangulation);
+
+    updateBuffer(this->vertexBuffer, triangles);
+
+    //Fill normal buffer with triangles to make sure it is not empty.
+    updateBuffer(this->normalBuffer, triangles);
+    updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
+    return triangles.length();
 }
 
-void SeedPointEngine::draw(Simulation *UNUSED(Simulation))
+void SeedPointEngine::draw(Simulation *simulation)
 {
-   qDebug() << "SeedPointEngine::draw";
-   int bufferLength = this->updateBuffers();
+    int bufferLength = this->updateBuffers(simulation);
 
-   drawWithMode(drawMode, bufferLength);
+    drawWithMode(GL_TRIANGLES, bufferLength);
 }
