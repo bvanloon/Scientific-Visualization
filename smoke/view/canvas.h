@@ -36,10 +36,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       EngineMap enginemap; //Public since mainwindow accesses it to setup connections
       ActiveEnginesMap activeEngines;
    public slots:
-      void onGlyphsEngineToggled(bool checked);
 
-      void onSmokeEngineToggled(bool checked);
-
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
    signals:
       void mouseMoved(QPoint newPosition);
@@ -63,7 +61,7 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
-      void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
+      void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
    private:
       Simulation *simulation;
