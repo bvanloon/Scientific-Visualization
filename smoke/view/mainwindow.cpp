@@ -43,11 +43,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second), this->smokeColorMapTab);
-   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::smoke)), this->smokeColorMapTab);
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::smoke)));
 
-   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second), this->glyphsTab->getColorMapWidget());
-   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::glyphs)), this->glyphsTab->getColorMapWidget());
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::glyphs)));
 
    qDebug() << "connectStreamLineEngineAndColorMapTab";
    qDebug() << "connectStreamLineEngineAndSettings";
@@ -160,12 +160,12 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine *currentEngine, Colo
 void MainWindow::connectVectorEngineAndGlyphTab()
 {
    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
-            this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second, SLOT(onGridDimensionChanged(int,int)));
+            this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
 void MainWindow::connectVectorEngineAndSettings()
 {
-   AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second;
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs);
 
 
    engine->setColorMap(Settings::visualization::glyphs().colorMap);
@@ -182,7 +182,7 @@ void MainWindow::connectVectorEngineAndSettings()
 
 void MainWindow::connectSmokeEngineAndSettings()
 {
-   AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second;
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::smoke);
 
    engine->setColorMap(Settings::visualization::smoke().colorMap);
 
