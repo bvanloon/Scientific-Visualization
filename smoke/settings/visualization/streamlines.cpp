@@ -1,5 +1,6 @@
 #include "streamlines.h"
 #include "settings/visualizationsettings.h"
+#include "settings/canvassettings.h"
 
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    QObject(parent),
@@ -34,5 +35,6 @@ void Settings::visualization::StreamLines::onClearSeedPoints()
 
 void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint)
 {
-   this->seedPoints.append(newSeedPoint);
+    newSeedPoint.setY(Settings::canvas().size.height() - newSeedPoint.y());
+    this->seedPoints.append(newSeedPoint);
 }
