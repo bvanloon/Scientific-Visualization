@@ -16,7 +16,15 @@ class SeedPointEngine : public AbstractEngine
    private:
       int updateBuffers();
 
+      void fillIntermediateBuffers();
+      void clearIntermediateBuffers();
+      int intermediateBufferSize();
+
       static const int drawMode = GL_TRIANGLES;
+
+      QVector<QVector3D> vertices;
+      QVector<QVector3D> normals;
+      QVector<float> textureCoordinates;
 };
 
 #endif // SEEDPOINTENGINE_H
