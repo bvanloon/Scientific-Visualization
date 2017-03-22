@@ -58,14 +58,16 @@ namespace Settings {
         {
            hedgehog,
            triangles,
-           airplane
+           airplane,
+           cone,
         };
 
         static const std::map<Settings::sim::GlyphsType, GLint> drawModes =
         {
            std::make_pair(Settings::sim::GlyphsType::hedgehog,  GL_LINES),
            std::make_pair(Settings::sim::GlyphsType::triangles, GL_TRIANGLES),
-           std::make_pair(Settings::sim::GlyphsType::airplane,  GL_TRIANGLES)
+           std::make_pair(Settings::sim::GlyphsType::airplane,  GL_TRIANGLES),
+           std::make_pair(Settings::sim::GlyphsType::cone,      GL_TRIANGLES)
         };
     }
 
@@ -107,7 +109,7 @@ namespace Settings {
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
                 static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
-                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::hedgehog;
+                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::cone;
                 static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
 

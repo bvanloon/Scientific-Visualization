@@ -124,9 +124,45 @@ mesh::Triangle *mesh::TriangleMesh::addTriangle(mesh::Vertex *a, mesh::Vertex *b
    return triangle;
 }
 
-QVector<mesh::Triangle *> mesh::TriangleMesh::getTriangles() const
+QVector<QVector3D> mesh::TriangleMesh::getVerticesAsVBO() const
 {
-   return triangles;
+   QVector<QVector3D> vertices;
+   for (auto triangle : this->triangles)
+   {
+      vertices.append(triangle->getVertexPositions());
+   }
+   return vertices;
+}
+
+QVector<QVector3D> mesh::TriangleMesh::getNormalsAsVBO() const
+{
+   QVector<QVector3D> normals;
+   for (auto triangle : this->triangles)
+   {
+      normals.append(triangle->getVertexNormals());
+   }
+   return normals;
+}
+
+QVector<QVector3D> mesh::TriangleMesh::getVertexPositions() const
+{
+   return vertexPositions;
+}
+
+void mesh::TriangleMesh::applyTransformation(QMatrix4x4 transformationMatrix)
+{
+   QVector4D transformedPosition;
+
+   for (int i = 0; i < numVertices(); i++)
+   {
+      transformedPosition = transformationMatrix * QVector4D(vertexPositions[i], 1.0);
+      vertexPositions.replace(i, transformedPosition.toVector3D());
+   }
+}
+
+int mesh::TriangleMesh::numVertices()
+{
+   return this->vertexPositions.length();
 }
 
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)
