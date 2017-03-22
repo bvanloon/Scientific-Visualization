@@ -24,7 +24,7 @@ class ColorMapTab : public QWidget
 
       void setColormapSettings(Settings::visualization::ColorMap *value);
 
-signals:
+   signals:
       void setClamping(bool clampingOn);
 
       void setClampingRange(float minimum, float maximum);
@@ -55,9 +55,9 @@ signals:
 
       void on_saturationSlider_valueChanged(double arg1);
 
-private:
+   private:
       Ui::ColorMapTab *ui;
-      Settings::visualization::ColorMap* colormapSettings;
+      Settings::visualization::ColorMap *colormapSettings;
 
       void setUItoDefaults();
 
