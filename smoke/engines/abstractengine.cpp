@@ -39,6 +39,13 @@ void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 
    QPair<float, float> range = Settings::simulation().getRange(colorMap->scalar);
    setColorMapValueRange(range.first, range.second);
+
+   /*
+    * Hacky solution to ensure that the changes in range due to changes in initial
+    * scalars are solved. Correct solution is initializing the engines and colormaptab
+    * based on the correct instance of the colormap settings object.
+    */
+   this->colorMap->onTextureVariableChanged(this->colorMap->scalar);
 }
 
 void AbstractEngine::initializeUniforms()
