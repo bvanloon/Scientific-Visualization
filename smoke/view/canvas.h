@@ -19,7 +19,6 @@
 #include "colormaps/colormapfactory.h"
 
 
-
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 {
    Q_OBJECT
@@ -68,6 +67,7 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       //Engines
       ActiveEnginesMap activeEngines;
+
       void initializeActiveEngines();
 
       void connectThisAndEngine(AbstractEngine *engine);
