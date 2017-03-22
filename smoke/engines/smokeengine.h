@@ -5,15 +5,13 @@
 
 class SmokeEngine : public AbstractEngine
 {
-public:
-    SmokeEngine();
+   public:
+      SmokeEngine();
 
-    void draw(Simulation* simulation);
+      void draw(Simulation *simulation);
 
-private:
-    int updateBuffers(Simulation* simulation);
-
-
+   private:
+      int updateBuffers(Simulation *simulation);
 };
 
 

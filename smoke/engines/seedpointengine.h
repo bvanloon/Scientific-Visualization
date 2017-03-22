@@ -2,7 +2,6 @@
 #define SEEDPOINTENGINE_H
 
 #include "abstractengine.h"
-#include "unused.h"
 
 class SeedPointEngine : public AbstractEngine
 {
@@ -10,12 +9,11 @@ class SeedPointEngine : public AbstractEngine
 
    public:
       SeedPointEngine();
+
       void draw(Simulation *Simulation);
 
    private:
       int updateBuffers(Simulation *simulation);
-
-//      static const int drawMode = GL_TRIANGLES;
 };
 
 #endif // SEEDPOINTENGINE_H
