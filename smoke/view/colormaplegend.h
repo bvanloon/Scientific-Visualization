@@ -27,7 +27,7 @@ public slots:
 
 protected:
     void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
+    void paintEvent(QPaintEvent *UNUSED(event)) Q_DECL_OVERRIDE;
 
 private:
     Ui::ColorMapLegend *ui;

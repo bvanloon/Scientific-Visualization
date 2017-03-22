@@ -2,10 +2,14 @@
 #define VISUALIZATIONS_H
 
 #include <QObject>
+#include <QSizeF>
+
 #include "settings.h"
 #include "simulation/simulation.h"
-#include <QSizeF>
+#include "settings/visualization/streamlines.h"
+
 #include "grid/vertex.h"
+
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
 #else
@@ -54,7 +58,7 @@ class Settings::visualization::Glyphs : public QObject {
       GLint drawMode;
       QSizeF cellSize;
 
-    QPair<float, float> getCurrentMagnitudeRange() const;
+      QPair<float, float> getCurrentMagnitudeRange() const;
 
    public slots:
       void onVectorFieldChanged(Settings::sim::Vector vectorField);
@@ -70,9 +74,9 @@ class Settings::visualization::Glyphs : public QObject {
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
 
-      void setMagnitude(Settings::sim::Vector vectorField);
+      QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 
-    Settings::sim::Scalar magnitude;
+      Settings::sim::Vector vectorField;
 };
 
 #endif // VISUALIZATIONS_H

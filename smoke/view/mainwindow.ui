@@ -60,12 +60,12 @@
       <property name="minimumSize">
        <size>
         <width>400</width>
-        <height>0</height>
+        <height>600</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>350</width>
+        <width>400</width>
         <height>16777215</height>
        </size>
       </property>
@@ -76,7 +76,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideMiddle</enum>
@@ -99,6 +99,11 @@
         <string>Glyphs</string>
        </attribute>
       </widget>
+      <widget class="StreamLinesTab" name="streamLinesTab">
+       <attribute name="title">
+        <string>Stream Lines</string>
+       </attribute>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -106,6 +111,12 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
+  <customwidget>
+   <class>ColorMapTab</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormaptab.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>Canvas</class>
    <extends>QOpenGLWidget</extends>
@@ -118,15 +129,15 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>ColorMapTab</class>
-   <extends>QWidget</extends>
-   <header location="global">view/colormaptab.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>GlyphsTab</class>
    <extends>QWidget</extends>
    <header location="global">view/glyphstab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StreamLinesTab</class>
+   <extends>QWidget</extends>
+   <header location="global">view/streamlinestab.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

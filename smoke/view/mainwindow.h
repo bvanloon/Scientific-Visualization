@@ -9,6 +9,7 @@
 #include "view/simulationtab.h"
 #include "view/colormaptab.h"
 #include "view/glyphstab.h"
+#include "view/streamlinestab.h"
 #include "keyboardhandler.h"
 
 namespace Ui {
@@ -19,47 +20,62 @@ class MainWindow : public QMainWindow
 {
    Q_OBJECT
 
-public:
-   explicit MainWindow(QWidget *parent = 0);
-   ~MainWindow();
+   public:
+      explicit MainWindow(QWidget *parent = 0);
+      ~MainWindow();
 
-   KeyboardHandler *keyboardHandler;
+      KeyboardHandler *keyboardHandler;
 
-public slots:
-   void onOpenGLReady();
+   public slots:
+      void onOpenGLReady();
 
-private:
-   Ui::MainWindow *ui;
+   private:
+      Ui::MainWindow *ui;
 
-   Canvas *canvas;
-   Simulation *simulation;
-   SimulationSettingPane *simulationTab;
-   ColorMapTab *smokeColorMapTab;
-   GlyphsTab *glyphsTab;
+      Canvas *canvas;
+      Simulation *simulation;
+      SimulationSettingPane *simulationTab;
 
-   void setUpConnections();
+      ColorMapTab *smokeColorMapTab;
 
-   void connectCanvasAndThis();
-   void connectCanvasAndSimulation();
-   void connectCanvasAndSettings();
-   void connectCanvasAndSimulationTab();
+      GlyphsTab *glyphsTab;
+      StreamLinesTab *streamLinesTab;
 
-   void connectVectorEngineAndGlyphTab();
-   void connectVectorEngineAndSettings();
+      void setUpConnections();
 
-   void connectSmokeEngineAndSettings();
+      void connectCanvasAndThis();
 
-   void connectEngineAndSettings(AbstractEngine *currentEngine);
-   void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
+      void connectCanvasAndSimulation();
 
-   void connectSimulationTabAndSettings();
-   void connectSimulationTabAndSimulation();
+      void connectCanvasAndSettings();
 
-   void connectGlyphTabAndSettings();
+      void connectCanvasAndSimulationTab();
 
-   void connectSmokeColorMapTabAndSettings();
+      void connectVectorEngineAndGlyphTab();
 
-   void connectKeyBoardHandlerAndSimulation();
+      void connectVectorEngineAndSettings();
+
+      void connectSmokeEngineAndSettings();
+
+      void connectStreamLineEngineAndStreamLinesTab();
+
+      void connectStreamLineEngineAndSettings();
+
+      void connectEngineAndSettings(AbstractEngine *currentEngine);
+
+      void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
+
+      void connectSimulationTabAndSettings();
+
+      void connectSimulationTabAndSimulation();
+
+      void connectGlyphTabAndSettings();
+
+      void connectSmokeTabAndSettings();
+
+      void connectStreamLinesTabAndSettings();
+
+      void connectKeyBoardHandlerAndSimulation();
 };
 
 #endif // MAINWINDOW_H

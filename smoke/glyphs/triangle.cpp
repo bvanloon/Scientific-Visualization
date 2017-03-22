@@ -3,7 +3,7 @@
 #include "glyphs/ccwtriangle.h"
 #include "utilities/vector.h"
 
-const double Triangle::cellRatio = 1;
+const double Triangle::cellRatio = 0.8;
 
 Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)

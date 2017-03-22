@@ -62,10 +62,13 @@ SOURCES += main.cpp\
     glyphs/triangle.cpp \
     glyphs/ccwtriangle.cpp \
     glyphs/airplane.cpp \
-    utilities/interpolation.cpp \
     utilities/range.cpp \
     utilities/mesh.cpp \
     utilities/vector.cpp \
+    utilities/approximation.cpp \
+    settings/visualization/streamlines.cpp \
+    view/streamlinestab.cpp \
+    engines/seedpointengine.cpp
     glyphs/cone.cpp \
     shapes/cone.cpp
 
@@ -108,12 +111,16 @@ HEADERS  += main.ih\
     glyphs/triangle.h \
     glyphs/ccwtriangle.h \
     glyphs/airplane.h \
-    utilities/interpolation.h \
     utilities/range.h \
     utilities/mesh.h \
     utilities/vector.h \
     glyphs/cone.h \
     shapes/cone.h
+    unused.h \
+    utilities/approximation.h \
+    settings/visualization/streamlines.h \
+    view/streamlinestab.h \
+    engines/seedpointengine.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
@@ -121,7 +128,8 @@ FORMS    += view/mainwindow.ui \
     view/floatslider.ui \
     view/intslider.ui \
     view/simulationtab.ui \
-    view/glyphstab.ui
+    view/glyphstab.ui \
+    view/streamlinestab.ui
 
 RESOURCES += \
     shaders.qrc

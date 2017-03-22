@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QImage>
 #include "settings/simulationsettings.h"
+#include <QApplication>
+
 
 
 Canvas::Canvas(QWidget *parent) :
@@ -56,12 +58,13 @@ void Canvas::initializeGL()
    glEnable(GL_DEPTH_TEST);
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smoke, new SmokeEngine()));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new VectorEngine(simulation->getSimulationGrid())));
+   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::seedPoints, new SeedPointEngine()));
 
 
    emit openGlReady();
 
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::smoke)->second);
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::glyphs)->second);
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
 }
 
 void Canvas::idleLoop()
@@ -72,17 +75,17 @@ void Canvas::idleLoop()
 
 void Canvas::setSimulation(Simulation *simulation)
 {
-   this->simulation = simulation;
+    this->simulation = simulation;
 }
 
-void Canvas::onGlyphsEngineToggled(bool checked)
+AbstractEngine* Canvas::getEngine(Settings::engines::EnginesTypes engine)
 {
-   activeEngines[Settings::engines::EnginesTypes::glyphs] = checked;
+    return this->enginemap.find(engine)->second;
 }
 
-void Canvas::onSmokeEngineToggled(bool checked)
+void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   activeEngines[Settings::engines::EnginesTypes::smoke] = checked;
+    activeEngines[engine] = checked;
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
@@ -91,6 +94,15 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
    {
       QPointF mousePosition = event->localPos();
       emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+   }
+}
+
+void Canvas::mousePressEvent(QMouseEvent *event)
+{
+   if (QApplication::keyboardModifiers() & Qt::ControlModifier)
+   {
+      QPointF mousePosition = event->localPos();
+      emit seedPointAdded(mousePosition);
    }
 }
 

@@ -1,5 +1,6 @@
 #include "cell.h"
-#include "utilities/interpolation.h"
+#include "utilities/approximation.h"
+#include <assert.h>
 
 Cell::Cell()
 {}
@@ -52,6 +53,23 @@ QVector2D StructuredCell::interpolate2DVector(QVector3D position, Vertex::vector
    return QVector2D(x, y);
 }
 
+QVector2D StructuredCell::computeGradient(QVector3D position, Vertex::scalarGetter getter)
+{
+   assert(this->isInCell(position));
+   QVector3D normalizedPosition = this->normalizePosition(position);
+   float lowerLeftValue = (lowerLeft->*getter)();
+   float lowerRightValue = (lowerRight->*getter)();
+   float upperLeftValue = (upperLeft->*getter)();
+   float upperRightValue = (upperRight->*getter)();
+
+   float dx = (1 - normalizedPosition.y()) * ((lowerRightValue - lowerLeftValue) / (this->width())) +
+      normalizedPosition.y() * ((upperRightValue - upperLeftValue) / (this->width()));
+   float dy = (1 - normalizedPosition.x()) * ((upperLeftValue - lowerLeftValue) / (this->height())) +
+      normalizedPosition.x() * ((upperRightValue - lowerRightValue) / (this->height()));
+   QVector2D gradient = QVector2D(dx, dy);
+   return gradient;
+}
+
 QSizeF StructuredCell::getSize() const
 {
    float width = upperRight->getPosition()->x() - upperLeft->getPosition()->x();
@@ -66,6 +84,16 @@ bool StructuredCell::isInCell(QVector3D position)
           position.x() <= upperRight->getPosition()->x() &&
           position.y() >= upperLeft->getPosition()->y() &&
           position.y() <= lowerLeft->getPosition()->y();
+}
+
+float StructuredCell::width()
+{
+   return this->upperRight->getPosition()->x() - this->upperLeft->getPosition()->x();
+}
+
+float StructuredCell::height()
+{
+   return this->upperLeft->getPosition()->y() - this->lowerLeft->getPosition()->y();
 }
 
 QVector3D StructuredCell::normalizePosition(const QVector3D position)

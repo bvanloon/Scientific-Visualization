@@ -6,9 +6,9 @@
 Settings::Simulation::Simulation(QObject *parent) :
    QObject(parent),
    dimension(50),
+   timestep(0.4),
    frozen(false),
    force(10.0f),
-   timestep(0.4),
    cellSize(-1, -1)
 {
    scalarRanges.insert(Settings::sim::Scalar::fluidDensity, QPair<float, float>(0.0f, force));

@@ -8,11 +8,8 @@ KeyboardHandler::KeyboardHandler(QObject *parent) :
    setUpConnections();
 }
 
-
 KeyboardHandler::~KeyboardHandler()
-{
-}
-
+{}
 
 bool KeyboardHandler::eventFilter(QObject *object, QEvent *event)
 {
@@ -33,7 +30,6 @@ bool KeyboardHandler::eventFilter(QObject *object, QEvent *event)
    }
 }
 
-
 bool KeyboardHandler::handleKeyEvent(QKeyEvent *event)
 {
    qDebug() << "KeyboardHandler::handleKeyEvent: Key Press: " << event->key();
@@ -42,11 +38,11 @@ bool KeyboardHandler::handleKeyEvent(QKeyEvent *event)
    case Qt::Key_A:
    //Fall through
    case Qt::Key_Space:
-      freezeSimulation(event);
+      freezeSimulation();
       break;
 
    case Qt::Key_S:
-      stepSimulation(event);
+      stepSimulation();
       break;
 
    default:
@@ -55,18 +51,15 @@ bool KeyboardHandler::handleKeyEvent(QKeyEvent *event)
    return true;
 }
 
-
-void KeyboardHandler::freezeSimulation(QKeyEvent *event)
+void KeyboardHandler::freezeSimulation()
 {
    emit toggleFrozen();
 }
 
-
-void KeyboardHandler::stepSimulation(QKeyEvent *event)
+void KeyboardHandler::stepSimulation()
 {
    emit step();
 }
-
 
 void KeyboardHandler::setUpConnections()
 {

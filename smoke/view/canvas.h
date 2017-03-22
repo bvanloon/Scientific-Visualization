@@ -14,9 +14,9 @@
 
 #include "engines/vectorengine.h"
 #include "engines/smokeengine.h"
+#include "engines/seedpointengine.h"
 #include "simulation/simulation.h"
 #include "colormaps/colormapfactory.h"
-
 
 
 class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
@@ -29,17 +29,15 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void setSimulation(Simulation *simulation);
 
+      AbstractEngine *getEngine(Settings::engines::EnginesTypes engine);
+
       typedef std::map<Settings::engines::EnginesTypes, AbstractEngine *> EngineMap;
       typedef std::pair<Settings::engines::EnginesTypes, AbstractEngine *> EnginePair;
       typedef std::map<Settings::engines::EnginesTypes, bool> ActiveEnginesMap;
 
-      EngineMap enginemap; //Public since mainwindow accesses it to setup connections
-      ActiveEnginesMap activeEngines;
    public slots:
-      void onGlyphsEngineToggled(bool checked);
 
-      void onSmokeEngineToggled(bool checked);
-
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
    signals:
       void mouseMoved(QPoint newPosition);
@@ -47,6 +45,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void windowResized(int width, int height);
 
       void openGlReady();
+
+      void seedPointAdded(QPointF position);
 
    private slots:
       void idleLoop();
@@ -61,10 +61,15 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
+      void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
    private:
       Simulation *simulation;
 
       //Engines
+      ActiveEnginesMap activeEngines;
+      EngineMap enginemap;
+
       void initializeActiveEngines();
 
       void connectThisAndEngine(AbstractEngine *engine);

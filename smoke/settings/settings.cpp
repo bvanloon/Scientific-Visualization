@@ -3,6 +3,7 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
+
 const Settings::Simulation& Settings::simulation()
 {
    return Simulation::instance();
@@ -33,12 +34,29 @@ QStringList Settings::visualization::getScalarVariableNames()
    return scalarVariableNames;
 }
 
-QStringList Settings::visualization::getVectorVariableNames()
+QStringList Settings::visualization::getAllVectorVariableNames()
+{
+   QStringList vectorVariableNames;
+
+   vectorVariableNames << "Fluid velocity"
+                       << "Force"
+                       << "Fluid density gradient"
+                       << "Fluid velocity magnitude gradient";
+
+   return vectorVariableNames;
+}
+
+QStringList Settings::visualization::getNonDerivedVectorVariableNames()
 {
    QStringList vectorVariableNames;
 
    vectorVariableNames << "Fluid velocity"
                        << "Force";
 
-      return vectorVariableNames;
+   return vectorVariableNames;
+}
+
+const Settings::visualization::StreamLines& Settings::visualization::streamLines()
+{
+   return Settings::visualization::StreamLines::instance();
 }

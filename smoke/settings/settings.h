@@ -22,7 +22,9 @@ namespace Settings {
     namespace visualization {
         QStringList getScalarVariableNames();
 
-        QStringList getVectorVariableNames();
+        QStringList getAllVectorVariableNames();
+
+        QStringList getNonDerivedVectorVariableNames();
 
         class ColorMap;
 
@@ -31,6 +33,9 @@ namespace Settings {
 
         class Glyphs;
         const Glyphs& glyphs();
+
+        class StreamLines;
+        const StreamLines& streamLines();
     }
 
     namespace sim {
@@ -45,6 +50,8 @@ namespace Settings {
         {
            fluidVelocity,
            force,
+           fluidDensityGradient,
+           fluidVelocityMagnitudeGradient
         };
 
         enum GlyphsType
@@ -69,6 +76,7 @@ namespace Settings {
         {
            glyphs,
            smoke,
+           seedPoints,
            numberOfEngines
         };
     }
@@ -104,8 +112,9 @@ namespace Settings {
                 static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::cone;
                 static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
-        }
 
+            namespace streamlines {}
+        }
         namespace engines {
             static const bool activeEngines[2] = { true, false };
         }

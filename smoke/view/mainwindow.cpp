@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
    this->glyphsTab = ui->glyphsTab;
    this->glyphsTab->getColorMapWidget()->setColormapSettings(Settings::visualization::glyphs().colorMap);
 
+   this->streamLinesTab = ui->streamLinesTab;
+   this->streamLinesTab->getColorMapWidget()->setColormapSettings(Settings::visualization::streamLines().colorMap);
+
    this->installEventFilter(this->keyboardHandler);
 
    setUpConnections();
@@ -40,11 +43,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::onOpenGLReady()
 {
-   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second), this->smokeColorMapTab);
-   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::smoke)), this->smokeColorMapTab);
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::smoke)));
 
-   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second), this->glyphsTab->getColorMapWidget());
-   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second));
+   connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::glyphs)), this->glyphsTab->getColorMapWidget());
+   connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::glyphs)));
+
+   qDebug() << "connectStreamLineEngineAndColorMapTab";
+   qDebug() << "connectStreamLineEngineAndSettings";
 
    connectCanvasAndSimulationTab();
 
@@ -65,7 +71,9 @@ void MainWindow::setUpConnections()
 
    connectGlyphTabAndSettings();
 
-   connectSmokeColorMapTabAndSettings();
+   connectSmokeTabAndSettings();
+
+   connectStreamLinesTabAndSettings();
 
    connectKeyBoardHandlerAndSimulation();
 }
@@ -91,15 +99,15 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(windowResized(int,int)),
             &Settings::simulation(), SLOT(onWindowResized(int,int)));
+
+   connect(this->canvas, SIGNAL(seedPointAdded(QPointF)),
+           &Settings::visualization::streamLines(), SLOT(onSeedPointAdded(QPointF)));
 }
 
 void MainWindow::connectCanvasAndSimulationTab()
 {
-   connect(this->simulationTab, SIGNAL(glyphsEngineToggled(bool)),
-            this->canvas, SLOT(onGlyphsEngineToggled(bool)));
-
-   connect(this->simulationTab, SIGNAL(smokeEngineToggled(bool)),
-                    this->canvas, SLOT(onSmokeEngineToggled(bool)));
+   connect(this->simulationTab, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+           this->canvas, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
@@ -152,12 +160,12 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine *currentEngine, Colo
 void MainWindow::connectVectorEngineAndGlyphTab()
 {
    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
-            this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second, SLOT(onGridDimensionChanged(int,int)));
+            this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
 void MainWindow::connectVectorEngineAndSettings()
 {
-   AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::glyphs)->second;
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs);
 
 
    engine->setColorMap(Settings::visualization::glyphs().colorMap);
@@ -168,13 +176,13 @@ void MainWindow::connectVectorEngineAndSettings()
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
    connect(Settings::visualization::glyphs().colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
-   connect(dynamic_cast<VectorEngine*>(engine), SIGNAL(cellSizeChanged(QSizeF)),
+   connect(dynamic_cast<VectorEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 
 void MainWindow::connectSmokeEngineAndSettings()
 {
-   AbstractEngine *engine = this->canvas->enginemap.find(Settings::engines::EnginesTypes::smoke)->second;
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::smoke);
 
    engine->setColorMap(Settings::visualization::smoke().colorMap);
 
@@ -184,9 +192,20 @@ void MainWindow::connectSmokeEngineAndSettings()
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
-void MainWindow::connectSmokeColorMapTabAndSettings()
+void MainWindow::connectSmokeTabAndSettings()
 {
    this->smokeColorMapTab->connectToColorMapSettings(Settings::visualization::smoke().colorMap);
+}
+
+void MainWindow::connectStreamLinesTabAndSettings()
+{
+    connect(this->streamLinesTab, SIGNAL(timeStepChanged(double)),
+            &Settings::visualization::streamLines(), SLOT(ontimeStepChanged(double)));
+    connect(this->streamLinesTab, SIGNAL(edgeLengthFactorChanged(double)),
+            &Settings::visualization::streamLines(), SLOT(onEdgeLengthFactorChanged(double)));
+    connect(this->streamLinesTab, SIGNAL(clearSeedPoints()),
+            &Settings::visualization::streamLines(), SLOT(onClearSeedPoints()));
+
 }
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()
