@@ -76,7 +76,12 @@ void Canvas::idleLoop()
 
 void Canvas::setSimulation(Simulation *simulation)
 {
-   this->simulation = simulation;
+    this->simulation = simulation;
+}
+
+AbstractEngine* Canvas::getEngine(Settings::engines::EnginesTypes engine)
+{
+    return this->enginemap.find(engine)->second;
 }
 
 void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
