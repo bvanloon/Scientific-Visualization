@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>340</width>
-    <height>500</height>
+    <height>907</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -27,7 +27,14 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="ColorMapTab" name="colorMapWidget" native="true"/>
+       <widget class="ColorMapTab" name="colorMapWidget" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -86,23 +93,38 @@
         </item>
        </layout>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="seedPointsGroupBox">
+     <property name="title">
+      <string>Seed Points</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="showSeedPointsButton">
-          <property name="text">
-           <string>Show Seed Points</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="clearSeedPointsButton">
-          <property name="text">
-           <string>Clear Seed Points</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLabel" name="seedPointsExplanationLabel">
+        <property name="text">
+         <string>Add seed points by cmd + click or windows + click.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="showSeedPoinsCheckBox">
+        <property name="text">
+         <string>Show seed points</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clearSeedPointsButton">
+        <property name="text">
+         <string>Clear Seed Points</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

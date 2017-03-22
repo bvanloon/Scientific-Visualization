@@ -4,6 +4,7 @@
 #include <QObject>
 #include "settings/settings.h"
 #include "grid/vertex.h"
+#include <QList>
 
 class Settings::visualization::StreamLines : public QObject
 {
@@ -14,6 +15,7 @@ class Settings::visualization::StreamLines : public QObject
       Settings::visualization::ColorMap *colorMap;
       double timeStep;
       double edgeLengthFactor;
+      QList<QPointF> seedPoints;
 
    signals:
 
@@ -23,6 +25,8 @@ class Settings::visualization::StreamLines : public QObject
       void onEdgeLengthFactorChanged(double newFactor);
 
       void onClearSeedPoints();
+
+      void onSeedPointAdded(QPointF newSeedPoint);
 
    private slots:
 

@@ -27,5 +27,10 @@ void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newF
 
 void Settings::visualization::StreamLines::onClearSeedPoints()
 {
-   qDebug() << "Settings::visualization::StreamLines::onClearSeedPoints implement";
+    this->seedPoints.clear();
+}
+
+void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint)
+{
+    this->seedPoints.append(newSeedPoint);
 }

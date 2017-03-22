@@ -48,6 +48,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void openGlReady();
 
+      void seedPointAdded(QPointF position);
+
    private slots:
       void idleLoop();
 
@@ -60,6 +62,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void resizeGL(int width, int height) Q_DECL_OVERRIDE;
 
       void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+      void mousePressEvent(QMouseEvent* event) Q_DECL_OVERRIDE;
 
    private:
       Simulation *simulation;

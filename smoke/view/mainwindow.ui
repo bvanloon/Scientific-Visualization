@@ -60,12 +60,12 @@
       <property name="minimumSize">
        <size>
         <width>400</width>
-        <height>0</height>
+        <height>600</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>350</width>
+        <width>400</width>
         <height>16777215</height>
        </size>
       </property>
@@ -112,6 +112,12 @@
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
+   <class>ColorMapTab</class>
+   <extends>QWidget</extends>
+   <header location="global">view/colormaptab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>Canvas</class>
    <extends>QOpenGLWidget</extends>
    <header location="global">view/canvas.h</header>
@@ -120,12 +126,6 @@
    <class>SimulationSettingPane</class>
    <extends>QWidget</extends>
    <header location="global">view/simulationtab.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ColorMapTab</class>
-   <extends>QWidget</extends>
-   <header location="global">view/colormaptab.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
