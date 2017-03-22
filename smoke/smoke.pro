@@ -69,7 +69,7 @@ SOURCES += main.cpp\
     settings/visualization/streamlines.cpp \
     view/streamlinestab.cpp \
     engines/seedpointengine.cpp \
-    shapes/rectangle.cpp
+    shapes/rectangle.cpp \
     glyphs/cone.cpp \
     shapes/cone.cpp
 
