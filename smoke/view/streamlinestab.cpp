@@ -8,7 +8,6 @@ StreamLinesTab::StreamLinesTab(QWidget *parent) :
    ui(new Ui::StreamLinesTab)
 {
    ui->setupUi(this);
-   fillUi();
    setUiToDefaults();
 }
 
@@ -21,9 +20,6 @@ ColorMapTab *StreamLinesTab::getColorMapWidget()
 {
    return ui->colorMapWidget;
 }
-
-void StreamLinesTab::fillUi()
-{}
 
 void StreamLinesTab::setUiToDefaults()
 {

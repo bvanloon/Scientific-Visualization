@@ -25,7 +25,6 @@ class StreamLinesTab : public QWidget
     private:
         Ui::StreamLinesTab *ui;
 
-        void fillUi();
         void setUiToDefaults();
 };
 
