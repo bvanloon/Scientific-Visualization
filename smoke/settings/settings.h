@@ -74,6 +74,7 @@ namespace Settings {
         {
            glyphs,
            smoke,
+           seedPoints,
            numberOfEngines
         };
     }

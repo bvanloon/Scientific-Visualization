@@ -67,7 +67,8 @@ SOURCES += main.cpp\
     utilities/vector.cpp \
     utilities/approximation.cpp \
     settings/visualization/streamlines.cpp \
-    view/streamlinestab.cpp
+    view/streamlinestab.cpp \
+    engines/seedpointengine.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -114,7 +115,8 @@ HEADERS  += main.ih\
     unused.h \
     utilities/approximation.h \
     settings/visualization/streamlines.h \
-    view/streamlinestab.h
+    view/streamlinestab.h \
+    engines/seedpointengine.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

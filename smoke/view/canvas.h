@@ -14,6 +14,7 @@
 
 #include "engines/vectorengine.h"
 #include "engines/smokeengine.h"
+#include "engines/seedpointengine.h"
 #include "simulation/simulation.h"
 #include "colormaps/colormapfactory.h"
 
