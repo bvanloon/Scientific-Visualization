@@ -19,10 +19,19 @@ class StreamLinesTab : public QWidget
       ColorMapTab *getColorMapWidget();
 
     signals:
+      void timeStepChanged(double newTimeStep);
+      void edgeLengthFactorChanged(double newFactor);
+      void clearSeedPoints();
 
     private slots:
 
-    private:
+      void on_timeStepSelector_valueChanged(double arg1);
+
+      void on_lengthFactorSelector_valueChanged(double arg1);
+
+      void on_clearSeedPointsButton_clicked();
+
+private:
         Ui::StreamLinesTab *ui;
 
         void setUiToDefaults();
