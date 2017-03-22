@@ -52,6 +52,8 @@ void MainWindow::onOpenGLReady()
    connectEngineAndColorMapTab(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::seedPoints)), this->streamLinesTab->getColorMapWidget());
    connectEngineAndSettings(dynamic_cast<AbstractEngine *>(this->canvas->getEngine(Settings::engines::seedPoints)));
 
+   connectSeedEngineAndSettings();
+
    connectStreamLineEngineAndSettings();
    connectStreamLineEngineAndStreamLinesTab();
 
