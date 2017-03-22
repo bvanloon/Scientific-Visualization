@@ -5,22 +5,23 @@
 #include "view/colormaptab.h"
 
 namespace Ui {
-class StreamLinesTab;
+    class StreamLinesTab;
 }
 
 class StreamLinesTab : public QWidget
 {
-    Q_OBJECT
+   Q_OBJECT
 
-public:
-    explicit StreamLinesTab(QWidget *parent = 0);
-    ~StreamLinesTab();
+   public:
+      explicit StreamLinesTab(QWidget *parent = 0);
+      ~StreamLinesTab();
 
-    ColorMapTab *getColorMapWidget();
-private:
-    Ui::StreamLinesTab *ui;
+      ColorMapTab *getColorMapWidget();
 
-    void setUiToDefaults();
+   private:
+      Ui::StreamLinesTab *ui;
+
+      void setUiToDefaults();
 };
 
 #endif // STREAMLINESTAB_H

@@ -2,23 +2,23 @@
 #include "ui_streamlinestab.h"
 
 StreamLinesTab::StreamLinesTab(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::StreamLinesTab)
+   QWidget(parent),
+   ui(new Ui::StreamLinesTab)
 {
-    ui->setupUi(this);
+   ui->setupUi(this);
 }
 
 StreamLinesTab::~StreamLinesTab()
 {
-    delete ui;
+   delete ui;
 }
 
 ColorMapTab *StreamLinesTab::getColorMapWidget()
 {
-    return ui->colorMapWidget;
+   return ui->colorMapWidget;
 }
 
 void StreamLinesTab::setUiToDefaults()
 {
-    qDebug() << "Disable the scalar field of the colormapwidget.";
+   qDebug() << "Disable the scalar field of the colormapwidget.";
 }
