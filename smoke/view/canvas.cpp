@@ -79,14 +79,9 @@ void Canvas::setSimulation(Simulation *simulation)
    this->simulation = simulation;
 }
 
-void Canvas::onGlyphsEngineToggled(bool checked)
+void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   activeEngines[Settings::engines::EnginesTypes::glyphs] = checked;
-}
-
-void Canvas::onSmokeEngineToggled(bool checked)
-{
-   activeEngines[Settings::engines::EnginesTypes::smoke] = checked;
+    activeEngines[engine] = checked;
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)

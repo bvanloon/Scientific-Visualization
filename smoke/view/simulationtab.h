@@ -2,6 +2,7 @@
 #define SIMULATIONSETTINGPANE_H
 
 #include <QWidget>
+#include "settings/settings.h"
 
 namespace Ui {
     class SimulationSettingPane;
@@ -26,9 +27,7 @@ class SimulationSettingPane : public QWidget
 
       void timeStepChanged(float timeStep);
 
-      void glyphsEngineToggled(bool checked);
-
-      void smokeEngineToggled(bool checked);
+      void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
    private slots:
       void on_freezeButton_clicked();

@@ -67,12 +67,12 @@ void SimulationSettingPane::on_timeStepBox_valueChanged(double value)
 
 void SimulationSettingPane::on_glyphsCheckBox_toggled(bool checked)
 {
-   emit glyphsEngineToggled(checked);
+   emit engineToggled(Settings::engines::EnginesTypes::glyphs, checked);
 }
 
 void SimulationSettingPane::on_smokeCheckBox_toggled(bool checked)
 {
-   emit smokeEngineToggled(checked);
+   emit engineToggled(Settings::engines::EnginesTypes::smoke, checked);
 }
 
 void SimulationSettingPane::on_forceSlider_valueChanged(double value)

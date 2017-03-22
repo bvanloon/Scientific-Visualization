@@ -106,11 +106,8 @@ void MainWindow::connectCanvasAndSettings()
 
 void MainWindow::connectCanvasAndSimulationTab()
 {
-   connect(this->simulationTab, SIGNAL(glyphsEngineToggled(bool)),
-            this->canvas, SLOT(onGlyphsEngineToggled(bool)));
-
-   connect(this->simulationTab, SIGNAL(smokeEngineToggled(bool)),
-                    this->canvas, SLOT(onSmokeEngineToggled(bool)));
+   connect(this->simulationTab, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+           this->canvas, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
