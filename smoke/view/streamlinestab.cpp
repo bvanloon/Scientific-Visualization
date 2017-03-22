@@ -29,6 +29,8 @@ void StreamLinesTab::setUiToDefaults()
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
 
    this->ui->lengthFactorSelector->setValue(Settings::visualization::streamLines().edgeLengthFactor);
+
+   this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
 }
 
 void StreamLinesTab::on_timeStepSelector_valueChanged(double value)

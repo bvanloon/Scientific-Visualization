@@ -114,7 +114,7 @@ namespace Settings {
             namespace streamlines {}
         }
         namespace engines {
-            static const bool activeEngines[2] = { true, false };
+            static const bool activeEngines[3] = { false, false, true };
         }
     }
 }
