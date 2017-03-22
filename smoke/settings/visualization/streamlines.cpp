@@ -32,5 +32,5 @@ void Settings::visualization::StreamLines::onClearSeedPoints()
 
 void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint)
 {
-    qDebug() << "Settings::visualization::StreamLines::onSeedPointAdded: new seedPoint: " << newSeedPoint;
+    this->seedPoints.append(newSeedPoint);
 }
