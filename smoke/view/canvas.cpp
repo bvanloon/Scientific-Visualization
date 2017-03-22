@@ -63,9 +63,8 @@ void Canvas::initializeGL()
 
    emit openGlReady();
 
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::smoke)->second);
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::glyphs)->second);
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::seedPoints)->second);
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
 }
 
 void Canvas::idleLoop()
