@@ -36,6 +36,9 @@ void AbstractEngine::init()
 void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 {
    this->colorMap = value;
+
+   QPair<float, float> range = Settings::simulation().getRange(colorMap->scalar);
+   setColorMapValueRange(range.first, range.second);
 }
 
 void AbstractEngine::initializeUniforms()
