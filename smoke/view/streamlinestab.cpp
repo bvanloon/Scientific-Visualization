@@ -45,3 +45,8 @@ void StreamLinesTab::on_clearSeedPointsButton_clicked()
 {
    emit clearSeedPoints();
 }
+
+void StreamLinesTab::on_showSeedPoinsCheckBox_clicked(bool checked)
+{
+    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
+}

@@ -2,6 +2,7 @@
 #define STREAMLINESTAB_H
 
 #include <QWidget>
+#include "settings/settings.h"
 #include "view/colormaptab.h"
 
 namespace Ui {
@@ -18,23 +19,29 @@ class StreamLinesTab : public QWidget
 
       ColorMapTab *getColorMapWidget();
 
-    signals:
+   signals:
       void timeStepChanged(double newTimeStep);
+
       void edgeLengthFactorChanged(double newFactor);
+
       void clearSeedPoints();
 
-    private slots:
+      void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
+
+   private slots:
 
       void on_timeStepSelector_valueChanged(double arg1);
 
       void on_lengthFactorSelector_valueChanged(double arg1);
 
       void on_clearSeedPointsButton_clicked();
+      
+      void on_showSeedPoinsCheckBox_clicked(bool checked);
 
 private:
-        Ui::StreamLinesTab *ui;
+      Ui::StreamLinesTab *ui;
 
-        void setUiToDefaults();
+      void setUiToDefaults();
 };
 
 #endif // STREAMLINESTAB_H
