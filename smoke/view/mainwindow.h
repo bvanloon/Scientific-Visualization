@@ -43,6 +43,7 @@ class MainWindow : public QMainWindow
 
       void setUpConnections();
 
+      //Canvas
       void connectCanvasAndThis();
 
       void connectCanvasAndSimulation();
@@ -51,6 +52,8 @@ class MainWindow : public QMainWindow
 
       void connectCanvasAndSimulationTab();
 
+
+      //Engines
       void connectVectorEngineAndGlyphTab();
 
       void connectVectorEngineAndSettings();
@@ -65,6 +68,8 @@ class MainWindow : public QMainWindow
 
       void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
 
+
+      //Tabs
       void connectSimulationTabAndSettings();
 
       void connectSimulationTabAndSimulation();
@@ -75,6 +80,8 @@ class MainWindow : public QMainWindow
 
       void connectStreamLinesTabAndSettings();
 
+
+      //Other IO
       void connectKeyBoardHandlerAndSimulation();
 };
 
