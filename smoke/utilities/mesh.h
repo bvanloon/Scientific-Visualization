@@ -30,6 +30,7 @@ namespace mesh {
           void applyTransformation(QMatrix4x4 transformationMatrix);
 
           int numVertices();
+          int numVBOVertices();
 
        private:
           QVector<QVector3D> vertexPositions;
