@@ -50,19 +50,22 @@ class MainWindow : public QMainWindow
 
       void connectCanvasAndSettings();
 
-      void connectCanvasAndSimulationTab();
+      void connectCanvasAndTabs();
 
 
-      //Engines
+      //Engines - Vector
       void connectVectorEngineAndGlyphTab();
 
       void connectVectorEngineAndSettings();
 
+
       void connectSmokeEngineAndSettings();
+
 
       void connectStreamLineEngineAndStreamLinesTab();
 
       void connectStreamLineEngineAndSettings();
+
 
       void connectEngineAndSettings(AbstractEngine *currentEngine);
 
