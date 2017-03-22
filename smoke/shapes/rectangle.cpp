@@ -5,11 +5,6 @@ shapes::Rectangle::Rectangle(double width, double height) :
    height(height)
 {}
 
-shapes::Rectangle::Rectangle(double size) :
-   width(size),
-   height(size)
-{}
-
 mesh::TriangleMesh *shapes::Rectangle::toTriangleMesh()
 {
    int numVertices = 4;

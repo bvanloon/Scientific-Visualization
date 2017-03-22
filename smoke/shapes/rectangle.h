@@ -8,7 +8,6 @@ namespace shapes {
     {
        public:
           Rectangle(double width = 1, double height = 1);
-          Rectangle(double size = 1);
 
           mesh::TriangleMesh *toTriangleMesh();
 
