@@ -99,6 +99,9 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(windowResized(int,int)),
             &Settings::simulation(), SLOT(onWindowResized(int,int)));
+
+   connect(this->canvas, SIGNAL(seedPointAdded(QPointF)),
+           &Settings::visualization::streamLines(), SLOT(onSeedPointAdded(QPointF)));
 }
 
 void MainWindow::connectCanvasAndSimulationTab()

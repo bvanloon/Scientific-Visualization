@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QImage>
 #include "settings/simulationsettings.h"
+#include <QApplication>
+
 
 
 Canvas::Canvas(QWidget *parent) :
@@ -91,6 +93,15 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
    {
       QPointF mousePosition = event->localPos();
       emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
+   }
+}
+
+void Canvas::mousePressEvent(QMouseEvent *event)
+{
+   if (QApplication::keyboardModifiers() & Qt::ControlModifier)
+   {
+      QPointF mousePosition = event->localPos();
+      emit seedPointAdded(mousePosition);
    }
 }
 

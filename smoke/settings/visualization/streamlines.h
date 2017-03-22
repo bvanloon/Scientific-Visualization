@@ -24,6 +24,8 @@ class Settings::visualization::StreamLines : public QObject
 
       void onClearSeedPoints();
 
+      void onSeedPointAdded(QPointF newSeedPoint);
+
    private slots:
 
    private:
