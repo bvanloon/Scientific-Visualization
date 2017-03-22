@@ -199,30 +199,23 @@ void MainWindow::connectSmokeEngineAndSettings()
 
 void MainWindow::connectSeedEngineAndSettings()
 {
-    AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::seedPoints);
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::seedPoints);
 
-    engine->setColorMap(Settings::visualization::streamLines().colorMap);
-
-    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+   engine->setColorMap(Settings::visualization::streamLines().colorMap);
+   connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
             engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
-    connect(Settings::visualization::streamLines().colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+   connect(Settings::visualization::streamLines().colorMap, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
             engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
 void MainWindow::connectSeedEngineAndStreamLinesTab()
-{
-
-}
+{}
 
 void MainWindow::connectStreamLineEngineAndStreamLinesTab()
-{
-
-}
+{}
 
 void MainWindow::connectStreamLineEngineAndSettings()
-{
-
-}
+{}
 
 void MainWindow::connectSmokeTabAndSettings()
 {
@@ -231,13 +224,12 @@ void MainWindow::connectSmokeTabAndSettings()
 
 void MainWindow::connectStreamLinesTabAndSettings()
 {
-    connect(this->streamLinesTab, SIGNAL(timeStepChanged(double)),
+   connect(this->streamLinesTab, SIGNAL(timeStepChanged(double)),
             &Settings::visualization::streamLines(), SLOT(ontimeStepChanged(double)));
-    connect(this->streamLinesTab, SIGNAL(edgeLengthFactorChanged(double)),
+   connect(this->streamLinesTab, SIGNAL(edgeLengthFactorChanged(double)),
             &Settings::visualization::streamLines(), SLOT(onEdgeLengthFactorChanged(double)));
-    connect(this->streamLinesTab, SIGNAL(clearSeedPoints()),
+   connect(this->streamLinesTab, SIGNAL(clearSeedPoints()),
             &Settings::visualization::streamLines(), SLOT(onClearSeedPoints()));
-
 }
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()
