@@ -152,29 +152,29 @@ QComboBox *ColorMapTab::getVariableSelector() const
 
 void ColorMapTab::on_clampingMinimumFloatBox_valueChanged(double value)
 {
-    double maximum = this->ui->clampingMaximumFloatBox->value();
-    double minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
+   double maximum = this->ui->clampingMaximumFloatBox->value();
+   double minimum = qMin(value, maximum - Settings::defaults::visualization::colormap::clampEpsilon);
 
-    this->ui->clampingMinimumFloatBox->setValue(minimum);
-    emit setClampingRange(minimum, maximum);
+   this->ui->clampingMinimumFloatBox->setValue(minimum);
+   emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::on_clampingMaximumFloatBox_valueChanged(double value)
 {
-    double minimum = this->ui->clampingMinimumFloatBox->value();
-    double maximum = qMax(value, minimum + Settings::defaults::visualization::colormap::clampEpsilon);
+   double minimum = this->ui->clampingMinimumFloatBox->value();
+   double maximum = qMax(value, minimum + Settings::defaults::visualization::colormap::clampEpsilon);
 
-    this->ui->clampingMaximumFloatBox->setValue(maximum);
-    emit setClampingRange(minimum, maximum);
+   this->ui->clampingMaximumFloatBox->setValue(maximum);
+   emit setClampingRange(minimum, maximum);
 }
 
 void ColorMapTab::on_saturationSlider_valueChanged(double value)
 {
-    this->ui->saturationSlider->setValue(value);
-    AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
+   this->ui->saturationSlider->setValue(value);
+   AbstractColorMap *newColormap = ColorMapFactory::get()->createColorMap(
                  static_cast<ColorMapFactory::colorMaps>(this->ui->colormapSelector->currentIndex()),
                  this->ui->numColorsSlider->value(),
                  value, 0.5f);
 
-    emit colorMapChanged(*newColormap);
+   emit colorMapChanged(*newColormap);
 }
