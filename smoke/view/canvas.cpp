@@ -63,9 +63,8 @@ void Canvas::initializeGL()
 
    emit openGlReady();
 
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::smoke)->second);
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::glyphs)->second);
-   connectThisAndEngine(enginemap.find(Settings::engines::EnginesTypes::seedPoints)->second);
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
 }
 
 void Canvas::idleLoop()
@@ -76,17 +75,17 @@ void Canvas::idleLoop()
 
 void Canvas::setSimulation(Simulation *simulation)
 {
-   this->simulation = simulation;
+    this->simulation = simulation;
 }
 
-void Canvas::onGlyphsEngineToggled(bool checked)
+AbstractEngine* Canvas::getEngine(Settings::engines::EnginesTypes engine)
 {
-   activeEngines[Settings::engines::EnginesTypes::glyphs] = checked;
+    return this->enginemap.find(engine)->second;
 }
 
-void Canvas::onSmokeEngineToggled(bool checked)
+void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   activeEngines[Settings::engines::EnginesTypes::smoke] = checked;
+    activeEngines[engine] = checked;
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
