@@ -22,7 +22,9 @@ namespace Settings {
     namespace visualization {
         QStringList getScalarVariableNames();
 
-        QStringList getVectorVariableNames();
+        QStringList getAllVectorVariableNames();
+
+        QStringList getNonDerivedVectorVariableNames();
 
         class ColorMap;
 
@@ -107,8 +109,9 @@ namespace Settings {
                 static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::hedgehog;
                 static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
-        }
 
+            namespace streamlines {}
+        }
         namespace engines {
             static const bool activeEngines[2] = { true, false };
         }

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "settings/settings.h"
+#include "grid/vertex.h"
 
 class Settings::visualization::StreamLines : public QObject
 {
@@ -11,10 +12,17 @@ class Settings::visualization::StreamLines : public QObject
       static const StreamLines& instance();
 
       Settings::visualization::ColorMap *colorMap;
+      double timeStep;
+      double edgeLengthFactor;
 
    signals:
 
    public slots:
+      void ontimeStepChanged(double newTimeStep);
+
+      void onEdgeLengthFactorChanged(double newFactor);
+
+      void onClearSeedPoints();
 
    private slots:
 

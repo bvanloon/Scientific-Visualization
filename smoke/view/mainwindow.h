@@ -53,6 +53,9 @@ private:
 
    void connectSmokeEngineAndSettings();
 
+   void connectStreamLineEngineAndStreamLinesTab();
+   void connectStreamLineEngineAndSettings();
+
    void connectEngineAndSettings(AbstractEngine *currentEngine);
    void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
 
