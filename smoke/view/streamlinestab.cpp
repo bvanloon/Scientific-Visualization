@@ -45,8 +45,3 @@ void StreamLinesTab::on_clearSeedPointsButton_clicked()
 {
    emit clearSeedPoints();
 }
-
-void StreamLinesTab::on_showSeedPointsButton_clicked()
-{
-   qDebug() << "StreamLinesTab::on_showSeedPointsButton_clicked not implemented";
-}
