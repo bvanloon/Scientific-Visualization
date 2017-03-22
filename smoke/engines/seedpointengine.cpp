@@ -25,5 +25,5 @@ void SeedPointEngine::draw(Simulation *simulation)
 {
    int bufferLength = this->updateBuffers(simulation);
 
-   drawWithMode(GL_TRIANGLES, bufferLength);
+   drawWithMode(drawMode, bufferLength);
 }

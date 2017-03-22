@@ -14,6 +14,8 @@ class SeedPointEngine : public AbstractEngine
 
    private:
       int updateBuffers(Simulation *simulation);
+
+      static const int drawMode = GL_TRIANGLES;
 };
 
 #endif // SEEDPOINTENGINE_H
