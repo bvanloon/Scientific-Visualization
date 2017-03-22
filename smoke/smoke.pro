@@ -116,7 +116,7 @@ HEADERS  += main.ih\
     utilities/mesh.h \
     utilities/vector.h \
     glyphs/cone.h \
-    shapes/cone.h
+    shapes/cone.h \
     unused.h \
     utilities/approximation.h \
     settings/visualization/streamlines.h \
