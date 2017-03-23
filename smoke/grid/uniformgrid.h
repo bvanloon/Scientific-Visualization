@@ -50,7 +50,7 @@ class UniformGrid : public Grid
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
-      QRectF computeCoveredArea(QSizeF areaSize, QSizeF padding);
+      QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
 
       int to1Dindex(int x, int y) const;
 
