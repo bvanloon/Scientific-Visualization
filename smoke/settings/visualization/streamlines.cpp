@@ -44,7 +44,23 @@ int Settings::visualization::StreamLines::numberOfSeedPoints()
 
 void Settings::visualization::StreamLines::ontimeStepChanged(double newTimeStep)
 {
+   qDebug() << "Settings::visualization::StreamLines::ontimeStepChanged " << newTimeStep;
    this->timeStep = newTimeStep;
+}
+
+void Settings::visualization::StreamLines::onMaximumTimeChanged(double newMaximumTime)
+{
+   qDebug() << "Settings::visualization::StreamLines::onMaximumTimeChanged " << newMaximumTime;
+}
+
+void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newEdgeLengthFactor)
+{
+   qDebug() << "Settings::visualization::StreamLines::onEdgeLengthFactorChanged " << newEdgeLengthFactor;
+}
+
+void Settings::visualization::StreamLines::onMaximumTotalStreamLineLengthFactorChanged(double newValue)
+{
+   qDebug() << "Settings::visualization::StreamLines::onMaximumTotalStreamLineLengthFactorChanged " << newValue;
 }
 
 void Settings::visualization::StreamLines::onClearSeedPoints()

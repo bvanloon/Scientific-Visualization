@@ -1,5 +1,6 @@
 #include "streamlinestab.h"
 #include "ui_streamlinestab.h"
+#include <limits>
 
 #include "settings/visualizationsettings.h"
 
@@ -37,6 +38,10 @@ void StreamLinesTab::setUiToDefaults()
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
    qDebug() << "Set selectors to correct default values";
 
+   this->ui->maximumTimeSelector->setSpecialValueText("Infinity");
+
+   this->ui->maximumLengthSelector->setSpecialValueText("Infinity");
+
    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
 }
 
@@ -59,19 +64,17 @@ void StreamLinesTab::on_showSeedPoinsCheckBox_clicked(bool checked)
 
 void StreamLinesTab::on_maximumTimeSelector_valueChanged(double value)
 {
-
+   if (value == this->ui->maximumLengthSelector->minimum()) value = std::numeric_limits<double>::infinity();
+   emit maximumTimeChanged(value);
 }
 
 void StreamLinesTab::on_edgeLengthSelector_valueChanged(double value)
 {
-
+   emit edgeLengthFactorChanged(value);
 }
 
-void StreamLinesTab::on_totalLengthSelector_valueChanged(double arg1)
+void StreamLinesTab::on_maximumLengthSelector_valueChanged(double value)
 {
-
+   if (value == this->ui->maximumLengthSelector->minimum()) value = std::numeric_limits<double>::infinity();
+   emit maximumTotalStreamLineLengthFactorChanged(value);
 }
-
-
-
-

@@ -24,6 +24,10 @@ class Settings::visualization::StreamLines : public QObject
    public slots:
       void ontimeStepChanged(double newTimeStep);
 
+      void onMaximumTimeChanged(double newMaximumTime);
+      void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
+      void onMaximumTotalStreamLineLengthFactorChanged(double newValue);
+
       void onClearSeedPoints();
 
       void onSeedPointAdded(QPointF newSeedPoint);

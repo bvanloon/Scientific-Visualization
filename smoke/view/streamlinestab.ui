@@ -70,6 +70,9 @@
             <property name="statusTip">
              <string/>
             </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
@@ -94,7 +97,7 @@
              <string> cell size</string>
             </property>
             <property name="maximum">
-             <double>3.000000000000000</double>
+             <double>10.000000000000000</double>
             </property>
             <property name="singleStep">
              <double>0.010000000000000</double>
@@ -113,22 +116,31 @@
             <property name="toolTip">
              <string>The maximum integration time. </string>
             </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>16777215.000000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="totalLengthLabel">
+           <widget class="QLabel" name="maximumLengthLabel">
             <property name="text">
-             <string>Total Length</string>
+             <string>Maximum lenth</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="totalLengthSelector">
+           <widget class="QDoubleSpinBox" name="maximumLengthSelector">
             <property name="toolTip">
              <string>The maximum total length of a stream line.</string>
             </property>
             <property name="suffix">
              <string> cell size</string>
+            </property>
+            <property name="maximum">
+             <double>16777215.000000000000000</double>
             </property>
            </widget>
           </item>
