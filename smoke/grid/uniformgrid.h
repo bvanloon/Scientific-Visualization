@@ -63,7 +63,7 @@ class UniformGrid : public Grid
 
       class StreamLineBuilder {
          public:
-            StreamLineBuilder(Grid *grid, QVector3D seedPoint,
+            StreamLineBuilder(Grid *grid, QVector3D currentPosition,
                               Vertex::vectorGetter vectorGetter,
 
                               Vertex::scalarGetter textureGetter);
@@ -72,7 +72,6 @@ class UniformGrid : public Grid
 
          private:
             Grid *grid;
-            QVector3D seedPoint;
 
             double timeStep;
             double maximumTime;
@@ -84,6 +83,13 @@ class UniformGrid : public Grid
             Vertex::scalarGetter textureGetter;
 
             streamobject::Line streamLine;
+
+            void build(QVector3D seedPoint);
+            bool terminate(double currentTime);
+            bool isEdgeAllowed(QVector3D origin, QVector3D destination);
+            void addEdge(QVector3D origin);
+            QVector3D interpolate();
+
       };
 };
 
