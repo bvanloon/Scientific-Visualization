@@ -1,7 +1,8 @@
 #include "grid/uniformgrid.h"
 #include "settings/visualizationsettings.h"
 
-UniformGrid::StreamLineBuilder::StreamLineBuilder(Grid *grid, QVector3D seedPoint, Vertex::vectorGetter vectorGetter, Vertex::scalarGetter textureGetter) :
+UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
+                                                  Vertex::vectorGetter vectorGetter, Vertex::scalarGetter textureGetter) :
    grid(grid),
    vectorGetter(vectorGetter),
    textureGetter(textureGetter)
@@ -25,18 +26,12 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
    double time = 0.0;
    QVector3D next, current = seedPoint;
 
-   //Current isn't necessarily allowed....
-   addEdge(current);
+   bool succes = tryAddingSeedPoint(current);
 
-   while (!terminate(time))
+   while (!terminate(time) && succes)
    {
       next = interpolate(current);
-
-      if (isEdgeAllowed(current, next))
-      {
-         addEdge(next);
-      }
-      else break;
+      succes = tryAddingEdge(current, next);
 
       current = next;
       time += this->timeStep;
@@ -50,18 +45,42 @@ bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
 {
-   // - Streamline goes out of the computational domain
+   // - Streamline goes out of the computational domain: isVertexAllowed();
    // - streamLineLength > maximumLength
 
    return true;
 }
 
-void UniformGrid::StreamLineBuilder::addEdge(QVector3D position)
+bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 {
+   //Is vertex within the computational domain?
+   return true;
+}
+
+bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
+{
+   if (!this->isEdgeAllowed(previousPosition, position)) return false;
+
    //Find texture coordinate for destination
+//   Cell *cell = this->grid->findCellContaining(position);
    float textureCoordinate = 0.0;
 
    this->streamLine.addVertex(position, textureCoordinate);
+
+   return true;
+}
+
+bool UniformGrid::StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
+{
+   if (!this->isVertexAllowed(seedPoint)) return false;
+
+   //Find texture coordinate for seedpoint
+   Cell *cell = this->grid->findCellContaining(seedPoint);
+   float textureCoordinate = 0.0;
+
+   this->streamLine.addVertex(seedPoint, textureCoordinate);
+
+   return true;
 }
 
 QVector3D UniformGrid::StreamLineBuilder::interpolate(QVector3D previous)
