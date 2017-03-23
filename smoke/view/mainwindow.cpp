@@ -46,6 +46,9 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::seedPoints,
                           this->streamLinesTab->getColorMapWidget(),
                           Settings::visualization::streamLines().colorMap);
+   connectAbstractEngine(Settings::engines::streamLines,
+                         this->streamLinesTab->getColorMapWidget(),
+                         Settings::visualization::streamLines().colorMap);
 
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
