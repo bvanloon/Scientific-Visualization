@@ -111,7 +111,7 @@ namespace Settings {
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
                 static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
-                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::cone;
+                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::triangles;
                 static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
 
@@ -121,7 +121,7 @@ namespace Settings {
             }
         }
         namespace engines {
-            static const bool activeEngines[4] = { false, true, true, false };
+            static const bool activeEngines[4] = { false, false, false, true };
         }
     }
 }

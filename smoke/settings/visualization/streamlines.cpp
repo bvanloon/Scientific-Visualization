@@ -18,15 +18,6 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    vectorField = Vertex::getVectorGetter(Settings::sim::Vector::fluidVelocity);
 
    connectToOtherSettings();
-
-   qDebug() << "Settings::visualization::StreamLines::StreamLines: maximumTime is set to 1.0, should be inf by default.";
-   maximumTime = 1.0;
-
-   qDebug() << "Settings::visualization::StreamLines::StreamLines: some seedpoints are initialized for testing purposes";
-   this->seedPoints.append(QPointF(20.0, 20.0));
-   this->seedPoints.append(QPointF(0, 0));
-   this->seedPoints.append(QPointF(200.0, 110.0));
-   this->seedPoints.append(QPointF(40.0, 300.0));
 }
 
 double Settings::visualization::StreamLines::computeEdgeLength(double factor, double cellSize)
