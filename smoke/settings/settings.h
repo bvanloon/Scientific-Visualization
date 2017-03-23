@@ -75,8 +75,8 @@ namespace Settings {
         enum EnginesTypes
         {
            glyphs,
-           smoke,
            seedPoints,
+           smoke,
            numberOfEngines
         };
     }
