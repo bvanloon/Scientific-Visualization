@@ -9,9 +9,8 @@
 #endif
 #include "abstractengine.h"
 #include "unused.h"
-
-
 #include "glyphs/glyphsfactory.h"
+
 class VectorEngine : public AbstractEngine {
    Q_OBJECT
 
