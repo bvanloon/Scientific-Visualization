@@ -96,9 +96,11 @@ class UniformGrid : public Grid
             bool terminate(double currentTime);
 
             bool isEdgeAllowed(QVector3D origin, QVector3D destination);
+
             bool isVertexAllowed(QVector3D vertex);
 
             bool tryAddingEdge(QVector3D previousPosition, QVector3D position);
+
             bool tryAddingSeedPoint(QVector3D seedPoint);
 
 
