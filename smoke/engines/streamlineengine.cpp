@@ -1,31 +1,24 @@
 #include "streamlineengine.h"
+#include "utilities/gpudata.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::noLight),
    grid(simulationGrid)
 {}
 
-int StreamLineEngine::updateBuffers(Simulation *simulation)
+int StreamLineEngine::updateBuffers()
 {
-   Triangulation triangulation = simulation->getGridTriangulation();
+    GPUData data;
+    data.addElement(QVector3D(0.0, 0.0, 0.0), QVector3D(0.0, 0.0, 1.0), 0.0);
+    data.addElement(QVector3D(200.0, 200.0, 0.0), QVector3D(0.0, 0.0, 1.0), 0.01);
 
-   QVector<QVector3D> triangles = triangulation.getVertexPositions();
-
-   QVector<float> textureCoordinates = simulation->getTexCoord(
-                Settings::visualization::streamLines().colorMap->textureGetter,
-                triangulation);
-
-   updateBuffer(this->vertexBuffer, triangles);
-
-   //Fill normal buffer with triangles to make sure it is not empty.
-   updateBuffer(this->normalBuffer, triangles);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   return triangles.length();
+    this->AbstractEngine::updateBuffers(data);
+    return data.numElements();
 }
 
-void StreamLineEngine::draw(Simulation *simulation)
+void StreamLineEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->updateBuffers(simulation);
+   int bufferLength = this->updateBuffers();
 
-   drawWithMode(GL_TRIANGLES, bufferLength);
+   drawWithMode(this->drawMode, bufferLength);
 }
