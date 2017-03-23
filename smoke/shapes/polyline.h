@@ -17,7 +17,7 @@ namespace shapes {
 
           double getLength() const;
 
-    protected:
+       protected:
           QList<QVector3D> vertices;
           double length;
 
