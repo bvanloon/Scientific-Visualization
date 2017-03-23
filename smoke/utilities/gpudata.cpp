@@ -19,27 +19,9 @@ int GPUData::numElements()
 
 void GPUData::addElement(QVector3D vertex, QVector3D normal, float textureCoordinate)
 {
-   addElement(vertex, normal);
-   this->textureCoordinates.append(textureCoordinate);
-}
-
-void GPUData::addElement(QVector3D vertex, QVector3D normal)
-{
    this->vertices.append(vertex);
    this->normals.append(normal);
-}
-
-void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal)
-{
-   QVector<QVector3D> normals = QVector<QVector3D>(vertices.size(), normal);
-   addElements(vertices, normals);
-}
-
-void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals)
-{
-   assert(vertices.length() == normals.length());
-   this->vertices.append(vertices);
-   this->normals.append(normals);
+   this->textureCoordinates.append(textureCoordinate);
 }
 
 void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate)
@@ -84,12 +66,4 @@ QVector<float> GPUData::getTextureCoordinates() const
 QVector<QVector3D> GPUData::getNormals() const
 {
    return this->normals;
-}
-
-void GPUData::setTextureCoordinates(const QVector<float>& value)
-{
-   assert(value.length() == this->normals.length());
-   assert(value.length() == this->vertices.length());
-
-   this->textureCoordinates = value;
 }
