@@ -37,6 +37,7 @@ void StreamLinesTab::setUiToDefaults()
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
 
    this->ui->lengthFactorSelector->setValue(Settings::visualization::streamLines().edgeLengthFactor);
+   qDebug() << "Set selectors to correct default values";
 
    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
 }
