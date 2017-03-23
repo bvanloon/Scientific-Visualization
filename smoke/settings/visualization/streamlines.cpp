@@ -12,6 +12,8 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    totalLengthFactor(Settings::defaults::visualization::streamlines::totalLengthFactor)
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
+   this->edgeLength = computeEdgeLength(edgeLengthFactor, Settings::simulation().cellSize.width());
+   this->totalLength = computeEdgeLength(totalLengthFactor, Settings::simulation().cellSize.width());
    connectToOtherSettings();
 }
 
@@ -105,5 +107,5 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
 void Settings::visualization::StreamLines::onCellSizeChanged(QSizeF currentCellSize)
 {
    this->edgeLength = computeEdgeLength(this->edgeLengthFactor, currentCellSize.width());
-   this->maximumTotalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
+   this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
 }

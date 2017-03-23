@@ -18,7 +18,7 @@ class Settings::visualization::StreamLines : public QObject
       double maximumTime;
 
       double edgeLength;
-      double maximumTotalLength;
+      double totalLength;
 
       QList<QPointF> seedPoints;
 
