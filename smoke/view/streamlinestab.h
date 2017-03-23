@@ -35,8 +35,6 @@ class StreamLinesTab : public QWidget
 
       void on_timeStepSelector_valueChanged(double arg1);
 
-      void on_lengthFactorSelector_valueChanged(double arg1);
-
       void on_clearSeedPointsButton_clicked();
 
       void on_showSeedPoinsCheckBox_clicked(bool checked);

@@ -66,15 +66,15 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="lengthFactorLabel">
+          <item row="2" column="0">
+           <widget class="QLabel" name="edgeLengthLabel">
             <property name="text">
-             <string>Length Factor</string>
+             <string>Edge length</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="lengthFactorSelector">
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="edgeLengthSelector">
             <property name="minimumSize">
              <size>
               <width>0</width>

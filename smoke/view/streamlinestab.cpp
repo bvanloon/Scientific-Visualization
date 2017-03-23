@@ -35,8 +35,6 @@ void StreamLinesTab::setUiToDefaults()
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
 
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
-
-   this->ui->lengthFactorSelector->setValue(Settings::visualization::streamLines().edgeLengthFactor);
    qDebug() << "Set selectors to correct default values";
 
    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
@@ -45,11 +43,6 @@ void StreamLinesTab::setUiToDefaults()
 void StreamLinesTab::on_timeStepSelector_valueChanged(double value)
 {
    emit timeStepChanged(value);
-}
-
-void StreamLinesTab::on_lengthFactorSelector_valueChanged(double value)
-{
-   emit edgeLengthFactorChanged(value);
 }
 
 void StreamLinesTab::on_clearSeedPointsButton_clicked()
