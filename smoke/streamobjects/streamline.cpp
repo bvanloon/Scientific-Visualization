@@ -12,6 +12,10 @@ streamobject::Line::Line(QPointF seedPoint, float textureCoordinate) :
    this->textureCoordinates.append(textureCoordinate);
 }
 
+streamobject::Line::Line():
+    shapes::PolyLine()
+{}
+
 GPUData streamobject::Line::toGPUData() const
 {
    GPUData data;

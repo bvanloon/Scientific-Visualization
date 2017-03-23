@@ -14,6 +14,7 @@ namespace streamobject {
        public:
           Line(QVector3D seedPoint, float textureCoordinate);
           Line(QPointF seedPoint, float textureCoordinate);
+          Line();
 
           void addVertex(QVector3D vertex, float textureCoordinate);
 

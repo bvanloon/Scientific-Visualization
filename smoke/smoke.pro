@@ -75,7 +75,8 @@ SOURCES += main.cpp\
     engines/streamlineengine.cpp \
     shapes/polyline.cpp \
     utilities/gpudata.cpp \
-    streamobjects/streamline.cpp
+    streamobjects/streamline.cpp \
+    grid/utilities/streamlinebuilder.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \

@@ -60,6 +60,31 @@ class UniformGrid : public Grid
       static void createCells(UniformGrid *grid);
 
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
+
+      class StreamLineBuilder {
+         public:
+            StreamLineBuilder(Grid *grid, QVector3D seedPoint,
+                              Vertex::vectorGetter vectorGetter,
+
+                              Vertex::scalarGetter textureGetter);
+
+            streamobject::Line getStreamLine();
+
+         private:
+            Grid *grid;
+            QVector3D seedPoint;
+
+            double timeStep;
+            double maximumTime;
+
+            double edgeLength;
+            double maximumTotalLength;
+
+            Vertex::vectorGetter vectorGetter;
+            Vertex::scalarGetter textureGetter;
+
+            streamobject::Line streamLine;
+      };
 };
 
 #endif // UNIFORMGRID_H
