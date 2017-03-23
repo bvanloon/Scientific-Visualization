@@ -14,6 +14,7 @@ namespace shapes {
           PolyLine(QPointF start);
 
           void addVertex(QVector3D vertex);
+
           void addVertex(QPointF vertex);
 
        protected:

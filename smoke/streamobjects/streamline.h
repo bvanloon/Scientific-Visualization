@@ -16,6 +16,7 @@ namespace streamobject {
           Line(QPointF seedPoint, float textureCoordinate);
 
           void addVertex(QVector3D vertex, float textureCoordinate);
+
           void addVertex(QPointF vertex, float textureCoordinate);
 
           GPUData toGPUData() const;
