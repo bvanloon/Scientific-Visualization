@@ -34,10 +34,9 @@ class MainWindow : public QMainWindow
 
       Canvas *canvas;
       Simulation *simulation;
+
       SimulationSettingPane *simulationTab;
-
-      ColorMapTab *smokeColorMapTab;
-
+      ColorMapTab *smokeTab;
       GlyphsTab *glyphsTab;
       StreamLinesTab *streamLinesTab;
 
@@ -54,29 +53,11 @@ class MainWindow : public QMainWindow
 
 
       //Engines
-      void connectVectorEngineAndGlyphTab();
+      void connectGlyphTabAndVectorEngine();
 
-      void connectVectorEngineAndSettings();
+      void connectGlyphEngineAndSettings();
 
-
-      void connectSmokeEngineAndSettings();
-
-
-      void connectSeedEngineAndSettings();
-
-      void connectSeedEngineAndStreamLinesTab();
-
-
-      void connectStreamLineEngineAndStreamLinesTab();
-
-      void connectStreamLineEngineAndSettings();
-
-
-      void connectEngineAndSettings(AbstractEngine *currentEngine);
-
-      void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
-
-      void connectAbstractEngine(AbstractEngine *engine,
+      void connectAbstractEngine(Settings::engines::EnginesTypes engine,
                                        ColorMapTab *colormapTab,
                                        Settings::visualization::ColorMap* colorMapSetings);
 
@@ -86,8 +67,6 @@ class MainWindow : public QMainWindow
       void connectSimulationTabAndSimulation();
 
       void connectGlyphTabAndSettings();
-
-      void connectSmokeTabAndSettings();
 
       void connectStreamLinesTabAndSettings();
 
