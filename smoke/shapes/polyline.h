@@ -15,7 +15,9 @@ namespace shapes {
 
           void addVertex(QVector3D vertex);
 
-       protected:
+          double getLength() const;
+
+    protected:
           QList<QVector3D> vertices;
           double length;
 

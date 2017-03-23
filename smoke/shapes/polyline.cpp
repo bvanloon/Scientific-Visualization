@@ -18,6 +18,11 @@ void shapes::PolyLine::addVertex(QVector3D vertex)
    this->vertices.append(vertex);
 }
 
+double PolyLine::getLength() const
+{
+    return length;
+}
+
 void shapes::PolyLine::updateLength(QVector3D newVertex)
 {
    if (this->vertices.length() < 2) return;

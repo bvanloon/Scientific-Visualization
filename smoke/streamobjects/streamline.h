@@ -18,10 +18,11 @@ namespace streamobject {
 
           void addVertex(QVector3D vertex, float textureCoordinate);
 
-
           GPUData toGPUData() const;
 
           int numVertices() const;
+
+          int getLength() const;
 
        private:
           QList<float> textureCoordinates;
