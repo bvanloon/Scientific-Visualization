@@ -5,11 +5,8 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    grid(simulationGrid)
 {}
 
-int StreamLineEngine::updateBuffers(Simulation* simulation)
+int StreamLineEngine::updateBuffers(Simulation *simulation)
 {
-   qDebug() << "StreamLineEngine::updateBuffers";
-
-
    Triangulation triangulation = simulation->getGridTriangulation();
 
    QVector<QVector3D> triangles = triangulation.getVertexPositions();
@@ -28,7 +25,6 @@ int StreamLineEngine::updateBuffers(Simulation* simulation)
 
 void StreamLineEngine::draw(Simulation *simulation)
 {
-   qDebug() << "StreamLineEngine::draw";
    int bufferLength = this->updateBuffers(simulation);
 
    drawWithMode(GL_TRIANGLES, bufferLength);
