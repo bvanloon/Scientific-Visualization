@@ -1,5 +1,6 @@
 #include "streamlinestab.h"
 #include "ui_streamlinestab.h"
+#include <limits>
 
 #include "settings/visualizationsettings.h"
 
@@ -18,14 +19,15 @@ StreamLinesTab::~StreamLinesTab()
 
 ColorMapTab *StreamLinesTab::getColorMapWidget()
 {
-    return ui->colorMapWidget;
+   return ui->colorMapWidget;
 }
 
 void StreamLinesTab::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-    if(engine == Settings::engines::EnginesTypes::seedPoints){
-        this->ui->showSeedPoinsCheckBox->setChecked(checked);
-    }
+   if (engine == Settings::engines::EnginesTypes::seedPoints)
+   {
+      this->ui->showSeedPoinsCheckBox->setChecked(checked);
+   }
 }
 
 void StreamLinesTab::setUiToDefaults()
@@ -35,19 +37,28 @@ void StreamLinesTab::setUiToDefaults()
 
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
 
-   this->ui->lengthFactorSelector->setValue(Settings::visualization::streamLines().edgeLengthFactor);
+   this->ui->maximumTimeSelector->setSpecialValueText("Infinity");
+   this->setSpinBoxWithSpecialValueToDefault(this->ui->maximumTimeSelector,
+                                              Settings::visualization::streamLines().maximumTime);
+
+   this->ui->maximumLengthSelector->setSpecialValueText("Infinity");
+   this->setSpinBoxWithSpecialValueToDefault(this->ui->maximumLengthSelector,
+                                              Settings::defaults::visualization::streamlines::totalLengthFactor);
+
+   this->ui->edgeLengthSelector->setValue(Settings::defaults::visualization::streamlines::edgeLengthFactor);
 
    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
+}
+
+void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox* spinBox, double value)
+{
+   if (value == std::numeric_limits<double>::infinity()) value = spinBox->minimum();
+   spinBox->setValue(value);
 }
 
 void StreamLinesTab::on_timeStepSelector_valueChanged(double value)
 {
    emit timeStepChanged(value);
-}
-
-void StreamLinesTab::on_lengthFactorSelector_valueChanged(double value)
-{
-   emit edgeLengthFactorChanged(value);
 }
 
 void StreamLinesTab::on_clearSeedPointsButton_clicked()
@@ -58,5 +69,23 @@ void StreamLinesTab::on_clearSeedPointsButton_clicked()
 void StreamLinesTab::on_showSeedPoinsCheckBox_clicked(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
-   if(checked) emit engineToggled(Settings::engines::EnginesTypes::streamLines, true);
+
+   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamLines, true);
+}
+
+void StreamLinesTab::on_maximumTimeSelector_valueChanged(double value)
+{
+   if (value == this->ui->maximumLengthSelector->minimum()) value = std::numeric_limits<double>::infinity();
+   emit maximumTimeChanged(value);
+}
+
+void StreamLinesTab::on_edgeLengthSelector_valueChanged(double value)
+{
+   emit edgeLengthFactorChanged(value);
+}
+
+void StreamLinesTab::on_maximumLengthSelector_valueChanged(double value)
+{
+   if (value == this->ui->maximumLengthSelector->minimum()) value = std::numeric_limits<double>::infinity();
+   emit maximumTotalLengthFactorChanged(value);
 }

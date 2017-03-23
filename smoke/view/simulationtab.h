@@ -29,7 +29,7 @@ class SimulationSettingPane : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
-public slots:
+   public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
    private slots:
@@ -49,7 +49,7 @@ public slots:
 
       void on_streamLinesCheckBox_clicked(bool checked);
 
-private:
+   private:
       Ui::SimulationSettingPane *ui;
 
       void setUItoDefaults();

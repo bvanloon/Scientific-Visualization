@@ -15,7 +15,11 @@ class Settings::visualization::StreamLines : public QObject
 
       Settings::visualization::ColorMap *colorMap;
       double timeStep;
-      double edgeLengthFactor;
+      double maximumTime;
+
+      double edgeLength;
+      double totalLength;
+
       QList<QPointF> seedPoints;
 
       int numberOfSeedPoints();
@@ -25,7 +29,11 @@ class Settings::visualization::StreamLines : public QObject
    public slots:
       void ontimeStepChanged(double newTimeStep);
 
-      void onEdgeLengthFactorChanged(double newFactor);
+      void onMaximumTimeChanged(double newMaximumTime);
+
+      void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
+
+      void onMaximumTotalLengthFactorChanged(double newValue);
 
       void onClearSeedPoints();
 
@@ -33,12 +41,20 @@ class Settings::visualization::StreamLines : public QObject
 
       void onWindowResized(QSizeF oldSize, QSizeF newSize);
 
+      void onCellSizeChanged(QSizeF currentCellSize);
+
    private slots:
 
    private:
       explicit StreamLines(QObject *parent = 0);
       StreamLines(StreamLines const&) = delete;
       void operator=(StreamLines const&) = delete;
+
+      double computeEdgeLength(double factor, double cellSize);
+      double computeMaximumTotalLength(double factor, double cellSize);
+
+      double edgeLengthFactor;
+      double totalLengthFactor;
 
       void connectToOtherSettings();
 

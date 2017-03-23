@@ -52,7 +52,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="timeStepLabel">
             <property name="text">
-             <string>Time Step</string>
+             <string>Time step</string>
             </property>
            </widget>
           </item>
@@ -64,28 +64,83 @@
               <height>24</height>
              </size>
             </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="lengthFactorLabel">
-            <property name="text">
-             <string>Length Factor</string>
+            <property name="toolTip">
+             <string>The integration time.</string>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="decimals">
+             <number>1</number>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="lengthFactorSelector">
+          <item row="2" column="0">
+           <widget class="QLabel" name="edgeLengthLabel">
+            <property name="text">
+             <string>Edge length</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="edgeLengthSelector">
             <property name="minimumSize">
              <size>
               <width>0</width>
               <height>24</height>
              </size>
             </property>
+            <property name="toolTip">
+             <string>The length of on piece of the stream line.</string>
+            </property>
+            <property name="suffix">
+             <string> cell size</string>
+            </property>
             <property name="maximum">
-             <double>1.000000000000000</double>
+             <double>10.000000000000000</double>
             </property>
             <property name="singleStep">
              <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="maximumTimeLabel">
+            <property name="text">
+             <string>Maximum time</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDoubleSpinBox" name="maximumTimeSelector">
+            <property name="toolTip">
+             <string>The maximum integration time. </string>
+            </property>
+            <property name="decimals">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <double>16777215.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="maximumLengthLabel">
+            <property name="text">
+             <string>Maximum lenth</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDoubleSpinBox" name="maximumLengthSelector">
+            <property name="toolTip">
+             <string>The maximum total length of a stream line.</string>
+            </property>
+            <property name="suffix">
+             <string> cell size</string>
+            </property>
+            <property name="maximum">
+             <double>16777215.000000000000000</double>
             </property>
            </widget>
           </item>
@@ -105,7 +160,7 @@
       <item>
        <widget class="QLabel" name="seedPointsExplanationLabel">
         <property name="text">
-         <string>Add seed points by cmd + click or ctrl + click.</string>
+         <string>Add seed points by cmd + click (OS X) or ctrl + click (Windows).</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

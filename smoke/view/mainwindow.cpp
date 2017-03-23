@@ -4,6 +4,7 @@
 #include "settings/settings.h"
 #include "settings/simulationsettings.h"
 #include "settings/canvassettings.h"
+#include "settings/visualizationsettings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 
@@ -52,8 +53,6 @@ void MainWindow::onOpenGLReady()
 
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
-
-   connectStreamLinesTabAndSettings();
 }
 
 void MainWindow::setUpConnections()
@@ -188,8 +187,12 @@ void MainWindow::connectStreamLinesTabAndSettings()
 {
    connect(this->streamLinesTab, SIGNAL(timeStepChanged(double)),
             &Settings::visualization::streamLines(), SLOT(ontimeStepChanged(double)));
+   connect(this->streamLinesTab, SIGNAL(maximumTimeChanged(double)),
+            &Settings::visualization::streamLines(), SLOT(onMaximumTimeChanged(double)));
    connect(this->streamLinesTab, SIGNAL(edgeLengthFactorChanged(double)),
             &Settings::visualization::streamLines(), SLOT(onEdgeLengthFactorChanged(double)));
+   connect(this->streamLinesTab, SIGNAL(maximumTotalLengthFactorChanged(double)),
+            &Settings::visualization::streamLines(), SLOT(onMaximumTotalLengthFactorChanged(double)));
    connect(this->streamLinesTab, SIGNAL(clearSeedPoints()),
            &Settings::visualization::streamLines(), SLOT(onClearSeedPoints()));
 }

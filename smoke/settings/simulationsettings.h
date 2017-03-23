@@ -32,6 +32,8 @@ class Settings::Simulation : public QObject
 
       void recomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
+      void cellSizeChanged(QSizeF cellSize);
+
    public slots:
       void onDimensionChanged(int newDimension);
 

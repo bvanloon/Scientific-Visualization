@@ -3,6 +3,7 @@
 
 #include "colormaps/colormapfactory.h"
 #include "QSize"
+#include <limits>
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -114,7 +115,10 @@ namespace Settings {
                 static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
 
-            namespace streamlines {}
+            namespace streamlines {
+                static const double edgeLengthFactor = 0.33;
+                static const double totalLengthFactor = std::numeric_limits<double>::infinity();
+            }
         }
         namespace engines {
             static const bool activeEngines[4] = { false, false, false, true };
