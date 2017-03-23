@@ -3,6 +3,7 @@
 
 #include <QVector3D>
 #include <QList>
+#include <QPointF>
 #include "utilities/gpudata.h"
 
 namespace shapes {
@@ -10,8 +11,10 @@ namespace shapes {
     {
        public:
           PolyLine(QVector3D start);
+          PolyLine(QPointF start);
 
           void addVertex(QVector3D vertex);
+          void addVertex(QPointF vertex);
 
           GPUData toGPUData() const;
 
