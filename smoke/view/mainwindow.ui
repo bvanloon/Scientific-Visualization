@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1104</width>
-    <height>524</height>
+    <height>618</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -76,7 +76,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideMiddle</enum>
@@ -91,7 +91,7 @@
       </widget>
       <widget class="ColorMapTab" name="smokeColormapTab">
        <attribute name="title">
-        <string>Smoke Color Map</string>
+        <string>Smoke</string>
        </attribute>
       </widget>
       <widget class="GlyphsTab" name="glyphsTab">
