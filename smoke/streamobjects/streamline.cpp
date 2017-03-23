@@ -1,4 +1,7 @@
 #include "streamline.h"
+#include <limits>
+
+const double streamobject::Line::minimalEdgeSize = std::numeric_limits<double>::min();
 
 streamobject::Line::Line(QVector3D seedPoint, float textureCoordinate) :
    shapes::PolyLine(seedPoint)
@@ -28,16 +31,26 @@ GPUData streamobject::Line::toGPUData() const
 
 int streamobject::Line::numVertices() const
 {
-    return this->vertices.length();
+   return this->vertices.length();
 }
 
 int streamobject::Line::getLength() const
 {
-    return shapes::PolyLine::getLength();
+   return shapes::PolyLine::getLength();
+}
+
+bool streamobject::Line::isEdgeAllowed(QVector3D vertex)
+{
+   if (this->vertices.isEmpty()) return true;
+
+   QVector3D newEdge = vertex - this->vertices.last();
+   return newEdge.length() > minimalEdgeSize;
 }
 
 void streamobject::Line::addVertex(QVector3D vertex, float textureCoordinate)
 {
+   if (!isEdgeAllowed(vertex)) return;
+
    shapes::PolyLine::addVertex(vertex);
    this->textureCoordinates.append(textureCoordinate);
 }

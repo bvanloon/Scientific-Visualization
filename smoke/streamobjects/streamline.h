@@ -26,6 +26,9 @@ namespace streamobject {
 
        private:
           QList<float> textureCoordinates;
+          bool isEdgeAllowed(QVector3D vertex);
+
+          static const double minimalEdgeSize;
     };
 }
 
