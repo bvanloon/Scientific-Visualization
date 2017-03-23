@@ -21,7 +21,8 @@ GPUData StreamLineEngine::buildStreamLines()
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
-      data.extend(buildStreamLine(seedpoint));
+      GPUData streamLine = buildStreamLine(seedpoint);
+      data.extend(streamLine);
    }
    return data;
 }
