@@ -6,29 +6,41 @@
 
 class GPUData
 {
-public:
-    GPUData();
+   public:
+      GPUData();
 
-    void extend(GPUData data);
+      void extend(GPUData data);
 
-    int numElements();
+      int numElements();
 
-    void addElement(QVector3D vertex, QVector3D normal, float textureCoordinate);
-    void addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate);
-    void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate);
-    void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates);
-    void addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates);
+      void addElement(QVector3D vertex, QVector3D normal, float textureCoordinate);
 
-    QVector<QVector3D> getVertices() const;
+      void addElement(QVector3D vertex, QVector3D normal);
 
-    QVector<float> getTextureCoordinates() const;
+      void addElements(QVector<QVector3D> vertices, QVector3D normal);
 
-    QVector<QVector3D> getNormals() const;
+      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals);
 
-private:
-    QVector<QVector3D> vertices;
-    QVector<float> textureCoordinates;
-    QVector<QVector3D> normals;
+      void addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate);
+
+      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate);
+
+      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates);
+
+      void addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates);
+
+      QVector<QVector3D> getVertices() const;
+
+      QVector<float> getTextureCoordinates() const;
+
+      QVector<QVector3D> getNormals() const;
+
+      void setTextureCoordinates(const QVector<float>& value);
+
+   private:
+      QVector<QVector3D> vertices;
+      QVector<float> textureCoordinates;
+      QVector<QVector3D> normals;
 };
 
 #endif // GPUDATA_H
