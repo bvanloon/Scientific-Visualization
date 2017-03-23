@@ -53,7 +53,7 @@ class MainWindow : public QMainWindow
 
 
       //Engines
-      void connectGlyphTabAndVectorEngine();
+      void connectGlyphEngineAndGlyphTab();
 
       void connectGlyphEngineAndSettings();
 

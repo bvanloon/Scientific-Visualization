@@ -48,7 +48,7 @@ void MainWindow::onOpenGLReady()
                           Settings::visualization::streamLines().colorMap);
 
    connectGlyphEngineAndSettings();
-   connectGlyphTabAndVectorEngine();
+   connectGlyphEngineAndGlyphTab();
 
    connectStreamLinesTabAndSettings();
 }
@@ -163,7 +163,7 @@ void MainWindow::connectAbstractEngine(Settings::engines::EnginesTypes engineTyp
             engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
-void MainWindow::connectGlyphTabAndVectorEngine()
+void MainWindow::connectGlyphEngineAndGlyphTab()
 {
    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
             this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
