@@ -53,7 +53,9 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
 
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 {
-    return this->grid->inGridArea(vertex);
+   return this->grid->inGridArea(vertex);
+}
+
 void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
 {
    float textureCoordinate = this->computeTextureCoordiante(position);
