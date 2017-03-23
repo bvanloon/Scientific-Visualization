@@ -1,5 +1,6 @@
 #include "gpudata.h"
 #include <assert.h>
+#include <QDebug>
 
 GPUData::GPUData()
 {}
@@ -56,7 +57,9 @@ void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normal
 
 void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates)
 {
-   assert(this->vertices.length() == this->normals.length() == this->textureCoordinates.length());
+   assert(this->vertices.length() == this->normals.length());
+   assert(this->normals.length() == this->textureCoordinates.length());
+
    this->vertices.append(vertices);
    this->normals.append(normals);
    this->textureCoordinates.append(textureCoordinates);
@@ -85,6 +88,8 @@ QVector<QVector3D> GPUData::getNormals() const
 
 void GPUData::setTextureCoordinates(const QVector<float>& value)
 {
-   assert(value.length() == this->normals.length() == this->vertices.length());
+   assert(value.length() == this->normals.length());
+   assert(value.length() == this->vertices.length());
+
    this->textureCoordinates = value;
 }
