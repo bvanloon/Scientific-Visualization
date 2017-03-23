@@ -15,7 +15,6 @@ class Settings::visualization::StreamLines : public QObject
 
       Settings::visualization::ColorMap *colorMap;
       double timeStep;
-      double edgeLengthFactor;
       QList<QPointF> seedPoints;
 
       int numberOfSeedPoints();
@@ -24,8 +23,6 @@ class Settings::visualization::StreamLines : public QObject
 
    public slots:
       void ontimeStepChanged(double newTimeStep);
-
-      void onEdgeLengthFactorChanged(double newFactor);
 
       void onClearSeedPoints();
 

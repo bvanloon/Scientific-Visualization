@@ -5,8 +5,7 @@
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   timeStep(1.0),
-   edgeLengthFactor(0.5)
+   timeStep(1.0)
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
    connectToOtherSettings();
@@ -46,11 +45,6 @@ int Settings::visualization::StreamLines::numberOfSeedPoints()
 void Settings::visualization::StreamLines::ontimeStepChanged(double newTimeStep)
 {
    this->timeStep = newTimeStep;
-}
-
-void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newFactor)
-{
-   this->edgeLengthFactor = newFactor;
 }
 
 void Settings::visualization::StreamLines::onClearSeedPoints()

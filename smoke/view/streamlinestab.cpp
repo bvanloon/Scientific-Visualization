@@ -56,3 +56,22 @@ void StreamLinesTab::on_showSeedPoinsCheckBox_clicked(bool checked)
 
    if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamLines, true);
 }
+
+void StreamLinesTab::on_maximumTimeSelector_valueChanged(double value)
+{
+
+}
+
+void StreamLinesTab::on_edgeLengthSelector_valueChanged(double value)
+{
+
+}
+
+void StreamLinesTab::on_totalLengthSelector_valueChanged(double arg1)
+{
+
+}
+
+
+
+

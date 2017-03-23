@@ -25,8 +25,6 @@ class StreamLinesTab : public QWidget
    signals:
       void timeStepChanged(double newTimeStep);
 
-      void edgeLengthFactorChanged(double newFactor);
-
       void clearSeedPoints();
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
@@ -39,7 +37,13 @@ class StreamLinesTab : public QWidget
 
       void on_showSeedPoinsCheckBox_clicked(bool checked);
 
-   private:
+      void on_maximumTimeSelector_valueChanged(double value);
+
+      void on_edgeLengthSelector_valueChanged(double value);
+
+      void on_totalLengthSelector_valueChanged(double arg1);
+
+private:
       Ui::StreamLinesTab *ui;
 
       void setUiToDefaults();

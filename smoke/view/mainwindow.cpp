@@ -52,8 +52,6 @@ void MainWindow::onOpenGLReady()
 
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
-
-   connectStreamLinesTabAndSettings();
 }
 
 void MainWindow::setUpConnections()
@@ -188,8 +186,6 @@ void MainWindow::connectStreamLinesTabAndSettings()
 {
    connect(this->streamLinesTab, SIGNAL(timeStepChanged(double)),
             &Settings::visualization::streamLines(), SLOT(ontimeStepChanged(double)));
-   connect(this->streamLinesTab, SIGNAL(edgeLengthFactorChanged(double)),
-            &Settings::visualization::streamLines(), SLOT(onEdgeLengthFactorChanged(double)));
    connect(this->streamLinesTab, SIGNAL(clearSeedPoints()),
            &Settings::visualization::streamLines(), SLOT(onClearSeedPoints()));
 }
