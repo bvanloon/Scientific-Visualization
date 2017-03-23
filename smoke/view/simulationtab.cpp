@@ -35,7 +35,9 @@ void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engi
       break;
 
    case Settings::engines::EnginesTypes::seedPoints:
-   //Fall through
+      //Do nothing
+      break;
+
    case Settings::engines::EnginesTypes::numberOfEngines:
       qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum here.";
       break;
