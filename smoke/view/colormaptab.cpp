@@ -153,6 +153,16 @@ QComboBox *ColorMapTab::getVariableSelector() const
    return ui->variableSelector;
 }
 
+ColorMapTab *ColorMapTab::getColorMapWidget()
+{
+   return this;
+}
+
+const ColorMapTab *ColorMapTab::getColorMapWidget() const
+{
+   return this;
+}
+
 void ColorMapTab::on_clampingMinimumFloatBox_valueChanged(double value)
 {
    double maximum = this->ui->clampingMaximumFloatBox->value();
