@@ -7,7 +7,9 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    timeStep(1.0),
-   maximumTime(std::numeric_limits<double>::infinity())
+   maximumTime(std::numeric_limits<double>::infinity()),
+   edgeLengthFactor(Settings::defaults::visualization::streamlines::edgeLengthFactor),
+   totalLengthFactor(Settings::defaults::visualization::streamlines::totalLengthFactor)
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
    connectToOtherSettings();
