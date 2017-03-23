@@ -5,6 +5,7 @@
 #include <QSizeF>
 #include "simulation/simulationrealization.h"
 #include "streamobjects/streamline.h"
+#include <QRectF>
 
 class UniformGrid : public Grid
 {
@@ -36,6 +37,8 @@ class UniformGrid : public Grid
       QSizeF cellSize;
       QSizeF padding;
 
+      QRectF coveredArea;
+
       UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
       UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
 
@@ -44,6 +47,8 @@ class UniformGrid : public Grid
       QSizeF computeCellSize(QSizeF area);
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
+
+      QRectF computeCoveredArea(QSizeF areaSize, QSizeF padding);
 
       int to1Dindex(int x, int y) const;
 
