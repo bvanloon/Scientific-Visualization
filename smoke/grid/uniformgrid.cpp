@@ -109,6 +109,11 @@ int UniformGrid::getDimension() const
    return dimension;
 }
 
+bool UniformGrid::inGridArea(QVector3D position) const
+{
+   return this->coveredArea.contains(position.x(), position.y());
+}
+
 streamobject::Line UniformGrid::computeStreamLine(QVector3D seedPoint,
                                                   Vertex::scalarGetter textureCoordinateGetter,
                                                   Vertex::vectorGetter vectorGetter)

@@ -28,6 +28,8 @@ class UniformGrid : public Grid
 
       int getDimension() const;
 
+      bool inGridArea(QVector3D position) const;
+
       streamobject::Line computeStreamLine(QVector3D seedPoint,
                                            Vertex::scalarGetter textureCoordinateGetter,
                                            Vertex::vectorGetter vectorGetter);
