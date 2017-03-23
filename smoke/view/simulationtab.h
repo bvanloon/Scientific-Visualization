@@ -29,6 +29,9 @@ class SimulationSettingPane : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+public slots:
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
+
    private slots:
       void on_freezeButton_clicked();
 

@@ -19,6 +19,9 @@ class StreamLinesTab : public QWidget
 
       ColorMapTab *getColorMapWidget();
 
+   public slots:
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
+
    signals:
       void timeStepChanged(double newTimeStep);
 

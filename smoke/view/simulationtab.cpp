@@ -18,6 +18,28 @@ SimulationSettingPane::~SimulationSettingPane()
    delete ui;
 }
 
+void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
+{
+   switch (engine)
+   {
+   case Settings::engines::EnginesTypes::glyphs:
+      this->ui->glyphsCheckBox->setChecked(checked);
+       break;
+
+   case Settings::engines::EnginesTypes::streamLines:
+      this->ui->streamLinesCheckBox->setChecked(checked);
+       break;
+
+   case Settings::engines::EnginesTypes::smoke:
+      this->ui->smokeCheckBox->setChecked(checked);
+       break;
+
+   case Settings::engines::EnginesTypes::numberOfEngines:
+      qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum.";
+       break;
+   }
+}
+
 void SimulationSettingPane::setUItoDefaults()
 {
    ui->forceSlider->setMinimum(Settings::defaults::simulation::forceMin);
@@ -83,6 +105,6 @@ void SimulationSettingPane::on_forceSlider_valueChanged(double value)
 
 void SimulationSettingPane::on_streamLinesCheckBox_clicked(bool checked)
 {
-    emit engineToggled(Settings::engines::EnginesTypes::streamLines, checked);
-    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLines, checked);
+   emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
 }
