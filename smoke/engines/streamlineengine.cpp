@@ -8,13 +8,29 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
 
 int StreamLineEngine::updateBuffers()
 {
-    GPUData data;
-    data.addElement(QVector3D(0.0, 0.0, 0.0), QVector3D(0.0, 0.0, 1.0), 0.0);
-    data.addElement(QVector3D(200.0, 200.0, 0.0), QVector3D(0.0, 0.0, 1.0), 0.01);
-
-    this->AbstractEngine::updateBuffers(data);
-    return data.numElements();
+   GPUData data = buildStreamLines();
+   AbstractEngine::updateBuffers(data);
+   return data.numElements();
 }
+
+GPUData StreamLineEngine::buildStreamLines()
+{
+    GPUData data;
+    for(QPointF seedpoint : Settings::visualization::streamLines().seedPoints){
+        data.extend(buildStreamLine(seedpoint));
+    }
+    return data;
+}
+
+GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
+{
+    GPUData data;
+    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+    data.addElement(QVector3D(seedPoint), normal, 0.0);
+    data.addElement(QVector3D(seedPoint + 3 * QPointF(seedPoint)), normal, 0.0);
+    return data;
+}
+
 
 void StreamLineEngine::draw(Simulation *UNUSED(simulation))
 {

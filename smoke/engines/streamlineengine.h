@@ -24,6 +24,10 @@ class StreamLineEngine : public AbstractEngine {
    private:
       static const int drawMode = GL_LINES;
 
+      GPUData buildStreamLines();
+
+      GPUData buildStreamLine(QPointF seedPoint);
+
       int updateBuffers();
 
       UniformGrid *grid;
