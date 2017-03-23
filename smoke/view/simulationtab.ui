@@ -117,6 +117,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="streamLinesCheckBox">
+        <property name="text">
+         <string>Stream Lines</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

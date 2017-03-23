@@ -70,6 +70,8 @@ class MainWindow : public QMainWindow
 
       void connectStreamLinesTabAndSettings();
 
+      void connectTabs();
+
 
       //Other IO
       void connectKeyBoardHandlerAndSimulation();

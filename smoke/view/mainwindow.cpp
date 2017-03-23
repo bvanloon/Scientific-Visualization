@@ -46,6 +46,9 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::seedPoints,
                           this->streamLinesTab->getColorMapWidget(),
                           Settings::visualization::streamLines().colorMap);
+   connectAbstractEngine(Settings::engines::streamLines,
+                         this->streamLinesTab->getColorMapWidget(),
+                         Settings::visualization::streamLines().colorMap);
 
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
@@ -66,6 +69,8 @@ void MainWindow::setUpConnections()
    connectGlyphTabAndSettings();
 
    connectStreamLinesTabAndSettings();
+
+   connectTabs();
 
    connectKeyBoardHandlerAndSimulation();
 }
@@ -186,7 +191,15 @@ void MainWindow::connectStreamLinesTabAndSettings()
    connect(this->streamLinesTab, SIGNAL(edgeLengthFactorChanged(double)),
             &Settings::visualization::streamLines(), SLOT(onEdgeLengthFactorChanged(double)));
    connect(this->streamLinesTab, SIGNAL(clearSeedPoints()),
-            &Settings::visualization::streamLines(), SLOT(onClearSeedPoints()));
+           &Settings::visualization::streamLines(), SLOT(onClearSeedPoints()));
+}
+
+void MainWindow::connectTabs()
+{
+   connect(this->streamLinesTab, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+            this->simulationTab, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+   connect(this->simulationTab, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+            this->streamLinesTab, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void MainWindow::connectKeyBoardHandlerAndSimulation()

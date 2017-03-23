@@ -29,6 +29,9 @@ class SimulationSettingPane : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+public slots:
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
+
    private slots:
       void on_freezeButton_clicked();
 
@@ -44,7 +47,9 @@ class SimulationSettingPane : public QWidget
 
       void on_forceSlider_valueChanged(double value);
 
-   private:
+      void on_streamLinesCheckBox_clicked(bool checked);
+
+private:
       Ui::SimulationSettingPane *ui;
 
       void setUItoDefaults();

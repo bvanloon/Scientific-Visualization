@@ -18,7 +18,14 @@ StreamLinesTab::~StreamLinesTab()
 
 ColorMapTab *StreamLinesTab::getColorMapWidget()
 {
-   return ui->colorMapWidget;
+    return ui->colorMapWidget;
+}
+
+void StreamLinesTab::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
+{
+    if(engine == Settings::engines::EnginesTypes::seedPoints){
+        this->ui->showSeedPoinsCheckBox->setChecked(checked);
+    }
 }
 
 void StreamLinesTab::setUiToDefaults()
@@ -51,4 +58,5 @@ void StreamLinesTab::on_clearSeedPointsButton_clicked()
 void StreamLinesTab::on_showSeedPoinsCheckBox_clicked(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
+   if(checked) emit engineToggled(Settings::engines::EnginesTypes::streamLines, true);
 }
