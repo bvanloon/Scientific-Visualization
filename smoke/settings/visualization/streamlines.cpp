@@ -31,6 +31,11 @@ const Settings::visualization::StreamLines& Settings::visualization::StreamLines
    return instance;
 }
 
+int Settings::visualization::StreamLines::numberOfSeedPoints()
+{
+   return this->seedPoints.length();
+}
+
 void Settings::visualization::StreamLines::ontimeStepChanged(double newTimeStep)
 {
    this->timeStep = newTimeStep;
