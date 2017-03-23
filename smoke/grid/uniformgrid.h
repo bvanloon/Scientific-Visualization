@@ -109,7 +109,7 @@ class UniformGrid : public Grid
 
             float computeTextureCoordiante(QVector3D position);
 
-            QVector3D interpolate(QVector3D previous);
+            QVector3D integrate(QVector3D previousPosition);
       };
 };
 

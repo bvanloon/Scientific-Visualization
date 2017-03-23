@@ -30,7 +30,7 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
 
    while (!terminate(time) && succes)
    {
-      next = interpolate(current);
+      next = integrate(current);
       succes = tryAddingEdge(current, next);
 
       current = next;
@@ -95,8 +95,10 @@ float UniformGrid::StreamLineBuilder::computeTextureCoordiante(QVector3D positio
    return textureCoordinate;
 }
 
-QVector3D UniformGrid::StreamLineBuilder::interpolate(QVector3D previous)
+QVector3D UniformGrid::StreamLineBuilder::integrate(QVector3D previousPosition)
 {
    //Euler will do just fine for now
-   return previous + previous + QVector3D(20.0, 20.0, 0.0);
+   QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->vectorGetter);
+   QVector3D currentPosition = previousPosition + previousVector.normalized() * this->edgeLength;
+   return currentPosition;
 }
