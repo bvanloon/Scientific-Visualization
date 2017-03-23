@@ -19,10 +19,10 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
 
    connectToOtherSettings();
 
-   static bool printedWarning = false;
-   if(!printedWarning){
-       qDebug() << "Settings::visualization::StreamLines::StreamLines: some seedpoints are initialized for testing purposes";
-   }
+   qDebug() << "Settings::visualization::StreamLines::StreamLines: maximumTime is set to 1.0, should be inf by default.";
+   maximumTime = 1.0;
+
+   qDebug() << "Settings::visualization::StreamLines::StreamLines: some seedpoints are initialized for testing purposes";
    this->seedPoints.append(QPointF(20.0, 20.0));
    this->seedPoints.append(QPointF(200.0, 110.0));
    this->seedPoints.append(QPointF(40.0, 300.0));
