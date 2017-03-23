@@ -184,8 +184,6 @@ void MainWindow::connectAbstractEngine(AbstractEngine *engine, ColorMapTab *colo
     //Connect to the Simulation
     connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
             engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
-    connect(colorMapSetings, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
-            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
 void MainWindow::connectVectorEngineAndGlyphTab()
