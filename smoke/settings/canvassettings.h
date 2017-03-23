@@ -16,7 +16,7 @@ class Settings::Canvas : public QObject
       QSize size;
 
    signals:
-      void windowResized(QSize oldSize, QSize newSize);
+      void windowResized(QSizeF oldSize, QSizeF newSize);
 
    public slots:
       void onWindowResized(int width, int height);

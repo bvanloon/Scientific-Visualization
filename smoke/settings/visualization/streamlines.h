@@ -18,6 +18,8 @@ class Settings::visualization::StreamLines : public QObject
       double edgeLengthFactor;
       QList<QPointF> seedPoints;
 
+      int numberOfSeedPoints();
+
    signals:
 
    public slots:
@@ -29,7 +31,7 @@ class Settings::visualization::StreamLines : public QObject
 
       void onSeedPointAdded(QPointF newSeedPoint);
 
-      void onWindowResized(QSize oldSize, QSize newSize);
+      void onWindowResized(QSizeF oldSize, QSizeF newSize);
 
    private slots:
 

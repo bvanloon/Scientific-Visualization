@@ -14,8 +14,8 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
 
 void Settings::visualization::StreamLines::connectToOtherSettings()
 {
-    connect(&Settings::canvas(), SIGNAL(windowResized(QSize,QSize)),
-            this, SLOT(onWindowResized(QSize,QSize)));
+   connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF,QSizeF)),
+            this, SLOT(onWindowResized(QSizeF,QSizeF)));
 }
 
 void Settings::visualization::StreamLines::transformSeedPoints(QMatrix4x4 transformationMatrix)
@@ -52,7 +52,7 @@ void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint
     this->seedPoints.append(newSeedPoint);
 }
 
-void Settings::visualization::StreamLines::onWindowResized(QSize oldSize, QSize newSize)
+void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSizeF newSize)
 {
     QMatrix4x4 transformationMatrix;
     transformationMatrix.setToIdentity();
