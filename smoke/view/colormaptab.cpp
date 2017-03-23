@@ -12,6 +12,7 @@ ColorMapTab::ColorMapTab(QWidget *parent) :
 
    setUItoDefaults();
    setUpConnections();
+   this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
 }
 
 ColorMapTab::~ColorMapTab()
