@@ -53,8 +53,7 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
 
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 {
-   //Is vertex within the computational domain?
-   return true;
+    return this->grid->inGridArea(vertex);
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
