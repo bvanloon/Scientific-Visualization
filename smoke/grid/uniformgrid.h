@@ -88,7 +88,7 @@ class UniformGrid : public Grid
             bool terminate(double currentTime);
             bool isEdgeAllowed(QVector3D origin, QVector3D destination);
             void addEdge(QVector3D origin);
-            QVector3D interpolate();
+            QVector3D interpolate(QVector3D previous);
 
       };
 };
