@@ -15,6 +15,10 @@ const Settings::Canvas& Settings::Canvas::instance()
 
 void Settings::Canvas::onWindowResized(int width, int height)
 {
+   QSize oldSize = this->size;
+
    size.setWidth(width);
    size.setHeight(height);
+
+   emit windowResized(oldSize, this->size);
 }
