@@ -11,6 +11,9 @@ shapes::PolyLine::PolyLine(QPointF start)
    this->vertices.append(QVector3D(start));
 }
 
+shapes::PolyLine::PolyLine()
+{}
+
 void shapes::PolyLine::addVertex(QVector3D vertex)
 {
    this->vertices.append(vertex);

@@ -12,6 +12,7 @@ namespace shapes {
        public:
           PolyLine(QVector3D start);
           PolyLine(QPointF start);
+          PolyLine();
 
           void addVertex(QVector3D vertex);
 
