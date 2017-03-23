@@ -78,7 +78,7 @@ void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newE
 
 void Settings::visualization::StreamLines::onMaximumTotalLengthFactorChanged(double newValue)
 {
-   this->maximumTotalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
+   this->totalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
    this->totalLengthFactor = newValue;
 }
 
