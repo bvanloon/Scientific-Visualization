@@ -73,6 +73,7 @@ SOURCES += main.cpp\
     glyphs/cone.cpp \
     shapes/cone.cpp \
     engines/streamlineengine.cpp \
+    shapes/polyline.cpp \
     utilities/gpudata.cpp
 
 HEADERS  += main.ih\
@@ -126,6 +127,7 @@ HEADERS  += main.ih\
     engines/seedpointengine.h \
     shapes/rectangle.h \
     engines/streamlineengine.h \
+    shapes/polyline.h \
     utilities/gpudata.h
 
 FORMS    += view/mainwindow.ui \
