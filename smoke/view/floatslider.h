@@ -5,40 +5,44 @@
 #include <QLabel>
 
 namespace Ui {
-class FloatSlider;
+    class FloatSlider;
 }
 
 class FloatSlider : public QWidget
 {
-    Q_OBJECT
+   Q_OBJECT
 
-public:
-    explicit FloatSlider(QWidget *parent = 0);
-    ~FloatSlider();
+   public:
+      explicit FloatSlider(QWidget *parent = 0);
+      ~FloatSlider();
 
-    void init(float minimum, float maximum, float value);
+      void init(float minimum, float maximum, float value);
 
-    float value() const;
+      float value() const;
 
-    void setMinimum(float minimum);
-    void setMaximum(float maximum);
-    void setRange(float minimum, float maximum);
-    void setValue(float value);
-    void setDisabled(bool disabled);
+      void setMinimum(float minimum);
 
-signals:
-    void valueChanged(float value);
+      void setMaximum(float maximum);
 
-private slots:
-    void on_slider_valueChanged(int position);
+      void setRange(float minimum, float maximum);
 
-private:
-    Ui::FloatSlider *ui;
+      void setValue(float value);
 
-    float minimum;
-    float maximum;
+      void setDisabled(bool disabled);
 
-    void setLabel(QLabel *label, float value);
+   signals:
+      void valueChanged(float value);
+
+   private slots:
+      void on_slider_valueChanged(int position);
+
+   private:
+      Ui::FloatSlider *ui;
+
+      float minimum;
+      float maximum;
+
+      void setLabel(QLabel *label, float value);
 };
 
 #endif // FLOATSLIDER_H

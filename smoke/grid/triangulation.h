@@ -7,24 +7,26 @@
 
 class Triangulation
 {
-public:
+   public:
 
-    Triangulation();
-    Triangulation(int numVertices);
+      Triangulation();
+      Triangulation(int numVertices);
 
-    void extend(Triangulation* other);
-    void extend(Triangulation other);
+      void extend(Triangulation *other);
 
-    void addVertex(Vertex *value);
+      void extend(Triangulation other);
 
-    int numVertices();
+      void addVertex(Vertex *value);
 
-    QVector<QVector3D> getVertexPositions() const;
-    QVector<Vertex *> getVertices() const;
+      int numVertices();
 
-private:
-    QVector<QVector3D> vertexPositions;
-    QVector<Vertex*> vertices;
+      QVector<QVector3D> getVertexPositions() const;
+
+      QVector<Vertex *> getVertices() const;
+
+   private:
+      QVector<QVector3D> vertexPositions;
+      QVector<Vertex *> vertices;
 };
 
 #endif // TRIANGULATION_H

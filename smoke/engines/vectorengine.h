@@ -27,7 +27,7 @@ class VectorEngine : public AbstractEngine {
 
       void onGridDimensionChanged(int width, int UNUSED(height));
 
-signals:
+   signals:
       void cellSizeChanged(QSizeF newSize);
 
    private:

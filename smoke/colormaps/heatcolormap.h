@@ -5,14 +5,15 @@
 
 class HeatColorMap : public AbstractColorMap
 {
-public:
-    static AbstractColorMap * Create(int numColors, float saturation, float UNUSED(hue));
+   public:
+      static AbstractColorMap *Create(int numColors, float saturation, float UNUSED(hue));
 
-private:
-    HeatColorMap(int numColors, float saturation);
+   private:
+      HeatColorMap(int numColors, float saturation);
 
-    void fill();
-    QRgb toHeatColor(float f);
+      void fill();
+
+      QRgb toHeatColor(float f);
 };
 
 #endif // HEATCOLORMAP_H

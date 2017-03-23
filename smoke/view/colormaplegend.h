@@ -9,57 +9,65 @@
 #include <colormaps/rainbowcolormap.h>
 
 namespace Ui {
-class ColorMapLegend;
+    class ColorMapLegend;
 }
 
 class ColorMapLegend : public QWidget
 {
-    Q_OBJECT
+   Q_OBJECT
 
-public:
-    explicit ColorMapLegend(QWidget *parent = 0);
-    ~ColorMapLegend();
+   public:
+      explicit ColorMapLegend(QWidget *parent = 0);
+      ~ColorMapLegend();
 
-public slots:
-    void onColorMapChanged(AbstractColorMap colorMapImage);
-    void onValueRangeChanged(float minimum, float maximum);
-    void onClampRangeChanged(float minimum, float maximum);
+   public slots:
+      void onColorMapChanged(AbstractColorMap colorMapImage);
 
-protected:
-    void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
-    void paintEvent(QPaintEvent *UNUSED(event)) Q_DECL_OVERRIDE;
+      void onValueRangeChanged(float minimum, float maximum);
 
-private:
-    Ui::ColorMapLegend *ui;
+      void onClampRangeChanged(float minimum, float maximum);
 
-    QImage colorMapImage;
-    float numberOfColors;
+   protected:
+      void resizeEvent(QResizeEvent *event) Q_DECL_OVERRIDE;
 
-    QRect colorBar;
+      void paintEvent(QPaintEvent *UNUSED(event)) Q_DECL_OVERRIDE;
 
-    int numberOfTicks;
+   private:
+      Ui::ColorMapLegend *ui;
 
-    float minimumValue;
-    float maximumValue;
+      QImage colorMapImage;
+      float numberOfColors;
 
-    float minimumFactor;
-    float maximumFactor;
+      QRect colorBar;
 
-    static const int colorMapImageWidth;
-    static const int tickWidth;
-    static const int maximumNumberOfTicks;
-    static const QPointF textOffset;
+      int numberOfTicks;
 
-    void drawColorMapImage();
-    void drawTicksAndLabels();
-    void drawTickandLabel(QPointF left, float value);
-    void drawLabel(QPointF left, float labelValue);
+      float minimumValue;
+      float maximumValue;
 
-    void setFactorRange(float minimum, float maximum);
-    void setValueRange(float minimum, float maximum);
-    void setColorMap(AbstractColorMap colorMap);
+      float minimumFactor;
+      float maximumFactor;
 
-    int getDescriptionLabelHeight();
+      static const int colorMapImageWidth;
+      static const int tickWidth;
+      static const int maximumNumberOfTicks;
+      static const QPointF textOffset;
+
+      void drawColorMapImage();
+
+      void drawTicksAndLabels();
+
+      void drawTickandLabel(QPointF left, float value);
+
+      void drawLabel(QPointF left, float labelValue);
+
+      void setFactorRange(float minimum, float maximum);
+
+      void setValueRange(float minimum, float maximum);
+
+      void setColorMap(AbstractColorMap colorMap);
+
+      int getDescriptionLabelHeight();
 };
 
 #endif // COLORMAPLEGEND_H

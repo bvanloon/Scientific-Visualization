@@ -27,6 +27,7 @@ class KeyboardHandler : public QObject
       bool handleKeyEvent(QKeyEvent *event);
 
       void freezeSimulation();
+
       void stepSimulation();
 
       void setUpConnections();

@@ -22,14 +22,16 @@ namespace mesh {
           Triangle *addTriangle(Vertex *a, Vertex *b, Vertex *c);
 
           QVector<QVector3D> getVerticesAsVBO() const;
+
           QVector<QVector3D> getNormalsAsVBO() const;
+
           QVector<QVector3D> getVertexPositions() const;
 
           void applyTransformation(QMatrix4x4 transformationMatrix);
 
           int numVertices();
 
-    private:
+       private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;
           QVector<Triangle *> triangles;

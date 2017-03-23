@@ -9,48 +9,55 @@
 class Settings::Simulation : public QObject
 {
    Q_OBJECT
-public:
+   public:
 
-   static const Simulation& instance();
+      static const Simulation& instance();
 
-   int dimension;
-   float timestep;
-   bool frozen;
-   float force;
-   QSizeF cellSize;
+      int dimension;
+      float timestep;
+      bool frozen;
+      float force;
+      QSizeF cellSize;
 
-   const float simulationTimeStepMinimum = 0.35;
-   const float simulationTimeStepMaximum = 0.45;
+      const float simulationTimeStepMinimum = 0.35;
+      const float simulationTimeStepMaximum = 0.45;
 
 
-   QPair<float, float> getRange(Settings::sim::Scalar scalar) const;
+      QPair<float, float> getRange(Settings::sim::Scalar scalar) const;
 
-signals:
-   void valueRangeChanged(Settings::sim::Scalar scalar, float minimum, float maximum);
+   signals:
+      void valueRangeChanged(Settings::sim::Scalar scalar, float minimum, float maximum);
 
-   void toggleFrozen(bool frozen);
-   void recomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
+      void toggleFrozen(bool frozen);
 
-public slots:
-   void onDimensionChanged(int newDimension);
-   void onForceChanged(float newForce);
-   void onWindowResized(int width, int height);
-   void onToggleFrozen();
-   void onToggleFrozenKeyboard();
-   void onTimeStepChanged(float value);
+      void recomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
-private:
-   explicit Simulation(QObject *parent = 0);
+   public slots:
+      void onDimensionChanged(int newDimension);
 
-   Simulation(Simulation const&)     = delete;
-   void operator=(Simulation const&) = delete;
+      void onForceChanged(float newForce);
 
-   QMultiMap<Settings::sim::Scalar, QPair<float, float>> scalarRanges;
+      void onWindowResized(int width, int height);
 
-   void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
+      void onToggleFrozen();
 
-   void updateGridCellSize();
-   void updateGridCellSize(int width, int height);
+      void onToggleFrozenKeyboard();
+
+      void onTimeStepChanged(float value);
+
+   private:
+      explicit Simulation(QObject *parent = 0);
+
+      Simulation(Simulation const&) = delete;
+      void operator=(Simulation const&) = delete;
+
+      QMultiMap<Settings::sim::Scalar, QPair<float, float> > scalarRanges;
+
+      void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
+
+      void updateGridCellSize();
+
+      void updateGridCellSize(int width, int height);
 };
 
 #endif // SIMULATIONS_H

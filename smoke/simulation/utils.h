@@ -7,7 +7,9 @@
 #include <QPoint>
 
 int clamp(float x);
+
 float max(float x, float y);
+
 int cursorLocationToArrayIndex(QPoint newMousePosition);
 
 #endif // UTILS_H

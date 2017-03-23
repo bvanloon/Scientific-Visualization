@@ -11,29 +11,31 @@
 
 class Grid
 {
-public:
-   Grid(int numberOfVertices, bool hasPadding = true);
-   virtual ~Grid();
+   public:
+      Grid(int numberOfVertices, bool hasPadding = true);
+      virtual ~Grid();
 
-   GlyphData getGlyphData() const;
+      GlyphData getGlyphData() const;
 
-   virtual void changeGridArea(QSizeF newArea) = 0;
-   virtual void changeGridArea(QSizeF newArea, QSizeF padding) = 0;
+      virtual void changeGridArea(QSizeF newArea) = 0;
 
-   QVector<QVector3D> const& getVertexPositions() const;
+      virtual void changeGridArea(QSizeF newArea, QSizeF padding) = 0;
 
-   QVector<Vertex *> const& getVertices() const;
+      QVector<QVector3D> const& getVertexPositions() const;
 
-   QVector<Cell *> const& getCells() const;
-   int numVertices() const;
+      QVector<Vertex *> const& getVertices() const;
 
-protected:
-   QVector<Vertex *> vertices;
-   QMultiMap<QPair<int, int>, Vertex *> vertexMap;
-   QVector<QVector3D> vertexPositions;
+      QVector<Cell *> const& getCells() const;
 
-   QVector<Cell *> cells;
-   bool hasPadding;
+      int numVertices() const;
+
+   protected:
+      QVector<Vertex *> vertices;
+      QMultiMap<QPair<int, int>, Vertex *> vertexMap;
+      QVector<QVector3D> vertexPositions;
+
+      QVector<Cell *> cells;
+      bool hasPadding;
 };
 
 #endif // ABSTRACTGRID_H

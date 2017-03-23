@@ -40,7 +40,7 @@ class GlyphsTab : public QWidget
 
       void on_scale_valueChanged(double scale);
 
-private:
+   private:
       Ui::GlyphsTab *ui;
 
       void setUiToDefaults();

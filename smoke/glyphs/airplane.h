@@ -38,9 +38,13 @@ class Airplane::AirplaneBuilder {
       static const double maxCellRatio;
 
       QVector3D computeNose();
+
       QVector3D computeBase();
+
       QVector3D computeLeftWing();
+
       QVector3D computeRightWing();
+
       QVector3D computeWing(int direction);
 
       void determineSizeRange();

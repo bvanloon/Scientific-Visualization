@@ -12,35 +12,35 @@
 
 
 
-
-
 class ColorMapFactory
 {
-public:
-    enum colorMaps { rainbow, heat, cold, grayScale, zebra, hue };
+   public:
+      enum colorMaps { rainbow, heat, cold, grayScale, zebra, hue };
 
-    ~ColorMapFactory();
+      ~ColorMapFactory();
 
-    static ColorMapFactory *get(){
-        static ColorMapFactory instance;
-        return &instance;
-    }
+      static ColorMapFactory *get()
+      {
+         static ColorMapFactory instance;
 
-    static QStringList getColorMapNames();
+         return &instance;
+      }
 
-    AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, float saturation, float hue = no_hue);
+      static QStringList getColorMapNames();
 
-private:
-    typedef AbstractColorMap* (*CreateColorMapFn)(int, float, float);
+      AbstractColorMap *createColorMap(const colorMaps colormap, int numColors, float saturation, float hue = no_hue);
 
-    std::map<colorMaps,CreateColorMapFn > colorMapMapping;
+   private:
+      typedef AbstractColorMap * (*CreateColorMapFn)(int, float, float);
 
-    ColorMapFactory();
-    ColorMapFactory(const ColorMapFactory &){}
-    ColorMapFactory &operator = (const ColorMapFactory &) {return *this;}
+      std::map<colorMaps, CreateColorMapFn> colorMapMapping;
 
-    void registerColorMap(const colorMaps colormap, CreateColorMapFn pfnCreate);
+      ColorMapFactory();
+      ColorMapFactory(const ColorMapFactory&) {}
 
+      ColorMapFactory& operator =(const ColorMapFactory&) { return *this; }
+
+      void registerColorMap(const colorMaps colormap, CreateColorMapFn pfnCreate);
 };
 
 #endif // COLORMAPFACTORY_H

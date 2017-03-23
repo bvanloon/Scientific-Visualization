@@ -6,17 +6,17 @@
 
 class RainbowColorMap : public AbstractColorMap
 {
-public:
-    static AbstractColorMap* Create(int numColors, float saturation, float UNUSED(hue));
+   public:
+      static AbstractColorMap *Create(int numColors, float saturation, float UNUSED(hue));
 
-private:
-    float dx;
+   private:
+      float dx;
 
-    RainbowColorMap(int numColors, float saturation, float dx = 0.8);
+      RainbowColorMap(int numColors, float saturation, float dx = 0.8);
 
-    void fill();
-    QColor toRainbowColor(float i);
+      void fill();
 
+      QColor toRainbowColor(float i);
 };
 
 #endif // RAINBOWCOLORMAP_H

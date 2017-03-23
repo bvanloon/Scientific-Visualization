@@ -20,7 +20,7 @@ class GlyphsTriangulation
 
       int numVertices();
 
-private:
+   private:
       QVector<QVector3D> vertices;
       QVector<float> textureCoordinates;
       QVector<QVector3D> normals;

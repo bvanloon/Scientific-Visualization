@@ -5,14 +5,12 @@
 
 class ZebraMap : public AbstractColorMap
 {
-public:
-    static AbstractColorMap* Create(int numColors, float saturation, float UNUSED(hue));
+   public:
+      static AbstractColorMap *Create(int numColors, float saturation, float UNUSED(hue));
 
-private:
-    ZebraMap(int numColors, float saturation);
-    void fill();
+   private:
+      ZebraMap(int numColors, float saturation);
+      void fill();
 };
 
 #endif // ZEBRAMAP_H
-
-
