@@ -24,19 +24,21 @@ void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engi
    {
    case Settings::engines::EnginesTypes::glyphs:
       this->ui->glyphsCheckBox->setChecked(checked);
-       break;
+      break;
 
    case Settings::engines::EnginesTypes::streamLines:
       this->ui->streamLinesCheckBox->setChecked(checked);
-       break;
+      break;
 
    case Settings::engines::EnginesTypes::smoke:
       this->ui->smokeCheckBox->setChecked(checked);
-       break;
+      break;
 
+   case Settings::engines::EnginesTypes::seedPoints:
+   //Fall through
    case Settings::engines::EnginesTypes::numberOfEngines:
-      qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum.";
-       break;
+      qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum here.";
+      break;
    }
 }
 
