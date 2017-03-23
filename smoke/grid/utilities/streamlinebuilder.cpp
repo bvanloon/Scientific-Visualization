@@ -53,12 +53,7 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
    // - Streamline goes out of the computational domain
    // - streamLineLength > maximumLength
 
-    static bool returnValue = true;
-    if(returnValue){
-        returnValue = false;
-        return true;
-    }
-    return returnValue;
+   return true;
 }
 
 void UniformGrid::StreamLineBuilder::addEdge(QVector3D position)
