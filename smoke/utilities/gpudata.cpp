@@ -36,6 +36,7 @@ void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal)
 
 void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals)
 {
+   assert(vertices.length() == normals.length());
    this->vertices.append(vertices);
    this->normals.append(normals);
 }
