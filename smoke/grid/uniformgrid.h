@@ -4,6 +4,7 @@
 #include "grid/grid.h"
 #include <QSizeF>
 #include "simulation/simulationrealization.h"
+#include "streamobjects/streamline.h"
 
 class UniformGrid : public Grid
 {
@@ -25,6 +26,10 @@ class UniformGrid : public Grid
       QSizeF getCellSize() const;
 
       int getDimension() const;
+
+      streamobject::Line computeStreamLine(QVector3D seedPoint,
+                                         Vertex::scalarGetter textureCoordinateGetter,
+                                         Vertex::vectorGetter vectorGetter);
 
    private:
       int dimension;
