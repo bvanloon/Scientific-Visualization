@@ -103,10 +103,8 @@ streamobject::Line UniformGrid::computeStreamLine(QVector3D seedPoint,
                                                 Vertex::scalarGetter textureCoordinateGetter,
                                                 Vertex::vectorGetter vectorGetter)
 {
-    streamobject::Line streamLine = streamobject::Line(seedPoint, 0.0);
-    streamLine.addVertex(seedPoint + 2 * seedPoint, 0.0);
-
-    return streamLine;
+    return StreamLineBuilder(this, seedPoint,
+                             vectorGetter, textureCoordinateGetter).getStreamLine();
 }
 
 Cell *UniformGrid::findCellContaining(QVector3D position)
