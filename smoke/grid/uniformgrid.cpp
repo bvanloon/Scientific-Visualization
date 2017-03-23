@@ -110,10 +110,10 @@ int UniformGrid::getDimension() const
 }
 
 streamobject::Line UniformGrid::computeStreamLine(QVector3D seedPoint,
-                                                Vertex::scalarGetter textureCoordinateGetter,
-                                                Vertex::vectorGetter vectorGetter)
+                                                  Vertex::scalarGetter textureCoordinateGetter,
+                                                  Vertex::vectorGetter vectorGetter)
 {
-    return StreamLineBuilder(this, seedPoint,
+   return StreamLineBuilder(this, seedPoint,
                              vectorGetter, textureCoordinateGetter).getStreamLine();
 }
 
