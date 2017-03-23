@@ -36,13 +36,24 @@ void StreamLinesTab::setUiToDefaults()
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
 
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
-   qDebug() << "Set selectors to correct default values";
 
    this->ui->maximumTimeSelector->setSpecialValueText("Infinity");
+   this->setSpinBoxWithSpecialValueToDefault(this->ui->maximumTimeSelector,
+                                              Settings::visualization::streamLines().maximumTime);
 
    this->ui->maximumLengthSelector->setSpecialValueText("Infinity");
+   this->setSpinBoxWithSpecialValueToDefault(this->ui->maximumLengthSelector,
+                                              Settings::defaults::visualization::streamlines::totalLengthFactor);
+
+   this->ui->edgeLengthSelector->setValue(Settings::defaults::visualization::streamlines::edgeLengthFactor);
 
    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
+}
+
+void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox* spinBox, double value)
+{
+   if (value == std::numeric_limits<double>::infinity()) value = spinBox->minimum();
+   spinBox->setValue(value);
 }
 
 void StreamLinesTab::on_timeStepSelector_valueChanged(double value)

@@ -2,6 +2,7 @@
 #define STREAMLINESTAB_H
 
 #include <QWidget>
+#include <QDoubleSpinBox>
 #include "settings/settings.h"
 #include "view/colormaptab.h"
 
@@ -53,6 +54,8 @@ class StreamLinesTab : public QWidget
       Ui::StreamLinesTab *ui;
 
       void setUiToDefaults();
+
+      void setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox *spinBox, double value);
 };
 
 #endif // STREAMLINESTAB_H
