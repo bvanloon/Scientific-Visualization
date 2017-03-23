@@ -28,13 +28,10 @@ GPUData StreamLineEngine::buildStreamLines()
 
 GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
-   streamobject::Line streamLine = streamobject::Line(seedPoint, 0.0);
-   streamLine.addVertex(seedPoint + 2 * seedPoint, 0.0);
-
-   GPUData data = streamLine.toGPUData();
-   data.setTextureCoordinates(QVector<float>(2, 0.0));
-
-   return data;
+   streamobject::Line streamLine = grid->computeStreamLine(QVector3D(seedPoint),
+                                                           Settings::visualization::streamLines().colorMap->textureGetter,
+                                                           Settings::visualization::streamLines().vectorField);
+   return streamLine.toGPUData();
 }
 
 void StreamLineEngine::draw(Simulation *UNUSED(simulation))
