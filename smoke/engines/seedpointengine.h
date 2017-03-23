@@ -25,7 +25,7 @@ class SeedPointEngine : public AbstractEngine
 
       void addSeedPointFill(QPointF position);
 
-      void addMesh(mesh::TriangleMesh* mesh, float textureCoordinate);
+      void addMesh(mesh::TriangleMesh *mesh, float textureCoordinate);
 
       void clearIntermediateBuffers();
 
