@@ -11,15 +11,15 @@ namespace shapes {
     {
        public:
           PolyLine(QVector3D start);
-          PolyLine(QPointF start);
           PolyLine();
 
           void addVertex(QVector3D vertex);
 
-          void addVertex(QPointF vertex);
-
        protected:
           QList<QVector3D> vertices;
+          double length;
+
+          void updateLength(QVector3D newVertex);
     };
 }
 
