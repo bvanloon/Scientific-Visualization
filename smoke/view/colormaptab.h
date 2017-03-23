@@ -27,6 +27,10 @@ class ColorMapTab : public QWidget
 
       QComboBox *getVariableSelector() const;
 
+      ColorMapTab *getColorMapWidget();
+
+      const ColorMapTab *getColorMapWidget() const;
+
    signals:
       void setClamping(bool clampingOn);
 
