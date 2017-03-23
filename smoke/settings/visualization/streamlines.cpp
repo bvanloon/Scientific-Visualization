@@ -14,6 +14,9 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
    this->edgeLength = computeEdgeLength(edgeLengthFactor, Settings::simulation().cellSize.width());
    this->totalLength = computeEdgeLength(totalLengthFactor, Settings::simulation().cellSize.width());
+
+   vectorField = Vertex::getVectorGetter(Settings::sim::Vector::fluidVelocity);
+
    connectToOtherSettings();
 
    static bool printedWarning = false;

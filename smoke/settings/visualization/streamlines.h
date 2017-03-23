@@ -20,6 +20,8 @@ class Settings::visualization::StreamLines : public QObject
       double edgeLength;
       double totalLength;
 
+      Vertex::vectorGetter vectorField;
+
       QList<QPointF> seedPoints;
 
       int numberOfSeedPoints();
