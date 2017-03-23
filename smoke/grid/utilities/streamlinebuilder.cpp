@@ -48,7 +48,7 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
    // - Streamline goes out of the computational domain: isVertexAllowed();
    // - streamLineLength > maximumLength
 
-   return true;
+   return this->isVertexAllowed(destination);
 }
 
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
