@@ -8,7 +8,20 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    timeStep(1.0),
    edgeLengthFactor(0.5)
 {
-   colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
+    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
+    connectToOtherSettings();
+}
+
+void Settings::visualization::StreamLines::connectToOtherSettings()
+{
+    connect(&Settings::canvas(), SIGNAL(windowResized(QSize,QSize)),
+            this, SLOT(onWindowResized(QSize,QSize)));
+}
+
+void Settings::visualization::StreamLines::transformSeedPoints(QMatrix4x4 transformationMatrix)
+{
+    for(QPointF seedPoint : this->seedPoints){
+    }
 }
 
 const Settings::visualization::StreamLines& Settings::visualization::StreamLines::instance()
@@ -37,4 +50,11 @@ void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint
 {
     newSeedPoint.setY(Settings::canvas().size.height() - newSeedPoint.y());
     this->seedPoints.append(newSeedPoint);
+}
+
+void Settings::visualization::StreamLines::onWindowResized(QSize oldSize, QSize newSize)
+{
+    QMatrix4x4 transformationMatrix;
+    transformationMatrix.setToIdentity();
+    transformSeedPoints(transformationMatrix);
 }
