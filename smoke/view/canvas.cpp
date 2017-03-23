@@ -60,12 +60,14 @@ void Canvas::initializeGL()
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smoke, new SmokeEngine()));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new VectorEngine(simulation->getSimulationGrid())));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::seedPoints, new SeedPointEngine()));
+   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::streamLines, new StreamLineEngine(simulation->getSimulationGrid())));
 
    emit openGlReady();
 
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedPoints));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLines));
 }
 
 void Canvas::idleLoop()

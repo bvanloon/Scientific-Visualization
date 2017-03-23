@@ -16,6 +16,7 @@
 #include "engines/smokeengine.h"
 #include "engines/seedpointengine.h"
 #include "simulation/simulation.h"
+#include "engines/streamlineengine.h"
 #include "colormaps/colormapfactory.h"
 
 

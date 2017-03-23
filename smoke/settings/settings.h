@@ -76,6 +76,7 @@ namespace Settings {
         {
            glyphs,
            seedPoints,
+           streamLines,
            smoke,
            numberOfEngines
         };
@@ -116,7 +117,7 @@ namespace Settings {
             namespace streamlines {}
         }
         namespace engines {
-            static const bool activeEngines[3] = { false, false, true };
+            static const bool activeEngines[4] = { false, true, false, true };
         }
     }
 }

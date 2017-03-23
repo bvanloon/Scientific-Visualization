@@ -44,7 +44,9 @@ class SimulationSettingPane : public QWidget
 
       void on_forceSlider_valueChanged(double value);
 
-   private:
+      void on_streamLinesCheckBox_clicked(bool checked);
+
+private:
       Ui::SimulationSettingPane *ui;
 
       void setUItoDefaults();

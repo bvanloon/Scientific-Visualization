@@ -28,6 +28,7 @@ void SimulationSettingPane::setUItoDefaults()
 
    ui->glyphsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::glyphs]);
    ui->smokeCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::smoke]);
+   ui->streamLinesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::streamLines]);
 }
 
 void SimulationSettingPane::setUpConnections()
@@ -78,4 +79,10 @@ void SimulationSettingPane::on_smokeCheckBox_toggled(bool checked)
 void SimulationSettingPane::on_forceSlider_valueChanged(double value)
 {
    emit forceChanged(value);
+}
+
+void SimulationSettingPane::on_streamLinesCheckBox_clicked(bool checked)
+{
+    emit engineToggled(Settings::engines::EnginesTypes::streamLines, checked);
+    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
 }
