@@ -54,7 +54,7 @@ class UniformGrid : public Grid
 
       int to1Dindex(int x, int y) const;
 
-      Cell *findCellContaining(QVector3D position);
+      StructuredCell *findCellContaining(QVector3D position);
 
       QVector3D computeVertexPosition(int i, int j);
 

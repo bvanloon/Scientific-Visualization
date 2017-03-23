@@ -122,15 +122,16 @@ streamobject::Line UniformGrid::computeStreamLine(QVector3D seedPoint,
                              vectorGetter, textureCoordinateGetter).getStreamLine();
 }
 
-Cell *UniformGrid::findCellContaining(QVector3D position)
+StructuredCell *UniformGrid::findCellContaining(QVector3D position)
 {
    QPair<int, int> coordinates = findUpperLeftOfContainingCell(position);
    StructuredGridVertex *upperLeftVertex = dynamic_cast<StructuredGridVertex *>(vertexMap.find(coordinates).value());
    Cell *containingCell = upperLeftVertex->getLowerRightCell();
 
-   assert(dynamic_cast<StructuredCell *>(containingCell)->isInCell(position));
+   StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
+   assert(cell->isInCell(position));
 
-   return containingCell;
+   return cell;
 }
 
 QPair<int,
