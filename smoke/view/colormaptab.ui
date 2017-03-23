@@ -27,11 +27,20 @@
        <property name="rowWrapPolicy">
         <enum>QFormLayout::DontWrapRows</enum>
        </property>
+       <property name="formAlignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
        <property name="bottomMargin">
         <number>20</number>
        </property>
        <item row="0" column="0">
         <widget class="QLabel" name="variableSelectorLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>the scalar variable to use to determine the color</string>
          </property>
@@ -52,6 +61,12 @@
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="colormapSelectorLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="toolTip">
           <string>the colormap to be used</string>
          </property>
@@ -75,7 +90,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>0</height>
+           <height>26</height>
           </size>
          </property>
          <property name="toolTip">
@@ -88,6 +103,12 @@
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="sautrationlabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>26</height>
+          </size>
+         </property>
          <property name="text">
           <string>Saturation</string>
          </property>
