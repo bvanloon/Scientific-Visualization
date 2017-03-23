@@ -161,7 +161,31 @@ void MainWindow::connectEngineAndColorMapTab(AbstractEngine *currentEngine, Colo
    connect(colormap, SIGNAL(setClampingRange(float,float)),
             currentEngine, SLOT(onsetClampingRange(float,float)));
    connect(colormap, SIGNAL(colorMapChanged(AbstractColorMap)),
-            currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
+           currentEngine, SLOT(onColorMapChanged(AbstractColorMap)));
+}
+
+void MainWindow::connectAbstractEngine(AbstractEngine *engine, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
+{
+    //Connect with colormapTab with Engine
+    connect(colormapTab, SIGNAL(setClamping(bool)),
+             engine, SLOT(onSetClamping(bool)));
+    connect(colormapTab, SIGNAL(setClampingRange(float,float)),
+             engine, SLOT(onsetClampingRange(float,float)));
+    connect(colormapTab, SIGNAL(colorMapChanged(AbstractColorMap)),
+            engine, SLOT(onColorMapChanged(AbstractColorMap)));
+
+    //Set the colormap settings in the engine
+    engine->setColorMap(colorMapSetings);
+
+    //Connect the colormapSettings with the engine
+    connect(colorMapSetings, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+
+    //Connect to the Simulation
+    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+    connect(colorMapSetings, SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
+            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
 void MainWindow::connectVectorEngineAndGlyphTab()

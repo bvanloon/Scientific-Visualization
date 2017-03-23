@@ -61,18 +61,24 @@ class MainWindow : public QMainWindow
 
       void connectSmokeEngineAndSettings();
 
+
       void connectSeedEngineAndSettings();
 
       void connectSeedEngineAndStreamLinesTab();
+
 
       void connectStreamLineEngineAndStreamLinesTab();
 
       void connectStreamLineEngineAndSettings();
 
+
       void connectEngineAndSettings(AbstractEngine *currentEngine);
 
       void connectEngineAndColorMapTab(AbstractEngine *currentEngine, ColorMapTab *colormap);
 
+      void connectAbstractEngine(AbstractEngine *engine,
+                                       ColorMapTab *colormapTab,
+                                       Settings::visualization::ColorMap* colorMapSetings);
 
       //Tabs
       void connectSimulationTabAndSettings();
