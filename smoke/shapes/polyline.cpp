@@ -1,34 +1,33 @@
 #include "polyline.h"
+#include "assert.h"
 #include <QDebug>
 
-shapes::PolyLine::PolyLine(QVector3D start)
+shapes::PolyLine::PolyLine(QVector3D start) :
+   length(0)
 {
    this->vertices.append(start);
 }
 
+shapes::PolyLine::PolyLine() :
+   length(0)
+{}
+
 void shapes::PolyLine::addVertex(QVector3D vertex)
 {
+   updateLength(vertex);
    this->vertices.append(vertex);
 }
 
-GPUData shapes::PolyLine::toGPUData() const
+double shapes::PolyLine::getLength() const
 {
-   GPUData data;
+    return length;
+}
 
-   QList<QVector3D>::const_iterator current = this->vertices.begin();
-   QList<QVector3D>::const_iterator next;
+void shapes::PolyLine::updateLength(QVector3D newVertex)
+{
+   if (this->vertices.isEmpty()) return;
 
-   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
-
-   do
-   {
-      next = current + 1;
-
-      data.addElement(*current, normal);
-      data.addElement(*next, normal);
-
-      current = next;
-   } while (current + 1 != this->vertices.end());
-
-   return data;
+   QVector3D newEdge = newVertex - this->vertices.last();
+   assert(newEdge.length() > 0);
+   this->length += newEdge.length();
 }

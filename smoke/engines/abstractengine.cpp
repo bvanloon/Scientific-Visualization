@@ -219,6 +219,13 @@ void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
    buffer->release();
 }
 
+void AbstractEngine::updateBuffers(GPUData data)
+{
+    updateBuffer(this->vertexBuffer, data.getVertices());
+    updateBuffer(this->normalBuffer, data.getNormals());
+    updateBuffer(this->textureCoordinateBuffer, data.getTextureCoordinates());
+}
+
 void AbstractEngine::drawWithMode(int mode, int bufferLength)
 {
    this->shaderProgram->bind();

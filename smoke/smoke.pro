@@ -74,7 +74,9 @@ SOURCES += main.cpp\
     shapes/cone.cpp \
     engines/streamlineengine.cpp \
     shapes/polyline.cpp \
-    utilities/gpudata.cpp
+    utilities/gpudata.cpp \
+    streamobjects/streamline.cpp \
+    grid/utilities/streamlinebuilder.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -128,7 +130,8 @@ HEADERS  += main.ih\
     shapes/rectangle.h \
     engines/streamlineengine.h \
     shapes/polyline.h \
-    utilities/gpudata.h
+    utilities/gpudata.h \
+    streamobjects/streamline.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

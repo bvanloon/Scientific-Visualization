@@ -15,14 +15,20 @@ class StreamLineEngine : public AbstractEngine {
    public:
       StreamLineEngine(UniformGrid *simulationGrid);
 
-      void draw(Simulation *simulation);
+      void draw(Simulation *UNUSED(simulation));
 
    public slots:
 
    signals:
 
    private:
-      int updateBuffers(Simulation *simulation);
+      static const int drawMode = GL_LINES;
+
+      GPUData buildStreamLines();
+
+      GPUData buildStreamLine(QPointF seedPoint);
+
+      int updateBuffers();
 
       UniformGrid *grid;
 };

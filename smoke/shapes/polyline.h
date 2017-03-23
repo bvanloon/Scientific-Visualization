@@ -3,6 +3,7 @@
 
 #include <QVector3D>
 #include <QList>
+#include <QPointF>
 #include "utilities/gpudata.h"
 
 namespace shapes {
@@ -10,13 +11,17 @@ namespace shapes {
     {
        public:
           PolyLine(QVector3D start);
+          PolyLine();
 
           void addVertex(QVector3D vertex);
 
-          GPUData toGPUData() const;
+          double getLength() const;
 
-       private:
+    protected:
           QList<QVector3D> vertices;
+          double length;
+
+          void updateLength(QVector3D newVertex);
     };
 }
 

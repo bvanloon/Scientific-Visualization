@@ -15,12 +15,6 @@ class GPUData
 
       void addElement(QVector3D vertex, QVector3D normal, float textureCoordinate);
 
-      void addElement(QVector3D vertex, QVector3D normal);
-
-      void addElements(QVector<QVector3D> vertices, QVector3D normal);
-
-      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals);
-
       void addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate);
 
       void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate);
@@ -34,8 +28,6 @@ class GPUData
       QVector<float> getTextureCoordinates() const;
 
       QVector<QVector3D> getNormals() const;
-
-      void setTextureCoordinates(const QVector<float>& value);
 
    private:
       QVector<QVector3D> vertices;

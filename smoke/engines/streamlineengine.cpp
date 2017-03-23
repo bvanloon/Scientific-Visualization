@@ -1,31 +1,43 @@
 #include "streamlineengine.h"
+#include "utilities/gpudata.h"
+#include "streamobjects/streamline.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::noLight),
    grid(simulationGrid)
 {}
 
-int StreamLineEngine::updateBuffers(Simulation *simulation)
+int StreamLineEngine::updateBuffers()
 {
-   Triangulation triangulation = simulation->getGridTriangulation();
+   GPUData data = buildStreamLines();
 
-   QVector<QVector3D> triangles = triangulation.getVertexPositions();
-
-   QVector<float> textureCoordinates = simulation->getTexCoord(
-                Settings::visualization::streamLines().colorMap->textureGetter,
-                triangulation);
-
-   updateBuffer(this->vertexBuffer, triangles);
-
-   //Fill normal buffer with triangles to make sure it is not empty.
-   updateBuffer(this->normalBuffer, triangles);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   return triangles.length();
+   AbstractEngine::updateBuffers(data);
+   return data.numElements();
 }
 
-void StreamLineEngine::draw(Simulation *simulation)
+GPUData StreamLineEngine::buildStreamLines()
 {
-   int bufferLength = this->updateBuffers(simulation);
+   GPUData data;
 
-   drawWithMode(GL_TRIANGLES, bufferLength);
+   for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
+   {
+      GPUData streamLine = buildStreamLine(seedpoint);
+      data.extend(streamLine);
+   }
+   return data;
+}
+
+GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
+{
+   streamobject::Line streamLine = grid->computeStreamLine(QVector3D(seedPoint),
+                                                           Settings::visualization::streamLines().colorMap->textureGetter,
+                                                           Settings::visualization::streamLines().vectorField);
+   return streamLine.toGPUData();
+}
+
+void StreamLineEngine::draw(Simulation *UNUSED(simulation))
+{
+   int bufferLength = this->updateBuffers();
+
+   drawWithMode(this->drawMode, bufferLength);
 }

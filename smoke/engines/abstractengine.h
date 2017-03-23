@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QMatrix4x4>
 
+#include "utilities/gpudata.h"
 #include "simulation/simulation.h"
 #include "settings/settings.h"
 #include "settings/visualizationsettings.h"
@@ -45,6 +46,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
 
       void updateBuffer(QOpenGLBuffer *buffer, QVector<float> data);
+
+      void updateBuffers(GPUData data);
 
       void drawWithMode(int mode, int bufferLength);
 
