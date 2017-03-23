@@ -121,7 +121,7 @@ namespace Settings {
             }
         }
         namespace engines {
-            static const bool activeEngines[4] = { false, false, false, true };
+            static const bool activeEngines[4] = { false, true, true, false };
         }
     }
 }

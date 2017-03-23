@@ -15,6 +15,14 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    this->edgeLength = computeEdgeLength(edgeLengthFactor, Settings::simulation().cellSize.width());
    this->totalLength = computeEdgeLength(totalLengthFactor, Settings::simulation().cellSize.width());
    connectToOtherSettings();
+
+   static bool printedWarning = false;
+   if(!printedWarning){
+       qDebug() << "Settings::visualization::StreamLines::StreamLines: some seedpoints are initialized for testing purposes";
+   }
+   this->seedPoints.append(QPointF(20.0, 20.0));
+   this->seedPoints.append(QPointF(200.0, 110.0));
+   this->seedPoints.append(QPointF(40.0, 300.0));
 }
 
 double Settings::visualization::StreamLines::computeEdgeLength(double factor, double cellSize)
