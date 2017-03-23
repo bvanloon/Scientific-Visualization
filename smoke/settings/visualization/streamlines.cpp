@@ -24,6 +24,7 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
 
    qDebug() << "Settings::visualization::StreamLines::StreamLines: some seedpoints are initialized for testing purposes";
    this->seedPoints.append(QPointF(20.0, 20.0));
+   this->seedPoints.append(QPointF(0, 0));
    this->seedPoints.append(QPointF(200.0, 110.0));
    this->seedPoints.append(QPointF(40.0, 300.0));
 }
