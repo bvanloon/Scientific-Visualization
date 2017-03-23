@@ -162,7 +162,12 @@ void mesh::TriangleMesh::applyTransformation(QMatrix4x4 transformationMatrix)
 
 int mesh::TriangleMesh::numVertices()
 {
-   return this->vertexPositions.length();
+    return this->vertexPositions.length();
+}
+
+int mesh::TriangleMesh::numVBOVertices()
+{
+    return this->triangles.length() * 3;
 }
 
 mesh::Vertex *mesh::TriangleMesh::addVertex(mesh::Vertex *vertex)

@@ -5,6 +5,7 @@
 #include "settings/settings.h"
 #include "grid/vertex.h"
 #include <QList>
+#include <QMatrix4x4>
 
 class Settings::visualization::StreamLines : public QObject
 {
@@ -17,6 +18,8 @@ class Settings::visualization::StreamLines : public QObject
       double edgeLengthFactor;
       QList<QPointF> seedPoints;
 
+      int numberOfSeedPoints();
+
    signals:
 
    public slots:
@@ -28,12 +31,18 @@ class Settings::visualization::StreamLines : public QObject
 
       void onSeedPointAdded(QPointF newSeedPoint);
 
+      void onWindowResized(QSizeF oldSize, QSizeF newSize);
+
    private slots:
 
    private:
       explicit StreamLines(QObject *parent = 0);
       StreamLines(StreamLines const&) = delete;
       void operator=(StreamLines const&) = delete;
+
+      void connectToOtherSettings();
+
+      void transformSeedPoints(QMatrix4x4 transformationMatrix);
 };
 
 #endif // STREAMLINES_H

@@ -31,6 +31,8 @@ namespace mesh {
 
           int numVertices();
 
+          int numVBOVertices();
+
        private:
           QVector<QVector3D> vertexPositions;
           QVector<Vertex *> vertices;

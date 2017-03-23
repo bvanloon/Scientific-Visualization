@@ -23,7 +23,7 @@ ColorMapTab *StreamLinesTab::getColorMapWidget()
 
 void StreamLinesTab::setUiToDefaults()
 {
-   this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::sim::Scalar::fluidVelocityMagnitude);
+   this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::visualization::streamLines().colorMap->scalar);
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
 
    this->ui->timeStepSelector->setValue(Settings::visualization::streamLines().timeStep);
