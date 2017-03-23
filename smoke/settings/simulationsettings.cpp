@@ -79,4 +79,5 @@ void Settings::Simulation::updateGridCellSize(int width, int height)
    cellSize.setHeight((fftw_real)height / (fftw_real)(dimension + 1));
    cellSize.setWidth((fftw_real)width / (fftw_real)(dimension + 1));
    emit recomputeVertexPositions(QSize(width, height), cellSize);
+   emit cellSizeChanged(this->cellSize);
 }

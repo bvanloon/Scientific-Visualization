@@ -29,7 +29,7 @@ class StreamLinesTab : public QWidget
 
       void edgeLengthFactorChanged(double newEdgeLengthFactor);
 
-      void maximumTotalStreamLineLengthFactorChanged(double newValue);
+      void maximumTotalLengthFactorChanged(double newValue);
 
       void clearSeedPoints();
 

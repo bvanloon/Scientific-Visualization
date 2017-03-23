@@ -76,5 +76,5 @@ void StreamLinesTab::on_edgeLengthSelector_valueChanged(double value)
 void StreamLinesTab::on_maximumLengthSelector_valueChanged(double value)
 {
    if (value == this->ui->maximumLengthSelector->minimum()) value = std::numeric_limits<double>::infinity();
-   emit maximumTotalStreamLineLengthFactorChanged(value);
+   emit maximumTotalLengthFactorChanged(value);
 }
