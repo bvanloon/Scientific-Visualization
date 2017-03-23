@@ -1,5 +1,6 @@
 #include "streamlineengine.h"
 #include "utilities/gpudata.h"
+#include "shapes/polyline.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::noLight),
@@ -24,10 +25,12 @@ GPUData StreamLineEngine::buildStreamLines()
 
 GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
-    GPUData data;
-    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
-    data.addElement(QVector3D(seedPoint), normal, 0.0);
-    data.addElement(QVector3D(seedPoint + 3 * QPointF(seedPoint)), normal, 0.0);
+    shapes::PolyLine polyLine = shapes::PolyLine(seedPoint);
+    polyLine.addVertex(seedPoint + 2 * seedPoint);
+
+    GPUData data = polyLine.toGPUData();
+    data.setTextureCoordinates(QVector<float>(2, 0.0));
+
     return data;
 }
 
