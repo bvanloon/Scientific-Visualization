@@ -19,19 +19,15 @@ streamobject::Line::Line():
 GPUData streamobject::Line::toGPUData() const
 {
    GPUData data;
-   int next, current = 0;
+
    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
 
-   do
-   {
-      next = current + 1;
+   if(this->numVertices() <= 1) return data;
 
-      data.addElement(this->vertices[current], normal, this->textureCoordinates[current]);
-      data.addElement(this->vertices[next], normal, this->textureCoordinates[next]);
-
-      current = next;
-   } while (current + 1 != this->vertices.length());
-
+   for(int current = 0, next = 1; next < this->vertices.length(); current++, next++){
+       data.addElement(this->vertices[current], normal, this->textureCoordinates[current]);
+       data.addElement(this->vertices[next], normal, this->textureCoordinates[next]);
+   }
    return data;
 }
 
