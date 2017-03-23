@@ -16,9 +16,7 @@ namespace shapes {
           void addVertex(QVector3D vertex);
           void addVertex(QPointF vertex);
 
-          GPUData toGPUData() const;
-
-       private:
+       protected:
           QList<QVector3D> vertices;
     };
 }

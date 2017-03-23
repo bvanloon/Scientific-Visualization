@@ -1,6 +1,6 @@
 #include "streamlineengine.h"
 #include "utilities/gpudata.h"
-#include "shapes/polyline.h"
+#include "streamobjects/streamline.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::noLight),
@@ -10,30 +10,32 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
 int StreamLineEngine::updateBuffers()
 {
    GPUData data = buildStreamLines();
+
    AbstractEngine::updateBuffers(data);
    return data.numElements();
 }
 
 GPUData StreamLineEngine::buildStreamLines()
 {
-    GPUData data;
-    for(QPointF seedpoint : Settings::visualization::streamLines().seedPoints){
-        data.extend(buildStreamLine(seedpoint));
-    }
-    return data;
+   GPUData data;
+
+   for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
+   {
+      data.extend(buildStreamLine(seedpoint));
+   }
+   return data;
 }
 
 GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
-    shapes::PolyLine polyLine = shapes::PolyLine(seedPoint);
-    polyLine.addVertex(seedPoint + 2 * seedPoint);
+   streamobject::Line streamLine = streamobject::Line(seedPoint, 0.0);
+   streamLine.addVertex(seedPoint + 2 * seedPoint, 0.0);
 
-    GPUData data = polyLine.toGPUData();
-    data.setTextureCoordinates(QVector<float>(2, 0.0));
+   GPUData data = streamLine.toGPUData();
+   data.setTextureCoordinates(QVector<float>(2, 0.0));
 
-    return data;
+   return data;
 }
-
 
 void StreamLineEngine::draw(Simulation *UNUSED(simulation))
 {
