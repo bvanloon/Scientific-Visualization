@@ -24,8 +24,11 @@ class StreamLinesTab : public QWidget
 
    signals:
       void timeStepChanged(double newTimeStep);
+
       void maximumTimeChanged(double newMaximumTime);
+
       void edgeLengthFactorChanged(double newEdgeLengthFactor);
+
       void maximumTotalStreamLineLengthFactorChanged(double newValue);
 
       void clearSeedPoints();
@@ -46,7 +49,7 @@ class StreamLinesTab : public QWidget
 
       void on_maximumLengthSelector_valueChanged(double value);
 
-private:
+   private:
       Ui::StreamLinesTab *ui;
 
       void setUiToDefaults();

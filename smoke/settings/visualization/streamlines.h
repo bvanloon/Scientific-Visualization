@@ -25,7 +25,9 @@ class Settings::visualization::StreamLines : public QObject
       void ontimeStepChanged(double newTimeStep);
 
       void onMaximumTimeChanged(double newMaximumTime);
+
       void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
+
       void onMaximumTotalStreamLineLengthFactorChanged(double newValue);
 
       void onClearSeedPoints();
