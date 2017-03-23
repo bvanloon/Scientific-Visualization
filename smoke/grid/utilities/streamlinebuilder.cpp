@@ -59,12 +59,13 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
 void UniformGrid::StreamLineBuilder::addEdge(QVector3D position)
 {
    //Find texture coordinate for destination
-    float textureCoordinate = 0.0;
-    this->streamLine.addVertex(position, textureCoordinate);
+   float textureCoordinate = 0.0;
+
+   this->streamLine.addVertex(position, textureCoordinate);
 }
 
 QVector3D UniformGrid::StreamLineBuilder::interpolate(QVector3D previous)
 {
-    //Euler will do just fine for now
-    return previous + 3 * previous;
+   //Euler will do just fine for now
+   return previous + 3 * previous;
 }
