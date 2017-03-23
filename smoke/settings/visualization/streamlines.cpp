@@ -20,8 +20,15 @@ void Settings::visualization::StreamLines::connectToOtherSettings()
 
 void Settings::visualization::StreamLines::transformSeedPoints(QMatrix4x4 transformationMatrix)
 {
-    for(QPointF seedPoint : this->seedPoints){
-    }
+   int numSeedPoints = numberOfSeedPoints();
+   QPointF seedPoint;
+
+   while (numSeedPoints--)
+   {
+      seedPoint = this->seedPoints.takeFirst();
+      seedPoint = transformationMatrix * seedPoint;
+      this->seedPoints.append(seedPoint);
+   }
 }
 
 const Settings::visualization::StreamLines& Settings::visualization::StreamLines::instance()
