@@ -3,6 +3,7 @@
 #include "settings/settings.h"
 #include "settings/simulationsettings.h"
 #include <QDebug>
+#include <QSpacerItem>
 
 ColorMapTab::ColorMapTab(QWidget *parent) :
    QWidget(parent),
@@ -12,6 +13,8 @@ ColorMapTab::ColorMapTab(QWidget *parent) :
 
    setUItoDefaults();
    setUpConnections();
+   this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+   this->ui->UIElementsLayout->addSpacerItem(new QSpacerItem(10, 10, QSizePolicy::Preferred, QSizePolicy::Expanding));
 }
 
 ColorMapTab::~ColorMapTab()
