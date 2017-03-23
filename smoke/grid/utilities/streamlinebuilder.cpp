@@ -90,5 +90,5 @@ float UniformGrid::StreamLineBuilder::computeTextureCoordiante(QVector3D positio
 QVector3D UniformGrid::StreamLineBuilder::interpolate(QVector3D previous)
 {
    //Euler will do just fine for now
-   return previous + 3 * previous + QVector3D(20.0, 20.0, 0.0);
+   return previous + previous + QVector3D(20.0, 20.0, 0.0);
 }
