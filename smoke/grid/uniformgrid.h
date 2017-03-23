@@ -85,11 +85,14 @@ class UniformGrid : public Grid
             streamobject::Line streamLine;
 
             void build(QVector3D seedPoint);
-            bool terminate(double currentTime);
-            bool isEdgeAllowed(QVector3D origin, QVector3D destination);
-            void addEdge(QVector3D origin);
-            QVector3D interpolate(QVector3D previous);
 
+            bool terminate(double currentTime);
+
+            bool isEdgeAllowed(QVector3D origin, QVector3D destination);
+
+            void addEdge(QVector3D origin);
+
+            QVector3D interpolate(QVector3D previous);
       };
 };
 
