@@ -72,7 +72,8 @@ SOURCES += main.cpp\
     shapes/rectangle.cpp \
     glyphs/cone.cpp \
     shapes/cone.cpp \
-    engines/streamlineengine.cpp
+    engines/streamlineengine.cpp \
+    utilities/gpudata.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -124,7 +125,8 @@ HEADERS  += main.ih\
     view/streamlinestab.h \
     engines/seedpointengine.h \
     shapes/rectangle.h \
-    engines/streamlineengine.h
+    engines/streamlineengine.h \
+    utilities/gpudata.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
