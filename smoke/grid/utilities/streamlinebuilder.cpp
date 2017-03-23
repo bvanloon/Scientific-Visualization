@@ -25,6 +25,7 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
    double time = 0.0;
    QVector3D next, current = seedPoint;
 
+   //Current isn't necessarily allowed....
    addEdge(current);
 
    while (!terminate(time))
