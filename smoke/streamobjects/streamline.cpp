@@ -35,6 +35,11 @@ GPUData streamobject::Line::toGPUData() const
    return data;
 }
 
+int streamobject::Line::numVertices() const
+{
+    return this->vertices.length();
+}
+
 void streamobject::Line::addVertex(QVector3D vertex, float textureCoordinate)
 {
    shapes::PolyLine::addVertex(vertex);

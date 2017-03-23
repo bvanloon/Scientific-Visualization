@@ -22,6 +22,8 @@ namespace streamobject {
 
           GPUData toGPUData() const;
 
+          int numVertices() const;
+
        private:
           QList<float> textureCoordinates;
     };
