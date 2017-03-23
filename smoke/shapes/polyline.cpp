@@ -25,7 +25,7 @@ double shapes::PolyLine::getLength() const
 
 void shapes::PolyLine::updateLength(QVector3D newVertex)
 {
-   if (this->vertices.length() < 2) return;
+   if (this->vertices.isEmpty()) return;
 
    QVector3D newEdge = newVertex - this->vertices.last();
    assert(newEdge.length() > 0);
