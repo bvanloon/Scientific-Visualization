@@ -99,10 +99,13 @@ class UniformGrid : public Grid
 
             bool isVertexAllowed(QVector3D vertex);
 
+            void addVertex(QVector3D position);
+
             bool tryAddingEdge(QVector3D previousPosition, QVector3D position);
 
             bool tryAddingSeedPoint(QVector3D seedPoint);
 
+            float computeTextureCoordiante(QVector3D position);
 
             QVector3D interpolate(QVector3D previous);
       };

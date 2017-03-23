@@ -54,17 +54,18 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 {
     return this->grid->inGridArea(vertex);
+void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
+{
+   float textureCoordinate = this->computeTextureCoordiante(position);
+
+   this->streamLine.addVertex(position, textureCoordinate);
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
 {
    if (!this->isEdgeAllowed(previousPosition, position)) return false;
 
-   //Find texture coordinate for destination
-//   Cell *cell = this->grid->findCellContaining(position);
-   float textureCoordinate = 0.0;
-
-   this->streamLine.addVertex(position, textureCoordinate);
+   this->addVertex(position);
 
    return true;
 }
@@ -73,13 +74,17 @@ bool UniformGrid::StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
 {
    if (!this->isVertexAllowed(seedPoint)) return false;
 
-   //Find texture coordinate for seedpoint
-   Cell *cell = this->grid->findCellContaining(seedPoint);
-   float textureCoordinate = 0.0;
-
-   this->streamLine.addVertex(seedPoint, textureCoordinate);
+   this->addVertex(seedPoint);
 
    return true;
+}
+
+float UniformGrid::StreamLineBuilder::computeTextureCoordiante(QVector3D position)
+{
+   StructuredCell *cell = this->grid->findCellContaining(position);
+   float textureCoordinate = cell->interpolateScalar(position, this->textureGetter);
+
+   return textureCoordinate;
 }
 
 QVector3D UniformGrid::StreamLineBuilder::interpolate(QVector3D previous)
