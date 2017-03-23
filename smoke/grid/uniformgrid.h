@@ -99,6 +99,8 @@ class UniformGrid : public Grid
 
             bool isVertexAllowed(QVector3D vertex);
 
+            bool isEdgeLengthAllowed(QVector3D origin, QVector3D destination);
+
             void addVertex(QVector3D position);
 
             bool tryAddingEdge(QVector3D previousPosition, QVector3D position);

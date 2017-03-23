@@ -45,15 +45,21 @@ bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
 {
-   // - Streamline goes out of the computational domain: isVertexAllowed();
-   // - streamLineLength > maximumLength
-
-   return this->isVertexAllowed(destination);
+   return this->isVertexAllowed(destination) &&
+          this->isEdgeLengthAllowed(origin, destination);
 }
 
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 {
    return this->grid->inGridArea(vertex);
+}
+
+bool UniformGrid::StreamLineBuilder::isEdgeLengthAllowed(QVector3D origin, QVector3D destination)
+{
+   double edgeLength = (destination - origin).length();
+   double potentialStreamLineLength = this->streamLine.getLength() + edgeLength;
+
+   return potentialStreamLineLength < this->maximumTotalLength;
 }
 
 void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
