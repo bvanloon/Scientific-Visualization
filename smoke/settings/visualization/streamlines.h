@@ -51,6 +51,7 @@ class Settings::visualization::StreamLines : public QObject
       void operator=(StreamLines const&) = delete;
 
       double computeEdgeLength(double factor, double cellSize);
+
       double computeMaximumTotalLength(double factor, double cellSize);
 
       double edgeLengthFactor;
