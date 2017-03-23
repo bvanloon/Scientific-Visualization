@@ -18,7 +18,7 @@ void shapes::PolyLine::addVertex(QVector3D vertex)
    this->vertices.append(vertex);
 }
 
-double PolyLine::getLength() const
+double shapes::PolyLine::getLength() const
 {
     return length;
 }

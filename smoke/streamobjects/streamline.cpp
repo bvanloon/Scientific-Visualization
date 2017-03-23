@@ -33,7 +33,7 @@ int streamobject::Line::numVertices() const
 
 int streamobject::Line::getLength() const
 {
-    return this->getLength();
+    return shapes::PolyLine::getLength();
 }
 
 void streamobject::Line::addVertex(QVector3D vertex, float textureCoordinate)
