@@ -70,21 +70,21 @@ void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, QVector
 
 QVector<QVector3D> GPUData::getVertices() const
 {
-   return vertices;
+   return this->vertices;
 }
 
 QVector<float> GPUData::getTextureCoordinates() const
 {
-   return textureCoordinates;
+   return this->textureCoordinates;
 }
 
 QVector<QVector3D> GPUData::getNormals() const
 {
-   return normals;
+   return this->normals;
 }
 
 void GPUData::setTextureCoordinates(const QVector<float>& value)
 {
    assert(value.length() == this->normals.length() == this->vertices.length());
-   textureCoordinates = value;
+   this->textureCoordinates = value;
 }
