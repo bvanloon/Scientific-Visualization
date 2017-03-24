@@ -4,11 +4,15 @@
 #include <QVector2D>
 #include <QVector3D>
 
-void inUnitRange(float t);
+void assertInUnitRange(float t);
 
-void inUnitRange(QVector2D t);
+void assertInUnitRange(QVector2D t);
 
-void inUnitRange(QVector3D t);
+void assertInUnitRange(QVector3D t);
+
+float ensureUnitRange(float t);
+QVector2D ensureUnitRange(QVector2D vector);
+QVector3D ensureUnitRange(QVector3D vector);
 
 template<typename T>
 T mapToRange(const T& input, const T& input_start, const T& input_end, const T& output_start, const T& output_end)
