@@ -1,4 +1,4 @@
-#include "grid/uniformgrid.h"
+#include "grid/utilities/streamlinebuilder.h"
 #include "settings/visualizationsettings.h"
 
 UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
