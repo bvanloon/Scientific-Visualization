@@ -76,6 +76,7 @@ class Settings::visualization::Glyphs : public QObject {
 
       QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 
+      Settings::sim::Scalar magnitude;
       Settings::sim::Vector vectorField;
 };
 
