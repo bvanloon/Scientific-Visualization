@@ -61,7 +61,7 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
    for (int i = 0; i < this->numVertices(); i++)
    {
       transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
-      this->vertexPositions.replace(i, transformedPosition.toVector3D());
+      this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
    }
 }
 
@@ -139,8 +139,6 @@ StructuredCell *UniformGrid::findCellContaining(QVector3D position)
    Cell *containingCell = upperLeftVertex->getLowerRightCell();
 
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
-   assert(cell->isInCell(position));
-
    return cell;
 }
 
@@ -242,8 +240,9 @@ void UniformGrid::changeGridArea(QSizeF newArea)
    cellSize = computeCellSize(newArea);
 
    if (hasPadding) padding = cellSize;
-   recomputeVertexPositions(oldCellSize, cellSize);
+
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
+   recomputeVertexPositions(oldCellSize, cellSize);
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
@@ -251,15 +250,29 @@ void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
    if (hasPadding) this->padding = padding;
    QSizeF oldCellSize = cellSize;
    cellSize = computeCellSize(newArea, padding);
-   recomputeVertexPositions(oldCellSize, cellSize);
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
+   recomputeVertexPositions(oldCellSize, cellSize);
 }
 
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
 {
    return QVector3D(padding.width() + (float)i * cellSize.width(),
                    padding.height() + (float)j * cellSize.height(),
-                   0.0f);
+                    0.0f);
+}
+
+QVector3D UniformGrid::boundToGrid(QVector3D position)
+{
+   float offset = std::numeric_limits<float>::epsilon() * 10;
+
+   if (position.x() <= this->coveredArea.left()) position.setX(this->coveredArea.left() + offset);
+   if (position.x() >= this->coveredArea.right()) position.setX(this->coveredArea.right() - offset);
+
+
+   if (position.y() <= this->coveredArea.top()) position.setY(this->coveredArea.top() + offset);
+   if (position.y() >= this->coveredArea.bottom()) position.setY(this->coveredArea.bottom() - offset);
+
+   return position;
 }
 
 const QSizeF& UniformGrid::getPadding() const

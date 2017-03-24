@@ -30,16 +30,7 @@ QVector3D JitterGrid::computeVertexPosition(int i, int j)
    float xOffset = xRange(re);
    float yOffset = yRange(re);
 
-   x += xOffset;
-   y += yOffset;
+   QVector3D position = QVector3D(x + xOffset, y + yOffset, 0.0f);
 
-   if (x < padding.width()) x = padding.width() + 10.0 * std::numeric_limits<float>::epsilon();
-   if (x > padding.width() + cellSize.width() * (dimension - 1)) x = padding.width() + cellSize.width() * (dimension - 1) - 10.0 * std::numeric_limits<float>::epsilon();
-
-   if (y < padding.height()) y = padding.height() + 10.0 * std::numeric_limits<float>::epsilon();
-   if (y > padding.height() + cellSize.height() * (dimension - 1)) y = padding.height() + cellSize.height() * (dimension - 1) - 10.0 * std::numeric_limits<float>::epsilon();
-
-
-
-   return QVector3D(x, y, 0.0f);
+   return boundToGrid(position);
 }
