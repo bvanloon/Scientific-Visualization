@@ -60,7 +60,7 @@ bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 
 bool UniformGrid::StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
 {
-   return magnitude <= UniformGrid::StreamLineBuilder::minimumMagnitude;
+   return true;
 }
 
 bool UniformGrid::StreamLineBuilder::hasTimeLeftOver(double currentTime)
@@ -79,9 +79,10 @@ bool UniformGrid::StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D orig
 bool UniformGrid::StreamLineBuilder::tryAddingVertex(QVector3D position)
 {
    float magnitude = this->computeMagnitude(position);
+   bool magnitudeAllowed = this->isMagnitudeLargeEnoguh(magnitude);
 
-   this->streamLine.addVertex(position, magnitude);
-   return true;
+   if (magnitudeAllowed) this->streamLine.addVertex(position, magnitude);
+   return magnitudeAllowed;
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
