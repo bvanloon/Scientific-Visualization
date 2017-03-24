@@ -48,12 +48,15 @@ class UniformGrid : public Grid
 
       virtual QVector3D computeVertexPosition(int i, int j);
 
+      QVector3D boundToGrid(QVector3D position);
+
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
 
-   private:
       QRectF coveredArea;
+   private:
+
       void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
 
       QSizeF computeCellSize(QSizeF area);
