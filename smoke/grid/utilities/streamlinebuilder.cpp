@@ -8,7 +8,7 @@ UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D s
    grid(grid),
    vectorGetter(vectorGetter),
    magnitudeGetter(magnitudeGetter),
-   currentMagnitudeIsNearZero(false)
+   currentMagnitudeIsLargeEnough(true)
 {
    this->timeStep = Settings::visualization::streamLines().timeStep;
    this->maximumTime = Settings::visualization::streamLines().maximumTime;
@@ -44,7 +44,7 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
 bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 {
    return !hasTimeLeftOver(currentTime) &&
-          !this->currentMagnitudeIsNearZero;
+          !this->currentMagnitudeIsLargeEnough;
 }
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
@@ -79,12 +79,6 @@ bool UniformGrid::StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D orig
 void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
 {
    float magnitude = this->computeMagnitude(position);
-
-   if (isMagnitudeNearZero(magnitude))
-   {
-      this->currentMagnitudeIsNearZero = true;
-      return;
-   }
    this->streamLine.addVertex(position, magnitude);
 }
 

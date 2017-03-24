@@ -26,7 +26,7 @@ class UniformGrid::StreamLineBuilder {
 
       static const float minimumMagnitude;
 
-      bool currentMagnitudeIsNearZero;
+      bool currentMagnitudeIsLargeEnough;
 
       streamobject::Line streamLine;
 
