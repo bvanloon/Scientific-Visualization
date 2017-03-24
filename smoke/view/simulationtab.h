@@ -63,10 +63,6 @@ class SimulationSettingPane : public QWidget
       void setUpConnections();
 
       void setFreezeButtonLabel(bool frozen);
-
-      void toggleNonSliceEngines(bool toggle);
-
-      void toggleSliceEnginges(bool toggle);
 };
 
 #endif // SIMULATIONSETTINGPANE_H
