@@ -60,7 +60,7 @@ bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 
 bool UniformGrid::StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
 {
-   return true;
+   return magnitude > UniformGrid::StreamLineBuilder::minimumMagnitude;
 }
 
 bool UniformGrid::StreamLineBuilder::hasTimeLeftOver(double currentTime)
