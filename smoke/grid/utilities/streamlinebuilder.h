@@ -40,7 +40,7 @@ class UniformGrid::StreamLineBuilder {
 
       bool hasTimeLeftOver(double currentTime);
 
-      bool isEdgeLengthAllowed(QVector3D origin, QVector3D destination);
+      bool isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination);
 
       void addVertex(QVector3D position);
 

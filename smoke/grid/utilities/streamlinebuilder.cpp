@@ -50,7 +50,7 @@ bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
 {
    return this->isVertexAllowed(destination) &&
-          this->isEdgeLengthAllowed(origin, destination);
+          this->isNewStreamLineLengthAllowed(origin, destination);
 }
 
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
@@ -63,7 +63,7 @@ bool UniformGrid::StreamLineBuilder::hasTimeLeftOver(double currentTime)
    return currentTime <= this->maximumTime;
 }
 
-bool UniformGrid::StreamLineBuilder::isEdgeLengthAllowed(QVector3D origin, QVector3D destination)
+bool UniformGrid::StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination)
 {
    double edgeLength = (destination - origin).length();
    double potentialStreamLineLength = this->streamLine.getLength() + edgeLength;
