@@ -1,7 +1,7 @@
 #include "grid/utilities/streamlinebuilder.h"
 #include "settings/visualizationsettings.h"
 
-const float UniformGrid::StreamLineBuilder::minimumMagnitude = std::numeric_limits<float>::min();
+const float UniformGrid::StreamLineBuilder::minimumMagnitude = 0.004;
 
 UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
                                                   Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
