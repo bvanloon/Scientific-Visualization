@@ -131,7 +131,8 @@ HEADERS  += main.ih\
     engines/streamlineengine.h \
     shapes/polyline.h \
     utilities/gpudata.h \
-    streamobjects/streamline.h
+    streamobjects/streamline.h \
+    grid/utilities/streamlinebuilder.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

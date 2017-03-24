@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <assert.h>
 #include <QtMath>
+#include "grid/utilities/streamlinebuilder.h"
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
    Grid(dimension * dimension, hasPadding),
