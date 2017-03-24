@@ -38,6 +38,8 @@ class UniformGrid::StreamLineBuilder {
 
       bool isVertexAllowed(QVector3D vertex);
 
+      bool isMagnitudeNearZero(float magnitude);
+
       bool hasTimeLeftOver(double currentTime);
 
       bool isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination);

@@ -58,6 +58,11 @@ bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
    return this->grid->inGridArea(vertex);
 }
 
+bool UniformGrid::StreamLineBuilder::isMagnitudeNearZero(float magnitude)
+{
+   return magnitude <= UniformGrid::StreamLineBuilder::minimumMagnitude;
+}
+
 bool UniformGrid::StreamLineBuilder::hasTimeLeftOver(double currentTime)
 {
    return currentTime <= this->maximumTime;
