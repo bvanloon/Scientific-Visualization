@@ -8,7 +8,7 @@ class UniformGrid::StreamLineBuilder {
    public:
       StreamLineBuilder(UniformGrid *grid, QVector3D currentPosition,
                         Vertex::vectorGetter vectorGetter,
-                        Vertex::scalarGetter textureGetter);
+                        Vertex::scalarGetter magnitudeGetter);
 
       streamobject::Line getStreamLine();
 
@@ -22,27 +22,35 @@ class UniformGrid::StreamLineBuilder {
       double maximumTotalLength;
 
       Vertex::vectorGetter vectorGetter;
-      Vertex::scalarGetter textureGetter;
+      Vertex::scalarGetter magnitudeGetter;
+
+      static const float minimumMagnitude;
+
+      bool currentMagnitudeIsLargeEnough;
 
       streamobject::Line streamLine;
 
       void build(QVector3D seedPoint);
 
-      bool terminate(double currentTime);
+      bool continueBuilding(double currentTime);
 
       bool isEdgeAllowed(QVector3D origin, QVector3D destination);
 
       bool isVertexAllowed(QVector3D vertex);
 
-      bool isEdgeLengthAllowed(QVector3D origin, QVector3D destination);
+      bool isMagnitudeLargeEnoguh(float magnitude);
 
-      void addVertex(QVector3D position);
+      bool hasTimeLeftOver(double currentTime);
+
+      bool isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination);
+
+      bool tryAddingVertex(QVector3D position);
 
       bool tryAddingEdge(QVector3D previousPosition, QVector3D position);
 
       bool tryAddingSeedPoint(QVector3D seedPoint);
 
-      float computeTextureCoordiante(QVector3D position);
+      float computeMagnitude(QVector3D position);
 
       QVector3D integrate(QVector3D previousPosition);
 };

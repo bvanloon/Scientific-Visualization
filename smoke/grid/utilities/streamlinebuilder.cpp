@@ -1,11 +1,14 @@
 #include "grid/utilities/streamlinebuilder.h"
 #include "settings/visualizationsettings.h"
 
+const float UniformGrid::StreamLineBuilder::minimumMagnitude = 0.004;
+
 UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
-                                                  Vertex::vectorGetter vectorGetter, Vertex::scalarGetter textureGetter) :
+                                                  Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
    grid(grid),
    vectorGetter(vectorGetter),
-   textureGetter(textureGetter)
+   magnitudeGetter(magnitudeGetter),
+   currentMagnitudeIsLargeEnough(true)
 {
    this->timeStep = Settings::visualization::streamLines().timeStep;
    this->maximumTime = Settings::visualization::streamLines().maximumTime;
@@ -28,7 +31,7 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
 
    bool succes = tryAddingSeedPoint(current);
 
-   while (!terminate(time) && succes)
+   while (continueBuilding(time) && succes)
    {
       next = integrate(current);
       succes = tryAddingEdge(current, next);
@@ -38,15 +41,16 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
    }
 }
 
-bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
+bool UniformGrid::StreamLineBuilder::continueBuilding(double currentTime)
 {
-   return currentTime > this->maximumTime;
+   return hasTimeLeftOver(currentTime) &&
+          this->currentMagnitudeIsLargeEnough;
 }
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
 {
    return this->isVertexAllowed(destination) &&
-          this->isEdgeLengthAllowed(origin, destination);
+          this->isNewStreamLineLengthAllowed(origin, destination);
 }
 
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
@@ -54,7 +58,17 @@ bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
    return this->grid->inGridArea(vertex);
 }
 
-bool UniformGrid::StreamLineBuilder::isEdgeLengthAllowed(QVector3D origin, QVector3D destination)
+bool UniformGrid::StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
+{
+   return magnitude > UniformGrid::StreamLineBuilder::minimumMagnitude;
+}
+
+bool UniformGrid::StreamLineBuilder::hasTimeLeftOver(double currentTime)
+{
+   return currentTime <= this->maximumTime;
+}
+
+bool UniformGrid::StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination)
 {
    double edgeLength = (destination - origin).length();
    double potentialStreamLineLength = this->streamLine.getLength() + edgeLength;
@@ -62,35 +76,35 @@ bool UniformGrid::StreamLineBuilder::isEdgeLengthAllowed(QVector3D origin, QVect
    return potentialStreamLineLength < this->maximumTotalLength;
 }
 
-void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
+bool UniformGrid::StreamLineBuilder::tryAddingVertex(QVector3D position)
 {
-   float textureCoordinate = this->computeTextureCoordiante(position);
+   float magnitude = this->computeMagnitude(position);
+   bool magnitudeAllowed = this->isMagnitudeLargeEnoguh(magnitude);
 
-   this->streamLine.addVertex(position, textureCoordinate);
+   if (magnitudeAllowed) this->streamLine.addVertex(position, magnitude);
+   return magnitudeAllowed;
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
 {
    if (!this->isEdgeAllowed(previousPosition, position)) return false;
 
-   this->addVertex(position);
-
-   return true;
+   bool succes = this->tryAddingVertex(position);
+   return succes;
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
 {
    if (!this->isVertexAllowed(seedPoint)) return false;
 
-   this->addVertex(seedPoint);
-
-   return true;
+   bool succes = this->tryAddingVertex(seedPoint);
+   return succes;
 }
 
-float UniformGrid::StreamLineBuilder::computeTextureCoordiante(QVector3D position)
+float UniformGrid::StreamLineBuilder::computeMagnitude(QVector3D position)
 {
    StructuredCell *cell = this->grid->findCellContaining(position);
-   float textureCoordinate = cell->interpolateScalar(position, this->textureGetter);
+   float textureCoordinate = cell->interpolateScalar(position, this->magnitudeGetter);
 
    return textureCoordinate;
 }
@@ -100,5 +114,6 @@ QVector3D UniformGrid::StreamLineBuilder::integrate(QVector3D previousPosition)
    //Euler will do just fine for now
    QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->vectorGetter);
    QVector3D currentPosition = previousPosition + previousVector.normalized() * this->edgeLength;
+
    return currentPosition;
 }
