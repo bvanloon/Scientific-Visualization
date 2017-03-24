@@ -1,20 +1,23 @@
 #include "range.h"
 #include <assert.h>
+#include <limits>
 
-void inUnitRange(float t)
+void assertInUnitRange(float t)
 {
-   assert(t >= 0 && t <= 1);
+   float epsilon = 100 * std::numeric_limits<float>::epsilon();
+
+   assert(t >= 0.0f - epsilon && t <= 1.0f + epsilon);
 }
 
-void inUnitRange(QVector2D t)
+void assertInUnitRange(QVector2D t)
 {
-   inUnitRange(t.x());
-   inUnitRange(t.y());
+   assertInUnitRange(t.x());
+   assertInUnitRange(t.y());
 }
 
-void inUnitRange(QVector3D t)
+void assertInUnitRange(QVector3D t)
 {
-   inUnitRange(t.x());
-   inUnitRange(t.y());
-   inUnitRange(t.z());
+   assertInUnitRange(t.x());
+   assertInUnitRange(t.y());
+   assertInUnitRange(t.z());
 }

@@ -34,17 +34,30 @@ class UniformGrid : public Grid
                                            Vertex::scalarGetter textureCoordinateGetter,
                                            Vertex::vectorGetter vectorGetter);
 
-   private:
+   protected:
+      UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
+      UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
+
+      static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
+
+
+      static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
+
+
+      static void createCells(UniformGrid *grid);
+
+      virtual QVector3D computeVertexPosition(int i, int j);
+
+      QVector3D boundToGrid(QVector3D position);
+
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
 
       QRectF coveredArea;
+   private:
 
-      UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
-      UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
-
-      void recomputeVertexPositions();
+      void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
 
       QSizeF computeCellSize(QSizeF area);
 
@@ -52,19 +65,15 @@ class UniformGrid : public Grid
 
       QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
 
+
       int to1Dindex(int x, int y) const;
 
       StructuredCell *findCellContaining(QVector3D position);
 
-      QVector3D computeVertexPosition(int i, int j);
+
+      bool inGridArea(QVector3D position);
 
       Vertex *getVertexAt(int x, int y) const;
-
-      static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
-
-      static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
-
-      static void createCells(UniformGrid *grid);
 
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 

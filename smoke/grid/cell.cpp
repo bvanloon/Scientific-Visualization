@@ -80,10 +80,14 @@ QSizeF StructuredCell::getSize() const
 
 bool StructuredCell::isInCell(QVector3D position)
 {
-   return position.x() >= upperLeft->getPosition()->x() &&
-          position.x() <= upperRight->getPosition()->x() &&
-          position.y() >= upperLeft->getPosition()->y() &&
-          position.y() <= lowerLeft->getPosition()->y();
+   bool left, right, top, bottom;
+
+   left = position.x() >= upperLeft->getPosition()->x();
+   right = position.x() <= upperRight->getPosition()->x();
+   top = position.y() >= upperLeft->getPosition()->y();
+   bottom = position.y() <= lowerLeft->getPosition()->y();
+
+   return left && right && top && bottom;
 }
 
 float StructuredCell::width()

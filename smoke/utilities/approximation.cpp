@@ -3,7 +3,7 @@
 
 float interpolateBilinearly(QVector2D t, float upperLeft, float upperRight, float lowerLeft, float lowerRight)
 {
-   inUnitRange(t);
+   assertInUnitRange(t);
 
    return upperLeft * (1 - t.x()) * (1 - t.y())
           + upperRight * t.x() * (1 - t.y())

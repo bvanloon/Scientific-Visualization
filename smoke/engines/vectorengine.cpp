@@ -7,14 +7,14 @@
 VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::phongLight),
    visualizationGrid(
-      UniformGrid::createVisualizationGrid(
+      JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),
          Settings::canvas().size,
          simulationGrid)
       ),
    simulationGrid(simulationGrid)
 {
-    emit cellSizeChanged(dynamic_cast<UniformGrid*>(visualizationGrid)->getCellSize());
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void VectorEngine::draw(Simulation *UNUSED(simulation))
@@ -27,13 +27,13 @@ void VectorEngine::draw(Simulation *UNUSED(simulation))
 void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
-   emit cellSizeChanged(dynamic_cast<UniformGrid*>(visualizationGrid)->getCellSize());
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void VectorEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
-   visualizationGrid = UniformGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
-   emit cellSizeChanged(dynamic_cast<UniformGrid*>(visualizationGrid)->getCellSize());
+   visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 int VectorEngine::updateBuffers()

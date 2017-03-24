@@ -56,7 +56,7 @@ class Settings::visualization::Glyphs : public QObject {
 
       Settings::sim::GlyphsType glyph;
       GLint drawMode;
-      QSizeF cellSize;
+      QSizeF approxCellSize;
 
       QPair<float, float> getCurrentMagnitudeRange() const;
 
@@ -76,6 +76,7 @@ class Settings::visualization::Glyphs : public QObject {
 
       QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 
+      Settings::sim::Scalar magnitude;
       Settings::sim::Vector vectorField;
 };
 
