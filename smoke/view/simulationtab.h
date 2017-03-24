@@ -49,6 +49,12 @@ class SimulationSettingPane : public QWidget
 
       void on_streamLinesCheckBox_clicked(bool checked);
 
+      void on_glyphSlicesCheckBox_clicked(bool checked);
+
+      void on_smokeSlicesCheckBox_clicked(bool checked);
+
+      void on_streamLineSlicesCheckBox_clicked(bool checked);
+
    private:
       Ui::SimulationSettingPane *ui;
 
@@ -57,6 +63,10 @@ class SimulationSettingPane : public QWidget
       void setUpConnections();
 
       void setFreezeButtonLabel(bool frozen);
+
+      void toggleNonSliceEngines(bool toggle);
+
+      void toggleSliceEnginges(bool toggle);
 };
 
 #endif // SIMULATIONSETTINGPANE_H

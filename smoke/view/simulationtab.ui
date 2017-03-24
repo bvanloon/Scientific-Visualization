@@ -102,11 +102,18 @@
      <property name="title">
       <string>Engines</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QCheckBox" name="smokeCheckBox">
+       <widget class="QCheckBox" name="checkBox">
         <property name="text">
-         <string>Smoke</string>
+         <string>Slices</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="streamLinesCheckBox">
+        <property name="text">
+         <string>Stream Lines</string>
         </property>
        </widget>
       </item>
@@ -118,9 +125,39 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="streamLinesCheckBox">
+       <widget class="QCheckBox" name="smokeCheckBox">
+        <property name="text">
+         <string>Smoke</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="SlicesGroupBox">
+     <property name="title">
+      <string>Slices</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="streamLineSlicesCheckBox">
         <property name="text">
          <string>Stream Lines</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="glyphSlicesCheckBox">
+        <property name="text">
+         <string>Glyphs</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="smokeSlicesCheckBox">
+        <property name="text">
+         <string>Smoke</string>
         </property>
        </widget>
       </item>
