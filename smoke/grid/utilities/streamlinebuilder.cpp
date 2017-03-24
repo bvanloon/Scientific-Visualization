@@ -58,7 +58,7 @@ bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
    return this->grid->inGridArea(vertex);
 }
 
-bool UniformGrid::StreamLineBuilder::isMagnitudeNearZero(float magnitude)
+bool UniformGrid::StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
 {
    return magnitude <= UniformGrid::StreamLineBuilder::minimumMagnitude;
 }

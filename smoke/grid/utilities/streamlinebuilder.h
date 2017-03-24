@@ -38,7 +38,7 @@ class UniformGrid::StreamLineBuilder {
 
       bool isVertexAllowed(QVector3D vertex);
 
-      bool isMagnitudeNearZero(float magnitude);
+      bool isMagnitudeLargeEnoguh(float magnitude);
 
       bool hasTimeLeftOver(double currentTime);
 
