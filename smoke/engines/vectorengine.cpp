@@ -2,6 +2,7 @@
 #include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
+#include "utilities/gpudata.h"
 
 
 VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
@@ -38,12 +39,15 @@ void VectorEngine::onGridDimensionChanged(int width, int UNUSED(height))
 
 int VectorEngine::updateBuffers()
 {
-   GlyphData data = visualizationGrid->getGlyphData();
-   GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
+//   GlyphData data = visualizationGrid->getGlyphData();
+//   GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
 
-   updateBuffer(this->vertexBuffer, glyphs.getVertices());
-   updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
-   updateBuffer(this->normalBuffer, glyphs.getNormals());
+    GPUData data = GPUData::cube();
+    AbstractEngine::updateBuffers(data);
 
-   return glyphs.numVertices();
+//   updateBuffer(this->vertexBuffer, glyphs.getVertices());
+//   updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
+//   updateBuffer(this->normalBuffer, glyphs.getNormals());
+
+   return data.numElements();
 }
