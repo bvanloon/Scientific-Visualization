@@ -76,16 +76,6 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
    this->ui->freezeButton->setText(labelText);
 }
 
-void SimulationSettingPane::toggleNonSliceEngines(bool toggle)
-{
-   qDebug() << "SimulationSettingPane::toggleNonSliceEngines";
-}
-
-void SimulationSettingPane::toggleSliceEnginges(bool toggle)
-{
-   qDebug() << "SimulationSettingPane::toggleSliceEnginges";
-}
-
 void SimulationSettingPane::on_freezeButton_clicked()
 {
    emit toggleFrozen(!Settings::simulation().frozen);
@@ -137,18 +127,15 @@ void SimulationSettingPane::on_streamLinesCheckBox_clicked(bool checked)
 
 void SimulationSettingPane::on_glyphSlicesCheckBox_clicked(bool checked)
 {
-   if (checked) toggleNonSliceEngines(false);
    emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, checked);
 }
 
 void SimulationSettingPane::on_smokeSlicesCheckBox_clicked(bool checked)
 {
-   if (checked) toggleNonSliceEngines(false);
    emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, checked);
 }
 
 void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 {
-   if (checked) toggleNonSliceEngines(false);
    emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, checked);
 }
