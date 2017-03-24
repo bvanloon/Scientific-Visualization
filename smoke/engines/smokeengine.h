@@ -8,10 +8,10 @@ class SmokeEngine : public AbstractEngine
    public:
       SmokeEngine();
 
-      void draw(Simulation *simulation);
+      virtual void draw(Simulation *simulation);
 
    private:
-      int updateBuffers(Simulation *simulation);
+      virtual int updateBuffers(Simulation *simulation);
 };
 
 

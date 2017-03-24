@@ -15,7 +15,7 @@ class StreamLineEngine : public AbstractEngine {
    public:
       StreamLineEngine(UniformGrid *simulationGrid);
 
-      void draw(Simulation *UNUSED(simulation));
+      virtual void draw(Simulation *UNUSED(simulation));
 
    public slots:
 
@@ -28,7 +28,7 @@ class StreamLineEngine : public AbstractEngine {
 
       GPUData buildStreamLine(QPointF seedPoint);
 
-      int updateBuffers();
+      virtual int updateBuffers();
 
       UniformGrid *grid;
 };
