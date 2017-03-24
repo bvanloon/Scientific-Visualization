@@ -32,7 +32,7 @@ class UniformGrid::StreamLineBuilder {
 
       void build(QVector3D seedPoint);
 
-      bool terminate(double currentTime);
+      bool continueBuilding(double currentTime);
 
       bool isEdgeAllowed(QVector3D origin, QVector3D destination);
 
