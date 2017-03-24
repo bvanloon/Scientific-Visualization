@@ -34,6 +34,8 @@ class UniformGrid::StreamLineBuilder {
 
       bool isVertexAllowed(QVector3D vertex);
 
+      bool hasTimeLeftOver(double currentTime);
+
       bool isEdgeLengthAllowed(QVector3D origin, QVector3D destination);
 
       void addVertex(QVector3D position);

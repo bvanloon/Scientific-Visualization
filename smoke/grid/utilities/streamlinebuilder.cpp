@@ -40,7 +40,7 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
 
 bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 {
-   return currentTime > this->maximumTime;
+   return !hasTimeLeftOver(currentTime);
 }
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
@@ -52,6 +52,11 @@ bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D d
 bool UniformGrid::StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 {
    return this->grid->inGridArea(vertex);
+}
+
+bool UniformGrid::StreamLineBuilder::hasTimeLeftOver(double currentTime)
+{
+   return currentTime <= this->maximumTime;
 }
 
 bool UniformGrid::StreamLineBuilder::isEdgeLengthAllowed(QVector3D origin, QVector3D destination)
