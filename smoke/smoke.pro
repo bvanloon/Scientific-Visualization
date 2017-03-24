@@ -133,6 +133,7 @@ HEADERS  += main.ih\
     shapes/polyline.h \
     utilities/gpudata.h \
     streamobjects/streamline.h \
+    grid/utilities/streamlinebuilder.h \
     grid/jittergrid.h
 
 FORMS    += view/mainwindow.ui \

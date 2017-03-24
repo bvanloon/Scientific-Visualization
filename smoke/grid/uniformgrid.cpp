@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <assert.h>
 #include <QtMath>
+#include "grid/utilities/streamlinebuilder.h"
 #include <cmath>
 #include <QMatrix4x4>
 #include <QVector4D>
