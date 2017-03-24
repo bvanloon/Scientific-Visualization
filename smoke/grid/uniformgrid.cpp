@@ -117,7 +117,7 @@ int UniformGrid::getDimension() const
    return dimension;
 }
 
-Cell *UniformGrid::findCellContaining(QVector3D position)
+bool UniformGrid::inGridArea(QVector3D position)
 {
    return this->coveredArea.contains(position.x(), position.y());
 }
@@ -239,7 +239,7 @@ void UniformGrid::changeGridArea(QSizeF newArea)
    cellSize = computeCellSize(newArea);
 
    if (hasPadding) padding = cellSize;
-   recomputeVertexPositions();
+   recomputeVertexPositions(oldCellSize, cellSize);
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
 }
 

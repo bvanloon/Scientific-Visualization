@@ -14,10 +14,11 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
 
 QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
 {
-   double maxX = maximumGradientValue / Settings::visualization::glyphs().cellSize.width();
-   double maxY = maximumGradientValue / Settings::visualization::glyphs().cellSize.height();
+   double maxX = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.width();
+   double maxY = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.height();
 
    double maximum = QVector2D(maxX, maxY).length();
+
    return QPair<double, double>(0.0, maximum);
 }
 

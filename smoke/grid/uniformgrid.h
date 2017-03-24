@@ -54,21 +54,21 @@ class UniformGrid : public Grid
 
    private:
       QRectF coveredArea;
-      void recomputeVertexPositions();
+      void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
 
       QSizeF computeCellSize(QSizeF area);
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
       QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
-      
+
 
       int to1Dindex(int x, int y) const;
 
       StructuredCell *findCellContaining(QVector3D position);
 
-      QVector3D computeVertexPosition(int i, int j);
 
+      bool inGridArea(QVector3D position);
 
       Vertex *getVertexAt(int x, int y) const;
 
@@ -116,9 +116,7 @@ class UniformGrid : public Grid
             float computeTextureCoordiante(QVector3D position);
 
             QVector3D integrate(QVector3D previousPosition);
-                
       };
-
 };
 
 #endif // UNIFORMGRID_H
