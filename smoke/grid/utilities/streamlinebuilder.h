@@ -24,6 +24,8 @@ class UniformGrid::StreamLineBuilder {
       Vertex::vectorGetter vectorGetter;
       Vertex::scalarGetter textureGetter;
 
+      bool currentMagnitudeIsNearZero;
+
       streamobject::Line streamLine;
 
       void build(QVector3D seedPoint);

@@ -5,7 +5,8 @@ UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D s
                                                   Vertex::vectorGetter vectorGetter, Vertex::scalarGetter textureGetter) :
    grid(grid),
    vectorGetter(vectorGetter),
-   textureGetter(textureGetter)
+   textureGetter(textureGetter),
+   currentMagnitudeIsNearZero(false)
 {
    this->timeStep = Settings::visualization::streamLines().timeStep;
    this->maximumTime = Settings::visualization::streamLines().maximumTime;
@@ -40,7 +41,8 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
 
 bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 {
-   return !hasTimeLeftOver(currentTime);
+   return !hasTimeLeftOver(currentTime) &&
+          !this->currentMagnitudeIsNearZero;
 }
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
@@ -105,5 +107,6 @@ QVector3D UniformGrid::StreamLineBuilder::integrate(QVector3D previousPosition)
    //Euler will do just fine for now
    QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->vectorGetter);
    QVector3D currentPosition = previousPosition + previousVector.normalized() * this->edgeLength;
+
    return currentPosition;
 }
