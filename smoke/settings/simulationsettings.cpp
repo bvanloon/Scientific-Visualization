@@ -21,6 +21,7 @@ void Settings::Simulation::updateRange(Settings::sim::Scalar scalar, float minim
    QPair<float, float> range = scalarRanges.find(scalar).value();
    range.first = minimum;
    range.second = maximum;
+   scalarRanges.replace(scalar, range);
    emit valueRangeChanged(scalar, minimum, maximum);
 }
 

@@ -27,6 +27,10 @@ Vertex::scalarGetter Vertex::getScalarGetter(Settings::sim::Scalar scalar)
 
    case Settings::sim::forceFieldMagnitude:
       return &Vertex::getForceMagnitude;
+
+   default:
+      qDebug() << "Vertex::getScalarGetter(): Current scalar is not supported. Using default getFluidDensity";
+      return &Vertex::getFluidDensity;
    }
 }
 
@@ -45,6 +49,10 @@ Vertex::vectorGetter Vertex::getVectorGetter(Settings::sim::Vector vector)
 
    case Settings::sim::fluidVelocityMagnitudeGradient:
       return &Vertex::getFluidVelocityMagnitudeGradient;
+
+   default:
+      qDebug() << "Vertex::getVectorGetter(): Current vector is not supported. Using default fluidVelocity ";
+      return &Vertex::getFluidVelocity;
    }
 }
 
@@ -162,13 +170,15 @@ float VisualizationVertex::getFluidVelocityMagnitude() const
 
 QVector2D VisualizationVertex::getFluidVelocityMagnitudeGradient() const
 {
-    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
-    return cell->computeGradient(*position, &Vertex::getFluidVelocityMagnitude);
+   StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
+
+   return cell->computeGradient(*position, &Vertex::getFluidVelocityMagnitude);
 }
 
 QVector2D VisualizationVertex::getForce() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
+
    return cell->interpolate2DVector(*position, &Vertex::getForce);
 }
 
@@ -188,12 +198,13 @@ float VisualizationVertex::getFluidDensity() const
 
 QVector2D VisualizationVertex::getFluidDensityGradient() const
 {
-    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
-    return cell->computeGradient(*position, &Vertex::getFluidDensity);
+   StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
+
+   return cell->computeGradient(*position, &Vertex::getFluidDensity);
 }
 
 StructuredGridVertex::StructuredGridVertex(const QVector3D *position) :
-    Vertex(position)
+   Vertex(position)
 {}
 
 

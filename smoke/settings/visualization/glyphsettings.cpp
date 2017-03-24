@@ -46,6 +46,10 @@ QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() 
    case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
       return this->computeGradientMagnitudeRange(
                     Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).second);
+
+   default:
+      qDebug() << "Settings::visualization::Glyphs::getCurrentMagnitudeRange(): Current VectorField is not supported. Using default fluidVelocityMagnitude ";
+      return Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude);
    }
 }
 
