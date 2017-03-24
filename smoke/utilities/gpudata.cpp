@@ -82,14 +82,14 @@ GPUData GPUData::cube()
    //Forward facing
    normal = QVector3D(0, 0, 1);
    //Lower Left Triangle
-//   data.addElement(QVector3D(negative, negative, negativeZ), normal, 1.0);
-//   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
-//   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
+   data.addElement(QVector3D(negative, negative, negativeZ), normal, 1.0);
+   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
+   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
 
-//   //Upper Right Triangle
-//   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
-//   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
-//   data.addElement(QVector3D(positive, positive, negativeZ), normal, 3.0);
+   //Upper Right Triangle
+   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
+   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
+   data.addElement(QVector3D(positive, positive, negativeZ), normal, 3.0);
 
    //Left facing
    normal = QVector3D(-1, 0, 0);
