@@ -78,7 +78,6 @@ SOURCES += main.cpp\
     streamobjects/streamline.cpp \
     grid/utilities/streamlinebuilder.cpp \
     grid/jittergrid.cpp \
-    engines/sliceengine.cpp \
     engines/smokeslicesengine.cpp
 
 HEADERS  += main.ih\
@@ -137,7 +136,6 @@ HEADERS  += main.ih\
     streamobjects/streamline.h \
     grid/utilities/streamlinebuilder.h \
     grid/jittergrid.h \
-    engines/sliceengine.h \
     engines/smokeslicesengine.h
 
 FORMS    += view/mainwindow.ui \

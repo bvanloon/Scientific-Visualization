@@ -1,10 +1,10 @@
 #ifndef SMOKESLICESENGINE_H
 #define SMOKESLICESENGINE_H
 
-#include "sliceengine.h"
+#include "smokeengine.h"
 #include <QObject>
 
-class SmokeSlicesEngine : public SliceEngine
+class SmokeSlicesEngine : public SmokeEngine
 {
    public:
       SmokeSlicesEngine();

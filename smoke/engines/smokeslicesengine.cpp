@@ -1,7 +1,7 @@
 #include "smokeslicesengine.h"
 
 SmokeSlicesEngine::SmokeSlicesEngine() :
-   SliceEngine()
+   SmokeEngine()
 {}
 
 void SmokeSlicesEngine::draw(Simulation *simulation)
