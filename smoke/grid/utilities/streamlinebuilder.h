@@ -24,6 +24,8 @@ class UniformGrid::StreamLineBuilder {
       Vertex::vectorGetter vectorGetter;
       Vertex::scalarGetter magnitudeGetter;
 
+      static const float minimumMagnitude;
+
       bool currentMagnitudeIsNearZero;
 
       streamobject::Line streamLine;
