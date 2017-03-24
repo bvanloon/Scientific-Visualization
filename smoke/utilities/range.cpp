@@ -3,7 +3,7 @@
 
 void inUnitRange(float t)
 {
-   assert(t >= 0 && t <= 1);
+   assert(t >= 0.0f && t <= 1.0f);
 }
 
 void inUnitRange(QVector2D t)
