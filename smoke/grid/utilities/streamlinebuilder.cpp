@@ -80,6 +80,11 @@ void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
 {
    float magnitude = this->computeMagnitude(position);
 
+   if (isMagnitudeNearZero(magnitude))
+   {
+      this->currentMagnitudeIsNearZero = true;
+      return;
+   }
    this->streamLine.addVertex(position, magnitude);
 }
 
