@@ -44,7 +44,7 @@ class UniformGrid::StreamLineBuilder {
 
       bool isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination);
 
-      void addVertex(QVector3D position);
+      bool tryAddingVertex(QVector3D position);
 
       bool tryAddingEdge(QVector3D previousPosition, QVector3D position);
 

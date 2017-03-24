@@ -76,28 +76,28 @@ bool UniformGrid::StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D orig
    return potentialStreamLineLength < this->maximumTotalLength;
 }
 
-void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
+bool UniformGrid::StreamLineBuilder::tryAddingVertex(QVector3D position)
 {
    float magnitude = this->computeMagnitude(position);
+
    this->streamLine.addVertex(position, magnitude);
+   return true;
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
 {
    if (!this->isEdgeAllowed(previousPosition, position)) return false;
 
-   this->addVertex(position);
-
-   return true;
+   bool succes = this->tryAddingVertex(position);
+   return succes;
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
 {
    if (!this->isVertexAllowed(seedPoint)) return false;
 
-   this->addVertex(seedPoint);
-
-   return true;
+   bool succes = this->tryAddingVertex(seedPoint);
+   return succes;
 }
 
 float UniformGrid::StreamLineBuilder::computeMagnitude(QVector3D position)
