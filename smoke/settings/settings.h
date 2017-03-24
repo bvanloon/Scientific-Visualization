@@ -79,6 +79,11 @@ namespace Settings {
            seedPoints,
            streamLines,
            smoke,
+
+           //Slice engines
+           smokeSlices,
+           glyphSlices,
+           streamLineSlices,
            numberOfEngines
         };
     }
@@ -121,7 +126,12 @@ namespace Settings {
             }
         }
         namespace engines {
-            static const bool activeEngines[4] = { false, false, false, true };
+            static const bool activeEngines[7] =
+            {
+               false, false, false, true,
+               //Slice Engines
+               true,  false, false
+            };
         }
     }
 }

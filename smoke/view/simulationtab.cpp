@@ -38,6 +38,12 @@ void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engi
       //Do nothing
       break;
 
+   case Settings::engines::EnginesTypes::smokeSlices:
+   //Fall through
+   case Settings::engines::EnginesTypes::glyphSlices:
+   //Fall through
+   case Settings::engines::EnginesTypes::streamLineSlices:
+   //Fall through
    case Settings::engines::EnginesTypes::numberOfEngines:
       qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum here.";
       break;
