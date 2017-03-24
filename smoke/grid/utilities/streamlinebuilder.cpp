@@ -43,8 +43,8 @@ void UniformGrid::StreamLineBuilder::build(QVector3D seedPoint)
 
 bool UniformGrid::StreamLineBuilder::terminate(double currentTime)
 {
-   return !hasTimeLeftOver(currentTime) &&
-          !this->currentMagnitudeIsLargeEnough;
+   return (!hasTimeLeftOver(currentTime)) ||
+          (!this->currentMagnitudeIsLargeEnough);
 }
 
 bool UniformGrid::StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
