@@ -2,6 +2,9 @@
 #define JITTERGRID_H
 
 #include "grid/uniformgrid.h"
+#ifdef __APPLE__
+#include <random>
+#endif
 
 class JitterGrid : public UniformGrid
 {
