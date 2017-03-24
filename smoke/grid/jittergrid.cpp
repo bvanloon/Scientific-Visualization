@@ -1,5 +1,6 @@
 #include "jittergrid.h"
 #include "qdebug.h"
+#include <limits>
 JitterGrid::JitterGrid(int dimension, QSizeF areaSize, QSizeF padding) :
    UniformGrid(dimension, areaSize, padding)
 {
@@ -20,24 +21,24 @@ UniformGrid *JitterGrid::createVisualizationGrid(int dimension,
 
 QVector3D JitterGrid::computeVertexPosition(int i, int j)
 {
-   double x = padding.width() + (double)i * cellSize.width();
-   double y = padding.height() + (double)j * cellSize.height();
+   float x = padding.width() + (float)i * cellSize.width();
+   float y = padding.height() + (float)j * cellSize.height();
 
-   std::uniform_real_distribution<double> xRange(-cellSize.width() * jitterFactor, cellSize.width() * jitterFactor);
-   std::uniform_real_distribution<double> yRange(-cellSize.height() * jitterFactor, cellSize.height() * jitterFactor);
+   std::uniform_real_distribution<float> xRange(-cellSize.width() * jitterFactor, cellSize.width() * jitterFactor);
+   std::uniform_real_distribution<float> yRange(-cellSize.height() * jitterFactor, cellSize.height() * jitterFactor);
 
-   double xOffset = xRange(re);
-   double yOffset = yRange(re);
+   float xOffset = xRange(re);
+   float yOffset = yRange(re);
 
    x += xOffset;
    y += yOffset;
 
+   if (x < padding.width()) x = padding.width() + 10.0 * std::numeric_limits<float>::epsilon();
+   if (x > padding.width() + cellSize.width() * (dimension - 1)) x = padding.width() + cellSize.width() * (dimension - 1) - 10.0 * std::numeric_limits<float>::epsilon();
 
-   if (x < padding.width()) x = padding.width();
-   if (x > padding.width() + cellSize.width() * (dimension - 1)) x = padding.width() + cellSize.width() * (dimension - 1);
+   if (y < padding.height()) y = padding.height() + 10.0 * std::numeric_limits<float>::epsilon();
+   if (y > padding.height() + cellSize.height() * (dimension - 1)) y = padding.height() + cellSize.height() * (dimension - 1) - 10.0 * std::numeric_limits<float>::epsilon();
 
-   if (y < padding.height()) y = padding.height();
-   if (y > padding.height() + cellSize.height() * (dimension - 1)) y = padding.height() + cellSize.height() * (dimension - 1);
 
 
    return QVector3D(x, y, 0.0f);

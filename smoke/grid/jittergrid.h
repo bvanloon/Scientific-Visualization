@@ -19,7 +19,7 @@ class JitterGrid : public UniformGrid
 
    private:
       std::default_random_engine re;
-      double jitterFactor = 0.4;
+      float jitterFactor = 0.4;
 };
 
 #endif // JITTERGRID_H

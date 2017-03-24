@@ -5,15 +5,17 @@
 #include <QDebug>
 #include <assert.h>
 #include <QtMath>
+#include <cmath>
 #include <QMatrix4x4>
 #include <QVector4D>
+#include <limits>
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
 
    Grid(dimension * dimension, hasPadding),
    dimension(dimension),
    cellSize(computeCellSize(areaSize)),
-   padding(0, 0)
+   padding(0.0f, 0.0f)
 {
    if (hasPadding) padding = cellSize;
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
@@ -48,8 +50,8 @@ Triangulation UniformGrid::getTriangulation() const
 
 void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize)
 {
-   double xScaling = newCellSize.width() / oldCellSize.width();
-   double yScaling = newCellSize.height() / oldCellSize.height();
+   float xScaling = newCellSize.width() / oldCellSize.width();
+   float yScaling = newCellSize.height() / oldCellSize.height();
 
    QMatrix4x4 scaleMatrix;
 
@@ -70,7 +72,7 @@ QSizeF UniformGrid::computeCellSize(QSizeF area)
 
 QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
 {
-   QSizeF usedArea = (area - padding * 2);
+   QSizeF usedArea = area - padding * 2;
    QSizeF cellSize = usedArea / ((float)(dimension - 1));
 
    return cellSize;
@@ -145,9 +147,10 @@ StructuredCell *UniformGrid::findCellContaining(QVector3D position)
 QPair<int,
       int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
 {
-   //Fabs accounts for cases where (x - x) > 0.
-   int x = qFloor(qFabs((position.x() - padding.width()) / cellSize.width()));
-   int y = qFloor(qFabs((position.y() - padding.height()) / cellSize.height()));
+   float xUnrounded = ((float)position.x() - padding.width()) / cellSize.width();
+   float yUnrounded = ((float)position.y() - padding.height()) / cellSize.height();
+   int x = std::floor(xUnrounded + std::numeric_limits<float>::epsilon());
+   int y = std::floor(yUnrounded + std::numeric_limits<float>::epsilon());
 
    // Account for the borders
    if (y == (dimension - 1)) y--;
@@ -254,8 +257,8 @@ void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
 
 QVector3D UniformGrid::computeVertexPosition(int i, int j)
 {
-   return QVector3D(padding.width() + (double)i * cellSize.width(),
-                   padding.height() + (double)j * cellSize.height(),
+   return QVector3D(padding.width() + (float)i * cellSize.width(),
+                   padding.height() + (float)j * cellSize.height(),
                    0.0f);
 }
 
