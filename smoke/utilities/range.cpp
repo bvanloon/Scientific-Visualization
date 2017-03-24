@@ -4,7 +4,9 @@
 
 void assertInUnitRange(float t)
 {
-   assert(t >= 0.0f && t <= 1.0f);
+   float epsilon = 100 * std::numeric_limits<float>::epsilon();
+
+   assert(t >= 0.0f - epsilon && t <= 1.0f + epsilon);
 }
 
 void assertInUnitRange(QVector2D t)
