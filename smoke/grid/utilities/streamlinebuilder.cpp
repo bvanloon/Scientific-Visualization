@@ -2,10 +2,10 @@
 #include "settings/visualizationsettings.h"
 
 UniformGrid::StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
-                                                  Vertex::vectorGetter vectorGetter, Vertex::scalarGetter textureGetter) :
+                                                  Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
    grid(grid),
    vectorGetter(vectorGetter),
-   textureGetter(textureGetter),
+   magnitudeGetter(magnitudeGetter),
    currentMagnitudeIsNearZero(false)
 {
    this->timeStep = Settings::visualization::streamLines().timeStep;
@@ -71,9 +71,9 @@ bool UniformGrid::StreamLineBuilder::isEdgeLengthAllowed(QVector3D origin, QVect
 
 void UniformGrid::StreamLineBuilder::addVertex(QVector3D position)
 {
-   float textureCoordinate = this->computeTextureCoordiante(position);
+   float magnitude = this->computeMagnitude(position);
 
-   this->streamLine.addVertex(position, textureCoordinate);
+   this->streamLine.addVertex(position, magnitude);
 }
 
 bool UniformGrid::StreamLineBuilder::tryAddingEdge(QVector3D previousPosition, QVector3D position)
@@ -94,7 +94,7 @@ bool UniformGrid::StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
    return true;
 }
 
-float UniformGrid::StreamLineBuilder::computeTextureCoordiante(QVector3D position)
+float UniformGrid::StreamLineBuilder::computeMagnitude(QVector3D position)
 {
    StructuredCell *cell = this->grid->findCellContaining(position);
    float textureCoordinate = cell->interpolateScalar(position, this->textureGetter);
