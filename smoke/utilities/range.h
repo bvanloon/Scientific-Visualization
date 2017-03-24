@@ -10,10 +10,6 @@ void assertInUnitRange(QVector2D t);
 
 void assertInUnitRange(QVector3D t);
 
-float ensureUnitRange(float t);
-QVector2D ensureUnitRange(QVector2D vector);
-QVector3D ensureUnitRange(QVector3D vector);
-
 template<typename T>
 T mapToRange(const T& input, const T& input_start, const T& input_end, const T& output_start, const T& output_end)
 {
