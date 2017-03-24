@@ -67,3 +67,41 @@ QVector<QVector3D> GPUData::getNormals() const
 {
    return this->normals;
 }
+
+GPUData GPUData::cube()
+{
+   GPUData data;
+   QVector3D normal;
+
+   float negative = 100;
+   float positive = 400;
+
+   float negativeZ = -1.0;
+   float positiveZ = 1.0;
+
+   //Forward facing
+   normal = QVector3D(0, 0, 1);
+   //Lower Left Triangle
+//   data.addElement(QVector3D(negative, negative, negativeZ), normal, 1.0);
+//   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
+//   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
+
+//   //Upper Right Triangle
+//   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
+//   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
+//   data.addElement(QVector3D(positive, positive, negativeZ), normal, 3.0);
+
+   //Left facing
+   normal = QVector3D(-1, 0, 0);
+   //Lower Left Triangle
+   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
+   data.addElement(QVector3D(negative, negative, negativeZ), normal, 1.0);
+   data.addElement(QVector3D(negative, negative, positiveZ), normal, 5.0);
+
+   //Upper Right Triangle
+   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
+   data.addElement(QVector3D(negative, positive, positiveZ), normal, 6.0);
+   data.addElement(QVector3D(negative, negative, positiveZ), normal, 5.0);
+
+   return data;
+}

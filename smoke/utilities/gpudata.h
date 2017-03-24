@@ -29,6 +29,8 @@ class GPUData
 
       QVector<QVector3D> getNormals() const;
 
+      static GPUData cube();
+
    private:
       QVector<QVector3D> vertices;
       QVector<float> textureCoordinates;
