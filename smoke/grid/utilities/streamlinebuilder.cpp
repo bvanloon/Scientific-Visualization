@@ -109,7 +109,7 @@ bool UniformGrid::StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
 float UniformGrid::StreamLineBuilder::computeMagnitude(QVector3D position)
 {
    StructuredCell *cell = this->grid->findCellContaining(position);
-   float textureCoordinate = cell->interpolateScalar(position, this->textureGetter);
+   float textureCoordinate = cell->interpolateScalar(position, this->magnitudeGetter);
 
    return textureCoordinate;
 }
