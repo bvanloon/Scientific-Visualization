@@ -73,9 +73,11 @@ class SimulationSettingPane : public QWidget
       void setFreezeButtonLabel(bool frozen);
 
       void disableSliceEngines();
+
       void disableNonSliceEngines();
 
       bool isSliceEngine(Settings::engines::EnginesTypes engine);
+
       bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
 
       EngineMap engines;
