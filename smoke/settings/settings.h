@@ -84,6 +84,7 @@ namespace Settings {
            smokeSlices,
            glyphSlices,
            streamLineSlices,
+
            numberOfEngines
         };
     }
