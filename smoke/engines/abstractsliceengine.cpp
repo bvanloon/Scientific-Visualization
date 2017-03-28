@@ -4,7 +4,7 @@
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel) :
    AbstractEngine(lightModel)
 {
-    updateModelViewMatrix();
+   updateModelViewMatrix();
 }
 
 void AbstractSliceEngine::onUpdateModelViewMatrix()
