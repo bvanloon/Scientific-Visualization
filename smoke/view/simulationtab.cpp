@@ -45,7 +45,6 @@ void SimulationSettingPane::setEnginesToDefaults()
    {
       engine = static_cast<Settings::engines::EnginesTypes>(i);
       emit engineToggled(engine, Settings::defaults::engines::activeEngines[engine]);
-//      this->engineCheckBoxMapping.find(engine).value()->setChecked(Settings::defaults::engines::activeEngines[engine]);
    }
 }
 
