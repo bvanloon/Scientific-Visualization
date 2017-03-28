@@ -22,6 +22,8 @@ class StreamLineSlicesEngine : public AbstractEngine
    public slots:
 
    signals:
+
+   private:
       static const int drawMode = GL_LINES;
 
       GPUData buildStreamLines();
