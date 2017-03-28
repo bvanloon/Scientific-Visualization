@@ -177,6 +177,10 @@ void MainWindow::connectGlyphEngineAndGlyphTab()
             this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
+void MainWindow::connectGlyphSlicesEngineAndGlyphTab(){
+    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
+             this->canvas->getEngine(Settings::engines::EnginesTypes::glyphSlices), SLOT(onGridDimensionChanged(int,int)));
+}
 void MainWindow::connectGlyphEngineAndSettings()
 {
    AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs);
