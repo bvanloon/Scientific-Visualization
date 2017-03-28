@@ -16,16 +16,21 @@ class Settings::Canvas : public QObject
 
       QSize size;
       Rotation rotation;
+      double scalingFactor;
 
    signals:
       void windowResized(QSizeF oldSize, QSizeF newSize);
 
       void updateModelViewMatrix();
 
+      void scalingFactorChanged(double newScalingFactor);
+
    public slots:
       void onWindowResized(int width, int height);
 
       void onRotationChanged(Rotation::axis axis, int newAngle);
+
+      void onScalingFactorChanged(double newScalingFactor);
 
    private:
       explicit Canvas(QObject *parent = 0);

@@ -13,6 +13,8 @@ Canvas::Canvas(QWidget *parent) :
 {
    this->initiateIdleLoop();
    this->initializeActiveEngines();
+
+   grabGesture(Qt::PinchGesture);
 }
 
 Canvas::~Canvas()
@@ -128,4 +130,30 @@ void Canvas::resizeGL(int width, int height)
    glViewport(0.0f, 0.0f, (GLfloat)width, (GLfloat)height);
 
    emit windowResized(width, height);
+}
+
+bool Canvas::event(QEvent *event)
+{
+   if (event->type() == QEvent::Gesture)
+   {
+      return gestureEvent(static_cast<QGestureEvent *>(event));
+   }
+   return QWidget::event(event);
+}
+
+bool Canvas::gestureEvent(QGestureEvent *event)
+{
+   if (QGesture *pinch = event->gesture(Qt::PinchGesture))
+   {
+      pinchTriggered(static_cast<QPinchGesture *>(pinch));
+   }
+   return true;
+}
+
+void Canvas::pinchTriggered(QPinchGesture *gesture)
+{
+   QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+   if (changeFlags & QPinchGesture::ScaleFactorChanged) emit scalingFactorChanged(gesture->scaleFactor());
+   if (gesture->state() == Qt::GestureFinished) qDebug() << "Never happens?";
+   update();
 }

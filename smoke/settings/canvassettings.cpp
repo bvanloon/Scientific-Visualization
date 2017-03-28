@@ -3,7 +3,8 @@
 
 Settings::Canvas::Canvas(QObject *parent) :
    QObject(parent),
-   size(506, 500)
+   size(506, 500),
+   scalingFactor(1.0)
 {}
 
 const Settings::Canvas& Settings::Canvas::instance()
@@ -29,4 +30,11 @@ void Settings::Canvas::onRotationChanged(Rotation::axis axis, int newAngle)
 {
    this->rotation.setRotation(axis, newAngle);
    emit updateModelViewMatrix();
+}
+
+void Settings::Canvas::onScalingFactorChanged(double newScalingFactor)
+{
+   this->scalingFactor = newScalingFactor;
+   emit updateModelViewMatrix();
+   emit scalingFactorChanged(newScalingFactor);
 }
