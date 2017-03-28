@@ -73,35 +73,90 @@ GPUData GPUData::cube()
    GPUData data;
    QVector3D normal;
 
-   float negative = 100;
-   float positive = 400;
+   float yA = 100;
+   float yB = 200;
+   float yC = 300;
+   float yD = 400;
+   float yE = 500;
 
-   float negativeZ = -1.0;
-   float positiveZ = 1.0;
+   float negx = 200;
+   float midx = 300;
+   float posx = 400;
+
+   float negz = -100.0;
+   float midz = 0.0;
+   float posz = 100.0;
+
+   QVector3D A = QVector3D(midx, yE, negz);
+   QVector3D B = QVector3D(midx, yC, negz);
+   QVector3D C = QVector3D(negx, yB, midz);
+   QVector3D D = QVector3D(negx, yD, midz);
+   QVector3D E = QVector3D(posx, yD, midz);
+   QVector3D F = QVector3D(posx, yB, midz);
+   QVector3D G = QVector3D(midx, yC, posz);
+   QVector3D H = QVector3D(midx, yA, posz);
 
    //Forward facing
-   normal = QVector3D(0, 0, 1);
-   //Lower Left Triangle
-   data.addElement(QVector3D(negative, negative, negativeZ), normal, 1.0);
-   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
-   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
+   normal = QVector3D::crossProduct(A, C);
+   //left back Triangle
+   data.addElement(A, normal, 1.0);
+   data.addElement(C, normal, 1.0);
+   data.addElement(B, normal, 1.0);
 
-   //Upper Right Triangle
-   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
-   data.addElement(QVector3D(positive, negative, negativeZ), normal, 4.0);
-   data.addElement(QVector3D(positive, positive, negativeZ), normal, 3.0);
+   data.addElement(A, normal, 1.0);
+   data.addElement(D, normal, 1.0);
+   data.addElement(C, normal, 1.0);
 
-   //Left facing
-   normal = QVector3D(-1, 0, 0);
-   //Lower Left Triangle
-   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
-   data.addElement(QVector3D(negative, negative, negativeZ), normal, 1.0);
-   data.addElement(QVector3D(negative, negative, positiveZ), normal, 5.0);
 
-   //Upper Right Triangle
-   data.addElement(QVector3D(negative, positive, negativeZ), normal, 2.0);
-   data.addElement(QVector3D(negative, positive, positiveZ), normal, 6.0);
-   data.addElement(QVector3D(negative, negative, positiveZ), normal, 5.0);
+   normal = QVector3D::crossProduct(A, E);
+   //right back
+   data.addElement(A, normal, 1.0);
+   data.addElement(B, normal, 1.0);
+   data.addElement(E, normal, 1.0);
+
+   data.addElement(B, normal, 1.0);
+   data.addElement(F, normal, 1.0);
+   data.addElement(E, normal, 1.0);
+
+   normal = QVector3D::crossProduct(C, H);
+   //Bottom
+   data.addElement(B, normal, 1.0);
+   data.addElement(C, normal, 1.0);
+   data.addElement(H, normal, 1.0);
+
+   data.addElement(B, normal, 1.0);
+   data.addElement(H, normal, 1.0);
+   data.addElement(F, normal, 1.0);
+
+   normal = QVector3D::crossProduct(A, G);
+   //Top
+   data.addElement(A, normal, 1.0);
+   data.addElement(D, normal, 1.0);
+   data.addElement(G, normal, 1.0);
+
+   data.addElement(A, normal, 1.0);
+   data.addElement(G, normal, 1.0);
+   data.addElement(E, normal, 1.0);
+
+   normal = QVector3D::crossProduct(D, G);
+   //Left front
+   data.addElement(C, normal, 1.0);
+   data.addElement(G, normal, 1.0);
+   data.addElement(D, normal, 1.0);
+
+   data.addElement(C, normal, 1.0);
+   data.addElement(H, normal, 1.0);
+   data.addElement(G, normal, 1.0);
+
+   normal = QVector3D::crossProduct(G, H);
+   //Right front
+   data.addElement(G, normal, 1.0);
+   data.addElement(H, normal, 1.0);
+   data.addElement(F, normal, 1.0);
+
+   data.addElement(E, normal, 1.0);
+   data.addElement(G, normal, 1.0);
+   data.addElement(F, normal, 1.0);
 
    return data;
 }
