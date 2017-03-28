@@ -5,6 +5,7 @@
 #include "settings/settings.h"
 #include <QCheckBox>
 #include <QMap>
+#include "utilities/rotation.h"
 
 namespace Ui {
     class SimulationSettingPane;
@@ -31,7 +32,7 @@ class SimulationSettingPane : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
-      void rotationChanged(int direction, int newAngle);
+      void rotationChanged(Rotation::axis axis, int newAngle);
 
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);

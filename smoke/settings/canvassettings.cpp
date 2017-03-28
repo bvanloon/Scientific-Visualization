@@ -23,3 +23,10 @@ void Settings::Canvas::onWindowResized(int width, int height)
 
    emit windowResized(oldSize, newSize);
 }
+
+void Settings::Canvas::onRotationChanged(Rotation::axis axis, int newAngle)
+{
+   qDebug() << "Settings::Canvas::onRotationChanged axis: " << axis << "angle: " << newAngle;
+   this->rotation.setRotation(axis, newAngle);
+   qDebug() << "New Rotation: " << rotation.x() << rotation.y() << rotation.z();
+}

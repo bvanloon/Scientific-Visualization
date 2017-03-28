@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSize>
+#include "utilities/rotation.h"
 
 #include "settings/settings.h"
 
@@ -14,12 +15,14 @@ class Settings::Canvas : public QObject
       static const Canvas& instance();
 
       QSize size;
+      Rotation rotation;
 
    signals:
       void windowResized(QSizeF oldSize, QSizeF newSize);
 
    public slots:
       void onWindowResized(int width, int height);
+      void onRotationChanged(Rotation::axis axis, int newAngle);
 
    private:
       explicit Canvas(QObject *parent = 0);

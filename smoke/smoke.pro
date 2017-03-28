@@ -81,7 +81,8 @@ SOURCES += main.cpp\
     engines/smokeslicesengine.cpp \
     engines/glyphsliceengine.cpp \
     engines/streamlineslicesengine.cpp \
-    engines/abstractsliceengine.cpp
+    engines/abstractsliceengine.cpp \
+    utilities/rotation.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -142,7 +143,8 @@ HEADERS  += main.ih\
     engines/smokeslicesengine.h \
     engines/glyphsliceengine.h \
     engines/streamlineslicesengine.h \
-    engines/abstractsliceengine.h
+    engines/abstractsliceengine.h \
+    utilities/rotation.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

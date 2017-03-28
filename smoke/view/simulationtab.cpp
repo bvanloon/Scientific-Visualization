@@ -172,15 +172,15 @@ void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 
 void SimulationSettingPane::on_xRotationDial_valueChanged(int value)
 {
-    emit rotationChanged(0, value);
+    emit rotationChanged(Rotation::axis::xAxis, value);
 }
 
 void SimulationSettingPane::on_yRotationDial_valueChanged(int value)
 {
-    emit rotationChanged(1, value);
+    emit rotationChanged(Rotation::axis::yAxis, value);
 }
 
 void SimulationSettingPane::on_zRotationDial_valueChanged(int value)
 {
-    emit rotationChanged(2, value);
+    emit rotationChanged(Rotation::axis::zAxis, value);
 }
