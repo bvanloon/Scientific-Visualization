@@ -9,6 +9,13 @@
 #include <QObject>
 #include <QMatrix4x4>
 
+#include <QObject>
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
+
 #include "utilities/gpudata.h"
 #include "simulation/simulation.h"
 #include "settings/settings.h"

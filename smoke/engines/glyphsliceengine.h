@@ -1,15 +1,6 @@
 #ifndef GLYPHSLICEENGINE_H
 #define GLYPHSLICEENGINE_H
 
-#include <QObject>
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
-#else
-#include <GL/gl.h>
-#endif
-#include "abstractengine.h"
-#include "grid/jittergrid.h"
-
 #include "abstractsliceengine.h"
 #include "unused.h"
 #include "grid/jittergrid.h"
