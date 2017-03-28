@@ -3,9 +3,16 @@
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel) :
    AbstractEngine(lightModel)
-{}
+{
+    updateModelViewMatrix();
+}
 
 void AbstractSliceEngine::onUpdateModelViewMatrix()
+{
+   updateModelViewMatrix();
+}
+
+void AbstractSliceEngine::updateModelViewMatrix()
 {
    this->modelViewMatrix = QMatrix4x4();
 

@@ -19,6 +19,8 @@ class AbstractSliceEngine : public AbstractEngine
    private:
 
       virtual int updateBuffers(Simulation *simulation) = 0;
+
+      void updateModelViewMatrix();
 };
 
 #endif // ABSTRACTSLICEENGINE_H
