@@ -46,7 +46,7 @@ void Rotation::setRotation(Rotation::axis axis, int angle)
     }
 }
 
-QMatrix4x4 Rotation::matrix()
+QMatrix4x4 Rotation::matrix() const
 {
    QMatrix4x4 rotationMatrix;
 

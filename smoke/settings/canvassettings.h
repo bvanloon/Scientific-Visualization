@@ -19,6 +19,7 @@ class Settings::Canvas : public QObject
 
    signals:
       void windowResized(QSizeF oldSize, QSizeF newSize);
+      void updateModelViewMatrix();
 
    public slots:
       void onWindowResized(int width, int height);

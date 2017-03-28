@@ -1,10 +1,18 @@
 #include "abstractsliceengine.h"
+#include "settings/canvassettings.h"
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel) :
    AbstractEngine(lightModel)
 {}
 
-void AbstractSliceEngine::onRotationChanged(int direction, int newAngle)
+void AbstractSliceEngine::onUpdateModelViewMatrix()
 {
-   qDebug() << "AbstractSliceEngine::onRotationChanged: direction: " << direction << " angle: " << newAngle;
+   this->modelViewMatrix = QMatrix4x4();
+
+   QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
+   this->modelViewMatrix *= rotationMatrix;
+
+   //Do things with the  scale of the model view matrix;
+
+   this->setMVPMatrix();
 }

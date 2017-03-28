@@ -13,10 +13,11 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void draw(Simulation *Simulation) = 0;
 
-public slots:
-      void onRotationChanged(int direction, int newAngle);
+   public slots:
+      void onUpdateModelViewMatrix();
 
    private:
+
       virtual int updateBuffers(Simulation *simulation) = 0;
 };
 

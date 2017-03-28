@@ -27,12 +27,11 @@ class Rotation
 
       void setRotation(Rotation::axis axis, int angle);
 
-      QMatrix4x4 matrix();
+      QMatrix4x4 matrix() const;
 
    private:
 
       int xAngle;
-
       int yAngle;
       int zAngle;
 };

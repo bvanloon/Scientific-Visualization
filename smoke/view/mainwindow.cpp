@@ -186,6 +186,9 @@ void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engi
 {
     connectAbstractEngine(engineType, colormapTab, colorMapSetings);
     AbstractSliceEngine *engine = dynamic_cast<AbstractSliceEngine*>(this->canvas->getEngine(engineType));
+
+    connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
+            engine, SLOT(onUpdateModelViewMatrix()));
 }
 
 void MainWindow::connectGlyphEngineAndGlyphTab()

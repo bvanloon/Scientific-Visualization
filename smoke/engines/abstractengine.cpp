@@ -51,7 +51,6 @@ void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
-   setNormalMatrix();
    setLightModel();
    initializeColorMapInfo();
 }
@@ -72,11 +71,13 @@ void AbstractEngine::initializeColorMapInfo()
    setColorMapClampingTo(Settings::defaults::visualization::colormap::clampingOn);
 }
 
-void AbstractEngine::setProjectionMatrix(float width, float height)
+void AbstractEngine::updateProjectionMatrix(float width, float height)
 {
    projectionMatrix.setToIdentity();
    projectionMatrix.ortho(0.0, width, 0.0, height,
                          nearClippingPlane, farClippingPlane);
+
+   setMVPMatrix();
 }
 
 void AbstractEngine::setMVPMatrix()
@@ -86,6 +87,8 @@ void AbstractEngine::setMVPMatrix()
    this->shaderProgram->bind();
    this->shaderProgram->setUniformValue("mvpMatrix", mvpMatrix);
    this->shaderProgram->release();
+
+   setNormalMatrix();
 }
 
 void AbstractEngine::setLightModel()
@@ -128,24 +131,15 @@ void AbstractEngine::onColorMapChanged(AbstractColorMap colormap)
 
 void AbstractEngine::onWindowChanged(int width, int height)
 {
-   setProjectionMatrix(width, height);
-   setMVPMatrix();
-   setNormalMatrix();
+   updateProjectionMatrix(width, height);
 }
 
 /** Set functions **/
 void AbstractEngine::setTexture(QImage image)
 {
    // TODO isValid?
-   if (!texture)
-   {
-      texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
-   }
-
-   if (texture->isCreated())
-   {
-      texture->destroy();
-   }
+   if (!texture) texture = new QOpenGLTexture(QOpenGLTexture::Target1D);
+   if (texture->isCreated()) texture->destroy();
    texture->create();
    texture->setData(image.mirrored());
    texture->setMagnificationFilter(QOpenGLTexture::Nearest);
