@@ -57,7 +57,9 @@ class SimulationSettingPane : public QWidget
 
       void on_streamLineSlicesCheckBox_clicked(bool checked);
 
-   private:
+      void on_xRotationDial_valueChanged(int value);
+
+private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
 
       Ui::SimulationSettingPane *ui;

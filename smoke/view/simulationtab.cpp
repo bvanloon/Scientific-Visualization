@@ -169,3 +169,18 @@ void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, checked);
 }
+
+void SimulationSettingPane::on_xRotationDial_valueChanged(int value)
+{
+
+}
+
+void SimulationSettingPane::on_yRotationDial_valueChanged(int value)
+{
+
+}
+
+void SimulationSettingPane::on_zRotationDial_valueChanged(int value)
+{
+
+}

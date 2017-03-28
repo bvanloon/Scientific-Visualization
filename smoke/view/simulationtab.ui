@@ -173,7 +173,7 @@
       <item>
        <layout class="QVBoxLayout" name="xLayout">
         <item>
-         <widget class="QDial" name="dial">
+         <widget class="QDial" name="xRotationDial">
           <property name="maximum">
            <number>359</number>
           </property>
@@ -183,7 +183,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="xRotationDialLabel">
           <property name="text">
            <string>x rotation</string>
           </property>
@@ -197,7 +197,7 @@
       <item>
        <layout class="QVBoxLayout" name="yLayout">
         <item>
-         <widget class="QDial" name="dial_2">
+         <widget class="QDial" name="yRotationDial">
           <property name="maximum">
            <number>359</number>
           </property>
@@ -207,7 +207,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="yRotationDialLabel">
           <property name="text">
            <string>y rotation</string>
           </property>
@@ -221,7 +221,7 @@
       <item>
        <layout class="QVBoxLayout" name="zLayout">
         <item>
-         <widget class="QDial" name="dial_3">
+         <widget class="QDial" name="zRotationDial">
           <property name="maximum">
            <number>359</number>
           </property>
@@ -231,7 +231,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="zRotationDialLabel">
           <property name="text">
            <string>z rotation</string>
           </property>
