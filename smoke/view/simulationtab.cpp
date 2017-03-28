@@ -9,8 +9,13 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    ui(new Ui::SimulationSettingPane)
 {
    ui->setupUi(this);
-   setUItoDefaults();
+   setUpEnineCheckBoxMappings();
    setUpConnections();
+   setUItoDefaults();
+
+   //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
+   this->ui->seedPointsCheckBox->setHidden(true);
+   this->ui->slicesCheckBox->setHidden(true);
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -20,28 +25,9 @@ SimulationSettingPane::~SimulationSettingPane()
 
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   switch (engine)
-   {
-   case Settings::engines::EnginesTypes::glyphs:
-      this->ui->glyphsCheckBox->setChecked(checked);
-      break;
-
-   case Settings::engines::EnginesTypes::streamLines:
-      this->ui->streamLinesCheckBox->setChecked(checked);
-      break;
-
-   case Settings::engines::EnginesTypes::smoke:
-      this->ui->smokeCheckBox->setChecked(checked);
-      break;
-
-   case Settings::engines::EnginesTypes::seedPoints:
-      //Do nothing
-      break;
-
-   case Settings::engines::EnginesTypes::numberOfEngines:
-      qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum here.";
-      break;
-   }
+   this->engines.find(engine).value()->setChecked(checked);
+   if (checked && this->isSliceEngine(engine)) disableNonSliceEngines();
+   if (checked && this->isNonSliceEngine(engine)) disableSliceEngines();
 }
 
 void SimulationSettingPane::setUItoDefaults()
@@ -52,15 +38,45 @@ void SimulationSettingPane::setUItoDefaults()
 
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 
-   ui->glyphsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::glyphs]);
-   ui->smokeCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::smoke]);
-   ui->streamLinesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::streamLines]);
+   setEnginesToDefaults();
+}
+
+void SimulationSettingPane::setEnginesToDefaults()
+{
+   Settings::engines::EnginesTypes engine;
+   for (int i = 0; i < Settings::engines::EnginesTypes::numberOfEngines; i++)
+   {
+      engine = static_cast<Settings::engines::EnginesTypes>(i);
+      emit engineToggled(engine, Settings::defaults::engines::activeEngines[engine]);
+   }
 }
 
 void SimulationSettingPane::setUpConnections()
 {
    connect(this, SIGNAL(toggleFrozen(bool)),
             this, SLOT(onToggleFrozen(bool)));
+   connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+           this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+}
+
+void SimulationSettingPane::setUpEnineCheckBoxMappings()
+{
+   this->engines.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   this->engines.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   this->engines.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   this->engines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   this->engines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   this->engines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   this->engines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
+
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
+
+   this->sliceEngines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   this->sliceEngines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   this->sliceEngines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -70,9 +86,35 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
    this->ui->freezeButton->setText(labelText);
 }
 
+void SimulationSettingPane::disableSliceEngines()
+{
+   emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, false);
+   emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, false);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, false);
+}
+
+void SimulationSettingPane::disableNonSliceEngines()
+{
+   emit engineToggled(Settings::engines::EnginesTypes::glyphs, false);
+   emit engineToggled(Settings::engines::EnginesTypes::smoke, false);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLines, false);
+   emit engineToggled(Settings::engines::EnginesTypes::seedPoints, false);
+}
+
+bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine)
+{
+   return this->sliceEngines.contains(engine);
+}
+
+bool SimulationSettingPane::isNonSliceEngine(Settings::engines::EnginesTypes engine)
+{
+   return this->nonSliceEngines.contains(engine);
+}
+
 void SimulationSettingPane::on_freezeButton_clicked()
 {
    emit toggleFrozen(!Settings::simulation().frozen);
+
    emit toggleFrozen();
 }
 
@@ -111,4 +153,19 @@ void SimulationSettingPane::on_streamLinesCheckBox_clicked(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::streamLines, checked);
    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
+}
+
+void SimulationSettingPane::on_glyphSlicesCheckBox_clicked(bool checked)
+{
+   emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, checked);
+}
+
+void SimulationSettingPane::on_smokeSlicesCheckBox_clicked(bool checked)
+{
+   emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, checked);
+}
+
+void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
+{
+   emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, checked);
 }

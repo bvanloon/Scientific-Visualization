@@ -51,8 +51,21 @@ void MainWindow::onOpenGLReady()
                          this->streamLinesTab->getColorMapWidget(),
                          Settings::visualization::streamLines().colorMap);
 
+   connectAbstractEngine(Settings::engines::smokeSlices,
+                         this->smokeTab->getColorMapWidget(),
+                         Settings::visualization::smoke().colorMap);
+   connectAbstractEngine(Settings::engines::glyphSlices,
+                         this->glyphsTab->getColorMapWidget(),
+                         Settings::visualization::glyphs().colorMap);
+   connectAbstractEngine(Settings::engines::streamLineSlices,
+                         this->streamLinesTab->getColorMapWidget(),
+                         Settings::visualization::streamLines().colorMap);
+
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
+
+   connectGlyphSlicesEngineAndSettings();
+   connectGlyphSlicesEngineAndGlyphTab();
 }
 
 void MainWindow::setUpConnections()
@@ -173,6 +186,10 @@ void MainWindow::connectGlyphEngineAndGlyphTab()
             this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
+void MainWindow::connectGlyphSlicesEngineAndGlyphTab(){
+    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
+             this->canvas->getEngine(Settings::engines::EnginesTypes::glyphSlices), SLOT(onGridDimensionChanged(int,int)));
+}
 void MainWindow::connectGlyphEngineAndSettings()
 {
    AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs);
@@ -180,6 +197,16 @@ void MainWindow::connectGlyphEngineAndSettings()
    connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
            engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
    connect(dynamic_cast<VectorEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
+           &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
+}
+
+void MainWindow::connectGlyphSlicesEngineAndSettings()
+{
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphSlices);
+
+   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
+           engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+   connect(dynamic_cast<GlyphSliceEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 

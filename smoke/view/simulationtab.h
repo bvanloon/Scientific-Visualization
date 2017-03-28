@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "settings/settings.h"
+#include <QCheckBox>
+#include <QMap>
 
 namespace Ui {
     class SimulationSettingPane;
@@ -49,14 +51,38 @@ class SimulationSettingPane : public QWidget
 
       void on_streamLinesCheckBox_clicked(bool checked);
 
+      void on_glyphSlicesCheckBox_clicked(bool checked);
+
+      void on_smokeSlicesCheckBox_clicked(bool checked);
+
+      void on_streamLineSlicesCheckBox_clicked(bool checked);
+
    private:
+      typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
+
       Ui::SimulationSettingPane *ui;
 
       void setUItoDefaults();
 
+      void setEnginesToDefaults();
+
       void setUpConnections();
 
+      void setUpEnineCheckBoxMappings();
+
       void setFreezeButtonLabel(bool frozen);
+
+      void disableSliceEngines();
+
+      void disableNonSliceEngines();
+
+      bool isSliceEngine(Settings::engines::EnginesTypes engine);
+
+      bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
+
+      EngineMap engines;
+      EngineMap nonSliceEngines;
+      EngineMap sliceEngines;
 };
 
 #endif // SIMULATIONSETTINGPANE_H

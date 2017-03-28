@@ -1,5 +1,5 @@
-#ifndef STREAMLINEENGINE_H
-#define STREAMLINEENGINE_H
+#ifndef STREAMLINESLICESENGINE_H
+#define STREAMLINESLICESENGINE_H
 
 #include <QObject>
 #ifdef __APPLE__
@@ -10,11 +10,12 @@
 #include "abstractengine.h"
 #include "unused.h"
 
-class StreamLineEngine : public AbstractEngine {
+class StreamLineSlicesEngine : public AbstractEngine
+{
    Q_OBJECT
 
    public:
-      StreamLineEngine(UniformGrid *simulationGrid);
+      StreamLineSlicesEngine(UniformGrid *simulationGrid);
 
       virtual void draw(Simulation *UNUSED(simulation));
 
@@ -34,4 +35,4 @@ class StreamLineEngine : public AbstractEngine {
       UniformGrid *grid;
 };
 
-#endif // STREAMLINEENGINE_H
+#endif // STREAMLINESLICESENGINE_H

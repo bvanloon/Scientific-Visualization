@@ -1,5 +1,5 @@
-#ifndef VECTORENGINE_H
-#define VECTORENGINE_H
+#ifndef GLYPHSLICEENGINE_H
+#define GLYPHSLICEENGINE_H
 
 #include <QObject>
 #ifdef __APPLE__
@@ -13,13 +13,13 @@
 #include "unused.h"
 #include "glyphs/glyphsfactory.h"
 
-class VectorEngine : public AbstractEngine {
+class GlyphSliceEngine : public AbstractEngine {
    Q_OBJECT
 
    public:
-      VectorEngine(UniformGrid *simulationGrid);
+      GlyphSliceEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *UNUSED(simulation));
+      virtual void draw(Simulation *UNUSED(Simulation));
 
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
@@ -37,4 +37,4 @@ class VectorEngine : public AbstractEngine {
       GlyphsFactory factory;
 };
 
-#endif // VECTORENGINE_H
+#endif // GLYPHSLICEENGINE_H
