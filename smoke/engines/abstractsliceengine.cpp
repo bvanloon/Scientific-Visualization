@@ -19,7 +19,7 @@ void AbstractSliceEngine::updateModelViewMatrix()
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
    this->modelViewMatrix *= rotationMatrix;
 
-   //Do things with the  scale of the model view matrix;
+   this->modelViewMatrix.scale(Settings::canvas().scalingFactor);
 
    this->setMVPMatrix();
 }
