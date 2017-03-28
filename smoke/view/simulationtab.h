@@ -66,7 +66,7 @@ class SimulationSettingPane : public QWidget
 
       void on_zRotationDial_valueChanged(int value);
 
-private:
+   private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
 
       Ui::SimulationSettingPane *ui;
