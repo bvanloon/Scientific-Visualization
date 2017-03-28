@@ -9,17 +9,9 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    ui(new Ui::SimulationSettingPane)
 {
    ui->setupUi(this);
-
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
-   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
-
-   setUItoDefaults();
+   setUpEnineCheckBoxMapping();
    setUpConnections();
+   setUItoDefaults();
 
    //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
    this->ui->seedPointsCheckBox->setHidden(true);
@@ -52,7 +44,8 @@ void SimulationSettingPane::setEnginesToDefaults()
    for (int i = 0; i < Settings::engines::EnginesTypes::numberOfEngines; i++)
    {
       engine = static_cast<Settings::engines::EnginesTypes>(i);
-      this->engineCheckBoxMapping.find(engine).value()->setChecked(Settings::defaults::engines::activeEngines[engine]);
+      emit engineToggled(engine, Settings::defaults::engines::activeEngines[engine]);
+//      this->engineCheckBoxMapping.find(engine).value()->setChecked(Settings::defaults::engines::activeEngines[engine]);
    }
 }
 
@@ -62,6 +55,17 @@ void SimulationSettingPane::setUpConnections()
             this, SLOT(onToggleFrozen(bool)));
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+}
+
+void SimulationSettingPane::setUpEnineCheckBoxMapping()
+{
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)

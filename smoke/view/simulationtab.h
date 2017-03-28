@@ -66,6 +66,8 @@ class SimulationSettingPane : public QWidget
 
       void setUpConnections();
 
+      void setUpEnineCheckBoxMapping();
+
       void setFreezeButtonLabel(bool frozen);
 
       void disableNonSliceEngines();
