@@ -13,8 +13,14 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void draw(Simulation *Simulation) = 0;
 
+   public slots:
+      void onUpdateModelViewMatrix();
+
    private:
+
       virtual int updateBuffers(Simulation *simulation) = 0;
+
+      void updateModelViewMatrix();
 };
 
 #endif // ABSTRACTSLICEENGINE_H

@@ -19,7 +19,14 @@ void Settings::Canvas::onWindowResized(int width, int height)
 
    size.setWidth(width);
    size.setHeight(height);
+
    QSizeF newSize = this->size;
 
    emit windowResized(oldSize, newSize);
+}
+
+void Settings::Canvas::onRotationChanged(Rotation::axis axis, int newAngle)
+{
+   this->rotation.setRotation(axis, newAngle);
+   emit updateModelViewMatrix();
 }

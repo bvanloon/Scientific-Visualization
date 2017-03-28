@@ -48,6 +48,9 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       QOpenGLBuffer *textureCoordinateBuffer;
       QOpenGLBuffer *normalBuffer;
 
+      QMatrix4x4 modelViewMatrix;
+      QMatrix4x4 projectionMatrix;
+
       enum lightModel { noLight = 0, phongLight = 1 };
 
       void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
@@ -57,6 +60,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void updateBuffers(GPUData data);
 
       void drawWithMode(int mode, int bufferLength);
+
+      void setMVPMatrix();
 
    private:
       void init();
@@ -81,10 +86,9 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void initBuffers();
 
-      //Uniforms
-      QMatrix4x4 modelViewMatrix;
-      QMatrix4x4 projectionMatrix;
+      void updateProjectionMatrix(float width, float height);
 
+      //Uniforms
       void setColorMapClampingTo(bool clampingOn);
 
       void setColorMapValueRange(float min, float max);
@@ -92,10 +96,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void setTexture(QImage image);
 
       void setColorMapClampRange(float startClamp, float endClamp);
-
-      void setProjectionMatrix(float width, float height);
-
-      void setMVPMatrix();
 
       void setLightModel();
 

@@ -131,6 +131,8 @@ void MainWindow::connectSimulationTabAndSettings()
             this->simulationTab, SLOT(onToggleFrozen(bool)));
    connect(this->simulationTab, SIGNAL(timeStepChanged(float)),
             &Settings::simulation(), SLOT(onTimeStepChanged(float)));
+   connect(this->simulationTab, SIGNAL(rotationChanged(Rotation::axis,int)),
+           &Settings::canvas(), SLOT(onRotationChanged(Rotation::axis,int)));
 }
 
 void MainWindow::connectSimulationTabAndSimulation()
@@ -180,9 +182,13 @@ void MainWindow::connectAbstractEngine(Settings::engines::EnginesTypes engineTyp
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
-void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engine, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
+void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engineType, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
 {
-    connectAbstractEngine(engine, colormapTab, colorMapSetings);
+    connectAbstractEngine(engineType, colormapTab, colorMapSetings);
+    AbstractSliceEngine *engine = dynamic_cast<AbstractSliceEngine*>(this->canvas->getEngine(engineType));
+
+    connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
+            engine, SLOT(onUpdateModelViewMatrix()));
 }
 
 void MainWindow::connectGlyphEngineAndGlyphTab()
