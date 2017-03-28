@@ -2,6 +2,7 @@
 #include "ui_simulationtab.h"
 #include "settings/simulationsettings.h"
 #include "settings/settings.h"
+#include "settings/canvassettings.h"
 #include <QDebug>
 
 SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
@@ -37,6 +38,10 @@ void SimulationSettingPane::setUItoDefaults()
    ui->forceSlider->setValue(Settings::simulation().force);
 
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
+
+   ui->xRotationDial->setValue(Settings::canvas().rotation.x());
+   ui->yRotationDial->setValue(Settings::canvas().rotation.y());
+   ui->zRotationDial->setValue(Settings::canvas().rotation.z());
 
    setEnginesToDefaults();
 }
@@ -91,6 +96,8 @@ void SimulationSettingPane::toggleSliceEngines(bool toggle)
    emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, toggle);
    emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, toggle);
    emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, toggle);
+
+   this->ui->rotationGroupBox->setDisabled(!toggle);
 }
 
 void SimulationSettingPane::toggle2DEngines(bool toggle)
@@ -99,6 +106,8 @@ void SimulationSettingPane::toggle2DEngines(bool toggle)
    emit engineToggled(Settings::engines::EnginesTypes::smoke, toggle);
    emit engineToggled(Settings::engines::EnginesTypes::streamLines, toggle);
    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, toggle);
+
+   this->ui->rotationGroupBox->setDisabled(toggle);
 }
 
 bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine)
@@ -172,15 +181,15 @@ void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 
 void SimulationSettingPane::on_xRotationDial_valueChanged(int value)
 {
-    emit rotationChanged(Rotation::axis::xAxis, value);
+   emit rotationChanged(Rotation::axis::xAxis, value);
 }
 
 void SimulationSettingPane::on_yRotationDial_valueChanged(int value)
 {
-    emit rotationChanged(Rotation::axis::yAxis, value);
+   emit rotationChanged(Rotation::axis::yAxis, value);
 }
 
 void SimulationSettingPane::on_zRotationDial_valueChanged(int value)
 {
-    emit rotationChanged(Rotation::axis::zAxis, value);
+   emit rotationChanged(Rotation::axis::zAxis, value);
 }
