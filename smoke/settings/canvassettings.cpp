@@ -4,7 +4,8 @@
 Settings::Canvas::Canvas(QObject *parent) :
    QObject(parent),
    size(506, 500),
-   scalingFactor(1.0)
+   scalingFactor(1.0),
+   panningPosition(0.0, 0.0, 0.0)
 {}
 
 const Settings::Canvas& Settings::Canvas::instance()

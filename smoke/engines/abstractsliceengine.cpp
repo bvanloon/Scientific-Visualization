@@ -16,6 +16,8 @@ void AbstractSliceEngine::updateModelViewMatrix()
 {
    this->modelViewMatrix = QMatrix4x4();
 
+   this->modelViewMatrix.translate(Settings::canvas().panningPosition);
+
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
    this->modelViewMatrix *= rotationMatrix;
 

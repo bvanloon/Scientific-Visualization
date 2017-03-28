@@ -17,6 +17,7 @@ class Settings::Canvas : public QObject
       QSize size;
       Rotation rotation;
       double scalingFactor;
+      QVector3D panningPosition;
 
    signals:
       void windowResized(QSizeF oldSize, QSizeF newSize);
