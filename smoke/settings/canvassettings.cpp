@@ -36,5 +36,4 @@ void Settings::Canvas::onScalingFactorChanged(double newScalingFactor)
    this->scalingFactor = newScalingFactor;
    emit updateModelViewMatrix();
    emit scalingFactorChanged(newScalingFactor);
-    qDebug() << "Settings::Canvas::onScalingFactorChangd";
 }
