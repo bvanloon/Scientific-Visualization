@@ -1,18 +1,18 @@
 #include "streamlineslicesengine.h"
 
 StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(AbstractEngine::lightModel::noLight),
+   AbstractSliceEngine(AbstractEngine::lightModel::noLight),
    grid(simulationGrid)
 {}
 
-void StreamLineSlicesEngine::draw(Simulation *UNUSED(simulation))
+void StreamLineSlicesEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->updateBuffers(simulation);
 
    drawWithMode(this->drawMode, bufferLength);
 }
 
-int StreamLineSlicesEngine::updateBuffers()
+int StreamLineSlicesEngine::updateBuffers(Simulation *UNUSED(Simulation))
 {
    GPUData data = buildStreamLines();
 

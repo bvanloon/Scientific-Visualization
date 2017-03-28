@@ -31,6 +31,8 @@ class SimulationSettingPane : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void rotationChanged(int direction, int newAngle);
+
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
@@ -57,7 +59,13 @@ class SimulationSettingPane : public QWidget
 
       void on_streamLineSlicesCheckBox_clicked(bool checked);
 
-   private:
+      void on_xRotationDial_valueChanged(int value);
+
+      void on_yRotationDial_valueChanged(int value);
+
+      void on_zRotationDial_valueChanged(int value);
+
+private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
 
       Ui::SimulationSettingPane *ui;

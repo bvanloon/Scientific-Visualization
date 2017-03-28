@@ -64,6 +64,9 @@ class MainWindow : public QMainWindow
       void connectAbstractEngine(Settings::engines::EnginesTypes engine,
                                  ColorMapTab *colormapTab,
                                  Settings::visualization::ColorMap *colorMapSetings);
+      void connectAbstractSliceEngine(Settings::engines::EnginesTypes engine,
+                                 ColorMapTab *colormapTab,
+                                 Settings::visualization::ColorMap *colorMapSetings);
 
       //Tabs
       void connectSimulationTabAndSettings();
