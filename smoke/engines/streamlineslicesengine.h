@@ -2,17 +2,17 @@
 #define STREAMLINESLICESENGINE_H
 
 #include <QObject>
-#include "abstractengine.h"
+#include "abstractsliceengine.h"
 #include "unused.h"
 
-class StreamLineSlicesEngine : public AbstractEngine
+class StreamLineSlicesEngine : public AbstractSliceEngine
 {
    Q_OBJECT
 
    public:
       StreamLineSlicesEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *UNUSED(simulation));
+      virtual void draw(Simulation *simulation);
 
    public slots:
 
@@ -25,7 +25,7 @@ class StreamLineSlicesEngine : public AbstractEngine
 
       GPUData buildStreamLine(QPointF seedPoint);
 
-      virtual int updateBuffers();
+      virtual int updateBuffers(Simulation *UNUSED(Simulation));
 
       UniformGrid *grid;
 };
