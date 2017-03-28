@@ -118,7 +118,15 @@ void Canvas::clickMouseEvent(QMouseEvent *event)
 
 void Canvas::altMouseEvent(QMouseEvent *event)
 {
-    qDebug() << "Canvas::altMouseEvent";
+    static QVector3D previousMousePosition;
+
+    QVector3D currentPosition = QVector3D(event->localPos().x(), event->localPos().y());
+
+    qDebug() << "Account for the difference in the position of the origin.";
+
+    qDebug() << "emit the panning direction";
+
+    previousMousePosition = currentPosition;
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
