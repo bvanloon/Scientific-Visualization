@@ -4,7 +4,7 @@
 #include "settings/canvassettings.h"
 
 GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(AbstractEngine::lightModel::phongLight),
+   AbstractSliceEngine(AbstractEngine::lightModel::phongLight),
    visualizationGrid(
       JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),
@@ -16,9 +16,9 @@ GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-void GlyphSliceEngine::draw(Simulation *UNUSED(Simulation))
+void GlyphSliceEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->updateBuffers(simulation);
 
    drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
 }
@@ -29,7 +29,7 @@ void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellS
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-int GlyphSliceEngine::updateBuffers()
+int GlyphSliceEngine::updateBuffers(Simulation *UNUSED(Simulation))
 {
    GlyphData data = visualizationGrid->getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);

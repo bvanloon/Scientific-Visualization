@@ -10,16 +10,18 @@
 #include "abstractengine.h"
 #include "grid/jittergrid.h"
 
+#include "abstractsliceengine.h"
 #include "unused.h"
+#include "grid/jittergrid.h"
 #include "glyphs/glyphsfactory.h"
 
-class GlyphSliceEngine : public AbstractEngine {
+class GlyphSliceEngine : public AbstractSliceEngine {
    Q_OBJECT
 
    public:
       GlyphSliceEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *UNUSED(Simulation));
+      virtual void draw(Simulation *simulation);
 
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
@@ -30,7 +32,7 @@ class GlyphSliceEngine : public AbstractEngine {
       void cellSizeChanged(QSizeF newSize);
 
    private:
-      virtual int updateBuffers();
+      virtual int updateBuffers(Simulation *UNUSED(Simulation));
 
       Grid *visualizationGrid;
       UniformGrid *simulationGrid;
