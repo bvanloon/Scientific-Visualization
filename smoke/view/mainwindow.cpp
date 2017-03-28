@@ -51,6 +51,10 @@ void MainWindow::onOpenGLReady()
                          this->streamLinesTab->getColorMapWidget(),
                          Settings::visualization::streamLines().colorMap);
 
+   connectAbstractEngine(Settings::engines::smokeSlices,
+                         this->smokeTab->getColorMapWidget(),
+                         Settings::visualization::smoke().colorMap);
+
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
 }
