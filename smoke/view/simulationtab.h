@@ -31,7 +31,7 @@ class SimulationSettingPane : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
-      void rotationChanged(int direction, newAngle);
+      void rotationChanged(int direction, int newAngle);
 
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
