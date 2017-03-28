@@ -51,13 +51,13 @@ void MainWindow::onOpenGLReady()
                          this->streamLinesTab->getColorMapWidget(),
                          Settings::visualization::streamLines().colorMap);
 
-   connectAbstractEngine(Settings::engines::smokeSlices,
+   connectAbstractSliceEngine(Settings::engines::smokeSlices,
                          this->smokeTab->getColorMapWidget(),
                          Settings::visualization::smoke().colorMap);
-   connectAbstractEngine(Settings::engines::glyphSlices,
+   connectAbstractSliceEngine(Settings::engines::glyphSlices,
                          this->glyphsTab->getColorMapWidget(),
                          Settings::visualization::glyphs().colorMap);
-   connectAbstractEngine(Settings::engines::streamLineSlices,
+   connectAbstractSliceEngine(Settings::engines::streamLineSlices,
                          this->streamLinesTab->getColorMapWidget(),
                          Settings::visualization::streamLines().colorMap);
 
@@ -177,7 +177,12 @@ void MainWindow::connectAbstractEngine(Settings::engines::EnginesTypes engineTyp
 
    //Connect to the Simulation
    connect(&Settings::simulation(), SIGNAL(valueRangeChanged(Settings::sim::Scalar,float,float)),
-            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+           engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
+}
+
+void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engine, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
+{
+    connectAbstractEngine(engine, colormapTab, colorMapSetings);
 }
 
 void MainWindow::connectGlyphEngineAndGlyphTab()
