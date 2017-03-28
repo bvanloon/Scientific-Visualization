@@ -101,15 +101,11 @@ void SimulationSettingPane::on_timeStepBox_valueChanged(double value)
 void SimulationSettingPane::on_glyphsCheckBox_toggled(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::glyphs, checked);
-
-   if (checked) toggleSliceEnginges(false);
 }
 
 void SimulationSettingPane::on_smokeCheckBox_toggled(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::smoke, checked);
-
-   if (checked) toggleSliceEnginges(false);
 }
 
 void SimulationSettingPane::on_forceSlider_valueChanged(double value)
@@ -121,8 +117,6 @@ void SimulationSettingPane::on_streamLinesCheckBox_clicked(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::streamLines, checked);
    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, checked);
-
-   if (checked) toggleSliceEnginges(false);
 }
 
 void SimulationSettingPane::on_glyphSlicesCheckBox_clicked(bool checked)
