@@ -81,16 +81,16 @@ private:
 
       void setFreezeButtonLabel(bool frozen);
 
-      void disableSliceEngines();
+      void toggleSliceEngines(bool toggle);
 
-      void disableNonSliceEngines();
+      void toggle2DEngines(bool toggle);
 
       bool isSliceEngine(Settings::engines::EnginesTypes engine);
 
       bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
 
       EngineMap engines;
-      EngineMap nonSliceEngines;
+      EngineMap engines2D;
       EngineMap sliceEngines;
 };
 
