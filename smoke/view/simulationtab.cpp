@@ -11,6 +11,13 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    ui->setupUi(this);
    setUItoDefaults();
    setUpConnections();
+
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -20,33 +27,11 @@ SimulationSettingPane::~SimulationSettingPane()
 
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   switch (engine)
+   auto pair = this->engineCheckBoxMapping.find(engine);
+
+   if (pair != this->engineCheckBoxMapping.end())
    {
-   case Settings::engines::EnginesTypes::glyphs:
-      this->ui->glyphsCheckBox->setChecked(checked);
-      break;
-
-   case Settings::engines::EnginesTypes::streamLines:
-      this->ui->streamLinesCheckBox->setChecked(checked);
-      break;
-
-   case Settings::engines::EnginesTypes::smoke:
-      this->ui->smokeCheckBox->setChecked(checked);
-      break;
-
-   case Settings::engines::EnginesTypes::seedPoints:
-      //Do nothing
-      break;
-
-   case Settings::engines::EnginesTypes::smokeSlices:
-   //Fall through
-   case Settings::engines::EnginesTypes::glyphSlices:
-   //Fall through
-   case Settings::engines::EnginesTypes::streamLineSlices:
-   //Fall through
-   case Settings::engines::EnginesTypes::numberOfEngines:
-      qDebug() << "SimulationSettingPane::onEngineToggled: " << engine << " is an invalid engine enum here.";
-      break;
+      pair.value()->setChecked(checked);
    }
 }
 

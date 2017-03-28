@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "settings/settings.h"
+#include <QCheckBox>
+#include <QMap>
 
 namespace Ui {
     class SimulationSettingPane;
@@ -63,6 +65,7 @@ class SimulationSettingPane : public QWidget
       void setUpConnections();
 
       void setFreezeButtonLabel(bool frozen);
+      QMap<Settings::engines::EnginesTypes, QCheckBox *> engineCheckBoxMapping;
 };
 
 #endif // SIMULATIONSETTINGPANE_H
