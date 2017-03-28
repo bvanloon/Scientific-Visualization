@@ -153,14 +153,7 @@ bool Canvas::gestureEvent(QGestureEvent *event)
 void Canvas::pinchTriggered(QPinchGesture *gesture)
 {
    QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
-   if (changeFlags & QPinchGesture::ScaleFactorChanged)
-   {
-//        this->zoomingFactor = gesture->scaleFactor();
-      qDebug() << "Do stuff!";
-   }
-   if (gesture->state() == Qt::GestureFinished)
-   {
-      qDebug() << "Never happens?";
-   }
+   if (changeFlags & QPinchGesture::ScaleFactorChanged) emit scalingFactorChanged(gesture->scaleFactor());
+   if (gesture->state() == Qt::GestureFinished) qDebug() << "Never happens?";
    update();
 }

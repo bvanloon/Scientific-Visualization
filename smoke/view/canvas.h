@@ -53,6 +53,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void seedPointAdded(QPointF position);
 
+      void scalingFactorChanged(double scalingFactor);
+
    private slots:
       void idleLoop();
 

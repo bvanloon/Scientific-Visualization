@@ -111,6 +111,9 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(seedPointAdded(QPointF)),
            &Settings::visualization::streamLines(), SLOT(onSeedPointAdded(QPointF)));
+
+   connect(this->canvas, SIGNAL(scalingFactorChanged(double)),
+           &Settings::canvas(), SLOT(onScalingFactorChanged(double)));
 }
 
 void MainWindow::connectCanvasAndTabs()
