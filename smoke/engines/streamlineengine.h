@@ -1,5 +1,6 @@
 #ifndef STREAMLINEENGINE_H
 #define STREAMLINEENGINE_H
+
 #include <QObject>
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
