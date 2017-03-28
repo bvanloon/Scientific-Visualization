@@ -16,6 +16,7 @@
 #include "engines/smokeengine.h"
 #include "engines/seedpointengine.h"
 #include "engines/smokeslicesengine.h"
+#include "engines/streamlineslicesengine.h"
 #include "engines/glyphsliceengine.h"
 #include "simulation/simulation.h"
 #include "engines/streamlineengine.h"
