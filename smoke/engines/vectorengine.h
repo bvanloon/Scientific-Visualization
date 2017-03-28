@@ -10,7 +10,6 @@
 #include "abstractengine.h"
 #include "grid/jittergrid.h"
 
-
 #include "unused.h"
 #include "glyphs/glyphsfactory.h"
 
