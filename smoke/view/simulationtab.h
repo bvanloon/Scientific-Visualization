@@ -58,6 +58,8 @@ class SimulationSettingPane : public QWidget
       void on_streamLineSlicesCheckBox_clicked(bool checked);
 
    private:
+      typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
+
       Ui::SimulationSettingPane *ui;
 
       void setUItoDefaults();
@@ -70,9 +72,11 @@ class SimulationSettingPane : public QWidget
 
       void setFreezeButtonLabel(bool frozen);
 
+      void disableSliceEngines();
       void disableNonSliceEngines();
 
-      typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
+      bool isSliceEngine(Settings::engines::EnginesTypes engine);
+      bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
 
       EngineMap engines;
       EngineMap nonSliceEngines;

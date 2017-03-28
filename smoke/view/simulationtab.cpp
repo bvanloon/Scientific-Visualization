@@ -15,6 +15,7 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
 
    //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
    this->ui->seedPointsCheckBox->setHidden(true);
+   this->ui->slicesCheckBox->setHidden(true);
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -25,6 +26,8 @@ SimulationSettingPane::~SimulationSettingPane()
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
    this->engines.find(engine).value()->setChecked(checked);
+   if (checked && this->isSliceEngine(engine)) disableNonSliceEngines();
+   if (checked && this->isNonSliceEngine(engine)) disableSliceEngines();
 }
 
 void SimulationSettingPane::setUItoDefaults()
@@ -66,14 +69,14 @@ void SimulationSettingPane::setUpEnineCheckBoxMappings()
    this->engines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
    this->engines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
 
-    this->nonSliceEngines.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
-    this->nonSliceEngines.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
-    this->nonSliceEngines.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-    this->nonSliceEngines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   this->nonSliceEngines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
 
-    this->sliceEngines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-    this->sliceEngines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-    this->sliceEngines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   this->sliceEngines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   this->sliceEngines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   this->sliceEngines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -83,14 +86,35 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
    this->ui->freezeButton->setText(labelText);
 }
 
+void SimulationSettingPane::disableSliceEngines()
+{
+   emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, false);
+   emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, false);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, false);
+}
+
 void SimulationSettingPane::disableNonSliceEngines()
 {
+   emit engineToggled(Settings::engines::EnginesTypes::glyphs, false);
+   emit engineToggled(Settings::engines::EnginesTypes::smoke, false);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLines, false);
+   emit engineToggled(Settings::engines::EnginesTypes::seedPoints, false);
+}
 
+bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine)
+{
+   return this->sliceEngines.contains(engine);
+}
+
+bool SimulationSettingPane::isNonSliceEngine(Settings::engines::EnginesTypes engine)
+{
+   return this->nonSliceEngines.contains(engine);
 }
 
 void SimulationSettingPane::on_freezeButton_clicked()
 {
    emit toggleFrozen(!Settings::simulation().frozen);
+
    emit toggleFrozen();
 }
 
