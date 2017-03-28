@@ -10,6 +10,7 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
 #include <QDebug>
+#include <QGestureEvent>
 #include <QTimer>
 
 #include "engines/vectorengine.h"
@@ -52,6 +53,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void seedPointAdded(QPointF position);
 
+      void scalingFactorChanged(double scalingFactor);
+
    private slots:
       void idleLoop();
 
@@ -66,6 +69,9 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
       void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
+
+      bool event(QEvent *event) Q_DECL_OVERRIDE;
+
 
    private:
       Simulation *simulation;
@@ -89,6 +95,11 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void initializeUniforms();
 
       void initializeColorMapInfo();
+
+      // Events
+      bool gestureEvent(QGestureEvent *event);
+
+      void pinchTriggered(QPinchGesture *gesture);
 };
 
 #endif // CANVAS_H

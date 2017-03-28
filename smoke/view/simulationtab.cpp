@@ -31,6 +31,11 @@ void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engi
    if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
 }
 
+void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
+{
+    this->ui->scaleFactorSpinBox->setValue(scalingFactor);
+}
+
 void SimulationSettingPane::setUItoDefaults()
 {
    ui->forceSlider->setMinimum(Settings::defaults::simulation::forceMin);
@@ -42,6 +47,8 @@ void SimulationSettingPane::setUItoDefaults()
    ui->xRotationDial->setValue(Settings::canvas().rotation.x());
    ui->yRotationDial->setValue(Settings::canvas().rotation.y());
    ui->zRotationDial->setValue(Settings::canvas().rotation.z());
+
+   ui->scaleFactorSpinBox->setValue(Settings::canvas().scalingFactor);
 
    setEnginesToDefaults();
 }
@@ -192,4 +199,9 @@ void SimulationSettingPane::on_yRotationDial_valueChanged(int value)
 void SimulationSettingPane::on_zRotationDial_valueChanged(int value)
 {
    emit rotationChanged(Rotation::axis::zAxis, value);
+}
+
+void SimulationSettingPane::on_scaleFactorSpinBox_valueChanged(double value)
+{
+    emit scalingFactorChanged(value);
 }

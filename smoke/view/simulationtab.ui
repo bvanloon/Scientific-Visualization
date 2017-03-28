@@ -19,149 +19,169 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QPushButton" name="freezeButton">
-       <property name="toolTip">
-        <string>(spacebar or A) freeze the simulation</string>
-       </property>
-       <property name="text">
-        <string>Freeze</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="stepButton">
-       <property name="toolTip">
-        <string>(s) take one step in the simulation</string>
-       </property>
-       <property name="text">
-        <string>Step</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="forceLabel">
-       <property name="toolTip">
-        <string>the force added at the position of the mouse cursor.</string>
-       </property>
-       <property name="text">
-        <string>Force</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="timeSteplabel">
-       <property name="text">
-        <string>Time Step</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="timeStepBox">
-       <property name="correctionMode">
-        <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
-       </property>
-       <property name="decimals">
-        <number>3</number>
-       </property>
-       <property name="singleStep">
-        <double>0.010000000000000</double>
-       </property>
-       <property name="value">
-        <double>0.400000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QDoubleSpinBox" name="forceSlider"/>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
+    <widget class="QGroupBox" name="simulationGroupBox">
      <property name="title">
-      <string>Engines</string>
+      <string>Simulation</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QCheckBox" name="slicesCheckBox">
-        <property name="text">
-         <string>Slices</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QPushButton" name="freezeButton">
+          <property name="toolTip">
+           <string>(spacebar or A) freeze the simulation</string>
+          </property>
+          <property name="text">
+           <string>Freeze</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="stepButton">
+          <property name="toolTip">
+           <string>(s) take one step in the simulation</string>
+          </property>
+          <property name="text">
+           <string>Step</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QCheckBox" name="streamLinesCheckBox">
-        <property name="text">
-         <string>Stream Lines</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="glyphsCheckBox">
-        <property name="text">
-         <string>Glyphs</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="smokeCheckBox">
-        <property name="text">
-         <string>Smoke</string>
-        </property>
-       </widget>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="forceLabel">
+          <property name="toolTip">
+           <string>the force added at the position of the mouse cursor.</string>
+          </property>
+          <property name="text">
+           <string>Force</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QDoubleSpinBox" name="forceSlider"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="timeSteplabel">
+          <property name="text">
+           <string>Time Step</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QDoubleSpinBox" name="timeStepBox">
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.400000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line_2">
+    <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="SlicesGroupBox">
-     <property name="title">
-      <string>Slices</string>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="title">
+        <string>Engines</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="slicesCheckBox">
+          <property name="text">
+           <string>Slices</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="streamLinesCheckBox">
+          <property name="text">
+           <string>Stream Lines</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="glyphsCheckBox">
+          <property name="text">
+           <string>Glyphs</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="smokeCheckBox">
+          <property name="text">
+           <string>Smoke</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="SlicesGroupBox">
+       <property name="title">
+        <string>Slices</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QCheckBox" name="streamLineSlicesCheckBox">
+          <property name="text">
+           <string>Stream Lines</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="glyphSlicesCheckBox">
+          <property name="text">
+           <string>Glyphs</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="smokeSlicesCheckBox">
+          <property name="text">
+           <string>Smoke</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QCheckBox" name="streamLineSlicesCheckBox">
-        <property name="text">
-         <string>Stream Lines</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="glyphSlicesCheckBox">
-        <property name="text">
-         <string>Glyphs</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="smokeSlicesCheckBox">
-        <property name="text">
-         <string>Smoke</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
@@ -244,6 +264,20 @@
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="scaleFactorLabel">
+       <property name="text">
+        <string>Scale Factor</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="scaleFactorSpinBox"/>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QCheckBox" name="seedPointsCheckBox">

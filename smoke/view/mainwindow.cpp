@@ -111,6 +111,9 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(seedPointAdded(QPointF)),
            &Settings::visualization::streamLines(), SLOT(onSeedPointAdded(QPointF)));
+
+   connect(this->canvas, SIGNAL(scalingFactorChanged(double)),
+           &Settings::canvas(), SLOT(onScalingFactorChanged(double)));
 }
 
 void MainWindow::connectCanvasAndTabs()
@@ -133,6 +136,10 @@ void MainWindow::connectSimulationTabAndSettings()
             &Settings::simulation(), SLOT(onTimeStepChanged(float)));
    connect(this->simulationTab, SIGNAL(rotationChanged(Rotation::axis,int)),
            &Settings::canvas(), SLOT(onRotationChanged(Rotation::axis,int)));
+   connect(this->simulationTab, SIGNAL(scalingFactorChanged(double)),
+           &Settings::canvas(), SLOT(onScalingFactorChanged(double)));
+   connect(&Settings::canvas(), SIGNAL(scalingFactorChanged(double)),
+           this->simulationTab, SLOT(onScalingFactorChanged(double)));
 }
 
 void MainWindow::connectSimulationTabAndSimulation()
