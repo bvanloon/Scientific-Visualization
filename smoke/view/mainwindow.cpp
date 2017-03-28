@@ -54,9 +54,15 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::smokeSlices,
                          this->smokeTab->getColorMapWidget(),
                          Settings::visualization::smoke().colorMap);
+   connectAbstractEngine(Settings::engines::glyphSlices,
+                         this->glyphsTab->getColorMapWidget(),
+                         Settings::visualization::glyphs().colorMap);
 
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
+
+   connectGlyphSlicesEngineAndSettings();
+   connectGlyphSlicesEngineAndGlyphTab();
 }
 
 void MainWindow::setUpConnections()
@@ -197,7 +203,7 @@ void MainWindow::connectGlyphSlicesEngineAndSettings()
 
    connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
            engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
-   connect(dynamic_cast<VectorEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
+   connect(dynamic_cast<GlyphSliceEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 
