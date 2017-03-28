@@ -191,6 +191,16 @@ void MainWindow::connectGlyphEngineAndSettings()
            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 
+void MainWindow::connectGlyphSlicesEngineAndSettings()
+{
+   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphSlices);
+
+   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
+           engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+   connect(dynamic_cast<VectorEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
+           &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
+}
+
 void MainWindow::connectStreamLinesTabAndSettings()
 {
    connect(this->streamLinesTab, SIGNAL(timeStepChanged(double)),
