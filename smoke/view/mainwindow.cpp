@@ -180,9 +180,13 @@ void MainWindow::connectAbstractEngine(Settings::engines::EnginesTypes engineTyp
            engine, SLOT(onValueRangeChanged(Settings::sim::Scalar,float,float)));
 }
 
-void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engine, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
+void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engineType, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
 {
-    connectAbstractEngine(engine, colormapTab, colorMapSetings);
+    connectAbstractEngine(engineType, colormapTab, colorMapSetings);
+    AbstractSliceEngine *engine = dynamic_cast<AbstractSliceEngine*>(this->canvas->getEngine(engineType));
+
+    connect(this->simulationTab, SIGNAL(rotationChanged(int,int)),
+            engine, SLOT(onRotationChanged(int,int)));
 }
 
 void MainWindow::connectGlyphEngineAndGlyphTab()
