@@ -64,7 +64,7 @@ void Canvas::initializeGL()
 
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smokeSlices, new SmokeSlicesEngine()));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphSlices, new GlyphSliceEngine(simulation->getSimulationGrid())));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::streamLineSlices, new StreamLineSlicesEngine(simulation->getSimulationGrid()));
+   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::streamLineSlices, new StreamLineSlicesEngine(simulation->getSimulationGrid())));
 
    emit openGlReady();
 

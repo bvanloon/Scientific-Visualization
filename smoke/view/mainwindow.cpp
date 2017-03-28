@@ -57,6 +57,9 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::glyphSlices,
                          this->glyphsTab->getColorMapWidget(),
                          Settings::visualization::glyphs().colorMap);
+   connectAbstractEngine(Settings::engines::streamLineSlices,
+                         this->streamLinesTab->getColorMapWidget(),
+                         Settings::visualization::streamLines().colorMap);
 
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
