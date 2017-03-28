@@ -103,11 +103,22 @@ void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checke
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
+    if(QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
+    if(QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
+}
+
+void Canvas::clickMouseEvent(QMouseEvent *event)
+{
    if (!Settings::simulation().frozen)
    {
       QPointF mousePosition = event->localPos();
       emit mouseMoved(QPoint(mousePosition.x(), mousePosition.y()));
    }
+}
+
+void Canvas::altMouseEvent(QMouseEvent *event)
+{
+    qDebug() << "Canvas::altMouseEvent";
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
