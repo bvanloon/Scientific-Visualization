@@ -62,9 +62,14 @@ class SimulationSettingPane : public QWidget
 
       void setUItoDefaults();
 
+      void setEnginesToDefaults();
+
       void setUpConnections();
 
       void setFreezeButtonLabel(bool frozen);
+
+      void disableNonSliceEngines();
+
       QMap<Settings::engines::EnginesTypes, QCheckBox *> engineCheckBoxMapping;
 };
 

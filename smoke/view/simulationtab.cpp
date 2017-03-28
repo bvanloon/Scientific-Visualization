@@ -9,8 +9,6 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    ui(new Ui::SimulationSettingPane)
 {
    ui->setupUi(this);
-   setUItoDefaults();
-   setUpConnections();
 
    this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
    this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
@@ -18,6 +16,13 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
    this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
    this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   this->engineCheckBoxMapping.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
+
+   setUItoDefaults();
+   setUpConnections();
+
+   //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
+   this->ui->seedPointsCheckBox->setHidden(true);
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -27,12 +32,7 @@ SimulationSettingPane::~SimulationSettingPane()
 
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   auto pair = this->engineCheckBoxMapping.find(engine);
-
-   if (pair != this->engineCheckBoxMapping.end())
-   {
-      pair.value()->setChecked(checked);
-   }
+   this->engineCheckBoxMapping.find(engine).value()->setChecked(checked);
 }
 
 void SimulationSettingPane::setUItoDefaults()
@@ -43,15 +43,25 @@ void SimulationSettingPane::setUItoDefaults()
 
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 
-   ui->glyphsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::glyphs]);
-   ui->smokeCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::smoke]);
-   ui->streamLinesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::streamLines]);
+   setEnginesToDefaults();
+}
+
+void SimulationSettingPane::setEnginesToDefaults()
+{
+   Settings::engines::EnginesTypes engine;
+   for (int i = 0; i < Settings::engines::EnginesTypes::numberOfEngines; i++)
+   {
+      engine = static_cast<Settings::engines::EnginesTypes>(i);
+      this->engineCheckBoxMapping.find(engine).value()->setChecked(Settings::defaults::engines::activeEngines[engine]);
+   }
 }
 
 void SimulationSettingPane::setUpConnections()
 {
    connect(this, SIGNAL(toggleFrozen(bool)),
             this, SLOT(onToggleFrozen(bool)));
+   connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+           this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
