@@ -9,9 +9,9 @@ class StateGrid : public UniformGrid
       StateGrid(UniformGrid *currentState);
 
    private:
-      void createVertices(UniformGrid *currentState);
+      void addVertices(UniformGrid *currentState);
 
-      void createCells(UniformGrid *currentState);
+      void addCells(UniformGrid *currentState);
 };
 
 #endif // STATEGRID_H

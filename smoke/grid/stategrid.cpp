@@ -6,15 +6,15 @@ StateGrid::StateGrid(UniformGrid *currentState) :
                true,
                currentState->getPadding())
 {
-    createVertices(currentState);
-    createCells(currentState);
+    addVertices(currentState);
+    addCells(currentState);
 }
 
-void StateGrid::createVertices(UniformGrid *currentState)
+void StateGrid::addVertices(UniformGrid *currentState)
 {
 }
 
-void StateGrid::createCells(UniformGrid *currentState)
+void StateGrid::addCells(UniformGrid *currentState)
 {
 
 }
