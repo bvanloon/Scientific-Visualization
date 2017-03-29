@@ -51,6 +51,7 @@ class UniformGrid : public Grid
 
       QVector3D boundToGrid(QVector3D position);
 
+      int to1Dindex(int x, int y) const;
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
@@ -68,11 +69,7 @@ class UniformGrid : public Grid
 
       QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
 
-
-      int to1Dindex(int x, int y) const;
-
       StructuredCell *findCellContaining(QVector3D position);
-
 
       bool inGridArea(QVector3D position);
 
