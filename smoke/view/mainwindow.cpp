@@ -114,6 +114,9 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(scalingFactorChanged(double)),
            &Settings::canvas(), SLOT(onScalingFactorChanged(double)));
+
+   connect(this->canvas, SIGNAL(panningDirectionChanged(QVector3D)),
+           &Settings::canvas(), SLOT(onPanningPositionChanged(QVector3D)));
 }
 
 void MainWindow::connectCanvasAndTabs()
