@@ -52,7 +52,10 @@ class UniformGrid : public Grid
       QVector3D boundToGrid(QVector3D position);
 
       int to1Dindex(int x, int y) const;
+
       int to1Dindex(Index2D idx) const;
+
+      Vertex *getVertexAt(int x, int y) const;
 
       int dimension;
       QSizeF cellSize;
@@ -75,7 +78,6 @@ class UniformGrid : public Grid
 
       bool inGridArea(QVector3D position);
 
-      Vertex *getVertexAt(int x, int y) const;
 
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 
