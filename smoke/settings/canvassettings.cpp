@@ -4,7 +4,8 @@
 Settings::Canvas::Canvas(QObject *parent) :
    QObject(parent),
    size(506, 500),
-   scalingFactor(1.0)
+   scalingFactor(1.0),
+   panningPosition(0.0, 0.0, 0.0)
 {}
 
 const Settings::Canvas& Settings::Canvas::instance()
@@ -12,6 +13,21 @@ const Settings::Canvas& Settings::Canvas::instance()
    static Canvas instance;
 
    return instance;
+}
+
+QPointF Settings::Canvas::convertToNormalCoordinates(QPointF openGLCoordinates) const
+{
+   return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPointF();
+}
+
+QVector3D Settings::Canvas::convertToNormalCoordinates(QVector3D openGLCoordinates) const
+{
+   QVector3D normalCoordinates = QVector3D(
+                openGLCoordinates.x(),
+                Settings::canvas().size.height() - openGLCoordinates.y(),
+                0.0);
+
+   return normalCoordinates;
 }
 
 void Settings::Canvas::onWindowResized(int width, int height)
@@ -37,4 +53,9 @@ void Settings::Canvas::onScalingFactorChanged(double newScalingFactor)
    this->scalingFactor = newScalingFactor;
    emit updateModelViewMatrix();
    emit scalingFactorChanged(newScalingFactor);
+}
+
+void Settings::Canvas::onPanningPositionChanged(QVector3D newDirection){
+    this->panningPosition = this->panningPosition + this->panningFactor * newDirection;
+    emit updateModelViewMatrix();
 }

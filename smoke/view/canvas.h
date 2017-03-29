@@ -55,6 +55,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void scalingFactorChanged(double scalingFactor);
 
+      void panningDirectionChanged(QVector3D position);
+
    private slots:
       void idleLoop();
 
@@ -98,8 +100,10 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       // Events
       bool gestureEvent(QGestureEvent *event);
-
       void pinchTriggered(QPinchGesture *gesture);
+
+      void clickMouseEvent(QMouseEvent* event);
+      void altMouseEvent(QMouseEvent* event);
 };
 
 #endif // CANVAS_H
