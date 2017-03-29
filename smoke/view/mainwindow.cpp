@@ -87,6 +87,8 @@ void MainWindow::setUpConnections()
    connectTabs();
 
    connectKeyBoardHandlerAndSimulation();
+
+   connectThisToFinishConnectionsReceivers();
 }
 
 void MainWindow::connectCanvasAndThis()
@@ -127,6 +129,8 @@ void MainWindow::connectCanvasAndTabs()
            this->canvas, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this->streamLinesTab, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
            this->canvas, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+}
+
 void MainWindow::connectThisToFinishConnectionsReceivers()
 {
    connect(this, SIGNAL(finishedSettingUpConnections()),
