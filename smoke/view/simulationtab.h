@@ -78,7 +78,7 @@ class SimulationSettingPane : public QWidget
 
       void on_resetViewButton_clicked();
 
-private:
+   private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
 
       Ui::SimulationSettingPane *ui;

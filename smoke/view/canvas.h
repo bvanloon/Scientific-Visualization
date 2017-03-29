@@ -100,10 +100,12 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       // Events
       bool gestureEvent(QGestureEvent *event);
+
       void pinchTriggered(QPinchGesture *gesture);
 
-      void clickMouseEvent(QMouseEvent* event);
-      void altMouseEvent(QMouseEvent* event);
+      void clickMouseEvent(QMouseEvent *event);
+
+      void altMouseEvent(QMouseEvent *event);
 };
 
 #endif // CANVAS_H
