@@ -33,14 +33,14 @@ void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engi
 
 void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
 {
-    this->ui->scaleFactorSpinBox->setValue(scalingFactor);
+   this->ui->scaleFactorSpinBox->setValue(scalingFactor);
 }
 
 void SimulationSettingPane::onRotationChanged(Rotation rotation)
 {
-    this->ui->xRotationDial->setValue(rotation.x());
-    this->ui->yRotationDial->setValue(rotation.y());
-    this->ui->zRotationDial->setValue(rotation.z());
+   this->ui->xRotationDial->setValue(rotation.x());
+   this->ui->yRotationDial->setValue(rotation.y());
+   this->ui->zRotationDial->setValue(rotation.z());
 }
 
 void SimulationSettingPane::setUItoDefaults()
@@ -210,10 +210,10 @@ void SimulationSettingPane::on_zRotationDial_valueChanged(int value)
 
 void SimulationSettingPane::on_scaleFactorSpinBox_valueChanged(double value)
 {
-    emit scalingFactorChanged(value);
+   emit scalingFactorChanged(value);
 }
 
 void SimulationSettingPane::on_resetViewButton_clicked()
 {
-    emit resetView();
+   emit resetView();
 }
