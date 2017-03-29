@@ -37,6 +37,7 @@ class UniformGrid : public Grid
    protected:
       UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
       UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
+      UniformGrid(int dimension, QSizeF cellSize, bool hasPadding, QSizeF padding);
 
       static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
 
