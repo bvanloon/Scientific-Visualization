@@ -40,7 +40,12 @@ void SimulationSettingPane::onRotationChanged(Rotation rotation)
 {
    this->ui->xRotationDial->setValue(rotation.x());
    this->ui->yRotationDial->setValue(rotation.y());
-   this->ui->zRotationDial->setValue(rotation.z());
+    this->ui->zRotationDial->setValue(rotation.z());
+}
+
+void SimulationSettingPane::onAllConnectionsAreSetUp()
+{
+    setEnginesToDefaults();
 }
 
 void SimulationSettingPane::setUItoDefaults()
@@ -56,8 +61,6 @@ void SimulationSettingPane::setUItoDefaults()
    ui->zRotationDial->setValue(Settings::canvas().rotation.z());
 
    ui->scaleFactorSpinBox->setValue(Settings::canvas().scalingFactor);
-
-   setEnginesToDefaults();
 }
 
 void SimulationSettingPane::setEnginesToDefaults()

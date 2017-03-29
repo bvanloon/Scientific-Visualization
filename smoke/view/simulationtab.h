@@ -45,6 +45,8 @@ class SimulationSettingPane : public QWidget
 
       void onRotationChanged(Rotation rotation);
 
+      void onAllConnectionsAreSetUp();
+
    private slots:
       void on_freezeButton_clicked();
 
