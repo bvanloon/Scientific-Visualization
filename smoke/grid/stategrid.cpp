@@ -10,6 +10,14 @@ StateGrid::StateGrid(UniformGrid *currentState) :
    addCells(currentState);
 }
 
+StateGrid::~StateGrid()
+{
+   for (auto vertex : this->vertices)
+   {
+      delete vertex;
+   }
+}
+
 void StateGrid::addVertices(UniformGrid *currentState)
 {
    QList<Index2D> vertexKeys = currentState->getVertexMap().keys();

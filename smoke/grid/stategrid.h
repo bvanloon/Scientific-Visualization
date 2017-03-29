@@ -7,6 +7,7 @@ class StateGrid : public UniformGrid
 {
    public:
       StateGrid(UniformGrid *currentState);
+      ~StateGrid();
 
    private:
       void addVertices(UniformGrid *currentState);
