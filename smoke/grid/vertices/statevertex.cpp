@@ -45,12 +45,12 @@ QVector2D StateVertex::getFluidVelocityMagnitudeGradient() const
 
 QVector2D StateVertex::getForce() const
 {
-    return QVector2D(fx, fy);
+   return QVector2D(fx, fy);
 }
 
 float StateVertex::getForceMagnitude() const
 {
-    return getForce().length();
+   return getForce().length();
 }
 
 float StateVertex::getFluidDensity() const
