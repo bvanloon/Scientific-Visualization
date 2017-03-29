@@ -141,6 +141,7 @@ class StateVertex : public StructuredGridVertex
 {
    public:
       StateVertex(SimulationVertex *simulationVertex);
+      ~StateVertex();
 
       friend QDebug operator<<(QDebug stream, const StateVertex& vertex);
 

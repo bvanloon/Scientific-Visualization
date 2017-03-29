@@ -7,6 +7,9 @@ StateVertex::StateVertex(SimulationVertex *simulationVertex) :
    rho(*simulationVertex->rho)
 {}
 
+StateVertex::~StateVertex()
+{}
+
 QDebug operator<<(QDebug stream, const StateVertex& vertex)
 {
    stream << "StateVertex ["
