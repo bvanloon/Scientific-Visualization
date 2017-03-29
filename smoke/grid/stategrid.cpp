@@ -8,7 +8,7 @@ StateGrid::StateGrid(UniformGrid *currentState) :
    vertexPositions(currentState->numVertices())
 {
    addVertices(currentState);
-   addCells(currentState);
+   addCells();
 }
 
 StateGrid::~StateGrid()
@@ -43,5 +43,23 @@ void StateGrid::addVertex(Index2D idx2D, SimulationVertex *vertex)
    this->vertexMap.insert(idx2D, stateVertex);
 }
 
-void StateGrid::addCells(UniformGrid *currentState)
-{}
+void StateGrid::addCells()
+{
+   Vertex *leftUpper, *rightLower, *rightUpper, *leftLower;
+
+   for (int x = 0; x < this->dimension - 1; x++)
+   {
+      for (int y = 0; y < this->dimension - 1; y++)
+      {
+         leftUpper = this->getVertexAt(x, y);
+         rightUpper = this->getVertexAt(x + 1, y);
+         leftLower = this->getVertexAt(x, y + 1);
+         rightLower = this->getVertexAt(x + 1, y + 1);
+
+         this->cells.append(new StructuredCell(leftUpper, rightUpper,
+                                               leftLower, rightLower));
+
+         dynamic_cast<StateVertex *>(leftUpper)->setLowerRightCell(this->cells.last());
+      }
+   }
+}
