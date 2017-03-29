@@ -44,9 +44,9 @@ class UniformGrid : public Grid
 
       static void createCells(UniformGrid *grid);
 
-      virtual QVector3D computeVertexPosition(int i, int j);
+      static void createTriangulation(UniformGrid *grid);
 
-      Triangulation computeTriangulation();
+      virtual QVector3D computeVertexPosition(int i, int j);
 
       QVector3D boundToGrid(QVector3D position);
 

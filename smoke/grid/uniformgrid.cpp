@@ -20,7 +20,6 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
 {
    if (hasPadding) padding = cellSize;
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
-   this->triangulation = this->computeTriangulation();
 }
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding) :
@@ -30,7 +29,6 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding) :
    padding(padding)
 {
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
-   this->triangulation = this->computeTriangulation();
 }
 
 const QVector<QVector3D>& UniformGrid::getVertexPositions() const
@@ -38,17 +36,14 @@ const QVector<QVector3D>& UniformGrid::getVertexPositions() const
    return this->vertexPositions;
 }
 
-Triangulation UniformGrid::computeTriangulation()
+void UniformGrid::createTriangulation(UniformGrid *grid)
 {
-   Triangulation triangulation;
+   QVector<Cell *>::const_iterator currentCell = grid->cells.begin();
 
-   QVector<Cell *>::const_iterator currentCell = cells.begin();
-
-   while (currentCell != cells.end())
+   while (currentCell != grid->cells.end())
    {
-      triangulation.extend((*currentCell++)->triangulate());
+      grid->triangulation.extend((*currentCell++)->triangulate());
    }
-   return triangulation;
 }
 
 void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize)
@@ -99,6 +94,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension,
 
    createVertices(grid, simulation);
    createCells(grid);
+   createTriangulation(grid);
    return grid;
 }
 
@@ -110,6 +106,7 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension,
 
    createVertices(grid, simulationGrid);
    createCells(grid);
+   createTriangulation(grid);
    return grid;
 }
 
