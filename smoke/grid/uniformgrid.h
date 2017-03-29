@@ -52,6 +52,8 @@ class UniformGrid : public Grid
       QVector3D boundToGrid(QVector3D position);
 
       int to1Dindex(int x, int y) const;
+      int to1Dindex(Index2D idx) const;
+
       int dimension;
       QSizeF cellSize;
       QSizeF padding;

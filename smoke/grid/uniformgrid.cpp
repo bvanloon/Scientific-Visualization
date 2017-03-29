@@ -240,7 +240,12 @@ void UniformGrid::createCells(UniformGrid *grid)
 
 int UniformGrid::to1Dindex(int x, int y) const
 {
-   return x + (y * this->dimension);
+    return x + (y * this->dimension);
+}
+
+int UniformGrid::to1Dindex(Index2D idx) const
+{
+    return to1Dindex(idx.first, idx.second);
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea)
