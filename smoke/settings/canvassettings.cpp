@@ -15,6 +15,21 @@ const Settings::Canvas& Settings::Canvas::instance()
    return instance;
 }
 
+QPointF Settings::Canvas::convertToNormalCoordinates(QPointF openGLCoordinates) const
+{
+   return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPointF();
+}
+
+QVector3D Settings::Canvas::convertToNormalCoordinates(QVector3D openGLCoordinates) const
+{
+   QVector3D normalCoordinates = QVector3D(
+                openGLCoordinates.x(),
+                Settings::canvas().size.height() - openGLCoordinates.y(),
+                0.0);
+
+   return normalCoordinates;
+}
+
 void Settings::Canvas::onWindowResized(int width, int height)
 {
    QSizeF oldSize = this->size;

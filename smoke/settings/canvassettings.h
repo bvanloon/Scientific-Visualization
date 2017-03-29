@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QSize>
+#include <QPointF>
+#include <QVector3D>
 #include "utilities/rotation.h"
 
 #include "settings/settings.h"
@@ -18,6 +20,9 @@ class Settings::Canvas : public QObject
       Rotation rotation;
       double scalingFactor;
       QVector3D panningPosition;
+
+      QPointF convertToNormalCoordinates(QPointF openGLCoordinates) const;
+      QVector3D convertToNormalCoordinates(QVector3D openGLCoordinates) const;
 
    signals:
       void windowResized(QSizeF oldSize, QSizeF newSize);
