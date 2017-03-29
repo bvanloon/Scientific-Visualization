@@ -38,6 +38,15 @@ void Triangulation::addVertex(Vertex *value)
    vertexPositions.append(*(value->getPosition()));
 }
 
+void Triangulation::transform(QMatrix4x4 transformationMatrix)
+{
+    QVector4D transformedPosition;
+    for (int i = 0; i < this->numVertices(); i++)
+    {
+       transformedPosition = transformationMatrix * QVector4D(this->vertexPositions[i], 1.0);
+       this->vertexPositions.replace(i, transformedPosition.toVector3D());
+    }
+}
 int Triangulation::numVertices()
 {
    return this->vertices.size();
