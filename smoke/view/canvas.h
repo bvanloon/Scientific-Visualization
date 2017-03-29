@@ -55,6 +55,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void scalingFactorChanged(double scalingFactor);
 
+      void panningDirectionChanged(QVector3D position);
+
    private slots:
       void idleLoop();
 

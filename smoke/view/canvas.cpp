@@ -3,7 +3,9 @@
 #include <QDebug>
 #include <QImage>
 #include "settings/simulationsettings.h"
+#include "settings/canvassettings.h"
 #include <QApplication>
+#include <QVector3D>
 
 
 
@@ -120,13 +122,13 @@ void Canvas::altMouseEvent(QMouseEvent *event)
 {
     static QVector3D previousMousePosition;
 
-    QVector3D currentPosition = QVector3D(event->localPos().x(), event->localPos().y());
+    QVector3D currentMousePosition = QVector3D(Settings::canvas().convertToNormalCoordinates(event->localPos()));
 
-    qDebug() << "Account for the difference in the position of the origin.";
+    QVector3D panningDirection = (currentMousePosition - previousMousePosition).normalized();
 
-    qDebug() << "emit the panning direction";
+    emit panningDirectionChanged(panningDirection);
 
-    previousMousePosition = currentPosition;
+    previousMousePosition = currentMousePosition;
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
