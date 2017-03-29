@@ -276,9 +276,14 @@ QVector3D UniformGrid::boundToGrid(QVector3D position)
    return position;
 }
 
+Triangulation UniformGrid::getTriangulation()
+{
+    return computeTriangulation();
+}
+
 const QSizeF& UniformGrid::getPadding() const
 {
-   return padding;
+    return padding;
 }
 
 Vertex *UniformGrid::getVertexAt(int x, int y) const
