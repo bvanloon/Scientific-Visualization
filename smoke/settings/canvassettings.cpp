@@ -4,8 +4,8 @@
 Settings::Canvas::Canvas(QObject *parent) :
    QObject(parent),
    size(506, 500),
-   scalingFactor(Settings::defaults::canvas::scalingFactor),
    rotation(Settings::defaults::canvas::rotation),
+   scalingFactor(Settings::defaults::canvas::scalingFactor),
    panningPosition(Settings::defaults::canvas::panningPosition)
 {}
 
