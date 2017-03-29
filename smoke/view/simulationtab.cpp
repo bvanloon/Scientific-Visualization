@@ -36,6 +36,13 @@ void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
     this->ui->scaleFactorSpinBox->setValue(scalingFactor);
 }
 
+void SimulationSettingPane::onRotationChanged(Rotation rotation)
+{
+    this->ui->xRotationDial->setValue(rotation.x());
+    this->ui->yRotationDial->setValue(rotation.y());
+    this->ui->zRotationDial->setValue(rotation.z());
+}
+
 void SimulationSettingPane::setUItoDefaults()
 {
    ui->forceSlider->setMinimum(Settings::defaults::simulation::forceMin);

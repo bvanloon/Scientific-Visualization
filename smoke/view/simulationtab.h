@@ -43,6 +43,8 @@ class SimulationSettingPane : public QWidget
 
       void onScalingFactorChanged(double scalingFactor);
 
+      void onRotationChanged(Rotation rotation);
+
    private slots:
       void on_freezeButton_clicked();
 

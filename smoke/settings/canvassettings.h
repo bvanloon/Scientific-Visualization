@@ -31,6 +31,8 @@ class Settings::Canvas : public QObject
 
       void scalingFactorChanged(double newScalingFactor);
 
+      void rotationChanged(Rotation rotation);
+
    public slots:
       void onWindowResized(int width, int height);
 
