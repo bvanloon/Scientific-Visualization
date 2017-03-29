@@ -9,6 +9,8 @@
 #include "grid/vertex.h"
 #include "grid/cell.h"
 
+typedef QPair<int, int> Index2D;
+
 class Grid
 {
    public:
@@ -31,7 +33,7 @@ class Grid
 
    protected:
       QVector<Vertex *> vertices;
-      QMultiMap<QPair<int, int>, Vertex *> vertexMap;
+      QMultiMap<Index2D, Vertex *> vertexMap;
       QVector<QVector3D> vertexPositions;
 
       QVector<Cell *> cells;
