@@ -36,17 +36,14 @@ const QVector<QVector3D>& UniformGrid::getVertexPositions() const
    return this->vertexPositions;
 }
 
-Triangulation UniformGrid::getTriangulation() const
+void UniformGrid::createTriangulation(UniformGrid *grid)
 {
-   Triangulation triangulation;
+   QVector<Cell *>::const_iterator currentCell = grid->cells.begin();
 
-   QVector<Cell *>::const_iterator currentCell = cells.begin();
-
-   while (currentCell != cells.end())
+   while (currentCell != grid->cells.end())
    {
-      triangulation.extend((*currentCell++)->triangulate());
+      grid->triangulation.extend((*currentCell++)->triangulate());
    }
-   return triangulation;
 }
 
 void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize)
@@ -64,6 +61,7 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
       transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
       this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
    }
+   this->triangulation.transform(scaleMatrix);
 }
 
 QSizeF UniformGrid::computeCellSize(QSizeF area)
@@ -96,6 +94,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension,
 
    createVertices(grid, simulation);
    createCells(grid);
+   createTriangulation(grid);
    return grid;
 }
 
@@ -107,6 +106,7 @@ UniformGrid *UniformGrid::createVisualizationGrid(int dimension,
 
    createVertices(grid, simulationGrid);
    createCells(grid);
+   createTriangulation(grid);
    return grid;
 }
 
@@ -274,6 +274,11 @@ QVector3D UniformGrid::boundToGrid(QVector3D position)
    if (position.y() >= this->coveredArea.bottom()) position.setY(this->coveredArea.bottom() - offset);
 
    return position;
+}
+
+Triangulation UniformGrid::getTriangulation()
+{
+   return this->triangulation;
 }
 
 const QSizeF& UniformGrid::getPadding() const

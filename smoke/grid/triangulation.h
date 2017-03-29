@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QVector3D>
+#include <QMatrix4x4>
 #include <grid/vertex.h>
 
 class Triangulation
@@ -17,6 +18,8 @@ class Triangulation
       void extend(Triangulation other);
 
       void addVertex(Vertex *value);
+
+      void transform(QMatrix4x4 transformationMatrix);
 
       int numVertices();
 
