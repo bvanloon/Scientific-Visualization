@@ -4,7 +4,8 @@ StateGrid::StateGrid(UniformGrid *currentState) :
    UniformGrid(currentState->getDimension(),
                currentState->getCellSize(),
                true,
-               currentState->getPadding())
+               currentState->getPadding()),
+   vertexPositions(currentState->numVertices())
 {
    addVertices(currentState);
    addCells(currentState);

@@ -9,6 +9,10 @@ class StateGrid : public UniformGrid
       StateGrid(UniformGrid *currentState);
       ~StateGrid();
 
+   protected:
+      //overwrites the vertexPositions of the parent class.
+      QVector<const QVector3D *> vertexPositions;
+
    private:
       void addVertices(UniformGrid *currentState);
 
