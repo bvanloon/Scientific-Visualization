@@ -20,6 +20,7 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
 {
    if (hasPadding) padding = cellSize;
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
+   this->triangulation = this->computeTriangulation();
 }
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding) :
@@ -29,6 +30,7 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding) :
    padding(padding)
 {
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
+   this->triangulation = this->computeTriangulation();
 }
 
 const QVector<QVector3D>& UniformGrid::getVertexPositions() const
@@ -64,6 +66,8 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
       transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
       this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
    }
+   this->triangulation = this->computeTriangulation();
+   qDebug() << "Apply the transformation matrix to the vertexpositions of the triangulation instead of replacing the object.";
 }
 
 QSizeF UniformGrid::computeCellSize(QSizeF area)
@@ -278,12 +282,12 @@ QVector3D UniformGrid::boundToGrid(QVector3D position)
 
 Triangulation UniformGrid::getTriangulation()
 {
-    return computeTriangulation();
+   return this->triangulation;
 }
 
 const QSizeF& UniformGrid::getPadding() const
 {
-    return padding;
+   return padding;
 }
 
 Vertex *UniformGrid::getVertexAt(int x, int y) const
