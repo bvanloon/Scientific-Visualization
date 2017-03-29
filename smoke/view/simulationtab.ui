@@ -280,6 +280,13 @@
     </layout>
    </item>
    <item>
+    <widget class="QPushButton" name="resetViewButton">
+     <property name="text">
+      <string>Reset View</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QCheckBox" name="seedPointsCheckBox">
      <property name="text">
       <string>Seed Points</string>

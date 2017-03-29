@@ -72,6 +72,8 @@ class SimulationSettingPane : public QWidget
 
       void on_scaleFactorSpinBox_valueChanged(double arg1);
 
+      void on_resetViewButton_clicked();
+
 private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
 

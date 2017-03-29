@@ -205,3 +205,7 @@ void SimulationSettingPane::on_scaleFactorSpinBox_valueChanged(double value)
 {
     emit scalingFactorChanged(value);
 }
+
+void SimulationSettingPane::on_resetViewButton_clicked()
+{
+}
