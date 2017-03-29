@@ -36,6 +36,8 @@ class SimulationSettingPane : public QWidget
 
       void scalingFactorChanged(double newScalingFactor);
 
+      void resetView();
+
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 

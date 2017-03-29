@@ -59,4 +59,13 @@ void Settings::Canvas::onScalingFactorChanged(double newScalingFactor)
 void Settings::Canvas::onPanningPositionChanged(QVector3D newDirection){
     this->panningPosition = this->panningPosition + this->panningFactor * newDirection;
     emit updateModelViewMatrix();
+void Settings::Canvas::onResetView()
+{
+   this->scalingFactor = Settings::defaults::canvas::scalingFactor;
+   this->panningPosition = Settings::defaults::canvas::panningPosition;
+   this->rotation = Settings::defaults::canvas::rotation;
+
+   emit scalingFactorChanged(this->scalingFactor);
+   emit rotationChanged(this->rotation);
+   emit updateModelViewMatrix();
 }

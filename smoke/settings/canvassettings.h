@@ -40,6 +40,8 @@ class Settings::Canvas : public QObject
 
       void onPanningPositionChanged(QVector3D newDirection);
 
+      void onResetView();
+
    private:
       explicit Canvas(QObject *parent = 0);
 
