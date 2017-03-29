@@ -111,7 +111,7 @@ void SimulationSettingPane::toggleSliceEngines(bool toggle)
    emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, toggle);
    emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, toggle);
 
-   this->ui->rotationGroupBox->setDisabled(!toggle);
+   this->ui->viewGroupBox->setDisabled(!toggle);
 }
 
 void SimulationSettingPane::toggle2DEngines(bool toggle)
@@ -121,7 +121,7 @@ void SimulationSettingPane::toggle2DEngines(bool toggle)
    emit engineToggled(Settings::engines::EnginesTypes::streamLines, toggle);
    emit engineToggled(Settings::engines::EnginesTypes::seedPoints, toggle);
 
-   this->ui->rotationGroupBox->setDisabled(toggle);
+   this->ui->viewGroupBox->setDisabled(toggle);
 }
 
 bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine)
