@@ -40,7 +40,10 @@ void SimulationSettingPane::onRotationChanged(Rotation rotation)
 {
    this->ui->xRotationDial->setValue(rotation.x());
    this->ui->yRotationDial->setValue(rotation.y());
-   this->ui->zRotationDial->setValue(rotation.z());
+    this->ui->zRotationDial->setValue(rotation.z());
+}
+
+void SimulationSettingPane::onAllConnectionsAreSetUp()
 }
 
 void SimulationSettingPane::setUItoDefaults()

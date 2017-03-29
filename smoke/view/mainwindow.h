@@ -26,6 +26,9 @@ class MainWindow : public QMainWindow
 
       KeyboardHandler *keyboardHandler;
 
+   signals:
+      void finishedSettingUpConnections();
+
    public slots:
       void onOpenGLReady();
 
@@ -50,6 +53,9 @@ class MainWindow : public QMainWindow
       void connectCanvasAndSettings();
 
       void connectCanvasAndTabs();
+
+      //Connect to objects that want to receive the finishedConnections signal
+      void connectThisToFinishConnectionsReceivers();
 
 
       //Engines

@@ -66,6 +66,8 @@ void MainWindow::onOpenGLReady()
 
    connectGlyphSlicesEngineAndSettings();
    connectGlyphSlicesEngineAndGlyphTab();
+
+   emit finishedSettingUpConnections();
 }
 
 void MainWindow::setUpConnections()
@@ -125,6 +127,10 @@ void MainWindow::connectCanvasAndTabs()
            this->canvas, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this->streamLinesTab, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
            this->canvas, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+void MainWindow::connectThisToFinishConnectionsReceivers()
+{
+   connect(this, SIGNAL(finishedSettingUpConnections()),
+            this->simulationTab, SLOT(onAllConnectionsAreSetUp()));
 }
 
 void MainWindow::connectSimulationTabAndSettings()
@@ -198,10 +204,10 @@ void MainWindow::connectAbstractEngine(Settings::engines::EnginesTypes engineTyp
 
 void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engineType, ColorMapTab *colormapTab, Settings::visualization::ColorMap *colorMapSetings)
 {
-    connectAbstractEngine(engineType, colormapTab, colorMapSetings);
-    AbstractSliceEngine *engine = dynamic_cast<AbstractSliceEngine*>(this->canvas->getEngine(engineType));
+   connectAbstractEngine(engineType, colormapTab, colorMapSetings);
+   AbstractSliceEngine *engine = dynamic_cast<AbstractSliceEngine *>(this->canvas->getEngine(engineType));
 
-    connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
+   connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
             engine, SLOT(onUpdateModelViewMatrix()));
 }
 
@@ -211,10 +217,12 @@ void MainWindow::connectGlyphEngineAndGlyphTab()
             this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
-void MainWindow::connectGlyphSlicesEngineAndGlyphTab(){
-    connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
+void MainWindow::connectGlyphSlicesEngineAndGlyphTab()
+{
+   connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
              this->canvas->getEngine(Settings::engines::EnginesTypes::glyphSlices), SLOT(onGridDimensionChanged(int,int)));
 }
+
 void MainWindow::connectGlyphEngineAndSettings()
 {
    AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs);
