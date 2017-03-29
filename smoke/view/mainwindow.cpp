@@ -143,6 +143,10 @@ void MainWindow::connectSimulationTabAndSettings()
            &Settings::canvas(), SLOT(onScalingFactorChanged(double)));
    connect(&Settings::canvas(), SIGNAL(scalingFactorChanged(double)),
            this->simulationTab, SLOT(onScalingFactorChanged(double)));
+   connect(this->simulationTab, SIGNAL(resetView()),
+           &Settings::canvas(), SLOT(onResetView()));
+   connect(&Settings::canvas(), SIGNAL(rotationChanged(Rotation)),
+           this->simulationTab, SLOT(onRotationChanged(Rotation)));
 }
 
 void MainWindow::connectSimulationTabAndSimulation()

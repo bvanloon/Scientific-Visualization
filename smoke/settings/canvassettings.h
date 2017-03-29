@@ -22,6 +22,7 @@ class Settings::Canvas : public QObject
       QVector3D panningPosition;
 
       QPointF convertToNormalCoordinates(QPointF openGLCoordinates) const;
+
       QVector3D convertToNormalCoordinates(QVector3D openGLCoordinates) const;
 
    signals:
@@ -31,6 +32,8 @@ class Settings::Canvas : public QObject
 
       void scalingFactorChanged(double newScalingFactor);
 
+      void rotationChanged(Rotation rotation);
+
    public slots:
       void onWindowResized(int width, int height);
 
@@ -39,6 +42,8 @@ class Settings::Canvas : public QObject
       void onScalingFactorChanged(double newScalingFactor);
 
       void onPanningPositionChanged(QVector3D newDirection);
+
+      void onResetView();
 
    private:
       explicit Canvas(QObject *parent = 0);

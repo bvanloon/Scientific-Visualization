@@ -4,8 +4,9 @@
 Settings::Canvas::Canvas(QObject *parent) :
    QObject(parent),
    size(506, 500),
-   scalingFactor(1.0),
-   panningPosition(0.0, 0.0, 0.0)
+   scalingFactor(Settings::defaults::canvas::scalingFactor),
+   panningPosition(Settings::defaults::canvas::panningPosition),
+   rotation(Settings::defaults::canvas::rotation)
 {}
 
 const Settings::Canvas& Settings::Canvas::instance()
@@ -55,7 +56,20 @@ void Settings::Canvas::onScalingFactorChanged(double newScalingFactor)
    emit scalingFactorChanged(newScalingFactor);
 }
 
-void Settings::Canvas::onPanningPositionChanged(QVector3D newDirection){
-    this->panningPosition = this->panningPosition + this->panningFactor * newDirection;
-    emit updateModelViewMatrix();
+void Settings::Canvas::onPanningPositionChanged(QVector3D newDirection)
+{
+   this->panningPosition = this->panningPosition + this->panningFactor * newDirection;
+
+   emit updateModelViewMatrix();
+}
+
+void Settings::Canvas::onResetView()
+{
+   this->scalingFactor = Settings::defaults::canvas::scalingFactor;
+   this->panningPosition = Settings::defaults::canvas::panningPosition;
+   this->rotation = Settings::defaults::canvas::rotation;
+
+   emit scalingFactorChanged(this->scalingFactor);
+   emit rotationChanged(this->rotation);
+   emit updateModelViewMatrix();
 }

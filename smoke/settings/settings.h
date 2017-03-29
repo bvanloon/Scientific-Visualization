@@ -4,6 +4,7 @@
 #include "colormaps/colormapfactory.h"
 #include "QSize"
 #include <limits>
+#include "utilities/rotation.h"
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -97,6 +98,13 @@ namespace Settings {
             static const int forceMin = 1;
             static const int forceMax = 100;
         }
+
+        namespace canvas {
+            static const double scalingFactor = 1.0;
+            static const QVector3D panningPosition(0.0, 0.0, 0.0);
+            static const Rotation rotation;
+        }
+
         namespace visualization {
             namespace colormap {
                 static const ColorMapFactory::colorMaps colormap = ColorMapFactory::colorMaps::rainbow;

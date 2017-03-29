@@ -36,10 +36,14 @@ class SimulationSettingPane : public QWidget
 
       void scalingFactorChanged(double newScalingFactor);
 
+      void resetView();
+
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
       void onScalingFactorChanged(double scalingFactor);
+
+      void onRotationChanged(Rotation rotation);
 
    private slots:
       void on_freezeButton_clicked();
@@ -72,7 +76,9 @@ class SimulationSettingPane : public QWidget
 
       void on_scaleFactorSpinBox_valueChanged(double arg1);
 
-private:
+      void on_resetViewButton_clicked();
+
+   private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
 
       Ui::SimulationSettingPane *ui;
