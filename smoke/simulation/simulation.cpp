@@ -40,7 +40,7 @@ GlyphData Simulation::getGlyphData(Grid *grid)
 
 Triangulation Simulation::getGridTriangulation()
 {
-   return simulationGrid->getTriangulation();
+   return simulationGrid->computeTriangulation();
 }
 
 

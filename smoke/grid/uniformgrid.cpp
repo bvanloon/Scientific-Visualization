@@ -36,7 +36,7 @@ const QVector<QVector3D>& UniformGrid::getVertexPositions() const
    return this->vertexPositions;
 }
 
-Triangulation UniformGrid::getTriangulation() const
+Triangulation UniformGrid::computeTriangulation()
 {
    Triangulation triangulation;
 

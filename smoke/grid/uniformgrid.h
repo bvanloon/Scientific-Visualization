@@ -12,7 +12,7 @@ class UniformGrid : public Grid
    public:
       QVector<QVector3D> const& getVertexPositions() const;
 
-      Triangulation getTriangulation() const;
+      Triangulation computeTriangulation();
 
       virtual void changeGridArea(QSizeF newArea);
 
@@ -40,9 +40,7 @@ class UniformGrid : public Grid
 
       static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
 
-
       static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
-
 
       static void createCells(UniformGrid *grid);
 
@@ -53,8 +51,10 @@ class UniformGrid : public Grid
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
-
       QRectF coveredArea;
+
+//      Triangulation triangulation;
+
    private:
 
       void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
