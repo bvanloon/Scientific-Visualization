@@ -18,7 +18,7 @@ class StateGrid : public UniformGrid
 
       void addVertex(Index2D index, SimulationVertex *vertex);
 
-      void addCells(UniformGrid *currentState);
+      void addCells();
 };
 
 #endif // STATEGRID_H
