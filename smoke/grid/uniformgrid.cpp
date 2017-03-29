@@ -66,8 +66,7 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
       transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
       this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
    }
-   this->triangulation = this->computeTriangulation();
-   qDebug() << "Apply the transformation matrix to the vertexpositions of the triangulation instead of replacing the object.";
+   this->triangulation.transform(scaleMatrix);
 }
 
 QSizeF UniformGrid::computeCellSize(QSizeF area)
