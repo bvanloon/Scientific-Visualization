@@ -19,11 +19,11 @@ void StateGrid::addVertices(UniformGrid *currentState)
    {
       key = vertexKeys[i];
       vertex = currentState->getVertexMap().find(key).value();
-      addVertex(key, dynamic_cast<StructuredGridVertex *>(vertex));
+      addVertex(key, dynamic_cast<SimulationVertex *>(vertex));
    }
 }
 
-void StateGrid::addVertex(Index2D index, StructuredGridVertex *vertex)
+void StateGrid::addVertex(Index2D idx2D, SimulationVertex *vertex)
 {
    qDebug() << index << ": " << vertex;
 }

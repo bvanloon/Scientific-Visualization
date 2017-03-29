@@ -11,7 +11,7 @@ class StateGrid : public UniformGrid
    private:
       void addVertices(UniformGrid *currentState);
 
-      void addVertex(Index2D index, StructuredGridVertex *vertex);
+      void addVertex(Index2D index, SimulationVertex *vertex);
 
       void addCells(UniformGrid *currentState);
 };
