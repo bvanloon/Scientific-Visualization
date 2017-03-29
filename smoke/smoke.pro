@@ -82,7 +82,9 @@ SOURCES += main.cpp\
     engines/glyphsliceengine.cpp \
     engines/streamlineslicesengine.cpp \
     engines/abstractsliceengine.cpp \
-    utilities/rotation.cpp
+    utilities/rotation.cpp \
+    grid/vertices/statevertex.cpp \
+    grid/stategrid.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -144,7 +146,8 @@ HEADERS  += main.ih\
     engines/glyphsliceengine.h \
     engines/streamlineslicesengine.h \
     engines/abstractsliceengine.h \
-    utilities/rotation.h
+    utilities/rotation.h \
+    grid/stategrid.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

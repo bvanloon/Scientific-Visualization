@@ -65,3 +65,8 @@ int Grid::numVertices() const
 {
    return this->vertexPositions.size();
 }
+
+QMultiMap<Index2D, Vertex *> Grid::getVertexMap() const
+{
+    return vertexMap;
+}

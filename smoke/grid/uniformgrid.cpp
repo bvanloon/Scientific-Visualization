@@ -31,6 +31,15 @@ UniformGrid::UniformGrid(int dimension, QSizeF areaSize, QSizeF padding) :
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
 }
 
+UniformGrid::UniformGrid(int dimension, QSizeF cellSize, bool hasPadding, QSizeF padding) :
+   Grid(dimension * dimension, hasPadding),
+   dimension(dimension),
+   cellSize(cellSize),
+   padding(padding)
+{
+   this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
+}
+
 const QVector<QVector3D>& UniformGrid::getVertexPositions() const
 {
    return this->vertexPositions;
@@ -231,7 +240,12 @@ void UniformGrid::createCells(UniformGrid *grid)
 
 int UniformGrid::to1Dindex(int x, int y) const
 {
-   return x + (y * this->dimension);
+    return x + (y * this->dimension);
+}
+
+int UniformGrid::to1Dindex(Index2D idx) const
+{
+    return to1Dindex(idx.first, idx.second);
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea)

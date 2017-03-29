@@ -37,6 +37,7 @@ class UniformGrid : public Grid
    protected:
       UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
       UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
+      UniformGrid(int dimension, QSizeF cellSize, bool hasPadding, QSizeF padding);
 
       static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
 
@@ -49,6 +50,12 @@ class UniformGrid : public Grid
       virtual QVector3D computeVertexPosition(int i, int j);
 
       QVector3D boundToGrid(QVector3D position);
+
+      int to1Dindex(int x, int y) const;
+
+      int to1Dindex(Index2D idx) const;
+
+      Vertex *getVertexAt(int x, int y) const;
 
       int dimension;
       QSizeF cellSize;
@@ -67,15 +74,10 @@ class UniformGrid : public Grid
 
       QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
 
-
-      int to1Dindex(int x, int y) const;
-
       StructuredCell *findCellContaining(QVector3D position);
-
 
       bool inGridArea(QVector3D position);
 
-      Vertex *getVertexAt(int x, int y) const;
 
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 

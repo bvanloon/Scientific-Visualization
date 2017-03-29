@@ -8,6 +8,11 @@
 
 class Cell;
 
+class StructuredGridVertex;
+class VisualizationVertex;
+class SimulationVertex;
+class StateVertex;
+
 class Vertex
 {
    public:
@@ -75,6 +80,8 @@ class StructuredGridVertex : public Vertex {
 
 class SimulationVertex : public StructuredGridVertex
 {
+   friend class StateVertex;
+
    public:
 
       SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho);
@@ -130,5 +137,34 @@ class VisualizationVertex : public StructuredGridVertex
       Cell *containingCell;
 };
 
+class StateVertex : public StructuredGridVertex
+{
+   public:
+      StateVertex(SimulationVertex *simulationVertex);
+      ~StateVertex();
+
+      friend QDebug operator<<(QDebug stream, const StateVertex& vertex);
+
+      friend QDebug operator<<(QDebug stream, StateVertex *vertex);
+
+      virtual QVector2D getFluidVelocity() const;
+
+      virtual float getFluidVelocityMagnitude() const;
+
+      virtual QVector2D getFluidVelocityMagnitudeGradient() const;
+
+      virtual QVector2D getForce() const;
+
+      virtual float getForceMagnitude() const;
+
+      virtual float getFluidDensity() const;
+
+      virtual QVector2D getFluidDensityGradient() const;
+
+   private:
+      double vx, vy;
+      double fx, fy;
+      float rho;
+};
 
 #endif // VERTEX_H
