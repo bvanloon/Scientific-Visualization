@@ -38,8 +38,12 @@ class Settings::Canvas : public QObject
 
       void onScalingFactorChanged(double newScalingFactor);
 
+      void onPanningPositionChanged(QVector3D newDirection);
+
    private:
       explicit Canvas(QObject *parent = 0);
+
+      double panningFactor = 10;
 
       Canvas(Canvas const&) = delete;
       void operator=(Canvas const&) = delete;
