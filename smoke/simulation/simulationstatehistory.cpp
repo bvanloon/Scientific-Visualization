@@ -64,7 +64,7 @@ const UniformGrid &SimulationStateHistory::getVisualizationGridAtQueueIdx(int id
     return *this->mirrorVisualizationGrid;
 }
 
-int SimulationStateHistory::mostRecentStateIdx()
+int SimulationStateHistory::mostRecentStateIdx() const
 {
     return this->states.size() - 1;
 }

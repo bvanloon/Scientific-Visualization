@@ -21,7 +21,7 @@ class SimulationStateHistory : public QObject
 
       const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
 
-      int mostRecentStateIdx();
+      int mostRecentStateIdx() const;
 
    signals:
 
