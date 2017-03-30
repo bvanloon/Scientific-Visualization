@@ -6,6 +6,8 @@ SimulationGrid::SimulationGrid(int dimension, QSizeF areaSize, SimulationData *d
 {
    cellSize = computeCellSize(areaSize);
    if (hasPadding) padding = cellSize;
+   coveredArea = computeCoveredArea(padding, cellSize);
+
    createVertices();
    createCells();
    createTriangulation();
@@ -30,9 +32,19 @@ void SimulationGrid::changeGridArea(QSizeF newArea)
    transform(computeScaleMatrix(oldCellSize, cellSize));
 }
 
+SimulationData *SimulationGrid::getData() const
+{
+    return data;
+}
+
+void SimulationGrid::setData(SimulationData *value)
+{
+    data = value;
+}
+
 QSizeF SimulationGrid::computeCellSize(QSizeF gridArea)
 {
-   return gridArea / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
+    return gridArea / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
 }
 
 QMatrix4x4 SimulationGrid::computeScaleMatrix(QSizeF oldCellSize, QSizeF newCellSize)

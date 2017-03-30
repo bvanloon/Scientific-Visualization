@@ -11,13 +11,12 @@ class SimulationGrid : public UniformGrid
       SimulationGrid(int dimension, QSizeF areaSize, SimulationData *data);
       ~SimulationGrid();
 
-      SimulationData getData() const;
-
-      void setData(const SimulationData& value);
-
       virtual void changeGridArea(QSizeF newArea);
 
-   private:
+      SimulationData *getData() const;
+      void setData(SimulationData *value);
+
+private:
       SimulationData *data;
 
       void createVertices();
