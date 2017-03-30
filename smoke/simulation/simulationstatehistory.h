@@ -16,6 +16,7 @@ class SimulationStateHistory : public QObject, private QQueue<StateGrid>
    signals:
 
    public slots:
+      void onNumberOfSlicesChanged(int numberOfSlices);
 
    private slots:
 
@@ -23,6 +24,8 @@ class SimulationStateHistory : public QObject, private QQueue<StateGrid>
       explicit SimulationStateHistory(QObject *parent = 0);
       SimulationStateHistory(SimulationStateHistory const&) = delete;
       void operator=(SimulationStateHistory const&) = delete;
+
+      int numberOfStatesToStore;
 };
 
 #endif // SIMULATIONSTATEHISTORY_H
