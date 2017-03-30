@@ -52,7 +52,7 @@ void SimulationGrid::transform(QMatrix4x4 transformation)
    for (int i = 0; i < this->numVertices(); i++)
    {
       transformedPosition = transformation * QVector4D(vertexPositions[i], 1.0);
-      vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
+      vertexPositions.replace(i, bindToGrid(transformedPosition.toVector3D()));
    }
    this->triangulation.transform(transformation);
 }

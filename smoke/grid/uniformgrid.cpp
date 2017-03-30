@@ -65,7 +65,7 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
    for (int i = 0; i < this->numVertices(); i++)
    {
       transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
-      this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
+      this->vertexPositions.replace(i, bindToGrid(transformedPosition.toVector3D()));
    }
    this->triangulation.transform(scaleMatrix);
 }
@@ -232,7 +232,7 @@ QVector3D UniformGrid::computeVertexPosition(int i, int j)
                     0.0f);
 }
 
-QVector3D UniformGrid::boundToGrid(QVector3D position)
+QVector3D UniformGrid::bindToGrid(QVector3D position)
 {
    float offset = std::numeric_limits<float>::epsilon() * 10;
 

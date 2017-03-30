@@ -49,7 +49,7 @@ class UniformGrid : public Grid
 
       virtual QVector3D computeVertexPosition(int i, int j);
 
-      QVector3D boundToGrid(QVector3D position);
+      QVector3D bindToGrid(QVector3D position);
 
       int to1Dindex(int x, int y) const;
 

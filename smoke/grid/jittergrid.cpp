@@ -32,5 +32,5 @@ QVector3D JitterGrid::computeVertexPosition(int i, int j)
 
    QVector3D position = QVector3D(x + xOffset, y + yOffset, 0.0f);
 
-   return boundToGrid(position);
+   return bindToGrid(position);
 }
