@@ -33,6 +33,14 @@ SimulationRealization::SimulationRealization() :
    }
 }
 
+SimulationRealization::~SimulationRealization()
+{
+    delete data;
+    free(vx0);
+    free(vy0);
+    free(rho0);
+}
+
 //FFT: Execute the Fast Fourier Transform on the dataset 'vx'.
 //     'dirfection' indicates if we do the direct (1) or inverse (-1) Fourier Transform
 void SimulationRealization::FFT(int direction, void *vx)
