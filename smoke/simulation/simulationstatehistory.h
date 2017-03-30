@@ -19,6 +19,8 @@ class SimulationStateHistory : public QObject
 
       const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
 
+      const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
+
    signals:
 
    public slots:
@@ -40,6 +42,7 @@ class SimulationStateHistory : public QObject
 
       int numberOfStatesToStore;
       QQueue<SimulationData *> states;
+
       SimulationGrid *mirrorSimulationGrid;
       UniformGrid *mirrorVisualizationGrid;
 

@@ -57,6 +57,13 @@ const SimulationGrid& SimulationStateHistory::getSimulationGridAtQueueIdx(int id
    return *this->mirrorSimulationGrid;
 }
 
+const UniformGrid &SimulationStateHistory::getVisualizationGridAtQueueIdx(int idx) const
+{
+    SimulationData *state = this->getStateAtQueueIdx(idx);
+    mirrorVisualizationGrid->setData(state);
+    return *this->mirrorVisualizationGrid;
+}
+
 void SimulationStateHistory::onNumberOfSlicesChanged(int numberOfSlices)
 {
    this->numberOfStatesToStore = numberOfSlices;
@@ -80,7 +87,6 @@ void SimulationStateHistory::onWindowResized(QSizeF newWindowSize)
 
 void SimulationStateHistory::onGridDimensionChanged(QSizeF newDimension)
 {
-   qDebug() << "SimulationStateHistory::onGridDimensionChanged";
    delete mirrorVisualizationGrid;
    mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
                 newDimension.width(),
