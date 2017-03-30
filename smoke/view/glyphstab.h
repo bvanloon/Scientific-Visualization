@@ -22,6 +22,7 @@ class GlyphsTab : public QWidget
 
    signals:
       void gridDimensionChanged(int widht, int height);
+      void gridDimensionChanged(QSizeF newDimension);
 
       void vectorFieldChanged(Settings::sim::Vector vectorField);
 
@@ -45,7 +46,7 @@ class GlyphsTab : public QWidget
 
       void setUiToDefaults();
 
-      void setUpConnections();
+      void connectToSettings();
 
       void updateScaleSpinBoxConfiguration(double currentValue);
 };
