@@ -76,7 +76,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideMiddle</enum>
@@ -102,6 +102,11 @@
       <widget class="StreamLinesTab" name="streamLinesTab">
        <attribute name="title">
         <string>Stream Lines</string>
+       </attribute>
+      </widget>
+      <widget class="SlicesTab" name="slicesTab">
+       <attribute name="title">
+        <string>Slices</string>
        </attribute>
       </widget>
      </widget>
@@ -138,6 +143,12 @@
    <class>StreamLinesTab</class>
    <extends>QWidget</extends>
    <header location="global">view/streamlinestab.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SlicesTab</class>
+   <extends>QWidget</extends>
+   <header>view/slicestab.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

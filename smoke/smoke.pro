@@ -85,7 +85,8 @@ SOURCES += main.cpp\
     utilities/rotation.cpp \
     grid/vertices/statevertex.cpp \
     grid/stategrid.cpp \
-    settings/visualization/slices.cpp
+    settings/visualization/slices.cpp \
+    view/slicestab.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -149,7 +150,8 @@ HEADERS  += main.ih\
     engines/abstractsliceengine.h \
     utilities/rotation.h \
     grid/stategrid.h \
-    settings/visualization/slices.h
+    settings/visualization/slices.h \
+    view/slicestab.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
@@ -158,7 +160,8 @@ FORMS    += view/mainwindow.ui \
     view/intslider.ui \
     view/simulationtab.ui \
     view/glyphstab.ui \
-    view/streamlinestab.ui
+    view/streamlinestab.ui \
+    view/slicestab.ui
 
 RESOURCES += \
     shaders.qrc
