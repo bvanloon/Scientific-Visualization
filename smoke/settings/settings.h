@@ -38,6 +38,9 @@ namespace Settings {
 
         class StreamLines;
         const StreamLines& streamLines();
+
+        class Slices;
+        const Slices& slices();
     }
 
     namespace sim {

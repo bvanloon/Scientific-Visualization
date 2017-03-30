@@ -7,6 +7,7 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 #include "settings/visualization/streamlines.h"
+#include "settings/visualization/slices.h"
 
 #include "grid/vertex.h"
 

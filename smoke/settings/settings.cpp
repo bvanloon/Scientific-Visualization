@@ -60,3 +60,8 @@ const Settings::visualization::StreamLines& Settings::visualization::streamLines
 {
    return Settings::visualization::StreamLines::instance();
 }
+
+const Settings::visualization::Slices &Settings::visualization::slices()
+{
+    return Settings::visualization::Slices::instance();
+}
