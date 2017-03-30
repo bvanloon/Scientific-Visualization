@@ -18,7 +18,8 @@ class SimulationStateHistory : public QObject
 
    public slots:
       void onNumberOfSlicesChanged(int numberOfSlices);
-      void onNewSimulationState(UniformGrid* currentSimulationState);
+
+      void onNewSimulationState(UniformGrid *currentSimulationState);
 
    private slots:
 
@@ -29,9 +30,15 @@ class SimulationStateHistory : public QObject
 
 
       int numberOfStatesToStore;
-      QQueue<StateGrid> states;
+      QQueue<StateGrid *> states;
 
-      void addState(StateGrid* StateGrid);
+      void addState(StateGrid *stateGrid);
+
+      bool historyTooLong();
+
+      void trimHistoryToMaximumSize();
+
+      void deleteOldestState();
 };
 
 #endif // SIMULATIONSTATEHISTORY_H

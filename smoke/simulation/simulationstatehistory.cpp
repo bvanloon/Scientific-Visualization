@@ -6,9 +6,30 @@ SimulationStateHistory::SimulationStateHistory(QObject *parent) :
    numberOfStatesToStore(Settings::visualization::slices().numberOfSlices)
 {}
 
-void SimulationStateHistory::addState(StateGrid *StateGrid)
+void SimulationStateHistory::addState(StateGrid *stateGrid)
 {
-   qDebug() << "Adding a state!";
+   this->states.enqueue(stateGrid);
+   if (this->historyTooLong()) trimHistoryToMaximumSize();
+}
+
+bool SimulationStateHistory::historyTooLong()
+{
+   return this->states.size() > this->numberOfStatesToStore;
+}
+
+void SimulationStateHistory::trimHistoryToMaximumSize()
+{
+   while (this->historyTooLong())
+   {
+      deleteOldestState();
+   }
+}
+
+void SimulationStateHistory::deleteOldestState()
+{
+   StateGrid *oldestState = this->states.dequeue();
+
+   delete oldestState;
 }
 
 const SimulationStateHistory& SimulationStateHistory::instance()
@@ -26,5 +47,6 @@ void SimulationStateHistory::onNumberOfSlicesChanged(int numberOfSlices)
 void SimulationStateHistory::onNewSimulationState(UniformGrid *currentSimulationState)
 {
    StateGrid *state = new StateGrid(currentSimulationState);
+
    this->addState(state);
 }
