@@ -8,6 +8,8 @@
 #include <QRectF>
 #include "unused.h"
 
+class SimulationGrid;
+
 class UniformGrid : public Grid
 {
    public:
@@ -16,7 +18,7 @@ class UniformGrid : public Grid
       virtual void changeGridArea(QSizeF UNUSED(newArea));
       virtual void changeGridArea(QSizeF newArea, QSizeF padding);
 
-      static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
+      static SimulationGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
 
       static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid);
 

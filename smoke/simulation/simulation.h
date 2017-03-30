@@ -7,7 +7,7 @@
 #include <QVector2D>
 #include <QPoint>
 #include <float.h>
-#include "grid/uniformgrid.h"
+#include "grid/simulationgrid.h"
 #include "grid/glyphdata.h"
 
 #include "simulation/simulationrealization.h"
@@ -57,7 +57,7 @@ class Simulation : public QObject {
    private:
 
       QPoint lastMousePosition;
-      UniformGrid *simulationGrid;
+      SimulationGrid *grid;
 };
 
 #endif // SMOKE_H

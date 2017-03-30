@@ -12,7 +12,7 @@ Simulation::Simulation(QObject *parent) :
    lastMousePosition(0.0f, 0.0f)
 {
    this->realization = new SimulationRealization();
-   this->simulationGrid = UniformGrid::createSimulationGrid(
+   this->grid = UniformGrid::createSimulationGrid(
     Settings::simulation().dimension,
     Settings::canvas().size,
     this->realization);
@@ -22,13 +22,13 @@ Simulation::Simulation(QObject *parent) :
 Simulation::~Simulation()
 {
    delete realization;
-   delete simulationGrid;
+   delete grid;
 }
 
 
 GlyphData Simulation::getGlyphData()
 {
-   return getGlyphData(simulationGrid);
+   return getGlyphData(grid);
 }
 
 
@@ -40,7 +40,7 @@ GlyphData Simulation::getGlyphData(Grid *grid)
 
 Triangulation Simulation::getGridTriangulation()
 {
-   return simulationGrid->getTriangulation();
+   return grid->getTriangulation();
 }
 
 
@@ -102,11 +102,11 @@ void Simulation::onStep()
 
 void Simulation::onWindowResized(int width, int height)
 {
-   simulationGrid->changeGridArea(QSizeF(width, height));
+   grid->changeGridArea(QSizeF(width, height));
 }
 
 
 UniformGrid *Simulation::getSimulationGrid() const
 {
-   return simulationGrid;
+   return grid;
 }

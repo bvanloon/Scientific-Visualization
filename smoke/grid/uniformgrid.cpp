@@ -87,7 +87,7 @@ QRectF UniformGrid::computeCoveredArea(QSizeF padding, QSizeF cellSize)
    return QRectF(upperLeftCorner, size);
 }
 
-UniformGrid *UniformGrid::createSimulationGrid(int dimension,
+SimulationGrid *UniformGrid::createSimulationGrid(int dimension,
                                                QSizeF size,
                                                SimulationRealization *simulation)
 {
