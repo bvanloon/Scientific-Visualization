@@ -6,6 +6,7 @@
 
 #include "grid/stategrid.h"
 #include "grid/uniformgrid.h"
+#include "simulation/simulationdata.h"
 
 class SimulationStateHistory : public QObject
 {
@@ -19,7 +20,7 @@ class SimulationStateHistory : public QObject
    public slots:
       void onNumberOfSlicesChanged(int numberOfSlices);
 
-      void onNewSimulationState(UniformGrid *currentSimulationState);
+      void onNewSimulationState(SimulationData* simulationDataDeepCopy);
 
    private slots:
 

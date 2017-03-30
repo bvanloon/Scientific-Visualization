@@ -49,4 +49,6 @@ void SimulationStateHistory::onNewSimulationState(UniformGrid *currentSimulation
    StateGrid *state = new StateGrid(currentSimulationState);
 
    this->addState(state);
+void SimulationStateHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)
+{
 }
