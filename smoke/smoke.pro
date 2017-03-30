@@ -87,7 +87,8 @@ SOURCES += main.cpp\
     grid/stategrid.cpp \
     settings/visualization/slices.cpp \
     view/slicestab.cpp \
-    simulation/simulationdata.cpp
+    simulation/simulationdata.cpp \
+    grid/simulationgrid.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -153,7 +154,8 @@ HEADERS  += main.ih\
     grid/stategrid.h \
     settings/visualization/slices.h \
     view/slicestab.h \
-    simulation/simulationdata.h
+    simulation/simulationdata.h \
+    grid/simulationgrid.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
