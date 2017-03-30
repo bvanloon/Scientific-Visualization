@@ -10,6 +10,7 @@
 #include <QMatrix4x4>
 #include <QVector4D>
 #include <limits>
+#include "grid/simulationgrid.h"
 
 UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
 
@@ -99,7 +100,7 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension,
                                                QSizeF size,
                                                SimulationRealization *simulation)
 {
-   UniformGrid *grid = new UniformGrid(dimension, size, true);
+   SimulationGrid *grid = new SimulationGrid(dimension, size, simulation->getData());
 
    createVertices(grid, simulation);
    createCells(grid);

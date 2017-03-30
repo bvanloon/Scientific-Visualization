@@ -78,7 +78,6 @@ class UniformGrid : public Grid
 
       bool inGridArea(QVector3D position);
 
-
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
 
       class StreamLineBuilder;
