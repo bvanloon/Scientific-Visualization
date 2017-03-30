@@ -67,6 +67,7 @@ void MainWindow::onOpenGLReady()
    connectGlyphSlicesEngineAndSettings();
    connectGlyphSlicesEngineAndGlyphTab();
 
+   connectThisToFinishConnectionsReceivers();
    emit finishedSettingUpConnections();
 }
 
@@ -88,7 +89,13 @@ void MainWindow::setUpConnections()
 
    connectKeyBoardHandlerAndSimulation();
 
-   connectThisToFinishConnectionsReceivers();
+   connectSimuationStateHistory();
+}
+
+void MainWindow::connectSimuationStateHistory()
+{
+   connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
+            &SimulationStateHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
 }
 
 void MainWindow::connectCanvasAndThis()

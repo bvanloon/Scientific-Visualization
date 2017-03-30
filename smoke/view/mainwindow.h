@@ -48,6 +48,8 @@ class MainWindow : public QMainWindow
 
       void setUpConnections();
 
+      void connectSimuationStateHistory();
+
       //Canvas
       void connectCanvasAndThis();
 
