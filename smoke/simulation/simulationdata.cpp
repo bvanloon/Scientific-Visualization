@@ -1,11 +1,12 @@
 #include "simulationdata.h"
-#include <algorithm>
+#include <QDebug>
 
 SimulationData::SimulationData(int dimension) :
    velocitiesSize(dimension * 2 * (dimension / 2 + 1)),
    rhoSize(dimension * dimension),
    forceSize(dimension * dimension)
 {
+   qDebug() << "SimulationData constructor";
    allocateVelocityData(velocitiesSize);
    allocteForceData(forceSize);
    allocateDensityData(rhoSize);
@@ -16,6 +17,7 @@ SimulationData::SimulationData(const SimulationData& obj) :
    rhoSize(obj.rhoSize),
    forceSize(obj.forceSize)
 {
+   qDebug() << "SimulationData copy constructor";
    allocateVelocityData(velocitiesSize);
    allocteForceData(forceSize);
    allocateDensityData(rhoSize);
@@ -58,6 +60,12 @@ fftw_real SimulationData::getVyAt(int idx) const
    return vy[idx];
 }
 
+QVector2D SimulationData::getFluidVelocityAt(int idx) const
+{
+   return QVector2D(getVxAt(idx),
+                     getVyAt(idx));
+}
+
 fftw_real *SimulationData::getFx() const
 {
    return fx;
@@ -78,6 +86,12 @@ fftw_real SimulationData::getFyAt(int idx) const
    return fy[idx];
 }
 
+QVector2D SimulationData::getForceAt(int idx)
+{
+   return QVector2D(getFxAt(idx),
+                     getFyAt(idx));
+}
+
 fftw_real *SimulationData::getRho() const
 {
    return rho;
@@ -85,7 +99,12 @@ fftw_real *SimulationData::getRho() const
 
 fftw_real SimulationData::getRhoAt(int idx) const
 {
-   return rho[idx];
+    return rho[idx];
+}
+
+double SimulationData::getDensityAt(int idx) const
+{
+    return this->getRhoAt(idx);
 }
 
 void SimulationData::allocateVelocityData(int length)
