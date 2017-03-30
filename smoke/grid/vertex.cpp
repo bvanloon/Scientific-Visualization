@@ -1,5 +1,7 @@
 #include "vertex.h"
 #include "cell.h"
+#include "grid/simulationgrid.h"
+#include "simulation/simulationdata.h"
 
 Vertex::Vertex(const QVector3D *position) :
    position(position)
@@ -72,20 +74,18 @@ QDebug operator<<(QDebug stream, Vertex *vertex)
    return stream;
 }
 
-SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho) :
+SimulationVertex::SimulationVertex(const QVector3D *position, size_t idx, SimulationGrid *grid) :
    StructuredGridVertex(position),
-   vx(vx), vy(vy),
-   fx(fx), fy(fy),
-   rho(rho)
+   idx(idx),
+   containingGrid(grid)
 {}
-
 
 QVector2D SimulationVertex::getFluidVelocity() const
 {
-   return QVector2D(*(vx), *(vy));
+   return containingGrid->getData()->getFluidVelocityAt(this->idx);
 }
 
-float SimulationVertex::getFluidVelocityMagnitude() const
+double SimulationVertex::getFluidVelocityMagnitude() const
 {
    return getFluidVelocity().length();
 }
@@ -98,17 +98,17 @@ QVector2D SimulationVertex::getFluidVelocityMagnitudeGradient() const
 
 QVector2D SimulationVertex::getForce() const
 {
-   return QVector2D(*(fx), *(fy));
+   return containingGrid->getData()->getForceAt(this->idx);
 }
 
-float SimulationVertex::getForceMagnitude() const
+double SimulationVertex::getForceMagnitude() const
 {
    return getForce().length();
 }
 
-float SimulationVertex::getFluidDensity() const
+double SimulationVertex::getFluidDensity() const
 {
-   return *rho;
+   return containingGrid->getData()->getDensityAt(this->idx);
 }
 
 QVector2D SimulationVertex::getFluidDensityGradient() const
@@ -121,9 +121,9 @@ QDebug operator<<(QDebug stream, const SimulationVertex& vertex)
 {
    stream << "SimulationVertex ["
           << " position: " << *vertex.position
-          << " (vx, vy): (" << *vertex.vx << ", " << *vertex.vy << ")"
-          << " (fx, fy): (" << *vertex.fx << ", " << *vertex.fy << ")"
-          << " (rho): (" << *vertex.rho << ")"
+          << " (vx, vy): " << vertex.getFluidVelocity()
+          << " (fx, fy): (" << vertex.getForce()
+          << " (rho): (" << vertex.getFluidDensity()
           << "]";
    return stream;
 }
@@ -161,7 +161,7 @@ QVector2D VisualizationVertex::getFluidVelocity() const
    return cell->interpolate2DVector(*position, &Vertex::getFluidVelocity);
 }
 
-float VisualizationVertex::getFluidVelocityMagnitude() const
+double VisualizationVertex::getFluidVelocityMagnitude() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
@@ -182,14 +182,14 @@ QVector2D VisualizationVertex::getForce() const
    return cell->interpolate2DVector(*position, &Vertex::getForce);
 }
 
-float VisualizationVertex::getForceMagnitude() const
+double VisualizationVertex::getForceMagnitude() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
    return cell->interpolateScalar(*position, &Vertex::getForceMagnitude);
 }
 
-float VisualizationVertex::getFluidDensity() const
+double VisualizationVertex::getFluidDensity() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 

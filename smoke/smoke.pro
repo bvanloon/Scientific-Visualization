@@ -83,8 +83,6 @@ SOURCES += main.cpp\
     engines/streamlineslicesengine.cpp \
     engines/abstractsliceengine.cpp \
     utilities/rotation.cpp \
-    grid/vertices/statevertex.cpp \
-    grid/stategrid.cpp \
     settings/visualization/slices.cpp \
     view/slicestab.cpp \
     simulation/simulationdata.cpp \
@@ -151,7 +149,6 @@ HEADERS  += main.ih\
     engines/streamlineslicesengine.h \
     engines/abstractsliceengine.h \
     utilities/rotation.h \
-    grid/stategrid.h \
     settings/visualization/slices.h \
     view/slicestab.h \
     simulation/simulationdata.h \

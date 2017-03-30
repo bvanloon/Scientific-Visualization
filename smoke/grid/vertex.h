@@ -6,6 +6,8 @@
 #include <QDebug>
 #include "settings/simulationsettings.h"
 
+class SimulationGrid;
+
 class Cell;
 
 class StructuredGridVertex;
@@ -19,7 +21,7 @@ class Vertex
       Vertex(const QVector3D *position = NULL);
       virtual ~Vertex();
 
-      typedef float (Vertex::*scalarGetter)() const;
+      typedef double (Vertex::*scalarGetter)() const;
       typedef QVector2D (Vertex::*vectorGetter)() const;
 
       const QVector3D *getPosition() const;
@@ -30,15 +32,15 @@ class Vertex
 
       virtual QVector2D getFluidVelocity() const = 0;
 
-      virtual float getFluidVelocityMagnitude() const = 0;
+      virtual double getFluidVelocityMagnitude() const = 0;
 
       virtual QVector2D getFluidVelocityMagnitudeGradient() const = 0;
 
       virtual QVector2D getForce() const = 0;
 
-      virtual float getForceMagnitude() const = 0;
+      virtual double getForceMagnitude() const = 0;
 
-      virtual float getFluidDensity() const = 0;
+      virtual double getFluidDensity() const = 0;
 
       virtual QVector2D getFluidDensityGradient() const = 0;
 
@@ -54,15 +56,15 @@ class StructuredGridVertex : public Vertex {
    public:
       virtual QVector2D getFluidVelocity() const = 0;
 
-      virtual float getFluidVelocityMagnitude() const = 0;
+      virtual double getFluidVelocityMagnitude() const = 0;
 
       virtual QVector2D getFluidVelocityMagnitudeGradient() const = 0;
 
       virtual QVector2D getForce() const = 0;
 
-      virtual float getForceMagnitude() const = 0;
+      virtual double getForceMagnitude() const = 0;
 
-      virtual float getFluidDensity() const = 0;
+      virtual double getFluidDensity() const = 0;
 
       virtual QVector2D getFluidDensityGradient() const = 0;
 
@@ -80,11 +82,9 @@ class StructuredGridVertex : public Vertex {
 
 class SimulationVertex : public StructuredGridVertex
 {
-   friend class StateVertex;
-
    public:
 
-      SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho);
+      SimulationVertex(const QVector3D *position, size_t idx, SimulationGrid *grid);
 
       friend QDebug operator<<(QDebug stream, const SimulationVertex& vertex);
 
@@ -92,22 +92,21 @@ class SimulationVertex : public StructuredGridVertex
 
       virtual QVector2D getFluidVelocity() const;
 
-      virtual float getFluidVelocityMagnitude() const;
+      virtual double getFluidVelocityMagnitude() const;
 
       virtual QVector2D getFluidVelocityMagnitudeGradient() const;
 
       virtual QVector2D getForce() const;
 
-      virtual float getForceMagnitude() const;
+      virtual double getForceMagnitude() const;
 
-      virtual float getFluidDensity() const;
+      virtual double getFluidDensity() const;
 
       virtual QVector2D getFluidDensityGradient() const;
 
    private:
-      double *vx, *vy;
-      double *fx, *fy;
-      double *rho;
+      size_t idx;
+      SimulationGrid *containingGrid;
 };
 
 class VisualizationVertex : public StructuredGridVertex
@@ -121,50 +120,20 @@ class VisualizationVertex : public StructuredGridVertex
 
       virtual QVector2D getFluidVelocity() const;
 
-      virtual float getFluidVelocityMagnitude() const;
+      virtual double getFluidVelocityMagnitude() const;
 
       virtual QVector2D getFluidVelocityMagnitudeGradient() const;
 
       virtual QVector2D getForce() const;
 
-      virtual float getForceMagnitude() const;
+      virtual double getForceMagnitude() const;
 
-      virtual float getFluidDensity() const;
+      virtual double getFluidDensity() const;
 
       virtual QVector2D getFluidDensityGradient() const;
 
    private:
       Cell *containingCell;
-};
-
-class StateVertex : public StructuredGridVertex
-{
-   public:
-      StateVertex(SimulationVertex *simulationVertex);
-      ~StateVertex();
-
-      friend QDebug operator<<(QDebug stream, const StateVertex& vertex);
-
-      friend QDebug operator<<(QDebug stream, StateVertex *vertex);
-
-      virtual QVector2D getFluidVelocity() const;
-
-      virtual float getFluidVelocityMagnitude() const;
-
-      virtual QVector2D getFluidVelocityMagnitudeGradient() const;
-
-      virtual QVector2D getForce() const;
-
-      virtual float getForceMagnitude() const;
-
-      virtual float getFluidDensity() const;
-
-      virtual QVector2D getFluidDensityGradient() const;
-
-   private:
-      double vx, vy;
-      double fx, fy;
-      float rho;
 };
 
 #endif // VERTEX_H

@@ -6,6 +6,8 @@ SimulationGrid::SimulationGrid(int dimension, QSizeF areaSize, SimulationData *d
 {
    cellSize = computeCellSize(areaSize);
    if (hasPadding) padding = cellSize;
+   coveredArea = computeCoveredArea(padding, cellSize);
+
    createVertices();
    createCells();
    createTriangulation();
@@ -28,6 +30,16 @@ void SimulationGrid::changeGridArea(QSizeF newArea)
    if (hasPadding) padding = cellSize;
    coveredArea = computeCoveredArea(padding, cellSize);
    transform(computeScaleMatrix(oldCellSize, cellSize));
+}
+
+SimulationData *SimulationGrid::getData() const
+{
+   return data;
+}
+
+void SimulationGrid::setData(SimulationData *value)
+{
+   data = value;
 }
 
 QSizeF SimulationGrid::computeCellSize(QSizeF gridArea)
@@ -74,10 +86,7 @@ void SimulationGrid::createVertex(int x, int y)
 
    const QVector3D *position = this->addVertexPosition(idx, computeVertexPosition(x, y));
 
-   Vertex *vertex = new SimulationVertex(position,
-                                &this->data->getVx()[idx], &this->data->getVy()[idx],
-                                &this->data->getFx()[idx], &this->data->getFy()[idx],
-                                &this->data->getRho()[idx]);
+   Vertex *vertex = new SimulationVertex(position, idx, this);
 
    this->vertices.replace(idx, vertex);
    this->vertexMap.insert(Index2D(x, y), vertex);
