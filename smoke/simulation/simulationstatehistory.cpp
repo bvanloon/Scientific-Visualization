@@ -11,6 +11,18 @@ SimulationStateHistory::SimulationStateHistory(QObject *parent) :
                            NULL))
 {}
 
+SimulationStateHistory::~SimulationStateHistory()
+{
+   for (auto state : states) delete state;
+}
+
+const SimulationStateHistory& SimulationStateHistory::instance()
+{
+   static SimulationStateHistory instance;
+
+   return instance;
+}
+
 void SimulationStateHistory::addState(SimulationData *state)
 {
    this->states.enqueue(state);
@@ -34,21 +46,21 @@ void SimulationStateHistory::deleteOldestState()
    delete oldestState;
 }
 
-const SimulationStateHistory& SimulationStateHistory::instance()
+const SimulationGrid &SimulationStateHistory::getSimulationGridAtQueueIdx(int idx) const
 {
-   static SimulationStateHistory instance;
-
-   return instance;
-}
-
-SimulationStateHistory::~SimulationStateHistory()
-{
-   for (auto state : states) delete state;
+   SimulationData *state = this->getStateAtQueueIdx(idx);
+   mirrorSimulationGrid->setData(state);
+   return *this->mirrorSimulationGrid;
 }
 
 void SimulationStateHistory::onNumberOfSlicesChanged(int numberOfSlices)
 {
    this->numberOfStatesToStore = numberOfSlices;
+}
+
+SimulationData *SimulationStateHistory::getStateAtQueueIdx(int idx) const
+{
+   return this->states.at(idx);
 }
 
 void SimulationStateHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)

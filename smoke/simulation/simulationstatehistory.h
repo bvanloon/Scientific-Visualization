@@ -16,6 +16,8 @@ class SimulationStateHistory : public QObject
 
       ~SimulationStateHistory();
 
+      const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
+
    signals:
 
    public slots:
@@ -38,6 +40,10 @@ class SimulationStateHistory : public QObject
       SimulationGrid *mirrorSimulationGrid;
 
       void addState(SimulationData *state);
+
+      SimulationData *getStateAtQueueIdx(int idx) const;
+
+      int timeToQueueIdx(int time);
 
       bool historyTooLong();
 
