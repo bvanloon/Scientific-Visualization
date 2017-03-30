@@ -19,6 +19,7 @@ class Settings::visualization::Slices : public QObject
 
    public slots:
         void onNumberOfSlicesChanged(int newNumberOfSlices);
+        void onGlobalAlphaChanged(double newGlobalAlpha);
 
    private slots:
 
