@@ -96,6 +96,8 @@ void MainWindow::connectSimuationStateHistory()
 {
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
             &SimulationStateHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
+   connect(this->simulation, SIGNAL(newSimulationState(UniformGrid *)),
+           &SimulationStateHistory::instance(), SLOT(onNewSimulationState(UniformGrid *)));
 }
 
 void MainWindow::connectCanvasAndThis()
