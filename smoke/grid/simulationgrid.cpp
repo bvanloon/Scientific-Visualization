@@ -4,16 +4,18 @@ SimulationGrid::SimulationGrid(int dimension, QSizeF areaSize, SimulationData *d
    UniformGrid(dimension, areaSize, true),
    data(data)
 {
-    addVertices();
+   addVertices();
+   addCells();
 }
 
 SimulationGrid::~SimulationGrid()
 {
-    for(auto vertex : this->vertices){
-        delete vertex;
-    }
-    this->vertices.clear();
-    this->vertexPositions.clear();
+   for (auto vertex : this->vertices)
+   {
+      delete vertex;
+   }
+   this->vertices.clear();
+   this->vertexPositions.clear();
 }
 
 void SimulationGrid::addVertices()
@@ -46,4 +48,26 @@ const QVector3D *SimulationGrid::addVertexPosition(int idx, QVector3D position)
 {
    this->vertexPositions.replace(idx, position);
    return &this->vertexPositions.at(idx);
+}
+
+void SimulationGrid::addCells()
+{
+   Vertex *leftUpper, *rightLower, *rightUpper, *leftLower;
+   SimulationVertex *vertex;
+
+   for (int x = 0; x < this->dimension - 1; x++)
+   {
+      for (int y = 0; y < this->dimension - 1; y++)
+      {
+         leftUpper = getVertexAt(x, y);
+         rightUpper = getVertexAt(x + 1, y);
+         leftLower = getVertexAt(x, y + 1);
+         rightLower = getVertexAt(x + 1, y + 1);
+
+         this->cells.append(new StructuredCell(leftUpper, rightUpper, leftLower,
+                                             rightLower));
+         vertex = dynamic_cast<SimulationVertex *>(leftUpper);
+         vertex->setLowerRightCell(cells.last());
+      }
+   }
 }

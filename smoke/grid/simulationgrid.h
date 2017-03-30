@@ -20,6 +20,8 @@ class SimulationGrid : public UniformGrid
       void addVertices();
       void addVertex(int x, int y);
       const QVector3D* addVertexPosition(int idx, QVector3D position);
+
+      void addCells();
 };
 
 
