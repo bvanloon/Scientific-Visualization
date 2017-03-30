@@ -11,6 +11,9 @@ class Settings::visualization::Slices : public QObject
    public:
       static const Slices& instance();
 
+      double globalAlpha;
+      double numberOfSlices;
+
    signals:
 
    public slots:

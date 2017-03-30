@@ -1,7 +1,9 @@
 #include "slices.h"
 
 Settings::visualization::Slices::Slices(QObject *parent) :
-   QObject(parent)
+   QObject(parent),
+   globalAlpha(1.0),
+   numberOfSlices(10)
 {
    connectToOtherSettings();
 }
