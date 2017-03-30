@@ -154,31 +154,6 @@ QPair<int,
    return QPair<int, int>(x, y);
 }
 
-void UniformGrid::createVertices(UniformGrid *grid,
-                                 SimulationRealization *simulation)
-{
-   QVector3D position;
-   Vertex *vertex;
-   int idx;
-
-   for (int y = 0; y < grid->dimension; y++)
-   {
-      for (int x = 0; x < grid->dimension; x++)
-      {
-         idx      = grid->to1Dindex(x, y);
-
-         position = grid->computeVertexPosition(x, y);
-         grid->vertexPositions.replace(idx, position);
-         vertex   = new SimulationVertex(&grid->vertexPositions.at(idx),
-                                    &simulation->vx[idx], &simulation->vy[idx],
-                                    &simulation->fx[idx], &simulation->fy[idx],
-                                    &simulation->rho[idx]);
-         grid->vertices.replace(idx, vertex);
-         grid->vertexMap.insert(QPair<int, int>(x, y), vertex);
-      }
-   }
-}
-
 void UniformGrid::createVertices(UniformGrid *visualizationGrid,
                                  UniformGrid *simulationGrid)
 {
