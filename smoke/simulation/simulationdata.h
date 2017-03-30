@@ -7,6 +7,7 @@ class SimulationData
 {
    public:
       SimulationData(int dimension);
+      SimulationData(const SimulationData &obj);
       ~SimulationData();
 
       fftw_real *getVx() const;
@@ -24,9 +25,13 @@ private:
       fftw_real *fx, *fy;         //(fx,fy)   = user-controlled simulation forces, steered with the mouse
       fftw_real *rho;             //smoke density at the current (rho) and previous (rho0) moment
 
-      void allocateVelocityData(int dimension);
+      size_t velocitiesSize;
+      size_t rhoSize;
+      size_t forceSize;
 
-      void allocteForceData(int dimension);
+      void allocateVelocityData(int length);
+
+      void allocteForceData(int length);
 
       void allocateDensityData(int dimension);
 };

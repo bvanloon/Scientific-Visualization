@@ -1,10 +1,32 @@
 #include "simulationdata.h"
+#include <algorithm>
 
-SimulationData::SimulationData(int dimension)
+SimulationData::SimulationData(int dimension) :
+    velocitiesSize(dimension * 2 * (dimension / 2 + 1)),
+    rhoSize(dimension * dimension),
+    forceSize(dimension * dimension)
 {
-   allocateVelocityData(dimension);
-   allocteForceData(dimension);
-   allocateDensityData(dimension);
+   allocateVelocityData(velocitiesSize);
+   allocteForceData(forceSize);
+   allocateDensityData(rhoSize);
+}
+
+SimulationData::SimulationData(const SimulationData& obj):
+    velocitiesSize(obj.velocitiesSize),
+    rhoSize(obj.rhoSize),
+    forceSize(obj.forceSize)
+{
+    allocateVelocityData(velocitiesSize);
+    allocteForceData(forceSize);
+    allocateDensityData(rhoSize);
+
+   memccpy(this->vx, obj.vx, this->velocitiesSize, this->velocitiesSize);
+   memccpy(this->vy, obj.vy, this->velocitiesSize, this->velocitiesSize);
+
+   memccpy(this->fx, obj.fx, this->forceSize, this->forceSize);
+   memccpy(this->fy, obj.fy, this->forceSize, this->forceSize);
+
+   memccpy(this->rho, obj.rho, this->rhoSize, this->rhoSize);
 }
 
 SimulationData::~SimulationData()
@@ -41,25 +63,25 @@ fftw_real *SimulationData::getRho() const
    return rho;
 }
 
-void SimulationData::allocateVelocityData(int dimension)
+void SimulationData::allocateVelocityData(int length)
 {
-   size_t mallocDimension = dimension * 2 * (dimension / 2 + 1) * sizeof(fftw_real);
+   size_t mallocDimension = length * sizeof(fftw_real);
 
    vx = (fftw_real *)malloc(mallocDimension);
    vy = (fftw_real *)malloc(mallocDimension);
 }
 
-void SimulationData::allocteForceData(int dimension)
+void SimulationData::allocteForceData(int length)
 {
-   size_t mallocDimension = dimension * dimension * sizeof(fftw_real);
+   size_t mallocDimension = length * sizeof(fftw_real);
 
    fx = (fftw_real *)malloc(mallocDimension);
    fy = (fftw_real *)malloc(mallocDimension);
 }
 
-void SimulationData::allocateDensityData(int dimension)
+void SimulationData::allocateDensityData(int length)
 {
-   size_t mallocDimension = dimension * dimension * sizeof(fftw_real);
+   size_t mallocDimension = length * sizeof(fftw_real);
 
    rho = (fftw_real *)malloc(mallocDimension);
 }
