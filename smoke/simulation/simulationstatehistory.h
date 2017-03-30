@@ -23,6 +23,8 @@ class SimulationStateHistory : public QObject
 
       void onNewSimulationState(SimulationData *simulationDataDeepCopy);
 
+      void onWindowResized(QSizeF newSize);
+
    private slots:
 
    private:

@@ -55,3 +55,8 @@ void SimulationStateHistory::onNewSimulationState(SimulationData *simulationData
 {
    addState(simulationDataDeepCopy);
 }
+
+void SimulationStateHistory::onWindowResized(QSizeF newSize)
+{
+   this->mirrorSimulationGrid->changeGridArea(newSize);
+}

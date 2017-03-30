@@ -98,6 +98,8 @@ void MainWindow::connectSimuationStateHistory()
             &SimulationStateHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
    connect(this->simulation, SIGNAL(newSimulationState(SimulationData*)),
            &SimulationStateHistory::instance(), SLOT(onNewSimulationState(SimulationData*)));
+   connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF)),
+           &SimulationStateHistory::instance(), SLOT(onWindowResized(QSizeF)));
 }
 
 void MainWindow::connectCanvasAndThis()
