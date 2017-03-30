@@ -6,7 +6,6 @@ SimulationData::SimulationData(int dimension) :
    rhoSize(dimension * dimension),
    forceSize(dimension * dimension)
 {
-   qDebug() << "SimulationData constructor";
    allocateVelocityData(velocitiesSize);
    allocteForceData(forceSize);
    allocateDensityData(rhoSize);
@@ -17,7 +16,6 @@ SimulationData::SimulationData(const SimulationData& obj) :
    rhoSize(obj.rhoSize),
    forceSize(obj.forceSize)
 {
-   qDebug() << "SimulationData copy constructor";
    allocateVelocityData(velocitiesSize);
    allocteForceData(forceSize);
    allocateDensityData(rhoSize);
