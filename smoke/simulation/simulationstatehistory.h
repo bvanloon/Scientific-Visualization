@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QQueue>
 
-#include "grid/stategrid.h"
 #include "grid/uniformgrid.h"
 #include "simulation/simulationdata.h"
 
@@ -15,12 +14,14 @@ class SimulationStateHistory : public QObject
    public:
       static const SimulationStateHistory& instance();
 
+      ~SimulationStateHistory();
+
    signals:
 
    public slots:
       void onNumberOfSlicesChanged(int numberOfSlices);
 
-      void onNewSimulationState(SimulationData* simulationDataDeepCopy);
+      void onNewSimulationState(SimulationData *simulationDataDeepCopy);
 
    private slots:
 
@@ -31,9 +32,9 @@ class SimulationStateHistory : public QObject
 
 
       int numberOfStatesToStore;
-      QQueue<StateGrid *> states;
+      QQueue<SimulationData *> states;
 
-      void addState(StateGrid *stateGrid);
+      void addState(SimulationData *state);
 
       bool historyTooLong();
 
