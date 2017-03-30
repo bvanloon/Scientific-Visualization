@@ -64,6 +64,11 @@ const UniformGrid &SimulationStateHistory::getVisualizationGridAtQueueIdx(int id
     return *this->mirrorVisualizationGrid;
 }
 
+int SimulationStateHistory::mostRecentStateIdx()
+{
+    return this->states.size() - 1;
+}
+
 void SimulationStateHistory::onNumberOfSlicesChanged(int numberOfSlices)
 {
    this->numberOfStatesToStore = numberOfSlices;

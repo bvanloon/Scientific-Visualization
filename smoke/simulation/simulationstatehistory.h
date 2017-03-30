@@ -21,6 +21,8 @@ class SimulationStateHistory : public QObject
 
       const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
 
+      int mostRecentStateIdx();
+
    signals:
 
    public slots:
