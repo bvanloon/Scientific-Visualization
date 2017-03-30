@@ -6,16 +6,23 @@ SimulationGrid::SimulationGrid(int dimension, QSizeF areaSize, SimulationData *d
 {
    createVertices();
    createCells();
+   createTriangulation();
 }
 
 SimulationGrid::~SimulationGrid()
 {
-   for (auto vertex : this->vertices)
+   for (auto vertex : vertices)
    {
       delete vertex;
    }
-   this->vertices.clear();
-   this->vertexPositions.clear();
+   vertices.clear();
+   vertexPositions.clear();
+
+   for (auto cell : cells)
+   {
+      delete cell;
+   }
+   cells.clear();
 }
 
 void SimulationGrid::createVertices()
@@ -75,4 +82,16 @@ void SimulationGrid::createCell(int x, int y)
 
    SimulationVertex *vertex = dynamic_cast<SimulationVertex *>(leftUpper);
    vertex->setLowerRightCell(cells.last());
+}
+
+void SimulationGrid::createTriangulation()
+{
+   QVector<Cell *>::const_iterator cell = cells.begin();
+   Triangulation cellTriangulation;
+
+   while (cell != cells.end())
+   {
+      cellTriangulation = (*cell++)->triangulate();
+      triangulation.extend(cellTriangulation);
+   }
 }

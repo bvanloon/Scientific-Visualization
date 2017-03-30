@@ -23,6 +23,7 @@ class SimulationGrid : public UniformGrid
 
       void createCells();
       void createCell(int x, int y);
+      void createTriangulation();
 };
 
 

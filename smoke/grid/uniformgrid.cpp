@@ -101,8 +101,6 @@ UniformGrid *UniformGrid::createSimulationGrid(int dimension,
                                                SimulationRealization *simulation)
 {
    SimulationGrid *grid = new SimulationGrid(dimension, size, simulation->getData());
-
-   createTriangulation(grid);
    return grid;
 }
 
