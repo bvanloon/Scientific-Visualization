@@ -14,6 +14,8 @@ class SimulationGrid : public UniformGrid
 
    private:
       SimulationData *data;
+
+      void addVertices();
 };
 
 
