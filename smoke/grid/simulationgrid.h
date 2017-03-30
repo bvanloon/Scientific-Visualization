@@ -16,7 +16,7 @@ class SimulationGrid : public UniformGrid
       SimulationData *getData() const;
       void setData(SimulationData *value);
 
-private:
+   private:
       SimulationData *data;
 
       void createVertices();

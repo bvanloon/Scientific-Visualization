@@ -44,7 +44,7 @@ class Simulation : public QObject {
       void step();
 
    signals:
-      void newSimulationState(SimulationData* deepCopyOfNewSimulationData);
+      void newSimulationState(SimulationData *deepCopyOfNewSimulationData);
 
    public slots:
 
@@ -52,8 +52,7 @@ class Simulation : public QObject {
 
       void onStep();
 
-      void onWindowResized(int width,
-                           int height);
+      void onWindowResized(int width, int height);
 
    private:
 
