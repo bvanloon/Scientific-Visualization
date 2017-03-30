@@ -9,15 +9,13 @@
 
 Simulation::Simulation(QObject *parent) :
    QObject(parent),
-   lastMousePosition(0.0f, 0.0f)
-{
-   this->realization = new SimulationRealization();
-   this->grid = UniformGrid::createSimulationGrid(
-    Settings::simulation().dimension,
-    Settings::canvas().size,
-    this->realization);
-}
-
+   realization(new SimulationRealization),
+   lastMousePosition(0.0f, 0.0f),
+   grid(new SimulationGrid(
+           Settings::simulation().dimension,
+           Settings::canvas().size,
+           realization->getData()))
+{}
 
 Simulation::~Simulation()
 {
