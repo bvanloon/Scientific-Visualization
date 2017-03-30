@@ -21,6 +21,8 @@ class SimulationRealization
       fftw_real *rho, *rho0;                    //smoke density at the current (rho) and previous (rho0) moment
       fftw_real *fx, *fy;           //(fx,fy)   = user-controlled simulation forces, steered with the mouse
 
+      SimulationData *getData() const;
+
    private:
       //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
       float visc;                       //fluid viscosity

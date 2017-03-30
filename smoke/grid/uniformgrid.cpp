@@ -10,15 +10,12 @@
 #include <QMatrix4x4>
 #include <QVector4D>
 #include <limits>
+#include "grid/simulationgrid.h"
 
-UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
-
+UniformGrid::UniformGrid(int dimension, bool hasPadding) :
    Grid(dimension * dimension, hasPadding),
-   dimension(dimension),
-   cellSize(computeCellSize(areaSize)),
-   padding(0.0f, 0.0f)
+   dimension(dimension)
 {
-   if (hasPadding) padding = cellSize;
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
 }
 
@@ -68,14 +65,9 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
    for (int i = 0; i < this->numVertices(); i++)
    {
       transformedPosition = scaleMatrix * QVector4D(this->vertexPositions[i], 1.0);
-      this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
+      this->vertexPositions.replace(i, bindToGrid(transformedPosition.toVector3D()));
    }
    this->triangulation.transform(scaleMatrix);
-}
-
-QSizeF UniformGrid::computeCellSize(QSizeF area)
-{
-   return area / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
 }
 
 QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
@@ -93,18 +85,6 @@ QRectF UniformGrid::computeCoveredArea(QSizeF padding, QSizeF cellSize)
                         (dimension - 1) * cellSize.height());
 
    return QRectF(upperLeftCorner, size);
-}
-
-UniformGrid *UniformGrid::createSimulationGrid(int dimension,
-                                               QSizeF size,
-                                               SimulationRealization *simulation)
-{
-   UniformGrid *grid = new UniformGrid(dimension, size, true);
-
-   createVertices(grid, simulation);
-   createCells(grid);
-   createTriangulation(grid);
-   return grid;
 }
 
 UniformGrid *UniformGrid::createVisualizationGrid(int dimension,
@@ -152,8 +132,7 @@ StructuredCell *UniformGrid::findCellContaining(QVector3D position)
    return cell;
 }
 
-QPair<int,
-      int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
+QPair<int, int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
 {
    float xUnrounded = ((float)position.x() - padding.width()) / cellSize.width();
    float yUnrounded = ((float)position.y() - padding.height()) / cellSize.height();
@@ -164,31 +143,6 @@ QPair<int,
    if (y == (dimension - 1)) y--;
    if (x == (dimension - 1)) x--;
    return QPair<int, int>(x, y);
-}
-
-void UniformGrid::createVertices(UniformGrid *grid,
-                                 SimulationRealization *simulation)
-{
-   QVector3D position;
-   Vertex *vertex;
-   int idx;
-
-   for (int y = 0; y < grid->dimension; y++)
-   {
-      for (int x = 0; x < grid->dimension; x++)
-      {
-         idx = grid->to1Dindex(x, y);
-
-         position = grid->computeVertexPosition(x, y);
-         grid->vertexPositions.replace(idx, position);
-         vertex = new SimulationVertex(&grid->vertexPositions.at(idx),
-                                    &simulation->vx[idx], &simulation->vy[idx],
-                                    &simulation->fx[idx], &simulation->fy[idx],
-                                    &simulation->rho[idx]);
-         grid->vertices.replace(idx, vertex);
-         grid->vertexMap.insert(QPair<int, int>(x, y), vertex);
-      }
-   }
 }
 
 void UniformGrid::createVertices(UniformGrid *visualizationGrid,
@@ -240,24 +194,17 @@ void UniformGrid::createCells(UniformGrid *grid)
 
 int UniformGrid::to1Dindex(int x, int y) const
 {
-    return x + (y * this->dimension);
+   return x + (y * this->dimension);
 }
 
 int UniformGrid::to1Dindex(Index2D idx) const
 {
-    return to1Dindex(idx.first, idx.second);
+   return to1Dindex(idx.first, idx.second);
 }
 
-void UniformGrid::changeGridArea(QSizeF newArea)
+void UniformGrid::changeGridArea(QSizeF UNUSED(newArea))
 {
-   QSizeF oldCellSize = cellSize;
-
-   cellSize = computeCellSize(newArea);
-
-   if (hasPadding) padding = cellSize;
-
-   this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
-   recomputeVertexPositions(oldCellSize, cellSize);
+   std::logic_error("UniformGrid::changeGridArea(QSizeF newArea) is not implemented.");
 }
 
 void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
@@ -276,7 +223,7 @@ QVector3D UniformGrid::computeVertexPosition(int i, int j)
                     0.0f);
 }
 
-QVector3D UniformGrid::boundToGrid(QVector3D position)
+QVector3D UniformGrid::bindToGrid(QVector3D position)
 {
    float offset = std::numeric_limits<float>::epsilon() * 10;
 

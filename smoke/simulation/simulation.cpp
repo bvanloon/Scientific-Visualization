@@ -9,40 +9,34 @@
 
 Simulation::Simulation(QObject *parent) :
    QObject(parent),
-   lastMousePosition(0.0f, 0.0f)
-{
-   this->realization = new SimulationRealization();
-   this->simulationGrid = UniformGrid::createSimulationGrid(
-    Settings::simulation().dimension,
-    Settings::canvas().size,
-    this->realization);
-}
-
+   realization(new SimulationRealization),
+   lastMousePosition(0.0f, 0.0f),
+   grid(new SimulationGrid(
+           Settings::simulation().dimension,
+           Settings::canvas().size,
+           realization->getData()))
+{}
 
 Simulation::~Simulation()
 {
    delete realization;
-   delete simulationGrid;
+   delete grid;
 }
-
 
 GlyphData Simulation::getGlyphData()
 {
-   return getGlyphData(simulationGrid);
+   return getGlyphData(grid);
 }
-
 
 GlyphData Simulation::getGlyphData(Grid *grid)
 {
    return grid->getGlyphData();
 }
 
-
 Triangulation Simulation::getGridTriangulation()
 {
-   return simulationGrid->getTriangulation();
+   return grid->getTriangulation();
 }
-
 
 QVector<float> Simulation::getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation)
 {
@@ -57,12 +51,10 @@ QVector<float> Simulation::getTexCoord(Vertex::scalarGetter getter, Triangulatio
    return textureCoordinates;
 }
 
-
 QVector<float> Simulation::getTexCoordFluidDensity(Triangulation triangulation)
 {
    return getTexCoord(&Vertex::getFluidDensity, triangulation);
 }
-
 
 QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(
    Triangulation triangulation)
@@ -70,19 +62,16 @@ QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(
    return getTexCoord(&Vertex::getFluidVelocityMagnitude, triangulation);
 }
 
-
 QVector<float> Simulation::getTexCoordForceFieldMagnitude(
    Triangulation triangulation)
 {
    return getTexCoord(&Vertex::getForceMagnitude, triangulation);
 }
 
-
 void Simulation::step()
 {
    this->realization->do_one_simulation_step();
 }
-
 
 void Simulation::onMouseMoved(QPoint newPosition)
 {
@@ -93,20 +82,17 @@ void Simulation::onMouseMoved(QPoint newPosition)
    this->lastMousePosition = newPosition;
 }
 
-
 void Simulation::onStep()
 {
    this->step();
 }
 
-
 void Simulation::onWindowResized(int width, int height)
 {
-   simulationGrid->changeGridArea(QSizeF(width, height));
+   grid->changeGridArea(QSizeF(width, height));
 }
-
 
 UniformGrid *Simulation::getSimulationGrid() const
 {
-   return simulationGrid;
+   return grid;
 }

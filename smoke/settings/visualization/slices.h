@@ -15,11 +15,12 @@ class Settings::visualization::Slices : public QObject
       int numberOfSlices;
 
    signals:
-        void numberOfSlicesChanged(int newNumberOfSlices);
+      void numberOfSlicesChanged(int newNumberOfSlices);
 
    public slots:
-        void onNumberOfSlicesChanged(int newNumberOfSlices);
-        void onGlobalAlphaChanged(double newGlobalAlpha);
+      void onNumberOfSlicesChanged(int newNumberOfSlices);
+
+      void onGlobalAlphaChanged(double newGlobalAlpha);
 
    private slots:
 

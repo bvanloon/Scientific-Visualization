@@ -12,6 +12,7 @@ class Triangulation
 
       Triangulation();
       Triangulation(int numVertices);
+      ~Triangulation();
 
       void extend(Triangulation *other);
 

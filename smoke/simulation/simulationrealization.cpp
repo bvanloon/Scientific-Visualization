@@ -196,6 +196,11 @@ void SimulationRealization::set_forces(void)
    }
 }
 
+SimulationData *SimulationRealization::getData() const
+{
+    return data;
+}
+
 //do_one_simulation_step: Do one complete cycle of the simulation:
 //      - set_forces:
 //      - solve:            read forces from the user
