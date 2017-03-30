@@ -16,6 +16,7 @@ class SimulationGrid : public UniformGrid
       SimulationData *data;
 
       void addVertices();
+      void addVertex(int x, int y);
 };
 
 
