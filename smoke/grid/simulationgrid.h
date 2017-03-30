@@ -36,5 +36,4 @@ class SimulationGrid : public UniformGrid
       void transform(QMatrix4x4 transformation);
 };
 
-
 #endif // SIMULATIONGRID_H

@@ -6,13 +6,14 @@
 #include "simulation/simulationrealization.h"
 #include "streamobjects/streamline.h"
 #include <QRectF>
+#include "unused.h"
 
 class UniformGrid : public Grid
 {
    public:
       QVector<QVector3D> const& getVertexPositions() const;
 
-      virtual void changeGridArea(QSizeF newArea);
+      virtual void changeGridArea(QSizeF UNUSED(newArea));
       virtual void changeGridArea(QSizeF newArea, QSizeF padding);
 
       static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
