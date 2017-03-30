@@ -57,6 +57,8 @@ class UniformGrid : public Grid
 
       Vertex *getVertexAt(int x, int y) const;
 
+            QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
+
       int dimension;
       QSizeF cellSize;
       QSizeF padding;
@@ -72,7 +74,7 @@ class UniformGrid : public Grid
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
-      QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
+
 
       StructuredCell *findCellContaining(QVector3D position);
 

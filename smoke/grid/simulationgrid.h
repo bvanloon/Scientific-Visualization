@@ -1,6 +1,7 @@
 #ifndef SIMULATIONGRID_H
 #define SIMULATIONGRID_H
 
+#include <QMatrix4x4>
 #include "grid/uniformgrid.h"
 #include "simulation/simulationdata.h"
 
@@ -14,6 +15,8 @@ class SimulationGrid : public UniformGrid
 
       void setData(const SimulationData& value);
 
+      virtual void changeGridArea(QSizeF newArea);
+
    private:
       SimulationData *data;
 
@@ -26,6 +29,11 @@ class SimulationGrid : public UniformGrid
       void createCell(int x, int y);
 
       void createTriangulation();
+
+      QSizeF computeCellSize(QSizeF gridArea);
+      QMatrix4x4 computeScaleMatrix(QSizeF oldCellSize, QSizeF newCellSize);
+
+      void transform(QMatrix4x4 transformation);
 };
 
 

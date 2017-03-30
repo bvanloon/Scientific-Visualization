@@ -19,6 +19,43 @@ SimulationGrid::~SimulationGrid()
    cells.clear();
 }
 
+void SimulationGrid::changeGridArea(QSizeF newArea)
+{
+   qDebug() << "SimulationGrid::changeGridArea";
+   QSizeF oldCellSize = cellSize;
+   cellSize    = computeCellSize(newArea);
+   if (hasPadding) padding = cellSize;
+   coveredArea = computeCoveredArea(padding, cellSize);
+   transform(computeScaleMatrix(oldCellSize, cellSize));
+}
+
+QSizeF SimulationGrid::computeCellSize(QSizeF gridArea)
+{
+   return gridArea / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
+}
+
+QMatrix4x4 SimulationGrid::computeScaleMatrix(QSizeF oldCellSize, QSizeF newCellSize)
+{
+   QMatrix4x4 scaleMatrix;
+
+   float xScaling = newCellSize.width() / oldCellSize.width();
+   float yScaling = newCellSize.height() / oldCellSize.height();
+
+   scaleMatrix.scale(xScaling, yScaling, 0.0);
+   return scaleMatrix;
+}
+
+void SimulationGrid::transform(QMatrix4x4 transformation)
+{
+   QVector4D transformedPosition;
+   for (int i = 0; i < this->numVertices(); i++)
+   {
+      transformedPosition = transformation * QVector4D(vertexPositions[i], 1.0);
+      vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
+   }
+   this->triangulation.transform(transformation);
+}
+
 void SimulationGrid::createVertices()
 {
    for (int y = 0; y < this->dimension; y++)
