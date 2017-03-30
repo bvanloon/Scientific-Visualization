@@ -23,7 +23,6 @@ SimulationGrid::~SimulationGrid()
 
 void SimulationGrid::changeGridArea(QSizeF newArea)
 {
-   qDebug() << "SimulationGrid::changeGridArea";
    QSizeF oldCellSize = cellSize;
    cellSize    = computeCellSize(newArea);
    if (hasPadding) padding = cellSize;
