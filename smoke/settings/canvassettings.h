@@ -50,7 +50,7 @@ class Settings::Canvas : public QObject
 
       double panningFactor = 10;
 
-      Canvas(Canvas const&)         = delete;
+      Canvas(Canvas const&) = delete;
       void operator=(Canvas const&) = delete;
 };
 

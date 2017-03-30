@@ -24,7 +24,7 @@ SimulationGrid::~SimulationGrid()
 void SimulationGrid::changeGridArea(QSizeF newArea)
 {
    QSizeF oldCellSize = cellSize;
-   cellSize    = computeCellSize(newArea);
+   cellSize = computeCellSize(newArea);
    if (hasPadding) padding = cellSize;
    coveredArea = computeCoveredArea(padding, cellSize);
    transform(computeScaleMatrix(oldCellSize, cellSize));
@@ -74,7 +74,7 @@ void SimulationGrid::createVertex(int x, int y)
 
    const QVector3D *position = this->addVertexPosition(idx, computeVertexPosition(x, y));
 
-   Vertex *vertex            = new SimulationVertex(position,
+   Vertex *vertex = new SimulationVertex(position,
                                 &this->data->getVx()[idx], &this->data->getVy()[idx],
                                 &this->data->getFx()[idx], &this->data->getFy()[idx],
                                 &this->data->getRho()[idx]);
@@ -104,9 +104,9 @@ void SimulationGrid::createCell(int x, int y)
 {
    Vertex *leftUpper, *rightLower, *rightUpper, *leftLower;
 
-   leftUpper  = getVertexAt(x, y);
+   leftUpper = getVertexAt(x, y);
    rightUpper = getVertexAt(x + 1, y);
-   leftLower  = getVertexAt(x, y + 1);
+   leftLower = getVertexAt(x, y + 1);
    rightLower = getVertexAt(x + 1, y + 1);
 
    StructuredCell *cell = new StructuredCell(leftUpper, rightUpper, leftLower, rightLower);

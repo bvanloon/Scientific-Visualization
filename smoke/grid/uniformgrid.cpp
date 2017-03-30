@@ -81,8 +81,8 @@ QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)
 QRectF UniformGrid::computeCoveredArea(QSizeF padding, QSizeF cellSize)
 {
    QPointF upperLeftCorner = QPointF(padding.width(), padding.height());
-   QSizeF size             = QSizeF((dimension - 1) * cellSize.width(),
-                                    (dimension - 1) * cellSize.height());
+   QSizeF size = QSizeF((dimension - 1) * cellSize.width(),
+                        (dimension - 1) * cellSize.height());
 
    return QRectF(upperLeftCorner, size);
 }
@@ -132,7 +132,7 @@ streamobject::Line UniformGrid::computeStreamLine(QVector3D seedPoint,
 
 StructuredCell *UniformGrid::findCellContaining(QVector3D position)
 {
-   QPair<int, int> coordinates           = findUpperLeftOfContainingCell(position);
+   QPair<int, int> coordinates = findUpperLeftOfContainingCell(position);
    StructuredGridVertex *upperLeftVertex = dynamic_cast<StructuredGridVertex *>(vertexMap.find(coordinates).value());
    Cell *containingCell = upperLeftVertex->getLowerRightCell();
 
@@ -145,8 +145,8 @@ QPair<int,
 {
    float xUnrounded = ((float)position.x() - padding.width()) / cellSize.width();
    float yUnrounded = ((float)position.y() - padding.height()) / cellSize.height();
-   int x            = std::floor(xUnrounded + std::numeric_limits<float>::epsilon());
-   int y            = std::floor(yUnrounded + std::numeric_limits<float>::epsilon());
+   int x = std::floor(xUnrounded + std::numeric_limits<float>::epsilon());
+   int y = std::floor(yUnrounded + std::numeric_limits<float>::epsilon());
 
    // Account for the borders
    if (y == (dimension - 1)) y--;
@@ -166,11 +166,11 @@ void UniformGrid::createVertices(UniformGrid *visualizationGrid,
    {
       for (int j = 0; j < visualizationGrid->dimension; j++)
       {
-         idx      = visualizationGrid->to1Dindex(i, j);
+         idx = visualizationGrid->to1Dindex(i, j);
          position = visualizationGrid->computeVertexPosition(i, j);
          visualizationGrid->vertexPositions.replace(idx, position);
 
-         cell   = simulationGrid->findCellContaining(position);
+         cell = simulationGrid->findCellContaining(position);
          vertex = new VisualizationVertex(&visualizationGrid->vertexPositions.at(
                                          idx), cell);
          visualizationGrid->vertices.replace(idx, vertex);
@@ -187,9 +187,9 @@ void UniformGrid::createCells(UniformGrid *grid)
    {
       for (int y = 0; y < grid->dimension - 1; y++)
       {
-         leftUpper  = grid->getVertexAt(x, y);
+         leftUpper = grid->getVertexAt(x, y);
          rightUpper = grid->getVertexAt(x + 1, y);
-         leftLower  = grid->getVertexAt(x, y + 1);
+         leftLower = grid->getVertexAt(x, y + 1);
          rightLower = grid->getVertexAt(x + 1, y + 1);
 
          grid->cells.append(new StructuredCell(leftUpper, rightUpper, leftLower,
@@ -220,7 +220,7 @@ void UniformGrid::changeGridArea(QSizeF newArea, QSizeF padding)
 {
    if (hasPadding) this->padding = padding;
    QSizeF oldCellSize = cellSize;
-   cellSize          = computeCellSize(newArea, padding);
+   cellSize = computeCellSize(newArea, padding);
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
    recomputeVertexPositions(oldCellSize, cellSize);
 }

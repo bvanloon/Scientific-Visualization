@@ -27,7 +27,7 @@ class Settings::visualization::Slices : public QObject
    private:
       explicit Slices(QObject *parent = 0);
 
-      Slices(Slices const&)         = delete;
+      Slices(Slices const&) = delete;
       void operator=(Slices const&) = delete;
 
       void connectToOtherSettings();

@@ -50,7 +50,7 @@ class Settings::Simulation : public QObject
    private:
       explicit Simulation(QObject *parent = 0);
 
-      Simulation(Simulation const&)     = delete;
+      Simulation(Simulation const&) = delete;
       void operator=(Simulation const&) = delete;
 
       QMultiMap<Settings::sim::Scalar, QPair<float, float> > scalarRanges;

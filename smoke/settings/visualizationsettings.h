@@ -41,7 +41,7 @@ class Settings::visualization::Smoke : public QObject {
 
    private:
       explicit Smoke(QObject *parent = 0);
-      Smoke(Smoke const&)          = delete;
+      Smoke(Smoke const&) = delete;
       void operator=(Smoke const&) = delete;
 };
 
@@ -72,7 +72,7 @@ class Settings::visualization::Glyphs : public QObject {
 
    private:
       explicit Glyphs(QObject *parent = 0);
-      Glyphs(Glyphs const&)         = delete;
+      Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
 
       QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
