@@ -1,9 +1,11 @@
 #include "simulationgrid.h"
 
 SimulationGrid::SimulationGrid(int dimension, QSizeF areaSize, SimulationData *data) :
-   UniformGrid(dimension, areaSize, true),
+   UniformGrid(dimension, true),
    data(data)
 {
+   cellSize = computeCellSize(areaSize);
+   if (hasPadding) padding = cellSize;
    createVertices();
    createCells();
    createTriangulation();

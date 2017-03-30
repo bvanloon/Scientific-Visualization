@@ -12,14 +12,10 @@
 #include <limits>
 #include "grid/simulationgrid.h"
 
-UniformGrid::UniformGrid(int dimension, QSizeF areaSize, bool hasPadding) :
-
+UniformGrid::UniformGrid(int dimension, bool hasPadding) :
    Grid(dimension * dimension, hasPadding),
-   dimension(dimension),
-   cellSize(computeCellSize(areaSize)),
-   padding(0.0f, 0.0f)
+   dimension(dimension)
 {
-   if (hasPadding) padding = cellSize;
    this->coveredArea = computeCoveredArea(this->padding, this->cellSize);
 }
 
@@ -72,11 +68,6 @@ void UniformGrid::recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSiz
       this->vertexPositions.replace(i, boundToGrid(transformedPosition.toVector3D()));
    }
    this->triangulation.transform(scaleMatrix);
-}
-
-QSizeF UniformGrid::computeCellSize(QSizeF area)
-{
-   return area / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
 }
 
 QSizeF UniformGrid::computeCellSize(QSizeF area, QSizeF padding)

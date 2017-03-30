@@ -35,11 +35,10 @@ class UniformGrid : public Grid
       Triangulation getTriangulation();
 
    protected:
-      UniformGrid(int dimension, QSizeF areaSize, bool hasPadding);
+      UniformGrid(int dimension, bool hasPadding);
       UniformGrid(int dimension, QSizeF areaSize, QSizeF padding);
       UniformGrid(int dimension, QSizeF cellSize, bool hasPadding, QSizeF padding);
 
-      static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
       static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
 
       static void createCells(UniformGrid *grid);
@@ -68,8 +67,6 @@ class UniformGrid : public Grid
    private:
 
       void recomputeVertexPositions(QSizeF oldCellSize, QSizeF newCellSize);
-
-      QSizeF computeCellSize(QSizeF area);
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
