@@ -124,9 +124,9 @@ QDebug operator<<(QDebug stream, const SimulationVertex& vertex)
 {
    stream << "SimulationVertex ["
           << " position: " << *vertex.position
-          << " (vx, vy): (" << *vertex.vx << ", " << *vertex.vy << ")"
-          << " (fx, fy): (" << *vertex.fx << ", " << *vertex.fy << ")"
-          << " (rho): (" << *vertex.rho << ")"
+          << " (vx, vy): " << vertex.getFluidVelocity()
+          << " (fx, fy): (" << vertex.getForce()
+          << " (rho): (" << vertex.getFluidDensity()
           << "]";
    return stream;
 }
