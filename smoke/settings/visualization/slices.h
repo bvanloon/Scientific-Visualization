@@ -12,11 +12,13 @@ class Settings::visualization::Slices : public QObject
       static const Slices& instance();
 
       double globalAlpha;
-      double numberOfSlices;
+      int numberOfSlices;
 
    signals:
+        void numberOfSlicesChanged(int newNumberOfSlices);
 
    public slots:
+        void onNumberOfSlicesChanged(int newNumberOfSlices);
 
    private slots:
 

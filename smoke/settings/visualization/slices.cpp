@@ -17,3 +17,9 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
 
    return instance;
 }
+
+void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)
+{
+   this->numberOfSlices = newNumberOfSlices;
+   emit numberOfSlicesChanged(newNumberOfSlices);
+}
