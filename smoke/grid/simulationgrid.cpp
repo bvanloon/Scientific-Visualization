@@ -77,7 +77,7 @@ void SimulationGrid::createVertex(int x, int y)
    Vertex *vertex = new SimulationVertex(position,
                                 &this->data->getVx()[idx], &this->data->getVy()[idx],
                                 &this->data->getFx()[idx], &this->data->getFy()[idx],
-                                &this->data->getRho()[idx]);
+                                &this->data->getRho()[idx], idx, this);
 
    this->vertices.replace(idx, vertex);
    this->vertexMap.insert(Index2D(x, y), vertex);
