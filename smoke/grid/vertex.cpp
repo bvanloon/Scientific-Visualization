@@ -1,5 +1,7 @@
 #include "vertex.h"
 #include "cell.h"
+#include "grid/simulationgrid.h"
+#include "simulation/simulationdata.h"
 
 Vertex::Vertex(const QVector3D *position) :
    position(position)
@@ -83,7 +85,7 @@ SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double
 
 QVector2D SimulationVertex::getFluidVelocity() const
 {
-   return QVector2D(*(vx), *(vy));
+   return containingGrid->getData()->getFluidVelocityAt(this->idx);
 }
 
 float SimulationVertex::getFluidVelocityMagnitude() const
@@ -99,7 +101,7 @@ QVector2D SimulationVertex::getFluidVelocityMagnitudeGradient() const
 
 QVector2D SimulationVertex::getForce() const
 {
-   return QVector2D(*(fx), *(fy));
+   return containingGrid->getData()->getForceAt(this->idx);
 }
 
 float SimulationVertex::getForceMagnitude() const
@@ -109,7 +111,7 @@ float SimulationVertex::getForceMagnitude() const
 
 float SimulationVertex::getFluidDensity() const
 {
-   return *rho;
+   return containingGrid->getData()->getDensityAt(this->idx);
 }
 
 QVector2D SimulationVertex::getFluidDensityGradient() const
