@@ -10,6 +10,7 @@ class SimulationRealization
 {
    public:
       SimulationRealization();
+      ~SimulationRealization();
 
       void addForceAt(QPoint newMousePosition, QPoint oldMousePosition);
 
@@ -34,7 +35,7 @@ class SimulationRealization
 
       void set_forces(void);
 
-      SimulationData data;
+      SimulationData *data;
 };
 
 #endif // SIMULATIONREALIZATION_H

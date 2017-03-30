@@ -9,20 +9,20 @@
 
 SimulationRealization::SimulationRealization() :
    visc(0.001),
-   data(SimulationData(Settings::simulation().dimension))
+   data(new SimulationData(Settings::simulation().dimension))
 {
    int i;
    size_t dim;
 
    dim = Settings::simulation().dimension * 2 * (Settings::simulation().dimension / 2 + 1) * sizeof(fftw_real);     //Allocate data structures
-   vx = data.vx;
-   vy = data.vy;
+   vx = data->vx;
+   vy = data->vy;
    vx0 = (fftw_real *)malloc(dim);
    vy0 = (fftw_real *)malloc(dim);
    dim = Settings::simulation().dimension * Settings::simulation().dimension * sizeof(fftw_real);
-   fx = data.fx;
-   fy = data.fy;
-   rho = data.rho;
+   fx = data->fx;
+   fy = data->fy;
+   rho = data->rho;
    rho0 = (fftw_real *)malloc(dim);
    plan_rc = rfftw2d_create_plan(Settings::simulation().dimension, Settings::simulation().dimension, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
    plan_cr = rfftw2d_create_plan(Settings::simulation().dimension, Settings::simulation().dimension, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
