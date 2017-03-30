@@ -75,10 +75,10 @@ void Settings::Simulation::updateGridCellSize()
    updateGridCellSize(Settings::canvas().size.width(), Settings::canvas().size.height());
 }
 
-void Settings::Simulation::updateGridCellSize(int width, int height)
+void Settings::Simulation::updateGridCellSize(int canvasWidth, int canvasHeight)
 {
-   cellSize.setHeight((fftw_real)height / (fftw_real)(dimension + 1));
-   cellSize.setWidth((fftw_real)width / (fftw_real)(dimension + 1));
-   emit recomputeVertexPositions(QSize(width, height), cellSize);
+   cellSize.setHeight((fftw_real)canvasHeight / (fftw_real)(dimension + 1));
+   cellSize.setWidth((fftw_real)canvasWidth / (fftw_real)(dimension + 1));
+   emit recomputeVertexPositions(QSize(canvasWidth, canvasHeight), cellSize);
    emit cellSizeChanged(this->cellSize);
 }
