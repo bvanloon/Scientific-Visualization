@@ -33,7 +33,7 @@ class Grid
 
       QMultiMap<Index2D, Vertex *> getVertexMap() const;
 
-protected:
+   protected:
       QVector<Vertex *> vertices;
       QMultiMap<Index2D, Vertex *> vertexMap;
       QVector<QVector3D> vertexPositions;

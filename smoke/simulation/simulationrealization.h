@@ -23,7 +23,7 @@ class SimulationRealization
 
       SimulationData *getData() const;
 
-private:
+   private:
       //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
       float visc;                       //fluid viscosity
       fftw_real *vx0, *vy0;         //(vx0,vy0) = velocity field at the previous moment

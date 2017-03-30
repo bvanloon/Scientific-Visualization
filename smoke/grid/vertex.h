@@ -28,17 +28,17 @@ class Vertex
 
       friend QDebug operator<<(QDebug stream, Vertex *vertex);
 
-      virtual QVector2D getFluidVelocity() const = 0;
+      virtual QVector2D getFluidVelocity() const                  = 0;
 
-      virtual float getFluidVelocityMagnitude() const = 0;
+      virtual float getFluidVelocityMagnitude() const             = 0;
 
       virtual QVector2D getFluidVelocityMagnitudeGradient() const = 0;
 
-      virtual QVector2D getForce() const = 0;
+      virtual QVector2D getForce() const                = 0;
 
-      virtual float getForceMagnitude() const = 0;
+      virtual float getForceMagnitude() const           = 0;
 
-      virtual float getFluidDensity() const = 0;
+      virtual float getFluidDensity() const             = 0;
 
       virtual QVector2D getFluidDensityGradient() const = 0;
 
@@ -52,17 +52,17 @@ class Vertex
 
 class StructuredGridVertex : public Vertex {
    public:
-      virtual QVector2D getFluidVelocity() const = 0;
+      virtual QVector2D getFluidVelocity() const                  = 0;
 
-      virtual float getFluidVelocityMagnitude() const = 0;
+      virtual float getFluidVelocityMagnitude() const             = 0;
 
       virtual QVector2D getFluidVelocityMagnitudeGradient() const = 0;
 
-      virtual QVector2D getForce() const = 0;
+      virtual QVector2D getForce() const                = 0;
 
-      virtual float getForceMagnitude() const = 0;
+      virtual float getForceMagnitude() const           = 0;
 
-      virtual float getFluidDensity() const = 0;
+      virtual float getFluidDensity() const             = 0;
 
       virtual QVector2D getFluidDensityGradient() const = 0;
 

@@ -49,7 +49,7 @@ class Settings::visualization::StreamLines : public QObject
 
    private:
       explicit StreamLines(QObject *parent = 0);
-      StreamLines(StreamLines const&) = delete;
+      StreamLines(StreamLines const&)    = delete;
       void operator=(StreamLines const&) = delete;
 
       double computeEdgeLength(double factor, double cellSize);
