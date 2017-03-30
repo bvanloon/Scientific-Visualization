@@ -34,17 +34,17 @@ void SimulationGrid::changeGridArea(QSizeF newArea)
 
 SimulationData *SimulationGrid::getData() const
 {
-    return data;
+   return data;
 }
 
 void SimulationGrid::setData(SimulationData *value)
 {
-    data = value;
+   data = value;
 }
 
 QSizeF SimulationGrid::computeCellSize(QSizeF gridArea)
 {
-    return gridArea / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
+   return gridArea / ((float)(dimension + (hasPadding ? 1.0 : -1.0)));
 }
 
 QMatrix4x4 SimulationGrid::computeScaleMatrix(QSizeF oldCellSize, QSizeF newCellSize)
