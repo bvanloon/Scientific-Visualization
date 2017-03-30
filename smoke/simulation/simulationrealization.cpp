@@ -15,14 +15,14 @@ SimulationRealization::SimulationRealization() :
    size_t dim;
 
    dim = Settings::simulation().dimension * 2 * (Settings::simulation().dimension / 2 + 1) * sizeof(fftw_real);     //Allocate data structures
-   vx = data->vx;
-   vy = data->vy;
+   vx = data->getVx();
+   vy = data->getVy();
    vx0 = (fftw_real *)malloc(dim);
    vy0 = (fftw_real *)malloc(dim);
    dim = Settings::simulation().dimension * Settings::simulation().dimension * sizeof(fftw_real);
-   fx = data->fx;
-   fy = data->fy;
-   rho = data->rho;
+   fx = data->getFx();
+   fy = data->getFy();
+   rho = data->getRho();
    rho0 = (fftw_real *)malloc(dim);
    plan_rc = rfftw2d_create_plan(Settings::simulation().dimension, Settings::simulation().dimension, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
    plan_cr = rfftw2d_create_plan(Settings::simulation().dimension, Settings::simulation().dimension, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);

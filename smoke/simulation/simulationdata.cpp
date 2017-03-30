@@ -16,6 +16,31 @@ SimulationData::~SimulationData()
    free(rho);
 }
 
+fftw_real *SimulationData::getVx() const
+{
+   return vx;
+}
+
+fftw_real *SimulationData::getVy() const
+{
+   return vy;
+}
+
+fftw_real *SimulationData::getFx() const
+{
+   return fx;
+}
+
+fftw_real *SimulationData::getFy() const
+{
+   return fy;
+}
+
+fftw_real *SimulationData::getRho() const
+{
+   return rho;
+}
+
 void SimulationData::allocateVelocityData(int dimension)
 {
    size_t mallocDimension = dimension * 2 * (dimension / 2 + 1) * sizeof(fftw_real);
