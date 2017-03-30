@@ -6,7 +6,8 @@
 class SimulationData
 {
    public:
-      SimulationData(int numSimulationVertices);
+      SimulationData(int dimension);
+      ~SimulationData();
 
       fftw_real *vx, *vy;         //(vx,vy)   = velocity field at the current moment
       fftw_real *fx, *fy;         //(fx,fy)   = user-controlled simulation forces, steered with the mouse
