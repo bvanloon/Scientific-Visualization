@@ -18,8 +18,6 @@ class UniformGrid : public Grid
       virtual void changeGridArea(QSizeF UNUSED(newArea));
       virtual void changeGridArea(QSizeF newArea, QSizeF padding);
 
-      static SimulationGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
-
       static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid);
 
       QSizeF const& getPadding() const;
