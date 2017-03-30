@@ -88,7 +88,7 @@ QVector2D SimulationVertex::getFluidVelocity() const
    return containingGrid->getData()->getFluidVelocityAt(this->idx);
 }
 
-float SimulationVertex::getFluidVelocityMagnitude() const
+double SimulationVertex::getFluidVelocityMagnitude() const
 {
    return getFluidVelocity().length();
 }
@@ -104,12 +104,12 @@ QVector2D SimulationVertex::getForce() const
    return containingGrid->getData()->getForceAt(this->idx);
 }
 
-float SimulationVertex::getForceMagnitude() const
+double SimulationVertex::getForceMagnitude() const
 {
    return getForce().length();
 }
 
-float SimulationVertex::getFluidDensity() const
+double SimulationVertex::getFluidDensity() const
 {
    return containingGrid->getData()->getDensityAt(this->idx);
 }
@@ -164,7 +164,7 @@ QVector2D VisualizationVertex::getFluidVelocity() const
    return cell->interpolate2DVector(*position, &Vertex::getFluidVelocity);
 }
 
-float VisualizationVertex::getFluidVelocityMagnitude() const
+double VisualizationVertex::getFluidVelocityMagnitude() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
@@ -185,14 +185,14 @@ QVector2D VisualizationVertex::getForce() const
    return cell->interpolate2DVector(*position, &Vertex::getForce);
 }
 
-float VisualizationVertex::getForceMagnitude() const
+double VisualizationVertex::getForceMagnitude() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 
    return cell->interpolateScalar(*position, &Vertex::getForceMagnitude);
 }
 
-float VisualizationVertex::getFluidDensity() const
+double VisualizationVertex::getFluidDensity() const
 {
    StructuredCell *cell = dynamic_cast<StructuredCell *>(containingCell);
 

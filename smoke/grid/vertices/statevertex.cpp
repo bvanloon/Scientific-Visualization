@@ -32,7 +32,7 @@ QVector2D StateVertex::getFluidVelocity() const
    return QVector2D(vx, vy);
 }
 
-float StateVertex::getFluidVelocityMagnitude() const
+double StateVertex::getFluidVelocityMagnitude() const
 {
    return getFluidVelocity().length();
 }
@@ -48,12 +48,12 @@ QVector2D StateVertex::getForce() const
    return QVector2D(fx, fy);
 }
 
-float StateVertex::getForceMagnitude() const
+double StateVertex::getForceMagnitude() const
 {
    return getForce().length();
 }
 
-float StateVertex::getFluidDensity() const
+double StateVertex::getFluidDensity() const
 {
    return rho;
 }
