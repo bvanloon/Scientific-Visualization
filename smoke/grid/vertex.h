@@ -86,7 +86,7 @@ class SimulationVertex : public StructuredGridVertex
 
    public:
 
-      SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho, size_t idx, SimulationGrid *grid);
+      SimulationVertex(const QVector3D *position, size_t idx, SimulationGrid *grid);
 
       friend QDebug operator<<(QDebug stream, const SimulationVertex& vertex);
 
@@ -107,9 +107,6 @@ class SimulationVertex : public StructuredGridVertex
       virtual QVector2D getFluidDensityGradient() const;
 
    private:
-      double *vx, *vy;
-      double *fx, *fy;
-      double *rho;
       size_t idx;
       SimulationGrid *containingGrid;
 };

@@ -86,10 +86,7 @@ void SimulationGrid::createVertex(int x, int y)
 
    const QVector3D *position = this->addVertexPosition(idx, computeVertexPosition(x, y));
 
-   Vertex *vertex = new SimulationVertex(position,
-                                &this->data->getVx()[idx], &this->data->getVy()[idx],
-                                &this->data->getFx()[idx], &this->data->getFy()[idx],
-                                &this->data->getRho()[idx], idx, this);
+   Vertex *vertex = new SimulationVertex(position, idx, this);
 
    this->vertices.replace(idx, vertex);
    this->vertexMap.insert(Index2D(x, y), vertex);

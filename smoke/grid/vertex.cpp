@@ -74,11 +74,8 @@ QDebug operator<<(QDebug stream, Vertex *vertex)
    return stream;
 }
 
-SimulationVertex::SimulationVertex(const QVector3D *position, double *vx, double *vy, double *fx, double *fy, double *rho, size_t idx, SimulationGrid *grid) :
+SimulationVertex::SimulationVertex(const QVector3D *position, size_t idx, SimulationGrid *grid) :
    StructuredGridVertex(position),
-   vx(vx), vy(vy),
-   fx(fx), fy(fy),
-   rho(rho),
    idx(idx),
    containingGrid(grid)
 {}
