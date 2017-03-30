@@ -17,11 +17,12 @@ class SimulationGrid : public UniformGrid
    private:
       SimulationData *data;
 
-      void addVertices();
-      void addVertex(int x, int y);
+      void createVertices();
+      void createVertex(int x, int y);
       const QVector3D* addVertexPosition(int idx, QVector3D position);
 
-      void addCells();
+      void createCells();
+      void createCell(int x, int y);
 };
 
 
