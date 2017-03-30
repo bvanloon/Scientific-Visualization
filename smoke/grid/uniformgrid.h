@@ -13,7 +13,6 @@ class UniformGrid : public Grid
       QVector<QVector3D> const& getVertexPositions() const;
 
       virtual void changeGridArea(QSizeF newArea);
-
       virtual void changeGridArea(QSizeF newArea, QSizeF padding);
 
       static UniformGrid *createSimulationGrid(int dimension, QSizeF size, SimulationRealization *simulation);
@@ -40,7 +39,6 @@ class UniformGrid : public Grid
       UniformGrid(int dimension, QSizeF cellSize, bool hasPadding, QSizeF padding);
 
       static void createVertices(UniformGrid *grid, SimulationRealization *simulation);
-
       static void createVertices(UniformGrid *visualizationGrid, UniformGrid *simulationGrid);
 
       static void createCells(UniformGrid *grid);
@@ -57,7 +55,7 @@ class UniformGrid : public Grid
 
       Vertex *getVertexAt(int x, int y) const;
 
-            QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
+      QRectF computeCoveredArea(QSizeF padding, QSizeF cellSize);
 
       int dimension;
       QSizeF cellSize;
@@ -73,8 +71,6 @@ class UniformGrid : public Grid
       QSizeF computeCellSize(QSizeF area);
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
-
-
 
       StructuredCell *findCellContaining(QVector3D position);
 
