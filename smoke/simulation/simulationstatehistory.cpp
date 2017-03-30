@@ -8,8 +8,13 @@ SimulationStateHistory::SimulationStateHistory(QObject *parent) :
    mirrorSimulationGrid(new SimulationGrid(
                            Settings::simulation().dimension,
                            Settings::canvas().size,
-                           NULL))
-{}
+                           NULL)),
+   mirrorVisualizationGrid(JitterGrid::createVisualizationGrid(
+                              Settings::defaults::visualization::glyphs::gridSize.width(),
+                              Settings::canvas().size,
+                              mirrorSimulationGrid))
+{
+}
 
 SimulationStateHistory::~SimulationStateHistory()
 {
@@ -46,7 +51,7 @@ void SimulationStateHistory::deleteOldestState()
    delete oldestState;
 }
 
-const SimulationGrid &SimulationStateHistory::getSimulationGridAtQueueIdx(int idx) const
+const SimulationGrid& SimulationStateHistory::getSimulationGridAtQueueIdx(int idx) const
 {
    SimulationData *state = this->getStateAtQueueIdx(idx);
    mirrorSimulationGrid->setData(state);
