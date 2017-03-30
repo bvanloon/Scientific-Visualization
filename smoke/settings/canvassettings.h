@@ -12,6 +12,7 @@
 class Settings::Canvas : public QObject
 {
    Q_OBJECT
+
    public:
 
       static const Canvas& instance();
