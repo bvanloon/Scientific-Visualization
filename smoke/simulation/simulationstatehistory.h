@@ -6,7 +6,7 @@
 
 #include "grid/stategrid.h"
 
-class SimulationStateHistory : public QObject, private QQueue<StateGrid>
+class SimulationStateHistory : public QObject
 {
    Q_OBJECT
 
@@ -26,6 +26,8 @@ class SimulationStateHistory : public QObject, private QQueue<StateGrid>
       void operator=(SimulationStateHistory const&) = delete;
 
       int numberOfStatesToStore;
+
+      QQueue<StateGrid> states;
 };
 
 #endif // SIMULATIONSTATEHISTORY_H

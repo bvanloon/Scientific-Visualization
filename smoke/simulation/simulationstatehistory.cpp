@@ -3,7 +3,6 @@
 
 SimulationStateHistory::SimulationStateHistory(QObject *parent) :
    QObject(parent),
-   QQueue(QQueue<StateGrid>()),
    numberOfStatesToStore(Settings::visualization::slices().numberOfSlices)
 {}
 
