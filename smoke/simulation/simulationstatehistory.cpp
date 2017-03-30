@@ -60,7 +60,7 @@ const SimulationGrid& SimulationStateHistory::getSimulationGridAtQueueIdx(int id
 const UniformGrid &SimulationStateHistory::getVisualizationGridAtQueueIdx(int idx) const
 {
     SimulationData *state = this->getStateAtQueueIdx(idx);
-    mirrorVisualizationGrid->setData(state);
+    mirrorSimulationGrid->setData(state);
     return *this->mirrorVisualizationGrid;
 }
 
