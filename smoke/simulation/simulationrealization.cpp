@@ -8,20 +8,21 @@
 #include "settings/simulationsettings.h"
 
 SimulationRealization::SimulationRealization() :
-   visc(0.001)
+   visc(0.001),
+   data(new SimulationData(Settings::simulation().dimension))
 {
    int i;
    size_t dim;
 
    dim = Settings::simulation().dimension * 2 * (Settings::simulation().dimension / 2 + 1) * sizeof(fftw_real);     //Allocate data structures
-   vx = (fftw_real *)malloc(dim);
-   vy = (fftw_real *)malloc(dim);
+   vx = data->getVx();
+   vy = data->getVy();
    vx0 = (fftw_real *)malloc(dim);
    vy0 = (fftw_real *)malloc(dim);
    dim = Settings::simulation().dimension * Settings::simulation().dimension * sizeof(fftw_real);
-   fx = (fftw_real *)malloc(dim);
-   fy = (fftw_real *)malloc(dim);
-   rho = (fftw_real *)malloc(dim);
+   fx = data->getFx();
+   fy = data->getFy();
+   rho = data->getRho();
    rho0 = (fftw_real *)malloc(dim);
    plan_rc = rfftw2d_create_plan(Settings::simulation().dimension, Settings::simulation().dimension, FFTW_REAL_TO_COMPLEX, FFTW_IN_PLACE);
    plan_cr = rfftw2d_create_plan(Settings::simulation().dimension, Settings::simulation().dimension, FFTW_COMPLEX_TO_REAL, FFTW_IN_PLACE);
@@ -32,6 +33,13 @@ SimulationRealization::SimulationRealization() :
    }
 }
 
+SimulationRealization::~SimulationRealization()
+{
+    delete data;
+    free(vx0);
+    free(vy0);
+    free(rho0);
+}
 
 //FFT: Execute the Fast Fourier Transform on the dataset 'vx'.
 //     'dirfection' indicates if we do the direct (1) or inverse (-1) Fourier Transform
@@ -46,7 +54,6 @@ void SimulationRealization::FFT(int direction, void *vx)
       rfftwnd_one_complex_to_real(plan_cr, (fftw_complex *)vx, (fftw_real *)vx);
    }
 }
-
 
 void SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMousePosition)
 {
@@ -63,7 +70,6 @@ void SimulationRealization::addForceAt(QPoint newMousePosition, QPoint oldMouseP
    fy[idx] += mouseDiff.y();
    rho[idx] = Settings::simulation().force;
 }
-
 
 //solve: Solve (compute) one step of the fluid flow simulation
 void SimulationRealization::solve(int grid_size, fftw_real *vx, fftw_real *vy, fftw_real *vx0, fftw_real *vy0, fftw_real visc, fftw_real dt)
@@ -148,7 +154,6 @@ void SimulationRealization::solve(int grid_size, fftw_real *vx, fftw_real *vy, f
    }
 }
 
-
 // diffuse_matter: This function diffuses matter that has been placed in the velocity field. It's almost identical to the
 // velocity diffusion step in the function above. The input matter densities are in rho0 and the result is written into rho.
 void SimulationRealization::diffuse_matter(int gride_size, fftw_real *vx, fftw_real *vy, fftw_real *rho, fftw_real *rho0, fftw_real dt)
@@ -175,7 +180,6 @@ void SimulationRealization::diffuse_matter(int gride_size, fftw_real *vx, fftw_r
    }
 }
 
-
 //set_forces: copy user-controlled forces to the force vectors that are sent to the solver.
 //            Also dampen forces and matter density to get a stable simulation.
 void SimulationRealization::set_forces(void)
@@ -191,7 +195,6 @@ void SimulationRealization::set_forces(void)
       vy0[i] = fy[i];
    }
 }
-
 
 //do_one_simulation_step: Do one complete cycle of the simulation:
 //      - set_forces:
