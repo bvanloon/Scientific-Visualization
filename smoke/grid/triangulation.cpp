@@ -10,6 +10,12 @@ Triangulation::Triangulation(int numVertices)
    vertices.reserve(numVertices);
 }
 
+Triangulation::~Triangulation()
+{
+    vertexPositions.clear();
+    vertices.clear();
+}
+
 void Triangulation::extend(Triangulation *other)
 {
    vertexPositions.append(other->vertexPositions);
