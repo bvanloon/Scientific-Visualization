@@ -13,8 +13,7 @@ SimulationStateHistory::SimulationStateHistory(QObject *parent) :
                               Settings::defaults::visualization::glyphs::gridSize.width(),
                               Settings::canvas().size,
                               mirrorSimulationGrid))
-{
-}
+{}
 
 SimulationStateHistory::~SimulationStateHistory()
 {
@@ -73,7 +72,18 @@ void SimulationStateHistory::onNewSimulationState(SimulationData *simulationData
    addState(simulationDataDeepCopy);
 }
 
-void SimulationStateHistory::onWindowResized(QSizeF newSize)
+void SimulationStateHistory::onWindowResized(QSizeF newWindowSize)
 {
-   this->mirrorSimulationGrid->changeGridArea(newSize);
+   mirrorSimulationGrid->changeGridArea(newWindowSize);
+   mirrorVisualizationGrid->changeGridArea(newWindowSize, mirrorSimulationGrid->getCellSize());
+}
+
+void SimulationStateHistory::onGridDimensionChanged(QSizeF newDimension)
+{
+   qDebug() << "SimulationStateHistory::onGridDimensionChanged";
+   delete mirrorVisualizationGrid;
+   mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
+                newDimension.width(),
+                Settings::canvas().size,
+                mirrorSimulationGrid);
 }
