@@ -84,7 +84,8 @@ SOURCES += main.cpp\
     engines/abstractsliceengine.cpp \
     utilities/rotation.cpp \
     grid/vertices/statevertex.cpp \
-    grid/stategrid.cpp
+    grid/stategrid.cpp \
+    settings/visualization/slices.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -147,7 +148,8 @@ HEADERS  += main.ih\
     engines/streamlineslicesengine.h \
     engines/abstractsliceengine.h \
     utilities/rotation.h \
-    grid/stategrid.h
+    grid/stategrid.h \
+    settings/visualization/slices.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
