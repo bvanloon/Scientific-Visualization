@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::SlicesTab *ui;
+
+    void connectToSettings();
+    void setUItoDefaults();
 };
 
 #endif // SLICESTAB_H
