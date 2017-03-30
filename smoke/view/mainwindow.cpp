@@ -100,6 +100,8 @@ void MainWindow::connectSimuationStateHistory()
            &SimulationStateHistory::instance(), SLOT(onNewSimulationState(SimulationData*)));
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF)),
            &SimulationStateHistory::instance(), SLOT(onWindowResized(QSizeF)));
+   connect(&Settings::visualization::glyphs(), SIGNAL(gridDimensionChanged(QSizeF)),
+           &SimulationStateHistory::instance(), SLOT(onGridDimensionChanged(QSizeF)));
 }
 
 void MainWindow::connectCanvasAndThis()
