@@ -1,9 +1,14 @@
 #include "simulationstatehistory.h"
 #include "settings/visualizationsettings.h"
+#include "settings/canvassettings.h"
 
 SimulationStateHistory::SimulationStateHistory(QObject *parent) :
    QObject(parent),
-   numberOfStatesToStore(Settings::visualization::slices().numberOfSlices)
+   numberOfStatesToStore(Settings::visualization::slices().numberOfSlices),
+   mirrorSimulationGrid(new SimulationGrid(
+                           Settings::simulation().dimension,
+                           Settings::canvas().size,
+                           NULL))
 {}
 
 void SimulationStateHistory::addState(SimulationData *state)

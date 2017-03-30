@@ -33,6 +33,7 @@ class SimulationStateHistory : public QObject
 
       int numberOfStatesToStore;
       QQueue<SimulationData *> states;
+      SimulationGrid *mirrorSimulationGrid;
 
       void addState(SimulationData *state);
 
