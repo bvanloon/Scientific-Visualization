@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QQueue>
 
-#include "grid/uniformgrid.h"
+#include "grid/simulationgrid.h"
 #include "simulation/simulationdata.h"
+#include "grid/jittergrid.h"
 
 class SimulationStateHistory : public QObject
 {
