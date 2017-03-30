@@ -132,8 +132,7 @@ StructuredCell *UniformGrid::findCellContaining(QVector3D position)
    return cell;
 }
 
-QPair<int,
-      int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
+QPair<int, int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
 {
    float xUnrounded = ((float)position.x() - padding.width()) / cellSize.width();
    float yUnrounded = ((float)position.y() - padding.height()) / cellSize.height();
