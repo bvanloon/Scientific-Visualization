@@ -11,14 +11,19 @@ class SimulationData
       ~SimulationData();
 
       fftw_real *getVx() const;
+      fftw_real getVxAt(int idx) const;
 
       fftw_real *getVy() const;
+      fftw_real getVyAt(int idx) const;
 
       fftw_real *getFx() const;
+      fftw_real getFxAt(int idx) const;
 
       fftw_real *getFy() const;
+      fftw_real getFyAt(int idx) const;
 
       fftw_real *getRho() const;
+      fftw_real getRhoAt(int idx) const;
 
    private:
       fftw_real *vx, *vy;         //(vx,vy)   = velocity field at the current moment
