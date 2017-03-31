@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "abstractengine.h"
+#include "utilities/sizelimitedqueue.h"
 
 class AbstractSliceEngine : public AbstractEngine
 {
@@ -17,6 +18,8 @@ class AbstractSliceEngine : public AbstractEngine
       void onUpdateModelViewMatrix();
 
    private:
+
+      SizeLimitedQueue<GPUData> slices;
 
       virtual int updateBuffers(Simulation *simulation) = 0;
 

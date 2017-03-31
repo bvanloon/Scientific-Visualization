@@ -1,8 +1,10 @@
 #include "abstractsliceengine.h"
 #include "settings/canvassettings.h"
+#include "settings/visualizationsettings.h"
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel) :
-   AbstractEngine(lightModel)
+   AbstractEngine(lightModel),
+   slices(Settings::visualization::slices().numberOfSlices)
 {
    updateModelViewMatrix();
 }
