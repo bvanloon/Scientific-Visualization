@@ -36,12 +36,16 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
+void AbstractEngine::connectToColorMap()
+{}
+
 void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 {
    this->colorMap = value;
 
    QPair<float, float> range = Settings::simulation().getRange(colorMap->scalar);
    setColorMapValueRange(range.first, range.second);
+   connectToColorMap();
 
    /*
     * Hacky solution to ensure that the changes in range due to changes in initial

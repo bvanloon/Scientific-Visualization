@@ -67,6 +67,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void setMVPMatrix();
 
+      virtual void connectToColorMap();
+
    private:
       void init();
 
