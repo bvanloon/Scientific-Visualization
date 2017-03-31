@@ -37,6 +37,7 @@ class Settings::Canvas : public QObject
       void rotationChanged(Rotation rotation);
 
       void clearCache();
+      void clearCache(Settings::engines::EnginesTypes engine);
 
    public slots:
       void onWindowResized(int width, int height);

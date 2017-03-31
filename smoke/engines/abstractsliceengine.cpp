@@ -56,6 +56,8 @@ void AbstractSliceEngine::connectToSettings()
            this, SLOT(onNumberOfSlicesChanged(int)));
    connect(&Settings::canvas(), SIGNAL(clearCache()),
            this, SLOT(onClearCache()));
+   connect(&Settings::canvas(), SIGNAL(clearCache(Settings::engines::EnginesTypes)),
+           this, SLOT(onClearCache(Settings::engines::EnginesTypes)));
 }
 
 void AbstractSliceEngine::connectToColorMap()

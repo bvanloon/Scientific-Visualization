@@ -78,4 +78,5 @@ void Settings::Canvas::onResetView()
 
 void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
+    if(checked) emit clearCache(engine);
 }
