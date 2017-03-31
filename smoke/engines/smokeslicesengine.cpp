@@ -5,6 +5,11 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
                        Settings::engines::EnginesTypes::smokeSlices)
 {}
 
+void SmokeSlicesEngine::updateCache()
+{
+    std::logic_error("SmokeSlicesEngine::updateCache() not yet implemented");
+}
+
 void SmokeSlicesEngine::draw(Simulation *simulation)
 {
    int bufferLength = this->fillBuffers(simulation);

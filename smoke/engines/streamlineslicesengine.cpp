@@ -6,20 +6,10 @@ StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
    grid(simulationGrid)
 {}
 
-void StreamLineSlicesEngine::draw(Simulation *UNUSED(simulation))
+void StreamLineSlicesEngine::updateCache()
 {
-    GPUData newData = buildStreamLines();
-    this->cache.enqueue(newData);
-
-    drawSlices();
-}
-
-int StreamLineSlicesEngine::fillBuffers(Simulation *UNUSED(Simulation))
-{
-   GPUData data = buildStreamLines();
-
-   updateBuffers(data);
-   return data.numElements();
+   GPUData newData = buildStreamLines();
+   this->cache.enqueue(newData);
 }
 
 GPUData StreamLineSlicesEngine::buildStreamLines()

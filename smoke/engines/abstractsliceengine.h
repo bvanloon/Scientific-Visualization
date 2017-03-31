@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "abstractengine.h"
+#include "unused.h"
 #include "utilities/sizelimitedqueue.h"
 
 class AbstractSliceEngine : public AbstractEngine
@@ -12,7 +13,7 @@ class AbstractSliceEngine : public AbstractEngine
    public:
       AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType);
 
-      virtual void draw(Simulation *Simulation) = 0;
+      void draw(Simulation *UNUSED(Simulation));
 
    public slots:
       void onUpdateModelViewMatrix();
@@ -28,10 +29,12 @@ class AbstractSliceEngine : public AbstractEngine
       void updateBuffers(GPUData data);
       void drawSlices();
 
+      virtual void updateCache() = 0;
+
    private:
       void updateModelViewMatrix();
 
-      virtual int fillBuffers(Simulation *simulation) = 0;
+      int fillBuffers(Simulation *UNUSED(simulation));
 
       virtual void connectToSettings();
       virtual void connectToColorMap();

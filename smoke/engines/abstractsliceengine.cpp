@@ -11,6 +11,12 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
    connectToSettings();
 }
 
+void AbstractSliceEngine::draw(Simulation *UNUSED(Simulation))
+{
+   updateCache();
+   drawSlices();
+}
+
 void AbstractSliceEngine::onUpdateModelViewMatrix()
 {
    updateModelViewMatrix();
@@ -50,19 +56,25 @@ void AbstractSliceEngine::updateModelViewMatrix()
    this->setMVPMatrix();
 }
 
+int AbstractSliceEngine::fillBuffers(Simulation *UNUSED(simulation))
+{
+   std::logic_error("AbstractSliceEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
+}
+
 void AbstractSliceEngine::updateBuffers(GPUData data)
 {
-    AbstractEngine::updateBuffers(data);
+   AbstractEngine::updateBuffers(data);
 }
 
 void AbstractSliceEngine::drawSlices()
 {
-    int bufferLength;
-    for(GPUData data : cache){
-        bufferLength = data.numElements();
-        updateBuffers(data);
-        drawWithMode(data.getDrawMode(), bufferLength);
-    }
+   int bufferLength;
+   for (GPUData data : cache)
+   {
+      bufferLength = data.numElements();
+      updateBuffers(data);
+      drawWithMode(data.getDrawMode(), bufferLength);
+   }
 }
 
 void AbstractSliceEngine::connectToSettings()

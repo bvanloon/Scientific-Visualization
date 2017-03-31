@@ -25,6 +25,11 @@ void GlyphSliceEngine::draw(Simulation *simulation)
    drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
 }
 
+void GlyphSliceEngine::updateCache()
+{
+   std::logic_error("GlyphSliceEngine::updateCache not yet implemented");
+}
+
 void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
