@@ -32,8 +32,8 @@ void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellS
 
 int GlyphSliceEngine::updateBuffers(Simulation *UNUSED(Simulation))
 {
-   int idx = SimulationStateHistory::instance().mostRecentStateIdx();
-   GlyphData data = SimulationStateHistory::instance().getVisualizationGridAtQueueIdx(idx).getGlyphData();
+   int idx = SimulationHistory::instance().mostRecentStateIdx();
+   GlyphData data = SimulationHistory::instance().getVisualizationGridAtQueueIdx(idx).getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
 
    updateBuffer(this->vertexBuffer, glyphs.getVertices());

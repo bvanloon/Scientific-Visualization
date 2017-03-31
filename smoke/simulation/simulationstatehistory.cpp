@@ -2,7 +2,7 @@
 #include "settings/visualizationsettings.h"
 #include "settings/canvassettings.h"
 
-SimulationStateHistory::SimulationStateHistory(QObject *parent) :
+SimulationHistory::SimulationHistory(QObject *parent) :
    QObject(parent),
    numberOfStatesToStore(Settings::visualization::slices().numberOfSlices),
    mirrorSimulationGrid(new SimulationGrid(
@@ -15,82 +15,82 @@ SimulationStateHistory::SimulationStateHistory(QObject *parent) :
                               mirrorSimulationGrid))
 {}
 
-SimulationStateHistory::~SimulationStateHistory()
+SimulationHistory::~SimulationHistory()
 {
    for (auto state : states) delete state;
 }
 
-const SimulationStateHistory& SimulationStateHistory::instance()
+const SimulationHistory& SimulationHistory::instance()
 {
-   static SimulationStateHistory instance;
+   static SimulationHistory instance;
 
    return instance;
 }
 
-void SimulationStateHistory::addState(SimulationData *state)
+void SimulationHistory::addState(SimulationData *state)
 {
    this->states.enqueue(state);
    if (this->historyTooLong()) trimHistoryToMaximumSize();
 }
 
-bool SimulationStateHistory::historyTooLong()
+bool SimulationHistory::historyTooLong()
 {
    return this->states.size() > this->numberOfStatesToStore;
 }
 
-void SimulationStateHistory::trimHistoryToMaximumSize()
+void SimulationHistory::trimHistoryToMaximumSize()
 {
    while (this->historyTooLong()) { deleteOldestState(); }
 }
 
-void SimulationStateHistory::deleteOldestState()
+void SimulationHistory::deleteOldestState()
 {
    SimulationData *oldestState = this->states.dequeue();
 
    delete oldestState;
 }
 
-const SimulationGrid& SimulationStateHistory::getSimulationGridAtQueueIdx(int idx) const
+const SimulationGrid& SimulationHistory::getSimulationGridAtQueueIdx(int idx) const
 {
    SimulationData *state = this->getStateAtQueueIdx(idx);
    mirrorSimulationGrid->setData(state);
    return *this->mirrorSimulationGrid;
 }
 
-const UniformGrid &SimulationStateHistory::getVisualizationGridAtQueueIdx(int idx) const
+const UniformGrid &SimulationHistory::getVisualizationGridAtQueueIdx(int idx) const
 {
     SimulationData *state = this->getStateAtQueueIdx(idx);
     mirrorSimulationGrid->setData(state);
     return *this->mirrorVisualizationGrid;
 }
 
-int SimulationStateHistory::mostRecentStateIdx() const
+int SimulationHistory::mostRecentStateIdx() const
 {
     return this->states.size() - 1;
 }
 
-void SimulationStateHistory::onNumberOfSlicesChanged(int numberOfSlices)
+void SimulationHistory::onNumberOfSlicesChanged(int numberOfSlices)
 {
    this->numberOfStatesToStore = numberOfSlices;
 }
 
-SimulationData *SimulationStateHistory::getStateAtQueueIdx(int idx) const
+SimulationData *SimulationHistory::getStateAtQueueIdx(int idx) const
 {
    return this->states.at(idx);
 }
 
-void SimulationStateHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)
+void SimulationHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)
 {
    addState(simulationDataDeepCopy);
 }
 
-void SimulationStateHistory::onWindowResized(QSizeF newWindowSize)
+void SimulationHistory::onWindowResized(QSizeF newWindowSize)
 {
    mirrorSimulationGrid->changeGridArea(newWindowSize);
    mirrorVisualizationGrid->changeGridArea(newWindowSize, mirrorSimulationGrid->getCellSize());
 }
 
-void SimulationStateHistory::onGridDimensionChanged(QSizeF newDimension)
+void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
 {
    delete mirrorVisualizationGrid;
    mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
