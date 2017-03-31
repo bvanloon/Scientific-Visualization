@@ -6,6 +6,12 @@ GPUData::GPUData(GLint drawMode) :
    drawMode(drawMode)
 {}
 
+void GPUData::transform(QMatrix4x4 transformation)
+{
+   transformVectors(&this->vertices, transformation);
+   transformVectors(&this->normals, transformation);
+}
+
 void GPUData::extend(GPUData data)
 {
    assertDrawModesAreEqual(this->drawMode, data.drawMode);
@@ -70,9 +76,19 @@ QVector<QVector3D> GPUData::getNormals() const
    return this->normals;
 }
 
+void GPUData::transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation)
+{
+   QVector4D transformedPosition;
+   for (int i = 0; i < numElements(); i++)
+   {
+      transformedPosition = transformation * QVector4D(vector->at(i), 1.0);
+      vector->replace(i, transformedPosition.toVector3D());
+   }
+}
+
 GLint GPUData::getDrawMode() const
 {
-    return drawMode;
+   return drawMode;
 }
 
 void GPUData::assertDrawModesAreEqual(GLint thisMode, GLint otherMode)
