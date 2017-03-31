@@ -154,7 +154,8 @@ HEADERS  += main.ih\
     view/slicestab.h \
     simulation/simulationstatehistory.h \
     simulation/simulationdata.h \
-    grid/simulationgrid.h
+    grid/simulationgrid.h \
+    utilities/sizelimitedqueue.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
