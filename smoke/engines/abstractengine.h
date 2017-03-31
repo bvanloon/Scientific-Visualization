@@ -31,7 +31,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void setColorMap(Settings::visualization::ColorMap *value);
 
-   public slots:
+public slots:
 
       void onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max);
 
@@ -47,9 +47,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       QOpenGLBuffer *vertexBuffer;
       QOpenGLBuffer *textureCoordinateBuffer;
       QOpenGLBuffer *normalBuffer;
-
-      QMatrix4x4 modelViewMatrix;
-      QMatrix4x4 projectionMatrix;
 
       Settings::visualization::ColorMap *colorMap;
 
@@ -67,10 +64,17 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void setMVPMatrix();
 
+      void setModelViewMatrix(const QMatrix4x4 &value);
+
+      void setProjectionMatrix(const QMatrix4x4 &value);
+
       virtual void connectToColorMap();
 
    private:
       void init();
+
+      QMatrix4x4 modelViewMatrix;
+      QMatrix4x4 projectionMatrix;
 
       int engineLightModel;
 

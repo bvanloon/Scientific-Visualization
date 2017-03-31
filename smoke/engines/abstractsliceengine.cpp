@@ -56,9 +56,7 @@ void AbstractSliceEngine::clearCache()
 
 void AbstractSliceEngine::updateModelViewMatrix()
 {
-   QMatrix4x4 newModelViewMatrix = computeModuleViewMatrix();
-   this->modelViewMatrix = newModelViewMatrix;
-   this->setMVPMatrix();
+   this->setModelViewMatrix(computeModuleViewMatrix());
 }
 
 

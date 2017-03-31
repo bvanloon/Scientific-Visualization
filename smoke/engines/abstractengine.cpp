@@ -36,6 +36,18 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
+void AbstractEngine::setProjectionMatrix(const QMatrix4x4 &value)
+{
+    projectionMatrix = value;
+    this->setMVPMatrix();
+}
+
+void AbstractEngine::setModelViewMatrix(const QMatrix4x4 &value)
+{
+    modelViewMatrix = value;
+    this->setMVPMatrix();
+}
+
 void AbstractEngine::connectToColorMap()
 {}
 
