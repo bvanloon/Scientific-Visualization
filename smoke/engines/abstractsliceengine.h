@@ -19,15 +19,20 @@ class AbstractSliceEngine : public AbstractEngine
 
       void onNumberOfSlicesChanged(int newNumberOfSlices);
 
+      void onClearCache(Settings::engines::EnginesTypes engine);
+      void onClearCache();
+
    private:
 
-      SizeLimitedQueue<GPUData> slices;
+      SizeLimitedQueue<GPUData> cache;
 
       virtual int updateBuffers(Simulation *simulation) = 0;
 
       void updateModelViewMatrix();
 
       virtual void connectToSettings();
+
+      void clearCache();
 };
 
 #endif // ABSTRACTSLICEENGINE_H

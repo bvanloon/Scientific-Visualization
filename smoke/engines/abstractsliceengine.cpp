@@ -5,7 +5,7 @@
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
-   slices(Settings::visualization::slices().numberOfSlices)
+   cache(Settings::visualization::slices().numberOfSlices)
 {
    updateModelViewMatrix();
    connectToSettings();
@@ -18,7 +18,22 @@ void AbstractSliceEngine::onUpdateModelViewMatrix()
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-   slices.changeMaximumSize(newNumberOfSlices);
+   cache.changeMaximumSize(newNumberOfSlices);
+}
+
+void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
+{
+   if (engine == me) clearCache();
+}
+
+void AbstractSliceEngine::onClearCache()
+{
+    clearCache();
+}
+
+void AbstractSliceEngine::clearCache()
+{
+    cache.clear();
 }
 
 void AbstractSliceEngine::updateModelViewMatrix()
@@ -38,5 +53,5 @@ void AbstractSliceEngine::updateModelViewMatrix()
 void AbstractSliceEngine::connectToSettings()
 {
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
-            this, SLOT(onNumberOfSlicesChanged(int)));
+           this, SLOT(onNumberOfSlicesChanged(int)));
 }
