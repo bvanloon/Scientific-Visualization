@@ -26,7 +26,7 @@ class AbstractSliceEngine : public AbstractEngine
       SizeLimitedQueue<GPUData> cache;
 
       void updateBuffers(GPUData data);
-      void drawSlices(int drawMode);
+      void drawSlices();
 
    private:
       void updateModelViewMatrix();

@@ -15,7 +15,7 @@ streamobject::Line::Line() :
 
 GPUData streamobject::Line::toGPUData() const
 {
-   GPUData data;
+   GPUData data(drawMode);
 
    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
 

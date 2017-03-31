@@ -2,17 +2,19 @@
 #include <assert.h>
 #include <QDebug>
 
-GPUData::GPUData()
+GPUData::GPUData(GLint drawMode) :
+   drawMode(drawMode)
 {}
 
 void GPUData::extend(GPUData data)
 {
+   assertDrawModesAreEqual(this->drawMode, data.drawMode);
    this->vertices.append(data.getVertices());
    this->normals.append(data.getNormals());
    this->textureCoordinates.append(data.getTextureCoordinates());
 }
 
-int GPUData::numElements()
+int GPUData::numElements() const
 {
    return this->vertices.length();
 }
@@ -66,4 +68,14 @@ QVector<float> GPUData::getTextureCoordinates() const
 QVector<QVector3D> GPUData::getNormals() const
 {
    return this->normals;
+}
+
+GLint GPUData::getDrawMode() const
+{
+    return drawMode;
+}
+
+void GPUData::assertDrawModesAreEqual(GLint thisMode, GLint otherMode)
+{
+   assert(thisMode == otherMode);
 }
