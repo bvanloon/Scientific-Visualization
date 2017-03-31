@@ -36,6 +36,8 @@ class Settings::Canvas : public QObject
 
       void rotationChanged(Rotation rotation);
 
+      void clearCache();
+
    public slots:
       void onWindowResized(int width, int height);
 

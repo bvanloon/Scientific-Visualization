@@ -54,4 +54,6 @@ void AbstractSliceEngine::connectToSettings()
 {
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
            this, SLOT(onNumberOfSlicesChanged(int)));
+   connect(&Settings::canvas(), SIGNAL(clearCache()),
+           this, SLOT(onClearCache()));
 }
