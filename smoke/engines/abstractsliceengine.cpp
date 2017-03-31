@@ -28,12 +28,12 @@ void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
 
 void AbstractSliceEngine::onClearCache()
 {
-    clearCache();
+   clearCache();
 }
 
 void AbstractSliceEngine::clearCache()
 {
-    cache.clear();
+   cache.clear();
 }
 
 void AbstractSliceEngine::updateModelViewMatrix()
