@@ -2,8 +2,8 @@
 #define SIMULATIONSTATEHISTORY_H
 
 #include <QObject>
-#include <QQueue>
 
+#include "utilities/sizelimitedqueue.h"
 #include "grid/simulationgrid.h"
 #include "simulation/simulationdata.h"
 #include "grid/jittergrid.h"
@@ -41,9 +41,7 @@ class SimulationHistory : public QObject
       SimulationHistory(SimulationHistory const&) = delete;
       void operator=(SimulationHistory const&) = delete;
 
-
-      int numberOfStatesToStore;
-      QQueue<SimulationData *> states;
+      SizeLimitedQueue<SimulationData *> states;
 
       SimulationGrid *mirrorSimulationGrid;
       UniformGrid *mirrorVisualizationGrid;
@@ -51,14 +49,6 @@ class SimulationHistory : public QObject
       void addState(SimulationData *state);
 
       SimulationData *getStateAtQueueIdx(int idx) const;
-
-      int timeToQueueIdx(int time);
-
-      bool historyTooLong();
-
-      void trimHistoryToMaximumSize();
-
-      void deleteOldestState();
 };
 
 #endif // SIMULATIONSTATEHISTORY_H
