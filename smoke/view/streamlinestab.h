@@ -54,6 +54,7 @@ class StreamLinesTab : public QWidget
       Ui::StreamLinesTab *ui;
 
       void setUiToDefaults();
+      void connectToSettings();
 
       void setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox *spinBox, double value);
 };

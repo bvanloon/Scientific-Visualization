@@ -3,12 +3,14 @@
 #include <limits>
 
 #include "settings/visualizationsettings.h"
+#include "settings/canvassettings.h"
 
 StreamLinesTab::StreamLinesTab(QWidget *parent) :
    QWidget(parent),
    ui(new Ui::StreamLinesTab)
 {
    ui->setupUi(this);
+   connectToSettings();
    setUiToDefaults();
 }
 
@@ -47,7 +49,13 @@ void StreamLinesTab::setUiToDefaults()
 
    this->ui->edgeLengthSelector->setValue(Settings::defaults::visualization::streamlines::edgeLengthFactor);
 
-   this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
+    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
+}
+
+void StreamLinesTab::connectToSettings()
+{
+    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+            &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox* spinBox, double value)

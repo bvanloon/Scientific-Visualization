@@ -49,6 +49,8 @@ class Settings::Canvas : public QObject
 
       void onResetView();
 
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
+
    private:
       explicit Canvas(QObject *parent = 0);
 

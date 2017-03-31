@@ -75,3 +75,7 @@ void Settings::Canvas::onResetView()
    emit rotationChanged(this->rotation);
    emit updateModelViewMatrix();
 }
+
+void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
+{
+}
