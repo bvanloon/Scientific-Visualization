@@ -7,9 +7,7 @@ SimulationData::SimulationData(int dimension) :
    rhoSize(dimension * dimension),
    forceSize(dimension * dimension)
 {
-   allocateVelocityData(velocitiesSize);
-   allocteForceData(forceSize);
-   allocateDensityData(rhoSize);
+    allocateData();
 }
 
 SimulationData::SimulationData(const SimulationData& obj) :
@@ -17,9 +15,7 @@ SimulationData::SimulationData(const SimulationData& obj) :
    rhoSize(obj.rhoSize),
    forceSize(obj.forceSize)
 {
-   allocateVelocityData(velocitiesSize);
-   allocteForceData(forceSize);
-   allocateDensityData(rhoSize);
+    allocateData();
 
    std::copy(std::begin(obj.vx), std::end(obj.vx), std::begin(this->vx));
    std::copy(std::begin(obj.vy), std::end(obj.vy), std::begin(this->vy));
@@ -28,6 +24,13 @@ SimulationData::SimulationData(const SimulationData& obj) :
    std::copy(std::begin(obj.fy), std::end(obj.fy), std::begin(this->fy));
 
    std::copy(std::begin(obj.rho), std::end(obj.rho), std::begin(this->rho));
+}
+
+void SimulationData::allocateData()
+{
+    allocateVelocityData(velocitiesSize);
+    allocteForceData(forceSize);
+    allocateDensityData(rhoSize);
 }
 
 SimulationData::~SimulationData()
@@ -105,7 +108,7 @@ fftw_real SimulationData::getRhoAt(int idx) const
 
 double SimulationData::getDensityAt(int idx) const
 {
-   return this->getRhoAt(idx);
+    return this->getRhoAt(idx);
 }
 
 void SimulationData::allocateVelocityData(int length)

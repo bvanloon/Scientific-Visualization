@@ -47,6 +47,8 @@ class SimulationData
       size_t rhoSize;
       size_t forceSize;
 
+      void allocateData();
+
       void allocateVelocityData(int length);
 
       void allocteForceData(int length);
