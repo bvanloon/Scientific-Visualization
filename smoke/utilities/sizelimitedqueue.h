@@ -31,7 +31,22 @@ class SizeLimitedQueue : public QQueue<T>
          this->dequeue();
       }
 };
+
+template<class T>
+class SizeLimitedQueue<T *> : public QQueue<T *>
+{
    public:
+      inline SizeLimitedQueue(int maximumSize) :
+         maximumSize(maximumSize)
+      {}
+
+      inline void enqueue(T *const t)
+      {
+         this->trim();
+         QQueue<T *>::enqueue(t);
+      }
+
+   private:
       int maximumSize;
 
       inline bool isTooLong() { return this->size() >= maximumSize; }
@@ -40,8 +55,8 @@ class SizeLimitedQueue : public QQueue<T>
 
       inline void deleteHead()
       {
-         T head = this->dequeue();
-//         delete head;
+         T *head = this->dequeue();
+         delete head;
       }
 };
 
