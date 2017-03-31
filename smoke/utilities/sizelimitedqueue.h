@@ -15,14 +15,20 @@ class SizeLimitedQueue : public QQueue<T>
 
       inline void enqueue(const T& t)
       {
-         this->trim();
          QQueue<T>::enqueue(t);
+         this->trim();
+      }
+
+      inline void changeMaximumSize(int newSize)
+      {
+         maximumSize = newSize;
+         this->trim();
       }
 
    private:
       int maximumSize;
 
-      inline bool isTooLong() { return this->size() >= maximumSize; }
+      inline bool isTooLong() { return this->size() > maximumSize; }
 
       inline void trim() { while (isTooLong()) deleteHead(); }
 
@@ -44,14 +50,20 @@ class SizeLimitedQueue<T *> : public QQueue<T *>
 
       inline void enqueue(T *const t)
       {
-         this->trim();
          QQueue<T *>::enqueue(t);
+         this->trim();
+      }
+
+      inline void changeMaximumSize(int newSize)
+      {
+         maximumSize = newSize;
+         this->trim();
       }
 
    private:
       int maximumSize;
 
-      inline bool isTooLong() { return this->size() >= maximumSize; }
+      inline bool isTooLong() { return this->size() > maximumSize; }
 
       inline void trim() { while (isTooLong()) deleteHead(); }
 
