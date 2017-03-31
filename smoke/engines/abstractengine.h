@@ -51,6 +51,8 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       QMatrix4x4 modelViewMatrix;
       QMatrix4x4 projectionMatrix;
 
+      Settings::visualization::ColorMap *colorMap;
+
       Settings::engines::EnginesTypes me;
 
       enum lightModel { noLight = 0, phongLight = 1 };
@@ -67,8 +69,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
    private:
       void init();
-
-      Settings::visualization::ColorMap *colorMap;
 
       int engineLightModel;
 
