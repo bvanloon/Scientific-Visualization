@@ -17,6 +17,8 @@ class AbstractSliceEngine : public AbstractEngine
    public slots:
       void onUpdateModelViewMatrix();
 
+      void onNumberOfSlicesChanged(int newNumberOfSlices);
+
    private:
 
       SizeLimitedQueue<GPUData> slices;
@@ -24,6 +26,8 @@ class AbstractSliceEngine : public AbstractEngine
       virtual int updateBuffers(Simulation *simulation) = 0;
 
       void updateModelViewMatrix();
+
+      virtual void connectToSettings();
 };
 
 #endif // ABSTRACTSLICEENGINE_H

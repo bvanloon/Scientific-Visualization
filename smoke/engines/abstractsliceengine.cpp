@@ -7,11 +7,17 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel) 
    slices(Settings::visualization::slices().numberOfSlices)
 {
    updateModelViewMatrix();
+   connectToSettings();
 }
 
 void AbstractSliceEngine::onUpdateModelViewMatrix()
 {
-   updateModelViewMatrix();
+    updateModelViewMatrix();
+}
+
+void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
+{
+    slices.changeMaximumSize(newNumberOfSlices);
 }
 
 void AbstractSliceEngine::updateModelViewMatrix()
@@ -26,4 +32,10 @@ void AbstractSliceEngine::updateModelViewMatrix()
    this->modelViewMatrix.scale(Settings::canvas().scalingFactor);
 
    this->setMVPMatrix();
+}
+
+void AbstractSliceEngine::connectToSettings()
+{
+   connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
+            this, SLOT(onNumberOfSlicesChanged(int)));
 }
