@@ -8,12 +8,12 @@ StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
 
 void StreamLineSlicesEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers(simulation);
+   int bufferLength = this->fillBuffers(simulation);
 
    drawWithMode(this->drawMode, bufferLength);
 }
 
-int StreamLineSlicesEngine::updateBuffers(Simulation *UNUSED(Simulation))
+int StreamLineSlicesEngine::fillBuffers(Simulation *UNUSED(Simulation))
 {
    GPUData data = buildStreamLines();
 

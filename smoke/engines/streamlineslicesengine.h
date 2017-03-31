@@ -25,7 +25,7 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
 
       GPUData buildStreamLine(QPointF seedPoint);
 
-      virtual int updateBuffers(Simulation *UNUSED(Simulation));
+      int fillBuffers(Simulation *UNUSED(Simulation));
 
       UniformGrid *grid;
 };

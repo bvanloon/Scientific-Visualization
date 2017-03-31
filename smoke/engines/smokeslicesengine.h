@@ -14,7 +14,7 @@ class SmokeSlicesEngine : public AbstractSliceEngine
       virtual void draw(Simulation *simulation);
 
    private:
-      virtual int updateBuffers(Simulation *simulation);
+      int fillBuffers(Simulation *simulation);
 };
 
 #endif // SMOKESLICESENGINE_H

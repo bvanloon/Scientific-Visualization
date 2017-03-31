@@ -26,9 +26,9 @@ class AbstractSliceEngine : public AbstractEngine
 
       SizeLimitedQueue<GPUData> cache;
 
-      virtual int updateBuffers(Simulation *simulation) = 0;
-
       void updateModelViewMatrix();
+
+      virtual int fillBuffers(Simulation* simulation) = 0;
 
       virtual void connectToSettings();
       virtual void connectToColorMap();

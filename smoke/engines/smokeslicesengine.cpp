@@ -7,12 +7,12 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
 
 void SmokeSlicesEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers(simulation);
+   int bufferLength = this->fillBuffers(simulation);
 
    drawWithMode(GL_TRIANGLES, bufferLength);
 }
 
-int SmokeSlicesEngine::updateBuffers(Simulation *simulation)
+int SmokeSlicesEngine::fillBuffers(Simulation *simulation)
 {
    Triangulation triangulation = simulation->getGridTriangulation();
 
