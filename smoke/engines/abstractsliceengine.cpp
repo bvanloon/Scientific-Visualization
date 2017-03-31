@@ -57,3 +57,10 @@ void AbstractSliceEngine::connectToSettings()
    connect(&Settings::canvas(), SIGNAL(clearCache()),
            this, SLOT(onClearCache()));
 }
+
+void AbstractSliceEngine::connectToColorMap()
+{
+   AbstractEngine::connectToColorMap();
+   connect(this->colorMap, SIGNAL(clearCache()),
+            this, SLOT(onClearCache()));
+}

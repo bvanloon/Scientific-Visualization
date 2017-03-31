@@ -31,6 +31,7 @@ class AbstractSliceEngine : public AbstractEngine
       void updateModelViewMatrix();
 
       virtual void connectToSettings();
+      virtual void connectToColorMap();
 
       void clearCache();
 };
