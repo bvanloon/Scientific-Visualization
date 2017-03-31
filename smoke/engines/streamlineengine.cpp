@@ -18,7 +18,7 @@ int StreamLineEngine::fillBuffers()
 
 GPUData StreamLineEngine::buildStreamLines()
 {
-   GPUData data;
+   GPUData data(streamobject::Line::drawMode);
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {

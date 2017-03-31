@@ -55,13 +55,13 @@ void AbstractSliceEngine::updateBuffers(GPUData data)
     AbstractEngine::updateBuffers(data);
 }
 
-void AbstractSliceEngine::drawSlices(int drawMode)
+void AbstractSliceEngine::drawSlices()
 {
     int bufferLength;
     for(GPUData data : cache){
         bufferLength = data.numElements();
         updateBuffers(data);
-        drawWithMode(drawMode, bufferLength);
+        drawWithMode(data.getDrawMode(), bufferLength);
     }
 }
 

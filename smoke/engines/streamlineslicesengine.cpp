@@ -11,7 +11,7 @@ void StreamLineSlicesEngine::draw(Simulation *UNUSED(simulation))
     GPUData newData = buildStreamLines();
     this->cache.enqueue(newData);
 
-    drawSlices(this->drawMode);
+    drawSlices();
 }
 
 int StreamLineSlicesEngine::fillBuffers(Simulation *UNUSED(Simulation))
@@ -24,7 +24,7 @@ int StreamLineSlicesEngine::fillBuffers(Simulation *UNUSED(Simulation))
 
 GPUData StreamLineSlicesEngine::buildStreamLines()
 {
-   GPUData data;
+   GPUData data(streamobject::Line::drawMode);
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
