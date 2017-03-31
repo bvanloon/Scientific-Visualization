@@ -63,10 +63,11 @@ const QVector<Cell *>& Grid::getCells() const
 
 int Grid::numVertices() const
 {
-   return this->vertexPositions.size();
+   int numVertices = this->vertexPositions.size();
+   return numVertices;
 }
 
 QMultiMap<Index2D, Vertex *> Grid::getVertexMap() const
 {
-    return vertexMap;
+   return vertexMap;
 }
