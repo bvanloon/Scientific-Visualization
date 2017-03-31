@@ -59,7 +59,7 @@ class Settings::Simulation : public QObject
 
       void updateGridCellSize();
 
-      void updateGridCellSize(int width, int height);
+      void updateGridCellSize(int canvasWidth, int height);
 };
 
 #endif // SIMULATIONS_H

@@ -7,6 +7,7 @@ GlyphsTab::GlyphsTab(QWidget *parent) :
 {
    ui->setupUi(this);
    setUiToDefaults();
+   connectToSettings();
 }
 
 GlyphsTab::~GlyphsTab()
@@ -38,24 +39,34 @@ void GlyphsTab::setUiToDefaults()
    ui->glyphSelector->setCurrentIndex(Settings::defaults::visualization::glyphs::glyphType);
 }
 
-void GlyphsTab::setUpConnections()
-{}
+void GlyphsTab::connectToSettings()
+{
+   qDebug() << "GlyphsTab::connectToSettings";
+   connect(this, SIGNAL(gridDimensionChanged(QSizeF)),
+            &Settings::visualization::glyphs(), SLOT(onGridDimensionChanged(QSizeF)));
+}
 
 void GlyphsTab::updateScaleSpinBoxConfiguration(double currentValue)
 {
-    if(currentValue <= 1.0){
-        ui->scale->setDecimals(2);
-        ui->scale->setSingleStep(0.1);
-    } else {
-        ui->scale->setDecimals(0);
-        ui->scale->setSingleStep(1);
-    }
+   if (currentValue <= 1.0)
+   {
+      ui->scale->setDecimals(2);
+      ui->scale->setSingleStep(0.1);
+   }
+   else
+   {
+      ui->scale->setDecimals(0);
+      ui->scale->setSingleStep(1);
+   }
 }
 
 void GlyphsTab::on_gridHeightSpinBox_valueChanged(int height)
 {
    int width = ui->gridWidthSpinBox->value();
-   emit gridDimensionChanged(width, height);
+   QSizeF newSize(width, height);
+
+   emit gridDimensionChanged(newSize.width(), newSize.height());
+   emit gridDimensionChanged(newSize);
 }
 
 void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
@@ -64,7 +75,10 @@ void GlyphsTab::on_gridWidthSpinBox_valueChanged(int width)
    ui->gridHeightSpinBox->setValue(width);
 
    int height = ui->gridHeightSpinBox->value();
-   emit gridDimensionChanged(width, height);
+   QSizeF newSize(width, height);
+
+   emit gridDimensionChanged(newSize.width(), newSize.height());
+   emit gridDimensionChanged(newSize);
 }
 
 void GlyphsTab::on_vectorFieldComboBox_currentIndexChanged(int index)
@@ -79,6 +93,6 @@ void GlyphsTab::on_glyphSelector_currentIndexChanged(int index)
 
 void GlyphsTab::on_scale_valueChanged(double scale)
 {
-    updateScaleSpinBoxConfiguration(scale);
-    emit scaleChanged(scale);
+   updateScaleSpinBoxConfiguration(scale);
+   emit scaleChanged(scale);
 }

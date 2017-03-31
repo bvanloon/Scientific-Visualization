@@ -8,7 +8,7 @@
 class SimulationGrid : public UniformGrid
 {
    public:
-      SimulationGrid(int dimension, QSizeF areaSize, SimulationData *data);
+      SimulationGrid(int dimension, QSizeF areaSize, SimulationData *data = 0);
       ~SimulationGrid();
 
       virtual void changeGridArea(QSizeF newArea);
@@ -16,7 +16,7 @@ class SimulationGrid : public UniformGrid
       SimulationData *getData() const;
       void setData(SimulationData *value);
 
-private:
+   private:
       SimulationData *data;
 
       void createVertices();

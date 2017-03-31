@@ -2,6 +2,7 @@
 #include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
+#include "simulation/simulationstatehistory.h"
 
 GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::phongLight),
@@ -31,7 +32,8 @@ void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellS
 
 int GlyphSliceEngine::updateBuffers(Simulation *UNUSED(Simulation))
 {
-   GlyphData data = visualizationGrid->getGlyphData();
+   int idx = SimulationStateHistory::instance().mostRecentStateIdx();
+   GlyphData data = SimulationStateHistory::instance().getVisualizationGridAtQueueIdx(idx).getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
 
    updateBuffer(this->vertexBuffer, glyphs.getVertices());

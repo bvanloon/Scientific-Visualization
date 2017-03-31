@@ -41,6 +41,7 @@ void Settings::Canvas::onWindowResized(int width, int height)
    QSizeF newSize = this->size;
 
    emit windowResized(oldSize, newSize);
+   emit windowResized(newSize);
 }
 
 void Settings::Canvas::onRotationChanged(Rotation::axis axis, int newAngle)

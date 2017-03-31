@@ -71,6 +71,7 @@ QVector<float> Simulation::getTexCoordForceFieldMagnitude(
 void Simulation::step()
 {
    this->realization->do_one_simulation_step();
+   emit newSimulationState(new SimulationData(*(this->grid->getData())));
 }
 
 void Simulation::onMouseMoved(QPoint newPosition)

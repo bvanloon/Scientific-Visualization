@@ -4,12 +4,15 @@
 #include <QMainWindow>
 
 #include <view/canvas.h>
-#include "simulation/simulation.h"
-#include "colormaplegend.h"
 #include "view/simulationtab.h"
 #include "view/colormaptab.h"
 #include "view/glyphstab.h"
 #include "view/streamlinestab.h"
+
+#include "simulation/simulation.h"
+#include "simulation/simulationstatehistory.h"
+#include "colormaplegend.h"
+
 #include "keyboardhandler.h"
 
 namespace Ui {
@@ -44,6 +47,8 @@ class MainWindow : public QMainWindow
       StreamLinesTab *streamLinesTab;
 
       void setUpConnections();
+
+      void connectSimuationStateHistory();
 
       //Canvas
       void connectCanvasAndThis();

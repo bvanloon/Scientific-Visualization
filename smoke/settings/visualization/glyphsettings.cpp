@@ -72,5 +72,11 @@ void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 
 void Settings::visualization::Glyphs::onScaleChanged(double scale)
 {
-   this->scale = scale;
+    this->scale = scale;
+}
+
+void Settings::visualization::Glyphs::onGridDimensionChanged(QSizeF newDimension)
+{
+    qDebug() << "Settings::visualization::Glyphs::onGridDimensionChanged";
+    emit gridDimensionChanged(newDimension);
 }

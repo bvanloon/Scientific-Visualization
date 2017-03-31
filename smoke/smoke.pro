@@ -86,7 +86,8 @@ SOURCES += main.cpp\
     settings/visualization/slices.cpp \
     view/slicestab.cpp \
     simulation/simulationdata.cpp \
-    grid/simulationgrid.cpp
+    grid/simulationgrid.cpp \
+    simulation/simulationstatehistory.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -151,6 +152,7 @@ HEADERS  += main.ih\
     utilities/rotation.h \
     settings/visualization/slices.h \
     view/slicestab.h \
+    simulation/simulationstatehistory.h \
     simulation/simulationdata.h \
     grid/simulationgrid.h
 

@@ -61,6 +61,9 @@ class Settings::visualization::Glyphs : public QObject {
 
       QPair<float, float> getCurrentMagnitudeRange() const;
 
+signals:
+      void gridDimensionChanged(QSizeF newDimension);
+
    public slots:
       void onVectorFieldChanged(Settings::sim::Vector vectorField);
 
@@ -69,6 +72,8 @@ class Settings::visualization::Glyphs : public QObject {
       void onCellSizeChanged(QSizeF newSize);
 
       void onScaleChanged(double scale);
+
+      void onGridDimensionChanged(QSizeF newDimension);
 
    private:
       explicit Glyphs(QObject *parent = 0);
