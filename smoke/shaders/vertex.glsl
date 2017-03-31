@@ -64,10 +64,20 @@ vec3 toEyeCoordinates(vec3 inputNormal){
     return normalize(normalMatrix * inputNormal);
 }
 
+vec4 perform_y_translation(vec4 vector, float y){
+    mat4 translationMatrix = mat4(1.0);
+    translationMatrix[3][1] = y;
+    vector = translationMatrix * vector;
+    return vector;
+}
+
 void main(void)
 {
     vsNormal = toEyeCoordinates(inputNormal);
     vsTextureCoordinate = computeTextureCoordinate(inputTextureCoordinate);
     gl_Position = mvpMatrix * vec4(inputPosition, 1.0);
+
+    gl_Position = perform_y_translation(gl_Position, 0.0);
+
     vsPosition = gl_Position.xyz;
 }
