@@ -9,12 +9,12 @@ SmokeEngine::SmokeEngine() :
 
 void SmokeEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers(simulation);
+   int bufferLength = this->fillBuffers(simulation);
 
    drawWithMode(GL_TRIANGLES, bufferLength);
 }
 
-int SmokeEngine::updateBuffers(Simulation *simulation)
+int SmokeEngine::fillBuffers(Simulation *simulation)
 {
    Triangulation triangulation = simulation->getGridTriangulation();
 
