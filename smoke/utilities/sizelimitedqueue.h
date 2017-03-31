@@ -40,6 +40,8 @@ class SizeLimitedQueue<T *> : public QQueue<T *>
          maximumSize(maximumSize)
       {}
 
+      inline ~SizeLimitedQueue() { qDeleteAll(this->begin(), this->end()); }
+
       inline void enqueue(T *const t)
       {
          this->trim();
