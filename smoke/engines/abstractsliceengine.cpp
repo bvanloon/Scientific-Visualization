@@ -56,16 +56,24 @@ void AbstractSliceEngine::clearCache()
 
 void AbstractSliceEngine::updateModelViewMatrix()
 {
-   this->modelViewMatrix = QMatrix4x4();
+   QMatrix4x4 newModelViewMatrix = computeModuleViewMatrix();
+   this->modelViewMatrix = newModelViewMatrix;
+   this->setMVPMatrix();
+}
 
-   this->modelViewMatrix.translate(Settings::canvas().panningPosition);
+
+
+QMatrix4x4 AbstractSliceEngine::computeModuleViewMatrix()
+{
+   QMatrix4x4 modelViewMatrix = QMatrix4x4();
+
+   modelViewMatrix.translate(Settings::canvas().panningPosition);
 
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
-   this->modelViewMatrix *= rotationMatrix;
+   modelViewMatrix *= rotationMatrix;
 
-   this->modelViewMatrix.scale(Settings::canvas().scalingFactor);
-
-   this->setMVPMatrix();
+   modelViewMatrix.scale(Settings::canvas().scalingFactor);
+   return modelViewMatrix;
 }
 
 int AbstractSliceEngine::fillBuffers(Simulation *UNUSED(simulation))

@@ -37,6 +37,9 @@ class AbstractSliceEngine : public AbstractEngine
    private:
       void updateModelViewMatrix();
 
+
+      QMatrix4x4 computeModuleViewMatrix();
+
       int fillBuffers(Simulation *UNUSED(simulation));
 
       virtual void connectToSettings();
