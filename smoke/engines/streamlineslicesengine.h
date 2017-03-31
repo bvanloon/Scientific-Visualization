@@ -12,7 +12,9 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
    public:
       StreamLineSlicesEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *simulation);
+      virtual void draw(Simulation *UNUSED(simulation));
+
+      void drawSlice(GPUData data);
 
    public slots:
 
