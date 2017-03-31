@@ -25,7 +25,7 @@ class VectorEngine : public AbstractEngine {
       void cellSizeChanged(QSizeF newSize);
 
    private:
-      virtual int updateBuffers();
+      int fillBuffers();
 
       Grid *visualizationGrid;
       UniformGrid *simulationGrid;
