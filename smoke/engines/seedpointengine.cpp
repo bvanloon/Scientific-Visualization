@@ -12,12 +12,12 @@ SeedPointEngine::SeedPointEngine() :
 
 void SeedPointEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->fillBuffers();
 
    drawWithMode(drawMode, bufferLength);
 }
 
-int SeedPointEngine::updateBuffers()
+int SeedPointEngine::fillBuffers()
 {
    fillIntermediateBuffers();
 
