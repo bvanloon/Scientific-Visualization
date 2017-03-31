@@ -11,7 +11,7 @@ class SmokeEngine : public AbstractEngine
       virtual void draw(Simulation *simulation);
 
    private:
-      virtual int updateBuffers(Simulation *simulation);
+      int fillBuffers(Simulation *simulation);
 };
 
 

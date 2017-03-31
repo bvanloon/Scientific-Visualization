@@ -11,10 +11,12 @@ class SmokeSlicesEngine : public AbstractSliceEngine
    public:
       SmokeSlicesEngine();
 
-      virtual void draw(Simulation *simulation);
+      void updateCache();
+
+      void draw(Simulation *simulation);
 
    private:
-      virtual int updateBuffers(Simulation *simulation);
+      int fillBuffers(Simulation *simulation);
 };
 
 #endif // SMOKESLICESENGINE_H

@@ -1,28 +1,20 @@
 #include "streamlineslicesengine.h"
 
 StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
-   AbstractSliceEngine(AbstractEngine::lightModel::noLight),
+   AbstractSliceEngine(AbstractEngine::lightModel::noLight,
+                       Settings::engines::EnginesTypes::streamLineSlices),
    grid(simulationGrid)
 {}
 
-void StreamLineSlicesEngine::draw(Simulation *simulation)
+void StreamLineSlicesEngine::updateCache()
 {
-   int bufferLength = this->updateBuffers(simulation);
-
-   drawWithMode(this->drawMode, bufferLength);
-}
-
-int StreamLineSlicesEngine::updateBuffers(Simulation *UNUSED(Simulation))
-{
-   GPUData data = buildStreamLines();
-
-   AbstractEngine::updateBuffers(data);
-   return data.numElements();
+   GPUData newData = buildStreamLines();
+   this->cache.enqueue(newData);
 }
 
 GPUData StreamLineSlicesEngine::buildStreamLines()
 {
-   GPUData data;
+   GPUData data(streamobject::Line::drawMode);
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {

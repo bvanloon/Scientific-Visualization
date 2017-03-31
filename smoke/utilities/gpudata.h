@@ -4,14 +4,23 @@
 #include <QVector>
 #include <QVector3D>
 
+#include <QObject>
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
+
 class GPUData
 {
    public:
-      GPUData();
+      GPUData(GLint drawMode);
 
       void extend(GPUData data);
 
-      int numElements();
+      int numElements() const ;
+
+      GLint getDrawMode() const;
 
       void addElement(QVector3D vertex, QVector3D normal, float textureCoordinate);
 
@@ -30,9 +39,13 @@ class GPUData
       QVector<QVector3D> getNormals() const;
 
    private:
+      GLint drawMode;
+
       QVector<QVector3D> vertices;
       QVector<float> textureCoordinates;
       QVector<QVector3D> normals;
+
+      void assertDrawModesAreEqual(GLint thisMode, GLint otherMode);
 };
 
 #endif // GPUDATA_H

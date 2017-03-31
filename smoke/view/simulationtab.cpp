@@ -11,7 +11,8 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
 {
    ui->setupUi(this);
    setUpEnineCheckBoxMappings();
-   setUpConnections();
+   setUpPrivateConnections();
+   connectToSettings();
    setUItoDefaults();
 
    //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
@@ -73,12 +74,18 @@ void SimulationSettingPane::setEnginesToDefaults()
    }
 }
 
-void SimulationSettingPane::setUpConnections()
+void SimulationSettingPane::setUpPrivateConnections()
 {
    connect(this, SIGNAL(toggleFrozen(bool)),
             this, SLOT(onToggleFrozen(bool)));
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+}
+
+void SimulationSettingPane::connectToSettings()
+{
+    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+            &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void SimulationSettingPane::setUpEnineCheckBoxMappings()

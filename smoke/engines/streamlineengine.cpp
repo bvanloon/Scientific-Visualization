@@ -3,21 +3,22 @@
 #include "streamobjects/streamline.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(AbstractEngine::lightModel::noLight),
+   AbstractEngine(AbstractEngine::lightModel::noLight,
+                  Settings::engines::EnginesTypes::streamLines),
    grid(simulationGrid)
 {}
 
-int StreamLineEngine::updateBuffers()
+int StreamLineEngine::fillBuffers()
 {
    GPUData data = buildStreamLines();
 
-   AbstractEngine::updateBuffers(data);
+   updateBuffers(data);
    return data.numElements();
 }
 
 GPUData StreamLineEngine::buildStreamLines()
 {
-   GPUData data;
+   GPUData data(streamobject::Line::drawMode);
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
@@ -37,7 +38,7 @@ GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 
 void StreamLineEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->fillBuffers();
 
    drawWithMode(this->drawMode, bufferLength);
 }

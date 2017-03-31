@@ -3,9 +3,12 @@
 const float AbstractEngine::farClippingPlane = 100000.0f;
 const float AbstractEngine::nearClippingPlane = -10000.0f;
 
-AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
+AbstractEngine::AbstractEngine(int lightModel,
+                               Settings::engines::EnginesTypes engineType,
+                               QObject *parent) :
    QObject(parent),
    normalBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
+   me(engineType),
    engineLightModel(lightModel),
    texture(0)
 {
@@ -33,12 +36,16 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
+void AbstractEngine::connectToColorMap()
+{}
+
 void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 {
    this->colorMap = value;
 
    QPair<float, float> range = Settings::simulation().getRange(colorMap->scalar);
    setColorMapValueRange(range.first, range.second);
+   connectToColorMap();
 
    /*
     * Hacky solution to ensure that the changes in range due to changes in initial
@@ -215,9 +222,9 @@ void AbstractEngine::updateBuffer(QOpenGLBuffer *buffer, QVector<float> data)
 
 void AbstractEngine::updateBuffers(GPUData data)
 {
-    updateBuffer(this->vertexBuffer, data.getVertices());
-    updateBuffer(this->normalBuffer, data.getNormals());
-    updateBuffer(this->textureCoordinateBuffer, data.getTextureCoordinates());
+   updateBuffer(this->vertexBuffer, data.getVertices());
+   updateBuffer(this->normalBuffer, data.getNormals());
+   updateBuffer(this->textureCoordinateBuffer, data.getTextureCoordinates());
 }
 
 void AbstractEngine::drawWithMode(int mode, int bufferLength)

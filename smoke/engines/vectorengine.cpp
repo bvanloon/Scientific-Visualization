@@ -5,7 +5,8 @@
 
 
 VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(AbstractEngine::lightModel::phongLight),
+   AbstractEngine(AbstractEngine::lightModel::phongLight,
+                  Settings::engines::EnginesTypes::glyphs),
    visualizationGrid(
       JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),
@@ -19,7 +20,7 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
 
 void VectorEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->fillBuffers();
 
    drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
 }
@@ -36,7 +37,7 @@ void VectorEngine::onGridDimensionChanged(int width, int UNUSED(height))
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-int VectorEngine::updateBuffers()
+int VectorEngine::fillBuffers()
 {
    GlyphData data = visualizationGrid->getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);

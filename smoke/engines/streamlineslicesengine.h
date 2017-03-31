@@ -12,20 +12,19 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
    public:
       StreamLineSlicesEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *simulation);
+      void updateCache();
+
+      void drawSlice(GPUData data);
 
    public slots:
 
    signals:
 
    private:
-      static const int drawMode = GL_LINES;
 
       GPUData buildStreamLines();
 
       GPUData buildStreamLine(QPointF seedPoint);
-
-      virtual int updateBuffers(Simulation *UNUSED(Simulation));
 
       UniformGrid *grid;
 };

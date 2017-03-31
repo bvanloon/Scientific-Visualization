@@ -5,7 +5,8 @@
 #include "simulation/simulationstatehistory.h"
 
 GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
-   AbstractSliceEngine(AbstractEngine::lightModel::phongLight),
+   AbstractSliceEngine(AbstractEngine::lightModel::phongLight,
+                       Settings::engines::EnginesTypes::glyphSlices),
    visualizationGrid(
       JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),
@@ -19,9 +20,14 @@ GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
 
 void GlyphSliceEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->updateBuffers(simulation);
+   int bufferLength = this->fillBuffers(simulation);
 
    drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
+}
+
+void GlyphSliceEngine::updateCache()
+{
+   std::logic_error("GlyphSliceEngine::updateCache not yet implemented");
 }
 
 void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
@@ -30,7 +36,7 @@ void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellS
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-int GlyphSliceEngine::updateBuffers(Simulation *UNUSED(Simulation))
+int GlyphSliceEngine::fillBuffers(Simulation *UNUSED(Simulation))
 {
    int idx = SimulationHistory::instance().mostRecentStateIdx();
    GlyphData data = SimulationHistory::instance().getVisualizationGridAtQueueIdx(idx).getGlyphData();

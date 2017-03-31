@@ -89,7 +89,8 @@ class SimulationSettingPane : public QWidget
 
       void setEnginesToDefaults();
 
-      void setUpConnections();
+      void setUpPrivateConnections();
+      void connectToSettings();
 
       void setUpEnineCheckBoxMappings();
 

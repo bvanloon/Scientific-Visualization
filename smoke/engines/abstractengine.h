@@ -25,7 +25,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 {
    Q_OBJECT
    public:
-      explicit AbstractEngine(int engineLightModel, QObject *parent = 0);
+      explicit AbstractEngine(int engineLightModel, Settings::engines::EnginesTypes me, QObject *parent = 0);
       virtual ~AbstractEngine();
       virtual void draw(Simulation *Simulation) = 0;
 
@@ -51,6 +51,10 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       QMatrix4x4 modelViewMatrix;
       QMatrix4x4 projectionMatrix;
 
+      Settings::visualization::ColorMap *colorMap;
+
+      Settings::engines::EnginesTypes me;
+
       enum lightModel { noLight = 0, phongLight = 1 };
 
       void updateBuffer(QOpenGLBuffer *buffer, QVector<QVector3D> data);
@@ -63,10 +67,10 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void setMVPMatrix();
 
+      virtual void connectToColorMap();
+
    private:
       void init();
-
-      Settings::visualization::ColorMap *colorMap;
 
       int engineLightModel;
 

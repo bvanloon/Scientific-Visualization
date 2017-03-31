@@ -6,17 +6,18 @@ const double SeedPointEngine::fillScale = 7;
 const double SeedPointEngine::borderScale = 10;
 
 SeedPointEngine::SeedPointEngine() :
-   AbstractEngine(AbstractEngine::lightModel::noLight)
+   AbstractEngine(AbstractEngine::lightModel::noLight,
+                  Settings::engines::EnginesTypes::seedPoints)
 {}
 
 void SeedPointEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->fillBuffers();
 
    drawWithMode(drawMode, bufferLength);
 }
 
-int SeedPointEngine::updateBuffers()
+int SeedPointEngine::fillBuffers()
 {
    fillIntermediateBuffers();
 

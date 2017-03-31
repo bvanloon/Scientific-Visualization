@@ -27,6 +27,7 @@ class Settings::visualization::ColorMap : public QObject {
 
    signals:
       void valueRangeChanged(Settings::sim::Scalar scalarVariable, float minimum, float maximum);
+      void clearCache();
 
    public slots:
       void onTextureVariableChanged(Settings::sim::Scalar scalarVariable);

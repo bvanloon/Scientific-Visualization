@@ -36,6 +36,9 @@ class Settings::Canvas : public QObject
 
       void rotationChanged(Rotation rotation);
 
+      void clearCache();
+      void clearCache(Settings::engines::EnginesTypes engine);
+
    public slots:
       void onWindowResized(int width, int height);
 
@@ -46,6 +49,8 @@ class Settings::Canvas : public QObject
       void onPanningPositionChanged(QVector3D newDirection);
 
       void onResetView();
+
+      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
    private:
       explicit Canvas(QObject *parent = 0);

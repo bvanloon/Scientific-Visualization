@@ -42,6 +42,7 @@ void Settings::Canvas::onWindowResized(int width, int height)
 
    emit windowResized(oldSize, newSize);
    emit windowResized(newSize);
+   emit clearCache();
 }
 
 void Settings::Canvas::onRotationChanged(Rotation::axis axis, int newAngle)
@@ -73,4 +74,9 @@ void Settings::Canvas::onResetView()
    emit scalingFactorChanged(this->scalingFactor);
    emit rotationChanged(this->rotation);
    emit updateModelViewMatrix();
+}
+
+void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
+{
+    if(checked) emit clearCache(engine);
 }
