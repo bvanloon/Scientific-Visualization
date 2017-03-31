@@ -7,7 +7,7 @@ template<class T>
 class SizeLimitedQueue : public QQueue<T>
 {
    public:
-      inline SizeLimitedQueue(size_t maximumSize) :
+      inline SizeLimitedQueue(int maximumSize) :
          maximumSize(maximumSize)
       {}
 
@@ -19,6 +19,18 @@ class SizeLimitedQueue : public QQueue<T>
          QQueue<T>::enqueue(t);
       }
 
+   private:
+      int maximumSize;
+
+      inline bool isTooLong() { return this->size() >= maximumSize; }
+
+      inline void trim() { while (isTooLong()) deleteHead(); }
+
+      inline void deleteHead()
+      {
+         this->dequeue();
+      }
+};
    public:
       int maximumSize;
 
