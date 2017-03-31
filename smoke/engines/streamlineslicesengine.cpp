@@ -9,6 +9,8 @@ StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
 void StreamLineSlicesEngine::updateCache()
 {
    GPUData newData = buildStreamLines();
+   newData.transform(toSliceTransformation);
+
    this->cache.enqueue(newData);
 }
 

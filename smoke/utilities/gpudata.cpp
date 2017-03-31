@@ -6,6 +6,12 @@ GPUData::GPUData(GLint drawMode) :
    drawMode(drawMode)
 {}
 
+void GPUData::transform(QMatrix4x4 transformation)
+{
+   transformVectors(&this->vertices, transformation);
+   transformVectors(&this->normals, transformation);
+}
+
 void GPUData::extend(GPUData data)
 {
    assertDrawModesAreEqual(this->drawMode, data.drawMode);
@@ -67,12 +73,39 @@ QVector<float> GPUData::getTextureCoordinates() const
 
 QVector<QVector3D> GPUData::getNormals() const
 {
-   return this->normals;
+    return this->normals;
+}
+
+GPUData GPUData::debugRectangleWireFrame()
+{
+    GPUData data = GPUData(GL_LINES);
+    data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
+    data.addElement(QVector3D(30, 300, 0), QVector3D(0, 0, 1.0), 0.03);
+
+    data.addElement(QVector3D(30, 300, 0), QVector3D(0, 0, 1.0), 0.03);
+    data.addElement(QVector3D(400, 300, 0), QVector3D(0, 0, 1.0), 0.06);
+
+    data.addElement(QVector3D(400, 300, 0), QVector3D(0, 0, 1.0), 0.06);
+    data.addElement(QVector3D(400, 30, 0), QVector3D(0, 0, 1.0), 1.0);
+
+    data.addElement(QVector3D(400, 30, 0), QVector3D(0, 0, 1.0), 1.0);
+    data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
+    return data;
+}
+
+void GPUData::transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation)
+{
+   QVector4D transformedPosition;
+   for (int i = 0; i < numElements(); i++)
+   {
+      transformedPosition = transformation * QVector4D(vector->at(i), 1.0);
+      vector->replace(i, transformedPosition.toVector3D());
+   }
 }
 
 GLint GPUData::getDrawMode() const
 {
-    return drawMode;
+   return drawMode;
 }
 
 void GPUData::assertDrawModesAreEqual(GLint thisMode, GLint otherMode)

@@ -7,8 +7,20 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
    AbstractEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numberOfSlices)
 {
+   defineToSliceTransformation();
+
    updateModelViewMatrix();
    connectToSettings();
+}
+
+void AbstractSliceEngine::defineToSliceTransformation()
+{
+   QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
+   QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
+
+   toSliceTransformation.translate(0.0, 20.0, 0.0);
+   toSliceTransformation.rotate(40, yaxis);
+   toSliceTransformation.rotate(80, xaxis);
 }
 
 void AbstractSliceEngine::draw(Simulation *UNUSED(Simulation))
@@ -91,5 +103,5 @@ void AbstractSliceEngine::connectToColorMap()
 {
    AbstractEngine::connectToColorMap();
    connect(this->colorMap, SIGNAL(clearCache()),
-            this, SLOT(onClearCache()));
+           this, SLOT(onClearCache()));
 }

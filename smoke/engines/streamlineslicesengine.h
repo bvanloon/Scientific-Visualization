@@ -14,8 +14,6 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
 
       void updateCache();
 
-      void drawSlice(GPUData data);
-
    public slots:
 
    signals:
