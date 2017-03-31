@@ -3,10 +3,13 @@
 const float AbstractEngine::farClippingPlane = 100000.0f;
 const float AbstractEngine::nearClippingPlane = -10000.0f;
 
-AbstractEngine::AbstractEngine(int lightModel, QObject *parent) :
+AbstractEngine::AbstractEngine(int lightModel,
+                               Settings::engines::EnginesTypes engineType,
+                               QObject *parent) :
    QObject(parent),
    normalBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
    engineLightModel(lightModel),
+   me(engineType),
    texture(0)
 {
    modelViewMatrix.setToIdentity();

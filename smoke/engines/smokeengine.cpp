@@ -3,7 +3,8 @@
 #include "settings/visualizationsettings.h"
 
 SmokeEngine::SmokeEngine() :
-   AbstractEngine(AbstractEngine::lightModel::noLight)
+   AbstractEngine(AbstractEngine::lightModel::noLight,
+                  Settings::engines::EnginesTypes::smoke)
 {}
 
 void SmokeEngine::draw(Simulation *simulation)

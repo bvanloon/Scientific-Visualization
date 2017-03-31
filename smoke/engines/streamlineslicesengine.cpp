@@ -1,7 +1,8 @@
 #include "streamlineslicesengine.h"
 
 StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
-   AbstractSliceEngine(AbstractEngine::lightModel::noLight),
+   AbstractSliceEngine(AbstractEngine::lightModel::noLight,
+                       Settings::engines::EnginesTypes::streamLineSlices),
    grid(simulationGrid)
 {}
 

@@ -5,7 +5,8 @@
 #include "simulation/simulationstatehistory.h"
 
 GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
-   AbstractSliceEngine(AbstractEngine::lightModel::phongLight),
+   AbstractSliceEngine(AbstractEngine::lightModel::phongLight,
+                       Settings::engines::EnginesTypes::glyphSlices),
    visualizationGrid(
       JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),

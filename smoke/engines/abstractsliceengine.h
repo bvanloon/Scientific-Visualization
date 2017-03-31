@@ -10,7 +10,7 @@ class AbstractSliceEngine : public AbstractEngine
    Q_OBJECT
 
    public:
-      AbstractSliceEngine(AbstractEngine::lightModel lightModel);
+      AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType);
 
       virtual void draw(Simulation *Simulation) = 0;
 

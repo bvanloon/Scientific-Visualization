@@ -3,7 +3,8 @@
 #include "streamobjects/streamline.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(AbstractEngine::lightModel::noLight),
+   AbstractEngine(AbstractEngine::lightModel::noLight,
+                  Settings::engines::EnginesTypes::streamLines),
    grid(simulationGrid)
 {}
 

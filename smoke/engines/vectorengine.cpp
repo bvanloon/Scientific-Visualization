@@ -5,7 +5,8 @@
 
 
 VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
-   AbstractEngine(AbstractEngine::lightModel::phongLight),
+   AbstractEngine(AbstractEngine::lightModel::phongLight,
+                  Settings::engines::EnginesTypes::glyphs),
    visualizationGrid(
       JitterGrid::createVisualizationGrid(
          Settings::defaults::visualization::glyphs::gridSize.width(),

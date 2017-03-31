@@ -6,7 +6,8 @@ const double SeedPointEngine::fillScale = 7;
 const double SeedPointEngine::borderScale = 10;
 
 SeedPointEngine::SeedPointEngine() :
-   AbstractEngine(AbstractEngine::lightModel::noLight)
+   AbstractEngine(AbstractEngine::lightModel::noLight,
+                  Settings::engines::EnginesTypes::seedPoints)
 {}
 
 void SeedPointEngine::draw(Simulation *UNUSED(simulation))
