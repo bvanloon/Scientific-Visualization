@@ -2,6 +2,7 @@
 #define ABSTRACTSLICEENGINE_H
 
 #include <QObject>
+#include <QMatrix4x4>
 #include "abstractengine.h"
 #include "unused.h"
 #include "utilities/sizelimitedqueue.h"
@@ -25,8 +26,10 @@ class AbstractSliceEngine : public AbstractEngine
 
    protected:
       SizeLimitedQueue<GPUData> cache;
+      QMatrix4x4 toSliceTransformation;
 
       void updateBuffers(GPUData data);
+
       void drawSlices();
 
       virtual void updateCache() = 0;
@@ -38,6 +41,8 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void connectToSettings();
       virtual void connectToColorMap();
+
+      void defineToSliceTransformation();
 
       void clearCache();
 };
