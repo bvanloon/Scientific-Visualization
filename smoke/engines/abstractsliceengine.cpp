@@ -13,12 +13,12 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
 
 void AbstractSliceEngine::onUpdateModelViewMatrix()
 {
-    updateModelViewMatrix();
+   updateModelViewMatrix();
 }
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-    slices.changeMaximumSize(newNumberOfSlices);
+   slices.changeMaximumSize(newNumberOfSlices);
 }
 
 void AbstractSliceEngine::updateModelViewMatrix()
