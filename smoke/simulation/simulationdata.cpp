@@ -1,14 +1,13 @@
 #include "simulationdata.h"
 #include <QDebug>
+#include <algorithm>
 
 SimulationData::SimulationData(int dimension) :
    velocitiesSize(dimension * 2 * (dimension / 2 + 1)),
    rhoSize(dimension * dimension),
    forceSize(dimension * dimension)
 {
-   allocateVelocityData(velocitiesSize);
-   allocteForceData(forceSize);
-   allocateDensityData(rhoSize);
+    allocateData();
 }
 
 SimulationData::SimulationData(const SimulationData& obj) :
@@ -16,31 +15,38 @@ SimulationData::SimulationData(const SimulationData& obj) :
    rhoSize(obj.rhoSize),
    forceSize(obj.forceSize)
 {
-   allocateVelocityData(velocitiesSize);
-   allocteForceData(forceSize);
-   allocateDensityData(rhoSize);
+    allocateData();
 
-   memccpy(this->vx, obj.vx, this->velocitiesSize, this->velocitiesSize);
-   memccpy(this->vy, obj.vy, this->velocitiesSize, this->velocitiesSize);
+   std::copy(std::begin(obj.vx), std::end(obj.vx), std::begin(this->vx));
+   std::copy(std::begin(obj.vy), std::end(obj.vy), std::begin(this->vy));
 
-   memccpy(this->fx, obj.fx, this->forceSize, this->forceSize);
-   memccpy(this->fy, obj.fy, this->forceSize, this->forceSize);
+   std::copy(std::begin(obj.fx), std::end(obj.fx), std::begin(this->fx));
+   std::copy(std::begin(obj.fy), std::end(obj.fy), std::begin(this->fy));
 
-   memccpy(this->rho, obj.rho, this->rhoSize, this->rhoSize);
+   std::copy(std::begin(obj.rho), std::end(obj.rho), std::begin(this->rho));
+}
+
+void SimulationData::allocateData()
+{
+    allocateVelocityData(velocitiesSize);
+    allocteForceData(forceSize);
+    allocateDensityData(rhoSize);
 }
 
 SimulationData::~SimulationData()
 {
-   free(vx);
-   free(vy);
-   free(fx);
-   free(fy);
-   free(rho);
+   vx.clear();
+   vy.clear();
+
+   fx.clear();
+   fy.clear();
+
+   rho.clear();
 }
 
-fftw_real *SimulationData::getVx() const
+fftw_real *SimulationData::getVx()
 {
-   return vx;
+   return this->vx.data();
 }
 
 fftw_real SimulationData::getVxAt(int idx) const
@@ -48,9 +54,9 @@ fftw_real SimulationData::getVxAt(int idx) const
    return vx[idx];
 }
 
-fftw_real *SimulationData::getVy() const
+fftw_real *SimulationData::getVy()
 {
-   return vy;
+   return this->vy.data();
 }
 
 fftw_real SimulationData::getVyAt(int idx) const
@@ -64,9 +70,9 @@ QVector2D SimulationData::getFluidVelocityAt(int idx) const
                      getVyAt(idx));
 }
 
-fftw_real *SimulationData::getFx() const
+fftw_real *SimulationData::getFx()
 {
-   return fx;
+   return fx.data();
 }
 
 fftw_real SimulationData::getFxAt(int idx) const
@@ -74,9 +80,9 @@ fftw_real SimulationData::getFxAt(int idx) const
    return fx[idx];
 }
 
-fftw_real *SimulationData::getFy() const
+fftw_real *SimulationData::getFy()
 {
-   return fy;
+   return fy.data();
 }
 
 fftw_real SimulationData::getFyAt(int idx) const
@@ -90,14 +96,14 @@ QVector2D SimulationData::getForceAt(int idx)
                      getFyAt(idx));
 }
 
-fftw_real *SimulationData::getRho() const
+fftw_real *SimulationData::getRho()
 {
-   return rho;
+   return rho.data();
 }
 
 fftw_real SimulationData::getRhoAt(int idx) const
 {
-    return rho[idx];
+   return rho[idx];
 }
 
 double SimulationData::getDensityAt(int idx) const
@@ -107,23 +113,17 @@ double SimulationData::getDensityAt(int idx) const
 
 void SimulationData::allocateVelocityData(int length)
 {
-   size_t mallocDimension = length * sizeof(fftw_real);
-
-   vx = (fftw_real *)malloc(mallocDimension);
-   vy = (fftw_real *)malloc(mallocDimension);
+   vx.resize(length);
+   vy.resize(length);
 }
 
 void SimulationData::allocteForceData(int length)
 {
-   size_t mallocDimension = length * sizeof(fftw_real);
-
-   fx = (fftw_real *)malloc(mallocDimension);
-   fy = (fftw_real *)malloc(mallocDimension);
+   fx.resize(length);
+   fy.resize(length);
 }
 
 void SimulationData::allocateDensityData(int length)
 {
-   size_t mallocDimension = length * sizeof(fftw_real);
-
-   rho = (fftw_real *)malloc(mallocDimension);
+   rho.resize(length);
 }
