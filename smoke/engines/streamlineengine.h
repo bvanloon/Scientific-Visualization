@@ -24,7 +24,7 @@ class StreamLineEngine : public AbstractEngine {
 
       GPUData buildStreamLine(QPointF seedPoint);
 
-      virtual int updateBuffers();
+      int fillBuffers();
 
       UniformGrid *grid;
 };

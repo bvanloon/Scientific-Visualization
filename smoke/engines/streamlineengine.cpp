@@ -8,11 +8,11 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    grid(simulationGrid)
 {}
 
-int StreamLineEngine::updateBuffers()
+int StreamLineEngine::fillBuffers()
 {
    GPUData data = buildStreamLines();
 
-   AbstractEngine::updateBuffers(data);
+   updateBuffers(data);
    return data.numElements();
 }
 
@@ -38,7 +38,7 @@ GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 
 void StreamLineEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->updateBuffers();
+   int bufferLength = this->fillBuffers();
 
    drawWithMode(this->drawMode, bufferLength);
 }
