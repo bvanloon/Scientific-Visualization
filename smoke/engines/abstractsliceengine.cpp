@@ -50,6 +50,11 @@ void AbstractSliceEngine::updateModelViewMatrix()
    this->setMVPMatrix();
 }
 
+void AbstractSliceEngine::updateBuffers(GPUData data)
+{
+    AbstractEngine::updateBuffers(data);
+}
+
 void AbstractSliceEngine::connectToSettings()
 {
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),

@@ -22,13 +22,15 @@ class AbstractSliceEngine : public AbstractEngine
       void onClearCache(Settings::engines::EnginesTypes engine);
       void onClearCache();
 
+      void updateBuffers(GPUData data);
+
    private:
 
       SizeLimitedQueue<GPUData> cache;
 
       void updateModelViewMatrix();
 
-      virtual int fillBuffers(Simulation* simulation) = 0;
+      virtual int fillBuffers(Simulation *simulation) = 0;
 
       virtual void connectToSettings();
       virtual void connectToColorMap();

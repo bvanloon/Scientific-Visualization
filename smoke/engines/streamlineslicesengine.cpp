@@ -17,7 +17,7 @@ int StreamLineSlicesEngine::fillBuffers(Simulation *UNUSED(Simulation))
 {
    GPUData data = buildStreamLines();
 
-   AbstractEngine::updateBuffers(data);
+   updateBuffers(data);
    return data.numElements();
 }
 
