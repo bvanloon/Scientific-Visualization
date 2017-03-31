@@ -95,13 +95,13 @@ void MainWindow::setUpConnections()
 void MainWindow::connectSimuationStateHistory()
 {
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
-            &SimulationStateHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
+            &SimulationHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
    connect(this->simulation, SIGNAL(newSimulationState(SimulationData*)),
-           &SimulationStateHistory::instance(), SLOT(onNewSimulationState(SimulationData*)));
+           &SimulationHistory::instance(), SLOT(onNewSimulationState(SimulationData*)));
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF)),
-           &SimulationStateHistory::instance(), SLOT(onWindowResized(QSizeF)));
+           &SimulationHistory::instance(), SLOT(onWindowResized(QSizeF)));
    connect(&Settings::visualization::glyphs(), SIGNAL(gridDimensionChanged(QSizeF)),
-           &SimulationStateHistory::instance(), SLOT(onGridDimensionChanged(QSizeF)));
+           &SimulationHistory::instance(), SLOT(onGridDimensionChanged(QSizeF)));
 }
 
 void MainWindow::connectCanvasAndThis()

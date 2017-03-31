@@ -8,14 +8,14 @@
 #include "simulation/simulationdata.h"
 #include "grid/jittergrid.h"
 
-class SimulationStateHistory : public QObject
+class SimulationHistory : public QObject
 {
    Q_OBJECT
 
    public:
-      static const SimulationStateHistory& instance();
+      static const SimulationHistory& instance();
 
-      ~SimulationStateHistory();
+      ~SimulationHistory();
 
       const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
 
@@ -37,9 +37,9 @@ class SimulationStateHistory : public QObject
    private slots:
 
    private:
-      explicit SimulationStateHistory(QObject *parent = 0);
-      SimulationStateHistory(SimulationStateHistory const&) = delete;
-      void operator=(SimulationStateHistory const&) = delete;
+      explicit SimulationHistory(QObject *parent = 0);
+      SimulationHistory(SimulationHistory const&) = delete;
+      void operator=(SimulationHistory const&) = delete;
 
 
       int numberOfStatesToStore;
