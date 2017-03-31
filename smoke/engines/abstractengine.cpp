@@ -8,8 +8,8 @@ AbstractEngine::AbstractEngine(int lightModel,
                                QObject *parent) :
    QObject(parent),
    normalBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
-   engineLightModel(lightModel),
    me(engineType),
+   engineLightModel(lightModel),
    texture(0)
 {
    modelViewMatrix.setToIdentity();
