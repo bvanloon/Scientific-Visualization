@@ -4,7 +4,7 @@
 
 SimulationHistory::SimulationHistory(QObject *parent) :
    QObject(parent),
-   numberOfStatesToStore(Settings::visualization::slices().numberOfSlices),
+   states(Settings::visualization::slices().numberOfSlices),
    mirrorSimulationGrid(new SimulationGrid(
                            Settings::simulation().dimension,
                            Settings::canvas().size,
@@ -16,9 +16,7 @@ SimulationHistory::SimulationHistory(QObject *parent) :
 {}
 
 SimulationHistory::~SimulationHistory()
-{
-   for (auto state : states) delete state;
-}
+{}
 
 const SimulationHistory& SimulationHistory::instance()
 {
@@ -30,24 +28,6 @@ const SimulationHistory& SimulationHistory::instance()
 void SimulationHistory::addState(SimulationData *state)
 {
    this->states.enqueue(state);
-   if (this->historyTooLong()) trimHistoryToMaximumSize();
-}
-
-bool SimulationHistory::historyTooLong()
-{
-   return this->states.size() > this->numberOfStatesToStore;
-}
-
-void SimulationHistory::trimHistoryToMaximumSize()
-{
-   while (this->historyTooLong()) { deleteOldestState(); }
-}
-
-void SimulationHistory::deleteOldestState()
-{
-   SimulationData *oldestState = this->states.dequeue();
-
-   delete oldestState;
 }
 
 const SimulationGrid& SimulationHistory::getSimulationGridAtQueueIdx(int idx) const
@@ -57,21 +37,21 @@ const SimulationGrid& SimulationHistory::getSimulationGridAtQueueIdx(int idx) co
    return *this->mirrorSimulationGrid;
 }
 
-const UniformGrid &SimulationHistory::getVisualizationGridAtQueueIdx(int idx) const
+const UniformGrid& SimulationHistory::getVisualizationGridAtQueueIdx(int idx) const
 {
-    SimulationData *state = this->getStateAtQueueIdx(idx);
-    mirrorSimulationGrid->setData(state);
-    return *this->mirrorVisualizationGrid;
+   SimulationData *state = this->getStateAtQueueIdx(idx);
+   mirrorSimulationGrid->setData(state);
+   return *this->mirrorVisualizationGrid;
 }
 
 int SimulationHistory::mostRecentStateIdx() const
 {
-    return this->states.size() - 1;
+   return this->states.size() - 1;
 }
 
 void SimulationHistory::onNumberOfSlicesChanged(int numberOfSlices)
 {
-   this->numberOfStatesToStore = numberOfSlices;
+   this->states.changeMaximumSize(numberOfSlices);
 }
 
 SimulationData *SimulationHistory::getStateAtQueueIdx(int idx) const
