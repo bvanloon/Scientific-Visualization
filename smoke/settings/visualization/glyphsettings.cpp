@@ -77,6 +77,5 @@ void Settings::visualization::Glyphs::onScaleChanged(double scale)
 
 void Settings::visualization::Glyphs::onGridDimensionChanged(QSizeF newDimension)
 {
-    qDebug() << "Settings::visualization::Glyphs::onGridDimensionChanged";
     emit gridDimensionChanged(newDimension);
 }

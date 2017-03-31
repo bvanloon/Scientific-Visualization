@@ -82,8 +82,6 @@ bool StructuredCell::isInCell(QVector3D position)
 {
    bool left, right, top, bottom;
 
-   qDebug() << 1000 * std::numeric_limits<float>::epsilon();
-
    left = position.x() >= upperLeft->getPosition()->x() - 700 * std::numeric_limits<float>::epsilon();
    right = position.x() <= upperRight->getPosition()->x() + 700 * std::numeric_limits<float>::epsilon();
    top = position.y() >= upperLeft->getPosition()->y() - 700 * std::numeric_limits<float>::epsilon();

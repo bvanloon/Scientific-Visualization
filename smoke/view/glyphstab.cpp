@@ -41,7 +41,6 @@ void GlyphsTab::setUiToDefaults()
 
 void GlyphsTab::connectToSettings()
 {
-   qDebug() << "GlyphsTab::connectToSettings";
    connect(this, SIGNAL(gridDimensionChanged(QSizeF)),
             &Settings::visualization::glyphs(), SLOT(onGridDimensionChanged(QSizeF)));
 }

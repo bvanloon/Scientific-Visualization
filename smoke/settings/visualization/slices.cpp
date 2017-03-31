@@ -20,13 +20,11 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
 
 void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha)
 {
-   qDebug() << "Settings::visualization::Slices::onGlobalAlphaChanged: " << newGlobalAlpha;
    this->globalAlpha = newGlobalAlpha;
 }
 
 void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-   qDebug() << "Settings::visualization::Slices::onNumberOfSlicesChanged: " << newNumberOfSlices;
    this->numberOfSlices = newNumberOfSlices;
    emit numberOfSlicesChanged(newNumberOfSlices);
 }
