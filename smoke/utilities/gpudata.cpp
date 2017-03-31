@@ -73,7 +73,24 @@ QVector<float> GPUData::getTextureCoordinates() const
 
 QVector<QVector3D> GPUData::getNormals() const
 {
-   return this->normals;
+    return this->normals;
+}
+
+GPUData GPUData::debugRectangleWireFrame()
+{
+    GPUData data = GPUData(GL_LINES);
+    data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
+    data.addElement(QVector3D(30, 300, 0), QVector3D(0, 0, 1.0), 0.03);
+
+    data.addElement(QVector3D(30, 300, 0), QVector3D(0, 0, 1.0), 0.03);
+    data.addElement(QVector3D(400, 300, 0), QVector3D(0, 0, 1.0), 0.06);
+
+    data.addElement(QVector3D(400, 300, 0), QVector3D(0, 0, 1.0), 0.06);
+    data.addElement(QVector3D(400, 30, 0), QVector3D(0, 0, 1.0), 1.0);
+
+    data.addElement(QVector3D(400, 30, 0), QVector3D(0, 0, 1.0), 1.0);
+    data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
+    return data;
 }
 
 void GPUData::transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation)
