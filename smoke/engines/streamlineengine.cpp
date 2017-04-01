@@ -10,10 +10,8 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
 
 int StreamLineEngine::fillBuffers()
 {
-   GPUData data = buildStreamLines();
-
-   updateBuffers(data);
-   return data.numElements();
+   std::logic_error("AbstractSliceEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
+   return 0;
 }
 
 GPUData StreamLineEngine::buildStreamLines()
@@ -38,7 +36,6 @@ GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 
 void StreamLineEngine::draw(Simulation *UNUSED(simulation))
 {
-   int bufferLength = this->fillBuffers();
-
-   drawWithMode(this->drawMode, bufferLength);
+   GPUData data = buildStreamLines();
+   updateBuffersAndDraw(data);
 }
