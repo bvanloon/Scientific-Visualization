@@ -27,6 +27,7 @@ class Settings::visualization::StreamLines : public QObject
       int numberOfSeedPoints();
 
    signals:
+      void clearCache();
 
    public slots:
       void ontimeStepChanged(double newTimeStep);
