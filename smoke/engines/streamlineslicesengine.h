@@ -24,6 +24,8 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
 
       GPUData buildStreamLine(QPointF seedPoint);
 
+      void connectToSettings();
+
       UniformGrid *grid;
 };
 

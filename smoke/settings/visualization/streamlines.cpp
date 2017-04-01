@@ -66,34 +66,40 @@ int Settings::visualization::StreamLines::numberOfSeedPoints()
 void Settings::visualization::StreamLines::ontimeStepChanged(double newTimeStep)
 {
    this->timeStep = newTimeStep;
+   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onMaximumTimeChanged(double newMaximumTime)
 {
    this->maximumTime = newMaximumTime;
+   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newEdgeLengthFactor)
 {
    this->edgeLength = computeEdgeLength(newEdgeLengthFactor, Settings::simulation().cellSize.width());
    this->edgeLengthFactor = newEdgeLengthFactor;
+   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onMaximumTotalLengthFactorChanged(double newValue)
 {
    this->totalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
    this->totalLengthFactor = newValue;
+   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onClearSeedPoints()
 {
    this->seedPoints.clear();
+   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onSeedPointAdded(QPointF newSeedPoint)
 {
    newSeedPoint.setY(Settings::canvas().size.height() - newSeedPoint.y());
    this->seedPoints.append(newSeedPoint);
+   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSizeF newSize)

@@ -1,10 +1,13 @@
 #include "streamlineslicesengine.h"
+#include "settings/visualizationsettings.h"
 
 StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
                        Settings::engines::EnginesTypes::streamLineSlices),
    grid(simulationGrid)
-{}
+{
+    connectToSettings();
+}
 
 void StreamLineSlicesEngine::updateCache()
 {
@@ -32,4 +35,10 @@ GPUData StreamLineSlicesEngine::buildStreamLine(QPointF seedPoint)
                                                             Settings::visualization::streamLines().colorMap->textureGetter,
                                                             Settings::visualization::streamLines().vectorField);
    return streamLine.toGPUData();
+}
+
+void StreamLineSlicesEngine::connectToSettings()
+{
+   connect(&Settings::visualization::streamLines(), SIGNAL(clearCache()),
+            this, SLOT(onClearCache()));
 }

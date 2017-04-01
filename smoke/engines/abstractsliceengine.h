@@ -36,6 +36,8 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void updateCache() = 0;
 
+      virtual void connectToSettings();
+
    private:
       void updateModelViewMatrix();
 
@@ -47,7 +49,6 @@ class AbstractSliceEngine : public AbstractEngine
 
       int fillBuffers(Simulation *UNUSED(simulation));
 
-      virtual void connectToSettings();
       virtual void connectToColorMap();
 
       void defineToSliceTransformation();
