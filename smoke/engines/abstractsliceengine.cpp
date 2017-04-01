@@ -2,6 +2,8 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
+const double AbstractSliceEngine::maximumYTranslation = 1.7;
+
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
@@ -18,14 +20,13 @@ void AbstractSliceEngine::defineToSliceTransformation()
    QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
    QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
 
-   toSliceTransformation.translate(0.0, 20.0, 0.0);
-   toSliceTransformation.rotate(40, yaxis);
+   toSliceTransformation.scale(0.76);
+   toSliceTransformation.rotate(45, yaxis);
    toSliceTransformation.rotate(80, xaxis);
 }
 
 void AbstractSliceEngine::draw(Simulation *UNUSED(Simulation))
 {
-   updateCache();
    drawSlices();
 }
 
@@ -36,7 +37,12 @@ void AbstractSliceEngine::onUpdateModelViewMatrix()
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-   cache.changeMaximumSize(newNumberOfSlices);
+    cache.changeMaximumSize(newNumberOfSlices);
+}
+
+void AbstractSliceEngine::onNewSimulationState()
+{
+    updateCache();
 }
 
 void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
@@ -56,21 +62,26 @@ void AbstractSliceEngine::clearCache()
 
 void AbstractSliceEngine::updateModelViewMatrix()
 {
-   this->modelViewMatrix = QMatrix4x4();
+   this->setModelViewMatrix(computeModuleViewMatrix());
+}
 
-   this->modelViewMatrix.translate(Settings::canvas().panningPosition);
+QMatrix4x4 AbstractSliceEngine::computeModuleViewMatrix()
+{
+   QMatrix4x4 modelViewMatrix = QMatrix4x4();
+
+   modelViewMatrix.translate(Settings::canvas().panningPosition);
 
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
-   this->modelViewMatrix *= rotationMatrix;
+   modelViewMatrix *= rotationMatrix;
 
-   this->modelViewMatrix.scale(Settings::canvas().scalingFactor);
-
-   this->setMVPMatrix();
+   modelViewMatrix.scale(Settings::canvas().scalingFactor);
+   return modelViewMatrix;
 }
 
 int AbstractSliceEngine::fillBuffers(Simulation *UNUSED(simulation))
 {
    std::logic_error("AbstractSliceEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
+   return 0;
 }
 
 void AbstractSliceEngine::updateBuffers(GPUData data)
@@ -80,13 +91,21 @@ void AbstractSliceEngine::updateBuffers(GPUData data)
 
 void AbstractSliceEngine::drawSlices()
 {
-   int bufferLength;
+   QMatrix4x4 transform;
+   double yTranslationStep = computeTranslationStepSize();
+
    for (GPUData data : cache)
    {
-      bufferLength = data.numElements();
-      updateBuffers(data);
-      drawWithMode(data.getDrawMode(), bufferLength);
+      setScreenSpaceTransformation(transform);
+      updateBuffersAndDraw(data);
+      transform.translate(0.0, yTranslationStep, 0.0);
    }
+}
+
+double AbstractSliceEngine::computeTranslationStepSize()
+{
+   double numSlices = static_cast<double>(Settings::visualization::slices().numberOfSlices);
+   return maximumYTranslation / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()

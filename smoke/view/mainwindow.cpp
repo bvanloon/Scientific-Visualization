@@ -226,6 +226,8 @@ void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engi
 
    connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
             engine, SLOT(onUpdateModelViewMatrix()));
+   connect(simulation, SIGNAL(newSimulationState(SimulationData*)),
+           engine, SLOT(onNewSimulationState()));
 }
 
 void MainWindow::connectGlyphEngineAndGlyphTab()

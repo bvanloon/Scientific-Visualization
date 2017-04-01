@@ -21,6 +21,8 @@ class AbstractSliceEngine : public AbstractEngine
 
       void onNumberOfSlicesChanged(int newNumberOfSlices);
 
+      void onNewSimulationState();
+
       void onClearCache(Settings::engines::EnginesTypes engine);
       void onClearCache();
 
@@ -36,6 +38,12 @@ class AbstractSliceEngine : public AbstractEngine
 
    private:
       void updateModelViewMatrix();
+
+
+      static const double maximumYTranslation;
+      QMatrix4x4 computeModuleViewMatrix();
+
+      double computeTranslationStepSize();
 
       int fillBuffers(Simulation *UNUSED(simulation));
 

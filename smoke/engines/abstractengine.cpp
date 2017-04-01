@@ -36,6 +36,32 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
+void AbstractEngine::setProjectionMatrix(const QMatrix4x4& value)
+{
+   projectionMatrix = value;
+   this->setMVPMatrix();
+}
+
+void AbstractEngine::setScreenSpaceTransformation()
+{
+    QMatrix4x4 transform;
+    transform.setToIdentity();
+    setScreenSpaceTransformation(transform);
+}
+
+void AbstractEngine::setScreenSpaceTransformation(const QMatrix4x4& transform)
+{
+   this->shaderProgram->bind();
+   this->shaderProgram->setUniformValue("screenSpaceTransformation", transform);
+   this->shaderProgram->release();
+}
+
+void AbstractEngine::setModelViewMatrix(const QMatrix4x4& value)
+{
+   modelViewMatrix = value;
+   this->setMVPMatrix();
+}
+
 void AbstractEngine::connectToColorMap()
 {}
 
@@ -59,6 +85,7 @@ void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
    setLightModel();
+   setScreenSpaceTransformation();
    initializeColorMapInfo();
 }
 
@@ -225,6 +252,17 @@ void AbstractEngine::updateBuffers(GPUData data)
    updateBuffer(this->vertexBuffer, data.getVertices());
    updateBuffer(this->normalBuffer, data.getNormals());
    updateBuffer(this->textureCoordinateBuffer, data.getTextureCoordinates());
+}
+
+void AbstractEngine::updateBuffersAndDraw(GPUData data)
+{
+    updateBuffers(data);
+    draw(data);
+}
+
+void AbstractEngine::draw(GPUData data)
+{
+    drawWithMode(data.getDrawMode(), data.numElements());
 }
 
 void AbstractEngine::drawWithMode(int mode, int bufferLength)
