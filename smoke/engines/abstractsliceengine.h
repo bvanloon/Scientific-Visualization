@@ -21,6 +21,8 @@ class AbstractSliceEngine : public AbstractEngine
 
       void onNumberOfSlicesChanged(int newNumberOfSlices);
 
+      void onNewSimulationState();
+
       void onClearCache(Settings::engines::EnginesTypes engine);
       void onClearCache();
 

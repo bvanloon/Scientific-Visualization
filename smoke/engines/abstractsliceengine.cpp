@@ -27,7 +27,6 @@ void AbstractSliceEngine::defineToSliceTransformation()
 
 void AbstractSliceEngine::draw(Simulation *UNUSED(Simulation))
 {
-   updateCache();
    drawSlices();
 }
 
@@ -38,7 +37,12 @@ void AbstractSliceEngine::onUpdateModelViewMatrix()
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-   cache.changeMaximumSize(newNumberOfSlices);
+    cache.changeMaximumSize(newNumberOfSlices);
+}
+
+void AbstractSliceEngine::onNewSimulationState()
+{
+    updateCache();
 }
 
 void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)

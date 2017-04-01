@@ -45,6 +45,7 @@ class Simulation : public QObject {
 
    signals:
       void newSimulationState(SimulationData *deepCopyOfNewSimulationData);
+      void newSimulationState();
 
    public slots:
 
