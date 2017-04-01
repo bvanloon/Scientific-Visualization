@@ -254,6 +254,17 @@ void AbstractEngine::updateBuffers(GPUData data)
    updateBuffer(this->textureCoordinateBuffer, data.getTextureCoordinates());
 }
 
+void AbstractEngine::updateBuffersAndDraw(GPUData data)
+{
+    updateBuffers(data);
+    draw(data);
+}
+
+void AbstractEngine::draw(GPUData data)
+{
+    drawWithMode(data.getDrawMode(), data.numElements());
+}
+
 void AbstractEngine::drawWithMode(int mode, int bufferLength)
 {
    this->shaderProgram->bind();

@@ -93,8 +93,7 @@ void AbstractSliceEngine::drawSlices()
    for (GPUData data : cache)
    {
       setScreenSpaceTransformation(transform);
-      updateBuffers(data);
-      drawWithMode(data.getDrawMode(), data.numElements());
+      updateBuffersAndDraw(data);
       transform.translate(0.0, yTranslationStep, 0.0);
    }
 }

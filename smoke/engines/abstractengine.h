@@ -60,6 +60,10 @@ public slots:
 
       void updateBuffers(GPUData data);
 
+      void updateBuffersAndDraw(GPUData data);
+
+      void draw(GPUData data);
+
       void drawWithMode(int mode, int bufferLength);
 
       void setMVPMatrix();
