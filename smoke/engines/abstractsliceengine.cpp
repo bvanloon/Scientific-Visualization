@@ -2,6 +2,8 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
+const double AbstractSliceEngine::maximumYTranslation = 1.5;
+
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
@@ -85,13 +87,21 @@ void AbstractSliceEngine::updateBuffers(GPUData data)
 
 void AbstractSliceEngine::drawSlices()
 {
-   int bufferLength;
+   QMatrix4x4 transform;
+   double yTranslationStep = computeTranslationStepSize();
+
    for (GPUData data : cache)
    {
-      bufferLength = data.numElements();
+      setScreenSpaceTransformation(transform);
       updateBuffers(data);
-      drawWithMode(data.getDrawMode(), bufferLength);
+      drawWithMode(data.getDrawMode(), data.numElements());
+      transform.translate(0.0, yTranslationStep, 0.0);
    }
+}
+
+double AbstractSliceEngine::computeTranslationStepSize()
+{
+   return 0.1;
 }
 
 void AbstractSliceEngine::connectToSettings()

@@ -38,7 +38,10 @@ class AbstractSliceEngine : public AbstractEngine
       void updateModelViewMatrix();
 
 
+      static const double maximumYTranslation;
       QMatrix4x4 computeModuleViewMatrix();
+
+      double computeTranslationStepSize();
 
       int fillBuffers(Simulation *UNUSED(simulation));
 
