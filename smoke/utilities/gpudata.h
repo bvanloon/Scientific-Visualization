@@ -38,7 +38,7 @@ class GPUData
 
       QVector<QVector3D> getNormals() const;
 
-      static GPUData debugRectangleWireFrame();
+      static GPUData debugSlice();
 
    private:
       GLint drawMode;

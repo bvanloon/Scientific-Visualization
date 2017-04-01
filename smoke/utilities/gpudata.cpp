@@ -76,7 +76,7 @@ QVector<QVector3D> GPUData::getNormals() const
     return this->normals;
 }
 
-GPUData GPUData::debugRectangleWireFrame()
+GPUData GPUData::debugSlice()
 {
     GPUData data = GPUData(GL_LINES);
     data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
