@@ -1,6 +1,7 @@
 #include "gpudata.h"
 #include <assert.h>
 #include <QDebug>
+#include "settings/canvassettings.h"
 
 GPUData::GPUData(GLint drawMode) :
    drawMode(drawMode)
@@ -78,18 +79,24 @@ QVector<QVector3D> GPUData::getNormals() const
 
 GPUData GPUData::debugSlice()
 {
+    double xMin = 1.0;
+    double xMax = Settings::canvas().size.width() - 1;
+
+    double yMin = 1.0;
+    double yMax = Settings::canvas().size.height();
+
     GPUData data = GPUData(GL_LINES);
-    data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
-    data.addElement(QVector3D(30, 300, 0), QVector3D(0, 0, 1.0), 0.03);
+    data.addElement(QVector3D(xMin, yMin, 0), QVector3D(0, 0, 1.0), 0.0);
+    data.addElement(QVector3D(xMin, yMax, 0), QVector3D(0, 0, 1.0), 0.03);
 
-    data.addElement(QVector3D(30, 300, 0), QVector3D(0, 0, 1.0), 0.03);
-    data.addElement(QVector3D(400, 300, 0), QVector3D(0, 0, 1.0), 0.06);
+    data.addElement(QVector3D(xMin, yMax, 0), QVector3D(0, 0, 1.0), 0.03);
+    data.addElement(QVector3D(xMax, yMax, 0), QVector3D(0, 0, 1.0), 0.06);
 
-    data.addElement(QVector3D(400, 300, 0), QVector3D(0, 0, 1.0), 0.06);
-    data.addElement(QVector3D(400, 30, 0), QVector3D(0, 0, 1.0), 1.0);
+    data.addElement(QVector3D(xMax, yMax, 0), QVector3D(0, 0, 1.0), 0.06);
+    data.addElement(QVector3D(xMax, yMin, 0), QVector3D(0, 0, 1.0), 1.0);
 
-    data.addElement(QVector3D(400, 30, 0), QVector3D(0, 0, 1.0), 1.0);
-    data.addElement(QVector3D(30, 30, 0), QVector3D(0, 0, 1.0), 0.0);
+    data.addElement(QVector3D(xMax, yMin, 0), QVector3D(0, 0, 1.0), 1.0);
+    data.addElement(QVector3D(xMin, yMin, 0), QVector3D(0, 0, 1.0), 0.0);
     return data;
 }
 
