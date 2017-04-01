@@ -68,6 +68,9 @@ public slots:
 
       void setProjectionMatrix(const QMatrix4x4 &value);
 
+      void setScreenSpaceTransformation();
+      void setScreenSpaceTransformation(const QMatrix4x4 &transform);
+
       virtual void connectToColorMap();
 
    private:

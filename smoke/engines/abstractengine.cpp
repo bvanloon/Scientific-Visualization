@@ -36,16 +36,30 @@ void AbstractEngine::init()
    initializeUniforms();
 }
 
-void AbstractEngine::setProjectionMatrix(const QMatrix4x4 &value)
+void AbstractEngine::setProjectionMatrix(const QMatrix4x4& value)
 {
-    projectionMatrix = value;
-    this->setMVPMatrix();
+   projectionMatrix = value;
+   this->setMVPMatrix();
 }
 
-void AbstractEngine::setModelViewMatrix(const QMatrix4x4 &value)
+void AbstractEngine::setScreenSpaceTransformation()
 {
-    modelViewMatrix = value;
-    this->setMVPMatrix();
+    QMatrix4x4 transform;
+    transform.setToIdentity();
+    setScreenSpaceTransformation(transform);
+}
+
+void AbstractEngine::setScreenSpaceTransformation(const QMatrix4x4& transform)
+{
+   this->shaderProgram->bind();
+   this->shaderProgram->setUniformValue("screenSpaceTransformation", transform);
+   this->shaderProgram->release();
+}
+
+void AbstractEngine::setModelViewMatrix(const QMatrix4x4& value)
+{
+   modelViewMatrix = value;
+   this->setMVPMatrix();
 }
 
 void AbstractEngine::connectToColorMap()
@@ -71,6 +85,7 @@ void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
    setLightModel();
+   setScreenSpaceTransformation();
    initializeColorMapInfo();
 }
 
