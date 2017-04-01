@@ -2,7 +2,7 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
-const double AbstractSliceEngine::maximumYTranslation = 1.5;
+const double AbstractSliceEngine::maximumYTranslation = 1.7;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType) :
@@ -101,7 +101,8 @@ void AbstractSliceEngine::drawSlices()
 
 double AbstractSliceEngine::computeTranslationStepSize()
 {
-   return 0.1;
+   double numSlices = static_cast<double>(Settings::visualization::slices().numberOfSlices);
+   return maximumYTranslation / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()
