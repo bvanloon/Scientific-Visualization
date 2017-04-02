@@ -18,6 +18,8 @@ class SmokeSlicesEngine : public AbstractSliceEngine
 
    private:
       SimulationGrid *simulation;
+
+      void connectToSettings();
 };
 
 #endif // SMOKESLICESENGINE_H
