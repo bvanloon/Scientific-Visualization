@@ -3,6 +3,7 @@
 #include "settings/visualizationsettings.h"
 
 const double AbstractSliceEngine::maximumYTranslation = 1.7;
+const double AbstractSliceEngine::minimumYTranslation = 0.0;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType,
@@ -116,7 +117,7 @@ void AbstractSliceEngine::drawSlices()
 double AbstractSliceEngine::computeTranslationStepSize()
 {
    double numSlices = static_cast<double>(Settings::visualization::slices().numberOfSlices);
-   return maximumYTranslation / (numSlices - 1);
+   return (maximumYTranslation - minimumYTranslation) / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()

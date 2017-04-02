@@ -37,6 +37,7 @@ class AbstractSliceEngine : public AbstractEngine
 
    private:
       static const double maximumYTranslation;
+      static const double minimumYTranslation;
 
       void drawSlices();
 
