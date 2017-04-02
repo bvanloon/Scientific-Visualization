@@ -11,14 +11,10 @@ SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
 
 void SmokeSlicesEngine::updateCache()
 {
-   std::logic_error("SmokeSlicesEngine::updateCache() not yet implemented");
-}
+    SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
+    GPUData newData = builder.getGPUData();
 
-void SmokeSlicesEngine::draw()
-{
-   SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
-   GPUData data = builder.getGPUData();
-   updateBuffersAndDraw(data);
+    this->cache.enqueue(newData);
 }
 
 void SmokeSlicesEngine::connectToSettings()

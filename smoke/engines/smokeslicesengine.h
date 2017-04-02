@@ -10,11 +10,9 @@ class SmokeSlicesEngine : public AbstractSliceEngine
    Q_OBJECT
 
    public:
-      SmokeSlicesEngine(SimulationGrid* grid);
+      SmokeSlicesEngine(SimulationGrid *grid);
 
       void updateCache();
-
-      void draw();
 
    private:
       SimulationGrid *simulation;
