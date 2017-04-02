@@ -12,11 +12,12 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
    public:
       StreamLineSlicesEngine(UniformGrid *simulationGrid);
 
-      void updateCache();
-
    public slots:
 
    signals:
+
+   protected:
+      void updateCache();
 
    private:
 

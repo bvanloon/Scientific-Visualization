@@ -14,8 +14,6 @@ class GlyphSliceEngine : public AbstractSliceEngine {
 
       void draw();
 
-      void updateCache();
-
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
@@ -23,6 +21,10 @@ class GlyphSliceEngine : public AbstractSliceEngine {
 
    signals:
       void cellSizeChanged(QSizeF newSize);
+
+   protected:
+
+      void updateCache();
 
    private:
       int fillBuffers();
