@@ -27,7 +27,7 @@ class GlyphEngine : public AbstractEngine {
    private:
       int fillBuffers();
 
-      Grid *visualizationGrid;
+      UniformGrid *visualizationGrid;
       UniformGrid *simulationGrid;
       GlyphsFactory factory;
 };
