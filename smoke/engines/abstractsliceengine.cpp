@@ -3,26 +3,26 @@
 #include "settings/visualizationsettings.h"
 
 const double AbstractSliceEngine::maximumYTranslation = 1.7;
+const double AbstractSliceEngine::minimumYTranslation = 0.0;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
-                                         Settings::engines::EnginesTypes engineType) :
+                                         Settings::engines::EnginesTypes engineType,
+                                         QMatrix4x4 toSliceTransformation) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numberOfSlices)
+   cache(Settings::visualization::slices().numberOfSlices),
+   toSliceTransformation(toSliceTransformation)
 {
-   defineToSliceTransformation();
-
    updateModelViewMatrix();
    connectToSettings();
 }
 
-void AbstractSliceEngine::defineToSliceTransformation()
+AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
+   AbstractEngine(lightModel, engineType),
+   cache(Settings::visualization::slices().numberOfSlices),
+   toSliceTransformation(computeToSliceTransformation())
 {
-   QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
-   QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
-
-   toSliceTransformation.scale(0.76);
-   toSliceTransformation.rotate(45, yaxis);
-   toSliceTransformation.rotate(80, xaxis);
+   updateModelViewMatrix();
+   connectToSettings();
 }
 
 void AbstractSliceEngine::draw()
@@ -37,12 +37,12 @@ void AbstractSliceEngine::onUpdateModelViewMatrix()
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-    cache.changeMaximumSize(newNumberOfSlices);
+   cache.changeMaximumSize(newNumberOfSlices);
 }
 
 void AbstractSliceEngine::onNewSimulationState()
 {
-    updateCache();
+   updateCache();
 }
 
 void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
@@ -53,6 +53,18 @@ void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
 void AbstractSliceEngine::onClearCache()
 {
    clearCache();
+}
+
+QMatrix4x4 AbstractSliceEngine::computeToSliceTransformation()
+{
+   QMatrix4x4 transform;
+   QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
+   QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
+
+   transform.scale(0.76);
+   transform.rotate(45, yaxis);
+   transform.rotate(80, xaxis);
+   return transform;
 }
 
 void AbstractSliceEngine::clearCache()
@@ -105,7 +117,7 @@ void AbstractSliceEngine::drawSlices()
 double AbstractSliceEngine::computeTranslationStepSize()
 {
    double numSlices = static_cast<double>(Settings::visualization::slices().numberOfSlices);
-   return maximumYTranslation / (numSlices - 1);
+   return (maximumYTranslation - minimumYTranslation) / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()

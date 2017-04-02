@@ -39,6 +39,8 @@ class Settings::visualization::Smoke : public QObject {
       static const Smoke& instance();
 
       Settings::visualization::ColorMap *colorMap;
+   signals:
+      void clearCache();
 
    private:
       explicit Smoke(QObject *parent = 0);
@@ -62,7 +64,7 @@ class Settings::visualization::Glyphs : public QObject {
 
       QPair<float, float> getCurrentMagnitudeRange() const;
 
-signals:
+   signals:
       void gridDimensionChanged(QSizeF newDimension);
 
    public slots:
