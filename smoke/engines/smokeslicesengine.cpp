@@ -1,36 +1,20 @@
 #include "smokeslicesengine.h"
+#include "grid/utilities/smokebuilder.h"
 
-SmokeSlicesEngine::SmokeSlicesEngine() :
+SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
-                       Settings::engines::EnginesTypes::smokeSlices)
+                       Settings::engines::EnginesTypes::smokeSlices),
+   simulation(grid)
 {}
 
 void SmokeSlicesEngine::updateCache()
 {
-    std::logic_error("SmokeSlicesEngine::updateCache() not yet implemented");
+   std::logic_error("SmokeSlicesEngine::updateCache() not yet implemented");
 }
 
 void SmokeSlicesEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->fillBuffers(simulation);
-
-   drawWithMode(GL_TRIANGLES, bufferLength);
-}
-
-int SmokeSlicesEngine::fillBuffers(Simulation *simulation)
-{
-   Triangulation triangulation = simulation->getGridTriangulation();
-
-   QVector<QVector3D> triangles = triangulation.getVertexPositions();
-
-   QVector<float> textureCoordinates = simulation->getTexCoord(
-                Settings::visualization::smoke().colorMap->textureGetter,
-                triangulation);
-
-   updateBuffer(this->vertexBuffer, triangles);
-
-   //Fill normal buffer with triangles to make sure it is not empty.
-   updateBuffer(this->normalBuffer, triangles);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   return triangles.length();
+   SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
+   GPUData data = builder.getGPUData();
+   updateBuffersAndDraw(data);
 }
