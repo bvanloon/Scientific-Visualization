@@ -26,7 +26,6 @@ class GPUData
       void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate);
       void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates);
       void addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates);
-      void addElements(AbstractGlyph* glyph, float textureCoordinate);
 
       void extend(GPUData data);
 
