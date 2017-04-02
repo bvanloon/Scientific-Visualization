@@ -79,27 +79,27 @@ QVector<float> GPUData::getTextureCoordinates() const
 
 QVector<QVector3D> GPUData::getNormals() const
 {
-    return this->normals;
+   return this->normals;
 }
 
 GPUData GPUData::debugSlice()
 {
-    double xMin = 1.0;
-    double xMax = Settings::canvas().size.width() - 1;
+   double xMin = 1.0;
+   double xMax = Settings::canvas().size.width() - 1;
 
-    double yMin = 1.0;
-    double yMax = Settings::canvas().size.height();
+   double yMin = 1.0;
+   double yMax = Settings::canvas().size.height();
 
-    GPUData data = GPUData(GL_TRIANGLES);
-    data.addElement(QVector3D(xMin, yMin, 0), QVector3D(0, 0, 1.0), 0.0);
-    data.addElement(QVector3D(xMax, yMin, 0), QVector3D(0, 0, 1.0), 10.0);
-    data.addElement(QVector3D(xMin, yMax, 0), QVector3D(0, 0, 1.0), 3.33);
+   GPUData data = GPUData(GL_TRIANGLES);
+   data.addElement(QVector3D(xMin, yMin, 0), QVector3D(0, 0, 1.0), 0.0);
+   data.addElement(QVector3D(xMax, yMin, 0), QVector3D(0, 0, 1.0), 10.0);
+   data.addElement(QVector3D(xMin, yMax, 0), QVector3D(0, 0, 1.0), 3.33);
 
-    data.addElement(QVector3D(xMin, yMax, 0), QVector3D(0, 0, 1.0), 3.33);
-    data.addElement(QVector3D(xMax, yMin, 0), QVector3D(0, 0, 1.0), 10.0);
-    data.addElement(QVector3D(xMax, yMax, 0), QVector3D(0, 0, 1.0), 6.66);
+   data.addElement(QVector3D(xMin, yMax, 0), QVector3D(0, 0, 1.0), 3.33);
+   data.addElement(QVector3D(xMax, yMin, 0), QVector3D(0, 0, 1.0), 10.0);
+   data.addElement(QVector3D(xMax, yMax, 0), QVector3D(0, 0, 1.0), 6.66);
 
-    return data;
+   return data;
 }
 
 void GPUData::transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation)
