@@ -2,6 +2,7 @@
 #define SMOKEENGINE_H
 
 #include "abstractengine.h"
+#include "unused.h"
 
 class SmokeEngine : public AbstractEngine
 {
@@ -11,7 +12,7 @@ class SmokeEngine : public AbstractEngine
       virtual void draw(Simulation *simulation);
 
    private:
-      int fillBuffers(Simulation *simulation);
+      int fillBuffers(Simulation *UNUSED(simulation));
 };
 
 

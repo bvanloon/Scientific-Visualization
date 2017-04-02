@@ -9,16 +9,13 @@ SmokeEngine::SmokeEngine() :
 
 void SmokeEngine::draw(Simulation *simulation)
 {
-   int bufferLength = this->fillBuffers(simulation);
-
-   drawWithMode(GL_TRIANGLES, bufferLength);
-}
-
-int SmokeEngine::fillBuffers(Simulation *simulation)
-{
    SmokeBuilder builder = SmokeBuilder(simulation->getSimulationGrid(), colorMap->textureGetter);
    GPUData data = builder.getGPUData();
+   updateBuffersAndDraw(data);
+}
 
-   updateBuffers(data);
-   return data.numElements();
+int SmokeEngine::fillBuffers(Simulation *UNUSED(simulation))
+{
+   std::logic_error("SmokeEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
+   return 0;
 }
