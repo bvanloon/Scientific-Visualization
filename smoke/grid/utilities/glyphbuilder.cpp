@@ -1,23 +1,31 @@
 #include "glyphbuilder.h"
+#include "glyphs/abstractglyph.h"
+#include "glyphs/hedgehog.h"
 
-GlyphBuilder::GlyphBuilder(UniformGrid *grid, Settings::sim::GlyphsType glyphThype) :
-   grid(grid)
-{
-   this->data = build(glyphThype);
-}
+GlyphBuilder::GlyphBuilder(UniformGrid *grid,
+                           Settings::sim::GlyphsType glyphThype,
+                           Vertex::scalarGetter textureGetter,
+                           Vertex::vectorGetter directionGetter) :
+   grid(grid),
+   getTextureCoordinate(textureGetter),
+   getDirection(directionGetter),
+   data(build(glyphThype))
+{}
 
 GlyphBuilder::~GlyphBuilder()
+{}
+
+GPUData GlyphBuilder::getData() const
 {
-   qDebug() << "GlyphBuilder::~GlyphBuilder";
-   delete data;
+   return data;
 }
 
-GPUData *GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
+GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
 {
    switch (glyphType)
    {
    case Settings::sim::GlyphsType::hedgehog:
-      return buildHedgeHodgs();
+      return buildHedgeHodges();
 
    case Settings::sim::GlyphsType::triangles:
       return buildTriangles();
@@ -30,26 +38,22 @@ GPUData *GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
    }
 }
 
-GPUData *GlyphBuilder::buildHedgeHodgs()
+GPUData GlyphBuilder::buildHedgeHodges()
 {
-   GPUData *data = new GPUData(GL_LINES);
-   return data;
+   return GPUData::debugSlice();
 }
 
-GPUData *GlyphBuilder::buildTriangles()
+GPUData GlyphBuilder::buildTriangles()
 {
-   GPUData *data = new GPUData(GL_TRIANGLES);
-   return data;
+   return GPUData::debugSlice();
 }
 
-GPUData *GlyphBuilder::buildAirplanes()
+GPUData GlyphBuilder::buildAirplanes()
 {
-   GPUData *data = new GPUData(GL_TRIANGLES);
-   return data;
+   return GPUData::debugSlice();
 }
 
-GPUData *GlyphBuilder::buildCones()
+GPUData GlyphBuilder::buildCones()
 {
-   GPUData *data = new GPUData(GL_TRIANGLES);
-   return data;
+   return GPUData::debugSlice();
 }
