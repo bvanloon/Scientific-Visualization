@@ -2,6 +2,7 @@
 #include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
+#include "grid/utilities/glyphbuilder.h"
 
 
 GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
@@ -39,12 +40,11 @@ void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
 
 int GlyphEngine::fillBuffers()
 {
-   GlyphData data = visualizationGrid->getGlyphData();
-   GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
+   GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
+                 Settings::visualization::glyphs().colorMap->textureGetter,
+                 Settings::visualization::glyphs().vectorGetter);
+   GPUData data = builder.getData();
+   updateBuffers(data);
 
-   updateBuffer(this->vertexBuffer, glyphs.getVertices());
-   updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
-   updateBuffer(this->normalBuffer, glyphs.getNormals());
-
-   return glyphs.numVertices();
+   return data.numElements();
 }
