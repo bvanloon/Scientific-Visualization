@@ -1,6 +1,6 @@
 #include "glyphbuilder.h"
 #include "glyphs/abstractglyph.h"
-#include "glyphs/hedgehog.h"
+#include "glyphs/glyphs.h"
 
 GlyphBuilder::GlyphBuilder(UniformGrid *grid,
                            Settings::sim::GlyphsType glyphThype,

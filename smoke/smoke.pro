@@ -159,7 +159,8 @@ HEADERS  += main.ih\
     utilities/sizelimitedqueue.h \
     grid/utilities/smokebuilder.h \
     engines/glyphengine.h \
-    grid/utilities/glyphbuilder.h
+    grid/utilities/glyphbuilder.h \
+    glyphs/glyphs.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
