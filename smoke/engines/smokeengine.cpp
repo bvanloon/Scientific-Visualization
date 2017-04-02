@@ -2,14 +2,15 @@
 #include "grid/utilities/smokebuilder.h"
 #include "settings/visualizationsettings.h"
 
-SmokeEngine::SmokeEngine() :
+SmokeEngine::SmokeEngine(SimulationGrid *grid) :
    AbstractEngine(AbstractEngine::lightModel::noLight,
-                  Settings::engines::EnginesTypes::smoke)
+                  Settings::engines::EnginesTypes::smoke),
+   simulation(grid)
 {}
 
 void SmokeEngine::draw(Simulation *simulation)
 {
-   SmokeBuilder builder = SmokeBuilder(simulation->getSimulationGrid(), colorMap->textureGetter);
+   SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
    GPUData data = builder.getGPUData();
    updateBuffersAndDraw(data);
 }
