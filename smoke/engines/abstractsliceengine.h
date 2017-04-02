@@ -30,22 +30,22 @@ class AbstractSliceEngine : public AbstractEngine
       SizeLimitedQueue<GPUData> cache;
       QMatrix4x4 toSliceTransformation;
 
-      void updateBuffers(GPUData data);
-
-      void drawSlices();
-
       virtual void updateCache() = 0;
 
       virtual void connectToSettings();
 
    private:
+      static const double maximumYTranslation;
+
+      void drawSlices();
+
       void updateModelViewMatrix();
 
-
-      static const double maximumYTranslation;
       QMatrix4x4 computeModuleViewMatrix();
 
       double computeTranslationStepSize();
+
+      void updateBuffers(GPUData data);
 
       int fillBuffers(Simulation *UNUSED(simulation));
 
