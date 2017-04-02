@@ -45,18 +45,19 @@ GPUData GlyphBuilder::buildHedgeHodges()
 
 GPUData GlyphBuilder::buildTriangles()
 {
-   Triangle *triangle;
-   float textureCoordinate;
    GPUData triangleData(GL_TRIANGLES);
-   for (Vertex *vertex : grid->getVertices())
-   {
-      textureCoordinate = (vertex->*(getTextureCoordinate))();
-      triangle = new Triangle(*(vertex->getPosition()),
-                              (vertex->*(getDirection))(),
-                              textureCoordinate);
-      triangleData.extend(triangle->toGPUData(textureCoordinate));
-      delete triangle;
-   }
+   for (Vertex *vertex : grid->getVertices()) triangleData.extend(buildTriangle(vertex));
+   return triangleData;
+}
+
+GPUData GlyphBuilder::buildTriangle(Vertex *vertex)
+{
+   GPUData triangleData(GL_TRIANGLES);
+   float textureCoordinate = (vertex->*(getTextureCoordinate))();
+   Triangle *triangle = new Triangle(*(vertex->getPosition()),
+                                     (vertex->*(getDirection))(), textureCoordinate);
+   triangleData.extend(triangle->toGPUData(textureCoordinate));
+   delete triangle;
    return triangleData;
 }
 

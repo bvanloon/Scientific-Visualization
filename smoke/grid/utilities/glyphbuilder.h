@@ -27,6 +27,7 @@ private:
 
       GPUData buildHedgeHodges();
       GPUData buildTriangles();
+      GPUData buildTriangle(Vertex* vertex);
       GPUData buildAirplanes();
       GPUData buildCones();
 };
