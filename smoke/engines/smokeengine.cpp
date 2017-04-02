@@ -18,16 +18,16 @@ int SmokeEngine::fillBuffers(Simulation *simulation)
 {
    Triangulation triangulation = simulation->getGridTriangulation();
 
-   QVector<QVector3D> triangles = triangulation.getVertexPositions();
+   Vertex::scalarGetter textureGetter = Settings::visualization::smoke().colorMap->textureGetter;
+   GPUData data = GPUData(GL_TRIANGLES);
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   double textureCoordinate;
 
-   QVector<float> textureCoordinates = simulation->getTexCoord(
-               Settings::visualization::smoke().colorMap->textureGetter,
-               triangulation);
+   for(Vertex* vertex : triangulation.getVertices()){
+        textureCoordinate = (vertex->*textureGetter)();
+        data.addElement(*vertex->getPosition(), normal, textureCoordinate);
+   }
 
-   updateBuffer(this->vertexBuffer, triangles);
-
-   //Fill normal buffer with triangles to make sure it is not empty.
-   updateBuffer(this->normalBuffer, triangles);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   return triangles.length();
+   updateBuffers(data);
+   return triangulation.numVertices();
 }
