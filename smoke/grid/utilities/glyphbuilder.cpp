@@ -55,6 +55,7 @@ GPUData GlyphBuilder::buildTriangles()
                               (vertex->*(getDirection))(),
                               textureCoordinate);
       triangleData.extend(triangle->toGPUData(textureCoordinate));
+      delete triangle;
    }
    return triangleData;
 }
