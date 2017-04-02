@@ -137,12 +137,13 @@ namespace Settings {
                 static const double totalLengthFactor = std::numeric_limits<double>::infinity();
             }
         }
+
         namespace engines {
             static const bool activeEngines[7] =
             {
-               false, false, false, false,
+               true, false, false, false,
                //Slice Engines
-               true,  false, false
+               false,  false, false
             };
         }
     }
