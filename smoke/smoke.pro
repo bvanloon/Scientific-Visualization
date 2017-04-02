@@ -88,7 +88,8 @@ SOURCES += main.cpp\
     grid/simulationgrid.cpp \
     simulation/simulationstatehistory.cpp \
     grid/utilities/smokebuilder.cpp \
-    engines/glyphengine.cpp
+    engines/glyphengine.cpp \
+    grid/utilities/glyphbuilder.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -157,7 +158,8 @@ HEADERS  += main.ih\
     grid/simulationgrid.h \
     utilities/sizelimitedqueue.h \
     grid/utilities/smokebuilder.h \
-    engines/glyphengine.h
+    engines/glyphengine.h \
+    grid/utilities/glyphbuilder.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
