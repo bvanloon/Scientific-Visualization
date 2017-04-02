@@ -18,7 +18,7 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-void VectorEngine::draw(Simulation *UNUSED(simulation))
+void VectorEngine::draw()
 {
    int bufferLength = this->fillBuffers();
 

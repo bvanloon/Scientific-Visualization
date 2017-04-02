@@ -14,7 +14,7 @@ class AbstractSliceEngine : public AbstractEngine
    public:
       AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType);
 
-      void draw(Simulation *UNUSED(Simulation));
+      void draw();
 
    public slots:
       void onUpdateModelViewMatrix();

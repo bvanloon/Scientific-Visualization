@@ -18,7 +18,12 @@ const Settings::Canvas& Settings::Canvas::instance()
 
 QPointF Settings::Canvas::convertToNormalCoordinates(QPointF openGLCoordinates) const
 {
-   return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPointF();
+    return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPointF();
+}
+
+QPoint Settings::Canvas::convertToNormalCoordinates(QPoint openGLCoordinates) const
+{
+    return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPoint();
 }
 
 QVector3D Settings::Canvas::convertToNormalCoordinates(QVector3D openGLCoordinates) const

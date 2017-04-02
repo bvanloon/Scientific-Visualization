@@ -87,7 +87,8 @@ SOURCES += main.cpp\
     view/slicestab.cpp \
     simulation/simulationdata.cpp \
     grid/simulationgrid.cpp \
-    simulation/simulationstatehistory.cpp
+    simulation/simulationstatehistory.cpp \
+    grid/utilities/smokebuilder.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -155,7 +156,8 @@ HEADERS  += main.ih\
     simulation/simulationstatehistory.h \
     simulation/simulationdata.h \
     grid/simulationgrid.h \
-    utilities/sizelimitedqueue.h
+    utilities/sizelimitedqueue.h \
+    grid/utilities/smokebuilder.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

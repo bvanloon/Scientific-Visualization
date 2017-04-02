@@ -12,7 +12,7 @@ class SeedPointEngine : public AbstractEngine
    public:
       SeedPointEngine();
 
-      void draw(Simulation *UNUSED(simulation));
+      void draw();
 
    private:
       int fillBuffers();

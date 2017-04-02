@@ -3,20 +3,21 @@
 
 #include <QObject>
 #include "abstractsliceengine.h"
+#include "grid/simulationgrid.h"
 
 class SmokeSlicesEngine : public AbstractSliceEngine
 {
    Q_OBJECT
 
    public:
-      SmokeSlicesEngine();
+      SmokeSlicesEngine(SimulationGrid* grid);
 
       void updateCache();
 
-      void draw(Simulation *simulation);
+      void draw();
 
    private:
-      int fillBuffers(Simulation *simulation);
+      SimulationGrid *simulation;
 };
 
 #endif // SMOKESLICESENGINE_H

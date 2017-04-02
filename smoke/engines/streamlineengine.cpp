@@ -34,7 +34,7 @@ GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
    return streamLine.toGPUData();
 }
 
-void StreamLineEngine::draw(Simulation *UNUSED(simulation))
+void StreamLineEngine::draw()
 {
    GPUData data = buildStreamLines();
    updateBuffersAndDraw(data);

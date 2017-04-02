@@ -1,33 +1,22 @@
 #include "smokeengine.h"
-#include "grid/triangulation.h"
+#include "grid/utilities/smokebuilder.h"
 #include "settings/visualizationsettings.h"
 
-SmokeEngine::SmokeEngine() :
+SmokeEngine::SmokeEngine(SimulationGrid *grid) :
    AbstractEngine(AbstractEngine::lightModel::noLight,
-                  Settings::engines::EnginesTypes::smoke)
+                  Settings::engines::EnginesTypes::smoke),
+   simulation(grid)
 {}
 
-void SmokeEngine::draw(Simulation *simulation)
+void SmokeEngine::draw()
 {
-   int bufferLength = this->fillBuffers(simulation);
-
-   drawWithMode(GL_TRIANGLES, bufferLength);
+   SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
+   GPUData data = builder.getGPUData();
+   updateBuffersAndDraw(data);
 }
 
-int SmokeEngine::fillBuffers(Simulation *simulation)
+int SmokeEngine::fillBuffers(Simulation *UNUSED(simulation))
 {
-   Triangulation triangulation = simulation->getGridTriangulation();
-
-   QVector<QVector3D> triangles = triangulation.getVertexPositions();
-
-   QVector<float> textureCoordinates = simulation->getTexCoord(
-               Settings::visualization::smoke().colorMap->textureGetter,
-               triangulation);
-
-   updateBuffer(this->vertexBuffer, triangles);
-
-   //Fill normal buffer with triangles to make sure it is not empty.
-   updateBuffer(this->normalBuffer, triangles);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   return triangles.length();
+   std::logic_error("SmokeEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
+   return 0;
 }
