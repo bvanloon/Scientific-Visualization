@@ -23,7 +23,7 @@ class Settings::Canvas : public QObject
       QVector3D panningPosition;
 
       QPointF convertToNormalCoordinates(QPointF openGLCoordinates) const;
-
+      QPoint convertToNormalCoordinates(QPoint openGLCoordinates) const;
       QVector3D convertToNormalCoordinates(QVector3D openGLCoordinates) const;
 
    signals:

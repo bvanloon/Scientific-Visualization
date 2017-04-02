@@ -42,8 +42,7 @@ void Simulation::step()
 
 void Simulation::onMouseMoved(QPoint newPosition)
 {
-   // Invert y-position
-   newPosition.setY(Settings::canvas().size.height() - newPosition.y());
+   newPosition = Settings::canvas().convertToNormalCoordinates(newPosition);
 
    this->realization->addForceAt(newPosition, this->lastMousePosition);
    this->lastMousePosition = newPosition;
