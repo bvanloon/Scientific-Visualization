@@ -52,13 +52,10 @@ GPUData GlyphBuilder::buildTriangles()
 
 GPUData GlyphBuilder::buildTriangle(Vertex *vertex)
 {
-   GPUData triangleData(GL_TRIANGLES);
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
-   Triangle *triangle = new Triangle(*(vertex->getPosition()),
-                                     (vertex->*(getDirection))(), textureCoordinate);
-   triangleData.extend(triangle->toGPUData(textureCoordinate));
-   delete triangle;
-   return triangleData;
+   Triangle triangle = Triangle(*(vertex->getPosition()),
+                                (vertex->*(getDirection))(), textureCoordinate);
+   return triangle.toGPUData(textureCoordinate);
 }
 
 GPUData GlyphBuilder::buildAirplanes()
