@@ -25,7 +25,7 @@ void AbstractSliceEngine::defineToSliceTransformation()
    toSliceTransformation.rotate(80, xaxis);
 }
 
-void AbstractSliceEngine::draw(Simulation *UNUSED(Simulation))
+void AbstractSliceEngine::draw()
 {
    drawSlices();
 }

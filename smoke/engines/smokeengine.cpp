@@ -8,7 +8,7 @@ SmokeEngine::SmokeEngine(SimulationGrid *grid) :
    simulation(grid)
 {}
 
-void SmokeEngine::draw(Simulation *simulation)
+void SmokeEngine::draw()
 {
    SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
    GPUData data = builder.getGPUData();

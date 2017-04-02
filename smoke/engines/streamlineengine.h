@@ -11,7 +11,7 @@ class StreamLineEngine : public AbstractEngine {
    public:
       StreamLineEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *UNUSED(simulation));
+      void draw();
 
    public slots:
 

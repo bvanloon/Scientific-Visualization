@@ -12,7 +12,7 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    public:
       GlyphSliceEngine(UniformGrid *simulationGrid);
 
-      void draw(Simulation *simulation);
+      void draw();
 
       void updateCache();
 
@@ -25,7 +25,7 @@ class GlyphSliceEngine : public AbstractSliceEngine {
       void cellSizeChanged(QSizeF newSize);
 
    private:
-      int fillBuffers(Simulation *UNUSED(Simulation));
+      int fillBuffers();
 
       Grid *visualizationGrid;
       UniformGrid *simulationGrid;

@@ -12,7 +12,7 @@ void SmokeSlicesEngine::updateCache()
    std::logic_error("SmokeSlicesEngine::updateCache() not yet implemented");
 }
 
-void SmokeSlicesEngine::draw(Simulation *simulation)
+void SmokeSlicesEngine::draw()
 {
    SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
    GPUData data = builder.getGPUData();

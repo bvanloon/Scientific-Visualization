@@ -14,7 +14,7 @@ class VectorEngine : public AbstractEngine {
    public:
       VectorEngine(UniformGrid *simulationGrid);
 
-      virtual void draw(Simulation *UNUSED(simulation));
+      void draw();
 
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);

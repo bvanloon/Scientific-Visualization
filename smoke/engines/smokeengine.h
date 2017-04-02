@@ -10,7 +10,7 @@ class SmokeEngine : public AbstractEngine
    public:
       SmokeEngine(SimulationGrid* grid);
 
-      virtual void draw(Simulation *simulation);
+      void draw();
 
    private:
       SimulationGrid* simulation;

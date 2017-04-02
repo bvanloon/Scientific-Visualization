@@ -48,10 +48,7 @@ void Canvas::enginesDraw()
 {
    for (auto const& engine : activeEngines)
    {
-      if (engine.second)
-      {
-         enginemap.find(engine.first)->second->draw(this->simulation);
-      }
+      if (engine.second) enginemap.find(engine.first)->second->draw();
    }
 }
 

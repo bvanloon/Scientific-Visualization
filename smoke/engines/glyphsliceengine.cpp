@@ -18,9 +18,9 @@ GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-void GlyphSliceEngine::draw(Simulation *simulation)
+void GlyphSliceEngine::draw()
 {
-   int bufferLength = this->fillBuffers(simulation);
+   int bufferLength = this->fillBuffers();
 
    drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
 }
@@ -36,7 +36,7 @@ void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellS
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-int GlyphSliceEngine::fillBuffers(Simulation *UNUSED(Simulation))
+int GlyphSliceEngine::fillBuffers()
 {
    int idx = SimulationHistory::instance().mostRecentStateIdx();
    GlyphData data = SimulationHistory::instance().getVisualizationGridAtQueueIdx(idx).getGlyphData();

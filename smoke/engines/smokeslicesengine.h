@@ -14,7 +14,7 @@ class SmokeSlicesEngine : public AbstractSliceEngine
 
       void updateCache();
 
-      void draw(Simulation *simulation);
+      void draw();
 
    private:
       SimulationGrid *simulation;

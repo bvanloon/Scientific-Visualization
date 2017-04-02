@@ -10,7 +10,7 @@ SeedPointEngine::SeedPointEngine() :
                   Settings::engines::EnginesTypes::seedPoints)
 {}
 
-void SeedPointEngine::draw(Simulation *UNUSED(simulation))
+void SeedPointEngine::draw()
 {
    int bufferLength = this->fillBuffers();
 
