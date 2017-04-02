@@ -94,7 +94,7 @@ void Simulation::onWindowResized(int width, int height)
    grid->changeGridArea(QSizeF(width, height));
 }
 
-UniformGrid *Simulation::getSimulationGrid() const
+SimulationGrid *Simulation::getSimulationGrid() const
 {
    return grid;
 }

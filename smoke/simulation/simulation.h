@@ -29,7 +29,7 @@ class Simulation : public QObject {
 
       Triangulation getGridTriangulation();
 
-      UniformGrid *getSimulationGrid() const;
+      SimulationGrid *getSimulationGrid() const;
 
       QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
 
