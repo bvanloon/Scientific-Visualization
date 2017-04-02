@@ -1,5 +1,6 @@
 #include "smokeslicesengine.h"
 #include "grid/utilities/smokebuilder.h"
+#include "settings/visualizationsettings.h"
 
 SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
@@ -11,13 +12,14 @@ SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
 
 void SmokeSlicesEngine::updateCache()
 {
-    SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
-    GPUData newData = builder.getGPUData();
+   SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
+   GPUData newData = builder.getGPUData();
 
-    this->cache.enqueue(newData);
+   this->cache.enqueue(newData);
 }
 
 void SmokeSlicesEngine::connectToSettings()
 {
-   qDebug() << "SmokeSlicesEngine::connectToSettings";
+   connect(&Settings::visualization::smoke(), SIGNAL(clearCache()),
+            this, SLOT(onClearCache()));
 }
