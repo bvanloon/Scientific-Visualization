@@ -27,7 +27,6 @@ SOURCES += main.cpp\
     colormaps/rainbowcolormap.cpp \
     simulation/simulationrealization.cpp \
     simulation/utils.cpp \
-    engines/vectorengine.cpp \
     engines/smokeengine.cpp \
     view/colormaplegend.cpp \
     settings/settings.cpp \
@@ -88,7 +87,8 @@ SOURCES += main.cpp\
     simulation/simulationdata.cpp \
     grid/simulationgrid.cpp \
     simulation/simulationstatehistory.cpp \
-    grid/utilities/smokebuilder.cpp
+    grid/utilities/smokebuilder.cpp \
+    engines/glyphengine.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -96,7 +96,6 @@ HEADERS  += main.ih\
     simulation/simulation.h \
     simulation/simulationrealization.h \
     simulation/utils.h \
-    engines/vectorengine.h \
     engines/smokeengine.h \
     colormaps/abstractcolormap.h \
     colormaps/rainbowcolormap.h \
@@ -157,7 +156,8 @@ HEADERS  += main.ih\
     simulation/simulationdata.h \
     grid/simulationgrid.h \
     utilities/sizelimitedqueue.h \
-    grid/utilities/smokebuilder.h
+    grid/utilities/smokebuilder.h \
+    engines/glyphengine.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

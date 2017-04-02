@@ -8,11 +8,11 @@
 #include "unused.h"
 #include "glyphs/glyphsfactory.h"
 
-class VectorEngine : public AbstractEngine {
+class GlyphEngine : public AbstractEngine {
    Q_OBJECT
 
    public:
-      VectorEngine(UniformGrid *simulationGrid);
+      GlyphEngine(UniformGrid *simulationGrid);
 
       void draw();
 

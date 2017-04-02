@@ -13,7 +13,7 @@
 #include <QGestureEvent>
 #include <QTimer>
 
-#include "engines/vectorengine.h"
+#include "engines/glyphengine.h"
 #include "engines/smokeengine.h"
 #include "engines/seedpointengine.h"
 #include "engines/smokeslicesengine.h"

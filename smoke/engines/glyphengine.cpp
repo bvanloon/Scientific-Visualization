@@ -1,10 +1,10 @@
-#include "vectorengine.h"
+#include "glyphengine.h"
 #include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
 
 
-VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
+GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::phongLight,
                   Settings::engines::EnginesTypes::glyphs),
    visualizationGrid(
@@ -18,26 +18,26 @@ VectorEngine::VectorEngine(UniformGrid *simulationGrid) :
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-void VectorEngine::draw()
+void GlyphEngine::draw()
 {
    int bufferLength = this->fillBuffers();
 
    drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
 }
 
-void VectorEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
+void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-void VectorEngine::onGridDimensionChanged(int width, int UNUSED(height))
+void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
    visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-int VectorEngine::fillBuffers()
+int GlyphEngine::fillBuffers()
 {
    GlyphData data = visualizationGrid->getGlyphData();
    GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);

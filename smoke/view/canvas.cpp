@@ -59,7 +59,7 @@ void Canvas::initializeGL()
    glEnable(GL_DEPTH_TEST);
 
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smoke, new SmokeEngine(simulation->getSimulationGrid())));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new VectorEngine(simulation->getSimulationGrid())));
+   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new GlyphEngine(simulation->getSimulationGrid())));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::seedPoints, new SeedPointEngine()));
    enginemap.insert(EnginePair(Settings::engines::EnginesTypes::streamLines, new StreamLineEngine(simulation->getSimulationGrid())));
 
