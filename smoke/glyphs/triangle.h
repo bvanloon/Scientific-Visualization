@@ -2,12 +2,15 @@
 #define TRIANGLE_H
 
 #include "glyphs/abstractglyph.h"
+#include "utilities/gpudata.h"
 
 
 class Triangle : public AbstractGlyph
 {
    public:
       Triangle(QVector3D position, QVector3D direction, float scalar);
+
+      GPUData toGPUData(float textureCoordinate);
 
    private:
       static const double cellRatio;

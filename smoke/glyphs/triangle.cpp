@@ -22,3 +22,10 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
 
    this->addVertices(triangle.getVertices(), normal);
 }
+
+GPUData Triangle::toGPUData(float textureCoordinate)
+{
+   GPUData data(GL_TRIANGLES);
+   data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
+   return data;
+}
