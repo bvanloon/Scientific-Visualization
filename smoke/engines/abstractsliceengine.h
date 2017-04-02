@@ -12,6 +12,7 @@ class AbstractSliceEngine : public AbstractEngine
    Q_OBJECT
 
    public:
+      AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType, QMatrix4x4 toSliceTransformation);
       AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType);
 
       void draw();
@@ -32,7 +33,7 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void updateCache() = 0;
 
-      virtual void connectToSettings();
+      QMatrix4x4 computeToSliceTransformation();
 
    private:
       static const double maximumYTranslation;
@@ -49,9 +50,9 @@ class AbstractSliceEngine : public AbstractEngine
 
       int fillBuffers(Simulation *UNUSED(simulation));
 
-      virtual void connectToColorMap();
+      void connectToSettings();
 
-      QMatrix4x4 computeToSliceTransformation();
+      virtual void connectToColorMap();
 
       void clearCache();
 };
