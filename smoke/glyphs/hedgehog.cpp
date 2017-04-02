@@ -6,6 +6,17 @@ const double HedgeHog::cellRatio = 5;
 HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
    AbstractGlyph(scalar)
 {
+   build(position, direction);
+}
+
+HedgeHog::HedgeHog(QVector3D position, QVector2D direction) :
+   AbstractGlyph(1.0)
+{
+   build(position, direction.toVector3D());
+}
+
+void HedgeHog::build(QVector3D position, QVector3D direction)
+{
    QVector3D offSet = computeOffSet(direction);
    QVector3D normal = computeNormal(direction);
 
