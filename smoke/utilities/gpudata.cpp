@@ -62,6 +62,11 @@ void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, QVector
    addElements(vertices, normals, textureCoordinates);
 }
 
+void GPUData::addElements(AbstractGlyph *glyph, float textureCoordinate)
+{
+   addElements(glyph->getVertices(), glyph->getNormals(), textureCoordinate);
+}
+
 QVector<QVector3D> GPUData::getVertices() const
 {
    return this->vertices;
