@@ -40,17 +40,17 @@ GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
 
 GPUData GlyphBuilder::buildHedgeHogs()
 {
-    GPUData hedgeHodgeData(GL_LINES);
-    for (Vertex *vertex : grid->getVertices()) hedgeHodgeData.extend(buildHedgeHog(vertex));
-    return hedgeHodgeData;
+   GPUData hedgeHodgeData(GL_LINES);
+   for (Vertex *vertex : grid->getVertices()) hedgeHodgeData.extend(buildHedgeHog(vertex));
+   return hedgeHodgeData;
 }
 
 GPUData GlyphBuilder::buildHedgeHog(Vertex *vertex)
 {
-    float textureCoordinate = (vertex->*(getTextureCoordinate))();
-    HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()),
-                                 (vertex->*(getDirection))(), textureCoordinate);
-    return hedgeHog.toGPUData(textureCoordinate);
+   float textureCoordinate = (vertex->*(getTextureCoordinate))();
+   HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()),
+                                (vertex->*(getDirection))(), textureCoordinate);
+   return hedgeHog.toGPUData(textureCoordinate);
 }
 
 GPUData GlyphBuilder::buildTriangles()
@@ -70,7 +70,17 @@ GPUData GlyphBuilder::buildTriangle(Vertex *vertex)
 
 GPUData GlyphBuilder::buildAirplanes()
 {
-   return GPUData::debugSlice();
+    GPUData airplanes(GL_TRIANGLES);
+    for (Vertex *vertex : grid->getVertices()) airplanes.extend(buildAirplane(vertex));
+    return airplanes;
+}
+
+GPUData GlyphBuilder::buildAirplane(Vertex *vertex)
+{
+   float textureCoordinate = (vertex->*(getTextureCoordinate))();
+   Airplane triangle = Airplane(*(vertex->getPosition()),
+                                (vertex->*(getDirection))(), textureCoordinate);
+   return triangle.toGPUData(textureCoordinate);
 }
 
 GPUData GlyphBuilder::buildCones()

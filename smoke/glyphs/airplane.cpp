@@ -17,6 +17,13 @@ Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
    addVertices(builder.getVertices(), builder.getNormals());
 }
 
+GPUData Airplane::toGPUData(float textureCoordinate)
+{
+    GPUData data(GL_TRIANGLES);
+    data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
+    return data;
+}
+
 Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude) :
    direction(direction.normalized()),
    orthogonalDirection(computeOrthogonalVector(direction)),

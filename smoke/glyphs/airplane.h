@@ -4,11 +4,14 @@
 #include <QVector3D>
 #include "glyphs/abstractglyph.h"
 #include "utilities/mesh.h"
+#include "utilities/gpudata.h"
 
 class Airplane : public AbstractGlyph
 {
    public:
       Airplane(QVector3D position, QVector3D direction, float scalar);
+
+      GPUData toGPUData(float textureCoordinate);
 
    private:
       class AirplaneBuilder;

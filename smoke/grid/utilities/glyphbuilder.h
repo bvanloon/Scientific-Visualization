@@ -32,6 +32,7 @@ private:
       GPUData buildTriangle(Vertex* vertex);
 
       GPUData buildAirplanes();
+      GPUData buildAirplane(Vertex* vertex);
 
       GPUData buildCones();
       GPUData buildCone(Vertex* vertex);
