@@ -26,10 +26,14 @@ private:
       GPUData build(Settings::sim::GlyphsType glyphType);
 
       GPUData buildHedgeHodges();
+
       GPUData buildTriangles();
       GPUData buildTriangle(Vertex* vertex);
+
       GPUData buildAirplanes();
+
       GPUData buildCones();
+      GPUData buildCone(Vertex* vertex);
 };
 
 #endif // GLYPHBUILDER_H

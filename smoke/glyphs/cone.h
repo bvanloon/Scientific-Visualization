@@ -3,11 +3,14 @@
 
 #include "glyphs/abstractglyph.h"
 #include "utilities/mesh.h"
+#include "utilities/gpudata.h"
 
 class Cone : public AbstractGlyph
 {
    public:
       Cone(QVector3D position, QVector3D direction, float scalar);
+
+      GPUData toGPUData(float textureCoordinate);
 
    private:
 

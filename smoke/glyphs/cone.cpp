@@ -18,6 +18,13 @@ Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
    this->addVertices(this->mesh->getVerticesAsVBO(), this->mesh->getNormalsAsVBO());
 }
 
+GPUData Cone::toGPUData(float textureCoordinate)
+{
+    GPUData data(GL_TRIANGLES);
+    data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
+    return data;
+}
+
 void Cone::transform()
 {
    QMatrix4x4 transformationMatrix = translationMatrix() * rotationMatrix() * scalingMatrix();

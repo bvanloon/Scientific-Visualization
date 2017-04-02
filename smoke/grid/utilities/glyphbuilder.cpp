@@ -68,5 +68,15 @@ GPUData GlyphBuilder::buildAirplanes()
 
 GPUData GlyphBuilder::buildCones()
 {
-   return GPUData::debugSlice();
+   GPUData cones(GL_TRIANGLES);
+   for (Vertex *vertex : grid->getVertices()) cones.extend(buildCone(vertex));
+   return cones;
+}
+
+GPUData GlyphBuilder::buildCone(Vertex *vertex)
+{
+   float textureCoordinate = (vertex->*(getTextureCoordinate))();
+   Cone cone = Cone(*(vertex->getPosition()),
+                    (vertex->*(getDirection))(), textureCoordinate);
+   return cone.toGPUData(textureCoordinate);
 }
