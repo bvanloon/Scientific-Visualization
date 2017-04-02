@@ -7,18 +7,28 @@
 class GlyphBuilder
 {
    public:
-      GlyphBuilder(UniformGrid *grid, Settings::sim::GlyphsType glyphThype);
+      GlyphBuilder(UniformGrid *grid,
+                   Settings::sim::GlyphsType glyphThype,
+                   Vertex::scalarGetter getTextureCoordinate,
+                   Vertex::vectorGetter directionGetter);
       ~GlyphBuilder();
 
-   private:
-      UniformGrid *grid;
-      GPUData* data;
+      GPUData getData() const;
 
-      GPUData *build(Settings::sim::GlyphsType glyphType);
-      GPUData *buildHedgeHodgs();
-      GPUData *buildTriangles();
-      GPUData *buildAirplanes();
-      GPUData *buildCones();
+private:
+      UniformGrid *grid;
+
+      Vertex::scalarGetter getTextureCoordinate;
+      Vertex::vectorGetter getDirection;
+
+      GPUData data;
+
+      GPUData build(Settings::sim::GlyphsType glyphType);
+
+      GPUData buildHedgeHodges();
+      GPUData buildTriangles();
+      GPUData buildAirplanes();
+      GPUData buildCones();
 };
 
 #endif // GLYPHBUILDER_H
