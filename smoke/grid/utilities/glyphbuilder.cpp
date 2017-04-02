@@ -25,7 +25,7 @@ GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
    switch (glyphType)
    {
    case Settings::sim::GlyphsType::hedgehog:
-      return buildHedgeHodges();
+      return buildHedgeHogs();
 
    case Settings::sim::GlyphsType::triangles:
       return buildTriangles();
@@ -38,9 +38,19 @@ GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
    }
 }
 
-GPUData GlyphBuilder::buildHedgeHodges()
+GPUData GlyphBuilder::buildHedgeHogs()
 {
-   return GPUData::debugSlice();
+    GPUData hedgeHodgeData(GL_LINES);
+    for (Vertex *vertex : grid->getVertices()) hedgeHodgeData.extend(buildHedgeHog(vertex));
+    return hedgeHodgeData;
+}
+
+GPUData GlyphBuilder::buildHedgeHog(Vertex *vertex)
+{
+    float textureCoordinate = (vertex->*(getTextureCoordinate))();
+    HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()),
+                                 (vertex->*(getDirection))(), textureCoordinate);
+    return hedgeHog.toGPUData(textureCoordinate);
 }
 
 GPUData GlyphBuilder::buildTriangles()

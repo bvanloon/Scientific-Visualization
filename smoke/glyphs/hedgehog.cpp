@@ -9,10 +9,11 @@ HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
    build(position, direction);
 }
 
-HedgeHog::HedgeHog(QVector3D position, QVector2D direction) :
-   AbstractGlyph(1.0)
+GPUData HedgeHog::toGPUData(float textureCoordinate)
 {
-   build(position, direction.toVector3D());
+   GPUData data(GL_LINES);
+   data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
+   return data;
 }
 
 void HedgeHog::build(QVector3D position, QVector3D direction)

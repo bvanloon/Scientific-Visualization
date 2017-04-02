@@ -25,7 +25,8 @@ private:
 
       GPUData build(Settings::sim::GlyphsType glyphType);
 
-      GPUData buildHedgeHodges();
+      GPUData buildHedgeHogs();
+      GPUData buildHedgeHog(Vertex* vertex);
 
       GPUData buildTriangles();
       GPUData buildTriangle(Vertex* vertex);

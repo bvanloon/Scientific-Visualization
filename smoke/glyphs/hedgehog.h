@@ -2,13 +2,15 @@
 #define HEDGEHOG_H
 
 #include "glyphs/abstractglyph.h"
+#include "utilities/gpudata.h"
 
 class HedgeHog : public AbstractGlyph
 {
    public:
       HedgeHog();
       HedgeHog(QVector3D position, QVector3D direction, float scalar);
-      HedgeHog(QVector3D position, QVector2D direction);
+
+      GPUData toGPUData(float textureCoordinate);
 
    private:
       void build(QVector3D position, QVector3D direction);
