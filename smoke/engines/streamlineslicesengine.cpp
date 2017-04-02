@@ -6,7 +6,7 @@ StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
                        Settings::engines::EnginesTypes::streamLineSlices),
    grid(simulationGrid)
 {
-    connectToSettings();
+   connectToSettings();
 }
 
 void StreamLineSlicesEngine::updateCache()
