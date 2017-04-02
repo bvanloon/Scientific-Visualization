@@ -45,7 +45,18 @@ GPUData GlyphBuilder::buildHedgeHodges()
 
 GPUData GlyphBuilder::buildTriangles()
 {
-   return GPUData::debugSlice();
+   Triangle *triangle;
+   float textureCoordinate;
+   GPUData triangleData(GL_TRIANGLES);
+   for (Vertex *vertex : grid->getVertices())
+   {
+      textureCoordinate = (vertex->*(getTextureCoordinate))();
+      triangle = new Triangle(*(vertex->getPosition()),
+                              (vertex->*(getDirection))(),
+                              textureCoordinate);
+      triangleData.extend(triangle->toGPUData(textureCoordinate));
+   }
+   return triangleData;
 }
 
 GPUData GlyphBuilder::buildAirplanes()
