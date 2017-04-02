@@ -51,7 +51,7 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void connectToColorMap();
 
-      void defineToSliceTransformation();
+      QMatrix4x4 computeToSliceTransformation();
 
       void clearCache();
 };

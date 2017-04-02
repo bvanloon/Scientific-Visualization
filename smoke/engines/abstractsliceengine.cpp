@@ -9,20 +9,22 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
    AbstractEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numberOfSlices)
 {
-   defineToSliceTransformation();
+   toSliceTransformation = computeToSliceTransformation();
 
    updateModelViewMatrix();
    connectToSettings();
 }
 
-void AbstractSliceEngine::defineToSliceTransformation()
+QMatrix4x4 AbstractSliceEngine::computeToSliceTransformation()
 {
+   QMatrix4x4 transform;
    QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
    QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
 
-   toSliceTransformation.scale(0.76);
-   toSliceTransformation.rotate(45, yaxis);
-   toSliceTransformation.rotate(80, xaxis);
+   transform.scale(0.76);
+   transform.rotate(45, yaxis);
+   transform.rotate(80, xaxis);
+   return transform;
 }
 
 void AbstractSliceEngine::draw()
@@ -37,12 +39,12 @@ void AbstractSliceEngine::onUpdateModelViewMatrix()
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-    cache.changeMaximumSize(newNumberOfSlices);
+   cache.changeMaximumSize(newNumberOfSlices);
 }
 
 void AbstractSliceEngine::onNewSimulationState()
 {
-    updateCache();
+   updateCache();
 }
 
 void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
