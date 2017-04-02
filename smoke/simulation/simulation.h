@@ -27,17 +27,7 @@ class Simulation : public QObject {
 
       GlyphData getGlyphData(Grid *grid);
 
-      Triangulation getGridTriangulation();
-
       SimulationGrid *getSimulationGrid() const;
-
-      QVector<float> getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation);
-
-      QVector<float> getTexCoordFluidDensity(Triangulation triangulation);
-
-      QVector<float> getTexCoordFluidVelocityMagnitude(Triangulation triangulation);
-
-      QVector<float> getTexCoordForceFieldMagnitude(Triangulation triangulation);
 
       SimulationRealization *realization;
 

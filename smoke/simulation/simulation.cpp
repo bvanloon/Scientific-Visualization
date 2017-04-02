@@ -33,41 +33,6 @@ GlyphData Simulation::getGlyphData(Grid *grid)
    return grid->getGlyphData();
 }
 
-Triangulation Simulation::getGridTriangulation()
-{
-   return grid->getTriangulation();
-}
-
-QVector<float> Simulation::getTexCoord(Vertex::scalarGetter getter, Triangulation triangulation)
-{
-   QVector<float> textureCoordinates;
-   Vertex *vertex;
-
-   for (int i = 0; i < triangulation.numVertices(); i++)
-   {
-      vertex = triangulation.getVertices().at(i);
-      textureCoordinates.append((vertex->*getter)());
-   }
-   return textureCoordinates;
-}
-
-QVector<float> Simulation::getTexCoordFluidDensity(Triangulation triangulation)
-{
-   return getTexCoord(&Vertex::getFluidDensity, triangulation);
-}
-
-QVector<float> Simulation::getTexCoordFluidVelocityMagnitude(
-   Triangulation triangulation)
-{
-   return getTexCoord(&Vertex::getFluidVelocityMagnitude, triangulation);
-}
-
-QVector<float> Simulation::getTexCoordForceFieldMagnitude(
-   Triangulation triangulation)
-{
-   return getTexCoord(&Vertex::getForceMagnitude, triangulation);
-}
-
 void Simulation::step()
 {
    this->realization->do_one_simulation_step();
