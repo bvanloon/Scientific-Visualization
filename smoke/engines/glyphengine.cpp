@@ -1,5 +1,4 @@
 #include "glyphengine.h"
-#include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
 #include "grid/utilities/glyphbuilder.h"

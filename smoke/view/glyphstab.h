@@ -4,7 +4,6 @@
 #include <QWidget>
 
 #include "view/colormaptab.h"
-#include "glyphs/glyphsfactory.h"
 
 namespace Ui {
     class GlyphsTab;

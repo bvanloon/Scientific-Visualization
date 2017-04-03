@@ -4,7 +4,6 @@
 #include "abstractsliceengine.h"
 #include "unused.h"
 #include "grid/jittergrid.h"
-#include "glyphs/glyphsfactory.h"
 
 class GlyphSliceEngine : public AbstractSliceEngine {
    Q_OBJECT

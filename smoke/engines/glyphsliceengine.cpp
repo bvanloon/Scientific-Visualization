@@ -1,8 +1,6 @@
 #include "glyphsliceengine.h"
-#include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
-#include "simulation/simulationstatehistory.h"
 #include "grid/utilities/glyphbuilder.h"
 
 GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :

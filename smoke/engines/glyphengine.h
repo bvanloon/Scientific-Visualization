@@ -4,9 +4,7 @@
 #include <QObject>
 #include "abstractengine.h"
 #include "grid/jittergrid.h"
-
 #include "unused.h"
-#include "glyphs/glyphsfactory.h"
 
 class GlyphEngine : public AbstractEngine {
    Q_OBJECT
