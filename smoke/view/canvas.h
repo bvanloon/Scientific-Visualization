@@ -60,6 +60,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
    private slots:
       void idleLoop();
 
+      void onOpenGLReady();
+
 
    protected:
       void initializeGL() Q_DECL_OVERRIDE;
@@ -82,7 +84,13 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       ActiveEnginesMap activeEngines;
       EngineMap enginemap;
 
+      void setUpPrivateConnections();
+
       void initializeActiveEngines();
+
+      void buildEngineMap();
+
+      void connectEngines();
 
       void connectThisAndEngine(AbstractEngine *engine);
 
@@ -91,6 +99,7 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       //Idle Loop
       QTimer *timer;
       void initiateIdleLoop();
+
 
 
       // OpenGL initialization

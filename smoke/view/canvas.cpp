@@ -13,6 +13,8 @@ Canvas::Canvas(QWidget *parent) :
    QOpenGLWidget(parent),
    timer(new QTimer(this))
 {
+   this->setUpPrivateConnections();
+
    this->initiateIdleLoop();
    this->initializeActiveEngines();
 
@@ -27,7 +29,6 @@ Canvas::~Canvas()
 void Canvas::initiateIdleLoop()
 {
    this->timer->start();
-   connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
 }
 
 void Canvas::initializeActiveEngines()
@@ -36,6 +37,49 @@ void Canvas::initializeActiveEngines()
    {
       activeEngines[static_cast<Settings::engines::EnginesTypes>(i)] = Settings::defaults::engines::activeEngines[i];
    }
+}
+
+void Canvas::buildEngineMap()
+{
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::smoke,
+                         new SmokeEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::glyphs,
+                         new GlyphEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::seedPoints,
+                         new SeedPointEngine()));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::streamLines,
+                         new StreamLineEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::smokeSlices,
+                         new SmokeSlicesEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::glyphSlices,
+                         new GlyphSliceEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::streamLineSlices,
+                        new StreamLineSlicesEngine(simulation->getSimulationGrid())));
+}
+
+void Canvas::connectEngines()
+{
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedPoints));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLines));
+
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smokeSlices));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphSlices));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLineSlices));
 }
 
 void Canvas::connectThisAndEngine(AbstractEngine *engine)
@@ -58,50 +102,20 @@ void Canvas::initializeGL()
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
    glEnable(GL_DEPTH_TEST);
 
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::smoke,
-                        new SmokeEngine(simulation->getSimulationGrid())));
-
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::glyphs,
-                        new GlyphEngine(simulation->getSimulationGrid())));
-
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::seedPoints,
-                        new SeedPointEngine()));
-
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::streamLines,
-                        new StreamLineEngine(simulation->getSimulationGrid())));
-
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::smokeSlices,
-                        new SmokeSlicesEngine(simulation->getSimulationGrid())));
-
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::glyphSlices,
-                        new GlyphSliceEngine(simulation->getSimulationGrid())));
-
-   enginemap.insert(EnginePair(
-                        Settings::engines::EnginesTypes::streamLineSlices,
-                        new StreamLineSlicesEngine(simulation->getSimulationGrid())));
+   buildEngineMap();
 
    emit openGlReady();
-
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smoke));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedPoints));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLines));
-
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smokeSlices));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphSlices));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLineSlices));
 }
 
 void Canvas::idleLoop()
 {
    if (!Settings::simulation().frozen) this->simulation->step();
    update();
+}
+
+void Canvas::onOpenGLReady()
+{
+   connectEngines();
 }
 
 void Canvas::setSimulation(Simulation *simulation)
@@ -121,8 +135,9 @@ void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checke
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    if(QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
-    if(QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
+   if (QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
+
+   if (QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
 }
 
 void Canvas::clickMouseEvent(QMouseEvent *event)
@@ -136,15 +151,15 @@ void Canvas::clickMouseEvent(QMouseEvent *event)
 
 void Canvas::altMouseEvent(QMouseEvent *event)
 {
-    static QVector3D previousMousePosition;
+   static QVector3D previousMousePosition;
 
-    QVector3D currentMousePosition = QVector3D(Settings::canvas().convertToNormalCoordinates(event->localPos()));
+   QVector3D currentMousePosition = QVector3D(Settings::canvas().convertToNormalCoordinates(event->localPos()));
 
-    QVector3D panningDirection = (currentMousePosition - previousMousePosition).normalized();
+   QVector3D panningDirection = (currentMousePosition - previousMousePosition).normalized();
 
-    emit panningDirectionChanged(panningDirection);
+   emit panningDirectionChanged(panningDirection);
 
-    previousMousePosition = currentMousePosition;
+   previousMousePosition = currentMousePosition;
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
@@ -176,6 +191,12 @@ bool Canvas::event(QEvent *event)
       return gestureEvent(static_cast<QGestureEvent *>(event));
    }
    return QWidget::event(event);
+}
+
+void Canvas::setUpPrivateConnections()
+{
+   connect(this, SIGNAL(openGlReady()), this, SLOT(onOpenGLReady()));
+   connect(timer, SIGNAL(timeout()), this, SLOT(idleLoop()));
 }
 
 bool Canvas::gestureEvent(QGestureEvent *event)
