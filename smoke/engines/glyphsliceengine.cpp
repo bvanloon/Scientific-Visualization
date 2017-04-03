@@ -39,16 +39,20 @@ void GlyphSliceEngine::connectToSettings()
             &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
    connect(&Settings::visualization::glyphs(), SIGNAL(gridDimensionChanged(QSizeF)),
            this, SLOT(onGridDimensionChanged(QSizeF)));
+   connect(&Settings::visualization::glyphs(), SIGNAL(clearCache()),
+            this, SLOT(onClearCache()));
 }
 
 void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
+   clearCache();
 }
 
 void GlyphSliceEngine::onGridDimensionChanged(QSizeF size)
 {
    visualizationGrid = JitterGrid::createVisualizationGrid(size.width(), Settings::canvas().size, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
+   clearCache();
 }
