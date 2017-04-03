@@ -4,7 +4,7 @@
 #include "grid/uniformgrid.h"
 #include "streamobjects/streamline.h"
 
-class UniformGrid::StreamLineBuilder {
+class StreamLineBuilder {
    public:
       StreamLineBuilder(UniformGrid *grid, QVector3D currentPosition,
                         Vertex::vectorGetter vectorGetter,

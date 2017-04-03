@@ -5,7 +5,6 @@
 #include <QDebug>
 #include <assert.h>
 #include <QtMath>
-#include "grid/utilities/streamlinebuilder.h"
 #include <cmath>
 #include <QMatrix4x4>
 #include <QVector4D>
@@ -114,13 +113,6 @@ bool UniformGrid::inGridArea(QVector3D position)
    return this->coveredArea.contains(position.x(), position.y());
 }
 
-streamobject::Line UniformGrid::computeStreamLine(QVector3D seedPoint,
-                                                  Vertex::scalarGetter textureCoordinateGetter,
-                                                  Vertex::vectorGetter vectorGetter)
-{
-   return StreamLineBuilder(this, seedPoint,
-                             vectorGetter, textureCoordinateGetter).getStreamLine();
-}
 
 StructuredCell *UniformGrid::findCellContaining(QVector3D position)
 {

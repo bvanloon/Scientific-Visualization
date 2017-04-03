@@ -1,6 +1,7 @@
 #include "streamlineengine.h"
 #include "utilities/gpudata.h"
 #include "streamobjects/streamline.h"
+#include "grid/utilities/streamlinebuilder.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::noLight,
@@ -28,9 +29,11 @@ GPUData StreamLineEngine::buildStreamLines()
 
 GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
-   streamobject::Line streamLine = grid->computeStreamLine(QVector3D(seedPoint),
-                                                           Settings::visualization::streamLines().colorMap->textureGetter,
-                                                           Settings::visualization::streamLines().vectorField);
+   StreamLineBuilder builder(grid, QVector3D(seedPoint),
+                             Settings::visualization::streamLines().vectorField,
+                             Settings::visualization::streamLines().colorMap->textureGetter);
+   streamobject::Line streamLine = builder.getStreamLine();
+
    return streamLine.toGPUData();
 }
 
