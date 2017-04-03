@@ -43,6 +43,8 @@ class GPUData
 
       static GPUData debugSlice();
 
+      bool isEmpty();
+
    private:
       GLint drawMode;
 

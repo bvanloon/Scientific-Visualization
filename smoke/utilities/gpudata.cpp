@@ -112,6 +112,11 @@ GPUData GPUData::debugSlice()
    return data;
 }
 
+bool GPUData::isEmpty()
+{
+   return this->numElements() == 0;
+}
+
 void GPUData::transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation)
 {
    QVector4D transformedPosition;
