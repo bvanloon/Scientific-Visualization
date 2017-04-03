@@ -49,7 +49,6 @@ SOURCES += main.cpp\
     grid/simulationgrid.cpp \
     grid/triangulation.cpp \
     grid/uniformgrid.cpp \
-    grid/utilities/streamlinebuilder.cpp \
     grid/vertex.cpp \
     keyboardhandler.cpp \
     settings/canvassettings.cpp \
@@ -86,7 +85,8 @@ SOURCES += main.cpp\
     view/slicestab.cpp \
     view/streamlinestab.cpp \
     visualizationbuilders/glyphbuilder.cpp \
-    visualizationbuilders/smokebuilder.cpp
+    visualizationbuilders/smokebuilder.cpp \
+    visualizationbuilders/streamlinebuilder.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -117,7 +117,6 @@ HEADERS  += main.ih\
     grid/simulationgrid.h \
     grid/triangulation.h \
     grid/uniformgrid.h \
-    grid/utilities/streamlinebuilder.h \
     grid/vertex.h \
     keyboardhandler.h \
     settings/canvassettings.h \
@@ -156,6 +155,7 @@ HEADERS  += main.ih\
     view/streamlinestab.h \
     visualizationbuilders/glyphbuilder.h \
     visualizationbuilders/smokebuilder.h \
+    visualizationbuilders/streamlinebuilder.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

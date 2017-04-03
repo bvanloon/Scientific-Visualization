@@ -1,19 +1,13 @@
 #include "streamlineengine.h"
 #include "utilities/gpudata.h"
 #include "streamobjects/streamline.h"
-#include "grid/utilities/streamlinebuilder.h"
+#include "visualizationbuilders/streamlinebuilder.h"
 
 StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
    AbstractEngine(AbstractEngine::lightModel::noLight,
                   Settings::engines::EnginesTypes::streamLines),
    grid(simulationGrid)
 {}
-
-int StreamLineEngine::fillBuffers()
-{
-   std::logic_error("AbstractSliceEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
-   return 0;
-}
 
 GPUData StreamLineEngine::buildStreamLines()
 {

@@ -1,6 +1,6 @@
 #include "streamlineslicesengine.h"
 #include "settings/visualizationsettings.h"
-#include "grid/utilities/streamlinebuilder.h"
+#include "visualizationbuilders/streamlinebuilder.h"
 
 StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
