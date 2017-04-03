@@ -19,12 +19,13 @@ class GPUData
 
       void transform(QMatrix4x4 transformation);
 
-      void addElement(QVector3D vertex, QVector3D normal, float textureCoordinate);
+      void addElement(QVector3D vertex, QVector3D normal, float textureCoordinate, float alpha = 1.0);
 
-      void addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate);
-      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate);
-      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates);
-      void addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates);
+      void addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate, float alpha = 1.0);
+      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate, float alpha = 1.0);
+      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates, float alpha = 1.0);
+      void addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates, float alpha = 1.0);
+      void addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates, QVector<float> alphas);
 
       void extend(GPUData data);
 
@@ -38,6 +39,8 @@ class GPUData
 
       QVector<QVector3D> getNormals() const;
 
+      QVector<float> getAlphas() const;
+
       static GPUData debugSlice();
 
    private:
@@ -46,8 +49,9 @@ class GPUData
       QVector<QVector3D> vertices;
       QVector<float> textureCoordinates;
       QVector<QVector3D> normals;
+      QVector<float> alphas;
 
-      void transformVectors(QVector<QVector3D>* vector, QMatrix4x4 transformation);
+      void transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation);
 
       void assertDrawModesAreEqual(GLint thisMode, GLint otherMode);
 };

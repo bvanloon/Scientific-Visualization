@@ -19,6 +19,7 @@ void GPUData::extend(GPUData data)
    this->vertices.append(data.getVertices());
    this->normals.append(data.getNormals());
    this->textureCoordinates.append(data.getTextureCoordinates());
+   this->alphas.append(data.getAlphas());
 }
 
 int GPUData::numElements() const
@@ -26,40 +27,49 @@ int GPUData::numElements() const
    return this->vertices.length();
 }
 
-void GPUData::addElement(QVector3D vertex, QVector3D normal, float textureCoordinate)
+void GPUData::addElement(QVector3D vertex, QVector3D normal, float textureCoordinate, float alpha)
 {
    this->vertices.append(vertex);
    this->normals.append(normal);
    this->textureCoordinates.append(textureCoordinate);
+   this->alphas.append(alpha);
 }
 
-void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate)
+void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, float textureCoordinate, float alpha)
 {
    QVector<QVector3D> normals = QVector<QVector3D>(vertices.size(), normal);
    QVector<float> textureCoordinates = QVector<float>(vertices.size(), textureCoordinate);
-   addElements(vertices, normals, textureCoordinates);
+   addElements(vertices, normals, textureCoordinates, alpha);
 }
 
-void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate)
+void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, float textureCoordinate, float alpha)
 {
    QVector<float> textureCoordinates = QVector<float>(vertices.size(), textureCoordinate);
-   addElements(vertices, normals, textureCoordinates);
+   addElements(vertices, normals, textureCoordinates, alpha);
 }
 
-void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates)
+void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates, float alpha)
+{
+   QVector<QVector3D> normals = QVector<QVector3D>(vertices.size(), normal);
+   addElements(vertices, normals, textureCoordinates, alpha);
+}
+
+void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates, float alpha)
+{
+   QVector<float> alphas = QVector<float>(vertices.size(), alpha);
+   addElements(vertices, normals, textureCoordinates, alphas);
+}
+
+void GPUData::addElements(QVector<QVector3D> vertices, QVector<QVector3D> normals, QVector<float> textureCoordinates, QVector<float> alphas)
 {
    assert(this->vertices.length() == this->normals.length());
-   assert(this->normals.length() == this->textureCoordinates.length());
+   assert(this->vertices.length() == this->textureCoordinates.length());
+   assert(this->vertices.length() == this->alphas.length());
 
    this->vertices.append(vertices);
    this->normals.append(normals);
    this->textureCoordinates.append(textureCoordinates);
-}
-
-void GPUData::addElements(QVector<QVector3D> vertices, QVector3D normal, QVector<float> textureCoordinates)
-{
-   QVector<QVector3D> normals = QVector<QVector3D>(vertices.size(), normal);
-   addElements(vertices, normals, textureCoordinates);
+   this->alphas.append(alphas);
 }
 
 QVector<QVector3D> GPUData::getVertices() const
@@ -75,6 +85,11 @@ QVector<float> GPUData::getTextureCoordinates() const
 QVector<QVector3D> GPUData::getNormals() const
 {
    return this->normals;
+}
+
+QVector<float> GPUData::getAlphas() const
+{
+   return alphas;
 }
 
 GPUData GPUData::debugSlice()
