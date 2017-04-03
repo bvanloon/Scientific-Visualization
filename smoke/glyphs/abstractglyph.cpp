@@ -4,15 +4,8 @@
 #include "utilities/range.h"
 
 
-AbstractGlyph::AbstractGlyph(float texture)
-{
-   this->textureCoordinate = texture;
-}
-
-float AbstractGlyph::getTextureCoordinate() const
-{
-   return textureCoordinate;
-}
+AbstractGlyph::AbstractGlyph()
+{}
 
 QVector<QVector3D> AbstractGlyph::getVertices() const
 {
@@ -56,6 +49,6 @@ float AbstractGlyph::computeNormalizedMagnitude(QVector3D direction)
 
 float AbstractGlyph::computeBaseSize(float cellRatio)
 {
-    QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
-    return cellRatio * qMax(cellSize.width(), cellSize.height());
+   QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
+   return cellRatio * qMax(cellSize.width(), cellSize.height());
 }

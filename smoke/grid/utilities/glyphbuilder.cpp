@@ -49,7 +49,7 @@ GPUData GlyphBuilder::buildHedgeHog(Vertex *vertex)
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()),
-                                (vertex->*(getDirection))(), textureCoordinate);
+                                (vertex->*(getDirection))());
    return hedgeHog.toGPUData(textureCoordinate);
 }
 
@@ -64,7 +64,7 @@ GPUData GlyphBuilder::buildTriangle(Vertex *vertex)
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    Triangle triangle = Triangle(*(vertex->getPosition()),
-                                (vertex->*(getDirection))(), textureCoordinate);
+                                (vertex->*(getDirection))());
    return triangle.toGPUData(textureCoordinate);
 }
 
@@ -79,7 +79,7 @@ GPUData GlyphBuilder::buildAirplane(Vertex *vertex)
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    Airplane triangle = Airplane(*(vertex->getPosition()),
-                                (vertex->*(getDirection))(), textureCoordinate);
+                                (vertex->*(getDirection))());
    return triangle.toGPUData(textureCoordinate);
 }
 
@@ -94,6 +94,6 @@ GPUData GlyphBuilder::buildCone(Vertex *vertex)
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    Cone cone = Cone(*(vertex->getPosition()),
-                    (vertex->*(getDirection))(), textureCoordinate);
+                    (vertex->*(getDirection))());
    return cone.toGPUData(textureCoordinate);
 }

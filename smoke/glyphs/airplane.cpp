@@ -9,8 +9,8 @@
 
 const double Airplane::AirplaneBuilder::maxCellRatio = 2;
 
-Airplane::Airplane(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar)
+Airplane::Airplane(QVector3D position, QVector3D direction) :
+   AbstractGlyph()
 {
    AirplaneBuilder builder = AirplaneBuilder(position, direction, computeNormalizedMagnitude(direction));
 

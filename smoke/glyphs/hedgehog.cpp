@@ -3,8 +3,8 @@
 
 const double HedgeHog::cellRatio = 5;
 
-HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar)
+HedgeHog::HedgeHog(QVector3D position, QVector3D direction) :
+   AbstractGlyph()
 {
    build(position, direction);
 }

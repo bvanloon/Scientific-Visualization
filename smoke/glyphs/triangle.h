@@ -8,7 +8,7 @@
 class Triangle : public AbstractGlyph
 {
    public:
-      Triangle(QVector3D position, QVector3D direction, float scalar);
+      Triangle(QVector3D position, QVector3D direction);
 
       GPUData toGPUData(float textureCoordinate);
 

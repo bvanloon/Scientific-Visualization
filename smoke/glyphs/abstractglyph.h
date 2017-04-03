@@ -10,10 +10,7 @@
 class AbstractGlyph
 {
    public:
-      AbstractGlyph(float textureCoordinate);
-      AbstractGlyph(QVector3D position, QVector3D direction, float scalar);
-
-      float getTextureCoordinate() const;
+      AbstractGlyph();
 
       QVector<QVector3D> getVertices() const;
 
@@ -22,7 +19,6 @@ class AbstractGlyph
       size_t numVertices();
 
    protected:
-      float textureCoordinate;
       QVector<QVector3D> normals;
       QVector<QVector3D> vertices;
 

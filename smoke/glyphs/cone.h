@@ -8,7 +8,7 @@
 class Cone : public AbstractGlyph
 {
    public:
-      Cone(QVector3D position, QVector3D direction, float scalar);
+      Cone(QVector3D position, QVector3D direction);
 
       GPUData toGPUData(float textureCoordinate);
 
