@@ -1,5 +1,5 @@
 #include "smokeslicesengine.h"
-#include "grid/utilities/smokebuilder.h"
+#include "visualizationbuilders/smokebuilder.h"
 #include "settings/visualizationsettings.h"
 
 SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
