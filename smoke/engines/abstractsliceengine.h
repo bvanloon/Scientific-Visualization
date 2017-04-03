@@ -24,6 +24,8 @@ class AbstractSliceEngine : public AbstractEngine
 
       void onNewSimulationState();
 
+      void onGLobalAlphaChanged(double globalAlpha);
+
       void onClearCache(Settings::engines::EnginesTypes engine);
       void onClearCache();
 

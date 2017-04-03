@@ -45,6 +45,11 @@ void AbstractSliceEngine::onNewSimulationState()
    updateCache();
 }
 
+void AbstractSliceEngine::onGLobalAlphaChanged(double globalAlpha)
+{
+   setGlobalAlpha(globalAlpha);
+}
+
 void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
 {
    if (engine == me) clearCache();
@@ -128,6 +133,8 @@ void AbstractSliceEngine::connectToSettings()
            this, SLOT(onClearCache()));
    connect(&Settings::canvas(), SIGNAL(clearCache(Settings::engines::EnginesTypes)),
            this, SLOT(onClearCache(Settings::engines::EnginesTypes)));
+   connect(&Settings::visualization::slices(), SIGNAL(globalALphaChanged(double)),
+           this, SLOT(onGLobalAlphaChanged(double)));
 }
 
 void AbstractSliceEngine::connectToColorMap()
