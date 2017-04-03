@@ -55,7 +55,6 @@ SOURCES += main.cpp\
     grid/glyphdata.cpp \
     colormaps/huecolormap.cpp \
     glyphs/abstractglyph.cpp \
-    glyphs/glyphstriangulation.cpp \
     glyphs/hedgehog.cpp \
     glyphs/triangle.cpp \
     glyphs/ccwtriangle.cpp \
@@ -122,7 +121,6 @@ HEADERS  += main.ih\
     grid/glyphdata.h \
     colormaps/huecolormap.h \
     glyphs/abstractglyph.h \
-    glyphs/glyphstriangulation.h \
     glyphs/hedgehog.h \
     glyphs/triangle.h \
     glyphs/ccwtriangle.h \
