@@ -1,7 +1,7 @@
 #include "glyphengine.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
-#include "grid/utilities/glyphbuilder.h"
+#include "visualizationbuilders/glyphbuilder.h"
 
 
 GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :

@@ -1,7 +1,7 @@
 #include "glyphsliceengine.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
-#include "grid/utilities/glyphbuilder.h"
+#include "visualizationbuilders/glyphbuilder.h"
 
 GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::phongLight,
