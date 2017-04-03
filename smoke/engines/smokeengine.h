@@ -14,8 +14,6 @@ class SmokeEngine : public AbstractEngine
 
    private:
       SimulationGrid *simulation;
-
-      int fillBuffers(Simulation *UNUSED(simulation));
 };
 
 

@@ -20,142 +20,142 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        view/mainwindow.cpp \
-    view/canvas.cpp \
-    simulation/simulation.cpp \
-    colormaps/abstractcolormap.cpp \
-    colormaps/rainbowcolormap.cpp \
-    simulation/simulationrealization.cpp \
-    simulation/utils.cpp \
-    engines/smokeengine.cpp \
-    view/colormaplegend.cpp \
-    settings/settings.cpp \
-    view/colormaptab.cpp \
+        colormaps/abstractcolormap.cpp \
+    colormaps/coldcolormap.cpp \
+    colormaps/colormapfactory.cpp \
     colormaps/grayscalecolormap.cpp \
     colormaps/heatcolormap.cpp \
-    colormaps/colormapfactory.cpp \
-    view/floatslider.cpp \
-    view/intslider.cpp \
-    settings/canvassettings.cpp \
-    settings/simulationsettings.cpp \
-    settings/visualization/visualizationsettings.cpp \
-    settings/visualization/smokesettings.cpp \
-    view/simulationtab.cpp \
-    keyboardhandler.cpp \
-    colormaps/zebramap.cpp \
-    colormaps/coldcolormap.cpp \
-    grid/vertex.cpp \
-    grid/uniformgrid.cpp \
-    grid/grid.cpp \
-    grid/cell.cpp \
-    grid/triangulation.cpp \
-    engines/abstractengine.cpp \
-    view/glyphstab.cpp \
     colormaps/huecolormap.cpp \
+    colormaps/rainbowcolormap.cpp \
+    colormaps/zebramap.cpp \
+    engines/abstractengine.cpp \
+    engines/abstractsliceengine.cpp \
+    engines/glyphengine.cpp \
+    engines/glyphsliceengine.cpp \
+    engines/seedpointengine.cpp \
+    engines/smokeengine.cpp \
+    engines/smokeslicesengine.cpp \
+    engines/streamlineengine.cpp \
+    engines/streamlineslicesengine.cpp \
     glyphs/abstractglyph.cpp \
+    glyphs/airplane.cpp \
+    glyphs/ccwtriangle.cpp \
+    glyphs/cone.cpp \
     glyphs/hedgehog.cpp \
     glyphs/triangle.cpp \
-    glyphs/ccwtriangle.cpp \
-    glyphs/airplane.cpp \
-    utilities/range.cpp \
-    utilities/mesh.cpp \
-    utilities/vector.cpp \
-    utilities/approximation.cpp \
-    settings/visualization/streamlines.cpp \
-    view/streamlinestab.cpp \
-    engines/seedpointengine.cpp \
-    shapes/rectangle.cpp \
-    glyphs/cone.cpp \
-    shapes/cone.cpp \
-    engines/streamlineengine.cpp \
-    shapes/polyline.cpp \
-    utilities/gpudata.cpp \
-    streamobjects/streamline.cpp \
-    grid/utilities/streamlinebuilder.cpp \
+    grid/cell.cpp \
+    grid/grid.cpp \
     grid/jittergrid.cpp \
-    engines/smokeslicesengine.cpp \
-    engines/glyphsliceengine.cpp \
-    engines/streamlineslicesengine.cpp \
-    engines/abstractsliceengine.cpp \
-    utilities/rotation.cpp \
-    settings/visualization/slices.cpp \
-    view/slicestab.cpp \
-    simulation/simulationdata.cpp \
     grid/simulationgrid.cpp \
+    grid/triangulation.cpp \
+    grid/uniformgrid.cpp \
+    grid/vertex.cpp \
+    keyboardhandler.cpp \
+    settings/canvassettings.cpp \
+    settings/settings.cpp \
+    settings/simulationsettings.cpp \
+    settings/visualization/glyphs.cpp \
+    settings/visualization/slices.cpp \
+    settings/visualization/smokesettings.cpp \
+    settings/visualization/streamlines.cpp \
+    settings/visualization/visualizationsettings.cpp \
+    shapes/cone.cpp \
+    shapes/polyline.cpp \
+    shapes/rectangle.cpp \
+    simulation/simulation.cpp \
+    simulation/simulationdata.cpp \
+    simulation/simulationrealization.cpp \
     simulation/simulationstatehistory.cpp \
-    grid/utilities/smokebuilder.cpp \
-    engines/glyphengine.cpp \
-    grid/utilities/glyphbuilder.cpp \
-    settings/visualization/glyphs.cpp
+    simulation/utils.cpp \
+    streamobjects/streamline.cpp \
+    utilities/approximation.cpp \
+    utilities/gpudata.cpp \
+    utilities/mesh.cpp \
+    utilities/range.cpp \
+    utilities/rotation.cpp \
+    utilities/vector.cpp \
+    view/canvas.cpp \
+    view/colormaplegend.cpp \
+    view/colormaptab.cpp \
+    view/floatslider.cpp \
+    view/glyphstab.cpp \
+    view/intslider.cpp \
+    view/mainwindow.cpp \
+    view/simulationtab.cpp \
+    view/slicestab.cpp \
+    view/streamlinestab.cpp \
+    visualizationbuilders/glyphbuilder.cpp \
+    visualizationbuilders/smokebuilder.cpp \
+    visualizationbuilders/streamlinebuilder.cpp
 
 HEADERS  += main.ih\
-        view/mainwindow.h \
-    view/canvas.h \
-    simulation/simulation.h \
-    simulation/simulationrealization.h \
-    simulation/utils.h \
-    engines/smokeengine.h \
-    colormaps/abstractcolormap.h \
-    colormaps/rainbowcolormap.h \
-    colormaps/colormapfactory.h \
-    view/colormaplegend.h \
-    settings/settings.h \
-    view/colormaptab.h \
-    view/floatslider.h \
-    view/intslider.h \
-    settings/canvassettings.h \
-    settings/simulationsettings.h \
-    settings/visualizationsettings.h \
-    view/simulationtab.h \
-    keyboardhandler.h \
-    colormaps/zebramap.h \
+        colormaps/abstractcolormap.h \
     colormaps/coldcolormap.h \
-    grid/vertex.h \
-    grid/uniformgrid.h \
-    grid/grid.h \
-    grid/cell.h \
-    grid/triangulation.h \
-    engines/abstractengine.h \
-    view/glyphstab.h \
+    colormaps/colormapfactory.h \
     colormaps/huecolormap.h \
+    colormaps/rainbowcolormap.h \
+    colormaps/zebramap.h \
+    engines/abstractengine.h \
+    engines/abstractsliceengine.h \
+    engines/glyphengine.h \
+    engines/glyphsliceengine.h \
+    engines/seedpointengine.h \
+    engines/smokeengine.h \
+    engines/smokeslicesengine.h \
+    engines/streamlineengine.h \
+    engines/streamlineslicesengine.h \
     glyphs/abstractglyph.h \
+    glyphs/airplane.h \
+    glyphs/ccwtriangle.h \
+    glyphs/cone.h \
+    glyphs/glyphs.h \
     glyphs/hedgehog.h \
     glyphs/triangle.h \
-    glyphs/ccwtriangle.h \
-    glyphs/airplane.h \
-    utilities/range.h \
-    utilities/mesh.h \
-    utilities/vector.h \
-    glyphs/cone.h \
+    grid/cell.h \
+    grid/grid.h \
+    grid/jittergrid.h \
+    grid/simulationgrid.h \
+    grid/triangulation.h \
+    grid/uniformgrid.h \
+    grid/vertex.h \
+    keyboardhandler.h \
+    settings/canvassettings.h \
+    settings/settings.h \
+    settings/simulationsettings.h \
+    settings/visualization/glyphs.h \
+    settings/visualization/slices.h \
+    settings/visualization/streamlines.h \
+    settings/visualizationsettings.h \
     shapes/cone.h \
+    shapes/polyline.h \
+    shapes/rectangle.h \
+    simulation/simulation.h \
+    simulation/simulationdata.h \
+    simulation/simulationrealization.h \
+    simulation/simulationstatehistory.h \
+    simulation/utils.h \
+    streamobjects/streamline.h \
     unused.h \
     utilities/approximation.h \
-    settings/visualization/streamlines.h \
-    view/streamlinestab.h \
-    engines/seedpointengine.h \
-    shapes/rectangle.h \
-    engines/streamlineengine.h \
-    shapes/polyline.h \
     utilities/gpudata.h \
-    streamobjects/streamline.h \
-    grid/utilities/streamlinebuilder.h \
-    grid/jittergrid.h \
-    engines/smokeslicesengine.h \
-    engines/glyphsliceengine.h \
-    engines/streamlineslicesengine.h \
-    engines/abstractsliceengine.h \
+    utilities/mesh.h \
+    utilities/range.h \
     utilities/rotation.h \
-    settings/visualization/slices.h \
-    view/slicestab.h \
-    simulation/simulationstatehistory.h \
-    simulation/simulationdata.h \
-    grid/simulationgrid.h \
     utilities/sizelimitedqueue.h \
-    grid/utilities/smokebuilder.h \
-    engines/glyphengine.h \
-    grid/utilities/glyphbuilder.h \
-    glyphs/glyphs.h \
-    settings/visualization/glyphs.h
+    utilities/vector.h \
+    view/canvas.h \
+    view/colormaplegend.h \
+    view/colormaptab.h \
+    view/floatslider.h \
+    view/glyphstab.h \
+    view/intslider.h \
+    view/mainwindow.h \
+    view/simulationtab.h \
+    view/slicestab.h \
+    view/streamlinestab.h \
+    visualizationbuilders/glyphbuilder.h \
+    visualizationbuilders/smokebuilder.h \
+    visualizationbuilders/streamlinebuilder.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

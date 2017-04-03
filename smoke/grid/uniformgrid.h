@@ -4,7 +4,6 @@
 #include "grid/grid.h"
 #include <QSizeF>
 #include "simulation/simulationrealization.h"
-#include "streamobjects/streamline.h"
 #include <QRectF>
 #include "unused.h"
 
@@ -15,24 +14,23 @@ class UniformGrid : public Grid
    public:
       QVector<QVector3D> const& getVertexPositions() const;
 
-      virtual void changeGridArea(QSizeF UNUSED(newArea));
-      virtual void changeGridArea(QSizeF newArea, QSizeF padding);
-
-      static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid);
-
       QSizeF const& getPadding() const;
 
       QSizeF getCellSize() const;
 
+      Triangulation getTriangulation();
+
       int getDimension() const;
 
       bool inGridArea(QVector3D position) const;
+      bool inGridArea(QVector3D position);
 
-      streamobject::Line computeStreamLine(QVector3D seedPoint,
-                                           Vertex::scalarGetter textureCoordinateGetter,
-                                           Vertex::vectorGetter vectorGetter);
+      StructuredCell *findCellContaining(QVector3D position);
 
-      Triangulation getTriangulation();
+      virtual void changeGridArea(QSizeF UNUSED(newArea));
+      virtual void changeGridArea(QSizeF newArea, QSizeF padding);
+
+      static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, UniformGrid *simulationGrid);
 
    protected:
       UniformGrid(int dimension, bool hasPadding);
@@ -70,13 +68,7 @@ class UniformGrid : public Grid
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
-      StructuredCell *findCellContaining(QVector3D position);
-
-      bool inGridArea(QVector3D position);
-
       QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
-
-      class StreamLineBuilder;
 };
 
 #endif // UNIFORMGRID_H
