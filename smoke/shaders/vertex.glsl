@@ -12,6 +12,7 @@ struct colorMapInfoStruct {
 layout(location = 0) in vec3 inputPosition;
 layout(location = 1) in float inputTextureCoordinate;
 layout(location = 2) in vec3 inputNormal;
+layout(location = 3) in float inputLocalAlpha;
 
 //Variable out
 layout(location = 0) out float vsTextureCoordinate;
@@ -71,7 +72,7 @@ void main(void)
     vsNormal = toEyeCoordinates(inputNormal);
     vsTextureCoordinate = computeTextureCoordinate(inputTextureCoordinate);
 
-    vsLocalAlpha = 1.0;
+    vsLocalAlpha = inputLocalAlpha;
 
     gl_Position = screenSpaceTransformation * mvpMatrix * vec4(inputPosition, 1.0);
 

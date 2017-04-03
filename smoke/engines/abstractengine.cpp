@@ -8,6 +8,7 @@ AbstractEngine::AbstractEngine(int lightModel,
                                QObject *parent) :
    QObject(parent),
    normalBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
+   alphaBuffer(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
    me(engineType),
    engineLightModel(lightModel),
    texture(0)
@@ -25,6 +26,7 @@ AbstractEngine::~AbstractEngine()
    this->vertexBuffer->destroy();
    this->textureCoordinateBuffer->destroy();
    this->normalBuffer->destroy();
+    this->alphaBuffer->destroy();
    this->vao.destroy();
 }
 
@@ -243,6 +245,13 @@ void AbstractEngine::initBuffers()
    glEnableVertexAttribArray(2);
    glVertexAttribPointer(2, 3, GL_FLOAT, GL_TRUE, 0, 0);
 
+   this->alphaBuffer->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+   this->alphaBuffer->create();
+   this->alphaBuffer->bind();
+
+   glEnableVertexAttribArray(3);
+   glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 0, 0);
+
    this->vao.release();
 }
 
@@ -265,6 +274,7 @@ void AbstractEngine::updateBuffers(GPUData data)
    updateBuffer(this->vertexBuffer, data.getVertices());
    updateBuffer(this->normalBuffer, data.getNormals());
    updateBuffer(this->textureCoordinateBuffer, data.getTextureCoordinates());
+   updateBuffer(this->alphaBuffer, data.getAlphas());
 }
 
 void AbstractEngine::updateBuffersAndDraw(GPUData data)

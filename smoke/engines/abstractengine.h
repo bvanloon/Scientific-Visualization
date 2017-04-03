@@ -47,6 +47,7 @@ public slots:
       QOpenGLBuffer *vertexBuffer;
       QOpenGLBuffer *textureCoordinateBuffer;
       QOpenGLBuffer *normalBuffer;
+      QOpenGLBuffer *alphaBuffer;
 
       Settings::visualization::ColorMap *colorMap;
 
