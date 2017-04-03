@@ -3,7 +3,6 @@
 #include "settings/settings.h"
 #include "settings/simulationsettings.h"
 #include "settings/canvassettings.h"
-#include "settings/visualizationsettings.h"
 
 #include <QDebug>
 
