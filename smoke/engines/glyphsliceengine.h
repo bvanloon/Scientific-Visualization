@@ -11,8 +11,6 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    public:
       GlyphSliceEngine(SimulationGrid *simulationGrid);
 
-      void draw();
-
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
@@ -22,7 +20,6 @@ class GlyphSliceEngine : public AbstractSliceEngine {
       void cellSizeChanged(QSizeF newSize);
 
    protected:
-
       void updateCache();
 
    private:
