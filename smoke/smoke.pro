@@ -39,7 +39,6 @@ SOURCES += main.cpp\
     settings/canvassettings.cpp \
     settings/simulationsettings.cpp \
     settings/visualization/visualizationsettings.cpp \
-    settings/visualization/glyphsettings.cpp \
     settings/visualization/smokesettings.cpp \
     view/simulationtab.cpp \
     keyboardhandler.cpp \
@@ -86,7 +85,8 @@ SOURCES += main.cpp\
     simulation/simulationstatehistory.cpp \
     grid/utilities/smokebuilder.cpp \
     engines/glyphengine.cpp \
-    grid/utilities/glyphbuilder.cpp
+    grid/utilities/glyphbuilder.cpp \
+    settings/visualization/glyphs.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
