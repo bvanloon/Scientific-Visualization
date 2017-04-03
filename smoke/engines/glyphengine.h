@@ -25,11 +25,9 @@ class GlyphEngine : public AbstractEngine {
       void cellSizeChanged(QSizeF newSize);
 
    private:
-      int fillBuffers();
 
       UniformGrid *visualizationGrid;
       UniformGrid *simulationGrid;
-      GlyphsFactory factory;
 };
 
 #endif // VECTORENGINE_H

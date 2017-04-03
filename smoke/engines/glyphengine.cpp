@@ -21,9 +21,11 @@ GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
 
 void GlyphEngine::draw()
 {
-   int bufferLength = this->fillBuffers();
-
-   drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
+    GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
+                  Settings::visualization::glyphs().colorMap->textureGetter,
+                  Settings::visualization::glyphs().vectorGetter);
+    GPUData data = builder.getData();
+    updateBuffersAndDraw(data);
 }
 
 void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
@@ -36,15 +38,4 @@ void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
    visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
-}
-
-int GlyphEngine::fillBuffers()
-{
-   GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
-                 Settings::visualization::glyphs().colorMap->textureGetter,
-                 Settings::visualization::glyphs().vectorGetter);
-   GPUData data = builder.getData();
-   updateBuffers(data);
-
-   return data.numElements();
 }
