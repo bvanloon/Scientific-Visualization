@@ -15,7 +15,7 @@ GlyphBuilder::GlyphBuilder(UniformGrid *grid,
 GlyphBuilder::~GlyphBuilder()
 {}
 
-GPUData GlyphBuilder::getData() const
+GPUData GlyphBuilder::getGPUData() const
 {
    return data;
 }

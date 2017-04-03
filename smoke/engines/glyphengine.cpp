@@ -24,7 +24,7 @@ void GlyphEngine::draw()
     GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
                   Settings::visualization::glyphs().colorMap->textureGetter,
                   Settings::visualization::glyphs().vectorGetter);
-    GPUData data = builder.getData();
+    GPUData data = builder.getGPUData();
     updateBuffersAndDraw(data);
 }
 

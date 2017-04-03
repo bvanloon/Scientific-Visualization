@@ -13,7 +13,7 @@ class GlyphBuilder
                    Vertex::vectorGetter directionGetter);
       ~GlyphBuilder();
 
-      GPUData getData() const;
+      GPUData getGPUData() const;
 
 private:
       UniformGrid *grid;
