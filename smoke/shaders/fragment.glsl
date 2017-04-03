@@ -44,7 +44,8 @@ vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
 
 //Lighting Model Functions
 void noLight(){
-    fColor = texture(colormap, vsTextureCoordinate);
+    vec4 color = texture(colormap, vsTextureCoordinate);
+    fColor = color;
 }
 
 void phongLight(){
