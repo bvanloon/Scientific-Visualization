@@ -68,8 +68,6 @@ class MainWindow : public QMainWindow
 
       void connectGlyphEngineAndSettings();
 
-      void connectGlyphSlicesEngineAndGlyphTab();
-
       void connectAbstractEngine(Settings::engines::EnginesTypes engine,
                                  ColorMapTab *colormapTab,
                                  Settings::visualization::ColorMap *colorMapSetings);

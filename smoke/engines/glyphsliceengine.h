@@ -14,7 +14,7 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
-      void onGridDimensionChanged(int width, int UNUSED(height));
+      void onGridDimensionChanged(QSizeF size);
 
    signals:
       void cellSizeChanged(QSizeF newSize);
