@@ -12,7 +12,7 @@ class SmokeSlicesEngine : public AbstractSliceEngine
    public:
       SmokeSlicesEngine(SimulationGrid *grid);
 
-protected:
+   protected:
       void updateCache();
 
    private:

@@ -31,7 +31,7 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
 
       void setColorMap(Settings::visualization::ColorMap *value);
 
-public slots:
+   public slots:
 
       void onValueRangeChanged(Settings::sim::Scalar scalar, float min, float max);
 
@@ -69,15 +69,15 @@ public slots:
 
       void setMVPMatrix();
 
-      void setModelViewMatrix(const QMatrix4x4 &value);
+      void setModelViewMatrix(const QMatrix4x4& value);
 
-      void setProjectionMatrix(const QMatrix4x4 &value);
+      void setProjectionMatrix(const QMatrix4x4& value);
 
       void setGlobalAlpha();
       void setGlobalAlpha(float alpha);
 
       void setScreenSpaceTransformation();
-      void setScreenSpaceTransformation(const QMatrix4x4 &transform);
+      void setScreenSpaceTransformation(const QMatrix4x4& transform);
 
       virtual void connectToColorMap();
 

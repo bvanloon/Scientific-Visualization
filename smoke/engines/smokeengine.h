@@ -8,12 +8,12 @@
 class SmokeEngine : public AbstractEngine
 {
    public:
-      SmokeEngine(SimulationGrid* grid);
+      SmokeEngine(SimulationGrid *grid);
 
       void draw();
 
    private:
-      SimulationGrid* simulation;
+      SimulationGrid *simulation;
 
       int fillBuffers(Simulation *UNUSED(simulation));
 };

@@ -15,7 +15,7 @@ class GlyphBuilder
 
       GPUData getGPUData() const;
 
-private:
+   private:
       UniformGrid *grid;
 
       Vertex::scalarGetter getTextureCoordinate;
@@ -26,16 +26,16 @@ private:
       GPUData build(Settings::sim::GlyphsType glyphType);
 
       GPUData buildHedgeHogs();
-      GPUData buildHedgeHog(Vertex* vertex);
+      GPUData buildHedgeHog(Vertex *vertex);
 
       GPUData buildTriangles();
-      GPUData buildTriangle(Vertex* vertex);
+      GPUData buildTriangle(Vertex *vertex);
 
       GPUData buildAirplanes();
-      GPUData buildAirplane(Vertex* vertex);
+      GPUData buildAirplane(Vertex *vertex);
 
       GPUData buildCones();
-      GPUData buildCone(Vertex* vertex);
+      GPUData buildCone(Vertex *vertex);
 };
 
 #endif // GLYPHBUILDER_H

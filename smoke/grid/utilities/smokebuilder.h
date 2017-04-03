@@ -12,7 +12,7 @@ class SmokeBuilder
 
       GPUData getGPUData() const;
 
-private:
+   private:
       SimulationGrid *grid;
       Vertex::scalarGetter textureGetter;
       GPUData data;
