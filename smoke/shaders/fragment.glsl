@@ -19,6 +19,7 @@ struct MaterialInfo {
 layout(location = 0) in float vsTextureCoordinate;
 layout(location = 1) in vec3 vsNormal;
 layout(location = 2) in vec3 vsPosition;
+layout(location = 3) in float vsLocalAlpha;
 
 //Variable out
 out vec4 fColor;
@@ -26,6 +27,8 @@ out vec4 fColor;
 //Uniform in
 uniform sampler1D colormap;
 uniform int lightModel;
+uniform float globalAlpha;
+
 
 //Constants
 vec3 eye = vec3(400.0, 400.0, 800.0);
@@ -42,9 +45,15 @@ vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
     return clamp(light * (reflectionConstant * color), 0, 1);
 }
 
+float computeAlpha(){
+    return vsLocalAlpha * globalAlpha;
+}
+
 //Lighting Model Functions
 void noLight(){
-    fColor = texture(colormap, vsTextureCoordinate);
+    vec4 color = texture(colormap, vsTextureCoordinate);
+    color.a = computeAlpha();
+    fColor = color;
 }
 
 void phongLight(){
@@ -63,7 +72,7 @@ void phongLight(){
                     * pow( max(dot(reflectionVector, viewVector), 0.0 ), material.alfa)
                     * max(diffuseDotProduct, 0.0);
     vec3 phongColor = clamp(ambient + diffuse + specular, 0, 1);
-    fColor = vec4(phongColor, 1.0);
+    fColor = vec4(phongColor, computeAlpha());
 }
 
 void main(void)

@@ -26,6 +26,7 @@ int SeedPointEngine::fillBuffers()
    updateBuffer(this->vertexBuffer, vertices);
    updateBuffer(this->normalBuffer, normals);
    updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
+   updateBuffer(this->alphaBuffer, QVector<float>(this->vertices.size(), 1.0));
 
    clearIntermediateBuffers();
 

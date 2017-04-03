@@ -21,6 +21,7 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
 void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha)
 {
    this->globalAlpha = newGlobalAlpha;
+   emit globalALphaChanged(newGlobalAlpha);
 }
 
 void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)

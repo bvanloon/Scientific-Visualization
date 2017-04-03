@@ -47,6 +47,7 @@ public slots:
       QOpenGLBuffer *vertexBuffer;
       QOpenGLBuffer *textureCoordinateBuffer;
       QOpenGLBuffer *normalBuffer;
+      QOpenGLBuffer *alphaBuffer;
 
       Settings::visualization::ColorMap *colorMap;
 
@@ -71,6 +72,9 @@ public slots:
       void setModelViewMatrix(const QMatrix4x4 &value);
 
       void setProjectionMatrix(const QMatrix4x4 &value);
+
+      void setGlobalAlpha();
+      void setGlobalAlpha(float alpha);
 
       void setScreenSpaceTransformation();
       void setScreenSpaceTransformation(const QMatrix4x4 &transform);
