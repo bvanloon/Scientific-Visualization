@@ -10,16 +10,16 @@ class SmokeBuilder
    public:
       SmokeBuilder(SimulationGrid *grid, Vertex::scalarGetter textureGetter);
 
-      GPUData getGPUData() const;
+      GPUData getGPUData();
 
-   private:
-      SimulationGrid *grid;
-      Vertex::scalarGetter textureGetter;
+   protected:
       GPUData data;
+      Vertex::scalarGetter getTextureCoordinate;
       QVector3D normal;
+      SimulationGrid *grid;
 
       void build();
-      void addVertex(Vertex *vertex);
+      virtual void addVertex(Vertex *vertex);
 };
 
 #endif // SMOKEBUILDER_H

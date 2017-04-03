@@ -9,7 +9,10 @@ class TranslucentSmokeBuilder :
    public SmokeBuilder
 {
    public:
-      TranslucentSmokeBuilder(SimulationGrid *grid, Vertex::scalarGetter textureGetter);
+      TranslucentSmokeBuilder(SimulationGrid *grid, Vertex::scalarGetter getTextureCoordinate);
+
+   protected:
+      void addVertex(Vertex *vertex);
 };
 
 #endif // TRANSLUCENTSMOKEBUILDER_H
