@@ -64,7 +64,6 @@ void MainWindow::onOpenGLReady()
    connectGlyphEngineAndSettings();
    connectGlyphEngineAndGlyphTab();
 
-   connectGlyphSlicesEngineAndSettings();
    connectGlyphSlicesEngineAndGlyphTab();
 
    connectThisToFinishConnectionsReceivers();
@@ -96,8 +95,8 @@ void MainWindow::connectSimuationStateHistory()
 {
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
             &SimulationHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
-   connect(this->simulation, SIGNAL(newSimulationState(SimulationData*)),
-           &SimulationHistory::instance(), SLOT(onNewSimulationState(SimulationData*)));
+   connect(this->simulation, SIGNAL(newSimulationState(SimulationData *)),
+           &SimulationHistory::instance(), SLOT(onNewSimulationState(SimulationData *)));
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF)),
            &SimulationHistory::instance(), SLOT(onWindowResized(QSizeF)));
    connect(&Settings::visualization::glyphs(), SIGNAL(gridDimensionChanged(QSizeF)),
@@ -226,7 +225,7 @@ void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engi
 
    connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
             engine, SLOT(onUpdateModelViewMatrix()));
-   connect(simulation, SIGNAL(newSimulationState(SimulationData*)),
+   connect(simulation, SIGNAL(newSimulationState(SimulationData *)),
            engine, SLOT(onNewSimulationState()));
 }
 
@@ -249,16 +248,6 @@ void MainWindow::connectGlyphEngineAndSettings()
    connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
            engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
    connect(dynamic_cast<GlyphEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
-           &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
-}
-
-void MainWindow::connectGlyphSlicesEngineAndSettings()
-{
-   AbstractEngine *engine = this->canvas->getEngine(Settings::engines::EnginesTypes::glyphSlices);
-
-   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
-           engine, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
-   connect(dynamic_cast<GlyphSliceEngine *>(engine), SIGNAL(cellSizeChanged(QSizeF)),
            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 

@@ -26,6 +26,8 @@ class GlyphSliceEngine : public AbstractSliceEngine {
 
       UniformGrid *visualizationGrid;
       SimulationGrid *simulationGrid;
+
+      void connectToSettings();
 };
 
 #endif // GLYPHSLICEENGINE_H

@@ -31,17 +31,24 @@ void GlyphSliceEngine::updateCache()
    this->cache.enqueue(data);
 }
 
+void GlyphSliceEngine::connectToSettings()
 {
+   connect(&Settings::simulation(), SIGNAL(recomputeVertexPositions(QSize,QSizeF)),
+            this, SLOT(onRecomputeVertexPositions(QSize,QSizeF)));
+   connect(this, SIGNAL(cellSizeChanged(QSizeF)),
+            &Settings::visualization::glyphs(), SLOT(onCellSizeChanged(QSizeF)));
 }
 
 void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
+   qDebug() << "GlyphSliceEngine::onRecomputeVertexPositions";
    visualizationGrid->changeGridArea(canvasSize, cellSize);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void GlyphSliceEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
+   qDebug() << "GlyphSliceEngine::onGridDimensionChanged";
    visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
