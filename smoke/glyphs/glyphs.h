@@ -7,4 +7,3 @@
 #include "triangle.h"
 
 #endif // GLYPHS
-
