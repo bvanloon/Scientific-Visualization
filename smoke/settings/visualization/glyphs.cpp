@@ -7,19 +7,10 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    scale(1.0),
+   glyph(Settings::sim::GlyphsType::airplane),
    vectorField(Settings::sim::Vector::fluidVelocity)
 {
-   vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
-}
-
-QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
-{
-   double maxX = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.width();
-   double maxY = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.height();
-
-   double maximum = QVector2D(maxX, maxY).length();
-
-   return QPair<double, double>(0.0, maximum);
+   vectorGetter = Vertex::getVectorGetter(vectorField);
 }
 
 const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance()
@@ -51,6 +42,16 @@ QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() 
       qDebug() << "Settings::visualization::Glyphs::getCurrentMagnitudeRange(): Current VectorField is not supported. Using default fluidVelocityMagnitude ";
       return Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude);
    }
+}
+
+QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
+{
+   double maxX = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.width();
+   double maxY = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.height();
+
+   double maximum = QVector2D(maxX, maxY).length();
+
+   return QPair<double, double>(0.0, maximum);
 }
 
 void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector vectorField)

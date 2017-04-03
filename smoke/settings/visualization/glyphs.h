@@ -16,10 +16,12 @@ class Settings::visualization::Glyphs : public QObject
       Settings::visualization::ColorMap *colorMap;
 
       Vertex::vectorGetter vectorGetter;
-      float scale;
+      Settings::sim::Vector vectorField;
 
       Settings::sim::GlyphsType glyph;
+
       QSizeF approxCellSize;
+      float scale;
 
       QPair<float, float> getCurrentMagnitudeRange() const;
 
@@ -43,9 +45,6 @@ class Settings::visualization::Glyphs : public QObject
       void operator=(Glyphs const&) = delete;
 
       QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
-
-      Settings::sim::Scalar magnitude;
-      Settings::sim::Vector vectorField;
 };
 
 #endif // GLYPHS_H

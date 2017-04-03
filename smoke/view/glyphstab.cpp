@@ -26,7 +26,7 @@ void GlyphsTab::setUiToDefaults()
    ui->gridWidthSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
 
    ui->vectorFieldComboBox->addItems(Settings::visualization::getAllVectorVariableNames());
-   ui->vectorFieldComboBox->setCurrentIndex(Settings::defaults::visualization::glyphs::vector);
+   ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::glyphs().vectorField);
 
    ui->scale->setValue(Settings::visualization::glyphs().scale);
    updateScaleSpinBoxConfiguration(Settings::visualization::glyphs().scale);
