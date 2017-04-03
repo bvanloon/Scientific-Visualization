@@ -11,9 +11,7 @@ HedgeHog::HedgeHog(QVector3D position, QVector3D direction) :
 
 GPUData HedgeHog::toGPUData(float textureCoordinate)
 {
-   GPUData data(GL_LINES);
-   data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
-   return data;
+   return AbstractGlyph::toGPUData(GL_LINES, textureCoordinate);
 }
 
 void HedgeHog::build(QVector3D position, QVector3D direction)

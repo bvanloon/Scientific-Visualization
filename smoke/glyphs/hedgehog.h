@@ -2,7 +2,6 @@
 #define HEDGEHOG_H
 
 #include "glyphs/abstractglyph.h"
-#include "utilities/gpudata.h"
 
 class HedgeHog : public AbstractGlyph
 {

@@ -7,19 +7,11 @@
 AbstractGlyph::AbstractGlyph()
 {}
 
-QVector<QVector3D> AbstractGlyph::getVertices() const
+GPUData AbstractGlyph::toGPUData(int drawMode, float textureCoordinate)
 {
-   return vertices;
-}
-
-QVector<QVector3D> AbstractGlyph::getNormals() const
-{
-   return normals;
-}
-
-size_t AbstractGlyph::numVertices()
-{
-   return this->vertices.length();
+   GPUData data(drawMode);
+   data.addElements(vertices, normals, textureCoordinate);
+   return data;
 }
 
 void AbstractGlyph::addVertex(QVector3D vertex, QVector3D normal)

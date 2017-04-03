@@ -3,7 +3,6 @@
 
 #include "glyphs/abstractglyph.h"
 #include "utilities/mesh.h"
-#include "utilities/gpudata.h"
 
 class Cone : public AbstractGlyph
 {

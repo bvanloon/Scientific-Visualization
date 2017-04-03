@@ -4,7 +4,6 @@
 #include <QVector>
 #include <QVector3D>
 #include <QMatrix4x4>
-#include "glyphs/abstractglyph.h"
 
 #include <QObject>
 #ifdef __APPLE__

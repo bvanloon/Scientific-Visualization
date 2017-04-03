@@ -20,9 +20,7 @@ Cone::Cone(QVector3D position, QVector3D direction) :
 
 GPUData Cone::toGPUData(float textureCoordinate)
 {
-    GPUData data(GL_TRIANGLES);
-    data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
-    return data;
+   return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
 }
 
 void Cone::transform()

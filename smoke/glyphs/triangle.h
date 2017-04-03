@@ -2,8 +2,6 @@
 #define TRIANGLE_H
 
 #include "glyphs/abstractglyph.h"
-#include "utilities/gpudata.h"
-
 
 class Triangle : public AbstractGlyph
 {

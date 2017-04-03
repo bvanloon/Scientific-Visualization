@@ -1,26 +1,28 @@
 #ifndef ABSTRACTGLYPH_H
 #define ABSTRACTGLYPH_H
 
-#include <QVector>
-#include <QVector2D>
-#include <QVector3D>
-#include "settings/settings.h"
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
 
+#include <QVector>
+#include <QVector3D>
+#include "utilities/gpudata.h"
 
 class AbstractGlyph
 {
    public:
       AbstractGlyph();
 
-      QVector<QVector3D> getVertices() const;
-
-      QVector<QVector3D> getNormals() const;
-
-      size_t numVertices();
+      virtual GPUData toGPUData(float textureCoordinate) = 0;
 
    protected:
       QVector<QVector3D> normals;
       QVector<QVector3D> vertices;
+
+      GPUData toGPUData(GLint drawMode, float textureCoordinate);
 
       void addVertex(QVector3D vertex, QVector3D normal);
 

@@ -19,9 +19,7 @@ Airplane::Airplane(QVector3D position, QVector3D direction) :
 
 GPUData Airplane::toGPUData(float textureCoordinate)
 {
-    GPUData data(GL_TRIANGLES);
-    data.addElements(this->getVertices(), this->getNormals(), textureCoordinate);
-    return data;
+    return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
 }
 
 Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude) :
