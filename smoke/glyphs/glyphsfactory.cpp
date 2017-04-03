@@ -85,15 +85,3 @@ GlyphsTriangulation GlyphsFactory::createCones(GlyphData data)
    }
    return triangulation;
 }
-
-QStringList GlyphsFactory::getGlyphsNames()
-{
-   QStringList glyphsNamesList;
-
-   glyphsNamesList << "Hedgehogs"
-                   << "Triangles"
-                   << "Airplanes"
-                   << "Cones";
-
-   return glyphsNamesList;
-}

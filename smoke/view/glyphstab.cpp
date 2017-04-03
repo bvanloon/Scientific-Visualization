@@ -35,7 +35,7 @@ void GlyphsTab::setUiToDefaults()
    ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
    ui->gridHeightSpinBox->setDisabled(true);
 
-   ui->glyphSelector->addItems(GlyphsFactory::getGlyphsNames());
+   ui->glyphSelector->addItems(Settings::visualization::getGlyphNames());
    ui->glyphSelector->setCurrentIndex(Settings::defaults::visualization::glyphs::glyphType);
 }
 

@@ -12,8 +12,6 @@ class GlyphsFactory
 {
    public:
 
-      static QStringList getGlyphsNames();
-
       GlyphsFactory();
 
       GlyphsTriangulation createGlyphs(GlyphData data, Settings::sim::GlyphsType glypType);

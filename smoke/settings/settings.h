@@ -28,6 +28,8 @@ namespace Settings {
 
         QStringList getNonDerivedVectorVariableNames();
 
+        QStringList getGlyphNames();
+
         class ColorMap;
 
         class Smoke;
