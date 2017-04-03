@@ -11,24 +11,23 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    public:
       GlyphSliceEngine(SimulationGrid *simulationGrid);
 
-      void draw();
-
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
-      void onGridDimensionChanged(int width, int UNUSED(height));
+      void onGridDimensionChanged(QSizeF size);
 
    signals:
       void cellSizeChanged(QSizeF newSize);
 
    protected:
-
       void updateCache();
 
    private:
 
       UniformGrid *visualizationGrid;
       SimulationGrid *simulationGrid;
+
+      void connectToSettings();
 };
 
 #endif // GLYPHSLICEENGINE_H

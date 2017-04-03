@@ -28,6 +28,8 @@ class Settings::visualization::Glyphs : public QObject
    signals:
       void gridDimensionChanged(QSizeF newDimension);
 
+      void clearCache();
+
    public slots:
       void onVectorFieldChanged(Settings::sim::Vector vectorField);
 

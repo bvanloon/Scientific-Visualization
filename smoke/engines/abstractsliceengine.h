@@ -33,6 +33,8 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void updateCache() = 0;
 
+      void clearCache();
+
       QMatrix4x4 computeToSliceTransformation();
 
    private:
@@ -54,8 +56,6 @@ class AbstractSliceEngine : public AbstractEngine
       void connectToSettings();
 
       virtual void connectToColorMap();
-
-      void clearCache();
 };
 
 #endif // ABSTRACTSLICEENGINE_H

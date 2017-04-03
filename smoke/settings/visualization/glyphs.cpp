@@ -58,24 +58,29 @@ void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector
 {
    this->vectorField = vectorField;
    vectorGetter = Vertex::getVectorGetter(vectorField);
+   emit clearCache();
 }
 
 void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType glyph)
 {
    this->glyph = glyph;
+   emit clearCache();
 }
 
 void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 {
    this->approxCellSize = newSize;
+   emit clearCache();
 }
 
 void Settings::visualization::Glyphs::onScaleChanged(double scale)
 {
    this->scale = scale;
+   emit clearCache();
 }
 
 void Settings::visualization::Glyphs::onGridDimensionChanged(QSizeF newDimension)
 {
    emit gridDimensionChanged(newDimension);
+   emit clearCache();
 }
