@@ -30,7 +30,6 @@ class GlyphSliceEngine : public AbstractSliceEngine {
 
       UniformGrid *visualizationGrid;
       SimulationGrid *simulationGrid;
-      GlyphsFactory factory;
 };
 
 #endif // GLYPHSLICEENGINE_H
