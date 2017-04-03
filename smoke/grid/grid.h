@@ -5,7 +5,6 @@
 #include <QVector3D>
 #include <QMultiMap>
 #include <QPair>
-#include "grid/glyphdata.h"
 #include "grid/vertex.h"
 #include "grid/cell.h"
 
@@ -16,8 +15,6 @@ class Grid
    public:
       Grid(int numberOfVertices, bool hasPadding = true);
       virtual ~Grid();
-
-      GlyphData getGlyphData() const;
 
       virtual void changeGridArea(QSizeF newArea) = 0;
 

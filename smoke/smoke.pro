@@ -52,7 +52,6 @@ SOURCES += main.cpp\
     grid/triangulation.cpp \
     engines/abstractengine.cpp \
     view/glyphstab.cpp \
-    grid/glyphdata.cpp \
     colormaps/huecolormap.cpp \
     glyphs/abstractglyph.cpp \
     glyphs/hedgehog.cpp \
@@ -118,7 +117,6 @@ HEADERS  += main.ih\
     grid/triangulation.h \
     engines/abstractengine.h \
     view/glyphstab.h \
-    grid/glyphdata.h \
     colormaps/huecolormap.h \
     glyphs/abstractglyph.h \
     glyphs/hedgehog.h \
