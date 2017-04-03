@@ -21,15 +21,7 @@ class Simulation : public QObject {
       explicit Simulation(QObject *parent = 0);
       ~Simulation();
 
-      typedef QVector<float>(Simulation::*textureCoordinateGetter)(Triangulation);
-
-      GlyphData getGlyphData();
-
-      GlyphData getGlyphData(Grid *grid);
-
       SimulationGrid *getSimulationGrid() const;
-
-      SimulationRealization *realization;
 
       void step();
 
@@ -46,9 +38,10 @@ class Simulation : public QObject {
       void onWindowResized(int width, int height);
 
    private:
+      SimulationRealization *realization;
+      SimulationGrid *grid;
 
       QPoint lastMousePosition;
-      SimulationGrid *grid;
 };
 
 #endif // SMOKE_H
