@@ -58,14 +58,33 @@ void Canvas::initializeGL()
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
    glEnable(GL_DEPTH_TEST);
 
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smoke, new SmokeEngine(simulation->getSimulationGrid())));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphs, new GlyphEngine(simulation->getSimulationGrid())));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::seedPoints, new SeedPointEngine()));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::streamLines, new StreamLineEngine(simulation->getSimulationGrid())));
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::smoke,
+                        new SmokeEngine(simulation->getSimulationGrid())));
 
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::smokeSlices, new SmokeSlicesEngine(simulation->getSimulationGrid())));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::glyphSlices, new GlyphSliceEngine(simulation->getSimulationGrid())));
-   enginemap.insert(EnginePair(Settings::engines::EnginesTypes::streamLineSlices, new StreamLineSlicesEngine(simulation->getSimulationGrid())));
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::glyphs,
+                        new GlyphEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::seedPoints,
+                        new SeedPointEngine()));
+
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::streamLines,
+                        new StreamLineEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::smokeSlices,
+                        new SmokeSlicesEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::glyphSlices,
+                        new GlyphSliceEngine(simulation->getSimulationGrid())));
+
+   enginemap.insert(EnginePair(
+                        Settings::engines::EnginesTypes::streamLineSlices,
+                        new StreamLineSlicesEngine(simulation->getSimulationGrid())));
 
    emit openGlReady();
 
