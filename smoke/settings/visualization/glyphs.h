@@ -5,6 +5,7 @@
 #include "grid/vertex.h"
 #include "settings/settings.h"
 
+
 class Settings::visualization::Glyphs : public QObject
 {
    Q_OBJECT
@@ -18,7 +19,6 @@ class Settings::visualization::Glyphs : public QObject
       float scale;
 
       Settings::sim::GlyphsType glyph;
-      GLint drawMode;
       QSizeF approxCellSize;
 
       QPair<float, float> getCurrentMagnitudeRange() const;

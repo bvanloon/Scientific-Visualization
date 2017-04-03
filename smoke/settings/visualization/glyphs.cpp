@@ -6,11 +6,10 @@
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   scale(1),
+   scale(1.0),
    vectorField(Settings::sim::Vector::fluidVelocity)
 {
    vectorGetter = Vertex::getVectorGetter(Settings::defaults::visualization::glyphs::vector);
-   this->drawMode = Settings::defaults::visualization::glyphs::defaultDrawMode;
 }
 
 QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
@@ -63,7 +62,6 @@ void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector
 void Settings::visualization::Glyphs::onGlyphChanged(Settings::sim::GlyphsType glyph)
 {
    this->glyph = glyph;
-   this->drawMode = Settings::sim::drawModes.at(glyph);
 }
 
 void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
@@ -73,10 +71,10 @@ void Settings::visualization::Glyphs::onCellSizeChanged(QSizeF newSize)
 
 void Settings::visualization::Glyphs::onScaleChanged(double scale)
 {
-    this->scale = scale;
+   this->scale = scale;
 }
 
 void Settings::visualization::Glyphs::onGridDimensionChanged(QSizeF newDimension)
 {
-    emit gridDimensionChanged(newDimension);
+   emit gridDimensionChanged(newDimension);
 }
