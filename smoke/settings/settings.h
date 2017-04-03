@@ -121,7 +121,6 @@ namespace Settings {
 
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
-                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::triangles;
             }
 
             namespace streamlines {
@@ -133,9 +132,9 @@ namespace Settings {
         namespace engines {
             static const bool activeEngines[7] =
             {
-               true, false, false, false,
+               true,  false, false, false,
                //Slice Engines
-               false,  false, false
+               false, false, false
             };
         }
     }
