@@ -10,7 +10,7 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    Q_OBJECT
 
    public:
-      GlyphSliceEngine(UniformGrid *simulationGrid);
+      GlyphSliceEngine(SimulationGrid *simulationGrid);
 
       void draw();
 
@@ -27,10 +27,9 @@ class GlyphSliceEngine : public AbstractSliceEngine {
       void updateCache();
 
    private:
-      int fillBuffers();
 
-      Grid *visualizationGrid;
-      UniformGrid *simulationGrid;
+      UniformGrid *visualizationGrid;
+      SimulationGrid *simulationGrid;
       GlyphsFactory factory;
 };
 

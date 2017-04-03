@@ -3,8 +3,9 @@
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
 #include "simulation/simulationstatehistory.h"
+#include "grid/utilities/glyphbuilder.h"
 
-GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
+GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::phongLight,
                        Settings::engines::EnginesTypes::glyphSlices),
    visualizationGrid(
@@ -20,9 +21,11 @@ GlyphSliceEngine::GlyphSliceEngine(UniformGrid *simulationGrid) :
 
 void GlyphSliceEngine::draw()
 {
-   int bufferLength = this->fillBuffers();
-
-   drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
+   GlyphBuilder builder = GlyphBuilder(visualizationGrid, Settings::visualization::glyphs().glyph,
+                  Settings::visualization::glyphs().colorMap->textureGetter,
+                  Settings::visualization::glyphs().vectorGetter);
+   GPUData data = builder.getGPUData();
+   updateBuffersAndDraw(data);
 }
 
 void GlyphSliceEngine::updateCache()
@@ -34,19 +37,6 @@ void GlyphSliceEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellS
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
-}
-
-int GlyphSliceEngine::fillBuffers()
-{
-   int idx = SimulationHistory::instance().mostRecentStateIdx();
-   GlyphData data = SimulationHistory::instance().getVisualizationGridAtQueueIdx(idx).getGlyphData();
-   GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
-
-   updateBuffer(this->vertexBuffer, glyphs.getVertices());
-   updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
-   updateBuffer(this->normalBuffer, glyphs.getNormals());
-
-   return glyphs.numVertices();
 }
 
 void GlyphSliceEngine::onGridDimensionChanged(int width, int UNUSED(height))
