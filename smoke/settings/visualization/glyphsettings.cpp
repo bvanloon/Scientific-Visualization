@@ -1,6 +1,7 @@
+#include "settings/visualization/glyphs.h"
+#include "settings/simulationsettings.h"
 #include "settings/visualizationsettings.h"
 #include <QDebug>
-#include "settings/simulationsettings.h"
 
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),

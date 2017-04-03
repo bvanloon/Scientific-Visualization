@@ -10,6 +10,7 @@
 class Settings::visualization::StreamLines : public QObject
 {
    Q_OBJECT
+
    public:
       static const StreamLines& instance();
 

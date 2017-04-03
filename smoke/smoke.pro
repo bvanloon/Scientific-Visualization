@@ -154,7 +154,8 @@ HEADERS  += main.ih\
     grid/utilities/smokebuilder.h \
     engines/glyphengine.h \
     grid/utilities/glyphbuilder.h \
-    glyphs/glyphs.h
+    glyphs/glyphs.h \
+    settings/visualization/glyphs.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
