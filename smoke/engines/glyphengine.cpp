@@ -1,7 +1,7 @@
 #include "glyphengine.h"
-#include "grid/glyphdata.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
+#include "grid/utilities/glyphbuilder.h"
 
 
 GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
@@ -20,9 +20,11 @@ GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
 
 void GlyphEngine::draw()
 {
-   int bufferLength = this->fillBuffers();
-
-   drawWithMode(Settings::visualization::glyphs().drawMode, bufferLength);
+    GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
+                  Settings::visualization::glyphs().colorMap->textureGetter,
+                  Settings::visualization::glyphs().vectorGetter);
+    GPUData data = builder.getGPUData();
+    updateBuffersAndDraw(data);
 }
 
 void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
@@ -35,16 +37,4 @@ void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
    visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
-}
-
-int GlyphEngine::fillBuffers()
-{
-   GlyphData data = visualizationGrid->getGlyphData();
-   GlyphsTriangulation glyphs = factory.createGlyphs(data, Settings::visualization::glyphs().glyph);
-
-   updateBuffer(this->vertexBuffer, glyphs.getVertices());
-   updateBuffer(this->textureCoordinateBuffer, glyphs.getTextureCoordinates());
-   updateBuffer(this->normalBuffer, glyphs.getNormals());
-
-   return glyphs.numVertices();
 }

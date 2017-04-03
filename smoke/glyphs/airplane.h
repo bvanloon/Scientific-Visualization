@@ -8,7 +8,9 @@
 class Airplane : public AbstractGlyph
 {
    public:
-      Airplane(QVector3D position, QVector3D direction, float scalar);
+      Airplane(QVector3D position, QVector3D direction);
+
+      GPUData toGPUData(float textureCoordinate);
 
    private:
       class AirplaneBuilder;

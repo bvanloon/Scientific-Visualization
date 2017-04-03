@@ -3,34 +3,23 @@
 #include "settings/settings.h"
 #include "settings/simulationsettings.h"
 #include "settings/canvassettings.h"
-#include "settings/visualizationsettings.h"
 
 #include <QDebug>
 
 Simulation::Simulation(QObject *parent) :
    QObject(parent),
    realization(new SimulationRealization),
-   lastMousePosition(0.0f, 0.0f),
    grid(new SimulationGrid(
            Settings::simulation().dimension,
            Settings::canvas().size,
-           realization->getData()))
+           realization->getData())),
+   lastMousePosition(0.0f, 0.0f)
 {}
 
 Simulation::~Simulation()
 {
    delete realization;
    delete grid;
-}
-
-GlyphData Simulation::getGlyphData()
-{
-   return getGlyphData(grid);
-}
-
-GlyphData Simulation::getGlyphData(Grid *grid)
-{
-   return grid->getGlyphData();
 }
 
 void Simulation::step()

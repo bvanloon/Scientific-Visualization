@@ -4,9 +4,7 @@
 #include <QObject>
 #include "abstractengine.h"
 #include "grid/jittergrid.h"
-
 #include "unused.h"
-#include "glyphs/glyphsfactory.h"
 
 class GlyphEngine : public AbstractEngine {
    Q_OBJECT
@@ -25,11 +23,9 @@ class GlyphEngine : public AbstractEngine {
       void cellSizeChanged(QSizeF newSize);
 
    private:
-      int fillBuffers();
 
-      Grid *visualizationGrid;
+      UniformGrid *visualizationGrid;
       UniformGrid *simulationGrid;
-      GlyphsFactory factory;
 };
 
 #endif // VECTORENGINE_H

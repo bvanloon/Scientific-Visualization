@@ -4,29 +4,14 @@
 #include "utilities/range.h"
 
 
-AbstractGlyph::AbstractGlyph(float texture)
-{
-   this->textureCoordinate = texture;
-}
+AbstractGlyph::AbstractGlyph()
+{}
 
-float AbstractGlyph::getTextureCoordinate() const
+GPUData AbstractGlyph::toGPUData(int drawMode, float textureCoordinate)
 {
-   return textureCoordinate;
-}
-
-QVector<QVector3D> AbstractGlyph::getVertices() const
-{
-   return vertices;
-}
-
-QVector<QVector3D> AbstractGlyph::getNormals() const
-{
-   return normals;
-}
-
-size_t AbstractGlyph::numVertices()
-{
-   return this->vertices.length();
+   GPUData data(drawMode);
+   data.addElements(vertices, normals, textureCoordinate);
+   return data;
 }
 
 void AbstractGlyph::addVertex(QVector3D vertex, QVector3D normal)
@@ -56,6 +41,6 @@ float AbstractGlyph::computeNormalizedMagnitude(QVector3D direction)
 
 float AbstractGlyph::computeBaseSize(float cellRatio)
 {
-    QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
-    return cellRatio * qMax(cellSize.width(), cellSize.height());
+   QSizeF cellSize = Settings::visualization::glyphs().approxCellSize;
+   return cellRatio * qMax(cellSize.width(), cellSize.height());
 }

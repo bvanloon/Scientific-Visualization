@@ -3,8 +3,18 @@
 
 const double HedgeHog::cellRatio = 5;
 
-HedgeHog::HedgeHog(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar)
+HedgeHog::HedgeHog(QVector3D position, QVector3D direction) :
+   AbstractGlyph()
+{
+   build(position, direction);
+}
+
+GPUData HedgeHog::toGPUData(float textureCoordinate)
+{
+   return AbstractGlyph::toGPUData(GL_LINES, textureCoordinate);
+}
+
+void HedgeHog::build(QVector3D position, QVector3D direction)
 {
    QVector3D offSet = computeOffSet(direction);
    QVector3D normal = computeNormal(direction);

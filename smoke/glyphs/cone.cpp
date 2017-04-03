@@ -7,8 +7,8 @@
 
 const double Cone::maxCellRatio = 0.75;
 
-Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar),
+Cone::Cone(QVector3D position, QVector3D direction) :
+   AbstractGlyph(),
    mesh(::shapes::Cone().toTriangleMesh()),
    normalizedMagnitude(computeNormalizedMagnitude(direction)),
    position(position),
@@ -16,6 +16,11 @@ Cone::Cone(QVector3D position, QVector3D direction, float scalar) :
 {
    transform();
    this->addVertices(this->mesh->getVerticesAsVBO(), this->mesh->getNormalsAsVBO());
+}
+
+GPUData Cone::toGPUData(float textureCoordinate)
+{
+   return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
 }
 
 void Cone::transform()

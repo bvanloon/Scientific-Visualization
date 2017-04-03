@@ -5,8 +5,8 @@
 
 const double Triangle::cellRatio = 0.8;
 
-Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
-   AbstractGlyph(scalar)
+Triangle::Triangle(QVector3D position, QVector3D direction) :
+   AbstractGlyph()
 {
    QVector3D orthogonalVector = computeOrthogonalVector(direction);
 
@@ -21,4 +21,9 @@ Triangle::Triangle(QVector3D position, QVector3D direction, float scalar) :
    QVector3D normal = triangle.computeForwardPointingFaceNormal();
 
    this->addVertices(triangle.getVertices(), normal);
+}
+
+GPUData Triangle::toGPUData(float textureCoordinate)
+{
+   return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
 }

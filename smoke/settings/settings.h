@@ -28,6 +28,8 @@ namespace Settings {
 
         QStringList getNonDerivedVectorVariableNames();
 
+        QStringList getGlyphNames();
+
         class ColorMap;
 
         class Smoke;
@@ -65,14 +67,6 @@ namespace Settings {
            triangles,
            airplane,
            cone,
-        };
-
-        static const std::map<Settings::sim::GlyphsType, GLint> drawModes =
-        {
-           std::make_pair(Settings::sim::GlyphsType::hedgehog,  GL_LINES),
-           std::make_pair(Settings::sim::GlyphsType::triangles, GL_TRIANGLES),
-           std::make_pair(Settings::sim::GlyphsType::airplane,  GL_TRIANGLES),
-           std::make_pair(Settings::sim::GlyphsType::cone,      GL_TRIANGLES)
         };
     }
 
@@ -127,9 +121,6 @@ namespace Settings {
 
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
-                static const Settings::sim::Vector vector = Settings::sim::Vector::fluidVelocity;
-                static const Settings::sim::GlyphsType glyphType = Settings::sim::GlyphsType::triangles;
-                static const GLint defaultDrawMode = Settings::sim::drawModes.at(Settings::defaults::visualization::glyphs::glyphType);
             }
 
             namespace streamlines {
@@ -141,9 +132,9 @@ namespace Settings {
         namespace engines {
             static const bool activeEngines[7] =
             {
-               true, false, false, false,
+               true,  false, false, false,
                //Slice Engines
-               false,  false, false
+               false, false, false
             };
         }
     }

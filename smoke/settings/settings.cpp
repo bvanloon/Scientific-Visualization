@@ -26,34 +26,46 @@ const Settings::visualization::Glyphs& Settings::visualization::glyphs()
 
 QStringList Settings::visualization::getScalarVariableNames()
 {
-   QStringList scalarVariableNames;
+   QStringList names;
 
-   scalarVariableNames << "Fluid density"
-                       << "Fluid velocity magnitude"
-                       << "Force field magnitude";
-   return scalarVariableNames;
+   names << "Fluid density"
+         << "Fluid velocity magnitude"
+         << "Force field magnitude";
+   return names;
 }
 
 QStringList Settings::visualization::getAllVectorVariableNames()
 {
-   QStringList vectorVariableNames;
+   QStringList names;
 
-   vectorVariableNames << "Fluid velocity"
-                       << "Force"
-                       << "Fluid density gradient"
-                       << "Fluid velocity magnitude gradient";
+   names << "Fluid velocity"
+         << "Force"
+         << "Fluid density gradient"
+         << "Fluid velocity magnitude gradient";
 
-   return vectorVariableNames;
+   return names;
 }
 
 QStringList Settings::visualization::getNonDerivedVectorVariableNames()
 {
-   QStringList vectorVariableNames;
+   QStringList names;
 
-   vectorVariableNames << "Fluid velocity"
-                       << "Force";
+   names << "Fluid velocity"
+         << "Force";
 
-   return vectorVariableNames;
+   return names;
+}
+
+QStringList Settings::visualization::getGlyphNames()
+{
+   QStringList names;
+
+   names << "Hedgehogs"
+         << "Triangles"
+         << "Airplanes"
+         << "Cones";
+
+   return names;
 }
 
 const Settings::visualization::StreamLines& Settings::visualization::streamLines()
@@ -61,7 +73,7 @@ const Settings::visualization::StreamLines& Settings::visualization::streamLines
    return Settings::visualization::StreamLines::instance();
 }
 
-const Settings::visualization::Slices &Settings::visualization::slices()
+const Settings::visualization::Slices& Settings::visualization::slices()
 {
-    return Settings::visualization::Slices::instance();
+   return Settings::visualization::Slices::instance();
 }

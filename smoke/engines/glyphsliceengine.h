@@ -4,13 +4,12 @@
 #include "abstractsliceengine.h"
 #include "unused.h"
 #include "grid/jittergrid.h"
-#include "glyphs/glyphsfactory.h"
 
 class GlyphSliceEngine : public AbstractSliceEngine {
    Q_OBJECT
 
    public:
-      GlyphSliceEngine(UniformGrid *simulationGrid);
+      GlyphSliceEngine(SimulationGrid *simulationGrid);
 
       void draw();
 
@@ -27,11 +26,9 @@ class GlyphSliceEngine : public AbstractSliceEngine {
       void updateCache();
 
    private:
-      int fillBuffers();
 
-      Grid *visualizationGrid;
-      UniformGrid *simulationGrid;
-      GlyphsFactory factory;
+      UniformGrid *visualizationGrid;
+      SimulationGrid *simulationGrid;
 };
 
 #endif // GLYPHSLICEENGINE_H

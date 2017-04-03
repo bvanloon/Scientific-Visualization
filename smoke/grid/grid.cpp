@@ -20,32 +20,6 @@ Grid::~Grid()
 //   }
 }
 
-GlyphData Grid::getGlyphData() const
-{
-   GlyphData data = GlyphData(this->numVertices());
-
-   QVector<Vertex *>::const_iterator currentVertex = vertices.begin();
-   QVector3D position;
-   QVector2D direction;
-   Vertex *vertex;
-   float textureCoordinate;
-
-   Vertex::vectorGetter getDirection = Settings::visualization::glyphs().vectorGetter;
-   Vertex::scalarGetter getTexCoord = Settings::visualization::glyphs().colorMap->textureGetter;
-
-
-   for ( ; currentVertex != vertices.end(); currentVertex++)
-   {
-      vertex = (*currentVertex);
-      position = *(vertex->getPosition());
-      direction = (vertex->*(getDirection))();
-      textureCoordinate = (vertex->*(getTexCoord))();
-
-      data.addGlyph(position, direction, textureCoordinate);
-   }
-   return data;
-}
-
 const QVector<QVector3D>& Grid::getVertexPositions() const
 {
    return this->vertexPositions;

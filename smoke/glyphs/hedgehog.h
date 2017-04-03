@@ -7,9 +7,13 @@ class HedgeHog : public AbstractGlyph
 {
    public:
       HedgeHog();
-      HedgeHog(QVector3D position, QVector3D direction, float scalar);
+      HedgeHog(QVector3D position, QVector3D direction);
+
+      GPUData toGPUData(float textureCoordinate);
 
    private:
+      void build(QVector3D position, QVector3D direction);
+
       QVector3D computeOffSet(QVector3D direction);
 
       QVector3D computeNormal(QVector3D direction);

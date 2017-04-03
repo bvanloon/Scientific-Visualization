@@ -39,7 +39,6 @@ SOURCES += main.cpp\
     settings/canvassettings.cpp \
     settings/simulationsettings.cpp \
     settings/visualization/visualizationsettings.cpp \
-    settings/visualization/glyphsettings.cpp \
     settings/visualization/smokesettings.cpp \
     view/simulationtab.cpp \
     keyboardhandler.cpp \
@@ -52,11 +51,8 @@ SOURCES += main.cpp\
     grid/triangulation.cpp \
     engines/abstractengine.cpp \
     view/glyphstab.cpp \
-    grid/glyphdata.cpp \
     colormaps/huecolormap.cpp \
-    glyphs/glyphsfactory.cpp \
     glyphs/abstractglyph.cpp \
-    glyphs/glyphstriangulation.cpp \
     glyphs/hedgehog.cpp \
     glyphs/triangle.cpp \
     glyphs/ccwtriangle.cpp \
@@ -88,7 +84,9 @@ SOURCES += main.cpp\
     grid/simulationgrid.cpp \
     simulation/simulationstatehistory.cpp \
     grid/utilities/smokebuilder.cpp \
-    engines/glyphengine.cpp
+    engines/glyphengine.cpp \
+    grid/utilities/glyphbuilder.cpp \
+    settings/visualization/glyphs.cpp
 
 HEADERS  += main.ih\
         view/mainwindow.h \
@@ -119,11 +117,8 @@ HEADERS  += main.ih\
     grid/triangulation.h \
     engines/abstractengine.h \
     view/glyphstab.h \
-    grid/glyphdata.h \
     colormaps/huecolormap.h \
-    glyphs/glyphsfactory.h \
     glyphs/abstractglyph.h \
-    glyphs/glyphstriangulation.h \
     glyphs/hedgehog.h \
     glyphs/triangle.h \
     glyphs/ccwtriangle.h \
@@ -157,7 +152,10 @@ HEADERS  += main.ih\
     grid/simulationgrid.h \
     utilities/sizelimitedqueue.h \
     grid/utilities/smokebuilder.h \
-    engines/glyphengine.h
+    engines/glyphengine.h \
+    grid/utilities/glyphbuilder.h \
+    glyphs/glyphs.h \
+    settings/visualization/glyphs.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
