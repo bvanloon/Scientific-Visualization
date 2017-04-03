@@ -26,9 +26,9 @@ out vec4 fColor;
 //Uniform in
 uniform sampler1D colormap;
 uniform int lightModel;
+uniform float globalAlpha;
 
 float localAlpha = 1.0;
-float globalAlpha = 1.0;
 
 //Constants
 vec3 eye = vec3(400.0, 400.0, 800.0);

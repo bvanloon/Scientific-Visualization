@@ -72,6 +72,9 @@ public slots:
 
       void setProjectionMatrix(const QMatrix4x4 &value);
 
+      void setGlobalAlpha();
+      void setGlobalAlpha(float alpha);
+
       void setScreenSpaceTransformation();
       void setScreenSpaceTransformation(const QMatrix4x4 &transform);
 

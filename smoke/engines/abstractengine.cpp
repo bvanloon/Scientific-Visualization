@@ -42,6 +42,18 @@ void AbstractEngine::setProjectionMatrix(const QMatrix4x4& value)
    this->setMVPMatrix();
 }
 
+void AbstractEngine::setGlobalAlpha()
+{
+    setGlobalAlpha(1.0);
+}
+
+void AbstractEngine::setGlobalAlpha(float alpha)
+{
+    this->shaderProgram->bind();
+    this->shaderProgram->setUniformValue("globalAlpha", alpha);
+    this->shaderProgram->release();
+}
+
 void AbstractEngine::setScreenSpaceTransformation()
 {
     QMatrix4x4 transform;
@@ -86,6 +98,7 @@ void AbstractEngine::initializeUniforms()
    setMVPMatrix();
    setLightModel();
    setScreenSpaceTransformation();
+   setGlobalAlpha();
    initializeColorMapInfo();
 }
 
