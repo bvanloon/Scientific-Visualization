@@ -135,8 +135,9 @@ void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checke
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-    if(QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
-    if(QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
+   if (QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
+
+   if (QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
 }
 
 void Canvas::clickMouseEvent(QMouseEvent *event)
@@ -150,15 +151,15 @@ void Canvas::clickMouseEvent(QMouseEvent *event)
 
 void Canvas::altMouseEvent(QMouseEvent *event)
 {
-    static QVector3D previousMousePosition;
+   static QVector3D previousMousePosition;
 
-    QVector3D currentMousePosition = QVector3D(Settings::canvas().convertToNormalCoordinates(event->localPos()));
+   QVector3D currentMousePosition = QVector3D(Settings::canvas().convertToNormalCoordinates(event->localPos()));
 
-    QVector3D panningDirection = (currentMousePosition - previousMousePosition).normalized();
+   QVector3D panningDirection = (currentMousePosition - previousMousePosition).normalized();
 
-    emit panningDirectionChanged(panningDirection);
+   emit panningDirectionChanged(panningDirection);
 
-    previousMousePosition = currentMousePosition;
+   previousMousePosition = currentMousePosition;
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
