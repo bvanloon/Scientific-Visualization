@@ -6,9 +6,9 @@
 Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   scale(1.0),
+   vectorField(Settings::sim::Vector::fluidVelocity),
    glyph(Settings::sim::GlyphsType::airplane),
-   vectorField(Settings::sim::Vector::fluidVelocity)
+   scale(1.0)
 {
    vectorGetter = Vertex::getVectorGetter(vectorField);
 }
