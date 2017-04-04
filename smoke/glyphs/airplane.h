@@ -10,7 +10,8 @@ class Airplane : public AbstractGlyph
    public:
       Airplane(QVector3D position, QVector3D direction);
 
-      GPUData toGPUData(float textureCoordinate, float alpha = 1.0);
+protected:
+      virtual GLint getDrawMode() const;
 
    private:
       class AirplaneBuilder;

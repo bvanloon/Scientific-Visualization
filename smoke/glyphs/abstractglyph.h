@@ -16,13 +16,13 @@ class AbstractGlyph
    public:
       AbstractGlyph();
 
-      virtual GPUData toGPUData(float textureCoordinate, float alpha = 1.0) = 0;
+      GPUData toGPUData(float textureCoordinate, float alpha = 1.0);
 
    protected:
       QVector<QVector3D> normals;
       QVector<QVector3D> vertices;
 
-      GPUData toGPUData(GLint drawMode, float textureCoordinate, float alpha = 1.0);
+      virtual GLint getDrawMode() const = 0;
 
       void addVertex(QVector3D vertex, QVector3D normal);
 

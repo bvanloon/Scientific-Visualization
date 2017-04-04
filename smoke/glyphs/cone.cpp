@@ -18,9 +18,9 @@ Cone::Cone(QVector3D position, QVector3D direction) :
    this->addVertices(this->mesh->getVerticesAsVBO(), this->mesh->getNormalsAsVBO());
 }
 
-GPUData Cone::toGPUData(float textureCoordinate, float alpha)
+GLint Cone::getDrawMode() const
 {
-   return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate, alpha);
+    return GL_TRIANGLES;
 }
 
 void Cone::transform()
