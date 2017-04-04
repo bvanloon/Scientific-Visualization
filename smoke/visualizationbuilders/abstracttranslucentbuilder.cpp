@@ -5,7 +5,7 @@ AbstractTranslucentBuilder::AbstractTranslucentBuilder(Range range) :
    range(range)
 {}
 
-float AbstractTranslucentBuilder::computeAlpha(float scalar)
+float AbstractTranslucentBuilder::computeAlpha(float scalar) const
 {
    return mapToUnitRange(scalar, range.first, range.second);
 }
