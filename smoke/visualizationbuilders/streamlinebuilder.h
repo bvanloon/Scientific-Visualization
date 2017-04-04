@@ -21,6 +21,8 @@ class StreamLineBuilder {
       double edgeLength;
       double maximumTotalLength;
 
+      QVector3D seedPoint;
+
       Vertex::vectorGetter vectorGetter;
       Vertex::scalarGetter magnitudeGetter;
 
