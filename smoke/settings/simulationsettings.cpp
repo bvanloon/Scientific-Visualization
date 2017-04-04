@@ -36,6 +36,27 @@ Range<double> Settings::Simulation::getRange(Settings::sim::Scalar scalar) const
    return this->scalarRanges.constFind(scalar).value();
 }
 
+Range<double> Settings::Simulation::getMagnitudeRange(Settings::sim::Vector vector) const
+{
+   switch (vector)
+   {
+   case Settings::sim::Vector::fluidVelocity:
+      return Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude);
+
+   case Settings::sim::Vector::force:
+      return Settings::simulation().getRange(Settings::sim::Scalar::forceFieldMagnitude);
+
+   case Settings::sim::Vector::fluidDensityGradient:
+   //fall through
+
+   case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
+   //fall through
+   default:
+      qDebug() << "Settings::visualization::Glyphs::getCurrentMagnitudeRange(): Current gradient magnitudes are not supported. ";
+      exit(-1);
+   }
+}
+
 void Settings::Simulation::onDimensionChanged(int newDimension)
 {
    this->dimension = newDimension;

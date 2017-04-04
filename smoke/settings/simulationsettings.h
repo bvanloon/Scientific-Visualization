@@ -25,6 +25,7 @@ class Settings::Simulation : public QObject
 
 
       Range<double> getRange(Settings::sim::Scalar scalar) const;
+      Range<double> getMagnitudeRange(Settings::sim::Vector vector) const;
 
    signals:
       void valueRangeChanged(Settings::sim::Scalar scalar, float minimum, float maximum);
@@ -61,6 +62,8 @@ class Settings::Simulation : public QObject
       void updateGridCellSize();
 
       void updateGridCellSize(int canvasWidth, int height);
+
+      Range<double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 };
 
 #endif // SIMULATIONS_H
