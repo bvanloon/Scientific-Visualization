@@ -15,6 +15,9 @@ class TranslucentGlyphBuilder :
                               Vertex::vectorGetter directionGetter,
                               Range magnitudeRange);
 
+   protected:
+      float computeAlpha(QVector3D vector) const;
+
    private:
 
       GPUData buildHedgeHog(Vertex *vertex) const;

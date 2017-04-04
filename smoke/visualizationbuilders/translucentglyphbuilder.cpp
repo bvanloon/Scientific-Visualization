@@ -8,34 +8,44 @@ TranslucentGlyphBuilder::TranslucentGlyphBuilder(UniformGrid *grid, Settings::si
                 directionGetter)
 {}
 
+float TranslucentGlyphBuilder::computeAlpha(QVector3D vector) const
+{
+   float magnitude = vector.length();
+   return AbstractTranslucentBuilder::computeAlpha(magnitude);
+}
+
 GPUData TranslucentGlyphBuilder::buildHedgeHog(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
-   HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()),
-                                (vertex->*(getDirection))());
-   return hedgeHog.toGPUData(textureCoordinate);
+   QVector3D direction = (vertex->*(getDirection))();
+   float alpha = computeAlpha(direction);
+   HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()), direction);
+   return hedgeHog.toGPUData(textureCoordinate, alpha);
 }
 
 GPUData TranslucentGlyphBuilder::buildTriangle(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
-   Triangle triangle = Triangle(*(vertex->getPosition()),
-                                (vertex->*(getDirection))());
-   return triangle.toGPUData(textureCoordinate);
+   QVector3D direction = (vertex->*(getDirection))();
+   float alpha = computeAlpha(direction);
+   Triangle triangle = Triangle(*(vertex->getPosition()), direction);
+   return triangle.toGPUData(textureCoordinate, alpha);
 }
 
 GPUData TranslucentGlyphBuilder::buildAirplane(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
-   Airplane triangle = Airplane(*(vertex->getPosition()),
-                                (vertex->*(getDirection))());
-   return triangle.toGPUData(textureCoordinate);
+   QVector3D direction = (vertex->*(getDirection))();
+   float alpha = computeAlpha(direction);
+   Airplane triangle = Airplane(*(vertex->getPosition()), direction);
+   return triangle.toGPUData(textureCoordinate, alpha);
 }
 
 GPUData TranslucentGlyphBuilder::buildCone(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
-   Cone cone = Cone(*(vertex->getPosition()),
-                    (vertex->*(getDirection))());
-   return cone.toGPUData(textureCoordinate);
+   QVector3D direction = (vertex->*(getDirection))();
+   float alpha = computeAlpha(direction);
+   Cone cone = Cone(*(vertex->getPosition()), direction);
+   return cone.toGPUData(textureCoordinate, alpha);
 }
