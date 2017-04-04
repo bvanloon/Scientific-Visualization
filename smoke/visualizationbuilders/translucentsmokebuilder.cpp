@@ -11,5 +11,6 @@ void TranslucentSmokeBuilder::addVertex(Vertex *vertex)
 {
    double textureCoordinate = (vertex->*getTextureCoordinate)();
    QVector3D position = *vertex->getPosition();
-   data.addElement(position, normal, textureCoordinate);
+   double alpha = computeAlpha(textureCoordinate);
+   data.addElement(position, normal, textureCoordinate, alpha);
 }
