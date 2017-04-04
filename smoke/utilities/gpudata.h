@@ -15,6 +15,7 @@
 class GPUData
 {
    public:
+      GPUData();
       GPUData(GLint drawMode);
 
       void transform(QMatrix4x4 transformation);
@@ -55,7 +56,9 @@ class GPUData
 
       void transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation);
 
-      void assertDrawModesAreEqual(GLint thisMode, GLint otherMode);
+      int determineDrawMode(GLint thisMode, GLint otherMode);
+
+      static const int noDrawMode = -1;
 };
 
 #endif // GPUDATA_H

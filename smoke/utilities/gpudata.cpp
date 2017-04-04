@@ -3,6 +3,10 @@
 #include <QDebug>
 #include "settings/canvassettings.h"
 
+GPUData::GPUData() :
+   drawMode(noDrawMode)
+{}
+
 GPUData::GPUData(GLint drawMode) :
    drawMode(drawMode)
 {}
@@ -15,7 +19,7 @@ void GPUData::transform(QMatrix4x4 transformation)
 
 void GPUData::extend(GPUData data)
 {
-   assertDrawModesAreEqual(this->drawMode, data.drawMode);
+   determineDrawMode(this->drawMode, data.drawMode);
    this->vertices.append(data.getVertices());
    this->normals.append(data.getNormals());
    this->textureCoordinates.append(data.getTextureCoordinates());
@@ -132,7 +136,17 @@ GLint GPUData::getDrawMode() const
    return drawMode;
 }
 
-void GPUData::assertDrawModesAreEqual(GLint thisMode, GLint otherMode)
+int GPUData::determineDrawMode(GLint thisMode, GLint otherMode)
 {
-   assert(thisMode == otherMode);
+   if ((thisMode != noDrawMode) && (otherMode != noDrawMode))
+   {
+      assert(thisMode == otherMode);
+      return thisMode;
+   }
+   if (thisMode != noDrawMode) return thisMode;
+
+   if (otherMode != noDrawMode) return otherMode;
+
+   //We are combining two empty GPUData objects.
+   return noDrawMode;
 }
