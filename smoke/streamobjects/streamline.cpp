@@ -54,3 +54,8 @@ void streamobject::Line::addVertex(QVector3D vertex, float textureCoordinate)
    shapes::PolyLine::addVertex(vertex);
    this->textureCoordinates.append(textureCoordinate);
 }
+
+bool streamobject::Line::hasNoVertices()
+{
+   return this->numVertices() == 0;
+}

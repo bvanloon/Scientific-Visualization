@@ -18,6 +18,8 @@ namespace streamobject {
 
           void addVertex(QVector3D vertex, float textureCoordinate);
 
+          bool hasNoVertices();
+
           GPUData toGPUData() const;
 
           int numVertices() const;
