@@ -6,12 +6,12 @@ const double HedgeHog::cellRatio = 5;
 HedgeHog::HedgeHog(QVector3D position, QVector3D direction) :
    AbstractGlyph()
 {
-   build(position, direction);
+    build(position, direction);
 }
 
-GPUData HedgeHog::toGPUData(float textureCoordinate)
+GLint HedgeHog::getDrawMode() const
 {
-   return AbstractGlyph::toGPUData(GL_LINES, textureCoordinate);
+    return GL_LINES;
 }
 
 void HedgeHog::build(QVector3D position, QVector3D direction)

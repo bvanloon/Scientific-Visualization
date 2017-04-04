@@ -9,7 +9,8 @@ class Cone : public AbstractGlyph
    public:
       Cone(QVector3D position, QVector3D direction);
 
-      GPUData toGPUData(float textureCoordinate);
+    protected:
+      GLint getDrawMode() const;
 
    private:
 

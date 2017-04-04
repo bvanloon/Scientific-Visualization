@@ -11,7 +11,7 @@ class AbstractTranslucentBuilder
       AbstractTranslucentBuilder(Range range);
 
    protected:
-      float computeAlpha(float scalar);
+      float computeAlpha(float scalar) const;
 
 private:
       Range range;

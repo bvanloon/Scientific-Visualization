@@ -23,7 +23,7 @@ Triangle::Triangle(QVector3D position, QVector3D direction) :
    this->addVertices(triangle.getVertices(), normal);
 }
 
-GPUData Triangle::toGPUData(float textureCoordinate)
+GLint Triangle::getDrawMode() const
 {
-   return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
+    return GL_TRIANGLES;
 }

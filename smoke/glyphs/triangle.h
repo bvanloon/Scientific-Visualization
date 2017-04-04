@@ -8,7 +8,7 @@ class Triangle : public AbstractGlyph
    public:
       Triangle(QVector3D position, QVector3D direction);
 
-      GPUData toGPUData(float textureCoordinate);
+      GLint getDrawMode() const;
 
    private:
       static const double cellRatio;

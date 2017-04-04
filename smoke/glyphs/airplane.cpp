@@ -17,9 +17,9 @@ Airplane::Airplane(QVector3D position, QVector3D direction) :
    addVertices(builder.getVertices(), builder.getNormals());
 }
 
-GPUData Airplane::toGPUData(float textureCoordinate)
+GLint Airplane::getDrawMode() const
 {
-    return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
+    return GL_TRIANGLES;
 }
 
 Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude) :
