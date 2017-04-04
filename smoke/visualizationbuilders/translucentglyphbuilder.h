@@ -16,6 +16,14 @@ class TranslucentGlyphBuilder :
                               Range magnitudeRange);
 
    private:
+
+      GPUData buildHedgeHog(Vertex *vertex) const;
+
+      GPUData buildTriangle(Vertex *vertex) const;
+
+      GPUData buildAirplane(Vertex *vertex) const;
+
+      GPUData buildCone(Vertex *vertex) const;
 };
 
 #endif // TRANSLUCENTGLYPHBUILDER_H

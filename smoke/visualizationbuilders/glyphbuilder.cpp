@@ -1,6 +1,4 @@
 #include "glyphbuilder.h"
-#include "glyphs/abstractglyph.h"
-#include "glyphs/glyphs.h"
 
 GlyphBuilder::GlyphBuilder(UniformGrid *grid,
                            Settings::sim::GlyphsType glyphThype,
@@ -9,18 +7,19 @@ GlyphBuilder::GlyphBuilder(UniformGrid *grid,
    grid(grid),
    getTextureCoordinate(textureGetter),
    getDirection(directionGetter),
-   data(build(glyphThype))
+   glyphType(glyphThype)
 {}
 
 GlyphBuilder::~GlyphBuilder()
 {}
 
-GPUData GlyphBuilder::getGPUData() const
+GPUData GlyphBuilder::getGPUData()
 {
+   if (data.isEmpty()) data = build(glyphType);
    return data;
 }
 
-GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
+GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType) const
 {
    switch (glyphType)
    {
@@ -38,14 +37,14 @@ GPUData GlyphBuilder::build(Settings::sim::GlyphsType glyphType)
    }
 }
 
-GPUData GlyphBuilder::buildHedgeHogs()
+GPUData GlyphBuilder::buildHedgeHogs() const
 {
    GPUData hedgeHodgeData(GL_LINES);
    for (Vertex *vertex : grid->getVertices()) hedgeHodgeData.extend(buildHedgeHog(vertex));
    return hedgeHodgeData;
 }
 
-GPUData GlyphBuilder::buildHedgeHog(Vertex *vertex)
+GPUData GlyphBuilder::buildHedgeHog(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    HedgeHog hedgeHog = HedgeHog(*(vertex->getPosition()),
@@ -53,14 +52,14 @@ GPUData GlyphBuilder::buildHedgeHog(Vertex *vertex)
    return hedgeHog.toGPUData(textureCoordinate);
 }
 
-GPUData GlyphBuilder::buildTriangles()
+GPUData GlyphBuilder::buildTriangles() const
 {
    GPUData triangleData(GL_TRIANGLES);
    for (Vertex *vertex : grid->getVertices()) triangleData.extend(buildTriangle(vertex));
    return triangleData;
 }
 
-GPUData GlyphBuilder::buildTriangle(Vertex *vertex)
+GPUData GlyphBuilder::buildTriangle(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    Triangle triangle = Triangle(*(vertex->getPosition()),
@@ -68,14 +67,14 @@ GPUData GlyphBuilder::buildTriangle(Vertex *vertex)
    return triangle.toGPUData(textureCoordinate);
 }
 
-GPUData GlyphBuilder::buildAirplanes()
+GPUData GlyphBuilder::buildAirplanes() const
 {
-    GPUData airplanes(GL_TRIANGLES);
-    for (Vertex *vertex : grid->getVertices()) airplanes.extend(buildAirplane(vertex));
-    return airplanes;
+   GPUData airplanes(GL_TRIANGLES);
+   for (Vertex *vertex : grid->getVertices()) airplanes.extend(buildAirplane(vertex));
+   return airplanes;
 }
 
-GPUData GlyphBuilder::buildAirplane(Vertex *vertex)
+GPUData GlyphBuilder::buildAirplane(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    Airplane triangle = Airplane(*(vertex->getPosition()),
@@ -83,14 +82,14 @@ GPUData GlyphBuilder::buildAirplane(Vertex *vertex)
    return triangle.toGPUData(textureCoordinate);
 }
 
-GPUData GlyphBuilder::buildCones()
+GPUData GlyphBuilder::buildCones() const
 {
    GPUData cones(GL_TRIANGLES);
    for (Vertex *vertex : grid->getVertices()) cones.extend(buildCone(vertex));
    return cones;
 }
 
-GPUData GlyphBuilder::buildCone(Vertex *vertex)
+GPUData GlyphBuilder::buildCone(Vertex *vertex) const
 {
    float textureCoordinate = (vertex->*(getTextureCoordinate))();
    Cone cone = Cone(*(vertex->getPosition()),

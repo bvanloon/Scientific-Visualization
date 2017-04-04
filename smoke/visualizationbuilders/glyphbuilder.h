@@ -3,6 +3,7 @@
 
 #include "grid/uniformgrid.h"
 #include "utilities/gpudata.h"
+#include "glyphs/glyphs.h"
 
 class GlyphBuilder
 {
@@ -13,29 +14,33 @@ class GlyphBuilder
                    Vertex::vectorGetter directionGetter);
       ~GlyphBuilder();
 
-      GPUData getGPUData() const;
+      GPUData getGPUData();
 
-   private:
+   protected:
       UniformGrid *grid;
 
       Vertex::scalarGetter getTextureCoordinate;
       Vertex::vectorGetter getDirection;
 
+   private:
+
+      Settings::sim::GlyphsType glyphType;
+
       GPUData data;
 
-      GPUData build(Settings::sim::GlyphsType glyphType);
+      GPUData build(Settings::sim::GlyphsType glyphType) const;
 
-      GPUData buildHedgeHogs();
-      GPUData buildHedgeHog(Vertex *vertex);
+      GPUData buildHedgeHogs() const;
+      virtual GPUData buildHedgeHog(Vertex *vertex) const;
 
-      GPUData buildTriangles();
-      GPUData buildTriangle(Vertex *vertex);
+      GPUData buildTriangles() const;
+      virtual GPUData buildTriangle(Vertex *vertex) const;
 
-      GPUData buildAirplanes();
-      GPUData buildAirplane(Vertex *vertex);
+      GPUData buildAirplanes() const;
+      virtual GPUData buildAirplane(Vertex *vertex) const;
 
-      GPUData buildCones();
-      GPUData buildCone(Vertex *vertex);
+      GPUData buildCones() const;
+      virtual GPUData buildCone(Vertex *vertex) const;
 };
 
 #endif // GLYPHBUILDER_H
