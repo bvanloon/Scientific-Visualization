@@ -17,9 +17,9 @@ Airplane::Airplane(QVector3D position, QVector3D direction) :
    addVertices(builder.getVertices(), builder.getNormals());
 }
 
-GPUData Airplane::toGPUData(float textureCoordinate)
+GPUData Airplane::toGPUData(float textureCoordinate, float alpha)
 {
-    return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate);
+    return AbstractGlyph::toGPUData(GL_TRIANGLES, textureCoordinate, alpha);
 }
 
 Airplane::AirplaneBuilder::AirplaneBuilder(QVector3D position, QVector3D direction, float normalizedMagnitude) :

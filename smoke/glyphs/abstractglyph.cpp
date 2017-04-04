@@ -7,10 +7,10 @@
 AbstractGlyph::AbstractGlyph()
 {}
 
-GPUData AbstractGlyph::toGPUData(int drawMode, float textureCoordinate)
+GPUData AbstractGlyph::toGPUData(int drawMode, float textureCoordinate, float alpha)
 {
    GPUData data(drawMode);
-   data.addElements(vertices, normals, textureCoordinate);
+   data.addElements(vertices, normals, textureCoordinate, alpha);
    return data;
 }
 
