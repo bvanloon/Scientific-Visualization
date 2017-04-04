@@ -1,7 +1,7 @@
 #include "glyphsliceengine.h"
 #include "settings/settings.h"
 #include "settings/canvassettings.h"
-#include "visualizationbuilders/glyphbuilder.h"
+#include "visualizationbuilders/translucentglyphbuilder.h"
 
 GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::phongLight,
@@ -21,9 +21,11 @@ GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :
 
 void GlyphSliceEngine::updateCache()
 {
-   GlyphBuilder builder = GlyphBuilder(visualizationGrid, Settings::visualization::glyphs().glyph,
-                   Settings::visualization::glyphs().colorMap->textureGetter,
-                   Settings::visualization::glyphs().vectorGetter);
+   TranslucentGlyphBuilder builder(visualizationGrid,
+                                   Settings::visualization::glyphs().glyph,
+                                   Settings::visualization::glyphs().colorMap->textureGetter,
+                                   Settings::visualization::glyphs().vectorGetter,
+                                   Settings::visualization::glyphs().getCurrentMagnitudeRange());
 
    GPUData data = builder.getGPUData();
    data.transform(toSliceTransformation);

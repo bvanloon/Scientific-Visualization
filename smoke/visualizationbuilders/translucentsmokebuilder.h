@@ -3,7 +3,6 @@
 
 #include "abstracttranslucentbuilder.h"
 #include "smokebuilder.h"
-#include <QPair>
 
 class TranslucentSmokeBuilder :
    private AbstractTranslucentBuilder,
