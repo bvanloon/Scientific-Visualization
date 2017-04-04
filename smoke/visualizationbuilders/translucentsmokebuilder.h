@@ -3,13 +3,16 @@
 
 #include "abstracttranslucentbuilder.h"
 #include "smokebuilder.h"
+#include <QPair>
 
 class TranslucentSmokeBuilder :
    private AbstractTranslucentBuilder,
    public SmokeBuilder
 {
    public:
-      TranslucentSmokeBuilder(SimulationGrid *grid, Vertex::scalarGetter getTextureCoordinate);
+      TranslucentSmokeBuilder(SimulationGrid *grid,
+                              Vertex::scalarGetter getTextureCoordinate,
+                              Range textureRange);
 
    protected:
       void addVertex(Vertex *vertex);

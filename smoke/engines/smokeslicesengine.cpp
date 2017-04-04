@@ -12,7 +12,9 @@ SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
 
 void SmokeSlicesEngine::updateCache()
 {
-   TranslucentSmokeBuilder builder(this->simulation, colorMap->textureGetter);
+   TranslucentSmokeBuilder builder(this->simulation,
+                                   colorMap->textureGetter,
+                                   Settings::simulation().getRange(colorMap->scalar));
    GPUData newData = builder.getGPUData();
    newData.transform(toSliceTransformation);
 
