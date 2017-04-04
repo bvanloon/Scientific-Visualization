@@ -1,6 +1,6 @@
 #include "smokeslicesengine.h"
-#include "visualizationbuilders/smokebuilder.h"
 #include "settings/visualizationsettings.h"
+#include "visualizationbuilders/translucentsmokebuilder.h"
 
 SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
@@ -12,7 +12,9 @@ SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
 
 void SmokeSlicesEngine::updateCache()
 {
-   SmokeBuilder builder = SmokeBuilder(this->simulation, colorMap->textureGetter);
+   TranslucentSmokeBuilder builder(this->simulation,
+                                   colorMap->textureGetter,
+                                   Settings::simulation().getRange(colorMap->scalar));
    GPUData newData = builder.getGPUData();
    newData.transform(toSliceTransformation);
 
