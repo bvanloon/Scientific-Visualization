@@ -6,7 +6,8 @@ TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
    QVector3D currentPosition,
    Vertex::vectorGetter vectorGetter,
    Vertex::scalarGetter magnitudeGetter,
-   Range magnitudeRange) :
+   Range<double> magnitudeRange
+   ) :
    AbstractTranslucentBuilder(magnitudeRange),
    StreamLineBuilder(grid, currentPosition, vectorGetter, magnitudeGetter)
 {

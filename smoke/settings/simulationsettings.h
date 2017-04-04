@@ -5,6 +5,7 @@
 #include <QSizeF>
 #include <QMultiMap>
 #include "settings.h"
+#include "utilities/range.h"
 
 class Settings::Simulation : public QObject
 {
@@ -23,7 +24,7 @@ class Settings::Simulation : public QObject
       const float simulationTimeStepMaximum = 0.45;
 
 
-      QPair<float, float> getRange(Settings::sim::Scalar scalar) const;
+      Range<double> getRange(Settings::sim::Scalar scalar) const;
 
    signals:
       void valueRangeChanged(Settings::sim::Scalar scalar, float minimum, float maximum);
@@ -53,7 +54,7 @@ class Settings::Simulation : public QObject
       Simulation(Simulation const&) = delete;
       void operator=(Simulation const&) = delete;
 
-      QMultiMap<Settings::sim::Scalar, QPair<float, float> > scalarRanges;
+      QMultiMap<Settings::sim::Scalar, Range<double>> scalarRanges;
 
       void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
 

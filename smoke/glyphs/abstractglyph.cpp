@@ -35,8 +35,8 @@ void AbstractGlyph::addVertices(QVector<QVector3D> vertices, QVector<QVector3D> 
 
 float AbstractGlyph::computeNormalizedMagnitude(QVector3D direction)
 {
-   QPair<float, float> range = Settings::visualization::glyphs().getCurrentMagnitudeRange();
-   return mapToUnitRange(direction.length(), range.first, range.second);
+   Range<double> range = Settings::visualization::glyphs().getCurrentMagnitudeRange();
+   return mapToUnitRange(direction.length(), (float) range.minimum(), (float) range.maximum());
 }
 
 float AbstractGlyph::computeBaseSize(float cellRatio)

@@ -11,16 +11,15 @@ Settings::Simulation::Simulation(QObject *parent) :
    force(10.0f),
    cellSize(-1, -1)
 {
-   scalarRanges.insert(Settings::sim::Scalar::fluidDensity, QPair<float, float>(0.0f, force));
-   scalarRanges.insert(Settings::sim::Scalar::fluidVelocityMagnitude, QPair<float, float>(0.0f, 0.1f));
-   scalarRanges.insert(Settings::sim::Scalar::forceFieldMagnitude, QPair<float, float>(0.0f, 0.5f));
+   scalarRanges.insert(Settings::sim::Scalar::fluidDensity, Range<double>(0.0f, force));
+   scalarRanges.insert(Settings::sim::Scalar::fluidVelocityMagnitude, Range<double>(0.0f, 0.1f));
+   scalarRanges.insert(Settings::sim::Scalar::forceFieldMagnitude, Range<double>(0.0f, 0.5f));
 }
 
 void Settings::Simulation::updateRange(Settings::sim::Scalar scalar, float minimum, float maximum)
 {
-   QPair<float, float> range = scalarRanges.find(scalar).value();
-   range.first = minimum;
-   range.second = maximum;
+   Range<double> range = scalarRanges.find(scalar).value();
+   range.change(minimum, maximum);
    scalarRanges.replace(scalar, range);
    emit valueRangeChanged(scalar, minimum, maximum);
 }
@@ -32,7 +31,7 @@ const Settings::Simulation& Settings::Simulation::instance()
    return instance;
 }
 
-QPair<float, float> Settings::Simulation::getRange(Settings::sim::Scalar scalar) const
+Range<double> Settings::Simulation::getRange(Settings::sim::Scalar scalar) const
 {
    return this->scalarRanges.constFind(scalar).value();
 }

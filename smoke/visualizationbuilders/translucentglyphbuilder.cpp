@@ -1,6 +1,6 @@
 #include "translucentglyphbuilder.h"
 
-TranslucentGlyphBuilder::TranslucentGlyphBuilder(UniformGrid *grid, Settings::sim::GlyphsType glyphThype, Vertex::scalarGetter getTextureCoordinate, Vertex::vectorGetter directionGetter, Range magnitudeRange) :
+TranslucentGlyphBuilder::TranslucentGlyphBuilder(UniformGrid *grid, Settings::sim::GlyphsType glyphThype, Vertex::scalarGetter getTextureCoordinate, Vertex::vectorGetter directionGetter, Range<double> magnitudeRange) :
    AbstractTranslucentBuilder(magnitudeRange),
    GlyphBuilder(grid,
                 glyphThype,

@@ -11,7 +11,7 @@ class TranslucentSmokeBuilder :
    public:
       TranslucentSmokeBuilder(SimulationGrid *grid,
                               Vertex::scalarGetter getTextureCoordinate,
-                              Range textureRange);
+                              Range<double> textureRange);
 
    protected:
       void addVertex(Vertex *vertex);

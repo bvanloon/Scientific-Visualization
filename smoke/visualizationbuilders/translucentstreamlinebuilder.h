@@ -13,7 +13,7 @@ class TranslucentStreamLineBuilder :
                                    QVector3D currentPosition,
                                    Vertex::vectorGetter vectorGetter,
                                    Vertex::scalarGetter magnitudeGetter,
-                                   Range magnitudeRange);
+                                   Range<double> magnitudeRange);
 };
 
 #endif // TRANSLUCENTSTREAMLINEBUILDER_H
