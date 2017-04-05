@@ -160,6 +160,18 @@ SimulationData& SimulationData::operator+=(const SimulationData& rhs)
    return *this;
 }
 
+SimulationData& SimulationData::operator/=(const double rhs)
+{   for (int i = 0; i < this->fx.size(); i++) this->fx[i] = this->fx[i] / rhs;
+    for (int i = 0; i < this->fy.size(); i++) this->fy[i] = this->fy[i] /rhs;
+
+    for (int i = 0; i < this->rho.size(); i++) this->rho[i] = this->rho[i] / rhs;
+
+    for (int i = 0; i < this->vx.size(); i++) this->vx[i] = this->vx[i] / rhs;
+    for (int i = 0; i < this->vy.size(); i++) this->vy[i] = this->vy[i] / rhs;
+
+    return *this;}
+
+
 SimulationData operator+(SimulationData lhs, const SimulationData& rhs)
 {
    lhs += rhs;

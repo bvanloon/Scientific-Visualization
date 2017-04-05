@@ -37,10 +37,12 @@ class SimulationData
 
 
       SimulationData& operator+=(const SimulationData& rhs);
+      SimulationData& operator/=(const double rhs);
 
       friend SimulationData operator+(SimulationData lhs, const SimulationData& rhs);
 
       friend QDebug operator<<(QDebug stream, const SimulationData& data);
+
 
    private:
       //Velocity field
