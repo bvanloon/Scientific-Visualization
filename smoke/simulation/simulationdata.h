@@ -43,6 +43,12 @@ class SimulationData
 
       friend SimulationData operator+(SimulationData lhs, const SimulationData& rhs);
 
+      friend SimulationData operator*(SimulationData lhs, const double rhs);
+      friend SimulationData operator*(const double lhs, SimulationData rhs);
+
+      friend SimulationData operator/(SimulationData lhs, const double rhs);
+
+
       friend QDebug operator<<(QDebug stream, const SimulationData& data);
 
 

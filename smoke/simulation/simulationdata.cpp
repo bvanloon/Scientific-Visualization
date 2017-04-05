@@ -186,6 +186,24 @@ SimulationData& SimulationData::operator*=(const double rhs)
    return *this;
 }
 
+SimulationData operator/(SimulationData lhs, const double rhs)
+{
+    lhs /= rhs;
+    return lhs;
+}
+
+SimulationData operator*(const double lhs, SimulationData rhs)
+{
+   rhs *= lhs;
+   return rhs;
+}
+
+SimulationData operator*(SimulationData lhs, const double rhs)
+{
+   lhs *= rhs;
+   return lhs;
+}
+
 SimulationData operator+(SimulationData lhs, const SimulationData& rhs)
 {
    lhs += rhs;
