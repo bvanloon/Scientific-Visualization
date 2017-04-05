@@ -14,6 +14,8 @@ GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :
       ),
    simulationGrid(simulationGrid)
 {
+   unNormalizedAlpha = Settings::sim::Scalar::fluidVelocityMagnitude;
+
    connectToSettings();
 
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
@@ -21,11 +23,13 @@ GlyphSliceEngine::GlyphSliceEngine(SimulationGrid *simulationGrid) :
 
 void GlyphSliceEngine::updateCache()
 {
-   TranslucentGlyphBuilder builder(visualizationGrid,
-                                   Settings::visualization::glyphs().glyph,
-                                   Settings::visualization::glyphs().colorMap->textureGetter,
-                                   Settings::visualization::glyphs().vectorGetter,
-                                   Settings::visualization::glyphs().getCurrentMagnitudeRange());
+   TranslucentGlyphBuilder builder = TranslucentGlyphBuilder(
+                visualizationGrid,
+                Settings::visualization::glyphs().glyph,
+                Settings::visualization::glyphs().colorMap->textureGetter,
+                Settings::visualization::glyphs().vectorGetter,
+                Vertex::getScalarGetter(unNormalizedAlpha),
+                Settings::simulation().getRange(unNormalizedAlpha));
 
    GPUData data = builder.getGPUData();
    data.transform(toSliceTransformation);

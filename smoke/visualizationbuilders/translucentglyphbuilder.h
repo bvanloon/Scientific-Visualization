@@ -13,12 +13,15 @@ class TranslucentGlyphBuilder :
                               Settings::sim::GlyphsType glyphThype,
                               Vertex::scalarGetter getTextureCoordinate,
                               Vertex::vectorGetter directionGetter,
-                              Range<double> magnitudeRange);
+                              Vertex::scalarGetter alphaGetter,
+                              Range<double> unNormalizedAlphaRange);
 
    protected:
-      float computeAlpha(QVector3D vector) const;
+      float computeAlpha(Vertex* vertex) const;
 
    private:
+
+      Vertex::scalarGetter getUnNormalizedAlphaValue;
 
       GPUData buildHedgeHog(Vertex *vertex) const;
 
