@@ -21,6 +21,7 @@ class Settings::visualization::StreamLines : public QObject
       double edgeLength;
       double totalLength;
 
+      Settings::sim::Vector vector;
       Vertex::vectorGetter vectorField;
 
       QList<QPointF> seedPoints;
