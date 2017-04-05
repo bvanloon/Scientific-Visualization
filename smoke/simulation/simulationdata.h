@@ -4,6 +4,7 @@
 #include "rfftw.h"
 #include <QVector2D>
 #include <QVector>
+#include <assert.h>
 
 class SimulationData
 {
@@ -33,7 +34,9 @@ class SimulationData
       double getDensityAt(int idx) const;
 
 
-    friend QDebug operator<<(QDebug stream, const SimulationData& data);
+      SimulationData& operator+=(const SimulationData& rhs);
+
+      friend QDebug operator<<(QDebug stream, const SimulationData& data);
 
    private:
       //Velocity field
