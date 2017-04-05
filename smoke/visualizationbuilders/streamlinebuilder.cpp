@@ -6,9 +6,9 @@ const float StreamLineBuilder::minimumMagnitude = 0.004;
 StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
                                      Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
    grid(grid),
+   seedPoint(seedPoint),
    vectorGetter(vectorGetter),
    magnitudeGetter(magnitudeGetter),
-   seedPoint(seedPoint),
    currentMagnitudeIsLargeEnough(true)
 {
    this->timeStep = Settings::visualization::streamLines().timeStep;

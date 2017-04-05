@@ -12,6 +12,12 @@ class StreamLineBuilder {
 
       streamobject::Line getStreamLine();
 
+   protected:
+      streamobject::Line streamLine;
+
+      float computeMagnitude(QVector3D position);
+      bool isMagnitudeLargeEnoguh(float magnitude);
+
    private:
       UniformGrid *grid;
 
@@ -30,8 +36,6 @@ class StreamLineBuilder {
 
       bool currentMagnitudeIsLargeEnough;
 
-      streamobject::Line streamLine;
-
       void build(QVector3D seedPoint);
 
       bool continueBuilding(double currentTime);
@@ -40,19 +44,17 @@ class StreamLineBuilder {
 
       bool isVertexAllowed(QVector3D vertex);
 
-      bool isMagnitudeLargeEnoguh(float magnitude);
+
 
       bool hasTimeLeftOver(double currentTime);
 
       bool isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination);
 
-      bool tryAddingVertex(QVector3D position);
+      virtual bool tryAddingVertex(QVector3D position);
 
       bool tryAddingEdge(QVector3D previousPosition, QVector3D position);
 
       bool tryAddingSeedPoint(QVector3D seedPoint);
-
-      float computeMagnitude(QVector3D position);
 
       QVector3D integrate(QVector3D previousPosition);
 };
