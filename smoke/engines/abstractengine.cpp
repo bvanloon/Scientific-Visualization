@@ -83,8 +83,8 @@ void AbstractEngine::setColorMap(Settings::visualization::ColorMap *value)
 {
    this->colorMap = value;
 
-   QPair<float, float> range = Settings::simulation().getRange(colorMap->scalar);
-   setColorMapValueRange(range.first, range.second);
+   Range<double> range = Settings::simulation().getRange(colorMap->scalar);
+   setColorMapValueRange(range.minimum(), range.maximum());
    connectToColorMap();
 
    /*

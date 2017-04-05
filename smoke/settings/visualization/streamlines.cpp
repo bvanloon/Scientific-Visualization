@@ -15,7 +15,8 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    this->edgeLength = computeEdgeLength(edgeLengthFactor, Settings::simulation().cellSize.width());
    this->totalLength = computeMaximumTotalLength(totalLengthFactor, Settings::simulation().cellSize.width());
 
-   vectorField = Vertex::getVectorGetter(Settings::sim::Vector::fluidVelocity);
+   vector = Settings::sim::Vector::fluidVelocity;
+   vectorField = Vertex::getVectorGetter(vector);
 
    connectToOtherSettings();
 }

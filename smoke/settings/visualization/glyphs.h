@@ -4,7 +4,7 @@
 #include <QObject>
 #include "grid/vertex.h"
 #include "settings/settings.h"
-
+#include "utilities/range.h"
 
 class Settings::visualization::Glyphs : public QObject
 {
@@ -23,7 +23,7 @@ class Settings::visualization::Glyphs : public QObject
       QSizeF approxCellSize;
       float scale;
 
-      QPair<float, float> getCurrentMagnitudeRange() const;
+      Range<double> getCurrentMagnitudeRange() const;
 
    signals:
       void gridDimensionChanged(QSizeF newDimension);
@@ -46,7 +46,7 @@ class Settings::visualization::Glyphs : public QObject
       Glyphs(Glyphs const&) = delete;
       void operator=(Glyphs const&) = delete;
 
-      QPair<double, double> computeGradientMagnitudeRange(double maximumGradientValue) const;
+      Range<double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 };
 
 #endif // GLYPHS_H

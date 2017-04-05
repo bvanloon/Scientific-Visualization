@@ -48,7 +48,7 @@ void SeedPointEngine::addSeedPoint(QPointF position)
 
 void SeedPointEngine::addSeedPointBorder(QPointF position)
 {
-   QPair<float, float> range = Settings::simulation().getRange(Settings::visualization::streamLines().colorMap->scalar);
+   Range<double> range = Settings::simulation().getRange(Settings::visualization::streamLines().colorMap->scalar);
    shapes::Rectangle rectangle = shapes::Rectangle(borderScale, borderScale);
    mesh::TriangleMesh *mesh = rectangle.toTriangleMesh();
 
@@ -56,14 +56,14 @@ void SeedPointEngine::addSeedPointBorder(QPointF position)
    translationMatrix.translate(position.x(), position.y(), 0.0);
    mesh->applyTransformation(translationMatrix);
 
-   this->addMesh(mesh, range.second);
+   this->addMesh(mesh, range.maximum());
 
    delete mesh;
 }
 
 void SeedPointEngine::addSeedPointFill(QPointF position)
 {
-   QPair<float, float> range = Settings::simulation().getRange(Settings::visualization::streamLines().colorMap->scalar);
+   Range<double> range = Settings::simulation().getRange(Settings::visualization::streamLines().colorMap->scalar);
    shapes::Rectangle rectangle = shapes::Rectangle(fillScale, fillScale);
    mesh::TriangleMesh *mesh = rectangle.toTriangleMesh();
 
@@ -71,7 +71,7 @@ void SeedPointEngine::addSeedPointFill(QPointF position)
    translationMatrix.translate(position.x(), position.y(), 0.0);
    mesh->applyTransformation(translationMatrix);
 
-   this->addMesh(mesh, range.first);
+   this->addMesh(mesh, range.minimum());
 
    delete mesh;
 }

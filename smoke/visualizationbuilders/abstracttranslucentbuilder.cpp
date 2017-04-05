@@ -1,11 +1,11 @@
 #include "abstracttranslucentbuilder.h"
 #include "utilities/range.h"
 
-AbstractTranslucentBuilder::AbstractTranslucentBuilder(Range range) :
+AbstractTranslucentBuilder::AbstractTranslucentBuilder(Range<double> range) :
    range(range)
 {}
 
-float AbstractTranslucentBuilder::computeAlpha(float scalar) const
+float AbstractTranslucentBuilder::computeAlpha(double scalar) const
 {
-   return mapToUnitRange(scalar, range.first, range.second);
+   return mapToUnitRange(scalar, range.minimum(), range.maximum());
 }

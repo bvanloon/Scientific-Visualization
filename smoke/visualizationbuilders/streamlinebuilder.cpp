@@ -4,8 +4,9 @@
 const float StreamLineBuilder::minimumMagnitude = 0.004;
 
 StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
-                                                  Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
+                                     Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
    grid(grid),
+   seedPoint(seedPoint),
    vectorGetter(vectorGetter),
    magnitudeGetter(magnitudeGetter),
    currentMagnitudeIsLargeEnough(true)
@@ -15,12 +16,11 @@ StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
 
    this->edgeLength = Settings::visualization::streamLines().edgeLength;
    this->maximumTotalLength = Settings::visualization::streamLines().totalLength;
-
-   build(seedPoint);
 }
 
 streamobject::Line StreamLineBuilder::getStreamLine()
 {
+   if (this->streamLine.hasNoVertices()) build(seedPoint);
    return this->streamLine;
 }
 

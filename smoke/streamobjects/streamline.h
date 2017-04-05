@@ -12,11 +12,13 @@ namespace streamobject {
     class Line : protected shapes::PolyLine
     {
        public:
-          Line(QVector3D seedPoint, float textureCoordinate);
-          Line(QPointF seedPoint, float textureCoordinate);
+          Line(QVector3D seedPoint, float textureCoordinate, float alpha = 1.0);
+          Line(QPointF seedPoint, float textureCoordinate, float alpha = 1.0);
           Line();
 
-          void addVertex(QVector3D vertex, float textureCoordinate);
+          void addVertex(QVector3D vertex, float textureCoordinate, float alpha = 1.0);
+
+          bool hasNoVertices();
 
           GPUData toGPUData() const;
 
@@ -28,6 +30,7 @@ namespace streamobject {
 
        private:
           QList<float> textureCoordinates;
+          QList<float> alphaValues;
           bool isEdgeAllowed(QVector3D vertex);
 
           static const double minimalEdgeSize;

@@ -8,8 +8,7 @@ class SizeLimitedQueue : public QQueue<T>
 {
    public:
       inline SizeLimitedQueue(int maximumSize) :
-         maximumSize(maximumSize)
-      {}
+         maximumSize(maximumSize) {}
 
       inline ~SizeLimitedQueue() {}
 

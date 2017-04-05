@@ -13,7 +13,7 @@ class TranslucentGlyphBuilder :
                               Settings::sim::GlyphsType glyphThype,
                               Vertex::scalarGetter getTextureCoordinate,
                               Vertex::vectorGetter directionGetter,
-                              Range magnitudeRange);
+                              Range<double> magnitudeRange);
 
    protected:
       float computeAlpha(QVector3D vector) const;

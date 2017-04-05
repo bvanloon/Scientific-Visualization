@@ -2,7 +2,7 @@
 
 TranslucentSmokeBuilder::TranslucentSmokeBuilder(SimulationGrid *grid,
                                                  Vertex::scalarGetter textureGetter,
-                                                 Range textureRange) :
+                                                 Range<double> textureRange) :
    AbstractTranslucentBuilder(textureRange),
    SmokeBuilder(grid, textureGetter)
 {}

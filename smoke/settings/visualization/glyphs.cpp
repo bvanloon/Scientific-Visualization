@@ -20,7 +20,7 @@ const Settings::visualization::Glyphs& Settings::visualization::Glyphs::instance
    return instance;
 }
 
-QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() const
+Range<double> Settings::visualization::Glyphs::getCurrentMagnitudeRange() const
 {
    switch (vectorField)
    {
@@ -32,11 +32,11 @@ QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() 
 
    case Settings::sim::Vector::fluidDensityGradient:
       return this->computeGradientMagnitudeRange(
-                   Settings::simulation().getRange(Settings::sim::Scalar::fluidDensity).second);
+                   Settings::simulation().getRange(Settings::sim::Scalar::fluidDensity).maximum());
 
    case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
       return this->computeGradientMagnitudeRange(
-                    Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).second);
+                    Settings::simulation().getRange(Settings::sim::Scalar::fluidVelocityMagnitude).maximum());
 
    default:
       qDebug() << "Settings::visualization::Glyphs::getCurrentMagnitudeRange(): Current VectorField is not supported. Using default fluidVelocityMagnitude ";
@@ -44,14 +44,14 @@ QPair<float, float> Settings::visualization::Glyphs::getCurrentMagnitudeRange() 
    }
 }
 
-QPair<double, double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
+Range<double> Settings::visualization::Glyphs::computeGradientMagnitudeRange(double maximumGradientValue) const
 {
    double maxX = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.width();
    double maxY = maximumGradientValue / Settings::visualization::glyphs().approxCellSize.height();
 
    double maximum = QVector2D(maxX, maxY).length();
 
-   return QPair<double, double>(0.0, maximum);
+   return Range<double>(0.0, maximum);
 }
 
 void Settings::visualization::Glyphs::onVectorFieldChanged(Settings::sim::Vector vectorField)
