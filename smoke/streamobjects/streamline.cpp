@@ -3,10 +3,18 @@
 
 const double streamobject::Line::minimalEdgeSize = std::numeric_limits<double>::min();
 
-streamobject::Line::Line(QVector3D seedPoint, float textureCoordinate) :
+streamobject::Line::Line(QVector3D seedPoint, float textureCoordinate, float alpha) :
    shapes::PolyLine(seedPoint)
 {
    this->textureCoordinates.append(textureCoordinate);
+   this->alphaValues.append(alpha);
+}
+
+streamobject::Line::Line(QPointF seedPoint, float textureCoordinate, float alpha) :
+   shapes::PolyLine(QVector3D(seedPoint))
+{
+   this->textureCoordinates.append(textureCoordinate);
+   this->alphaValues.append(alpha);
 }
 
 streamobject::Line::Line() :
@@ -23,8 +31,8 @@ GPUData streamobject::Line::toGPUData() const
 
    for (int current = 0, next = 1; next < this->vertices.length(); current++, next++)
    {
-      data.addElement(this->vertices[current], normal, this->textureCoordinates[current]);
-      data.addElement(this->vertices[next], normal, this->textureCoordinates[next]);
+      data.addElement(vertices[current], normal, textureCoordinates[current], alphaValues[current]);
+      data.addElement(vertices[next], normal, textureCoordinates[next], alphaValues[next]);
    }
    return data;
 }
@@ -47,12 +55,13 @@ bool streamobject::Line::isEdgeAllowed(QVector3D vertex)
    return newEdge.length() > minimalEdgeSize;
 }
 
-void streamobject::Line::addVertex(QVector3D vertex, float textureCoordinate)
+void streamobject::Line::addVertex(QVector3D vertex, float textureCoordinate, float alpha)
 {
    if (!isEdgeAllowed(vertex)) return;
 
    shapes::PolyLine::addVertex(vertex);
-   this->textureCoordinates.append(textureCoordinate);
+   textureCoordinates.append(textureCoordinate);
+   alphaValues.append(alpha);
 }
 
 bool streamobject::Line::hasNoVertices()
