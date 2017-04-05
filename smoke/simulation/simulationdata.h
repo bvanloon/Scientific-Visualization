@@ -33,6 +33,8 @@ class SimulationData
       double getDensityAt(int idx) const;
 
 
+    friend QDebug operator<<(QDebug stream, const SimulationData& data);
+
    private:
       //Velocity field
       QVector<fftw_real> vx, vy;

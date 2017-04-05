@@ -127,3 +127,13 @@ void SimulationData::allocateDensityData(int length)
 {
    rho.resize(length);
 }
+
+QDebug operator<<(QDebug stream, const SimulationData& data)
+{
+   stream << "fx:  " << data.fx << endl
+          << "fy:  " << data.fy << endl
+          << "rho: " << data.rho << endl
+          << "vx:  " << data.vx << endl
+          << "vy:  " << data.vy << endl;
+   return stream;
+}
