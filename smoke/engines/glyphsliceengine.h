@@ -28,6 +28,8 @@ class GlyphSliceEngine : public AbstractSliceEngine {
       SimulationGrid *simulationGrid;
 
       void connectToSettings();
+
+      Settings::sim::Scalar unNormalizedAlpha;
 };
 
 #endif // GLYPHSLICEENGINE_H
