@@ -4,12 +4,15 @@
 #include "rfftw.h"
 #include <QVector2D>
 #include <QVector>
+#include <assert.h>
 
 class SimulationData
 {
    public:
       SimulationData(int dimension);
       SimulationData(const SimulationData& obj);
+      SimulationData(SimulationData&& other);
+
       ~SimulationData();
 
       fftw_real *getVx();
@@ -31,6 +34,22 @@ class SimulationData
       fftw_real *getRho();
       fftw_real getRhoAt(int idx) const;
       double getDensityAt(int idx) const;
+
+
+      SimulationData& operator+=(const SimulationData& rhs);
+
+      SimulationData& operator/=(const double rhs);
+      SimulationData& operator*=(const double rhs);
+
+      friend SimulationData operator+(SimulationData lhs, const SimulationData& rhs);
+
+      friend SimulationData operator*(SimulationData lhs, const double rhs);
+      friend SimulationData operator*(const double lhs, SimulationData rhs);
+
+      friend SimulationData operator/(SimulationData lhs, const double rhs);
+
+
+      friend QDebug operator<<(QDebug stream, const SimulationData& data);
 
 
    private:
