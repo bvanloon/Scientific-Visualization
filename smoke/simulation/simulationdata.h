@@ -11,6 +11,8 @@ class SimulationData
    public:
       SimulationData(int dimension);
       SimulationData(const SimulationData& obj);
+      SimulationData(SimulationData&& other);
+
       ~SimulationData();
 
       fftw_real *getVx();
@@ -35,6 +37,8 @@ class SimulationData
 
 
       SimulationData& operator+=(const SimulationData& rhs);
+
+      friend SimulationData operator+(SimulationData lhs, const SimulationData& rhs);
 
       friend QDebug operator<<(QDebug stream, const SimulationData& data);
 

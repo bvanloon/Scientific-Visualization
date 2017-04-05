@@ -26,6 +26,24 @@ SimulationData::SimulationData(const SimulationData& obj) :
    std::copy(std::begin(obj.rho), std::end(obj.rho), std::begin(this->rho));
 }
 
+SimulationData::SimulationData(SimulationData&& other) :
+   velocitiesSize(other.velocitiesSize),
+   rhoSize(other.rhoSize),
+   forceSize(other.forceSize)
+{
+   vx = other.vx;
+   vy = other.vy;
+
+   fx = other.fx;
+   fy = other.fy;
+
+   rho = other.rho;
+
+   other.velocitiesSize = 0;
+   other.rhoSize = 0;
+   other.forceSize = 0;
+}
+
 void SimulationData::allocateData()
 {
    allocateVelocityData(velocitiesSize);
@@ -111,49 +129,49 @@ double SimulationData::getDensityAt(int idx) const
    return this->getRhoAt(idx);
 }
 
-SimulationData &SimulationData::operator+=(const SimulationData &rhs)
-{
-    assert(this->fx.size() == rhs.fx.size());
-    for(int i = 0; i < this->fx.size(); i++){
-        this->fx[i] = this->fx[i] + rhs.fx[i];
-        this->fy[i] = this->fy[i] + rhs.fy[i];
-    }
-
-    for(int i = 0; i < this->rho.size(); i++){
-        this->rho[i] = this->rho[i] + rhs.rho[i];
-    }
-
-    for(int i = 0; i < this->vx.size(); i++){
-        this->vx[i] = this->vx[i] + rhs.vx[i];
-        this->vy[i] = this->vy[i] + rhs.vy[i];
-    }
-    return *this;
-}
-
-
 void SimulationData::allocateVelocityData(int length)
 {
-    vx.resize(length);
-    vy.resize(length);
+   vx.resize(length);
+   vy.resize(length);
 }
 
 void SimulationData::allocteForceData(int length)
 {
-    fx.resize(length);
-    fy.resize(length);
+   fx.resize(length);
+   fy.resize(length);
 }
 
 void SimulationData::allocateDensityData(int length)
 {
-    rho.resize(length);
+   rho.resize(length);
+}
+
+SimulationData& SimulationData::operator+=(const SimulationData& rhs)
+{
+   assert(this->fx.size() == rhs.fx.size());
+   for (int i = 0; i < this->fx.size(); i++) this->fx[i] = this->fx[i] + rhs.fx[i];
+   for (int i = 0; i < this->fy.size(); i++) this->fy[i] = this->fy[i] + rhs.fy[i];
+
+   for (int i = 0; i < this->rho.size(); i++) this->rho[i] = this->rho[i] + rhs.rho[i];
+
+   for (int i = 0; i < this->vx.size(); i++) this->vx[i] = this->vx[i] + rhs.vx[i];
+   for (int i = 0; i < this->vy.size(); i++) this->vy[i] = this->vy[i] + rhs.vy[i];
+
+   return *this;
+}
+
+SimulationData operator+(SimulationData lhs, const SimulationData& rhs)
+{
+   lhs += rhs;
+   return lhs;
 }
 
 QDebug operator<<(QDebug stream, const SimulationData& data)
 {
-    stream << "fx:  " << data.fx << endl
-           << "fy:  " << data.fy << endl
-           << "rho: " << data.rho << endl
-           << "vx:  " << data.vx << endl
-           << "vy:  " << data.vy << endl;
-    return stream;
+   stream << "fx:  " << data.fx << endl
+          << "fy:  " << data.fy << endl
+          << "rho: " << data.rho << endl
+          << "vx:  " << data.vx << endl
+          << "vy:  " << data.vy << endl;
+   return stream;
 }
