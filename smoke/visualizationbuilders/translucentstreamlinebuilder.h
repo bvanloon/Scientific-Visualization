@@ -14,6 +14,9 @@ class TranslucentStreamLineBuilder :
                                    Vertex::vectorGetter vectorGetter,
                                    Vertex::scalarGetter magnitudeGetter,
                                    Range<double> magnitudeRange);
+
+   private:
+      bool tryAddingVertex(QVector3D position);
 };
 
 #endif // TRANSLUCENTSTREAMLINEBUILDER_H

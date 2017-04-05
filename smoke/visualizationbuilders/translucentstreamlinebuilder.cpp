@@ -10,6 +10,14 @@ TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
    ) :
    AbstractTranslucentBuilder(magnitudeRange),
    StreamLineBuilder(grid, currentPosition, vectorGetter, magnitudeGetter)
+{}
+
+bool TranslucentStreamLineBuilder::tryAddingVertex(QVector3D position)
 {
-   qDebug() << "TranslucentStreamLineBuilder::TranslucentStreamLineBuilder";
+   float magnitude = this->computeMagnitude(position);
+   bool magnitudeAllowed = this->isMagnitudeLargeEnoguh(magnitude);
+   float alpha = computeAlpha(magnitude);
+
+   if (magnitudeAllowed) this->streamLine.addVertex(position, magnitude, alpha);
+   return magnitudeAllowed;
 }
