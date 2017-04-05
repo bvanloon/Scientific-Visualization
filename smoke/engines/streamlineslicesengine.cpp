@@ -1,6 +1,6 @@
 #include "streamlineslicesengine.h"
 #include "settings/visualizationsettings.h"
-#include "visualizationbuilders/streamlinebuilder.h"
+#include "visualizationbuilders/translucentstreamlinebuilder.h"
 
 StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
@@ -32,9 +32,10 @@ GPUData StreamLineSlicesEngine::buildStreamLines()
 
 GPUData StreamLineSlicesEngine::buildStreamLine(QPointF seedPoint)
 {
-   StreamLineBuilder builder(grid, QVector3D(seedPoint),
-                             Settings::visualization::streamLines().vectorField,
-                             Settings::visualization::streamLines().colorMap->textureGetter);
+   TranslucentStreamLineBuilder builder(grid, QVector3D(seedPoint),
+                                        Settings::visualization::streamLines().vectorField,
+                                        Settings::visualization::streamLines().colorMap->textureGetter,
+                                        Settings::simulation().getMagnitudeRange(Settings::visualization::streamLines().vector));
    streamobject::Line streamLine = builder.getStreamLine();
    return streamLine.toGPUData();
 }
