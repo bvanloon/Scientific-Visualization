@@ -1,6 +1,6 @@
 #include "translucentglyphbuilder.h"
 
-TranslucentGlyphBuilder::TranslucentGlyphBuilder(UniformGrid *grid,
+TranslucentGlyphBuilder::TranslucentGlyphBuilder(const UniformGrid *grid,
                                                  Settings::sim::GlyphsType glyphThype,
                                                  Vertex::scalarGetter textureGetter,
                                                  Vertex::vectorGetter directionGetter,
