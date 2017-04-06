@@ -37,6 +37,7 @@ class SimulationData
 
 
       static SimulationData mean(QList<SimulationData> list);
+      static SimulationData mean(QList<SimulationData *> list);
 
 
       SimulationData& operator+=(const SimulationData& rhs);

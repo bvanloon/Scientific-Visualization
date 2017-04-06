@@ -15,10 +15,8 @@ GlyphSliceEngine::GlyphSliceEngine() :
 
 void GlyphSliceEngine::updateCache()
 {
-   int idx = SimulationHistory::instance().mostRecentStateIdx();
-
    TranslucentGlyphBuilder builder(
-      &SimulationHistory::instance().getVisualizationGridAtQueueIdx(idx),
+      &SimulationHistory::instance().getMeanVisualizationGridOfLastStates(1),
       Settings::visualization::glyphs().glyph,
       Settings::visualization::glyphs().colorMap->textureGetter,
       Settings::visualization::glyphs().vectorGetter,
