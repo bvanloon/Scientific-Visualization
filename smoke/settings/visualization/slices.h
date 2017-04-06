@@ -18,6 +18,7 @@ class Settings::visualization::Slices : public QObject
    signals:
       void numberOfSlicesChanged(int newNumberOfSlices);
 
+      void historySizeChanged(int newHistorySize);
 
       void numberOfStatesToCombineIntoASliceChanged(int newNumberOfStates);
 
@@ -37,6 +38,8 @@ class Settings::visualization::Slices : public QObject
 
       Slices(Slices const&) = delete;
       void operator=(Slices const&) = delete;
+
+      void updateHistorySize(int numberOfSlices, int numberOfStatesToCombine);
 
       void connectToOtherSettings();
 };
