@@ -229,7 +229,7 @@ QVector3D UniformGrid::bindToGrid(QVector3D position)
    return position;
 }
 
-Triangulation UniformGrid::getTriangulation()
+Triangulation UniformGrid::getTriangulation() const
 {
    return this->triangulation;
 }

@@ -1,6 +1,6 @@
 #include "smokebuilder.h"
 
-SmokeBuilder::SmokeBuilder(SimulationGrid *grid, Vertex::scalarGetter textureGetter) :
+SmokeBuilder::SmokeBuilder(const SimulationGrid *grid, Vertex::scalarGetter textureGetter) :
    data(GL_TRIANGLES),
    getTextureCoordinate(textureGetter),
    normal(QVector3D(0.0, 0.0, 1.0)),

@@ -8,7 +8,7 @@
 class SmokeBuilder
 {
    public:
-      SmokeBuilder(SimulationGrid *grid, Vertex::scalarGetter textureGetter);
+      SmokeBuilder(const SimulationGrid *grid, Vertex::scalarGetter textureGetter);
 
       GPUData getGPUData();
 
@@ -16,7 +16,7 @@ class SmokeBuilder
       GPUData data;
       Vertex::scalarGetter getTextureCoordinate;
       QVector3D normal;
-      SimulationGrid *grid;
+      const SimulationGrid *grid;
 
       void build();
       virtual void addVertex(Vertex *vertex);
