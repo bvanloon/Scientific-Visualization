@@ -188,6 +188,22 @@ SimulationData& SimulationData::operator*=(const double rhs)
    return *this;
 }
 
+SimulationData& SimulationData::operator=(SimulationData other)
+{
+   std::swap(vx, other.vx);
+   std::swap(vy, other.vy);
+
+   std::swap(fx, other.fx);
+   std::swap(fy, other.fy);
+
+   std::swap(rho, other.rho);
+
+   std::swap(velocitiesSize, other.velocitiesSize);
+   std::swap(rhoSize, other.rhoSize);
+   std::swap(forceSize, other.forceSize);
+   return *this;
+}
+
 SimulationData operator/(SimulationData lhs, const double rhs)
 {
    lhs /= rhs;

@@ -42,6 +42,8 @@ class SimulationData
 
       SimulationData& operator*=(const double rhs);
 
+      SimulationData& operator=(SimulationData other);
+
       friend SimulationData operator+(SimulationData lhs, const SimulationData& rhs);
 
       friend SimulationData operator*(SimulationData lhs, const double rhs);
