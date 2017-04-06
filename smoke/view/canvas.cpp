@@ -63,7 +63,7 @@ void Canvas::buildEngineMap()
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::glyphSlices,
-                         new GlyphSliceEngine(simulation->getSimulationGrid())));
+                         new GlyphSliceEngine()));
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::streamLineSlices,

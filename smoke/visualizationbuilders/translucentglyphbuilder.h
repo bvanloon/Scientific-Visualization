@@ -9,7 +9,7 @@ class TranslucentGlyphBuilder :
    public GlyphBuilder
 {
    public:
-      TranslucentGlyphBuilder(UniformGrid *grid,
+      TranslucentGlyphBuilder(const UniformGrid *grid,
                               Settings::sim::GlyphsType glyphThype,
                               Vertex::scalarGetter getTextureCoordinate,
                               Vertex::vectorGetter directionGetter,

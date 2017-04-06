@@ -8,7 +8,7 @@
 class GlyphBuilder
 {
    public:
-      GlyphBuilder(UniformGrid *grid,
+      GlyphBuilder(const UniformGrid *grid,
                    Settings::sim::GlyphsType glyphThype,
                    Vertex::scalarGetter getTextureCoordinate,
                    Vertex::vectorGetter directionGetter);
@@ -17,7 +17,7 @@ class GlyphBuilder
       GPUData getGPUData();
 
    protected:
-      UniformGrid *grid;
+      const UniformGrid *grid;
 
       Vertex::scalarGetter getTextureCoordinate;
       Vertex::vectorGetter getDirection;
