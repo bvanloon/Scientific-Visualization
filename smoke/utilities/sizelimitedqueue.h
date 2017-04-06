@@ -25,6 +25,16 @@ class SizeLimitedQueue : public QQueue<T>
       }
 
       inline const T& tail() const { return QList<T>::last(); }
+
+      inline const QList<T> tail(int size) const
+      {
+         size = qMin(size, this->length());
+         QList<T> theTail;
+         auto it = --QQueue<T>::end();
+         while (--size >= 0) theTail.append(*it--);
+         return theTail;
+      }
+
    private:
       int maximumSize;
 
