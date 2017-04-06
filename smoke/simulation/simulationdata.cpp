@@ -129,6 +129,16 @@ double SimulationData::getDensityAt(int idx) const
    return this->getRhoAt(idx);
 }
 
+SimulationData SimulationData::mean(QList<SimulationData> list)
+{
+   QList<SimulationData>::const_iterator it = list.cbegin();
+
+   SimulationData sum = *it++;
+
+   while (it != list.cend()) sum += *it++;
+
+   sum /= list.length();
+   return sum;
 }
 
 void SimulationData::allocateVelocityData(int length)

@@ -36,6 +36,9 @@ class SimulationData
       double getDensityAt(int idx) const;
 
 
+      static SimulationData mean(QList<SimulationData> list);
+
+
       SimulationData& operator+=(const SimulationData& rhs);
 
       SimulationData& operator/=(const double rhs);
