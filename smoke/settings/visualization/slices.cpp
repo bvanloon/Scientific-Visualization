@@ -49,5 +49,6 @@ void Settings::visualization::Slices::onNumberOfStatesPerSliceChanged(int newNum
 {
    this->numStatesPerSlice = newNumberOfStates;
    emit numberOfStatesPerSliceChanged(newNumberOfStates);
+   emit clearCache();
    updateHistorySize(this->numSlices, newNumberOfStates);
 }

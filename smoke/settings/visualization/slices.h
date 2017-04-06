@@ -24,6 +24,8 @@ class Settings::visualization::Slices : public QObject
 
       void globalALphaChanged(double newGlobalAlpha);
 
+      void clearCache();
+
    public slots:
       void onFinishedSettingUpConnections();
 
