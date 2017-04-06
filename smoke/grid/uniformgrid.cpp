@@ -113,7 +113,6 @@ bool UniformGrid::inGridArea(QVector3D position)
    return this->coveredArea.contains(position.x(), position.y());
 }
 
-
 StructuredCell *UniformGrid::findCellContaining(QVector3D position)
 {
    QPair<int, int> coordinates = findUpperLeftOfContainingCell(position);

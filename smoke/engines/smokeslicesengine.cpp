@@ -1,11 +1,11 @@
 #include "smokeslicesengine.h"
 #include "settings/visualizationsettings.h"
 #include "visualizationbuilders/translucentsmokebuilder.h"
+#include "simulation/simulationstatehistory.h"
 
-SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
+SmokeSlicesEngine::SmokeSlicesEngine() :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
-                       Settings::engines::EnginesTypes::smokeSlices),
-   simulation(grid)
+                       Settings::engines::EnginesTypes::smokeSlices)
 {
    connectToSettings();
 }
