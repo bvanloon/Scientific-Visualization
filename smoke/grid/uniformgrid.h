@@ -23,9 +23,8 @@ class UniformGrid : public Grid
       int getDimension() const;
 
       bool inGridArea(QVector3D position) const;
-      bool inGridArea(QVector3D position);
 
-      StructuredCell *findCellContaining(QVector3D position);
+      StructuredCell *findCellContaining(QVector3D position) const;
 
       virtual void changeGridArea(QSizeF UNUSED(newArea));
       virtual void changeGridArea(QSizeF newArea, QSizeF padding);
@@ -68,7 +67,7 @@ class UniformGrid : public Grid
 
       QSizeF computeCellSize(QSizeF area, QSizeF padding);
 
-      QPair<int, int> findUpperLeftOfContainingCell(QVector3D position);
+      QPair<int, int> findUpperLeftOfContainingCell(QVector3D position) const;
 };
 
 #endif // UNIFORMGRID_H

@@ -9,7 +9,7 @@ class TranslucentStreamLineBuilder :
    public StreamLineBuilder
 {
    public:
-      TranslucentStreamLineBuilder(UniformGrid *grid,
+      TranslucentStreamLineBuilder(const UniformGrid *grid,
                                    QVector3D currentPosition,
                                    Vertex::vectorGetter vectorGetter,
                                    Vertex::scalarGetter magnitudeGetter,
