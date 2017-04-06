@@ -126,7 +126,9 @@ fftw_real SimulationData::getRhoAt(int idx) const
 
 double SimulationData::getDensityAt(int idx) const
 {
-   return this->getRhoAt(idx);
+    return this->getRhoAt(idx);
+}
+
 }
 
 void SimulationData::allocateVelocityData(int length)
