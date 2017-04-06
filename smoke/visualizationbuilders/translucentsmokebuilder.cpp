@@ -1,6 +1,6 @@
 #include "translucentsmokebuilder.h"
 
-TranslucentSmokeBuilder::TranslucentSmokeBuilder(SimulationGrid *grid,
+TranslucentSmokeBuilder::TranslucentSmokeBuilder(const SimulationGrid *grid,
                                                  Vertex::scalarGetter textureGetter,
                                                  Range<double> textureRange) :
    AbstractTranslucentBuilder(textureRange),

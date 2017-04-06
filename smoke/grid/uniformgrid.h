@@ -18,7 +18,7 @@ class UniformGrid : public Grid
 
       QSizeF getCellSize() const;
 
-      Triangulation getTriangulation();
+      Triangulation getTriangulation() const;
 
       int getDimension() const;
 
