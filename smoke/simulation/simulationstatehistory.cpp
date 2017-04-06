@@ -4,7 +4,7 @@
 
 SimulationHistory::SimulationHistory(QObject *parent) :
    QObject(parent),
-   states(Settings::visualization::slices().numberOfSlices),
+   states(Settings::visualization::slices().numSlices),
    mirrorSimulationGrid(new SimulationGrid(
                            Settings::simulation().dimension,
                            Settings::canvas().size,

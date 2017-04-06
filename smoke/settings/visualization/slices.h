@@ -12,8 +12,8 @@ class Settings::visualization::Slices : public QObject
       static const Slices& instance();
 
       double globalAlpha;
-      int numberOfSlices;
-      int numberOfStatesToCombineIntoASlice;
+      int numSlices;
+      int numStatesPerSlice;
 
    signals:
       void numberOfSlicesChanged(int newNumberOfSlices);

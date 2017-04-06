@@ -3,11 +3,11 @@
 Settings::visualization::Slices::Slices(QObject *parent) :
    QObject(parent),
    globalAlpha(1.0),
-   numberOfSlices(10),
-   numberOfStatesToCombineIntoASlice(10)
+   numSlices(10),
+   numStatesPerSlice(10)
 {
    connectToOtherSettings();
-   updateHistorySize(numberOfSlices, numberOfStatesToCombineIntoASlice);
+   updateHistorySize(numSlices, numStatesPerSlice);
 }
 
 void Settings::visualization::Slices::updateHistorySize(int numberOfSlices, int numberOfStatesToCombine)
@@ -29,7 +29,7 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
 
 void Settings::visualization::Slices::onFinishedSettingUpConnections()
 {
-   updateHistorySize(numberOfSlices, numberOfStatesToCombineIntoASlice);
+   updateHistorySize(numSlices, numStatesPerSlice);
 }
 
 void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha)
@@ -40,14 +40,14 @@ void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha
 
 void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-   this->numberOfSlices = newNumberOfSlices;
+   this->numSlices = newNumberOfSlices;
    emit numberOfSlicesChanged(newNumberOfSlices);
-   updateHistorySize(newNumberOfSlices, this->numberOfStatesToCombineIntoASlice);
+   updateHistorySize(newNumberOfSlices, this->numStatesPerSlice);
 }
 
-void Settings::visualization::Slices::onNumberOfStatesToCombine(int newNumberOfStates)
+void Settings::visualization::Slices::onNumberOfStatesPerSliceChanged(int newNumberOfStates)
 {
-   this->numberOfStatesToCombineIntoASlice = newNumberOfStates;
-   emit numberOfStatesToCombineIntoASliceChanged(newNumberOfStates);
-   updateHistorySize(this->numberOfSlices, newNumberOfStates);
+   this->numStatesPerSlice = newNumberOfStates;
+   emit numberOfStatesPerSliceChanged(newNumberOfStates);
+   updateHistorySize(this->numSlices, newNumberOfStates);
 }
