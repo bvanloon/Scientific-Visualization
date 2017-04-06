@@ -22,11 +22,11 @@ GPUData StreamLineSlicesEngine::buildStreamLines()
 {
    GPUData data(streamobject::Line::drawMode);
 
-   int idx = SimulationHistory::instance().mostRecentStateIdx();
-
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
-      GPUData streamLine = buildStreamLine(&SimulationHistory::instance().getSimulationGridAtQueueIdx(idx), seedpoint);
+      GPUData streamLine = buildStreamLine(
+                  &SimulationHistory::instance().getMeanSimulationGridOfLastStates(1),
+                  seedpoint);
       data.extend(streamLine);
    }
    return data;
