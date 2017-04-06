@@ -3,7 +3,8 @@
 Settings::visualization::Slices::Slices(QObject *parent) :
    QObject(parent),
    globalAlpha(1.0),
-   numberOfSlices(10)
+   numberOfSlices(10),
+   numberOfStatesToCombineIntoASlice(10)
 {
    connectToOtherSettings();
 }
@@ -28,4 +29,10 @@ void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSli
 {
    this->numberOfSlices = newNumberOfSlices;
    emit numberOfSlicesChanged(newNumberOfSlices);
+}
+
+void Settings::visualization::Slices::onNumberOfStatesToCombine(int newNumberOfStates)
+{
+   this->numberOfStatesToCombineIntoASlice = newNumberOfStates;
+   emit numberOfStatesToCombineIntoASliceChanged(newNumberOfStates);
 }

@@ -13,14 +13,20 @@ class Settings::visualization::Slices : public QObject
 
       double globalAlpha;
       int numberOfSlices;
+      int numberOfStatesToCombineIntoASlice;
 
    signals:
       void numberOfSlicesChanged(int newNumberOfSlices);
+
+
+      void numberOfStatesToCombineIntoASliceChanged(int newNumberOfStates);
 
       void globalALphaChanged(double newGlobalAlpha);
 
    public slots:
       void onNumberOfSlicesChanged(int newNumberOfSlices);
+
+      void onNumberOfStatesToCombine(int newNumberOfStates);
 
       void onGlobalAlphaChanged(double newGlobalAlpha);
 
