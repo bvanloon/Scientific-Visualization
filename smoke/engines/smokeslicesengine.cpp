@@ -12,7 +12,8 @@ SmokeSlicesEngine::SmokeSlicesEngine(SimulationGrid *grid) :
 
 void SmokeSlicesEngine::updateCache()
 {
-   TranslucentSmokeBuilder builder(this->simulation,
+   int idx = SimulationHistory::instance().mostRecentStateIdx();
+   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getSimulationGridAtQueueIdx(idx),
                                    colorMap->textureGetter,
                                    Settings::simulation().getRange(colorMap->scalar));
    GPUData newData = builder.getGPUData();
