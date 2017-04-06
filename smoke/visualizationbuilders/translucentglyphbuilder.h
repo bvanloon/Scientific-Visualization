@@ -17,7 +17,7 @@ class TranslucentGlyphBuilder :
                               Range<double> unNormalizedAlphaRange);
 
    protected:
-      float computeAlpha(Vertex* vertex) const;
+      float computeAlpha(Vertex *vertex) const;
 
    private:
 

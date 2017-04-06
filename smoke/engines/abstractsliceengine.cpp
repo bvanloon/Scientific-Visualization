@@ -9,7 +9,7 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType,
                                          QMatrix4x4 toSliceTransformation) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numberOfSlices),
+   cache(Settings::visualization::slices().numSlices),
    toSliceTransformation(toSliceTransformation)
 {
    updateModelViewMatrix();
@@ -18,7 +18,7 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numberOfSlices),
+   cache(Settings::visualization::slices().numSlices),
    toSliceTransformation(computeToSliceTransformation())
 {
    updateModelViewMatrix();
@@ -121,7 +121,7 @@ void AbstractSliceEngine::drawSlices()
 
 double AbstractSliceEngine::computeTranslationStepSize()
 {
-   double numSlices = static_cast<double>(Settings::visualization::slices().numberOfSlices);
+   double numSlices = static_cast<double>(Settings::visualization::slices().numSlices);
    return (maximumYTranslation - minimumYTranslation) / (numSlices - 1);
 }
 

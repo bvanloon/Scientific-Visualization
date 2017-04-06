@@ -9,7 +9,7 @@ class Cone : public AbstractGlyph
    public:
       Cone(QVector3D position, QVector3D direction);
 
-    protected:
+   protected:
       GLint getDrawMode() const;
 
    private:

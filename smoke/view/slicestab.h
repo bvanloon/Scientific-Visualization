@@ -32,7 +32,7 @@ class SlicesTab : public QWidget
 
       void on_numberOfStatesSpinBox_valueChanged(int value);
 
-private:
+   private:
       Ui::SlicesTab *ui;
 
       void connectToSettings();
