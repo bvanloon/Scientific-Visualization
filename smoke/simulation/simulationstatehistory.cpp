@@ -46,7 +46,8 @@ const UniformGrid& SimulationHistory::getVisualizationGridAtQueueIdx(int idx) co
 
 int SimulationHistory::mostRecentStateIdx() const
 {
-   return this->states.size() - 1;
+   int idx = this->states.size() - 1;
+   return idx;
 }
 
 void SimulationHistory::onHistorySizeChanged(int size)
