@@ -145,6 +145,8 @@ void MainWindow::connectThisToFinishConnectionsReceivers()
 {
    connect(this, SIGNAL(finishedSettingUpConnections()),
             this->simulationTab, SLOT(onAllConnectionsAreSetUp()));
+   connect(this, SIGNAL(finishedSettingUpConnections()),
+           &Settings::visualization::slices(), SLOT(onFinishedSettingUpConnections()));
 }
 
 void MainWindow::connectSimulationTabAndSettings()

@@ -25,6 +25,8 @@ class Settings::visualization::Slices : public QObject
       void globalALphaChanged(double newGlobalAlpha);
 
    public slots:
+      void onFinishedSettingUpConnections();
+
       void onNumberOfSlicesChanged(int newNumberOfSlices);
 
       void onNumberOfStatesToCombine(int newNumberOfStates);

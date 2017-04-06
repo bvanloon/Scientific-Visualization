@@ -27,6 +27,11 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
    return instance;
 }
 
+void Settings::visualization::Slices::onFinishedSettingUpConnections()
+{
+   updateHistorySize(numberOfSlices, numberOfStatesToCombineIntoASlice);
+}
+
 void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha)
 {
    this->globalAlpha = newGlobalAlpha;
