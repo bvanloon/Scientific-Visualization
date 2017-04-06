@@ -1,11 +1,11 @@
 #include "streamlineslicesengine.h"
 #include "settings/visualizationsettings.h"
 #include "visualizationbuilders/translucentstreamlinebuilder.h"
+#include "simulation/simulationstatehistory.h"
 
-StreamLineSlicesEngine::StreamLineSlicesEngine(UniformGrid *simulationGrid) :
+StreamLineSlicesEngine::StreamLineSlicesEngine() :
    AbstractSliceEngine(AbstractEngine::lightModel::noLight,
-                       Settings::engines::EnginesTypes::streamLineSlices),
-   grid(simulationGrid)
+                       Settings::engines::EnginesTypes::streamLineSlices)
 {
    connectToSettings();
 }
@@ -22,15 +22,17 @@ GPUData StreamLineSlicesEngine::buildStreamLines()
 {
    GPUData data(streamobject::Line::drawMode);
 
+   int idx = SimulationHistory::instance().mostRecentStateIdx();
+
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
-      GPUData streamLine = buildStreamLine(seedpoint);
+      GPUData streamLine = buildStreamLine(&SimulationHistory::instance().getSimulationGridAtQueueIdx(idx), seedpoint);
       data.extend(streamLine);
    }
    return data;
 }
 
-GPUData StreamLineSlicesEngine::buildStreamLine(QPointF seedPoint)
+GPUData StreamLineSlicesEngine::buildStreamLine(const SimulationGrid *grid, QPointF seedPoint)
 {
    TranslucentStreamLineBuilder builder(grid, QVector3D(seedPoint),
                                         Settings::visualization::streamLines().vectorField,
