@@ -26,7 +26,7 @@ class SimulationHistory : public QObject
    signals:
 
    public slots:
-      void onNumberOfSlicesChanged(int numberOfSlices);
+      void onHistorySizeChanged(int size);
 
       void onNewSimulationState(SimulationData *simulationDataDeepCopy);
 

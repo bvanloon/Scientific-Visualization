@@ -49,9 +49,9 @@ int SimulationHistory::mostRecentStateIdx() const
    return this->states.size() - 1;
 }
 
-void SimulationHistory::onNumberOfSlicesChanged(int numberOfSlices)
+void SimulationHistory::onHistorySizeChanged(int size)
 {
-   this->states.changeMaximumSize(numberOfSlices);
+   this->states.changeMaximumSize(size);
 }
 
 SimulationData *SimulationHistory::getStateAtQueueIdx(int idx) const
