@@ -24,6 +24,7 @@ class SizeLimitedQueue : public QQueue<T>
          this->trim();
       }
 
+      inline const T& tail() const { return QList<T>::last(); }
    private:
       int maximumSize;
 
