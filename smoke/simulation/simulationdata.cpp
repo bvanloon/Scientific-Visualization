@@ -126,7 +126,7 @@ fftw_real SimulationData::getRhoAt(int idx) const
 
 double SimulationData::getDensityAt(int idx) const
 {
-    return this->getRhoAt(idx);
+   return this->getRhoAt(idx);
 }
 
 }
@@ -190,8 +190,8 @@ SimulationData& SimulationData::operator*=(const double rhs)
 
 SimulationData operator/(SimulationData lhs, const double rhs)
 {
-    lhs /= rhs;
-    return lhs;
+   lhs /= rhs;
+   return lhs;
 }
 
 SimulationData operator*(const double lhs, SimulationData rhs)
