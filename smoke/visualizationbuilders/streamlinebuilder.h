@@ -6,7 +6,7 @@
 
 class StreamLineBuilder {
    public:
-      StreamLineBuilder(UniformGrid *grid, QVector3D currentPosition,
+      StreamLineBuilder(const UniformGrid *grid, QVector3D currentPosition,
                         Vertex::vectorGetter vectorGetter,
                         Vertex::scalarGetter magnitudeGetter);
 
@@ -19,7 +19,7 @@ class StreamLineBuilder {
       bool isMagnitudeLargeEnoguh(float magnitude);
 
    private:
-      UniformGrid *grid;
+      const UniformGrid *grid;
 
       double timeStep;
       double maximumTime;

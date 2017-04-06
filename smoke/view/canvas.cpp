@@ -67,7 +67,7 @@ void Canvas::buildEngineMap()
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::streamLineSlices,
-                        new StreamLineSlicesEngine(simulation->getSimulationGrid())));
+                        new StreamLineSlicesEngine()));
 }
 
 void Canvas::connectEngines()

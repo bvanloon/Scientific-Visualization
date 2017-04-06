@@ -10,7 +10,7 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
    Q_OBJECT
 
    public:
-      StreamLineSlicesEngine(UniformGrid *simulationGrid);
+      StreamLineSlicesEngine();
 
    public slots:
 
@@ -23,11 +23,9 @@ class StreamLineSlicesEngine : public AbstractSliceEngine
 
       GPUData buildStreamLines();
 
-      GPUData buildStreamLine(QPointF seedPoint);
+      GPUData buildStreamLine(const SimulationGrid *grid, QPointF seedPoint);
 
       void connectToSettings();
-
-      UniformGrid *grid;
 };
 
 #endif // STREAMLINESLICESENGINE_H
