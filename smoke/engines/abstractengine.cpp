@@ -1,7 +1,7 @@
 #include "abstractengine.h"
 
 const float AbstractEngine::farClippingPlane = 100000.0f;
-const float AbstractEngine::nearClippingPlane = -10000.0f;
+const float AbstractEngine::nearClippingPlane = -1.0f;
 
 AbstractEngine::AbstractEngine(int lightModel,
                                Settings::engines::EnginesTypes engineType,
@@ -26,7 +26,7 @@ AbstractEngine::~AbstractEngine()
    this->vertexBuffer->destroy();
    this->textureCoordinateBuffer->destroy();
    this->normalBuffer->destroy();
-    this->alphaBuffer->destroy();
+   this->alphaBuffer->destroy();
    this->vao.destroy();
 }
 
@@ -46,21 +46,21 @@ void AbstractEngine::setProjectionMatrix(const QMatrix4x4& value)
 
 void AbstractEngine::setGlobalAlpha()
 {
-    setGlobalAlpha(1.0);
+   setGlobalAlpha(1.0);
 }
 
 void AbstractEngine::setGlobalAlpha(float alpha)
 {
-    this->shaderProgram->bind();
-    this->shaderProgram->setUniformValue("globalAlpha", alpha);
-    this->shaderProgram->release();
+   this->shaderProgram->bind();
+   this->shaderProgram->setUniformValue("globalAlpha", alpha);
+   this->shaderProgram->release();
 }
 
 void AbstractEngine::setScreenSpaceTransformation()
 {
-    QMatrix4x4 transform;
-    transform.setToIdentity();
-    setScreenSpaceTransformation(transform);
+   QMatrix4x4 transform;
+   transform.setToIdentity();
+   setScreenSpaceTransformation(transform);
 }
 
 void AbstractEngine::setScreenSpaceTransformation(const QMatrix4x4& transform)
@@ -279,13 +279,13 @@ void AbstractEngine::updateBuffers(GPUData data)
 
 void AbstractEngine::updateBuffersAndDraw(GPUData data)
 {
-    updateBuffers(data);
-    draw(data);
+   updateBuffers(data);
+   draw(data);
 }
 
 void AbstractEngine::draw(GPUData data)
 {
-    drawWithMode(data.getDrawMode(), data.numElements());
+   drawWithMode(data.getDrawMode(), data.numElements());
 }
 
 void AbstractEngine::drawWithMode(int mode, int bufferLength)
