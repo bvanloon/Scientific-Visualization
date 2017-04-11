@@ -60,6 +60,10 @@ void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha
    emit globalALphaChanged(newGlobalAlpha);
 }
 
+void Settings::visualization::Slices::onCombinationMethodChanged(Settings::visualization::Slices::CombinationMethod newMethod)
+{
+}
+
 void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
    this->numSlices = newNumberOfSlices;

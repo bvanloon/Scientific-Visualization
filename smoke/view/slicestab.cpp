@@ -1,8 +1,6 @@
 #include "slicestab.h"
 #include "ui_slicestab.h"
 
-#include "settings/visualizationsettings.h"
-
 SlicesTab::SlicesTab(QWidget *parent) :
    QWidget(parent),
    ui(new Ui::SlicesTab)
@@ -29,6 +27,8 @@ void SlicesTab::connectToSettings()
             &Settings::visualization::slices(), SLOT(onGlobalAlphaChanged(double)));
    connect(this, SIGNAL(numberOfStatesPerSliceChanged(int)),
            &Settings::visualization::slices(), SLOT(onNumberOfStatesPerSliceChanged(int)));
+   connect(this, SIGNAL(combinationMethodChanged(Settings::visualization::Slices::CombinationMethod)),
+           &Settings::visualization::slices(), SLOT(onCombinationMethodChanged(Settings::visualization::Slices::CombinationMethod)));
 }
 
 void SlicesTab::initializeUI()
@@ -61,5 +61,5 @@ void SlicesTab::on_numberOfStatesSpinBox_valueChanged(int value)
 
 void SlicesTab::on_combinationmethodComboBox_currentIndexChanged(int index)
 {
-   qDebug() << "SlicesTab::on_combinationmethodComboBox_currentIndexChanged emit change in combination method";
+   emit combinationMethodChanged(static_cast<Settings::visualization::Slices::CombinationMethod>(index));
 }

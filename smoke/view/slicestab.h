@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "settings/visualizationsettings.h"
+
 namespace Ui {
     class SlicesTab;
 }
@@ -21,6 +23,8 @@ class SlicesTab : public QWidget
       void globalAlphaChanged(double newGlobalAlpha);
 
       void numberOfStatesPerSliceChanged(int newNumberOfStates);
+
+      void combinationMethodChanged(Settings::visualization::Slices::CombinationMethod newMethod);
 
    public slots:
 

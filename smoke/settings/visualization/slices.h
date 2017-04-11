@@ -49,6 +49,8 @@ namespace Settings {
 
           void onGlobalAlphaChanged(double newGlobalAlpha);
 
+          void onCombinationMethodChanged(Settings::visualization::Slices::CombinationMethod newMethod);
+
        private slots:
 
        private:
