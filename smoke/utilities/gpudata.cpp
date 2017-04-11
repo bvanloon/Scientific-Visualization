@@ -126,12 +126,16 @@ GPUData GPUData::debugLowerLeftTriangle()
 
    float alpha = 0.25;
    float texture = 0.0;
-   float z = 0.0;
+   float z = -300.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
    data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
-   data.addElement(QVector3D(1 / 3.0 * xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
-   data.addElement(QVector3D(xMin, 1 / 2.0 * yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
 
    return data;
 }
@@ -141,32 +145,44 @@ GPUData GPUData::debugUpperLeftTriangle()
    double xMin = 1.0;
    double xMax = Settings::canvas().size.width() - 1;
 
+   double yMin = 1.0;
    double yMax = Settings::canvas().size.height();
 
    float alpha = 0.25;
    float texture = 5.0;
-   float z = -100.0;
+   float z = -200.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
-   data.addElement(QVector3D(xMin, 1 / 3.0 * yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
-   data.addElement(QVector3D(2 / 3.0 * xMax, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
    data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
 
    return data;
 }
 
 GPUData GPUData::debugUpperRightTriangle()
 {
+   double xMin = 1.0;
    double xMax = Settings::canvas().size.width() - 1;
+
+   double yMin = 1.0;
    double yMax = Settings::canvas().size.height();
 
    float alpha = 0.25;
    float texture = 10.0;
-   float z = -200.0;
+   float z = -100.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
-   data.addElement(QVector3D(1 / 2.0 * xMax, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
-   data.addElement(QVector3D(xMax, 1 / 3.0 * yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
    data.addElement(QVector3D(xMax, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
 
    return data;
@@ -174,6 +190,7 @@ GPUData GPUData::debugUpperRightTriangle()
 
 GPUData GPUData::debugLowerRightTriangle()
 {
+   double xMin = 1.0;
    double xMax = Settings::canvas().size.width() - 1;
 
    double yMin = 1.0;
@@ -181,12 +198,16 @@ GPUData GPUData::debugLowerRightTriangle()
 
    float alpha = 0.25;
    float texture = 7.4;
-   float z = -300.0;
+   float z = 0.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
-   data.addElement(QVector3D(1 / 3.0 * xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
    data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
-   data.addElement(QVector3D(xMax, 2 / 3.0 * yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+
+   data.addElement(QVector3D(xMin, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMax, yMax, z), QVector3D(0, 0, 1.0), texture, alpha);
 
    return data;
 }
