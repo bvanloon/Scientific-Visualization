@@ -116,6 +116,25 @@ GPUData GPUData::debugSlice()
    return data;
 }
 
+GPUData GPUData::debugLowerLeftTriangle()
+{
+   double xMin = 1.0;
+   double xMax = Settings::canvas().size.width() - 1;
+
+   double yMin = 1.0;
+   double yMax = Settings::canvas().size.height();
+
+   float alpha = 0.25;
+   float texture = 0.0;
+
+   GPUData data = GPUData(GL_TRIANGLES);
+   data.addElement(QVector3D(xMin, yMin, 0), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(1 / 3.0 * xMax, yMin, 0), QVector3D(0, 0, 1.0), texture, alpha);
+   data.addElement(QVector3D(xMin, 1 / 2.0 * yMax, 0), QVector3D(0, 0, 1.0), texture, alpha);
+
+   return data;
+}
+
 bool GPUData::isEmpty()
 {
    return this->numElements() == 0;
