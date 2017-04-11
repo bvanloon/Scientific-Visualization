@@ -18,12 +18,12 @@ const Settings::Canvas& Settings::Canvas::instance()
 
 QPointF Settings::Canvas::convertToNormalCoordinates(QPointF openGLCoordinates) const
 {
-    return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPointF();
+   return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPointF();
 }
 
 QPoint Settings::Canvas::convertToNormalCoordinates(QPoint openGLCoordinates) const
 {
-    return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPoint();
+   return convertToNormalCoordinates(QVector3D(openGLCoordinates)).toPoint();
 }
 
 QVector3D Settings::Canvas::convertToNormalCoordinates(QVector3D openGLCoordinates) const
@@ -83,5 +83,15 @@ void Settings::Canvas::onResetView()
 
 void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-    if(checked) emit clearCache(engine);
+   if (checked) emit clearCache(engine);
+}
+
+void Settings::Canvas::onSetViewMatrixToTopDownView()
+{
+   qDebug() << "Settings::Canvas::onSetViewMatrixToTopDownView()";
+}
+
+void Settings::Canvas::onSetViewMatrixToSideView()
+{
+   qDebug() << "Settings::Canvas::onSetViewMatrixToSideView()";
 }

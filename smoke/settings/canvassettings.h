@@ -52,6 +52,10 @@ class Settings::Canvas : public QObject
 
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void onSetViewMatrixToTopDownView();
+
+      void onSetViewMatrixToSideView();
+
    private:
       explicit Canvas(QObject *parent = 0);
 

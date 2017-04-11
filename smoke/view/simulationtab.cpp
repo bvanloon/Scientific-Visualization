@@ -86,6 +86,10 @@ void SimulationSettingPane::connectToSettings()
 {
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+   connect(this, SIGNAL(setViewMatrixToSideView()),
+           &Settings::canvas(), SLOT(onSetViewMatrixToSideView()));
+   connect(this, SIGNAL(setViewMatrixToTopDownView()),
+           &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
 }
 
 void SimulationSettingPane::setUpEnineCheckBoxMappings()
