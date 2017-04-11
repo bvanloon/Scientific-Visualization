@@ -2,50 +2,78 @@
 #define SLICES_H
 
 #include <QObject>
+#include <QStringList>
 
 #include "settings/settings.h"
+#include "simulation/simulationstatehistory.h"
 
-class Settings::visualization::Slices : public QObject
-{
-   Q_OBJECT
-   public:
-      static const Slices& instance();
+namespace Settings {
+    class visualization::Slices : public QObject
+    {
+       Q_OBJECT
 
-      double globalAlpha;
-      int numSlices;
-      int numStatesPerSlice;
+       public:
+          static const Slices& instance();
 
-   signals:
-      void numberOfSlicesChanged(int newNumberOfSlices);
+          double globalAlpha;
+          int numSlices;
+          int numStatesPerSlice;
 
-      void historySizeChanged(int newHistorySize);
+          SimulationHistory::SimulationGridUpdater combinationMethod;
 
-      void numberOfStatesPerSliceChanged(int newNumberOfStates);
+          enum CombinationMethod
+          {
+             mean,
+             skip
+          };
 
-      void globalALphaChanged(double newGlobalAlpha);
+          QStringList getCombinationMethodNames() const;
 
-      void clearCache();
+       signals:
+          void numberOfSlicesChanged(int newNumberOfSlices);
 
-   public slots:
-      void onFinishedSettingUpConnections();
+          void historySizeChanged(int newHistorySize);
 
-      void onNumberOfSlicesChanged(int newNumberOfSlices);
+          void numberOfStatesPerSliceChanged(int newNumberOfStates);
 
-      void onNumberOfStatesPerSliceChanged(int newNumberOfStates);
+          void globalALphaChanged(double newGlobalAlpha);
 
-      void onGlobalAlphaChanged(double newGlobalAlpha);
+          void clearCache();
 
-   private slots:
+       public slots:
+          void onFinishedSettingUpConnections();
 
-   private:
-      explicit Slices(QObject *parent = 0);
+          void onNumberOfSlicesChanged(int newNumberOfSlices);
 
-      Slices(Slices const&) = delete;
-      void operator=(Slices const&) = delete;
+          void onNumberOfStatesPerSliceChanged(int newNumberOfStates);
 
-      void updateHistorySize(int numSlices, int numberOfStatesToCombine);
+          void onGlobalAlphaChanged(double newGlobalAlpha);
 
-      void connectToOtherSettings();
-};
+          void onCombinationMethodChanged(Settings::visualization::Slices::CombinationMethod newMethod);
+
+       private slots:
+
+       private:
+          explicit Slices(QObject *parent = 0);
+
+          Slices(Slices const&) = delete;
+          void operator=(Slices const&) = delete;
+
+          void updateHistorySize(int numSlices, int numberOfStatesToCombine);
+
+          SimulationHistory::SimulationGridUpdater determineCombinationMethod(CombinationMethod method);
+
+          void connectToOtherSettings();
+    };
+
+    namespace defaults {
+        namespace visualization {
+            namespace slices {
+                static const Settings::visualization::Slices::CombinationMethod combinationMethod =
+                   Settings::visualization::Slices::CombinationMethod::mean;
+            }
+        }
+    }
+}
 
 #endif // SLICES_H

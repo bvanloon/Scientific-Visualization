@@ -16,7 +16,9 @@ GlyphSliceEngine::GlyphSliceEngine() :
 void GlyphSliceEngine::updateCache()
 {
    TranslucentGlyphBuilder builder(
-      &SimulationHistory::instance().getMeanVisualizationGridOfLastStates(Settings::visualization::slices().numStatesPerSlice),
+      &SimulationHistory::instance().getCombinedVisualizationGridOfLastStates(
+                   Settings::visualization::slices().numStatesPerSlice,
+                   Settings::visualization::slices().combinationMethod),
       Settings::visualization::glyphs().glyph,
       Settings::visualization::glyphs().colorMap->textureGetter,
       Settings::visualization::glyphs().vectorGetter,

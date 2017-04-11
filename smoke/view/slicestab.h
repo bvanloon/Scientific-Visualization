@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "settings/visualizationsettings.h"
+
 namespace Ui {
     class SlicesTab;
 }
@@ -22,6 +24,8 @@ class SlicesTab : public QWidget
 
       void numberOfStatesPerSliceChanged(int newNumberOfStates);
 
+      void combinationMethodChanged(Settings::visualization::Slices::CombinationMethod newMethod);
+
    public slots:
 
    private slots:
@@ -32,10 +36,14 @@ class SlicesTab : public QWidget
 
       void on_numberOfStatesSpinBox_valueChanged(int value);
 
+      void on_combinationmethodComboBox_currentIndexChanged(int index);
+
    private:
       Ui::SlicesTab *ui;
 
       void connectToSettings();
+
+      void initializeUI();
 
       void setUItoDefaults();
 };

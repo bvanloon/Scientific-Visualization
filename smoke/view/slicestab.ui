@@ -47,7 +47,14 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSpinBox" name="numberOfSlicesSpinBox"/>
+      <widget class="QSpinBox" name="numberOfSlicesSpinBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="numberOfStatesLabel">
@@ -57,7 +64,24 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QSpinBox" name="numberOfStatesSpinBox"/>
+      <widget class="QSpinBox" name="numberOfStatesSpinBox">
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>100</number>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="combinationMethodLabel">
+       <property name="text">
+        <string>Combination method</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="combinationmethodComboBox"/>
      </item>
     </layout>
    </item>

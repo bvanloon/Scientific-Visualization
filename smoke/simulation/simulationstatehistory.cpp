@@ -37,9 +37,9 @@ const SimulationGrid& SimulationHistory::getSimulationGridAtQueueIdx(int idx) co
    return *this->mirrorSimulationGrid;
 }
 
-const SimulationGrid& SimulationHistory::getMeanSimulationGridOfLastStates(int numStates) const
+const SimulationGrid& SimulationHistory::getCombinedSimulationGridOfLastStates(int numStates, SimulationGridUpdater updateSimulationGrid) const
 {
-   updateSimulationGridToMeanOfLastStates(numStates);
+   (this->*updateSimulationGrid)(numStates);
    return *mirrorSimulationGrid;
 }
 
@@ -50,9 +50,9 @@ const UniformGrid& SimulationHistory::getVisualizationGridAtQueueIdx(int idx) co
    return *this->mirrorVisualizationGrid;
 }
 
-const UniformGrid& SimulationHistory::getMeanVisualizationGridOfLastStates(int numStates) const
+const UniformGrid& SimulationHistory::getCombinedVisualizationGridOfLastStates(int numStates, SimulationGridUpdater updateSimulationGrid) const
 {
-   updateSimulationGridToMeanOfLastStates(numStates);
+   (this->*updateSimulationGrid)(numStates);
    return *mirrorVisualizationGrid;
 }
 
@@ -79,6 +79,16 @@ void SimulationHistory::updateSimulationGridToMeanOfLastStates(int numStates) co
    QList<SimulationData *> statesToUse = this->states.tail(numStates);
    meanPtr = new SimulationData(SimulationData::mean(statesToUse));
    mirrorSimulationGrid->setData(meanPtr);
+}
+
+void SimulationHistory::updateSimulationGridToLastState(int UNUSED(numStates)) const
+{
+   static SimulationData *dataPtr = nullptr;
+   if (dataPtr != nullptr) delete dataPtr;
+   QList<SimulationData *> statesToUse = this->states.tail(1);
+   //Hacky hack
+   dataPtr = new SimulationData(SimulationData::mean(statesToUse));
+   mirrorSimulationGrid->setData(dataPtr);
 }
 
 void SimulationHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)
