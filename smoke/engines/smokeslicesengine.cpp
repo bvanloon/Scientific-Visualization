@@ -12,7 +12,7 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
 
 void SmokeSlicesEngine::updateCache()
 {
-   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getMeanSimulationGridOfLastStates(1),
+   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getMeanSimulationGridOfLastStates(Settings::visualization::slices().numStatesPerSlice),
                                    colorMap->textureGetter,
                                    Settings::simulation().getRange(colorMap->scalar));
    GPUData newData = builder.getGPUData();
