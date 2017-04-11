@@ -95,12 +95,6 @@ QMatrix4x4 AbstractSliceEngine::computeModuleViewMatrix()
    return modelViewMatrix;
 }
 
-int AbstractSliceEngine::fillBuffers(Simulation *UNUSED(simulation))
-{
-   std::logic_error("AbstractSliceEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
-   return 0;
-}
-
 void AbstractSliceEngine::updateBuffers(GPUData data)
 {
    AbstractEngine::updateBuffers(data);

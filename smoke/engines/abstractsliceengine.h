@@ -53,8 +53,6 @@ class AbstractSliceEngine : public AbstractEngine
 
       void updateBuffers(GPUData data);
 
-      int fillBuffers(Simulation *UNUSED(simulation));
-
       void connectToSettings();
 
       virtual void connectToColorMap();
