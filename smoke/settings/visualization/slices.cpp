@@ -3,9 +3,18 @@
 Settings::visualization::Slices::Slices(QObject *parent) :
    QObject(parent),
    globalAlpha(1.0),
-   numberOfSlices(10)
+   numSlices(10),
+   numStatesPerSlice(10)
 {
    connectToOtherSettings();
+   updateHistorySize(numSlices, numStatesPerSlice);
+}
+
+void Settings::visualization::Slices::updateHistorySize(int numberOfSlices, int numberOfStatesToCombine)
+{
+   int historySize = numberOfSlices * numberOfStatesToCombine;
+
+   emit historySizeChanged(historySize);
 }
 
 void Settings::visualization::Slices::connectToOtherSettings()
@@ -18,6 +27,11 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
    return instance;
 }
 
+void Settings::visualization::Slices::onFinishedSettingUpConnections()
+{
+   updateHistorySize(numSlices, numStatesPerSlice);
+}
+
 void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha)
 {
    this->globalAlpha = newGlobalAlpha;
@@ -26,6 +40,15 @@ void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha
 
 void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
-   this->numberOfSlices = newNumberOfSlices;
+   this->numSlices = newNumberOfSlices;
    emit numberOfSlicesChanged(newNumberOfSlices);
+   updateHistorySize(newNumberOfSlices, this->numStatesPerSlice);
+}
+
+void Settings::visualization::Slices::onNumberOfStatesPerSliceChanged(int newNumberOfStates)
+{
+   this->numStatesPerSlice = newNumberOfStates;
+   emit numberOfStatesPerSliceChanged(newNumberOfStates);
+   emit clearCache();
+   updateHistorySize(this->numSlices, newNumberOfStates);
 }

@@ -43,6 +43,8 @@ class AbstractSliceEngine : public AbstractEngine
       static const double maximumYTranslation;
       static const double minimumYTranslation;
 
+      int numRecentSimulationStatesNotInSlice;
+
       void drawSlices();
 
       void updateModelViewMatrix();
@@ -52,8 +54,6 @@ class AbstractSliceEngine : public AbstractEngine
       double computeTranslationStepSize();
 
       void updateBuffers(GPUData data);
-
-      int fillBuffers(Simulation *UNUSED(simulation));
 
       void connectToSettings();
 

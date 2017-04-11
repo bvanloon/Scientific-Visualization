@@ -3,7 +3,7 @@
 
 const float StreamLineBuilder::minimumMagnitude = 0.004;
 
-StreamLineBuilder::StreamLineBuilder(UniformGrid *grid, QVector3D seedPoint,
+StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
                                      Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
    grid(grid),
    seedPoint(seedPoint),

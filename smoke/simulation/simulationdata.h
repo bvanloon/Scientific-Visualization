@@ -36,18 +36,25 @@ class SimulationData
       double getDensityAt(int idx) const;
 
 
+      static SimulationData mean(QList<SimulationData> list);
+      static SimulationData mean(QList<SimulationData *> list);
+
+
       SimulationData& operator+=(const SimulationData& rhs);
 
       SimulationData& operator/=(const double rhs);
+
       SimulationData& operator*=(const double rhs);
+
+      SimulationData& operator=(SimulationData other);
 
       friend SimulationData operator+(SimulationData lhs, const SimulationData& rhs);
 
       friend SimulationData operator*(SimulationData lhs, const double rhs);
+
       friend SimulationData operator*(const double lhs, SimulationData rhs);
 
       friend SimulationData operator/(SimulationData lhs, const double rhs);
-
 
       friend QDebug operator<<(QDebug stream, const SimulationData& data);
 

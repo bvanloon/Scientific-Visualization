@@ -9,8 +9,9 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          Settings::engines::EnginesTypes engineType,
                                          QMatrix4x4 toSliceTransformation) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numberOfSlices),
-   toSliceTransformation(toSliceTransformation)
+   cache(Settings::visualization::slices().numSlices),
+   toSliceTransformation(toSliceTransformation),
+   numRecentSimulationStatesNotInSlice(0)
 {
    updateModelViewMatrix();
    connectToSettings();
@@ -18,7 +19,7 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numberOfSlices),
+   cache(Settings::visualization::slices().numSlices),
    toSliceTransformation(computeToSliceTransformation())
 {
    updateModelViewMatrix();
@@ -42,7 +43,12 @@ void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 
 void AbstractSliceEngine::onNewSimulationState()
 {
-   updateCache();
+   numRecentSimulationStatesNotInSlice++;
+   if (numRecentSimulationStatesNotInSlice >= Settings::visualization::slices().numStatesPerSlice)
+   {
+      updateCache();
+      numRecentSimulationStatesNotInSlice = 0;
+   }
 }
 
 void AbstractSliceEngine::onGLobalAlphaChanged(double globalAlpha)
@@ -95,12 +101,6 @@ QMatrix4x4 AbstractSliceEngine::computeModuleViewMatrix()
    return modelViewMatrix;
 }
 
-int AbstractSliceEngine::fillBuffers(Simulation *UNUSED(simulation))
-{
-   std::logic_error("AbstractSliceEngine::fillBuffers is only implemented to ensure compliance with legacy code.");
-   return 0;
-}
-
 void AbstractSliceEngine::updateBuffers(GPUData data)
 {
    AbstractEngine::updateBuffers(data);
@@ -121,12 +121,16 @@ void AbstractSliceEngine::drawSlices()
 
 double AbstractSliceEngine::computeTranslationStepSize()
 {
-   double numSlices = static_cast<double>(Settings::visualization::slices().numberOfSlices);
+   double numSlices = static_cast<double>(Settings::visualization::slices().numSlices);
    return (maximumYTranslation - minimumYTranslation) / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()
 {
+   connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
+           this, SLOT(onNumberOfSlicesChanged(int)));
+   connect(&Settings::visualization::slices(), SIGNAL(clearCache()),
+           this, SLOT(onClearCache()));
    connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
            this, SLOT(onNumberOfSlicesChanged(int)));
    connect(&Settings::canvas(), SIGNAL(clearCache()),

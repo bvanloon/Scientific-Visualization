@@ -25,6 +25,7 @@ class Settings::Simulation : public QObject
 
 
       Range<double> getRange(Settings::sim::Scalar scalar) const;
+
       Range<double> getMagnitudeRange(Settings::sim::Vector vector) const;
 
    signals:
@@ -55,7 +56,7 @@ class Settings::Simulation : public QObject
       Simulation(Simulation const&) = delete;
       void operator=(Simulation const&) = delete;
 
-      QMultiMap<Settings::sim::Scalar, Range<double>> scalarRanges;
+      QMultiMap<Settings::sim::Scalar, Range<double> > scalarRanges;
 
       void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
 

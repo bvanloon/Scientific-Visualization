@@ -4,7 +4,7 @@
 
 SimulationHistory::SimulationHistory(QObject *parent) :
    QObject(parent),
-   states(Settings::visualization::slices().numberOfSlices),
+   states(Settings::visualization::slices().numSlices),
    mirrorSimulationGrid(new SimulationGrid(
                            Settings::simulation().dimension,
                            Settings::canvas().size,
@@ -37,6 +37,12 @@ const SimulationGrid& SimulationHistory::getSimulationGridAtQueueIdx(int idx) co
    return *this->mirrorSimulationGrid;
 }
 
+const SimulationGrid& SimulationHistory::getMeanSimulationGridOfLastStates(int numStates) const
+{
+   updateSimulationGridToMeanOfLastStates(numStates);
+   return *mirrorSimulationGrid;
+}
+
 const UniformGrid& SimulationHistory::getVisualizationGridAtQueueIdx(int idx) const
 {
    SimulationData *state = this->getStateAtQueueIdx(idx);
@@ -44,19 +50,35 @@ const UniformGrid& SimulationHistory::getVisualizationGridAtQueueIdx(int idx) co
    return *this->mirrorVisualizationGrid;
 }
 
-int SimulationHistory::mostRecentStateIdx() const
+const UniformGrid& SimulationHistory::getMeanVisualizationGridOfLastStates(int numStates) const
 {
-   return this->states.size() - 1;
+   updateSimulationGridToMeanOfLastStates(numStates);
+   return *mirrorVisualizationGrid;
 }
 
-void SimulationHistory::onNumberOfSlicesChanged(int numberOfSlices)
+int SimulationHistory::mostRecentStateIdx() const
 {
-   this->states.changeMaximumSize(numberOfSlices);
+   int idx = this->states.size() - 1;
+   return idx;
+}
+
+void SimulationHistory::onHistorySizeChanged(int size)
+{
+   this->states.changeMaximumSize(size);
 }
 
 SimulationData *SimulationHistory::getStateAtQueueIdx(int idx) const
 {
    return this->states.at(idx);
+}
+
+void SimulationHistory::updateSimulationGridToMeanOfLastStates(int numStates) const
+{
+   static SimulationData *meanPtr = nullptr;
+   if (meanPtr != nullptr) delete meanPtr;
+   QList<SimulationData *> statesToUse = this->states.tail(numStates);
+   meanPtr = new SimulationData(SimulationData::mean(statesToUse));
+   mirrorSimulationGrid->setData(meanPtr);
 }
 
 void SimulationHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)

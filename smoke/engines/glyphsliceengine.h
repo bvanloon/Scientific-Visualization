@@ -9,23 +9,16 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    Q_OBJECT
 
    public:
-      GlyphSliceEngine(SimulationGrid *simulationGrid);
+      GlyphSliceEngine();
 
    public slots:
-      void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
-
-      void onGridDimensionChanged(QSizeF size);
 
    signals:
-      void cellSizeChanged(QSizeF newSize);
 
    protected:
       void updateCache();
 
    private:
-
-      UniformGrid *visualizationGrid;
-      SimulationGrid *simulationGrid;
 
       void connectToSettings();
 

@@ -2,7 +2,7 @@
 
 
 TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
-   UniformGrid *grid,
+   const UniformGrid *grid,
    QVector3D currentPosition,
    Vertex::vectorGetter vectorGetter,
    Vertex::scalarGetter magnitudeGetter,

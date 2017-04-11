@@ -20,6 +20,8 @@ class SlicesTab : public QWidget
 
       void globalAlphaChanged(double newGlobalAlpha);
 
+      void numberOfStatesPerSliceChanged(int newNumberOfStates);
+
    public slots:
 
    private slots:
@@ -27,6 +29,8 @@ class SlicesTab : public QWidget
       void on_globalAlphaSpinBox_valueChanged(double arg1);
 
       void on_numberOfSlicesSpinBox_valueChanged(int arg1);
+
+      void on_numberOfStatesSpinBox_valueChanged(int value);
 
    private:
       Ui::SlicesTab *ui;

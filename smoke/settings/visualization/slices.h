@@ -12,15 +12,26 @@ class Settings::visualization::Slices : public QObject
       static const Slices& instance();
 
       double globalAlpha;
-      int numberOfSlices;
+      int numSlices;
+      int numStatesPerSlice;
 
    signals:
       void numberOfSlicesChanged(int newNumberOfSlices);
 
+      void historySizeChanged(int newHistorySize);
+
+      void numberOfStatesPerSliceChanged(int newNumberOfStates);
+
       void globalALphaChanged(double newGlobalAlpha);
 
+      void clearCache();
+
    public slots:
+      void onFinishedSettingUpConnections();
+
       void onNumberOfSlicesChanged(int newNumberOfSlices);
+
+      void onNumberOfStatesPerSliceChanged(int newNumberOfStates);
 
       void onGlobalAlphaChanged(double newGlobalAlpha);
 
@@ -31,6 +42,8 @@ class Settings::visualization::Slices : public QObject
 
       Slices(Slices const&) = delete;
       void operator=(Slices const&) = delete;
+
+      void updateHistorySize(int numSlices, int numberOfStatesToCombine);
 
       void connectToOtherSettings();
 };

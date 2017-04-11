@@ -1,6 +1,6 @@
 #include "glyphbuilder.h"
 
-GlyphBuilder::GlyphBuilder(UniformGrid *grid,
+GlyphBuilder::GlyphBuilder(const UniformGrid *grid,
                            Settings::sim::GlyphsType glyphThype,
                            Vertex::scalarGetter textureGetter,
                            Vertex::vectorGetter directionGetter) :

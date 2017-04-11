@@ -59,15 +59,15 @@ void Canvas::buildEngineMap()
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::smokeSlices,
-                         new SmokeSlicesEngine(simulation->getSimulationGrid())));
+                         new SmokeSlicesEngine()));
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::glyphSlices,
-                         new GlyphSliceEngine(simulation->getSimulationGrid())));
+                         new GlyphSliceEngine()));
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::streamLineSlices,
-                        new StreamLineSlicesEngine(simulation->getSimulationGrid())));
+                        new StreamLineSlicesEngine()));
 }
 
 void Canvas::connectEngines()

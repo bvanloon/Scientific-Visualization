@@ -108,13 +108,12 @@ int UniformGrid::getDimension() const
    return dimension;
 }
 
-bool UniformGrid::inGridArea(QVector3D position)
+bool UniformGrid::inGridArea(QVector3D position) const
 {
    return this->coveredArea.contains(position.x(), position.y());
 }
 
-
-StructuredCell *UniformGrid::findCellContaining(QVector3D position)
+StructuredCell *UniformGrid::findCellContaining(QVector3D position) const
 {
    QPair<int, int> coordinates = findUpperLeftOfContainingCell(position);
    StructuredGridVertex *upperLeftVertex = dynamic_cast<StructuredGridVertex *>(vertexMap.find(coordinates).value());
@@ -124,7 +123,7 @@ StructuredCell *UniformGrid::findCellContaining(QVector3D position)
    return cell;
 }
 
-QPair<int, int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position)
+QPair<int, int> UniformGrid::findUpperLeftOfContainingCell(QVector3D position) const
 {
    float xUnrounded = ((float)position.x() - padding.width()) / cellSize.width();
    float yUnrounded = ((float)position.y() - padding.height()) / cellSize.height();
@@ -229,7 +228,7 @@ QVector3D UniformGrid::bindToGrid(QVector3D position)
    return position;
 }
 
-Triangulation UniformGrid::getTriangulation()
+Triangulation UniformGrid::getTriangulation() const
 {
    return this->triangulation;
 }

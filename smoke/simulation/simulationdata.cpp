@@ -129,6 +129,30 @@ double SimulationData::getDensityAt(int idx) const
    return this->getRhoAt(idx);
 }
 
+SimulationData SimulationData::mean(QList<SimulationData> list)
+{
+   QList<SimulationData>::const_iterator it = list.cbegin();
+
+   SimulationData sum = *it++;
+
+   while (it != list.cend()) sum += *it++;
+
+   sum /= list.length();
+   return sum;
+}
+
+SimulationData SimulationData::mean(QList<SimulationData *> list)
+{
+   QList<SimulationData *>::const_iterator it = list.cbegin();
+
+   SimulationData sum = *(*it++);
+
+   while (it != list.cend()) sum += *(*it++);
+
+   sum /= list.length();
+   return sum;
+}
+
 void SimulationData::allocateVelocityData(int length)
 {
    vx.resize(length);
@@ -186,10 +210,26 @@ SimulationData& SimulationData::operator*=(const double rhs)
    return *this;
 }
 
+SimulationData& SimulationData::operator=(SimulationData other)
+{
+   std::swap(vx, other.vx);
+   std::swap(vy, other.vy);
+
+   std::swap(fx, other.fx);
+   std::swap(fy, other.fy);
+
+   std::swap(rho, other.rho);
+
+   std::swap(velocitiesSize, other.velocitiesSize);
+   std::swap(rhoSize, other.rhoSize);
+   std::swap(forceSize, other.forceSize);
+   return *this;
+}
+
 SimulationData operator/(SimulationData lhs, const double rhs)
 {
-    lhs /= rhs;
-    return lhs;
+   lhs /= rhs;
+   return lhs;
 }
 
 SimulationData operator*(const double lhs, SimulationData rhs)

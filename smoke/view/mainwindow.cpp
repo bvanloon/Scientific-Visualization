@@ -91,8 +91,8 @@ void MainWindow::setUpConnections()
 
 void MainWindow::connectSimuationStateHistory()
 {
-   connect(&Settings::visualization::slices(), SIGNAL(numberOfSlicesChanged(int)),
-            &SimulationHistory::instance(), SLOT(onNumberOfSlicesChanged(int)));
+   connect(&Settings::visualization::slices(), SIGNAL(historySizeChanged(int)),
+            &SimulationHistory::instance(), SLOT(onHistorySizeChanged(int)));
    connect(this->simulation, SIGNAL(newSimulationState(SimulationData *)),
            &SimulationHistory::instance(), SLOT(onNewSimulationState(SimulationData *)));
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF)),
@@ -145,6 +145,8 @@ void MainWindow::connectThisToFinishConnectionsReceivers()
 {
    connect(this, SIGNAL(finishedSettingUpConnections()),
             this->simulationTab, SLOT(onAllConnectionsAreSetUp()));
+   connect(this, SIGNAL(finishedSettingUpConnections()),
+           &Settings::visualization::slices(), SLOT(onFinishedSettingUpConnections()));
 }
 
 void MainWindow::connectSimulationTabAndSettings()

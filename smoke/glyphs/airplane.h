@@ -10,7 +10,7 @@ class Airplane : public AbstractGlyph
    public:
       Airplane(QVector3D position, QVector3D direction);
 
-protected:
+   protected:
       virtual GLint getDrawMode() const;
 
    private:

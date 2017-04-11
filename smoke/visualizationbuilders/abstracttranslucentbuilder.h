@@ -11,7 +11,7 @@ class AbstractTranslucentBuilder
    protected:
       float computeAlpha(double scalar) const;
 
-private:
+   private:
       Range<double> range;
 };
 

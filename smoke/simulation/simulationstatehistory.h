@@ -19,14 +19,18 @@ class SimulationHistory : public QObject
 
       const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
 
+      const SimulationGrid& getMeanSimulationGridOfLastStates(int numStates) const;
+
       const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
+
+      const UniformGrid& getMeanVisualizationGridOfLastStates(int numStates) const;
 
       int mostRecentStateIdx() const;
 
    signals:
 
    public slots:
-      void onNumberOfSlicesChanged(int numberOfSlices);
+      void onHistorySizeChanged(int size);
 
       void onNewSimulationState(SimulationData *simulationDataDeepCopy);
 
@@ -49,6 +53,8 @@ class SimulationHistory : public QObject
       void addState(SimulationData *state);
 
       SimulationData *getStateAtQueueIdx(int idx) const;
+
+      void updateSimulationGridToMeanOfLastStates(int numStates) const;
 };
 
 #endif // SIMULATIONSTATEHISTORY_H
