@@ -25,7 +25,9 @@ GPUData StreamLineSlicesEngine::buildStreamLines()
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
       GPUData streamLine = buildStreamLine(
-                  &SimulationHistory::instance().getCombinedSimulationGridOfLastStates(Settings::visualization::slices().numStatesPerSlice),
+                  &SimulationHistory::instance().getCombinedSimulationGridOfLastStates(
+                      Settings::visualization::slices().numStatesPerSlice,
+                      Settings::visualization::slices().combinationMethod),
                   seedpoint);
       data.extend(streamLine);
    }

@@ -4,7 +4,8 @@ Settings::visualization::Slices::Slices(QObject *parent) :
    QObject(parent),
    globalAlpha(1.0),
    numSlices(10),
-   numStatesPerSlice(10)
+   numStatesPerSlice(10),
+   combinationMethod(determineCombinationMethod(Settings::defaults::visualization::slices::combinationMethod))
 {
    connectToOtherSettings();
    updateHistorySize(numSlices, numStatesPerSlice);
@@ -15,6 +16,18 @@ void Settings::visualization::Slices::updateHistorySize(int numberOfSlices, int 
    int historySize = numberOfSlices * numberOfStatesToCombine;
 
    emit historySizeChanged(historySize);
+}
+
+SimulationHistory::SimulationGridUpdater Settings::visualization::Slices::determineCombinationMethod(Settings::visualization::Slices::CombinationMethods method)
+{
+   switch (method)
+   {
+   case CombinationMethods::skip:
+      qDebug() << "Settings::visualization::Slices::determineCombinationMethod: " << "No support for the skip method.";
+
+   case CombinationMethods::mean:
+      return &SimulationHistory::updateSimulationGridToMeanOfLastStates;
+   }
 }
 
 void Settings::visualization::Slices::connectToOtherSettings()

@@ -5,6 +5,7 @@
 #include <QStringList>
 
 #include "settings/settings.h"
+#include "simulation/simulationstatehistory.h"
 
 namespace Settings {
     class visualization::Slices : public QObject
@@ -17,6 +18,8 @@ namespace Settings {
           double globalAlpha;
           int numSlices;
           int numStatesPerSlice;
+
+          SimulationHistory::SimulationGridUpdater combinationMethod;
 
           enum CombinationMethods
           {
@@ -56,6 +59,8 @@ namespace Settings {
 
           void updateHistorySize(int numSlices, int numberOfStatesToCombine);
 
+          SimulationHistory::SimulationGridUpdater determineCombinationMethod(CombinationMethods method);
+
           void connectToOtherSettings();
     };
 
@@ -63,7 +68,7 @@ namespace Settings {
         namespace visualization {
             namespace slices {
                 static const Settings::visualization::Slices::CombinationMethods combinationMethod =
-                   Settings::visualization::Slices::CombinationMethods::skip;
+                   Settings::visualization::Slices::CombinationMethods::mean;
             }
         }
     }

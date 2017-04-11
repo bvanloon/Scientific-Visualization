@@ -22,12 +22,15 @@ class SimulationHistory : public QObject
       const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
 
       const SimulationGrid& getCombinedSimulationGridOfLastStates(int numStates,
-                                                                  SimulationGridUpdater updateSimulationGrid = & SimulationHistory::updateSimulationGridToMeanOfLastStates) const;
+                                                                  SimulationGridUpdater updateSimulationGrid) const;
 
       const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
 
       const UniformGrid& getCombinedVisualizationGridOfLastStates(int numStates,
-                                                                  SimulationGridUpdater updateSimulationGrid = & SimulationHistory::updateSimulationGridToMeanOfLastStates) const;
+                                                                  SimulationGridUpdater updateSimulationGrid) const;
+
+
+      void updateSimulationGridToMeanOfLastStates(int numStates) const;
 
       int mostRecentStateIdx() const;
 
@@ -57,8 +60,6 @@ class SimulationHistory : public QObject
       void addState(SimulationData *state);
 
       SimulationData *getStateAtQueueIdx(int idx) const;
-
-      void updateSimulationGridToMeanOfLastStates(int numStates) const;
 };
 
 #endif // SIMULATIONSTATEHISTORY_H
