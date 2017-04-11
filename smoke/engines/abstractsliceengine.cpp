@@ -10,7 +10,8 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
                                          QMatrix4x4 toSliceTransformation) :
    AbstractEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numSlices),
-   toSliceTransformation(toSliceTransformation)
+   toSliceTransformation(toSliceTransformation),
+   numRecentSimulationStatesNotInSlice(0)
 {
    updateModelViewMatrix();
    connectToSettings();
@@ -42,7 +43,12 @@ void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 
 void AbstractSliceEngine::onNewSimulationState()
 {
-   updateCache();
+   numRecentSimulationStatesNotInSlice++;
+   if (numRecentSimulationStatesNotInSlice >= Settings::visualization::slices().numStatesPerSlice)
+   {
+      updateCache();
+      numRecentSimulationStatesNotInSlice = 0;
+   }
 }
 
 void AbstractSliceEngine::onGLobalAlphaChanged(double globalAlpha)

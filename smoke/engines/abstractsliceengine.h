@@ -43,6 +43,8 @@ class AbstractSliceEngine : public AbstractEngine
       static const double maximumYTranslation;
       static const double minimumYTranslation;
 
+      int numRecentSimulationStatesNotInSlice;
+
       void drawSlices();
 
       void updateModelViewMatrix();
