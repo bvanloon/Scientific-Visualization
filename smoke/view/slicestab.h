@@ -32,10 +32,14 @@ class SlicesTab : public QWidget
 
       void on_numberOfStatesSpinBox_valueChanged(int value);
 
+      void on_combinationmethodComboBox_currentIndexChanged(int index);
+
    private:
       Ui::SlicesTab *ui;
 
       void connectToSettings();
+
+      void initializeUI();
 
       void setUItoDefaults();
 };

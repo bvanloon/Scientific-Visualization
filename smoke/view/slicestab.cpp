@@ -10,6 +10,9 @@ SlicesTab::SlicesTab(QWidget *parent) :
    ui->setupUi(this);
 
    connectToSettings();
+
+   initializeUI();
+
    setUItoDefaults();
 }
 
@@ -28,11 +31,18 @@ void SlicesTab::connectToSettings()
            &Settings::visualization::slices(), SLOT(onNumberOfStatesPerSliceChanged(int)));
 }
 
+void SlicesTab::initializeUI()
+{
+   this->ui->combinationmethodComboBox->addItems(Settings::visualization::slices().getCombinationMethodNames());
+}
+
 void SlicesTab::setUItoDefaults()
 {
    this->ui->globalAlphaSpinBox->setValue(Settings::visualization::slices().globalAlpha);
    this->ui->numberOfSlicesSpinBox->setValue(Settings::visualization::slices().numSlices);
    this->ui->numberOfStatesSpinBox->setValue(Settings::visualization::slices().numStatesPerSlice);
+
+   qDebug() << "SlicesTab::setUItoDefaults()" << "Add default combination method";
 }
 
 void SlicesTab::on_globalAlphaSpinBox_valueChanged(double value)
@@ -48,4 +58,9 @@ void SlicesTab::on_numberOfSlicesSpinBox_valueChanged(int value)
 void SlicesTab::on_numberOfStatesSpinBox_valueChanged(int value)
 {
    emit numberOfStatesPerSliceChanged(value);
+}
+
+void SlicesTab::on_combinationmethodComboBox_currentIndexChanged(int index)
+{
+   qDebug() << "SlicesTab::on_combinationmethodComboBox_currentIndexChanged emit change in combination method";
 }
