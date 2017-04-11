@@ -15,15 +15,19 @@ class SimulationHistory : public QObject
    public:
       static const SimulationHistory& instance();
 
+      typedef void (SimulationHistory::*SimulationGridUpdater)(int) const;
+
       ~SimulationHistory();
 
       const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
 
-      const SimulationGrid& getCombinedSimulationGridOfLastStates(int numStates) const;
+      const SimulationGrid& getCombinedSimulationGridOfLastStates(int numStates,
+                                                                  SimulationGridUpdater updateSimulationGrid = & SimulationHistory::updateSimulationGridToMeanOfLastStates) const;
 
       const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
 
-      const UniformGrid& getCombinedVisualizationGridOfLastStates(int numStates) const;
+      const UniformGrid& getCombinedVisualizationGridOfLastStates(int numStates,
+                                                                  SimulationGridUpdater updateSimulationGrid = & SimulationHistory::updateSimulationGridToMeanOfLastStates) const;
 
       int mostRecentStateIdx() const;
 

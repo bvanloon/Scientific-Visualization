@@ -37,9 +37,9 @@ const SimulationGrid& SimulationHistory::getSimulationGridAtQueueIdx(int idx) co
    return *this->mirrorSimulationGrid;
 }
 
-const SimulationGrid& SimulationHistory::getCombinedSimulationGridOfLastStates(int numStates) const
+const SimulationGrid& SimulationHistory::getCombinedSimulationGridOfLastStates(int numStates, SimulationGridUpdater updateSimulationGrid) const
 {
-   updateSimulationGridToMeanOfLastStates(numStates);
+   (this->*updateSimulationGrid)(numStates);
    return *mirrorSimulationGrid;
 }
 
@@ -50,9 +50,9 @@ const UniformGrid& SimulationHistory::getVisualizationGridAtQueueIdx(int idx) co
    return *this->mirrorVisualizationGrid;
 }
 
-const UniformGrid& SimulationHistory::getCombinedVisualizationGridOfLastStates(int numStates) const
+const UniformGrid& SimulationHistory::getCombinedVisualizationGridOfLastStates(int numStates, SimulationGridUpdater updateSimulationGrid) const
 {
-   updateSimulationGridToMeanOfLastStates(numStates);
+   (this->*updateSimulationGrid)(numStates);
    return *mirrorVisualizationGrid;
 }
 
