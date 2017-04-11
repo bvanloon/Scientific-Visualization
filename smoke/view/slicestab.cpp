@@ -41,8 +41,7 @@ void SlicesTab::setUItoDefaults()
    this->ui->globalAlphaSpinBox->setValue(Settings::visualization::slices().globalAlpha);
    this->ui->numberOfSlicesSpinBox->setValue(Settings::visualization::slices().numSlices);
    this->ui->numberOfStatesSpinBox->setValue(Settings::visualization::slices().numStatesPerSlice);
-
-   qDebug() << "SlicesTab::setUItoDefaults()" << "Add default combination method";
+   this->ui->combinationmethodComboBox->setCurrentIndex(Settings::defaults::visualization::slices::combinationMethod);
 }
 
 void SlicesTab::on_globalAlphaSpinBox_valueChanged(double value)
