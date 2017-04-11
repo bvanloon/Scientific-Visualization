@@ -51,6 +51,11 @@ void AbstractSliceEngine::onNewSimulationState()
    }
 }
 
+void AbstractSliceEngine::onNumberOfStatesPerSliceChanged(int UNUSED(numStatesPerSlice))
+{
+   clearCache();
+}
+
 void AbstractSliceEngine::onGLobalAlphaChanged(double globalAlpha)
 {
    setGlobalAlpha(globalAlpha);
@@ -139,6 +144,8 @@ void AbstractSliceEngine::connectToSettings()
            this, SLOT(onClearCache(Settings::engines::EnginesTypes)));
    connect(&Settings::visualization::slices(), SIGNAL(globalALphaChanged(double)),
            this, SLOT(onGLobalAlphaChanged(double)));
+   connect(&Settings::visualization::slices(), SIGNAL(numberOfStatesPerSliceChanged(int)),
+           this, SLOT(onNumberOfStatesPerSliceChanged(int)));
 }
 
 void AbstractSliceEngine::connectToColorMap()
