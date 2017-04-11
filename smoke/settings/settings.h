@@ -132,7 +132,7 @@ namespace Settings {
         namespace engines {
             static const bool activeEngines[7] =
             {
-               true,  false, false, false,
+               false, false, false, true,
                //Slice Engines
                false, false, false
             };
