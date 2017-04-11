@@ -21,7 +21,7 @@ namespace Settings {
 
           SimulationHistory::SimulationGridUpdater combinationMethod;
 
-          enum CombinationMethods
+          enum CombinationMethod
           {
              mean,
              skip
@@ -59,7 +59,7 @@ namespace Settings {
 
           void updateHistorySize(int numSlices, int numberOfStatesToCombine);
 
-          SimulationHistory::SimulationGridUpdater determineCombinationMethod(CombinationMethods method);
+          SimulationHistory::SimulationGridUpdater determineCombinationMethod(CombinationMethod method);
 
           void connectToOtherSettings();
     };
@@ -67,8 +67,8 @@ namespace Settings {
     namespace defaults {
         namespace visualization {
             namespace slices {
-                static const Settings::visualization::Slices::CombinationMethods combinationMethod =
-                   Settings::visualization::Slices::CombinationMethods::mean;
+                static const Settings::visualization::Slices::CombinationMethod combinationMethod =
+                   Settings::visualization::Slices::CombinationMethod::mean;
             }
         }
     }

@@ -18,14 +18,14 @@ void Settings::visualization::Slices::updateHistorySize(int numberOfSlices, int 
    emit historySizeChanged(historySize);
 }
 
-SimulationHistory::SimulationGridUpdater Settings::visualization::Slices::determineCombinationMethod(Settings::visualization::Slices::CombinationMethods method)
+SimulationHistory::SimulationGridUpdater Settings::visualization::Slices::determineCombinationMethod(Settings::visualization::Slices::CombinationMethod method)
 {
    switch (method)
    {
-   case CombinationMethods::skip:
+   case CombinationMethod::skip:
       qDebug() << "Settings::visualization::Slices::determineCombinationMethod: " << "No support for the skip method.";
 
-   case CombinationMethods::mean:
+   case CombinationMethod::mean:
       return &SimulationHistory::updateSimulationGridToMeanOfLastStates;
    }
 }
