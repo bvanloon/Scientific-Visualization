@@ -44,6 +44,12 @@ class GPUData
 
       static GPUData debugSlice();
 
+      static GPUData debugLowerLeftTriangle();
+      static GPUData debugUpperLeftTriangle();
+      static GPUData debugUpperRightTriangle();
+      static GPUData debugLowerRightTriangle();
+
+
       bool isEmpty();
 
    private:
