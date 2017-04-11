@@ -42,11 +42,11 @@ vec3 unitVectorToColor(vec3 vector){
 
 vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
 {
-    return clamp(light * (reflectionConstant * color), 0, 1);
+    return clamp(light * (reflectionConstant * color), 0.0, 1.0);
 }
 
 float computeAlpha(){
-    return vsLocalAlpha * globalAlpha;
+    return clamp(vsLocalAlpha * globalAlpha, 0.0, 1.0);
 }
 
 //Lighting Model Functions
