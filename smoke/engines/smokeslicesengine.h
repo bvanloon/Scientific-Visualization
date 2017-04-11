@@ -12,8 +12,11 @@ class SmokeSlicesEngine : public AbstractSliceEngine
    public:
       SmokeSlicesEngine();
 
+
    protected:
       void updateCache();
+
+      void clearCache();
 
    private:
       void connectToSettings();

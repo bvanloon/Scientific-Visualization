@@ -8,6 +8,11 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
                        Settings::engines::EnginesTypes::smokeSlices)
 {
    connectToSettings();
+   qDebug() << "SmokeSlicesEngine::SmokeSliceEngine(): fill the cache with debug data, temporarily";
+   this->cache.enqueue(GPUData::debugLowerLeftTriangle());
+   this->cache.enqueue(GPUData::debugUpperLeftTriangle());
+   this->cache.enqueue(GPUData::debugUpperRightTriangle());
+   this->cache.enqueue(GPUData::debugLowerRightTriangle());
 }
 
 void SmokeSlicesEngine::updateCache()
@@ -20,7 +25,15 @@ void SmokeSlicesEngine::updateCache()
    GPUData newData = builder.getGPUData();
    newData.transform(toSliceTransformation);
 
-   this->cache.enqueue(newData);
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SmokeSlicesEngine::updateCache(): don't update the cache', temporarily";
+   //   this->cache.enqueue(newData);
+}
+
+void SmokeSlicesEngine::clearCache()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SmokeSlicesEngine::clearCache(): do nothing, temporarily";
 }
 
 void SmokeSlicesEngine::connectToSettings()

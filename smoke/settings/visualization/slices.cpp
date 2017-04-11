@@ -3,8 +3,8 @@
 Settings::visualization::Slices::Slices(QObject *parent) :
    QObject(parent),
    globalAlpha(1.0),
-   numSlices(10),
-   numStatesPerSlice(10),
+   numSlices(4),
+   numStatesPerSlice(1),
    combinationMethod(determineCombinationMethod(Settings::defaults::visualization::slices::combinationMethod))
 {
    connectToOtherSettings();
