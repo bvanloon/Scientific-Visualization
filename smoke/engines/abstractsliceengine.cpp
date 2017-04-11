@@ -74,12 +74,7 @@ void AbstractSliceEngine::onClearCache()
 QMatrix4x4 AbstractSliceEngine::computeToSliceTransformation()
 {
    QMatrix4x4 transform;
-   QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
-   QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
-
-   transform.scale(0.76);
-   transform.rotate(45, yaxis);
-   transform.rotate(80, xaxis);
+   transform.setToIdentity();
    return transform;
 }
 
@@ -120,7 +115,7 @@ void AbstractSliceEngine::drawSlices()
    {
       setScreenSpaceTransformation(transform);
       updateBuffersAndDraw(data);
-      transform.translate(0.0, yTranslationStep, 0.0);
+//      transform.translate(0.0, yTranslationStep, 0.0);
    }
 }
 

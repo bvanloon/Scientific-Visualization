@@ -8,7 +8,7 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
                        Settings::engines::EnginesTypes::smokeSlices)
 {
    connectToSettings();
-   qDebug() << "SmokeSlicesEngine::SmokeSliceEngine(): fill the cache with debug data, temporarily";
+   qDebug() << "SmokeSlicesEngine::SmokeSliceEngine(): fill the cache with debug data";
    this->cache.enqueue(GPUData::debugLowerLeftTriangle());
    this->cache.enqueue(GPUData::debugUpperLeftTriangle());
    this->cache.enqueue(GPUData::debugUpperRightTriangle());
@@ -17,23 +17,23 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
 
 void SmokeSlicesEngine::updateCache()
 {
-   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getCombinedSimulationGridOfLastStates(
-                                       Settings::visualization::slices().numStatesPerSlice,
-                                       Settings::visualization::slices().combinationMethod),
-                                   colorMap->textureGetter,
-                                   Settings::simulation().getRange(colorMap->scalar));
-   GPUData newData = builder.getGPUData();
-   newData.transform(toSliceTransformation);
+//   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getCombinedSimulationGridOfLastStates(
+//                                       Settings::visualization::slices().numStatesPerSlice,
+//                                       Settings::visualization::slices().combinationMethod),
+//                                   colorMap->textureGetter,
+//                                   Settings::simulation().getRange(colorMap->scalar));
+//   GPUData newData = builder.getGPUData();
+//   newData.transform(toSliceTransformation);
+
+   clearCache();
+   this->cache.enqueue(GPUData::debugLowerLeftTriangle());
+   this->cache.enqueue(GPUData::debugUpperLeftTriangle());
+   this->cache.enqueue(GPUData::debugUpperRightTriangle());
+   this->cache.enqueue(GPUData::debugLowerRightTriangle());
 
    static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SmokeSlicesEngine::updateCache(): don't update the cache', temporarily";
+   if (!warningShown++) qDebug() << "SmokeSlicesEngine::updateCache(): fill the cache with debug data";
    //   this->cache.enqueue(newData);
-}
-
-void SmokeSlicesEngine::clearCache()
-{
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SmokeSlicesEngine::clearCache(): do nothing, temporarily";
 }
 
 void SmokeSlicesEngine::connectToSettings()

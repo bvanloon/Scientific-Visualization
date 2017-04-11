@@ -16,8 +16,6 @@ class SmokeSlicesEngine : public AbstractSliceEngine
    protected:
       void updateCache();
 
-      void clearCache();
-
    private:
       void connectToSettings();
 };

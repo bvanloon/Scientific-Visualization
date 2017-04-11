@@ -37,7 +37,7 @@ class AbstractSliceEngine : public AbstractEngine
 
       virtual void updateCache() = 0;
 
-      virtual void clearCache();
+      void clearCache();
 
       QMatrix4x4 computeToSliceTransformation();
 
