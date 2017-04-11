@@ -62,6 +62,8 @@ void Settings::visualization::Slices::onGlobalAlphaChanged(double newGlobalAlpha
 
 void Settings::visualization::Slices::onCombinationMethodChanged(Settings::visualization::Slices::CombinationMethod newMethod)
 {
+   this->combinationMethod = determineCombinationMethod(newMethod);
+   emit clearCache();
 }
 
 void Settings::visualization::Slices::onNumberOfSlicesChanged(int newNumberOfSlices)
