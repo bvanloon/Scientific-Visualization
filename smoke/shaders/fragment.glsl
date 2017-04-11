@@ -46,7 +46,7 @@ vec3 frontLightMaterial(float reflectionConstant, vec3 color, vec3 light)
 }
 
 float computeAlpha(){
-    return vsLocalAlpha * globalAlpha;
+    return clamp(vsLocalAlpha * globalAlpha, 0.0, 1.0);
 }
 
 //Lighting Model Functions
