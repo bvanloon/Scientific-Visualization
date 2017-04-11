@@ -49,7 +49,6 @@ class GPUData
       static GPUData debugUpperRightTriangle();
       static GPUData debugLowerRightTriangle();
 
-
       bool isEmpty();
 
    private:
