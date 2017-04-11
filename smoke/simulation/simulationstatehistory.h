@@ -32,6 +32,8 @@ class SimulationHistory : public QObject
 
       void updateSimulationGridToMeanOfLastStates(int numStates) const;
 
+      void updateSimulationGridToLastState(int UNUSED(numStates)) const;
+
       int mostRecentStateIdx() const;
 
    signals:

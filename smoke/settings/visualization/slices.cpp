@@ -23,7 +23,7 @@ SimulationHistory::SimulationGridUpdater Settings::visualization::Slices::determ
    switch (method)
    {
    case CombinationMethod::skip:
-      qDebug() << "Settings::visualization::Slices::determineCombinationMethod: " << "No support for the skip method.";
+      return &SimulationHistory::updateSimulationGridToLastState;
 
    case CombinationMethod::mean:
       return &SimulationHistory::updateSimulationGridToMeanOfLastStates;

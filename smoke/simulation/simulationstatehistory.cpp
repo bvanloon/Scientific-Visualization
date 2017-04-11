@@ -81,6 +81,16 @@ void SimulationHistory::updateSimulationGridToMeanOfLastStates(int numStates) co
    mirrorSimulationGrid->setData(meanPtr);
 }
 
+void SimulationHistory::updateSimulationGridToLastState(int UNUSED(numStates)) const
+{
+   static SimulationData *dataPtr = nullptr;
+   if (dataPtr != nullptr) delete dataPtr;
+   QList<SimulationData *> statesToUse = this->states.tail(1);
+   //Hacky hack
+   dataPtr = new SimulationData(SimulationData::mean(statesToUse));
+   mirrorSimulationGrid->setData(dataPtr);
+}
+
 void SimulationHistory::onNewSimulationState(SimulationData *simulationDataDeepCopy)
 {
    addState(simulationDataDeepCopy);
