@@ -2,18 +2,28 @@
 #define SLICES_H
 
 #include <QObject>
+#include <QStringList>
 
 #include "settings/settings.h"
 
 class Settings::visualization::Slices : public QObject
 {
    Q_OBJECT
+
    public:
       static const Slices& instance();
 
       double globalAlpha;
       int numSlices;
       int numStatesPerSlice;
+
+      enum CombinationMethods
+      {
+         mean,
+         skip
+      };
+
+      QStringList getCombinationMethodNames() const;
 
    signals:
       void numberOfSlicesChanged(int newNumberOfSlices);

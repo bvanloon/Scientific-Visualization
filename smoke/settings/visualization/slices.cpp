@@ -27,6 +27,15 @@ const Settings::visualization::Slices& Settings::visualization::Slices::instance
    return instance;
 }
 
+QStringList Settings::visualization::Slices::getCombinationMethodNames() const
+{
+   QStringList names;
+
+   names << "Mean"
+         << "Skip";
+   return names;
+}
+
 void Settings::visualization::Slices::onFinishedSettingUpConnections()
 {
    updateHistorySize(numSlices, numStatesPerSlice);
