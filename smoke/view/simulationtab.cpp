@@ -41,12 +41,12 @@ void SimulationSettingPane::onRotationChanged(Rotation rotation)
 {
    this->ui->xRotationDial->setValue(rotation.x());
    this->ui->yRotationDial->setValue(rotation.y());
-    this->ui->zRotationDial->setValue(rotation.z());
+   this->ui->zRotationDial->setValue(rotation.z());
 }
 
 void SimulationSettingPane::onAllConnectionsAreSetUp()
 {
-    setEnginesToDefaults();
+   setEnginesToDefaults();
 }
 
 void SimulationSettingPane::setUItoDefaults()
@@ -84,7 +84,7 @@ void SimulationSettingPane::setUpPrivateConnections()
 
 void SimulationSettingPane::connectToSettings()
 {
-    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+   connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
@@ -226,4 +226,14 @@ void SimulationSettingPane::on_scaleFactorSpinBox_valueChanged(double value)
 void SimulationSettingPane::on_resetViewButton_clicked()
 {
    emit resetView();
+}
+
+void SimulationSettingPane::on_sideViewButton_pressed()
+{
+   emit setViewMatrixToSideView();
+}
+
+void SimulationSettingPane::on_topDownViewButton_pressed()
+{
+   emit setViewMatrixToTopDownView();
 }

@@ -36,6 +36,10 @@ class SimulationSettingPane : public QWidget
 
       void scalingFactorChanged(double newScalingFactor);
 
+      void setViewMatrixToTopDownView();
+
+      void setViewMatrixToSideView();
+
       void resetView();
 
    public slots:
@@ -79,6 +83,10 @@ class SimulationSettingPane : public QWidget
       void on_scaleFactorSpinBox_valueChanged(double arg1);
 
       void on_resetViewButton_clicked();
+
+      void on_sideViewButton_pressed();
+
+      void on_topDownViewButton_pressed();
 
    private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;
