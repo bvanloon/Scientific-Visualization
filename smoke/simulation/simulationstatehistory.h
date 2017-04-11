@@ -19,11 +19,11 @@ class SimulationHistory : public QObject
 
       const SimulationGrid& getSimulationGridAtQueueIdx(int idx) const;
 
-      const SimulationGrid& getMeanSimulationGridOfLastStates(int numStates) const;
+      const SimulationGrid& getCombinedSimulationGridOfLastStates(int numStates) const;
 
       const UniformGrid& getVisualizationGridAtQueueIdx(int idx) const;
 
-      const UniformGrid& getMeanVisualizationGridOfLastStates(int numStates) const;
+      const UniformGrid& getCombinedVisualizationGridOfLastStates(int numStates) const;
 
       int mostRecentStateIdx() const;
 
