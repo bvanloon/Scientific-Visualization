@@ -44,7 +44,7 @@ void Settings::visualization::StreamSurfaces::onClearSeedCurves()
    seedCurve = new SeedCurve();
 }
 
-void Settings::visualization::StreamSurfaces::onAddVertexToSeedCurve(QPointF vertexPosition)
+void Settings::visualization::StreamSurfaces::onSeedCurveVertexAdded(QPointF vertexPosition)
 {
    seedCurve->addVertex(QVector3D(vertexPosition));
 }
