@@ -79,6 +79,7 @@ namespace Settings {
            glyphs,
            seedPoints,
            streamLines,
+           seedCurves,
            streamSurfaces,
            smoke,
 
