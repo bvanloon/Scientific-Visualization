@@ -41,6 +41,9 @@ namespace Settings {
         class StreamLines;
         const StreamLines& streamLines();
 
+        class StreamSurfaces;
+        const StreamSurfaces& streamSurfaces();
+
         class Slices;
         const Slices& slices();
     }
@@ -73,10 +76,12 @@ namespace Settings {
     namespace engines {
         enum EnginesTypes
         {
+           smoke,
            glyphs,
+           seedCurves,
+           streamSurfaces,
            seedPoints,
            streamLines,
-           smoke,
 
            //Slice engines
            smokeSlices,
@@ -130,11 +135,19 @@ namespace Settings {
         }
 
         namespace engines {
-            static const bool activeEngines[7] =
+            static const bool activeEngines[9] =
             {
-               false, false, false, false,
+               //Smoke
+               false,
+               //Glyphs
+               false,
+               //Stream Surfaces
+               true, false,
+               //StreamLines
+               false,false,
+
                //Slice Engines
-               true,  false, false
+               false,false, false
             };
         }
     }

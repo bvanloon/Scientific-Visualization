@@ -56,7 +56,7 @@ class GPUData
 
       void transformVectors(QVector<QVector3D> *vector, QMatrix4x4 transformation);
 
-      int determineDrawMode(GLint thisMode, GLint otherMode);
+      int determineDrawMode(int thisMode, int otherMode);
 
       static const int noDrawMode = -1;
 };

@@ -68,6 +68,10 @@ void Canvas::buildEngineMap()
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::streamLineSlices,
                         new StreamLineSlicesEngine()));
+
+   enginemap.insert(EnginePair(
+                         Settings::engines::EnginesTypes::seedCurves,
+                        new SeedCurveEngine()));
 }
 
 void Canvas::connectEngines()
@@ -76,6 +80,7 @@ void Canvas::connectEngines()
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedPoints));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLines));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedCurves));
 
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smokeSlices));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphSlices));
@@ -100,6 +105,8 @@ void Canvas::initializeGL()
 {
    initializeOpenGLFunctions();
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+   glPointSize(5.0);
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -137,7 +144,7 @@ void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checke
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-   if (QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
+   if (QApplication::keyboardModifiers().testFlag(Qt::AltModifier)) return altMouseEvent(event);
 
    if (QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
 }
@@ -164,13 +171,22 @@ void Canvas::altMouseEvent(QMouseEvent *event)
    previousMousePosition = currentMousePosition;
 }
 
+void Canvas::controlMouseEvent(QMouseEvent *event)
+{
+   QPointF mousePosition = event->localPos();
+   emit seedPointAdded(mousePosition);
+}
+
+void Canvas::shiftMouseEvent(QMouseEvent *event)
+{
+   QPointF mousePosition = event->localPos();
+   emit seedCurveVertexAdded(mousePosition);
+}
+
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-   if (QApplication::keyboardModifiers() & Qt::ControlModifier)
-   {
-      QPointF mousePosition = event->localPos();
-      emit seedPointAdded(mousePosition);
-   }
+   if (QApplication::keyboardModifiers().testFlag(Qt::ControlModifier)) controlMouseEvent(event);
+   if (QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier)) shiftMouseEvent(event);
 }
 
 void Canvas::paintGL()

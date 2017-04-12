@@ -76,6 +76,10 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void setGlobalAlpha();
       void setGlobalAlpha(float alpha);
 
+      virtual void setColorMapValueRange(float min, float max);
+
+      virtual void setColorMapClampingTo(bool clampingOn);
+
       virtual void connectToColorMap();
 
    private:
@@ -105,9 +109,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void updateProjectionMatrix(float width, float height);
 
       //Uniforms
-      void setColorMapClampingTo(bool clampingOn);
-
-      void setColorMapValueRange(float min, float max);
 
       void setTexture(QImage image);
 

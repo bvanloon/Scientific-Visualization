@@ -19,6 +19,7 @@
 #include "engines/smokeslicesengine.h"
 #include "engines/streamlineslicesengine.h"
 #include "engines/glyphsliceengine.h"
+#include "engines/seedcurveengine.h"
 #include "simulation/simulation.h"
 #include "engines/streamlineengine.h"
 #include "colormaps/colormapfactory.h"
@@ -52,6 +53,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void openGlReady();
 
       void seedPointAdded(QPointF position);
+
+      void seedCurveVertexAdded(QPointF vertexPosition);
 
       void scalingFactorChanged(double scalingFactor);
 
@@ -115,6 +118,10 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void clickMouseEvent(QMouseEvent *event);
 
       void altMouseEvent(QMouseEvent *event);
+
+      void controlMouseEvent(QMouseEvent *event);
+
+      void shiftMouseEvent(QMouseEvent *event);
 };
 
 #endif // CANVAS_H

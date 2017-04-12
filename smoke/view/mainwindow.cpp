@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
    this->smokeTab = ui->smokeColormapTab;
    this->glyphsTab = ui->glyphsTab;
    this->streamLinesTab = ui->streamLinesTab;
+   this->streamSurfacesTab = ui->streamSurfacesTab;
 
    this->installEventFilter(this->keyboardHandler);
 
@@ -50,6 +51,9 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::streamLines,
                          this->streamLinesTab->getColorMapWidget(),
                          Settings::visualization::streamLines().colorMap);
+   connectAbstractEngine(Settings::engines::seedCurves,
+                         this->streamSurfacesTab->getColorMapWidget(),
+                         Settings::visualization::streamSurfaces().colorMap);
 
    connectAbstractSliceEngine(Settings::engines::smokeSlices,
                          this->smokeTab->getColorMapWidget(),
@@ -131,6 +135,9 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(panningDirectionChanged(QVector3D)),
            &Settings::canvas(), SLOT(onPanningPositionChanged(QVector3D)));
+
+   connect(this->canvas, SIGNAL(seedCurveVertexAdded(QPointF)),
+           &Settings::visualization::streamSurfaces(), SLOT(onSeedCurveVertexAdded(QPointF)));
 }
 
 void MainWindow::connectCanvasAndTabs()

@@ -32,6 +32,7 @@ SOURCES += main.cpp\
     engines/abstractsliceengine.cpp \
     engines/glyphengine.cpp \
     engines/glyphsliceengine.cpp \
+    engines/seedcurveengine.cpp \
     engines/seedpointengine.cpp \
     engines/smokeengine.cpp \
     engines/smokeslicesengine.cpp \
@@ -58,6 +59,7 @@ SOURCES += main.cpp\
     settings/visualization/slices.cpp \
     settings/visualization/smokesettings.cpp \
     settings/visualization/streamlines.cpp \
+    settings/visualization/streamsurfaces.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
     shapes/polyline.cpp \
@@ -67,6 +69,7 @@ SOURCES += main.cpp\
     simulation/simulationrealization.cpp \
     simulation/simulationstatehistory.cpp \
     simulation/utils.cpp \
+    streamobjects/seedcurve.cpp \
     streamobjects/streamline.cpp \
     utilities/approximation.cpp \
     utilities/gpudata.cpp \
@@ -84,6 +87,7 @@ SOURCES += main.cpp\
     view/simulationtab.cpp \
     view/slicestab.cpp \
     view/streamlinestab.cpp \
+    view/streamsurfacestab.cpp \
     visualizationbuilders/glyphbuilder.cpp \
     visualizationbuilders/smokebuilder.cpp \
     visualizationbuilders/streamlinebuilder.cpp \
@@ -103,6 +107,7 @@ HEADERS  += main.ih\
     engines/abstractsliceengine.h \
     engines/glyphengine.h \
     engines/glyphsliceengine.h \
+    engines/seedcurveengine.h \
     engines/seedpointengine.h \
     engines/smokeengine.h \
     engines/smokeslicesengine.h \
@@ -129,6 +134,7 @@ HEADERS  += main.ih\
     settings/visualization/glyphs.h \
     settings/visualization/slices.h \
     settings/visualization/streamlines.h \
+    settings/visualization/streamsurfaces.h \
     settings/visualizationsettings.h \
     shapes/cone.h \
     shapes/polyline.h \
@@ -138,6 +144,7 @@ HEADERS  += main.ih\
     simulation/simulationrealization.h \
     simulation/simulationstatehistory.h \
     simulation/utils.h \
+    streamobjects/seedcurve.h \
     streamobjects/streamline.h \
     unused.h \
     utilities/approximation.h \
@@ -157,6 +164,7 @@ HEADERS  += main.ih\
     view/simulationtab.h \
     view/slicestab.h \
     view/streamlinestab.h \
+    view/streamsurfacestab.h \
     visualizationbuilders/glyphbuilder.h \
     visualizationbuilders/smokebuilder.h \
     visualizationbuilders/streamlinebuilder.h \
@@ -173,7 +181,8 @@ FORMS    += view/mainwindow.ui \
     view/simulationtab.ui \
     view/glyphstab.ui \
     view/streamlinestab.ui \
-    view/slicestab.ui
+    view/slicestab.ui \
+    view/streamsurfacestab.ui
 
 RESOURCES += \
     shaders.qrc
