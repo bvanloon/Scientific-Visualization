@@ -2,7 +2,9 @@
 #define STREAMSURFACES_H
 
 #include <QObject>
+#include <QList>
 #include "settings/settings.h"
+#include "shapes/polyline.h"
 
 class Settings::visualization::StreamSurfaces : public QObject
 {
@@ -12,6 +14,8 @@ class Settings::visualization::StreamSurfaces : public QObject
       static const StreamSurfaces& instance();
 
       Settings::visualization::ColorMap *colorMap;
+
+      QList<shapes::PolyLine> seedCurves;
 
    signals:
 
