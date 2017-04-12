@@ -74,6 +74,8 @@ class SimulationSettingPane : public QWidget
 
       void on_streamLineSlicesCheckBox_clicked(bool checked);
 
+      void on_streamSurfacesCheckBox_clicked(bool checked);
+
       void on_xRotationDial_valueChanged(int value);
 
       void on_yRotationDial_valueChanged(int value);

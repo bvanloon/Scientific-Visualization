@@ -76,6 +76,7 @@ namespace Settings {
            glyphs,
            seedPoints,
            streamLines,
+           streamSurfaces,
            smoke,
 
            //Slice engines
