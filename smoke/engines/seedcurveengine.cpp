@@ -7,5 +7,17 @@ SeedCurveEngine::SeedCurveEngine() :
 
 void SeedCurveEngine::draw()
 {
-   updateBuffersAndDraw(GPUData::debugSlice());
+   int resolution = Settings::visualization::streamSurfaces().resolution;
+   GPUData data = Settings::visualization::streamSurfaces().seedCurve->toGPUData(resolution);
+   updateBuffersAndDraw(data);
+}
+
+void SeedCurveEngine::setColorMapClampingTo(bool UNUSED(clampingOn))
+{
+   AbstractEngine::setColorMapClampingTo(false);
+}
+
+void SeedCurveEngine::setColorMapValueRange(float UNUSED(min), float UNUSED(max))
+{
+   AbstractEngine::setColorMapValueRange(0.0, 1.0);
 }

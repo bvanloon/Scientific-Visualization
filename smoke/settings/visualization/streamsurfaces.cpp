@@ -5,9 +5,14 @@
 Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   seedCurve(new shapes::PolyLine())
+   resolution(3),
+   seedCurve(new SeedCurve())
 {
    connectToOtherSettings();
+
+   seedCurve->addVertex(QVector3D(20, 40, 0));
+   seedCurve->addVertex(QVector3D(300, 40, 0));
+   seedCurve->addVertex(QVector3D(400, 300, 0));
 }
 
 void Settings::visualization::StreamSurfaces::connectToOtherSettings()
@@ -36,7 +41,7 @@ void Settings::visualization::StreamSurfaces::onWindowResized(QSizeF oldSize, QS
 void Settings::visualization::StreamSurfaces::onClearSeedCurves()
 {
    delete seedCurve;
-   seedCurve = new shapes::PolyLine();
+   seedCurve = new SeedCurve();
 }
 
 void Settings::visualization::StreamSurfaces::onAddVertexToSeedCurve(QPointF vertexPosition)
@@ -46,5 +51,5 @@ void Settings::visualization::StreamSurfaces::onAddVertexToSeedCurve(QPointF ver
 
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
 {
-   qDebug() << "NOT IMPLEMENTED: Settings::visualization::StreamSurfaces::transformSeedCurves";
+   this->seedCurve->applyTransformation(transform);
 }

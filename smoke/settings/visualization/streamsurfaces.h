@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QList>
 #include "settings/settings.h"
-#include "shapes/polyline.h"
+#include "streamobjects/seedcurve.h"
 
 class Settings::visualization::StreamSurfaces : public QObject
 {
@@ -15,7 +15,9 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       Settings::visualization::ColorMap *colorMap;
 
-      shapes::PolyLine *seedCurve;
+      int resolution;
+
+      SeedCurve *seedCurve;
 
    signals:
 

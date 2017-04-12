@@ -19,7 +19,7 @@ void GPUData::transform(QMatrix4x4 transformation)
 
 void GPUData::extend(GPUData data)
 {
-   determineDrawMode(this->drawMode, data.drawMode);
+   this->drawMode = determineDrawMode(this->drawMode, data.drawMode);
    this->vertices.append(data.getVertices());
    this->normals.append(data.getNormals());
    this->textureCoordinates.append(data.getTextureCoordinates());
@@ -139,16 +139,16 @@ GLint GPUData::getDrawMode() const
    return drawMode;
 }
 
-int GPUData::determineDrawMode(GLint thisMode, GLint otherMode)
+int GPUData::determineDrawMode(int thisMode, int otherMode)
 {
    if ((thisMode != noDrawMode) && (otherMode != noDrawMode))
    {
       assert(thisMode == otherMode);
       return thisMode;
    }
-   if (thisMode != noDrawMode) return thisMode;
+   if (thisMode == noDrawMode) return otherMode;
 
-   if (otherMode != noDrawMode) return otherMode;
+   if (otherMode == noDrawMode) return thisMode;
 
    //We are combining two empty GPUData objects.
    return noDrawMode;

@@ -76,12 +76,12 @@ namespace Settings {
     namespace engines {
         enum EnginesTypes
         {
+           smoke,
            glyphs,
-           seedPoints,
-           streamLines,
            seedCurves,
            streamSurfaces,
-           smoke,
+           seedPoints,
+           streamLines,
 
            //Slice engines
            smokeSlices,
@@ -137,14 +137,14 @@ namespace Settings {
         namespace engines {
             static const bool activeEngines[9] =
             {
-               //Glyphs
-               false,
-               //StreamLines
-               false,false,
-               //Stream Surfaces
-               true, false,
                //Smoke
                false,
+               //Glyphs
+               false,
+               //Stream Surfaces
+               true, false,
+               //StreamLines
+               false,false,
 
                //Slice Engines
                false,false, false
