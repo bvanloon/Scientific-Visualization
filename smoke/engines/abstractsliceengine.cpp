@@ -5,18 +5,6 @@
 const double AbstractSliceEngine::maximumZTranslation = -850;
 const double AbstractSliceEngine::minimumZTranslation = 0.0;
 
-AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
-                                         Settings::engines::EnginesTypes engineType,
-                                         QMatrix4x4 toSliceTransformation) :
-   AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numSlices),
-   toSliceTransformation(toSliceTransformation),
-   numRecentSimulationStatesNotInSlice(0)
-{
-   updateModelViewMatrix();
-   connectToSettings();
-}
-
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numSlices),

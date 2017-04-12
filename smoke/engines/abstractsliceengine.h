@@ -12,7 +12,6 @@ class AbstractSliceEngine : public AbstractEngine
    Q_OBJECT
 
    public:
-      AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType, QMatrix4x4 toSliceTransformation);
       AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType);
 
       void draw();
