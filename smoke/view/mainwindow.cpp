@@ -54,6 +54,9 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::seedCurves,
                          this->streamSurfacesTab->getColorMapWidget(),
                          Settings::visualization::streamSurfaces().colorMap);
+   connectAbstractEngine(Settings::engines::streamSurfaces,
+                         this->streamSurfacesTab->getColorMapWidget(),
+                         Settings::visualization::streamSurfaces().colorMap);
 
    connectAbstractSliceEngine(Settings::engines::smokeSlices,
                          this->smokeTab->getColorMapWidget(),

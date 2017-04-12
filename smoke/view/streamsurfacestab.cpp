@@ -35,9 +35,8 @@ void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
 
 void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
 {
-   qDebug() << "IMPLEMENTATION INCOMPLETE: StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked";
    emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
-//   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, true);
+   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, true);
 }
 
 void StreamSurfacesTab::setUiToDefaults()

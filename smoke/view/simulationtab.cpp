@@ -205,10 +205,8 @@ void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 
 void SimulationSettingPane::on_streamSurfacesCheckBox_clicked(bool checked)
 {
-//   emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, checked);
+   emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, checked);
    emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationSettingPane::on_streamSurfacesCheckBox_clicked: should emit engineToggled, but this will break stuff as there is  no engine.";
 }
 
 void SimulationSettingPane::on_xRotationDial_valueChanged(int value)
