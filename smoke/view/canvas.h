@@ -54,6 +54,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
 
       void seedPointAdded(QPointF position);
 
+      void seedCurveVertexAdded(QPointF vertexPosition);
+
       void scalingFactorChanged(double scalingFactor);
 
       void panningDirectionChanged(QVector3D position);
@@ -116,6 +118,10 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void clickMouseEvent(QMouseEvent *event);
 
       void altMouseEvent(QMouseEvent *event);
+
+      void controlMouseEvent(QMouseEvent *event);
+
+      void shiftMouseEvent(QMouseEvent *event);
 };
 
 #endif // CANVAS_H
