@@ -15,7 +15,7 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       Settings::visualization::ColorMap *colorMap;
 
-      QList<shapes::PolyLine> seedCurves;
+      shapes::PolyLine *seedCurve;
 
    signals:
 

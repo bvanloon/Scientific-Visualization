@@ -4,7 +4,8 @@
 
 Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    QObject(parent),
-   colorMap(new ColorMap())
+   colorMap(new ColorMap()),
+   seedCurve(new shapes::PolyLine())
 {
    connectToOtherSettings();
 }
@@ -34,7 +35,8 @@ void Settings::visualization::StreamSurfaces::onWindowResized(QSizeF oldSize, QS
 
 void Settings::visualization::StreamSurfaces::onClearSeedCurves()
 {
-   this->seedCurves.clear();
+   delete seedCurve;
+   seedCurve = new shapes::PolyLine();
 }
 
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
