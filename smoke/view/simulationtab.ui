@@ -321,8 +321,6 @@
        </widget>
       </item>
      </layout>
-     <zorder>resetViewButton</zorder>
-     <zorder>rotationGroupBox</zorder>
     </widget>
    </item>
    <item>
@@ -339,11 +337,6 @@
     </spacer>
    </item>
   </layout>
-  <zorder>line</zorder>
-  <zorder>line_2</zorder>
-  <zorder>simulationGroupBox</zorder>
-  <zorder>viewGroupBox</zorder>
-  <zorder>slicesCheckBox</zorder>
  </widget>
  <resources/>
  <connections/>
