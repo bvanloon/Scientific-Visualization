@@ -32,13 +32,10 @@ class AbstractSliceEngine : public AbstractEngine
 
    protected:
       SizeLimitedQueue<GPUData> cache;
-      QMatrix4x4 toSliceTransformation;
 
       virtual void updateCache() = 0;
 
       void clearCache();
-
-      QMatrix4x4 computeToSliceTransformation();
 
    private:
       static const double maximumZTranslation;

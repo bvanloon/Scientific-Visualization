@@ -7,8 +7,7 @@ const double AbstractSliceEngine::minimumZTranslation = 0.0;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numSlices),
-   toSliceTransformation(computeToSliceTransformation())
+   cache(Settings::visualization::slices().numSlices)
 {
    updateModelViewMatrix();
    connectToSettings();
@@ -57,13 +56,6 @@ void AbstractSliceEngine::onClearCache(Settings::engines::EnginesTypes engine)
 void AbstractSliceEngine::onClearCache()
 {
    clearCache();
-}
-
-QMatrix4x4 AbstractSliceEngine::computeToSliceTransformation()
-{
-   QMatrix4x4 transform;
-   transform.setToIdentity();
-   return transform;
 }
 
 void AbstractSliceEngine::clearCache()
