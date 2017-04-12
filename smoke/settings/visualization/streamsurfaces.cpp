@@ -32,6 +32,11 @@ void Settings::visualization::StreamSurfaces::onWindowResized(QSizeF oldSize, QS
    transformSeedCurves(transformationMatrix);
 }
 
+void Settings::visualization::StreamSurfaces::onClearSeedCurves()
+{
+   this->seedCurves.clear();
+}
+
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
 {
    qDebug() << "NOT IMPLEMENTED: Settings::visualization::StreamSurfaces::transformSeedCurves";

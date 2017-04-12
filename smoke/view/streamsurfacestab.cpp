@@ -30,7 +30,7 @@ void StreamSurfacesTab::onEngineToggled(Settings::engines::EnginesTypes engine, 
 
 void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
 {
-   qDebug() << "NOT IMPLEMENTED: StreamSurfacesTab::on_clearSeedCurvesButton_pressed";
+   emit clearSeedCurves();
 }
 
 void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
@@ -49,4 +49,6 @@ void StreamSurfacesTab::connectToSettings()
 {
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+   connect(this, SIGNAL(clearSeedCurves()),
+           &Settings::visualization::streamSurfaces(), SLOT(onClearSeedCurves()));
 }

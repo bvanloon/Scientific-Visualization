@@ -22,6 +22,8 @@ class Settings::visualization::StreamSurfaces : public QObject
    public slots:
       void onWindowResized(QSizeF oldSize, QSizeF newSize);
 
+      void onClearSeedCurves();
+
    private slots:
 
    private:
