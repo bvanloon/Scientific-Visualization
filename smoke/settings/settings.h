@@ -135,11 +135,19 @@ namespace Settings {
         }
 
         namespace engines {
-            static const bool activeEngines[7] =
+            static const bool activeEngines[9] =
             {
-               false, false, false, false,
+               //Glyphs
+               false,
+               //StreamLines
+               false,false,
+               //Stream Surfaces
+               true, false,
+               //Smoke
+               false,
+
                //Slice Engines
-               true,  false, false
+               false,false, false
             };
         }
     }

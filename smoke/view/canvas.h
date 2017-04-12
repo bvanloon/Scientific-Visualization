@@ -19,6 +19,7 @@
 #include "engines/smokeslicesengine.h"
 #include "engines/streamlineslicesengine.h"
 #include "engines/glyphsliceengine.h"
+#include "engines/seedcurveengine.h"
 #include "simulation/simulation.h"
 #include "engines/streamlineengine.h"
 #include "colormaps/colormapfactory.h"

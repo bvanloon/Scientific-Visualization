@@ -8,6 +8,7 @@
 #include "view/colormaptab.h"
 #include "view/glyphstab.h"
 #include "view/streamlinestab.h"
+#include "view/streamsurfacestab.h"
 
 #include "simulation/simulation.h"
 #include "simulation/simulationstatehistory.h"
@@ -45,6 +46,8 @@ class MainWindow : public QMainWindow
       ColorMapTab *smokeTab;
       GlyphsTab *glyphsTab;
       StreamLinesTab *streamLinesTab;
+      StreamSurfacesTab *streamSurfacesTab;
+
 
       void setUpConnections();
 
