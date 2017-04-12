@@ -49,27 +49,27 @@
    <item>
     <widget class="QGroupBox" name="seedCurvesGroupBox">
      <property name="title">
-      <string>Seed Curves</string>
+      <string>Seed Curve</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QLabel" name="seedCurvesExplanation">
         <property name="text">
-         <string>Some explanation</string>
+         <string>Add vertices to the seed curve with shift + click.</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="showSeedCurvesCheckBox">
         <property name="text">
-         <string>Show Seed Curves</string>
+         <string>Show Seed Curve</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="clearSeedCurvesButton">
         <property name="text">
-         <string>Clear Seed Curves</string>
+         <string>Clear Seed Curve</string>
         </property>
        </widget>
       </item>
