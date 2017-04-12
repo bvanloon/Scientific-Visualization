@@ -124,9 +124,9 @@ GPUData GPUData::debugLowerLeftTriangle()
    double yMin = 1.0;
    double yMax = Settings::canvas().size.height();
 
-   float alpha = 0.25;
+   float alpha = 1.0;
    float texture = 0.0;
-   float z = -300.0;
+   float z = 0.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
    data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
@@ -148,9 +148,9 @@ GPUData GPUData::debugUpperLeftTriangle()
    double yMin = 1.0;
    double yMax = Settings::canvas().size.height();
 
-   float alpha = 0.25;
+   float alpha = 1.0;
    float texture = 5.0;
-   float z = -200.0;
+   float z = 0.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
    data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
@@ -172,9 +172,9 @@ GPUData GPUData::debugUpperRightTriangle()
    double yMin = 1.0;
    double yMax = Settings::canvas().size.height();
 
-   float alpha = 0.25;
+   float alpha = 1.0;
    float texture = 10.0;
-   float z = -100.0;
+   float z = 0.0;
 
    GPUData data = GPUData(GL_TRIANGLES);
    data.addElement(QVector3D(xMin, yMin, z), QVector3D(0, 0, 1.0), texture, alpha);
@@ -196,7 +196,7 @@ GPUData GPUData::debugLowerRightTriangle()
    double yMin = 1.0;
    double yMax = Settings::canvas().size.height();
 
-   float alpha = 0.25;
+   float alpha = 1.0;
    float texture = 7.4;
    float z = 0.0;
 
