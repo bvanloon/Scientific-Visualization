@@ -69,6 +69,7 @@ SOURCES += main.cpp\
     simulation/simulationrealization.cpp \
     simulation/simulationstatehistory.cpp \
     simulation/utils.cpp \
+    streamobjects/seedcurve.cpp \
     streamobjects/streamline.cpp \
     utilities/approximation.cpp \
     utilities/gpudata.cpp \
@@ -143,6 +144,7 @@ HEADERS  += main.ih\
     simulation/simulationrealization.h \
     simulation/simulationstatehistory.h \
     simulation/utils.h \
+    streamobjects/seedcurve.h \
     streamobjects/streamline.h \
     unused.h \
     utilities/approximation.h \
