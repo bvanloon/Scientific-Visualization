@@ -8,11 +8,6 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
                        Settings::engines::EnginesTypes::smokeSlices)
 {
    connectToSettings();
-   qDebug() << "SmokeSlicesEngine::SmokeSliceEngine(): fill the cache with debug data";
-   this->cache.enqueue(GPUData::debugLowerLeftTriangle());
-   this->cache.enqueue(GPUData::debugUpperLeftTriangle());
-   this->cache.enqueue(GPUData::debugUpperRightTriangle());
-   this->cache.enqueue(GPUData::debugLowerRightTriangle());
 }
 
 void SmokeSlicesEngine::updateCache()
@@ -25,15 +20,34 @@ void SmokeSlicesEngine::updateCache()
 //   GPUData newData = builder.getGPUData();
 //   newData.transform(toSliceTransformation);
 
-   clearCache();
-   this->cache.enqueue(GPUData::debugLowerLeftTriangle());
-   this->cache.enqueue(GPUData::debugUpperLeftTriangle());
-   this->cache.enqueue(GPUData::debugUpperRightTriangle());
-   this->cache.enqueue(GPUData::debugLowerRightTriangle());
-
    static bool warningShown = false;
    if (!warningShown++) qDebug() << "SmokeSlicesEngine::updateCache(): fill the cache with debug data";
-   //   this->cache.enqueue(newData);
+
+   static int counter = 0;
+   counter = (counter + 1) % 4;
+
+   GPUData newData;
+
+   switch (counter)
+   {
+   case (0):
+      newData = GPUData::debugLowerLeftTriangle();
+      break;
+
+   case (1):
+      newData = GPUData::debugUpperLeftTriangle();
+      break;
+
+   case (2):
+      newData = GPUData::debugUpperRightTriangle();
+      break;
+
+   case (3):
+      newData = GPUData::debugLowerRightTriangle();
+      break;
+   }
+
+   this->cache.enqueue(newData);
 }
 
 void SmokeSlicesEngine::connectToSettings()
