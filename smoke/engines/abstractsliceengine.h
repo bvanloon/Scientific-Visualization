@@ -48,9 +48,9 @@ class AbstractSliceEngine : public AbstractEngine
 
       void drawSlices();
 
-      void updateModelViewMatrix();
+      void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
 
-      QMatrix4x4 computeModuleViewMatrix();
+      QMatrix4x4 computeViewMatrix();
 
       double computeTranslationStepSize();
 

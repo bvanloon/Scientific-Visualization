@@ -71,22 +71,22 @@ void AbstractSliceEngine::clearCache()
    cache.clear();
 }
 
-void AbstractSliceEngine::updateModelViewMatrix()
+void AbstractSliceEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
 {
-   this->setModelViewMatrix(computeModuleViewMatrix());
+   this->setModelViewMatrix(computeViewMatrix() * modelMatrix);
 }
 
-QMatrix4x4 AbstractSliceEngine::computeModuleViewMatrix()
+QMatrix4x4 AbstractSliceEngine::computeViewMatrix()
 {
-   QMatrix4x4 modelViewMatrix = QMatrix4x4();
+   QMatrix4x4 viewMatrix = QMatrix4x4();
 
-   modelViewMatrix.translate(Settings::canvas().panningPosition);
+   viewMatrix.translate(Settings::canvas().panningPosition);
 
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
-   modelViewMatrix *= rotationMatrix;
+   viewMatrix *= rotationMatrix;
 
-   modelViewMatrix.scale(Settings::canvas().scalingFactor);
-   return modelViewMatrix;
+   viewMatrix.scale(Settings::canvas().scalingFactor);
+   return viewMatrix;
 }
 
 void AbstractSliceEngine::updateBuffers(GPUData data)
