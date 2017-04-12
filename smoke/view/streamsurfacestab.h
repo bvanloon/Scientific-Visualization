@@ -15,8 +15,16 @@ class StreamSurfacesTab : public QWidget
       explicit StreamSurfacesTab(QWidget *parent = 0);
       ~StreamSurfacesTab();
 
+   private slots:
+      void on_clearSeedCurvesButton_pressed();
+
+      void on_showSeedCurvesCheckBox_clicked(bool checked);
+
    private:
       Ui::StreamSurfacesTab *ui;
+
+      void setUiToDefaults();
+      void connectToSettings();
 };
 
 #endif // STREAMSURFACESTAB_H
