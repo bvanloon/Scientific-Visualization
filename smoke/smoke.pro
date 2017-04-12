@@ -85,6 +85,7 @@ SOURCES += main.cpp\
     view/simulationtab.cpp \
     view/slicestab.cpp \
     view/streamlinestab.cpp \
+    view/streamsurfacestab.cpp \
     visualizationbuilders/glyphbuilder.cpp \
     visualizationbuilders/smokebuilder.cpp \
     visualizationbuilders/streamlinebuilder.cpp \
@@ -159,6 +160,7 @@ HEADERS  += main.ih\
     view/simulationtab.h \
     view/slicestab.h \
     view/streamlinestab.h \
+    view/streamsurfacestab.h \
     visualizationbuilders/glyphbuilder.h \
     visualizationbuilders/smokebuilder.h \
     visualizationbuilders/streamlinebuilder.h \
@@ -175,7 +177,8 @@ FORMS    += view/mainwindow.ui \
     view/simulationtab.ui \
     view/glyphstab.ui \
     view/streamlinestab.ui \
-    view/slicestab.ui
+    view/slicestab.ui \
+    view/streamsurfacestab.ui
 
 RESOURCES += \
     shaders.qrc
