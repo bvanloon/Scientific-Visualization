@@ -9,6 +9,31 @@ Settings::Canvas::Canvas(QObject *parent) :
    panningPosition(Settings::defaults::canvas::panningPosition)
 {}
 
+void Settings::Canvas::setPanningPosition(QVector3D position)
+{
+   this->panningPosition = position;
+   emit updateModelViewMatrix();
+}
+
+void Settings::Canvas::setRotation(int xAngle, int yAngle, int zAngle)
+{
+   setRotation(Rotation(xAngle, yAngle, zAngle));
+}
+
+void Settings::Canvas::setRotation(Rotation rotation)
+{
+   this->rotation = rotation;
+   emit rotationChanged(this->rotation);
+   emit updateModelViewMatrix();
+}
+
+void Settings::Canvas::setScaling(float scalingFactor)
+{
+   this->scalingFactor = scalingFactor;
+   emit scalingFactorChanged(this->scalingFactor);
+   emit updateModelViewMatrix();
+}
+
 const Settings::Canvas& Settings::Canvas::instance()
 {
    static Canvas instance;
@@ -58,27 +83,19 @@ void Settings::Canvas::onRotationChanged(Rotation::axis axis, int newAngle)
 
 void Settings::Canvas::onScalingFactorChanged(double newScalingFactor)
 {
-   this->scalingFactor = newScalingFactor;
-   emit updateModelViewMatrix();
-   emit scalingFactorChanged(newScalingFactor);
+   setScaling(newScalingFactor);
 }
 
 void Settings::Canvas::onPanningPositionChanged(QVector3D newDirection)
 {
-   this->panningPosition = this->panningPosition + this->panningFactor * newDirection;
-
-   emit updateModelViewMatrix();
+   setPanningPosition(this->panningPosition + this->panningFactor * newDirection);
 }
 
 void Settings::Canvas::onResetView()
 {
-   this->scalingFactor = Settings::defaults::canvas::scalingFactor;
-   this->panningPosition = Settings::defaults::canvas::panningPosition;
-   this->rotation = Settings::defaults::canvas::rotation;
-
-   emit scalingFactorChanged(this->scalingFactor);
-   emit rotationChanged(this->rotation);
-   emit updateModelViewMatrix();
+   setScaling(Settings::defaults::canvas::scalingFactor);
+   setPanningPosition(Settings::defaults::canvas::panningPosition);
+   setRotation(Settings::defaults::canvas::rotation);
 }
 
 void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
@@ -88,10 +105,14 @@ void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, b
 
 void Settings::Canvas::onSetViewMatrixToTopDownView()
 {
-   qDebug() << "Settings::Canvas::onSetViewMatrixToTopDownView()";
+   setScaling(1.0);
+   setPanningPosition(QVector3D(0.0, 0.0, 0.0));
+   setRotation(0, 0, 0);
 }
 
 void Settings::Canvas::onSetViewMatrixToSideView()
 {
-   qDebug() << "Settings::Canvas::onSetViewMatrixToSideView()";
+   setScaling(0.83);
+   setPanningPosition(QVector3D(0.0367604 * size.width(), 0.948104 * size.height(), 0.0));
+   setRotation(279, 0, 308);
 }

@@ -61,6 +61,11 @@ class Settings::Canvas : public QObject
 
       double panningFactor = 10;
 
+      void setPanningPosition(QVector3D position);
+      void setRotation(int xAngle, int yAngle, int zAngle);
+      void setRotation(Rotation rotation);
+      void setScaling(float scalingFactor);
+
       Canvas(Canvas const&) = delete;
       void operator=(Canvas const&) = delete;
 };
