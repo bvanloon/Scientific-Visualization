@@ -15,6 +15,8 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       Settings::visualization::ColorMap *colorMap;
 
+      int resolution;
+
       SeedCurve *seedCurve;
 
    signals:

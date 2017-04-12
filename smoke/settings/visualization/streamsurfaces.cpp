@@ -5,7 +5,8 @@
 Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   seedCurve(new SeedCurve())
+   seedCurve(new SeedCurve()),
+   resolution(3)
 {
    connectToOtherSettings();
 }
