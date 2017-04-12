@@ -2,6 +2,7 @@
 #define SEEDCURVEENGINE_H
 
 #include "abstractengine.h"
+#include "unused.h"
 
 class SeedCurveEngine : public AbstractEngine
 {
@@ -11,6 +12,8 @@ class SeedCurveEngine : public AbstractEngine
       void draw();
 
    private:
+      void setColorMapClampingTo(bool UNUSED(clampingOn));
+      void setColorMapValueRange(float UNUSED(min), float UNUSED(max));
 };
 
 #endif // SEEDCURVEENGINE_H
