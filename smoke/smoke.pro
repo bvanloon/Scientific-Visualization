@@ -58,6 +58,7 @@ SOURCES += main.cpp\
     settings/visualization/slices.cpp \
     settings/visualization/smokesettings.cpp \
     settings/visualization/streamlines.cpp \
+    settings/visualization/streamsurfaces.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
     shapes/polyline.cpp \
@@ -129,6 +130,7 @@ HEADERS  += main.ih\
     settings/visualization/glyphs.h \
     settings/visualization/slices.h \
     settings/visualization/streamlines.h \
+    settings/visualization/streamsurfaces.h \
     settings/visualizationsettings.h \
     shapes/cone.h \
     shapes/polyline.h \

@@ -77,3 +77,8 @@ const Settings::visualization::Slices& Settings::visualization::slices()
 {
    return Settings::visualization::Slices::instance();
 }
+
+const Settings::visualization::StreamSurfaces& Settings::visualization::streamSurfaces()
+{
+   return Settings::visualization::StreamSurfaces::instance();
+}

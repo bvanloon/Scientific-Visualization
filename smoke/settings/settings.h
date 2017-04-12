@@ -41,6 +41,9 @@ namespace Settings {
         class StreamLines;
         const StreamLines& streamLines();
 
+        class StreamSurfaces;
+        const StreamSurfaces& streamSurfaces();
+
         class Slices;
         const Slices& slices();
     }
