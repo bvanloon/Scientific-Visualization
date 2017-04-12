@@ -10,14 +10,10 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    ui(new Ui::SimulationSettingPane)
 {
    ui->setupUi(this);
-   setUpEnineCheckBoxMappings();
+   registerEngines();
    setUpPrivateConnections();
    connectToSettings();
    setUItoDefaults();
-
-   //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
-   this->ui->seedPointsCheckBox->setHidden(true);
-   this->ui->slicesCheckBox->setHidden(true);
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -66,10 +62,8 @@ void SimulationSettingPane::setUItoDefaults()
 
 void SimulationSettingPane::setEnginesToDefaults()
 {
-   Settings::engines::EnginesTypes engine;
-   for (int i = 0; i < Settings::engines::EnginesTypes::numberOfEngines; i++)
+   for (auto engine : this->engines.keys())
    {
-      engine = static_cast<Settings::engines::EnginesTypes>(i);
       emit engineToggled(engine, Settings::defaults::engines::activeEngines[engine]);
    }
 }
@@ -92,24 +86,15 @@ void SimulationSettingPane::connectToSettings()
            &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
 }
 
-void SimulationSettingPane::setUpEnineCheckBoxMappings()
+void SimulationSettingPane::registerEngines()
 {
-   this->engines.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
 
-   this->engines2D.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
-   this->engines2D.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
-   this->engines2D.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   this->engines2D.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
-
-   this->sliceEngines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-   this->sliceEngines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-   this->sliceEngines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   registerSliceEngine(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -121,20 +106,13 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
 
 void SimulationSettingPane::toggleSliceEngines(bool toggle)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, toggle);
-
+   for (auto engine : sliceEngines.keys()) emit engineToggled(engine, toggle);
    this->ui->viewGroupBox->setDisabled(!toggle);
 }
 
 void SimulationSettingPane::toggle2DEngines(bool toggle)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::glyphs, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::smoke, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::streamLines, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::seedPoints, toggle);
-
+   for (auto engine : engines2D.keys()) emit engineToggled(engine, toggle);
    this->ui->viewGroupBox->setDisabled(toggle);
 }
 
@@ -146,6 +124,18 @@ bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine
 bool SimulationSettingPane::isNonSliceEngine(Settings::engines::EnginesTypes engine)
 {
    return this->engines2D.contains(engine);
+}
+
+void SimulationSettingPane::register2DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox)
+{
+   this->engines.insert(engine, engineCheckBox);
+   this->engines2D.insert(engine, engineCheckBox);
+}
+
+void SimulationSettingPane::registerSliceEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox)
+{
+   this->engines.insert(engine, engineCheckBox);
+   this->sliceEngines.insert(engine, engineCheckBox);
 }
 
 void SimulationSettingPane::on_freezeButton_clicked()

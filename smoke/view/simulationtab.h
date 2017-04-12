@@ -101,7 +101,7 @@ class SimulationSettingPane : public QWidget
 
       void connectToSettings();
 
-      void setUpEnineCheckBoxMappings();
+      void registerEngines();
 
       void setFreezeButtonLabel(bool frozen);
 
@@ -112,6 +112,9 @@ class SimulationSettingPane : public QWidget
       bool isSliceEngine(Settings::engines::EnginesTypes engine);
 
       bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
+
+      void register2DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
+      void registerSliceEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
 
       EngineMap engines;
       EngineMap engines2D;
