@@ -3,7 +3,7 @@
 Settings::visualization::Slices::Slices(QObject *parent) :
    QObject(parent),
    globalAlpha(1.0),
-   numSlices(10),
+   numSlices(20),
    numStatesPerSlice(10),
    combinationMethod(determineCombinationMethod(Settings::defaults::visualization::slices::combinationMethod))
 {

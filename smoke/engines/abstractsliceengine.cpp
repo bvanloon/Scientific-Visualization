@@ -2,25 +2,12 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
-const double AbstractSliceEngine::maximumYTranslation = 1.7;
-const double AbstractSliceEngine::minimumYTranslation = 0.0;
-
-AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel,
-                                         Settings::engines::EnginesTypes engineType,
-                                         QMatrix4x4 toSliceTransformation) :
-   AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numSlices),
-   toSliceTransformation(toSliceTransformation),
-   numRecentSimulationStatesNotInSlice(0)
-{
-   updateModelViewMatrix();
-   connectToSettings();
-}
+const double AbstractSliceEngine::maximumZTranslation = -850;
+const double AbstractSliceEngine::minimumZTranslation = 0.0;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numSlices),
-   toSliceTransformation(computeToSliceTransformation())
+   cache(Settings::visualization::slices().numSlices)
 {
    updateModelViewMatrix();
    connectToSettings();
@@ -71,39 +58,27 @@ void AbstractSliceEngine::onClearCache()
    clearCache();
 }
 
-QMatrix4x4 AbstractSliceEngine::computeToSliceTransformation()
-{
-   QMatrix4x4 transform;
-   QVector3D xaxis = QVector3D(1.0, 0.0, 0.0);
-   QVector3D yaxis = QVector3D(0.0, 1.0, 0.0);
-
-   transform.scale(0.76);
-   transform.rotate(45, yaxis);
-   transform.rotate(80, xaxis);
-   return transform;
-}
-
 void AbstractSliceEngine::clearCache()
 {
    cache.clear();
 }
 
-void AbstractSliceEngine::updateModelViewMatrix()
+void AbstractSliceEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
 {
-   this->setModelViewMatrix(computeModuleViewMatrix());
+   this->setModelViewMatrix(computeViewMatrix() * modelMatrix);
 }
 
-QMatrix4x4 AbstractSliceEngine::computeModuleViewMatrix()
+QMatrix4x4 AbstractSliceEngine::computeViewMatrix()
 {
-   QMatrix4x4 modelViewMatrix = QMatrix4x4();
+   QMatrix4x4 viewMatrix = QMatrix4x4();
 
-   modelViewMatrix.translate(Settings::canvas().panningPosition);
+   viewMatrix.translate(Settings::canvas().panningPosition);
 
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
-   modelViewMatrix *= rotationMatrix;
+   viewMatrix *= rotationMatrix;
 
-   modelViewMatrix.scale(Settings::canvas().scalingFactor);
-   return modelViewMatrix;
+   viewMatrix.scale(Settings::canvas().scalingFactor);
+   return viewMatrix;
 }
 
 void AbstractSliceEngine::updateBuffers(GPUData data)
@@ -113,21 +88,21 @@ void AbstractSliceEngine::updateBuffers(GPUData data)
 
 void AbstractSliceEngine::drawSlices()
 {
-   QMatrix4x4 transform;
-   double yTranslationStep = computeTranslationStepSize();
+   QMatrix4x4 modelMatrix;
+   double translationStep = computeTranslationStepSize();
 
    for (GPUData data : cache)
    {
-      setScreenSpaceTransformation(transform);
+      updateModelViewMatrix(modelMatrix);
       updateBuffersAndDraw(data);
-      transform.translate(0.0, yTranslationStep, 0.0);
+      modelMatrix.translate(0.0, 0.0, translationStep);
    }
 }
 
 double AbstractSliceEngine::computeTranslationStepSize()
 {
    double numSlices = static_cast<double>(Settings::visualization::slices().numSlices);
-   return (maximumYTranslation - minimumYTranslation) / (numSlices - 1);
+   return (maximumZTranslation - minimumZTranslation) / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()

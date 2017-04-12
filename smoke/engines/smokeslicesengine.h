@@ -12,6 +12,7 @@ class SmokeSlicesEngine : public AbstractSliceEngine
    public:
       SmokeSlicesEngine();
 
+
    protected:
       void updateCache();
 

@@ -52,10 +52,19 @@ class Settings::Canvas : public QObject
 
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void onSetViewMatrixToTopDownView();
+
+      void onSetViewMatrixToSideView();
+
    private:
       explicit Canvas(QObject *parent = 0);
 
       double panningFactor = 10;
+
+      void setPanningPosition(QVector3D position);
+      void setRotation(int xAngle, int yAngle, int zAngle);
+      void setRotation(Rotation rotation);
+      void setScaling(float scalingFactor);
 
       Canvas(Canvas const&) = delete;
       void operator=(Canvas const&) = delete;

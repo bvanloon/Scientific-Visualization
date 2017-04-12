@@ -12,7 +12,6 @@ class AbstractSliceEngine : public AbstractEngine
    Q_OBJECT
 
    public:
-      AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType, QMatrix4x4 toSliceTransformation);
       AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType);
 
       void draw();
@@ -33,25 +32,22 @@ class AbstractSliceEngine : public AbstractEngine
 
    protected:
       SizeLimitedQueue<GPUData> cache;
-      QMatrix4x4 toSliceTransformation;
 
       virtual void updateCache() = 0;
 
       void clearCache();
 
-      QMatrix4x4 computeToSliceTransformation();
-
    private:
-      static const double maximumYTranslation;
-      static const double minimumYTranslation;
+      static const double maximumZTranslation;
+      static const double minimumZTranslation;
 
       int numRecentSimulationStatesNotInSlice;
 
       void drawSlices();
 
-      void updateModelViewMatrix();
+      void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
 
-      QMatrix4x4 computeModuleViewMatrix();
+      QMatrix4x4 computeViewMatrix();
 
       double computeTranslationStepSize();
 

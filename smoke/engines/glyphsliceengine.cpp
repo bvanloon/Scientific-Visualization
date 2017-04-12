@@ -6,10 +6,9 @@
 
 GlyphSliceEngine::GlyphSliceEngine() :
    AbstractSliceEngine(AbstractEngine::lightModel::phongLight,
-                       Settings::engines::EnginesTypes::glyphSlices)
+                       Settings::engines::EnginesTypes::glyphSlices),
+   unNormalizedAlpha(Settings::sim::Scalar::fluidVelocityMagnitude)
 {
-   unNormalizedAlpha = Settings::sim::Scalar::fluidVelocityMagnitude;
-
    connectToSettings();
 }
 
@@ -25,10 +24,7 @@ void GlyphSliceEngine::updateCache()
       Vertex::getScalarGetter(unNormalizedAlpha),
       Settings::simulation().getRange(unNormalizedAlpha));
 
-   GPUData data = builder.getGPUData();
-   data.transform(toSliceTransformation);
-
-   this->cache.enqueue(data);
+   this->cache.enqueue(builder.getGPUData());
 }
 
 void GlyphSliceEngine::connectToSettings()
