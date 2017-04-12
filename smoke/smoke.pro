@@ -58,6 +58,7 @@ SOURCES += main.cpp\
     settings/visualization/slices.cpp \
     settings/visualization/smokesettings.cpp \
     settings/visualization/streamlines.cpp \
+    settings/visualization/streamsurfaces.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
     shapes/polyline.cpp \
@@ -84,6 +85,7 @@ SOURCES += main.cpp\
     view/simulationtab.cpp \
     view/slicestab.cpp \
     view/streamlinestab.cpp \
+    view/streamsurfacestab.cpp \
     visualizationbuilders/glyphbuilder.cpp \
     visualizationbuilders/smokebuilder.cpp \
     visualizationbuilders/streamlinebuilder.cpp \
@@ -129,6 +131,7 @@ HEADERS  += main.ih\
     settings/visualization/glyphs.h \
     settings/visualization/slices.h \
     settings/visualization/streamlines.h \
+    settings/visualization/streamsurfaces.h \
     settings/visualizationsettings.h \
     shapes/cone.h \
     shapes/polyline.h \
@@ -157,6 +160,7 @@ HEADERS  += main.ih\
     view/simulationtab.h \
     view/slicestab.h \
     view/streamlinestab.h \
+    view/streamsurfacestab.h \
     visualizationbuilders/glyphbuilder.h \
     visualizationbuilders/smokebuilder.h \
     visualizationbuilders/streamlinebuilder.h \
@@ -173,7 +177,8 @@ FORMS    += view/mainwindow.ui \
     view/simulationtab.ui \
     view/glyphstab.ui \
     view/streamlinestab.ui \
-    view/slicestab.ui
+    view/slicestab.ui \
+    view/streamsurfacestab.ui
 
 RESOURCES += \
     shaders.qrc

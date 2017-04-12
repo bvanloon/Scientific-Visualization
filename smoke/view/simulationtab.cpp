@@ -23,9 +23,13 @@ SimulationSettingPane::~SimulationSettingPane()
 
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   this->engines.find(engine).value()->setChecked(checked);
-   if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
-   if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
+   EngineMap::const_iterator toggledPair = this->engines.find(engine);
+   if (toggledPair != this->engines.end())
+   {
+      toggledPair.value()->setChecked(checked);
+      if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
+      if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
+   }
 }
 
 void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
@@ -91,6 +95,7 @@ void SimulationSettingPane::registerEngines()
    register2DEngine(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::streamSurfaces, this->ui->streamSurfacesCheckBox);
 
    registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
    registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
@@ -195,6 +200,14 @@ void SimulationSettingPane::on_smokeSlicesCheckBox_clicked(bool checked)
 void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 {
    emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, checked);
+}
+
+void SimulationSettingPane::on_streamSurfacesCheckBox_clicked(bool checked)
+{
+//   emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, checked);
+//   emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationSettingPane::on_streamSurfacesCheckBox_clicked: should emit engineToggled, but this will break stuff as there is  no engine.";
 }
 
 void SimulationSettingPane::on_xRotationDial_valueChanged(int value)
