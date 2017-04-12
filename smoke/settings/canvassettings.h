@@ -36,6 +36,8 @@ class Settings::Canvas : public QObject
 
       void rotationChanged(Rotation rotation);
 
+      void engineToggled(Settings::engines::EnginesTypes engine, bool toggle);
+
       void clearCache();
       void clearCache(Settings::engines::EnginesTypes engine);
 

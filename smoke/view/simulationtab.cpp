@@ -88,6 +88,8 @@ void SimulationSettingPane::connectToSettings()
            &Settings::canvas(), SLOT(onSetViewMatrixToSideView()));
    connect(this, SIGNAL(setViewMatrixToTopDownView()),
            &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
+   connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+           this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void SimulationSettingPane::registerEngines()

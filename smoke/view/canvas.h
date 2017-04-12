@@ -87,6 +87,8 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       ActiveEnginesMap activeEngines;
       EngineMap enginemap;
 
+      void connectToSettings();
+
       void setUpPrivateConnections();
 
       void initializeActiveEngines();

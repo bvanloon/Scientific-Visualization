@@ -15,6 +15,8 @@ Canvas::Canvas(QWidget *parent) :
 {
    this->setUpPrivateConnections();
 
+   connectToSettings();
+
    this->initiateIdleLoop();
    this->initializeActiveEngines();
 
@@ -209,6 +211,12 @@ bool Canvas::event(QEvent *event)
       return gestureEvent(static_cast<QGestureEvent *>(event));
    }
    return QWidget::event(event);
+}
+
+void Canvas::connectToSettings()
+{
+   connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void Canvas::setUpPrivateConnections()
