@@ -24,12 +24,9 @@ SimulationSettingPane::~SimulationSettingPane()
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
    EngineMap::const_iterator toggledPair = this->engines.find(engine);
-   if (toggledPair != this->engines.end())
-   {
-      toggledPair.value()->setChecked(checked);
-      if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
-      if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
-   }
+   if (toggledPair.value() != nullptr) toggledPair.value()->setChecked(checked);
+   if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
+   if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
 }
 
 void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
@@ -88,6 +85,8 @@ void SimulationSettingPane::connectToSettings()
            &Settings::canvas(), SLOT(onSetViewMatrixToSideView()));
    connect(this, SIGNAL(setViewMatrixToTopDownView()),
            &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
+   connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+           this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
 void SimulationSettingPane::registerEngines()
@@ -96,6 +95,8 @@ void SimulationSettingPane::registerEngines()
    register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::streamSurfaces, this->ui->streamSurfacesCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::seedCurves);
+   register2DEngine(Settings::engines::EnginesTypes::seedPoints);
 
    registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
    registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
