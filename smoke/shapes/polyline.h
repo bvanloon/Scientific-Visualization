@@ -13,6 +13,8 @@ namespace shapes {
           PolyLine(QVector3D start);
           PolyLine();
 
+          ~PolyLine();
+
           void addVertex(QVector3D vertex);
 
           double getLength() const;

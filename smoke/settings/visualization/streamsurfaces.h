@@ -2,7 +2,9 @@
 #define STREAMSURFACES_H
 
 #include <QObject>
+#include <QList>
 #include "settings/settings.h"
+#include "shapes/polyline.h"
 
 class Settings::visualization::StreamSurfaces : public QObject
 {
@@ -13,10 +15,16 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       Settings::visualization::ColorMap *colorMap;
 
+      shapes::PolyLine *seedCurve;
+
    signals:
 
    public slots:
       void onWindowResized(QSizeF oldSize, QSizeF newSize);
+
+      void onClearSeedCurves();
+
+      void onAddVertexToSeedCurve(QPointF vertexPosition);
 
    private slots:
 

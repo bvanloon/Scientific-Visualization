@@ -25,6 +25,8 @@ class StreamSurfacesTab : public QWidget
    signals:
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void clearSeedCurves();
+
    private slots:
       void on_clearSeedCurvesButton_pressed();
 
