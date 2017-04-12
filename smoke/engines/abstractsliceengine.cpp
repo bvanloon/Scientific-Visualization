@@ -96,14 +96,14 @@ void AbstractSliceEngine::updateBuffers(GPUData data)
 
 void AbstractSliceEngine::drawSlices()
 {
-   QMatrix4x4 transform;
-   double yTranslationStep = computeTranslationStepSize();
+   QMatrix4x4 modelMatrix;
+   double translationStep = computeTranslationStepSize();
 
    for (GPUData data : cache)
    {
-      setScreenSpaceTransformation(transform);
+      updateModelViewMatrix(modelMatrix);
       updateBuffersAndDraw(data);
-//      transform.translate(0.0, yTranslationStep, 0.0);
+      modelMatrix.translate(0.0, 0.0, translationStep);
    }
 }
 
