@@ -42,8 +42,8 @@ class AbstractSliceEngine : public AbstractEngine
       QMatrix4x4 computeToSliceTransformation();
 
    private:
-      static const double maximumYTranslation;
-      static const double minimumYTranslation;
+      static const double maximumZTranslation;
+      static const double minimumZTranslation;
 
       int numRecentSimulationStatesNotInSlice;
 
