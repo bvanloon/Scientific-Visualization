@@ -66,10 +66,8 @@ void SimulationSettingPane::setUItoDefaults()
 
 void SimulationSettingPane::setEnginesToDefaults()
 {
-   Settings::engines::EnginesTypes engine;
-   for (int i = 0; i < Settings::engines::EnginesTypes::numberOfEngines; i++)
+   for (auto engine : this->engines.keys())
    {
-      engine = static_cast<Settings::engines::EnginesTypes>(i);
       emit engineToggled(engine, Settings::defaults::engines::activeEngines[engine]);
    }
 }
@@ -113,20 +111,13 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
 
 void SimulationSettingPane::toggleSliceEngines(bool toggle)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, toggle);
-
+   for (auto engine : sliceEngines.keys()) emit engineToggled(engine, toggle);
    this->ui->viewGroupBox->setDisabled(!toggle);
 }
 
 void SimulationSettingPane::toggle2DEngines(bool toggle)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::glyphs, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::smoke, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::streamLines, toggle);
-   emit engineToggled(Settings::engines::EnginesTypes::seedPoints, toggle);
-
+   for (auto engine : engines2D.keys()) emit engineToggled(engine, toggle);
    this->ui->viewGroupBox->setDisabled(toggle);
 }
 
