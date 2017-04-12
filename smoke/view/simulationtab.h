@@ -101,7 +101,7 @@ class SimulationSettingPane : public QWidget
 
       void connectToSettings();
 
-      void setUpEnineCheckBoxMappings();
+      void registerEngines();
 
       void setFreezeButtonLabel(bool frozen);
 

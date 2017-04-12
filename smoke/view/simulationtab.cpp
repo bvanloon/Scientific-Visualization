@@ -10,14 +10,10 @@ SimulationSettingPane::SimulationSettingPane(QWidget *parent) :
    ui(new Ui::SimulationSettingPane)
 {
    ui->setupUi(this);
-   setUpEnineCheckBoxMappings();
+   registerEngines();
    setUpPrivateConnections();
    connectToSettings();
    setUItoDefaults();
-
-   //Hack to avoid having to check if we are not requesting the nonexistent seedPoint checkbox.
-   this->ui->seedPointsCheckBox->setHidden(true);
-   this->ui->slicesCheckBox->setHidden(true);
 }
 
 SimulationSettingPane::~SimulationSettingPane()
@@ -90,12 +86,11 @@ void SimulationSettingPane::connectToSettings()
            &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
 }
 
-void SimulationSettingPane::setUpEnineCheckBoxMappings()
+void SimulationSettingPane::registerEngines()
 {
    register2DEngine(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   register2DEngine(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
 
    registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
    registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);

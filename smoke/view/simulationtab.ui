@@ -115,13 +115,6 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QCheckBox" name="slicesCheckBox">
-          <property name="text">
-           <string>Slices</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QCheckBox" name="streamLinesCheckBox">
           <property name="text">
            <string>Stream Lines</string>
@@ -326,13 +319,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="seedPointsCheckBox">
-     <property name="text">
-      <string>Seed Points</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -346,7 +332,6 @@
     </spacer>
    </item>
   </layout>
-  <zorder>seedPointsCheckBox</zorder>
   <zorder>line</zorder>
   <zorder>line_2</zorder>
   <zorder>simulationGroupBox</zorder>
