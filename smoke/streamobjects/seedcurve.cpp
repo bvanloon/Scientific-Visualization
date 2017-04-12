@@ -22,7 +22,12 @@ GPUData SeedCurve::toGPUData(int resolution)
 
 void SeedCurve::applyTransformation(QMatrix4x4 transform)
 {
-   qDebug() << "NOT IMPLEMENTED: SeedCurve::applyTransformation";
+   QVector3D currentVertex;
+   for (int i = 0; i < vertices.length(); i++)
+   {
+      currentVertex = vertices.takeFirst();
+      vertices.append(currentVertex * transform);
+   }
 }
 
 GPUData SeedCurve::edgeToGPUData(QVector3D start, QVector3D end, int resolution)
