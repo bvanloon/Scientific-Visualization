@@ -142,7 +142,7 @@ void Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, bool checke
 
 void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
-   if (QApplication::keyboardModifiers() && Qt::AltModifier) return altMouseEvent(event);
+   if (QApplication::keyboardModifiers().testFlag(Qt::AltModifier)) return altMouseEvent(event);
 
    if (QApplication::mouseButtons() && Qt::AllButtons) return clickMouseEvent(event);
 }
@@ -169,13 +169,22 @@ void Canvas::altMouseEvent(QMouseEvent *event)
    previousMousePosition = currentMousePosition;
 }
 
+void Canvas::controlMouseEvent(QMouseEvent *event)
+{
+   QPointF mousePosition = event->localPos();
+   emit seedPointAdded(mousePosition);
+}
+
+void Canvas::shiftMouseEvent(QMouseEvent *event)
+{
+   QPointF mousePosition = event->localPos();
+   emit seedCurveVertexAdded(mousePosition);
+}
+
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-   if (QApplication::keyboardModifiers() & Qt::ControlModifier)
-   {
-      QPointF mousePosition = event->localPos();
-      emit seedPointAdded(mousePosition);
-   }
+   if (QApplication::keyboardModifiers().testFlag(Qt::ControlModifier)) controlMouseEvent(event);
+   if (QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier)) shiftMouseEvent(event);
 }
 
 void Canvas::paintGL()
