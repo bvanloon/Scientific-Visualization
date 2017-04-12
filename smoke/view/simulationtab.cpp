@@ -23,9 +23,13 @@ SimulationSettingPane::~SimulationSettingPane()
 
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   this->engines.find(engine).value()->setChecked(checked);
-   if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
-   if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
+   EngineMap::const_iterator toggledPair = this->engines.find(engine);
+   if (toggledPair != this->engines.end())
+   {
+      toggledPair.value()->setChecked(checked);
+      if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
+      if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
+   }
 }
 
 void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
