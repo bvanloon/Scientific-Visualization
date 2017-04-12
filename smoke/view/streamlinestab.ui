@@ -176,7 +176,7 @@
       <item>
        <widget class="QCheckBox" name="showSeedPoinsCheckBox">
         <property name="text">
-         <string>Show seed points</string>
+         <string>Show Seed Points</string>
         </property>
        </widget>
       </item>
