@@ -113,6 +113,9 @@ class SimulationSettingPane : public QWidget
 
       bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
 
+      void register2DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
+      void registerSliceEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
+
       EngineMap engines;
       EngineMap engines2D;
       EngineMap sliceEngines;

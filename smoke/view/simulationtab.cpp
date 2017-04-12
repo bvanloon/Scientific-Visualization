@@ -94,22 +94,14 @@ void SimulationSettingPane::connectToSettings()
 
 void SimulationSettingPane::setUpEnineCheckBoxMappings()
 {
-   this->engines.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
-   this->engines.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
 
-   this->engines2D.insert(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
-   this->engines2D.insert(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
-   this->engines2D.insert(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   this->engines2D.insert(Settings::engines::EnginesTypes::seedPoints, this->ui->seedPointsCheckBox);
-
-   this->sliceEngines.insert(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-   this->sliceEngines.insert(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-   this->sliceEngines.insert(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   registerSliceEngine(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -146,6 +138,18 @@ bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine
 bool SimulationSettingPane::isNonSliceEngine(Settings::engines::EnginesTypes engine)
 {
    return this->engines2D.contains(engine);
+}
+
+void SimulationSettingPane::register2DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox)
+{
+   this->engines.insert(engine, engineCheckBox);
+   this->engines2D.insert(engine, engineCheckBox);
+}
+
+void SimulationSettingPane::registerSliceEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox)
+{
+   this->engines.insert(engine, engineCheckBox);
+   this->sliceEngines.insert(engine, engineCheckBox);
 }
 
 void SimulationSettingPane::on_freezeButton_clicked()
