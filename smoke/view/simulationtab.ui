@@ -122,6 +122,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="streamSurfacesCheckBox">
+          <property name="text">
+           <string>Stream Surfaces</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="glyphsCheckBox">
           <property name="text">
            <string>Glyphs</string>
@@ -336,6 +343,7 @@
   <zorder>line_2</zorder>
   <zorder>simulationGroupBox</zorder>
   <zorder>viewGroupBox</zorder>
+  <zorder>slicesCheckBox</zorder>
  </widget>
  <resources/>
  <connections/>
