@@ -135,6 +135,9 @@ void MainWindow::connectCanvasAndSettings()
 
    connect(this->canvas, SIGNAL(panningDirectionChanged(QVector3D)),
            &Settings::canvas(), SLOT(onPanningPositionChanged(QVector3D)));
+
+   connect(this->canvas, SIGNAL(seedCurveVertexAdded(QPointF)),
+           &Settings::visualization::streamSurfaces(), SLOT(onSeedCurveVertexAdded(QPointF)));
 }
 
 void MainWindow::connectCanvasAndTabs()
