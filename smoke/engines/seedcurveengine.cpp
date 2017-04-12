@@ -7,8 +7,20 @@ SeedCurveEngine::SeedCurveEngine() :
 
 void SeedCurveEngine::draw()
 {
+   drawEdges();
+   drawVertices();
+}
+
+void SeedCurveEngine::drawEdges()
+{
    int resolution = Settings::visualization::streamSurfaces().resolution;
-   GPUData data = Settings::visualization::streamSurfaces().seedCurve->toGPUData(resolution);
+   GPUData data = Settings::visualization::streamSurfaces().seedCurve->GPUDataEdges(resolution);
+   updateBuffersAndDraw(data);
+}
+
+void SeedCurveEngine::drawVertices()
+{
+   GPUData data = Settings::visualization::streamSurfaces().seedCurve->GPUDataVertices();
    updateBuffersAndDraw(data);
 }
 
