@@ -38,6 +38,7 @@ SOURCES += main.cpp\
     engines/smokeslicesengine.cpp \
     engines/streamlineengine.cpp \
     engines/streamlineslicesengine.cpp \
+    engines/streamsurfaceengine.cpp \
     glyphs/abstractglyph.cpp \
     glyphs/airplane.cpp \
     glyphs/ccwtriangle.cpp \
@@ -113,6 +114,7 @@ HEADERS  += main.ih\
     engines/smokeslicesengine.h \
     engines/streamlineengine.h \
     engines/streamlineslicesengine.h \
+    engines/streamsurfaceengine.h \
     glyphs/abstractglyph.h \
     glyphs/airplane.h \
     glyphs/ccwtriangle.h \
