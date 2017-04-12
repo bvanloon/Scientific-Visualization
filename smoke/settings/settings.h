@@ -142,7 +142,7 @@ namespace Settings {
                //Glyphs
                false,
                //Stream Surfaces
-               true, false,
+               true, true,
                //StreamLines
                false,false,
 
