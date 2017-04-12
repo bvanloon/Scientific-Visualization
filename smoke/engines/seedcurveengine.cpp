@@ -7,6 +7,5 @@ SeedCurveEngine::SeedCurveEngine() :
 
 void SeedCurveEngine::draw()
 {
-   GPUData data = GPUData::debugSlice();
-   updateBuffers(data);
+   updateBuffersAndDraw(GPUData::debugSlice());
 }
