@@ -12,41 +12,13 @@ SmokeSlicesEngine::SmokeSlicesEngine() :
 
 void SmokeSlicesEngine::updateCache()
 {
-//   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getCombinedSimulationGridOfLastStates(
-//                                       Settings::visualization::slices().numStatesPerSlice,
-//                                       Settings::visualization::slices().combinationMethod),
-//                                   colorMap->textureGetter,
-//                                   Settings::simulation().getRange(colorMap->scalar));
-//   GPUData newData = builder.getGPUData();
-//   newData.transform(toSliceTransformation);
-
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SmokeSlicesEngine::updateCache(): fill the cache with debug data";
-
-   static int counter = 0;
-   counter = (counter + 1) % 4;
-
-   GPUData newData;
-
-   switch (counter)
-   {
-   case (0):
-      newData = GPUData::debugLowerLeftTriangle();
-      break;
-
-   case (1):
-      newData = GPUData::debugUpperLeftTriangle();
-      break;
-
-   case (2):
-      newData = GPUData::debugUpperRightTriangle();
-      break;
-
-   case (3):
-      newData = GPUData::debugLowerRightTriangle();
-      break;
-   }
-
+   TranslucentSmokeBuilder builder(&SimulationHistory::instance().getCombinedSimulationGridOfLastStates(
+                                       Settings::visualization::slices().numStatesPerSlice,
+                                       Settings::visualization::slices().combinationMethod),
+                                   colorMap->textureGetter,
+                                   Settings::simulation().getRange(colorMap->scalar));
+   GPUData newData = builder.getGPUData();
+   newData.transform(toSliceTransformation);
    this->cache.enqueue(newData);
 }
 

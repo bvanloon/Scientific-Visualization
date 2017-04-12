@@ -12,7 +12,6 @@ Settings::Canvas::Canvas(QObject *parent) :
 void Settings::Canvas::setPanningPosition(QVector3D position)
 {
    this->panningPosition = position;
-   qDebug() << this->panningPosition;
    emit updateModelViewMatrix();
 }
 
