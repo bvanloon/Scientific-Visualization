@@ -7,7 +7,9 @@ SeedCurveEngine::SeedCurveEngine() :
 
 void SeedCurveEngine::draw()
 {
-   updateBuffersAndDraw(Settings::visualization::streamSurfaces().seedCurve->toGPUData());
+   int resolution = Settings::visualization::streamSurfaces().resolution;
+   GPUData data = Settings::visualization::streamSurfaces().seedCurve->toGPUData(resolution);
+   updateBuffersAndDraw(data);
 }
 
 void SeedCurveEngine::setColorMapClampingTo(bool UNUSED(clampingOn))
