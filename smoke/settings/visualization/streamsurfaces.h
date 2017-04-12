@@ -24,6 +24,8 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       void onClearSeedCurves();
 
+      void onAddVertexToSeedCurve(QPointF vertexPosition);
+
    private slots:
 
    private:

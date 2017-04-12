@@ -39,6 +39,11 @@ void Settings::visualization::StreamSurfaces::onClearSeedCurves()
    seedCurve = new shapes::PolyLine();
 }
 
+void Settings::visualization::StreamSurfaces::onAddVertexToSeedCurve(QPointF vertexPosition)
+{
+   seedCurve->addVertex(QVector3D(vertexPosition));
+}
+
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
 {
    qDebug() << "NOT IMPLEMENTED: Settings::visualization::StreamSurfaces::transformSeedCurves";
