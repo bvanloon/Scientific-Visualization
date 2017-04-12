@@ -76,9 +76,6 @@ class AbstractEngine :  public QObject, protected QOpenGLFunctions
       void setGlobalAlpha();
       void setGlobalAlpha(float alpha);
 
-      void setScreenSpaceTransformation();
-      void setScreenSpaceTransformation(const QMatrix4x4& transform);
-
       virtual void connectToColorMap();
 
    private:

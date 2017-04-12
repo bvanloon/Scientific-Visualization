@@ -56,20 +56,6 @@ void AbstractEngine::setGlobalAlpha(float alpha)
    this->shaderProgram->release();
 }
 
-void AbstractEngine::setScreenSpaceTransformation()
-{
-   QMatrix4x4 transform;
-   transform.setToIdentity();
-   setScreenSpaceTransformation(transform);
-}
-
-void AbstractEngine::setScreenSpaceTransformation(const QMatrix4x4& transform)
-{
-   this->shaderProgram->bind();
-   this->shaderProgram->setUniformValue("screenSpaceTransformation", transform);
-   this->shaderProgram->release();
-}
-
 void AbstractEngine::setModelViewMatrix(const QMatrix4x4& value)
 {
    modelViewMatrix = value;
@@ -99,7 +85,6 @@ void AbstractEngine::initializeUniforms()
 {
    setMVPMatrix();
    setLightModel();
-   setScreenSpaceTransformation();
    setGlobalAlpha();
    initializeColorMapInfo();
 }

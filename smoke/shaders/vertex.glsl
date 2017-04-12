@@ -23,7 +23,6 @@ layout(location = 3) out float vsLocalAlpha;
 //Uniform in
 uniform mat4 mvpMatrix;
 uniform mat3 normalMatrix;
-uniform mat4 screenSpaceTransformation;
 uniform colorMapInfoStruct colorMapInfo;
 
 float mapToUnitRange(float value, float oldMin, float oldMax)
@@ -74,7 +73,7 @@ void main(void)
 
     vsLocalAlpha = inputLocalAlpha;
 
-    gl_Position = screenSpaceTransformation * mvpMatrix * vec4(inputPosition, 1.0);
+    gl_Position = mvpMatrix * vec4(inputPosition, 1.0);
 
     vsPosition = gl_Position.xyz;
 }
