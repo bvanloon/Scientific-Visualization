@@ -9,6 +9,10 @@ Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    resolution(3)
 {
    connectToOtherSettings();
+
+   seedCurve->addVertex(QVector3D(20, 40, 0));
+   seedCurve->addVertex(QVector3D(600, 40, 0));
+   seedCurve->addVertex(QVector3D(400, 300, 0));
 }
 
 void Settings::visualization::StreamSurfaces::connectToOtherSettings()
