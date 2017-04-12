@@ -5,13 +5,13 @@
 Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
-   seedCurve(new SeedCurve()),
-   resolution(3)
+   resolution(3),
+   seedCurve(new SeedCurve())
 {
    connectToOtherSettings();
 
    seedCurve->addVertex(QVector3D(20, 40, 0));
-   seedCurve->addVertex(QVector3D(600, 40, 0));
+   seedCurve->addVertex(QVector3D(300, 40, 0));
    seedCurve->addVertex(QVector3D(400, 300, 0));
 }
 
