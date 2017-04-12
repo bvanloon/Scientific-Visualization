@@ -17,9 +17,7 @@ void SmokeSlicesEngine::updateCache()
                                        Settings::visualization::slices().combinationMethod),
                                    colorMap->textureGetter,
                                    Settings::simulation().getRange(colorMap->scalar));
-   GPUData newData = builder.getGPUData();
-   newData.transform(toSliceTransformation);
-   this->cache.enqueue(newData);
+   this->cache.enqueue(builder.getGPUData());
 }
 
 void SmokeSlicesEngine::connectToSettings()
