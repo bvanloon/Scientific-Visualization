@@ -12,6 +12,9 @@ shapes::PolyLine::PolyLine() :
    length(0)
 {}
 
+shapes::PolyLine::~PolyLine()
+{}
+
 void shapes::PolyLine::addVertex(QVector3D vertex)
 {
    updateLength(vertex);
@@ -20,7 +23,7 @@ void shapes::PolyLine::addVertex(QVector3D vertex)
 
 double shapes::PolyLine::getLength() const
 {
-    return length;
+   return length;
 }
 
 void shapes::PolyLine::updateLength(QVector3D newVertex)
