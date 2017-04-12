@@ -177,6 +177,8 @@ void Canvas::controlMouseEvent(QMouseEvent *event)
 
 void Canvas::shiftMouseEvent(QMouseEvent *event)
 {
+   QPointF mousePosition = event->localPos();
+   emit seedCurveVertexAdded(mousePosition);
 }
 
 void Canvas::mousePressEvent(QMouseEvent *event)
