@@ -4,7 +4,7 @@ SeedCurve::SeedCurve() :
    shapes::PolyLine()
 {}
 
-GPUData SeedCurve::toGPUData(int resolution)
+GPUData SeedCurve::GPUDataEdges(int resolution)
 {
    GPUData curveData;
    GPUData edgeData;
@@ -18,6 +18,17 @@ GPUData SeedCurve::toGPUData(int resolution)
       curveData.extend(edgeData);
    }
    return curveData;
+}
+
+GPUData SeedCurve::GPUDataVertices()
+{
+   GPUData data(GL_POINTS);
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   for (auto vertex : vertices)
+   {
+      data.addElement(vertex, normal, 1.0);
+   }
+   return data;
 }
 
 void SeedCurve::applyTransformation(QMatrix4x4 transform)

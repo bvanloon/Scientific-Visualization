@@ -14,6 +14,9 @@ class SeedCurveEngine : public AbstractEngine
    private:
       void setColorMapClampingTo(bool UNUSED(clampingOn));
       void setColorMapValueRange(float UNUSED(min), float UNUSED(max));
+
+      void drawEdges();
+      void drawVertices();
 };
 
 #endif // SEEDCURVEENGINE_H

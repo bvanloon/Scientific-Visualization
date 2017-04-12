@@ -9,7 +9,8 @@ class SeedCurve : public shapes::PolyLine
    public:
       SeedCurve();
 
-      GPUData toGPUData(int resolution);
+      GPUData GPUDataEdges(int resolution);
+      GPUData GPUDataVertices();
 
       void applyTransformation(QMatrix4x4 transform);
 
