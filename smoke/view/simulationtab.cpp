@@ -95,6 +95,7 @@ void SimulationSettingPane::registerEngines()
    register2DEngine(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
+   register2DEngine(Settings::engines::EnginesTypes::streamSurfaces, this->ui->streamSurfacesCheckBox);
 
    registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
    registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
