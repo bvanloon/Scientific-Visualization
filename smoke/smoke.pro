@@ -32,6 +32,7 @@ SOURCES += main.cpp\
     engines/abstractsliceengine.cpp \
     engines/glyphengine.cpp \
     engines/glyphsliceengine.cpp \
+    engines/seedcurveengine.cpp \
     engines/seedpointengine.cpp \
     engines/smokeengine.cpp \
     engines/smokeslicesengine.cpp \
@@ -105,6 +106,7 @@ HEADERS  += main.ih\
     engines/abstractsliceengine.h \
     engines/glyphengine.h \
     engines/glyphsliceengine.h \
+    engines/seedcurveengine.h \
     engines/seedpointengine.h \
     engines/smokeengine.h \
     engines/smokeslicesengine.h \
