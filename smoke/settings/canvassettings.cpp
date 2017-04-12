@@ -12,6 +12,7 @@ Settings::Canvas::Canvas(QObject *parent) :
 void Settings::Canvas::setPanningPosition(QVector3D position)
 {
    this->panningPosition = position;
+   qDebug() << this->panningPosition;
    emit updateModelViewMatrix();
 }
 
@@ -113,6 +114,6 @@ void Settings::Canvas::onSetViewMatrixToTopDownView()
 void Settings::Canvas::onSetViewMatrixToSideView()
 {
    setScaling(0.67);
-   setPanningPosition(QVector3D(0.0367604 * size.width(), 0.948104 * size.height(), 0.0));
-   setRotation(279, 0, 308);
+   setPanningPosition(QVector3D(676.947, 78.6077, 0));
+   setRotation(279, 180, 308);
 }
