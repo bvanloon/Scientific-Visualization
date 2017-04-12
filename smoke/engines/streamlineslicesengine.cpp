@@ -12,10 +12,7 @@ StreamLineSlicesEngine::StreamLineSlicesEngine() :
 
 void StreamLineSlicesEngine::updateCache()
 {
-   GPUData newData = buildStreamLines();
-   newData.transform(toSliceTransformation);
-
-   this->cache.enqueue(newData);
+   this->cache.enqueue(buildStreamLines());
 }
 
 GPUData StreamLineSlicesEngine::buildStreamLines()
