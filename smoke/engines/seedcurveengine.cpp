@@ -7,5 +7,5 @@ SeedCurveEngine::SeedCurveEngine() :
 
 void SeedCurveEngine::draw()
 {
-   updateBuffersAndDraw(GPUData::debugSlice());
+   updateBuffersAndDraw(Settings::visualization::streamSurfaces().seedCurve->toGPUData());
 }
