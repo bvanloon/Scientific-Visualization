@@ -36,13 +36,13 @@ void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
 void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
 {
    qDebug() << "NOT IMPLEMENTED: StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked";
-//   emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
+   emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
 //   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, true);
 }
 
 void StreamSurfacesTab::setUiToDefaults()
 {
-   qDebug() << "NOT IMPLEMENTED: StreamSurfacesTab::setUiToDefaults";
+   this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
 }
 
 void StreamSurfacesTab::connectToSettings()
