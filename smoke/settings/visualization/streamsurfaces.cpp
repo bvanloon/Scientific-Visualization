@@ -51,5 +51,5 @@ void Settings::visualization::StreamSurfaces::onAddVertexToSeedCurve(QPointF ver
 
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
 {
-   qDebug() << "NOT IMPLEMENTED: Settings::visualization::StreamSurfaces::transformSeedCurves";
+   this->seedCurve->applyTransformation(transform);
 }
