@@ -9,9 +9,12 @@ class SeedCurve : public shapes::PolyLine
    public:
       SeedCurve();
 
-      GPUData toGPUData(float textureCoordinate, float alpha = 1.0);
+      GPUData toGPUData(int resolution);
 
       void applyTransformation(QMatrix4x4 transform);
+
+   private:
+      GPUData edgeToGPUData(QVector3D start, QVector3D end, int resolution);
 };
 
 #endif // SEEDCURVE_H
