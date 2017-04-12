@@ -191,6 +191,13 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Use alt + mouse move for panning.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QFormLayout" name="formLayout">
         <item row="0" column="1">
          <widget class="QDoubleSpinBox" name="scaleFactorSpinBox">
