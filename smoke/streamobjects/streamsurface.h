@@ -41,6 +41,9 @@ namespace streamobject {
 
           GPUData gpuData;
           QList<VertexList> streamLines;
+
+          int longestStreamLineLength();
+
           void buildStreamLines(QList<Line> lines);
           void nextConnect();
           void nextConnectLevel(int level);

@@ -135,6 +135,13 @@ GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
    return this->gpuData;
 }
 
+int streamobject::Surface::SurfaceBuilder::longestStreamLineLength()
+{
+   int maxLength = this->streamLines.first().length();
+   for (VertexList streamLine : streamLines) maxLength = qMax(maxLength, streamLine.length());
+   return maxLength;
+}
+
 streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
    position(position),
    downNeighbour(downNeighbour),
