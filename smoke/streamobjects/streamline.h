@@ -20,7 +20,9 @@ namespace streamobject {
 
           bool hasNoVertices();
 
-          GPUData toGPUData() const;
+          GPUData GPUDataEdges() const;
+
+          GPUData GPUDataEdges(float textureCoordinate) const;
 
           GPUData GPUDataVertices(float textureCoordinate) const;
 

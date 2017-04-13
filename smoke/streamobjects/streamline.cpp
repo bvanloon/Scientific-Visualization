@@ -21,7 +21,7 @@ streamobject::Line::Line() :
    shapes::PolyLine()
 {}
 
-GPUData streamobject::Line::toGPUData() const
+GPUData streamobject::Line::GPUDataEdges() const
 {
    GPUData data(drawMode);
 
@@ -33,6 +33,22 @@ GPUData streamobject::Line::toGPUData() const
    {
       data.addElement(vertices[current], normal, textureCoordinates[current], alphaValues[current]);
       data.addElement(vertices[next], normal, textureCoordinates[next], alphaValues[next]);
+   }
+   return data;
+}
+
+GPUData streamobject::Line::GPUDataEdges(float textureCoordinate) const
+{
+   GPUData data(GL_LINES);
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   float alpha = 1.0;
+
+   if (this->numVertices() <= 1) return data;
+
+   for (int current = 0, next = 1; next < this->vertices.length(); current++, next++)
+   {
+      data.addElement(vertices[current], normal, textureCoordinate, alpha);
+      data.addElement(vertices[next], normal, textureCoordinate, alpha);
    }
    return data;
 }

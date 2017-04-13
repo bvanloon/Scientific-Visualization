@@ -28,7 +28,7 @@ GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
                              Settings::visualization::streamLines().colorMap->textureGetter);
    streamobject::Line streamLine = builder.getStreamLine();
 
-   return streamLine.toGPUData();
+   return streamLine.GPUDataEdges();
 }
 
 void StreamLineEngine::draw()
