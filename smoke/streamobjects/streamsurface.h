@@ -5,6 +5,7 @@
 #include "streamobjects/streamline.h"
 #include <QList>
 
+
 namespace streamobject {
     class Surface
     {
@@ -19,6 +20,8 @@ namespace streamobject {
           QList<Line> streamLines;
 
           int numVerticesLongestStreamLine() const;
+
+          QList<QPair<streamobject::Line, streamobject::Line::ConstIterator> > buildLineIteratorMap() const;
     };
 }
 
