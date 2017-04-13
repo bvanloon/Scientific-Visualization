@@ -70,7 +70,9 @@ void streamobject::Surface::addStreamLine(streamobject::Line streamLine)
 
 streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines) :
    gpuData(GL_TRIANGLES)
-{}
+{
+   for (Line line : streamLines) this->streamLines.append(VertexList(line));
+}
 
 streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 {}
