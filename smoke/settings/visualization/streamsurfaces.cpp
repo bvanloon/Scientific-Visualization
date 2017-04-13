@@ -6,6 +6,8 @@ Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    resolution(3),
+   showVertices(true),
+   showLines(true),
    seedCurve(new SeedCurve())
 {
    connectToOtherSettings();
@@ -47,6 +49,21 @@ void Settings::visualization::StreamSurfaces::onClearSeedCurves()
 void Settings::visualization::StreamSurfaces::onSeedCurveVertexAdded(QPointF vertexPosition)
 {
    seedCurve->addVertex(QVector3D(Settings::canvas().convertToNormalCoordinates(vertexPosition)));
+}
+
+void Settings::visualization::StreamSurfaces::onResolutionChanged(int resolution)
+{
+   this->resolution = resolution;
+}
+
+void Settings::visualization::StreamSurfaces::onShowStreamSurfaceLinesToggled(bool toggle)
+{
+   this->showLines = toggle;
+}
+
+void Settings::visualization::StreamSurfaces::onShowStreamSurfaceVerticesToggled(bool toggle)
+{
+   this->showVertices = toggle;
 }
 
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)

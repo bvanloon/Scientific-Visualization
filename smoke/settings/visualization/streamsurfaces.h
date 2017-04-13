@@ -17,6 +17,9 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       int resolution;
 
+      bool showVertices;
+      bool showLines;
+
       SeedCurve *seedCurve;
 
    signals:
@@ -27,6 +30,12 @@ class Settings::visualization::StreamSurfaces : public QObject
       void onClearSeedCurves();
 
       void onSeedCurveVertexAdded(QPointF vertexPosition);
+
+      void onResolutionChanged(int resolution);
+
+      void onShowStreamSurfaceLinesToggled(bool toggle);
+
+      void onShowStreamSurfaceVerticesToggled(bool toggle);
 
    private slots:
 
