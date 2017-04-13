@@ -69,10 +69,40 @@ void streamobject::Surface::addStreamLine(streamobject::Line streamLine)
 }
 
 streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines) :
-   streamLines(streamLines)
+   gpuData(GL_TRIANGLES)
 {}
 
 GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
 {
    return GPUData::debugSlice();
 }
+
+streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour, double distanceTravelled)
+{}
+
+streamobject::Surface::SurfaceBuilder::Vertex::~Vertex()
+{}
+
+void streamobject::Surface::SurfaceBuilder::Vertex::setUpNeighbour(Vertex *value)
+{
+   upNeighbour = value;
+}
+
+void streamobject::Surface::SurfaceBuilder::Vertex::setLeftNeighbour(Vertex *value)
+{
+   leftNeighbour = value;
+}
+
+void streamobject::Surface::SurfaceBuilder::Vertex::setRightNeighbour(Vertex *value)
+{
+   rightNeighbour = value;
+}
+
+streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line streamLine)
+{}
+
+streamobject::Surface::SurfaceBuilder::VertexList::~VertexList()
+{}
+
+streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::VertexList::getVertexAtLevel(int level)
+{}
