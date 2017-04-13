@@ -93,7 +93,14 @@ void streamobject::Surface::SurfaceBuilder::nextConnectLevel(int level)
 }
 
 void streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel(int level, streamobject::Surface::SurfaceBuilder::VertexList left, streamobject::Surface::SurfaceBuilder::VertexList right)
-{}
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "TODO streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel: Check if the connection is allowed ";
+   Vertex *leftVertex = left.getVertexAtLevel(level);
+   Vertex *rightVertex = right.getVertexAtLevel(level);
+   leftVertex->addRightNeighbour(rightVertex);
+   rightVertex->addLeftNeighbour(leftVertex);
+}
 
 streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 {}
