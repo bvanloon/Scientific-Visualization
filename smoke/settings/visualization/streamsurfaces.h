@@ -17,6 +17,9 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       int resolution;
 
+      bool showVertices;
+      bool showLines;
+
       SeedCurve *seedCurve;
 
    signals:

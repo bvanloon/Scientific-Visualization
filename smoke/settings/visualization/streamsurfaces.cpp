@@ -6,6 +6,8 @@ Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    resolution(3),
+   showVertices(true),
+   showLines(true),
    seedCurve(new SeedCurve())
 {
    connectToOtherSettings();
