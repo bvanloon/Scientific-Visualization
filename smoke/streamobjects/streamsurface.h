@@ -18,6 +18,7 @@ namespace streamobject {
           GPUData GPUDataSurface() const;
 
           static Surface debugSurfaceWithSplit(double offset = 0);
+          static Surface debugSurfaceWithHole(double offset = 0);
 
           void addStreamLine(Line streamLine);
 

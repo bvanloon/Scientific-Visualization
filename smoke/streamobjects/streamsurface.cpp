@@ -63,6 +63,104 @@ streamobject::Surface streamobject::Surface::debugSurfaceWithSplit(double offset
    return surface;
 }
 
+streamobject::Surface streamobject::Surface::debugSurfaceWithHole(double offset)
+{
+   double textureCoordinate = 0.0;
+
+   streamobject::Line line1;
+   QVector3D line1Vertex = QVector3D(50, offset, 0);
+
+   streamobject::Line line2;
+   QVector3D line2Vertex = QVector3D(100, offset, 0);
+
+   streamobject::Line line9;
+   QVector3D line9Vertex = QVector3D(450, offset, 0);
+
+   streamobject::Line line10;
+   QVector3D line10Vertex = QVector3D(500 - offset, offset, 0);
+
+   for (int i = 0; i < 6; i++)
+   {
+      line1Vertex.setY(i * 100);
+      line1.addVertex(line1Vertex, textureCoordinate);
+
+      line2Vertex.setY(i * 100);
+      line2.addVertex(line2Vertex, textureCoordinate);
+
+      line9Vertex.setY(i * 100);
+      line9.addVertex(line9Vertex, textureCoordinate);
+
+      line10Vertex.setY(i * 100);
+      line10.addVertex(line10Vertex, textureCoordinate);
+   }
+
+   streamobject::Line line3;
+   line3.addVertex(QVector3D(150, 0 + offset, 0), textureCoordinate);
+   line3.addVertex(QVector3D(101, 126.204, 0), textureCoordinate);
+   line3.addVertex(QVector3D(111.133, 225.218, 0), textureCoordinate);
+   line3.addVertex(QVector3D(125.138, 324.233, 0), textureCoordinate);
+   line3.addVertex(QVector3D(139.143, 423.247, 0), textureCoordinate);
+   line3.addVertex(QVector3D(150, 500 - offset, 0), textureCoordinate);
+
+   streamobject::Line line4;
+   line4.addVertex(QVector3D(200, 0 + offset, 0), textureCoordinate);
+   line4.addVertex(QVector3D(155.998, 89.799, 0), textureCoordinate);
+   line4.addVertex(QVector3D(111.997, 179.598, 0), textureCoordinate);
+   line4.addVertex(QVector3D(138.483, 276.027, 0), textureCoordinate);
+   line4.addVertex(QVector3D(164.968, 372.456, 0), textureCoordinate);
+   line4.addVertex(QVector3D(191.454, 468.884, 0), textureCoordinate);
+   line4.addVertex(QVector3D(200, 500 - offset, 0), textureCoordinate);
+
+   streamobject::Line line5;
+   line5.addVertex(QVector3D(250, 0 + offset, 0), textureCoordinate);
+   line5.addVertex(QVector3D(190.776, 80.5764, 0), textureCoordinate);
+   line5.addVertex(QVector3D(131.553, 161.153, 0), textureCoordinate);
+   line5.addVertex(QVector3D(164.551, 255.552, 0), textureCoordinate);
+   line5.addVertex(QVector3D(197.549, 349.951, 0), textureCoordinate);
+   line5.addVertex(QVector3D(230.547, 444.349, 0), textureCoordinate);
+   line5.addVertex(QVector3D(250, 500 - offset, 0), textureCoordinate);
+
+   streamobject::Line line6;
+   line6.addVertex(QVector3D(300, 0 + offset, 0), textureCoordinate);
+   line6.addVertex(QVector3D(342.289, 90.6183, 0), textureCoordinate);
+   line6.addVertex(QVector3D(384.577, 181.237, 0), textureCoordinate);
+   line6.addVertex(QVector3D(400.866, 271.855, 0), textureCoordinate);
+   line6.addVertex(QVector3D(378.267, 359.251, 0), textureCoordinate);
+   line6.addVertex(QVector3D(329.668, 446.648, 0), textureCoordinate);
+   line6.addVertex(QVector3D(300, 500 - offset, 0), textureCoordinate);
+
+   streamobject::Line line7;
+   line7.addVertex(QVector3D(350, 0 + offset, 0), textureCoordinate);
+   line7.addVertex(QVector3D(391.791, 90.849, 0), textureCoordinate);
+   line7.addVertex(QVector3D(433.581, 181.698, 0), textureCoordinate);
+   line7.addVertex(QVector3D(408.184, 278.419, 0), textureCoordinate);
+   line7.addVertex(QVector3D(382.786, 375.14, 0), textureCoordinate);
+   line7.addVertex(QVector3D(357.389, 471.861, 0), textureCoordinate);
+   line7.addVertex(QVector3D(350, 500 - offset, 0), textureCoordinate);
+
+   streamobject::Line line8;
+   line8.addVertex(QVector3D(400, 0 + offset, 0), textureCoordinate);
+   line8.addVertex(QVector3D(422.877, 97.3481, 0), textureCoordinate);
+   line8.addVertex(QVector3D(445.754, 194.696, 0), textureCoordinate);
+   line8.addVertex(QVector3D(447.145, 294.686, 0), textureCoordinate);
+   line8.addVertex(QVector3D(448.535, 394.677, 0), textureCoordinate);
+   line8.addVertex(QVector3D(449.926, 494.667, 0), textureCoordinate);
+   line8.addVertex(QVector3D(400, 500 - offset, 0), textureCoordinate);
+
+   streamobject::Surface surface;
+   surface.addStreamLine(line1);
+   surface.addStreamLine(line2);
+   surface.addStreamLine(line3);
+   surface.addStreamLine(line4);
+   surface.addStreamLine(line5);
+   surface.addStreamLine(line6);
+   surface.addStreamLine(line7);
+   surface.addStreamLine(line8);
+   surface.addStreamLine(line9);
+   surface.addStreamLine(line10);
+   return surface;
+}
+
 void streamobject::Surface::addStreamLine(streamobject::Line streamLine)
 {
    this->streamLines.append(streamLine);
