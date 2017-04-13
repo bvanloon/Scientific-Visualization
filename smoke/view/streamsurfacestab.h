@@ -25,12 +25,24 @@ class StreamSurfacesTab : public QWidget
    signals:
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void showStreamSurfaceVerticesToggled(bool toggle);
+
+      void showStreamSurfaceLinesToggled(bool toggle);
+
+      void resolutionChanged(int resolution);
+
       void clearSeedCurves();
 
    private slots:
       void on_clearSeedCurvesButton_pressed();
 
       void on_showSeedCurvesCheckBox_clicked(bool checked);
+
+      void on_resolutionSpinBox_valueChanged(int value);
+
+      void on_showLinesCheckBox_clicked(bool checked);
+
+      void on_showVerticesCheckBox_clicked(bool checked);
 
    private:
       Ui::StreamSurfacesTab *ui;

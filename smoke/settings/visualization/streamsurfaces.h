@@ -31,6 +31,12 @@ class Settings::visualization::StreamSurfaces : public QObject
 
       void onSeedCurveVertexAdded(QPointF vertexPosition);
 
+      void onResolutionChanged(int resolution);
+
+      void onShowStreamSurfaceLinesToggled(bool toggle);
+
+      void onShowStreamSurfaceVerticesToggled(bool toggle);
+
    private slots:
 
    private:

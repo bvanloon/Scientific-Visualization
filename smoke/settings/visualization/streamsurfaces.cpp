@@ -51,6 +51,21 @@ void Settings::visualization::StreamSurfaces::onSeedCurveVertexAdded(QPointF ver
    seedCurve->addVertex(QVector3D(Settings::canvas().convertToNormalCoordinates(vertexPosition)));
 }
 
+void Settings::visualization::StreamSurfaces::onResolutionChanged(int resolution)
+{
+   this->resolution = resolution;
+}
+
+void Settings::visualization::StreamSurfaces::onShowStreamSurfaceLinesToggled(bool toggle)
+{
+   this->showLines = toggle;
+}
+
+void Settings::visualization::StreamSurfaces::onShowStreamSurfaceVerticesToggled(bool toggle)
+{
+   this->showVertices = toggle;
+}
+
 void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
 {
    this->seedCurve->applyTransformation(transform);
