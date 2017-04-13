@@ -22,6 +22,8 @@ namespace streamobject {
 
           GPUData toGPUData() const;
 
+          GPUData GPUDataVertices(float textureCoordinate) const;
+
           int numVertices() const;
 
           int getLength() const;
