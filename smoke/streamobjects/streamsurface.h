@@ -80,6 +80,8 @@ namespace streamobject {
 
           Iterator begin();
           Iterator end();
+
+          int length();
           Vertex *getVertexAtLevel(int level);
 
        private:

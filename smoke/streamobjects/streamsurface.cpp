@@ -191,6 +191,11 @@ streamobject::Surface::SurfaceBuilder::VertexList::Iterator streamobject::Surfac
    return this->vertices.end();
 }
 
+int streamobject::Surface::SurfaceBuilder::VertexList::length()
+{
+   return this->vertices.length();
+}
+
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::VertexList::getVertexAtLevel(int level)
 {
    int actualLevel = qMin(level, this->vertices.length() - 1);
