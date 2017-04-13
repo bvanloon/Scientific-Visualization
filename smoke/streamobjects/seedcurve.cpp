@@ -59,10 +59,6 @@ GPUData SeedCurve::edgeToGPUData(QVector3D start, QVector3D end, int resolution)
 
    GPUData data(GL_LINES);
 
-   data.addElement(start, normal, minTextureCoordinate);
-   data.addElement(end, normal, maxTextureCoordinate);
-
-
    for (int i = 0; i < resolution; i++)
    {
       data.addElement(pieceStart, normal, minTextureCoordinate);
