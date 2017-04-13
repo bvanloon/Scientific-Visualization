@@ -88,9 +88,9 @@ void streamobject::Surface::SurfaceBuilder::nextConnect()
 
 void streamobject::Surface::SurfaceBuilder::nextConnectLevel(int level)
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "TODO streamobject::Surface::SurfaceBuilder::nextConnectLevel: Loop over all pairs of streamlines.";
-   nextConnectStreamLinesAtLevel(level, this->streamLines[0], this->streamLines[1]);
+   for (QList<VertexList>::Iterator left = streamLines.begin(), right = left + 1;
+        right != streamLines.end();
+        ++left, ++right) nextConnectStreamLinesAtLevel(level, *left, *right);
 }
 
 void streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel(int level, streamobject::Surface::SurfaceBuilder::VertexList left, streamobject::Surface::SurfaceBuilder::VertexList right)
