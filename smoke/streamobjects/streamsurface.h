@@ -15,6 +15,7 @@ namespace streamobject {
 
           GPUData GPUDataVertices() const;
           GPUData GPUDataLines() const;
+          GPUData GPUDataSurfaceEdges() const;
           GPUData GPUDataSurface() const;
 
           static Surface debugSurfaceWithSplit(double offset = 0);
@@ -35,6 +36,7 @@ namespace streamobject {
           ~SurfaceBuilder();
 
           GPUData getGPUData();
+          GPUData getEdgeGPUData();
 
        private:
           class Vertex;

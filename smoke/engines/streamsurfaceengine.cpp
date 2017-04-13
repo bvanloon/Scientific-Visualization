@@ -12,6 +12,9 @@ void StreamSurfaceEngine::draw()
    drawSurface(surface);
    if (Settings::visualization::streamSurfaces().showLines) drawLines(surface);
    if (Settings::visualization::streamSurfaces().showVertices) drawVertices(surface);
+
+   GPUData data = surface.GPUDataSurfaceEdges();
+   updateBuffersAndDraw(data);
 }
 
 void StreamSurfaceEngine::drawVertices(streamobject::Surface surface)

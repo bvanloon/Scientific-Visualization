@@ -19,6 +19,12 @@ GPUData streamobject::Surface::GPUDataLines() const
    return lines;
 }
 
+GPUData streamobject::Surface::GPUDataSurfaceEdges() const
+{
+   GPUData data = SurfaceBuilder(this->streamLines).getEdgeGPUData();
+   return data;
+}
+
 GPUData streamobject::Surface::GPUDataSurface() const
 {
    GPUData data = SurfaceBuilder(this->streamLines).getGPUData();
@@ -210,6 +216,11 @@ streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 {}
 
 GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
+{
+   return GPUData::debugSlice();
+}
+
+GPUData streamobject::Surface::SurfaceBuilder::getEdgeGPUData()
 {
    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
    double textureCoordinate = 10.0;
