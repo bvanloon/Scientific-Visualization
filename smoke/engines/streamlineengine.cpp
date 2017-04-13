@@ -11,7 +11,7 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
 
 GPUData StreamLineEngine::buildStreamLines()
 {
-   GPUData data(streamobject::Line::drawMode);
+   GPUData data;
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {

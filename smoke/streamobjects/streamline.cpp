@@ -23,7 +23,7 @@ streamobject::Line::Line() :
 
 GPUData streamobject::Line::GPUDataEdges() const
 {
-   GPUData data(drawMode);
+   GPUData data(GL_LINES);
 
    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
 

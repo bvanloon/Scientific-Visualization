@@ -30,7 +30,6 @@ namespace streamobject {
 
           int getLength() const;
 
-          static const int drawMode = GL_LINES;
 
        private:
           QList<float> textureCoordinates;

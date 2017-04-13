@@ -17,7 +17,7 @@ void StreamLineSlicesEngine::updateCache()
 
 GPUData StreamLineSlicesEngine::buildStreamLines()
 {
-   GPUData data(streamobject::Line::drawMode);
+   GPUData data;
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
