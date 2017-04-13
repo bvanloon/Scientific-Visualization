@@ -21,3 +21,10 @@ streamobject::Surface::Surface()
    this->streamLines.append(line3);
 }
 
+GPUData streamobject::Surface::GPUDataVertices() const
+{
+   float textureCoordinate = 0.0;
+   GPUData vertices;
+   for (auto streamline : streamLines) vertices.extend(streamline.GPUDataVertices(textureCoordinate));
+   return vertices;
+}

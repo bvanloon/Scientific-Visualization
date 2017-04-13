@@ -11,6 +11,7 @@ namespace streamobject {
        public:
           Surface();
 
+          GPUData GPUDataVertices() const;
        private:
           QList<Line> streamLines;
     };
