@@ -48,6 +48,8 @@ namespace streamobject {
           Vertex(QVector3D position, Vertex *downNeighbour);
           ~Vertex();
 
+          QVector3D position;
+
           void setUpNeighbour(Vertex *upNeighbour);
           void addLeftNeighbour(Vertex *value);
           void addRightNeighbour(Vertex *leftNeighbour);
@@ -56,8 +58,11 @@ namespace streamobject {
 
           QSet<Vertex *> getRightNeighbours() const;
 
+          Vertex *getDownNeighbour() const;
+
+          Vertex *getUpNeighbour() const;
+
        private:
-          QVector3D position;
 
           Vertex *downNeighbour;
           Vertex *upNeighbour;
@@ -67,15 +72,14 @@ namespace streamobject {
 
     class Surface::SurfaceBuilder::VertexList {
        public:
+          typedef QList<Vertex *>::Iterator Iterator;
+
           VertexList(Line streamLine);
           ~VertexList();
 
-          typedef QList<Vertex *>::Iterator Iterator;
+          QList<Vertex *> vertices;
 
           Vertex *getVertexAtLevel(int level);
-
-       private:
-          QList<Vertex *> vertices;
     };
 }
 

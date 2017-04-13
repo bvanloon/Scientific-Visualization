@@ -69,7 +69,7 @@ void streamobject::Surface::addStreamLine(streamobject::Line streamLine)
 }
 
 streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines) :
-   gpuData(GL_TRIANGLES)
+   gpuData(GL_LINES)
 {
    for (Line line : streamLines) this->streamLines.append(VertexList(line));
 }
@@ -79,7 +79,39 @@ streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 
 GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
 {
-   return GPUData::debugSlice();
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   double textureCoordinate = 10.0;
+   for (VertexList streamline : streamLines)
+   {
+      for (Vertex *vertex : streamline.vertices)
+      {
+         //Edge between upNeighbour and vertex
+         if (vertex->getUpNeighbour())
+         {
+            this->gpuData.addElement(vertex->position, normal, textureCoordinate);
+            this->gpuData.addElement(vertex->getUpNeighbour()->position, normal, textureCoordinate);
+         }
+         //Edge between downNeighbour and vertex
+         if (vertex->getDownNeighbour())
+         {
+            this->gpuData.addElement(vertex->position, normal, textureCoordinate);
+            this->gpuData.addElement(vertex->getDownNeighbour()->position, normal, textureCoordinate);
+         }
+         //Edges between leftNeighbours and vertex
+         for (Vertex *leftNeighbour : vertex->getLeftNeighbours())
+         {
+            this->gpuData.addElement(vertex->position, normal, textureCoordinate);
+            this->gpuData.addElement(leftNeighbour->position, normal, textureCoordinate);
+         }
+         //Edges between rightNeighbours and vertex
+         for (Vertex *rightNeighbour : vertex->getRightNeighbours())
+         {
+            this->gpuData.addElement(vertex->position, normal, textureCoordinate);
+            this->gpuData.addElement(rightNeighbour->position, normal, textureCoordinate);
+         }
+      }
+   }
+   return this->gpuData;
 }
 
 streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
@@ -114,6 +146,16 @@ void streamobject::Surface::SurfaceBuilder::Vertex::addRightNeighbour(Vertex *le
 QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getRightNeighbours() const
 {
    return rightNeighbours;
+}
+
+streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getUpNeighbour() const
+{
+   return upNeighbour;
+}
+
+streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getDownNeighbour() const
+{
+   return downNeighbour;
 }
 
 QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getLeftNeighbours() const
