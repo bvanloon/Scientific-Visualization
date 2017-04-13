@@ -19,6 +19,18 @@ namespace streamobject {
        private:
 
           QList<Line> streamLines;
+
+          class SurfaceBuilder;
+    };
+
+    class Surface::SurfaceBuilder {
+       public:
+          SurfaceBuilder(QList<Line> streamLines);
+
+          GPUData getGPUData();
+
+       private:
+          QList<Line> streamLines;
     };
 }
 

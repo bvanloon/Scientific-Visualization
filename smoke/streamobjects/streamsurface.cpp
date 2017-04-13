@@ -40,5 +40,15 @@ GPUData streamobject::Surface::GPUDataLines() const
 
 GPUData streamobject::Surface::GPUDataSurface() const
 {
+   GPUData data = SurfaceBuilder(this->streamLines).getGPUData();
+   return data;
+}
+
+streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines) :
+   streamLines(streamLines)
+{}
+
+GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
+{
    return GPUData::debugSlice();
 }
