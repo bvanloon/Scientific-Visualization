@@ -71,19 +71,9 @@ int streamobject::Line::getLength() const
    return shapes::PolyLine::getLength();
 }
 
-bool streamobject::Line::isLastVertex(streamobject::Line::ConstIterator iterator)
+QVector3D streamobject::Line::vertexAt(int i) const
 {
-   return(iterator == --this->vertices.cend());
-}
-
-streamobject::Line::ConstIterator streamobject::Line::verticesBegin() const
-{
-   return this->vertices.cbegin();
-}
-
-streamobject::Line::ConstIterator streamobject::Line::verticesEnd() const
-{
-   return this->vertices.cend();
+   return vertices[i];
 }
 
 bool streamobject::Line::isEdgeAllowed(QVector3D vertex)
