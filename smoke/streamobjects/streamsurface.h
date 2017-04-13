@@ -41,6 +41,10 @@ namespace streamobject {
 
           GPUData gpuData;
           QList<VertexList> streamLines;
+          void buildStreamLines(QList<Line> lines);
+          void nextConnect();
+          void nextConnectLevel(int level);
+          void nextConnectStreamLinesAtLevel(int level, VertexList left, VertexList right);
     };
 
     class Surface::SurfaceBuilder::Vertex {

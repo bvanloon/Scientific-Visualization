@@ -71,8 +71,29 @@ void streamobject::Surface::addStreamLine(streamobject::Line streamLine)
 streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines) :
    gpuData(GL_LINES)
 {
-   for (Line line : streamLines) this->streamLines.append(VertexList(line));
+   buildStreamLines(streamLines);
+   nextConnect();
 }
+
+void streamobject::Surface::SurfaceBuilder::buildStreamLines(QList<streamobject::Line> lines)
+{
+   for (Line line : lines) this->streamLines.append(VertexList(line));
+}
+
+void streamobject::Surface::SurfaceBuilder::nextConnect()
+{
+   //Fix to loop over all levels
+   nextConnectLevel(0);
+}
+
+void streamobject::Surface::SurfaceBuilder::nextConnectLevel(int level)
+{
+   //Fix to loop over all streamlines
+   nextConnectStreamLinesAtLevel(level, this->streamLines[0], this->streamLines[1]);
+}
+
+void streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel(int level, streamobject::Surface::SurfaceBuilder::VertexList left, streamobject::Surface::SurfaceBuilder::VertexList right)
+{}
 
 streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 {}
