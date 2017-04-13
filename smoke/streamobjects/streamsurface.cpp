@@ -28,3 +28,12 @@ GPUData streamobject::Surface::GPUDataVertices() const
    for (auto streamline : streamLines) vertices.extend(streamline.GPUDataVertices(textureCoordinate));
    return vertices;
 }
+
+GPUData streamobject::Surface::GPUDataLines() const
+{
+   float textureCoordinate = 0.0;
+   GPUData lines;
+   for (auto streamLine : streamLines) lines.extend(streamLine.GPUDataEdges(textureCoordinate));
+   return lines;
+}
+
