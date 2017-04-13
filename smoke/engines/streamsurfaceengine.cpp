@@ -8,6 +8,26 @@ StreamSurfaceEngine::StreamSurfaceEngine(SimulationGrid *grid) :
 
 void StreamSurfaceEngine::draw()
 {
-   GPUData data = GPUData::debugSlice();
+   streamobject::Surface surface;
+   drawSurface(surface);
+   if (Settings::visualization::streamSurfaces().showLines) drawLines(surface);
+   if (Settings::visualization::streamSurfaces().showVertices) drawVertices(surface);
+}
+
+void StreamSurfaceEngine::drawVertices(streamobject::Surface surface)
+{
+   GPUData data = surface.GPUDataVertices();
+   updateBuffersAndDraw(data);
+}
+
+void StreamSurfaceEngine::drawLines(streamobject::Surface surface)
+{
+   GPUData data = surface.GPUDataLines();
+   updateBuffersAndDraw(data);
+}
+
+void StreamSurfaceEngine::drawSurface(streamobject::Surface surface)
+{
+   GPUData data = surface.GPUDataSurface();
    updateBuffersAndDraw(data);
 }
