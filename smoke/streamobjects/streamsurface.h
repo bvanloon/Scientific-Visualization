@@ -54,6 +54,12 @@ namespace streamobject {
           void nextConnectLevel(int level);
           void nextConnectStreamLinesAtLevel(int level, VertexList left, VertexList right);
           void connectVertices(Vertex *left, Vertex *right);
+
+          GPUData buildLowerLeftTriangles();
+          GPUData buildLowerLeftTriangle(Vertex *vertex);
+
+          GPUData buildUpperRightTriangles();
+          GPUData buildUpperRightTriangle();
     };
 
     class Surface::SurfaceBuilder::Vertex {

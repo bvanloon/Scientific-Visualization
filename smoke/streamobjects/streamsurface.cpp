@@ -212,12 +212,45 @@ void streamobject::Surface::SurfaceBuilder::connectVertices(streamobject::Surfac
    right->addLeftNeighbour(left);
 }
 
+GPUData streamobject::Surface::SurfaceBuilder::buildLowerLeftTriangles()
+{
+   GPUData data;
+   for (VertexList streamLine : streamLines)
+   {
+      for (Vertex *vertex : streamLine)
+      {
+         buildLowerLeftTriangle(vertex);
+      }
+   }
+   return data;
+}
+
+GPUData streamobject::Surface::SurfaceBuilder::buildLowerLeftTriangle(Vertex *vertex)
+{
+   GPUData triangle;
+
+
+   return triangle;
+}
+
+GPUData streamobject::Surface::SurfaceBuilder::buildUpperRightTriangles()
+{
+   GPUData data;
+   return data;
+}
+
+GPUData streamobject::Surface::SurfaceBuilder::buildUpperRightTriangle()
+{}
+
 streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 {}
 
 GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
 {
-   return GPUData::debugSlice();
+   GPUData data;
+   data.extend(buildLowerLeftTriangles());
+   data.extend(buildUpperRightTriangles());
+   return data;
 }
 
 GPUData streamobject::Surface::SurfaceBuilder::getEdgeGPUData()
