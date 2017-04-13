@@ -30,7 +30,7 @@ namespace streamobject {
 
     class Surface::SurfaceBuilder {
        public:
-          SurfaceBuilder(QList<Line> streamLines);
+          SurfaceBuilder(QList<Line> streamLines, double maximumDistanceBetweenConnectedVertices = 200);
           ~SurfaceBuilder();
 
           GPUData getGPUData();
@@ -42,12 +42,15 @@ namespace streamobject {
           GPUData gpuData;
           QList<VertexList> streamLines;
 
+          double maximumDistanceBetweenConnectedVertices;
+
           int longestStreamLineLength();
 
           void buildStreamLines(QList<Line> lines);
           void nextConnect();
           void nextConnectLevel(int level);
           void nextConnectStreamLinesAtLevel(int level, VertexList left, VertexList right);
+          void connectVertices(Vertex *left, Vertex *right);
     };
 
     class Surface::SurfaceBuilder::Vertex {
@@ -69,8 +72,9 @@ namespace streamobject {
 
           Vertex *getUpNeighbour() const;
 
-       private:
+          double distanceTo(Vertex other);
 
+       private:
           Vertex *downNeighbour;
           Vertex *upNeighbour;
           QSet<Vertex *> leftNeighbours;

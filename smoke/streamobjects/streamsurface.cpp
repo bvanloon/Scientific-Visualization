@@ -68,8 +68,9 @@ void streamobject::Surface::addStreamLine(streamobject::Line streamLine)
    this->streamLines.append(streamLine);
 }
 
-streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines) :
-   gpuData(GL_LINES)
+streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> streamLines, double maximumDistanceBetweenConnectedVertices) :
+   gpuData(GL_LINES),
+   maximumDistanceBetweenConnectedVertices(maximumDistanceBetweenConnectedVertices)
 {
    buildStreamLines(streamLines);
    nextConnect();
@@ -95,12 +96,16 @@ void streamobject::Surface::SurfaceBuilder::nextConnectLevel(int level)
 
 void streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel(int level, streamobject::Surface::SurfaceBuilder::VertexList left, streamobject::Surface::SurfaceBuilder::VertexList right)
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "TODO streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel: Check if the connection is allowed ";
    Vertex *leftVertex = left.getVertexAtLevel(level);
    Vertex *rightVertex = right.getVertexAtLevel(level);
-   leftVertex->addRightNeighbour(rightVertex);
-   rightVertex->addLeftNeighbour(leftVertex);
+   double distance = leftVertex->distanceTo(*rightVertex);
+   if (distance < maximumDistanceBetweenConnectedVertices) connectVertices(leftVertex, rightVertex);
+}
+
+void streamobject::Surface::SurfaceBuilder::connectVertices(streamobject::Surface::SurfaceBuilder::Vertex *left, streamobject::Surface::SurfaceBuilder::Vertex *right)
+{
+   left->addRightNeighbour(right);
+   right->addLeftNeighbour(left);
 }
 
 streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
@@ -185,6 +190,11 @@ QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::Sur
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getUpNeighbour() const
 {
    return upNeighbour;
+}
+
+double streamobject::Surface::SurfaceBuilder::Vertex::distanceTo(streamobject::Surface::SurfaceBuilder::Vertex other)
+{
+   return other.position.distanceToPoint(this->position);
 }
 
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getDownNeighbour() const
