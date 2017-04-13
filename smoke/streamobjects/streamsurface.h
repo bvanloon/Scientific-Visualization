@@ -55,14 +55,12 @@ namespace streamobject {
           void nextConnectStreamLinesAtLevel(int level, VertexList left, VertexList right);
           void connectVertices(Vertex *left, Vertex *right);
 
-          GPUData buildLowerLeftTriangles();
+          GPUData buildTriangles();
           bool hasLowerLeftTriangle(Vertex *vertex);
+          bool hasUpperRightTriangle(Vertex *vertex);
           GPUData buildTriangle(Vertex *a, Vertex *b, Vertex *c);
 
           QVector3D computeTriangleNormal(Vertex *a, Vertex *b, Vertex *c);
-
-          GPUData buildUpperRightTriangles();
-          GPUData buildUpperRightTriangle();
     };
 
     class Surface::SurfaceBuilder::Vertex {

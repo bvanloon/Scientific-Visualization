@@ -214,24 +214,47 @@ void streamobject::Surface::SurfaceBuilder::connectVertices(streamobject::Surfac
    right->addLeftNeighbour(left);
 }
 
-GPUData streamobject::Surface::SurfaceBuilder::buildLowerLeftTriangles()
+GPUData streamobject::Surface::SurfaceBuilder::buildTriangles()
 {
    GPUData data;
    for (VertexList streamLine : streamLines)
    {
       for (Vertex *vertex : streamLine)
       {
-         buildLowerLeftTriangle(vertex);
+         if (hasLowerLeftTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->getLeftNeighbours(), vertex->getUpNeighbour()));
+//                  if (hasUpperRightTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->));
       }
    }
    return data;
 }
 
-GPUData streamobject::Surface::SurfaceBuilder::buildLowerLeftTriangle(Vertex *vertex)
+bool streamobject::Surface::SurfaceBuilder::hasLowerLeftTriangle(streamobject::Surface::SurfaceBuilder::Vertex *vertex)
 {
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "Implement streamobject::Surface::SurfaceBuilder::hasLowerLeftTriangle";
+   return true;
+}
+
+bool streamobject::Surface::SurfaceBuilder::hasUpperRightTriangle(streamobject::Surface::SurfaceBuilder::Vertex *vertex)
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "Implement streamobject::Surface::SurfaceBuilder::hasUpperRightTriangle";
+   return true;
+}
+
+GPUData streamobject::Surface::SurfaceBuilder::buildTriangle(Vertex *a, Vertex *b, Vertex *c)
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "streamobject::Surface::SurfaceBuilder::buildTriangle do something with the texture and alpha of the streamline.";
+
+   double texture = 5.0;
+   double alpha = 0.5;
+   QVector3D normal = computeTriangleNormal(a, b, c);
+
    GPUData triangle;
-
-
+   triangle.addElement(a->position, normal, texture, alpha);
+   triangle.addElement(b->position, normal, texture, alpha);
+   triangle.addElement(c->position, normal, texture, alpha);
    return triangle;
 }
 
@@ -243,22 +266,13 @@ QVector3D streamobject::Surface::SurfaceBuilder::computeTriangleNormal(streamobj
    return QVector3D::crossProduct(ac, ab).normalized();
 }
 
-GPUData streamobject::Surface::SurfaceBuilder::buildUpperRightTriangles()
-{
-   GPUData data;
-   return data;
-}
-
-GPUData streamobject::Surface::SurfaceBuilder::buildUpperRightTriangle()
-{}
-
 streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
 {}
 
 GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
 {
    GPUData data;
-   data.extend(buildLowerLeftTriangles());
+   data.extend(buildTriangles());
    data.extend(buildUpperRightTriangles());
    return data;
 }
