@@ -162,13 +162,11 @@ void streamobject::Surface::SurfaceBuilder::Vertex::setUpNeighbour(Vertex *upNei
 void streamobject::Surface::SurfaceBuilder::Vertex::addLeftNeighbour(Vertex *rightNeighbour)
 {
    leftNeighbours.insert(rightNeighbour);
-   if (!rightNeighbour->leftNeighbours.contains(this)) rightNeighbour->addLeftNeighbour(this);
 }
 
 void streamobject::Surface::SurfaceBuilder::Vertex::addRightNeighbour(Vertex *leftNeighbour)
 {
    rightNeighbours.insert(leftNeighbour);
-   if (!leftNeighbour->rightNeighbours.contains(this)) leftNeighbour->addRightNeighbour(this);
 }
 
 QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getRightNeighbours() const
