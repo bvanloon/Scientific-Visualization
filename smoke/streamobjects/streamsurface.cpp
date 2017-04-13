@@ -25,39 +25,39 @@ GPUData streamobject::Surface::GPUDataSurface() const
    return data;
 }
 
-streamobject::Surface streamobject::Surface::debugSurfaceWithSplit()
+streamobject::Surface streamobject::Surface::debugSurfaceWithSplit(double offset)
 {
    streamobject::Surface surface;
    streamobject::Line line1;
-   line1.addVertex(QVector3D(100.0, 0.0, 0.0), 0.0);
+   line1.addVertex(QVector3D(100.0, 0.0 + offset, 0.0), 0.0);
    line1.addVertex(QVector3D(100.0, 100.0, 0.0), 0.0);
    line1.addVertex(QVector3D(55, 189, 0.0), 0.0);
    line1.addVertex(QVector3D(10, 278, 0.0), 0.0);
-   line1.addVertex(QVector3D(0, 300, 0.0), 0.0);
+   line1.addVertex(QVector3D(0 + offset, 300, 0.0), 0.0);
    surface.addStreamLine(line1);
 
    streamobject::Line line2;
-   line2.addVertex(QVector3D(200, 0, 0), 3.33);
+   line2.addVertex(QVector3D(200, 0 + offset, 0), 3.33);
    line2.addVertex(QVector3D(200, 100, 0), 3.33);
    line2.addVertex(QVector3D(144, 183, 0), 3.33);
    line2.addVertex(QVector3D(89, 266, 0), 3.33);
    line2.addVertex(QVector3D(33, 349, 0), 3.33);
-   line2.addVertex(QVector3D(0, 400, 0), 3.33);
+   line2.addVertex(QVector3D(0 + offset, 400, 0), 3.33);
    surface.addStreamLine(line2);
 
    streamobject::Line line3;
-   line3.addVertex(QVector3D(300, 0, 0), 6.66);
+   line3.addVertex(QVector3D(300, 0 + offset, 0), 6.66);
    line3.addVertex(QVector3D(300, 100, 0), 6.66);
    line3.addVertex(QVector3D(389, 144, 0), 6.66);
    line3.addVertex(QVector3D(478, 189, 0), 6.66);
-   line3.addVertex(QVector3D(500, 200, 0), 6.66);
+   line3.addVertex(QVector3D(500 - offset, 200, 0), 6.66);
    surface.addStreamLine(line3);
 
    streamobject::Line line4;
-   line4.addVertex(QVector3D(400, 0, 0), 10);
+   line4.addVertex(QVector3D(400, 0 + offset, 0), 10);
    line4.addVertex(QVector3D(400, 100, 0), 10);
    line4.addVertex(QVector3D(489, 144, 0), 10);
-   line4.addVertex(QVector3D(500, 150, 0), 10);
+   line4.addVertex(QVector3D(500 - offset, 150, 0), 10);
    surface.addStreamLine(line4);
 
    return surface;
@@ -88,7 +88,8 @@ void streamobject::Surface::SurfaceBuilder::nextConnect()
 
 void streamobject::Surface::SurfaceBuilder::nextConnectLevel(int level)
 {
-   //Fix to loop over all streamlines
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "TODO streamobject::Surface::SurfaceBuilder::nextConnectLevel: Loop over all pairs of streamlines.";
    nextConnectStreamLinesAtLevel(level, this->streamLines[0], this->streamLines[1]);
 }
 

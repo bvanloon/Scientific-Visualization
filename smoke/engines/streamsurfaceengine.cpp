@@ -8,7 +8,7 @@ StreamSurfaceEngine::StreamSurfaceEngine(SimulationGrid *grid) :
 
 void StreamSurfaceEngine::draw()
 {
-   streamobject::Surface surface = streamobject::Surface::debugSurfaceWithSplit();
+   streamobject::Surface surface = streamobject::Surface::debugSurfaceWithSplit(10);
    drawSurface(surface);
    if (Settings::visualization::streamSurfaces().showLines) drawLines(surface);
    if (Settings::visualization::streamSurfaces().showVertices) drawVertices(surface);
