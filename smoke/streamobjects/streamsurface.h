@@ -18,15 +18,7 @@ namespace streamobject {
 
        private:
 
-          typedef QList<QPair<streamobject::Line, streamobject::Line::ConstIterator> > LineIteratorMap;
-
           QList<Line> streamLines;
-
-          int numVerticesLongestStreamLine() const;
-
-          LineIteratorMap buildLineIteratorMap() const;
-
-          GPUData buildSurfaceLayer(LineIteratorMap& map) const;
     };
 }
 

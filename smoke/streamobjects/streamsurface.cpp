@@ -40,40 +40,5 @@ GPUData streamobject::Surface::GPUDataLines() const
 
 GPUData streamobject::Surface::GPUDataSurface() const
 {
-   LineIteratorMap lineIteratorMap = buildLineIteratorMap();
-   int maxNumVertices = numVerticesLongestStreamLine();
-   GPUData surface;
-   for (int i = 0; i < maxNumVertices; i++) surface.extend(buildSurfaceLayer(lineIteratorMap));
    return GPUData::debugSlice();
-}
-
-streamobject::Surface::LineIteratorMap streamobject::Surface::buildLineIteratorMap() const
-{
-   streamobject::Surface::LineIteratorMap iterators;
-   for (auto streamLine : this->streamLines)
-   {
-      iterators.append(QPair<streamobject::Line, streamobject::Line::ConstIterator>(streamLine, streamLine.verticesBegin()));
-   }
-   return iterators;
-}
-
-int streamobject::Surface::numVerticesLongestStreamLine() const
-{
-   int length = streamLines.first().numVertices();
-   for (auto streamLine : this->streamLines) length = qMax(length, streamLine.numVertices());
-   return length;
-}
-
-GPUData streamobject::Surface::buildSurfaceLayer(streamobject::Surface::LineIteratorMap& map) const
-{
-   GPUData layer;
-   QPair<streamobject::Line, streamobject::Line::ConstIterator> pair;
-   for (int i = 0; i < map.length(); i++)
-   {
-      pair = map[i];
-      qDebug() << *pair.second;
-      if (!pair.first.isLastVertex(pair.second)) map[i].second++;
-   }
-   qDebug() << "";
-   return layer;
 }
