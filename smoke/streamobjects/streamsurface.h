@@ -70,6 +70,8 @@ namespace streamobject {
           VertexList(Line streamLine);
           ~VertexList();
 
+          typedef QList<Vertex *>::Iterator Iterator;
+
           Vertex *getVertexAtLevel(int level);
 
        private:

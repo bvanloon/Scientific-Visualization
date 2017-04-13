@@ -121,16 +121,17 @@ QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::Sur
 
 streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line streamLine)
 {
-   int currentIdx = 0;
-   int nextIdx = currentIdx + 1;
-   Vertex *currentVertex;
-   Vertex *previousVertex = nullptr;
-   while (nextIdx < streamLine.numVertices()) {
+   Vertex *currentVertex,
+          *previousVertex = nullptr;
+
+   for (int currentIdx = 0; currentIdx < streamLine.numVertices(); ++currentIdx)
+   {
       currentVertex = new Vertex(streamLine.vertexAt(currentIdx), previousVertex);
       this->vertices.append(currentVertex);
-      if (previousVertex) previousVertex->setUpNeighbour(currentVertex);
       previousVertex = currentVertex;
    }
+
+   for (int i = 0; i < vertices.length() - 1; i++) vertices[i]->setUpNeighbour(vertices[i + 1]);
 }
 
 streamobject::Surface::SurfaceBuilder::VertexList::~VertexList()
