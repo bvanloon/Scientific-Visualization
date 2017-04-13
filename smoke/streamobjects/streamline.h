@@ -16,6 +16,9 @@ namespace streamobject {
           Line(QPointF seedPoint, float textureCoordinate, float alpha = 1.0);
           Line();
 
+          typedef QList<QVector3D>::ConstIterator ConstIterator;
+          typedef QList<QVector3D>::Iterator Iterator;
+
           void addVertex(QVector3D vertex, float textureCoordinate, float alpha = 1.0);
 
           bool hasNoVertices();
@@ -30,6 +33,8 @@ namespace streamobject {
 
           int getLength() const;
 
+          ConstIterator verticesBegin() const;
+          ConstIterator verticesEnd() const;
 
        private:
           QList<float> textureCoordinates;

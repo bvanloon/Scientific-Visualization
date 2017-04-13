@@ -68,7 +68,17 @@ int streamobject::Line::numVertices() const
 
 int streamobject::Line::getLength() const
 {
-   return shapes::PolyLine::getLength();
+    return shapes::PolyLine::getLength();
+}
+
+streamobject::Line::ConstIterator streamobject::Line::verticesBegin() const
+{
+    return this->vertices.cbegin();
+}
+
+streamobject::Line::ConstIterator streamobject::Line::verticesEnd() const
+{
+    return this->vertices.cend();
 }
 
 bool streamobject::Line::isEdgeAllowed(QVector3D vertex)
