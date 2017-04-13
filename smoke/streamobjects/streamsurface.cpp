@@ -183,7 +183,7 @@ streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> 
 void streamobject::Surface::SurfaceBuilder::buildStreamLines(QList<streamobject::Line> lines)
 {
    int length = lines.first().numVertices();
-   for(Line line : lines) length = qMax(length, line.numVertices());
+   for (Line line : lines) length = qMax(length, line.numVertices());
    for (Line line : lines) this->streamLines.append(VertexList(line, length));
 }
 
@@ -233,6 +233,14 @@ GPUData streamobject::Surface::SurfaceBuilder::buildLowerLeftTriangle(Vertex *ve
 
 
    return triangle;
+}
+
+QVector3D streamobject::Surface::SurfaceBuilder::computeTriangleNormal(streamobject::Surface::SurfaceBuilder::Vertex *a, streamobject::Surface::SurfaceBuilder::Vertex *b, streamobject::Surface::SurfaceBuilder::Vertex *c)
+{
+   QVector3D ab = b->position - a->position;
+   QVector3D ac = c->position - a->position;
+
+   return QVector3D::crossProduct(ac, ab).normalized();
 }
 
 GPUData streamobject::Surface::SurfaceBuilder::buildUpperRightTriangles()
@@ -361,7 +369,7 @@ streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line
       currentVertex = new Vertex(streamLine.vertexAt(currentIdx), previousVertex);
       this->vertices.append(currentVertex);
       previousVertex = currentVertex;
-      if(currentIdx < (streamLine.numVertices() - 1)) ++currentIdx;
+      if (currentIdx < (streamLine.numVertices() - 1)) ++currentIdx;
    }
 
    for (int i = 0; i < vertices.length() - 1; i++) vertices[i]->setUpNeighbour(vertices[i + 1]);
