@@ -72,37 +72,72 @@ streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> 
    gpuData(GL_TRIANGLES)
 {}
 
+streamobject::Surface::SurfaceBuilder::~SurfaceBuilder()
+{}
+
 GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
 {
    return GPUData::debugSlice();
 }
 
-streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour, double distanceTravelled)
+streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
+   position(position),
+   downNeighbour(downNeighbour),
+   upNeighbour(nullptr)
 {}
 
 streamobject::Surface::SurfaceBuilder::Vertex::~Vertex()
-{}
-
-void streamobject::Surface::SurfaceBuilder::Vertex::setUpNeighbour(Vertex *value)
 {
-   upNeighbour = value;
+   this->leftNeighbours.clear();
+   this->rightNeighbours.clear();
 }
 
-void streamobject::Surface::SurfaceBuilder::Vertex::setLeftNeighbour(Vertex *value)
+void streamobject::Surface::SurfaceBuilder::Vertex::setUpNeighbour(Vertex *upNeighbour)
 {
-   leftNeighbour = value;
+   this->upNeighbour = upNeighbour;
 }
 
-void streamobject::Surface::SurfaceBuilder::Vertex::setRightNeighbour(Vertex *value)
+void streamobject::Surface::SurfaceBuilder::Vertex::addLeftNeighbour(Vertex *rightNeighbour)
 {
-   rightNeighbour = value;
+   leftNeighbours.insert(rightNeighbour);
+   if (!rightNeighbour->leftNeighbours.contains(this)) rightNeighbour->addLeftNeighbour(this);
+}
+
+void streamobject::Surface::SurfaceBuilder::Vertex::addRightNeighbour(Vertex *leftNeighbour)
+{
+   rightNeighbours.insert(leftNeighbour);
+   if (!leftNeighbour->rightNeighbours.contains(this)) leftNeighbour->addRightNeighbour(this);
+}
+
+QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getRightNeighbours() const
+{
+   return rightNeighbours;
+}
+
+QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getLeftNeighbours() const
+{
+   return leftNeighbours;
 }
 
 streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line streamLine)
-{}
+{
+   int currentIdx = 0;
+   int nextIdx = currentIdx + 1;
+   Vertex *currentVertex;
+   Vertex *previousVertex = nullptr;
+   while (nextIdx < streamLine.numVertices()) {
+      currentVertex = new Vertex(streamLine.vertexAt(currentIdx), previousVertex);
+      this->vertices.append(currentVertex);
+      if (previousVertex) previousVertex->setUpNeighbour(currentVertex);
+      previousVertex = currentVertex;
+   }
+}
 
 streamobject::Surface::SurfaceBuilder::VertexList::~VertexList()
 {}
 
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::VertexList::getVertexAtLevel(int level)
-{}
+{
+   int actualLevel = qMin(level, this->vertices.length() - 1);
+   return this->vertices[actualLevel];
+}

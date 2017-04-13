@@ -4,6 +4,7 @@
 #include "utilities/gpudata.h"
 #include "streamobjects/streamline.h"
 #include <QList>
+#include <QSet>
 
 
 namespace streamobject {
@@ -30,6 +31,7 @@ namespace streamobject {
     class Surface::SurfaceBuilder {
        public:
           SurfaceBuilder(QList<Line> streamLines);
+          ~SurfaceBuilder();
 
           GPUData getGPUData();
 
@@ -43,18 +45,24 @@ namespace streamobject {
 
     class Surface::SurfaceBuilder::Vertex {
        public:
-          Vertex(QVector3D position, Vertex *downNeighbour, double distanceTravelled);
+          Vertex(QVector3D position, Vertex *downNeighbour);
           ~Vertex();
 
-          void setUpNeighbour(Vertex *value);
-          void setLeftNeighbour(Vertex *value);
-          void setRightNeighbour(Vertex *value);
+          void setUpNeighbour(Vertex *upNeighbour);
+          void addLeftNeighbour(Vertex *value);
+          void addRightNeighbour(Vertex *leftNeighbour);
+
+          QSet<Vertex *> getLeftNeighbours() const;
+
+          QSet<Vertex *> getRightNeighbours() const;
 
        private:
+          QVector3D position;
+
           Vertex *downNeighbour;
           Vertex *upNeighbour;
-          Vertex *leftNeighbour;
-          Vertex *rightNeighbour;
+          QSet<Vertex *> leftNeighbours;
+          QSet<Vertex *> rightNeighbours;
     };
 
     class Surface::SurfaceBuilder::VertexList {
