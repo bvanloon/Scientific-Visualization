@@ -77,9 +77,13 @@ namespace streamobject {
           VertexList(Line streamLine);
           ~VertexList();
 
-          QList<Vertex *> vertices;
 
+          Iterator begin();
+          Iterator end();
           Vertex *getVertexAtLevel(int level);
+
+       private:
+          QList<Vertex *> vertices;
     };
 }
 

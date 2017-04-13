@@ -83,7 +83,7 @@ GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
    double textureCoordinate = 10.0;
    for (VertexList streamline : streamLines)
    {
-      for (Vertex *vertex : streamline.vertices)
+      for (Vertex *vertex : streamline)
       {
          //Edge between upNeighbour and vertex
          if (vertex->getUpNeighbour())
@@ -180,6 +180,16 @@ streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line
 
 streamobject::Surface::SurfaceBuilder::VertexList::~VertexList()
 {}
+
+streamobject::Surface::SurfaceBuilder::VertexList::Iterator streamobject::Surface::SurfaceBuilder::VertexList::begin()
+{
+   return this->vertices.begin();
+}
+
+streamobject::Surface::SurfaceBuilder::VertexList::Iterator streamobject::Surface::SurfaceBuilder::VertexList::end()
+{
+   return this->vertices.end();
+}
 
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::VertexList::getVertexAtLevel(int level)
 {
