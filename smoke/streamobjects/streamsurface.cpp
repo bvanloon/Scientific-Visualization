@@ -42,3 +42,10 @@ GPUData streamobject::Surface::GPUDataSurface() const
 {
    return GPUData::debugSlice();
 }
+
+int streamobject::Surface::numVerticesLongestStreamLine() const
+{
+   int length = streamLines.first().numVertices();
+   for (auto streamLine : this->streamLines) length = qMax(length, streamLine.numVertices());
+   return length;
+}

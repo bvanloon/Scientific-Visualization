@@ -17,6 +17,8 @@ namespace streamobject {
 
        private:
           QList<Line> streamLines;
+
+          int numVerticesLongestStreamLine() const;
     };
 }
 
