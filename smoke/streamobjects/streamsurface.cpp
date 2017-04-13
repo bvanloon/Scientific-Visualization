@@ -8,13 +8,13 @@ streamobject::Surface::Surface()
    line1.addVertex(QVector3D(100.0, 100.0, 0.0), 0.0);
 
    streamobject::Line line2;
-   line1.addVertex(QVector3D(50.0, 12.5, 0.0), 5.0);
-   line1.addVertex(QVector3D(100.0, 25.0, 0.0), 5.0);
-   line1.addVertex(QVector3D(175.0, 150.0, 0.0), 5.0);
+   line2.addVertex(QVector3D(50.0, 12.5, 0.0), 5.0);
+   line2.addVertex(QVector3D(100.0, 25.0, 0.0), 5.0);
+   line2.addVertex(QVector3D(175.0, 150.0, 0.0), 5.0);
 
    streamobject::Line line3;
-   line1.addVertex(QVector3D(150.0, 0, 0.0), 10.0);
-   line1.addVertex(QVector3D(175.0, 37.5, 0.0), 10.0);
+   line3.addVertex(QVector3D(150.0, 0, 0.0), 10.0);
+   line3.addVertex(QVector3D(175.0, 37.5, 0.0), 10.0);
 
    this->streamLines.append(line1);
    this->streamLines.append(line2);
