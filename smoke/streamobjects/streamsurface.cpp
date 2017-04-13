@@ -82,8 +82,8 @@ void streamobject::Surface::SurfaceBuilder::buildStreamLines(QList<streamobject:
 
 void streamobject::Surface::SurfaceBuilder::nextConnect()
 {
-   //Fix to loop over all levels
-   nextConnectLevel(0);
+   int numLevels = longestStreamLineLength();
+   for (int level = 0; level < numLevels; ++level) nextConnectLevel(level);
 }
 
 void streamobject::Surface::SurfaceBuilder::nextConnectLevel(int level)
