@@ -56,7 +56,10 @@ namespace streamobject {
           void connectVertices(Vertex *left, Vertex *right);
 
           GPUData buildLowerLeftTriangles();
-          GPUData buildLowerLeftTriangle(Vertex *vertex);
+          bool hasLowerLeftTriangle(Vertex *vertex);
+          GPUData buildTriangle(Vertex *a, Vertex *b, Vertex *c);
+
+          QVector3D computeTriangleNormal(Vertex* a, Vertex* b, Vertex* c);
 
           GPUData buildUpperRightTriangles();
           GPUData buildUpperRightTriangle();
@@ -94,7 +97,7 @@ namespace streamobject {
        public:
           typedef QList<Vertex *>::Iterator Iterator;
 
-          VertexList(Line streamLine);
+          VertexList(Line streamLine, int length);
           ~VertexList();
 
 

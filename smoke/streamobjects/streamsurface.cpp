@@ -182,7 +182,9 @@ streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> 
 
 void streamobject::Surface::SurfaceBuilder::buildStreamLines(QList<streamobject::Line> lines)
 {
-   for (Line line : lines) this->streamLines.append(VertexList(line));
+   int length = lines.first().numVertices();
+   for(Line line : lines) length = qMax(length, line.numVertices());
+   for (Line line : lines) this->streamLines.append(VertexList(line, length));
 }
 
 void streamobject::Surface::SurfaceBuilder::nextConnect()
@@ -349,16 +351,17 @@ QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::Sur
    return leftNeighbours;
 }
 
-streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line streamLine)
+streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line streamLine, int length)
 {
    Vertex *currentVertex,
           *previousVertex = nullptr;
 
-   for (int currentIdx = 0; currentIdx < streamLine.numVertices(); ++currentIdx)
+   for (int currentIdx = 0; vertices.length() < length; )
    {
       currentVertex = new Vertex(streamLine.vertexAt(currentIdx), previousVertex);
       this->vertices.append(currentVertex);
       previousVertex = currentVertex;
+      if(currentIdx < (streamLine.numVertices() - 1)) ++currentIdx;
    }
 
    for (int i = 0; i < vertices.length() - 1; i++) vertices[i]->setUpNeighbour(vertices[i + 1]);
