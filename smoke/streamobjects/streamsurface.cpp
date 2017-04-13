@@ -3,23 +3,36 @@
 streamobject::Surface::Surface()
 {
    streamobject::Line line1;
-   line1.addVertex(QVector3D(0.0, 0.0, 0.0), 0.0);
-   line1.addVertex(QVector3D(50.0, 50.0, 0.0), 0.0);
+   line1.addVertex(QVector3D(100.0, 0.0, 0.0), 0.0);
    line1.addVertex(QVector3D(100.0, 100.0, 0.0), 0.0);
-   line1.addVertex(QVector3D(175.0, 150.0, 0.0), 0.0);
+   line1.addVertex(QVector3D(55, 189, 0.0), 0.0);
+   line1.addVertex(QVector3D(10, 278, 0.0), 0.0);
+   line1.addVertex(QVector3D(0, 300, 0.0), 0.0);
+   this->streamLines.append(line1);
 
    streamobject::Line line2;
-   line2.addVertex(QVector3D(50.0, 12.5, 0.0), 5.0);
-   line2.addVertex(QVector3D(100.0, 25.0, 0.0), 5.0);
-   line2.addVertex(QVector3D(175.0, 150.0, 0.0), 5.0);
+   line2.addVertex(QVector3D(200, 0, 0), 3.33);
+   line2.addVertex(QVector3D(200, 100, 0), 3.33);
+   line2.addVertex(QVector3D(144, 183, 0), 3.33);
+   line2.addVertex(QVector3D(89, 266, 0), 3.33);
+   line2.addVertex(QVector3D(33, 349, 0), 3.33);
+   line2.addVertex(QVector3D(0, 400, 0), 3.33);
+   this->streamLines.append(line2);
 
    streamobject::Line line3;
-   line3.addVertex(QVector3D(150.0, 0, 0.0), 10.0);
-   line3.addVertex(QVector3D(175.0, 37.5, 0.0), 10.0);
-
-   this->streamLines.append(line1);
-   this->streamLines.append(line2);
+   line3.addVertex(QVector3D(300, 0, 0), 6.66);
+   line3.addVertex(QVector3D(300, 100, 0), 6.66);
+   line3.addVertex(QVector3D(389, 144, 0), 6.66);
+   line3.addVertex(QVector3D(478, 189, 0), 6.66);
+   line3.addVertex(QVector3D(500, 200, 0), 6.66);
    this->streamLines.append(line3);
+
+   streamobject::Line line4;
+   line4.addVertex(QVector3D(400, 0, 0), 10);
+   line4.addVertex(QVector3D(400, 100, 0), 10);
+   line4.addVertex(QVector3D(489, 144, 0), 10);
+   line4.addVertex(QVector3D(500, 150, 0), 10);
+   this->streamLines.append(line4);
 }
 
 GPUData streamobject::Surface::GPUDataVertices() const
