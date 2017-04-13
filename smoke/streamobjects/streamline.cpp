@@ -71,6 +71,11 @@ int streamobject::Line::getLength() const
    return shapes::PolyLine::getLength();
 }
 
+bool streamobject::Line::isLastVertex(streamobject::Line::ConstIterator iterator)
+{
+   return(iterator == --this->vertices.cend());
+}
+
 streamobject::Line::ConstIterator streamobject::Line::verticesBegin() const
 {
    return this->vertices.cbegin();

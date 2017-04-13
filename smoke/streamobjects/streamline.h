@@ -33,6 +33,8 @@ namespace streamobject {
 
           int getLength() const;
 
+          bool isLastVertex(ConstIterator iterator);
+
           ConstIterator verticesBegin() const;
           ConstIterator verticesEnd() const;
 
