@@ -37,3 +37,7 @@ GPUData streamobject::Surface::GPUDataLines() const
    return lines;
 }
 
+GPUData streamobject::Surface::GPUDataSurface() const
+{
+   return GPUData::debugSlice();
+}
