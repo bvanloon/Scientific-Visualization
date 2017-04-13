@@ -16,6 +16,10 @@ namespace streamobject {
           GPUData GPUDataLines() const;
           GPUData GPUDataSurface() const;
 
+          static Surface debugSurfaceWithSplit();
+
+          void addStreamLine(Line streamLine);
+
        private:
 
           QList<Line> streamLines;
