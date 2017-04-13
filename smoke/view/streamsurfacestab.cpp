@@ -44,6 +44,7 @@ void StreamSurfacesTab::setUiToDefaults()
    this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
    this->ui->showLinesCheckBox->setChecked(Settings::visualization::streamSurfaces().showLines);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streamSurfaces().showVertices);
+   this->ui->resolutionSpinBox->setValue(Settings::visualization::streamSurfaces().resolution);
 }
 
 void StreamSurfacesTab::connectToSettings()
