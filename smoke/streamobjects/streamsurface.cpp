@@ -40,26 +40,16 @@ GPUData streamobject::Surface::GPUDataLines() const
 
 GPUData streamobject::Surface::GPUDataSurface() const
 {
-   QList<QPair<streamobject::Line, streamobject::Line::ConstIterator> > lineIteratorMap = buildLineIteratorMap();
+   LineIteratorMap lineIteratorMap = buildLineIteratorMap();
    int maxNumVertices = numVerticesLongestStreamLine();
-   QPair<streamobject::Line, streamobject::Line::ConstIterator> pair;
-   qDebug() << "GPUData streamobject::Surface::GPUDataSurface()";
-   for (int i = 0; i < maxNumVertices; i++)
-   {
-      for (int i = 0; i < lineIteratorMap.length(); i++)
-      {
-         pair = lineIteratorMap[i];
-         qDebug() << *pair.second;
-         if (!pair.first.isLastVertex(pair.second)) lineIteratorMap[i].second++;
-      }
-      qDebug() << "";
-   }
+   GPUData surface;
+   for (int i = 0; i < maxNumVertices; i++) surface.extend(buildSurfaceLayer(lineIteratorMap));
    return GPUData::debugSlice();
 }
 
-QList<QPair<streamobject::Line, streamobject::Line::ConstIterator> > streamobject::Surface::buildLineIteratorMap() const
+streamobject::Surface::LineIteratorMap streamobject::Surface::buildLineIteratorMap() const
 {
-   QList<QPair<streamobject::Line, streamobject::Line::ConstIterator> > iterators;
+   streamobject::Surface::LineIteratorMap iterators;
    for (auto streamLine : this->streamLines)
    {
       iterators.append(QPair<streamobject::Line, streamobject::Line::ConstIterator>(streamLine, streamLine.verticesBegin()));
@@ -72,4 +62,18 @@ int streamobject::Surface::numVerticesLongestStreamLine() const
    int length = streamLines.first().numVertices();
    for (auto streamLine : this->streamLines) length = qMax(length, streamLine.numVertices());
    return length;
+}
+
+GPUData streamobject::Surface::buildSurfaceLayer(streamobject::Surface::LineIteratorMap& map) const
+{
+   GPUData layer;
+   QPair<streamobject::Line, streamobject::Line::ConstIterator> pair;
+   for (int i = 0; i < map.length(); i++)
+   {
+      pair = map[i];
+      qDebug() << *pair.second;
+      if (!pair.first.isLastVertex(pair.second)) map[i].second++;
+   }
+   qDebug() << "";
+   return layer;
 }
