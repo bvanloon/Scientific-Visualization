@@ -17,8 +17,6 @@ class Settings::visualization::StreamLines : public StreamObject
 
       Settings::visualization::ColorMap *colorMap;
 
-      double totalLength;
-
       Settings::sim::Vector vector;
       Vertex::vectorGetter vectorField;
 
@@ -30,15 +28,11 @@ class Settings::visualization::StreamLines : public StreamObject
 
    public slots:
 
-      void onMaximumTotalLengthFactorChanged(double newValue);
-
       void onClearSeedPoints();
 
       void onSeedPointAdded(QPointF newSeedPoint);
 
       void onWindowResized(QSizeF oldSize, QSizeF newSize);
-
-      void onCellSizeChanged(QSizeF currentCellSize);
 
    private slots:
 
@@ -46,11 +40,6 @@ class Settings::visualization::StreamLines : public StreamObject
       explicit StreamLines(QObject *parent = 0);
       StreamLines(StreamLines const&) = delete;
       void operator=(StreamLines const&) = delete;
-
-      double computeMaximumTotalLength(double factor, double cellSize);
-
-      double edgeLengthFactor;
-      double totalLengthFactor;
 
       void connectToOtherSettings();
 

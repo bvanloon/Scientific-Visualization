@@ -5,21 +5,13 @@
 
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    StreamObject(parent),
-   colorMap(new ColorMap()),
-   totalLengthFactor(Settings::defaults::visualization::streamlines::totalLengthFactor)
+   colorMap(new ColorMap())
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
-   this->totalLength = computeMaximumTotalLength(totalLengthFactor, Settings::simulation().cellSize.width());
-
    vector = Settings::sim::Vector::fluidVelocity;
    vectorField = Vertex::getVectorGetter(vector);
 
    connectToOtherSettings();
-}
-
-double Settings::visualization::StreamLines::computeMaximumTotalLength(double factor, double cellSize)
-{
-   return factor * cellSize;
 }
 
 void Settings::visualization::StreamLines::connectToOtherSettings()
@@ -55,13 +47,6 @@ int Settings::visualization::StreamLines::numberOfSeedPoints()
    return this->seedPoints.length();
 }
 
-void Settings::visualization::StreamLines::onMaximumTotalLengthFactorChanged(double newValue)
-{
-   this->totalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
-   this->totalLengthFactor = newValue;
-   emit clearCache();
-}
-
 void Settings::visualization::StreamLines::onClearSeedPoints()
 {
    this->seedPoints.clear();
@@ -84,10 +69,4 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
 
    transformationMatrix.scale(xScale, yScale, 0.0);
    transformSeedPoints(transformationMatrix);
-}
-
-void Settings::visualization::StreamLines::onCellSizeChanged(QSizeF currentCellSize)
-{
-   qDebug() << "Settings::visualization::StreamLines::onCellSizeChanged(QSizeF currentCellSize) remove if the refactor is completed.";
-   this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
 }

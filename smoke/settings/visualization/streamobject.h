@@ -14,8 +14,11 @@ class StreamObject : public QObject {
       double maximumTime;
 
       double edgeLength;
+      double totalLength;
 
       double getEdgeLengthFactor() const;
+
+      double getTotalLengthFactor() const;
 
    signals:
       void clearCache();
@@ -27,6 +30,8 @@ class StreamObject : public QObject {
 
       void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
 
+      void onMaximumTotalLengthFactorChanged(double newValue);
+
       void onCellSizeChanged(QSizeF currentCellSize);
 
    private slots:
@@ -34,7 +39,11 @@ class StreamObject : public QObject {
    private:
 
       double edgeLengthFactor;
+      double totalLengthFactor;
+
       double computeEdgeLength(double factor, double cellSize);
+
+      double computeMaximumTotalLength(double factor, double cellSize);
 };
 
 #endif // STREAMOBJECT_H

@@ -127,10 +127,6 @@ namespace Settings {
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
             }
-
-            namespace streamlines {
-                static const double totalLengthFactor = std::numeric_limits<double>::infinity();
-            }
         }
 
         namespace engines {

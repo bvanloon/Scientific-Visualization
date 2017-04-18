@@ -45,7 +45,7 @@ void StreamLinesTab::setUiToDefaults()
 
    this->ui->maximumLengthSelector->setSpecialValueText("Infinity");
    this->setSpinBoxWithSpecialValueToDefault(this->ui->maximumLengthSelector,
-                                              Settings::defaults::visualization::streamlines::totalLengthFactor);
+                                              Settings::visualization::streamLines().getTotalLengthFactor());
 
    this->ui->edgeLengthSelector->setValue(Settings::visualization::streamLines().getEdgeLengthFactor());
 
