@@ -6,22 +6,15 @@
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    StreamObject(parent),
    colorMap(new ColorMap()),
-   edgeLengthFactor(Settings::defaults::visualization::streamlines::edgeLengthFactor),
    totalLengthFactor(Settings::defaults::visualization::streamlines::totalLengthFactor)
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
-   this->edgeLength = computeEdgeLength(edgeLengthFactor, Settings::simulation().cellSize.width());
    this->totalLength = computeMaximumTotalLength(totalLengthFactor, Settings::simulation().cellSize.width());
 
    vector = Settings::sim::Vector::fluidVelocity;
    vectorField = Vertex::getVectorGetter(vector);
 
    connectToOtherSettings();
-}
-
-double Settings::visualization::StreamLines::computeEdgeLength(double factor, double cellSize)
-{
-   return factor * cellSize;
 }
 
 double Settings::visualization::StreamLines::computeMaximumTotalLength(double factor, double cellSize)
@@ -62,13 +55,6 @@ int Settings::visualization::StreamLines::numberOfSeedPoints()
    return this->seedPoints.length();
 }
 
-void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newEdgeLengthFactor)
-{
-   this->edgeLength = computeEdgeLength(newEdgeLengthFactor, Settings::simulation().cellSize.width());
-   this->edgeLengthFactor = newEdgeLengthFactor;
-   emit clearCache();
-}
-
 void Settings::visualization::StreamLines::onMaximumTotalLengthFactorChanged(double newValue)
 {
    this->totalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
@@ -102,6 +88,6 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
 
 void Settings::visualization::StreamLines::onCellSizeChanged(QSizeF currentCellSize)
 {
-   this->edgeLength = computeEdgeLength(this->edgeLengthFactor, currentCellSize.width());
+   qDebug() << "Settings::visualization::StreamLines::onCellSizeChanged(QSizeF currentCellSize) remove if the refactor is completed.";
    this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
 }

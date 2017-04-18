@@ -47,18 +47,18 @@ void StreamLinesTab::setUiToDefaults()
    this->setSpinBoxWithSpecialValueToDefault(this->ui->maximumLengthSelector,
                                               Settings::defaults::visualization::streamlines::totalLengthFactor);
 
-   this->ui->edgeLengthSelector->setValue(Settings::defaults::visualization::streamlines::edgeLengthFactor);
+   this->ui->edgeLengthSelector->setValue(Settings::visualization::streamLines().getEdgeLengthFactor());
 
-    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
+   this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
 }
 
 void StreamLinesTab::connectToSettings()
 {
-    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
+   connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
 }
 
-void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox* spinBox, double value)
+void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox *spinBox, double value)
 {
    if (value == std::numeric_limits<double>::infinity()) value = spinBox->minimum();
    spinBox->setValue(value);

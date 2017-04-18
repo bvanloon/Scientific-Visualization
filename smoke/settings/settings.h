@@ -129,7 +129,6 @@ namespace Settings {
             }
 
             namespace streamlines {
-                static const double edgeLengthFactor = 0.33;
                 static const double totalLengthFactor = std::numeric_limits<double>::infinity();
             }
         }

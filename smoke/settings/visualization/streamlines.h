@@ -17,7 +17,6 @@ class Settings::visualization::StreamLines : public StreamObject
 
       Settings::visualization::ColorMap *colorMap;
 
-      double edgeLength;
       double totalLength;
 
       Settings::sim::Vector vector;
@@ -30,7 +29,6 @@ class Settings::visualization::StreamLines : public StreamObject
    signals:
 
    public slots:
-      void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
 
       void onMaximumTotalLengthFactorChanged(double newValue);
 
@@ -48,8 +46,6 @@ class Settings::visualization::StreamLines : public StreamObject
       explicit StreamLines(QObject *parent = 0);
       StreamLines(StreamLines const&) = delete;
       void operator=(StreamLines const&) = delete;
-
-      double computeEdgeLength(double factor, double cellSize);
 
       double computeMaximumTotalLength(double factor, double cellSize);
 
