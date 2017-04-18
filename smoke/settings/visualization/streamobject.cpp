@@ -47,9 +47,6 @@ void StreamObject::onCellSizeChanged(QSizeF currentCellSize)
 {
    this->edgeLength = computeEdgeLength(this->edgeLengthFactor, currentCellSize.width());
    this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
-   qDebug() << "StreamObject::onCellSizeChanged";
-   qDebug() << "EdgeLength: " << edgeLength;
-   qDebug() << "totalLength: " << totalLength;
 }
 
 double StreamObject::getTotalLengthFactor() const
