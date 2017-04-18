@@ -4,8 +4,7 @@ streamobject::Surface::Surface()
 {}
 
 streamobject::Surface::~Surface()
-{
-}
+{}
 
 GPUData streamobject::Surface::GPUDataVertices() const
 {
@@ -331,7 +330,7 @@ int streamobject::Surface::SurfaceBuilder::longestStreamLineLength()
    return maxLength;
 }
 
-streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
+streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, double textureCoordinate, double alpha, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
    position(position),
    downNeighbour(downNeighbour),
    upNeighbour(nullptr),
@@ -407,12 +406,12 @@ streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line
    Vertex *currentVertex,
           *previousVertex = nullptr;
 
-   for (int currentIdx = 0; vertices.length() < length; )
+   for (int current = 0; vertices.length() < length; )
    {
-      currentVertex = new Vertex(streamLine.vertexAt(currentIdx), previousVertex);
+      currentVertex = new Vertex(streamLine.vertexAt(current), streamLine.getTextureAt(current), streamLine.getAlphaAt(current), previousVertex);
       this->vertices.append(currentVertex);
       previousVertex = currentVertex;
-      if (currentIdx < (streamLine.numVertices() - 1)) ++currentIdx;
+      if (current < (streamLine.numVertices() - 1)) ++current;
    }
 
    for (int i = 0; i < vertices.length() - 1; i++) vertices[i]->setUpNeighbour(vertices[i + 1]);

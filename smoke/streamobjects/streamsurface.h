@@ -66,7 +66,7 @@ namespace streamobject {
 
     class Surface::SurfaceBuilder::Vertex {
        public:
-          Vertex(QVector3D position, Vertex *downNeighbour);
+          Vertex(QVector3D position, double textureCoordinate, double alpha, Vertex *downNeighbour);
           ~Vertex();
 
           QVector3D position;
