@@ -332,6 +332,8 @@ int streamobject::Surface::SurfaceBuilder::longestStreamLineLength()
 
 streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, double textureCoordinate, double alpha, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
    position(position),
+   textureCoordinate(textureCoordinate),
+   alpha(alpha),
    downNeighbour(downNeighbour),
    upNeighbour(nullptr),
    leftNeighbour(nullptr),

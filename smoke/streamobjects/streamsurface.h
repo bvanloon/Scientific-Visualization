@@ -70,6 +70,8 @@ namespace streamobject {
           ~Vertex();
 
           QVector3D position;
+          double textureCoordinate;
+          double alpha;
 
           Vertex *getDownNeighbour() const;
           bool hasDownNeighbour() const;
