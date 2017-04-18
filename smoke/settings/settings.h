@@ -138,7 +138,7 @@ namespace Settings {
             static const bool activeEngines[9] =
             {
                //Smoke
-               true,
+               false,
                //Glyphs
                false,
                //Stream Surfaces
