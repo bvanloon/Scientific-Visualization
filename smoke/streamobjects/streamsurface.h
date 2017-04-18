@@ -58,7 +58,7 @@ namespace streamobject {
           GPUData buildTriangles();
           bool hasLowerLeftTriangle(Vertex *vertex);
           bool hasUpperRightTriangle(Vertex *vertex);
-          GPUData buildTriangle(Vertex *a, Vertex *b, Vertex *c);
+          GPUData buildTriangle(Vertex *a, Vertex *b, Vertex *c, double texture);
 
           QVector3D computeTriangleNormal(Vertex *a, Vertex *b, Vertex *c);
     };
