@@ -16,7 +16,6 @@ class Settings::visualization::StreamLines : public StreamObject
       static const StreamLines& instance();
 
       Settings::visualization::ColorMap *colorMap;
-      double timeStep;
       double maximumTime;
 
       double edgeLength;
@@ -30,11 +29,8 @@ class Settings::visualization::StreamLines : public StreamObject
       int numberOfSeedPoints();
 
    signals:
-      void clearCache();
 
    public slots:
-      void ontimeStepChanged(double newTimeStep);
-
       void onMaximumTimeChanged(double newMaximumTime);
 
       void onEdgeLengthFactorChanged(double newEdgeLengthFactor);

@@ -9,9 +9,13 @@ class StreamObject : public QObject {
    public:
       explicit StreamObject(QObject *parent = 0);
 
+      double timeStep;
+
    signals:
+      void clearCache();
 
    public slots:
+      void ontimeStepChanged(double newTimeStep);
 
    private slots:
 

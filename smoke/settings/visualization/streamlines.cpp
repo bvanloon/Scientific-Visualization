@@ -6,7 +6,6 @@
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    StreamObject(parent),
    colorMap(new ColorMap()),
-   timeStep(1.0),
    maximumTime(100),
    edgeLengthFactor(Settings::defaults::visualization::streamlines::edgeLengthFactor),
    totalLengthFactor(Settings::defaults::visualization::streamlines::totalLengthFactor)
@@ -62,12 +61,6 @@ const Settings::visualization::StreamLines& Settings::visualization::StreamLines
 int Settings::visualization::StreamLines::numberOfSeedPoints()
 {
    return this->seedPoints.length();
-}
-
-void Settings::visualization::StreamLines::ontimeStepChanged(double newTimeStep)
-{
-   this->timeStep = newTimeStep;
-   emit clearCache();
 }
 
 void Settings::visualization::StreamLines::onMaximumTimeChanged(double newMaximumTime)
