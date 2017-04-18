@@ -16,7 +16,6 @@ class Settings::visualization::StreamLines : public StreamObject
       static const StreamLines& instance();
 
       Settings::visualization::ColorMap *colorMap;
-      double maximumTime;
 
       double edgeLength;
       double totalLength;
@@ -31,8 +30,6 @@ class Settings::visualization::StreamLines : public StreamObject
    signals:
 
    public slots:
-      void onMaximumTimeChanged(double newMaximumTime);
-
       void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
 
       void onMaximumTotalLengthFactorChanged(double newValue);

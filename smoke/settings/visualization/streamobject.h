@@ -10,12 +10,15 @@ class StreamObject : public QObject {
       explicit StreamObject(QObject *parent = 0);
 
       double timeStep;
+      double maximumTime;
 
    signals:
       void clearCache();
 
    public slots:
       void ontimeStepChanged(double newTimeStep);
+
+      void onMaximumTimeChanged(double newMaximumTime);
 
    private slots:
 
