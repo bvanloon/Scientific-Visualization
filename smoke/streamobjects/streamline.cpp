@@ -76,6 +76,16 @@ QVector3D streamobject::Line::vertexAt(int i) const
    return vertices[i];
 }
 
+double streamobject::Line::getTextureAt(int i) const
+{
+   return textureCoordinates[i];
+}
+
+double streamobject::Line::getAlphaAt(int i) const
+{
+   return alphaValues[i];
+}
+
 bool streamobject::Line::isEdgeAllowed(QVector3D vertex)
 {
    if (this->vertices.isEmpty()) return true;

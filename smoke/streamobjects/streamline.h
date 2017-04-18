@@ -35,6 +35,10 @@ namespace streamobject {
 
           QVector3D vertexAt(int i) const;
 
+          double getTextureAt(int i) const;
+
+          double getAlphaAt(int i) const;
+
        private:
           QList<float> textureCoordinates;
           QList<float> alphaValues;
