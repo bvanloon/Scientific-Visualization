@@ -3,6 +3,10 @@
 streamobject::Surface::Surface()
 {}
 
+streamobject::Surface::~Surface()
+{
+}
+
 GPUData streamobject::Surface::GPUDataVertices() const
 {
    float textureCoordinate = 0.0;
