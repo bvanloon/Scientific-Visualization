@@ -19,11 +19,11 @@ void Diverging::fill()
 
    for (int i = 0; i < numColors; f += stepSize, i++)
    {
-      setPixel(i, 0, setSaturation(divergenceColor(f, fmid), saturation));
+      setPixel(i, 0, divergenceColor(f, fmid));
    }
 }
 
-QColor Diverging::divergenceColor(float f, float fmid)
+QRgb Diverging::divergenceColor(float f, float fmid)
 {
    float rMin = 0.230 * 255.0;
    float rMid = 0.865 * 255.0;
@@ -33,11 +33,13 @@ QColor Diverging::divergenceColor(float f, float fmid)
    float gMid = 0.865 * 255.0;
    float gMax = 0.016 * 255.0;
 
-   float bMin = 0.754 * 255.0;
+   float bMin = 0.754 * 255.0;//0.754 * 255.0;
    float bMid = 0.865 * 255.0;
    float bMax = 0.150 * 255.0;
 
-   int red, green, blue;
+   int red;
+   int green;
+   int blue;
    if (f <= fmid)
    {
       red = rMin + ((rMid - rMin) * f);
@@ -46,14 +48,15 @@ QColor Diverging::divergenceColor(float f, float fmid)
    }
    else
    {
-      red = rMid + ((rMax - rMid) * (f / 2.0));
-      green = gMid + ((gMax - gMid) * (f / 2.0));
-      blue = bMid + ((bMax - bMid) * (f / 2.0));
+      red = rMid + ((rMax - rMid) * (f - fmid));
+      green = gMid + ((gMax - gMid) * (f - fmid));
+      blue = bMid + ((bMax - bMid) * (f - fmid));
    }
 
-   if ((red < 0) || (green < 0) || (blue < 0) || (red > 255) || (green > 255) || (blue > 255))
+   if ((red < 0) || (green < 0) || (blue < 0) || (red > 254) || (green > 254) || (blue > 254))
    {
       qDebug() << "paniek";
    }
-   return QColor(red, green, blue);
+
+   return qRgb(red, green, blue);
 }
