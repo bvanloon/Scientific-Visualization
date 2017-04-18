@@ -8,7 +8,7 @@ StreamObject::StreamObject(QObject *parent) :
    QObject(parent),
    timeStep(1.0),
    maximumTime(100),
-   vector(Settings::sim::Vector::fluidVelocity),
+   vectorField(Settings::sim::Vector::fluidVelocity),
    //Private
    edgeLengthFactor(0.33),
    totalLengthFactor(std::numeric_limits<double>::infinity())
@@ -17,7 +17,7 @@ StreamObject::StreamObject(QObject *parent) :
    this->edgeLength = 4.0;
    this->totalLength = 4.0;
 
-   this->getVector = Vertex::getVectorGetter(vector);
+   this->getVector = Vertex::getVectorGetter(vectorField);
 }
 
 void StreamObject::ontimeStepChanged(double newTimeStep)

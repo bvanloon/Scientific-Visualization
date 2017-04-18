@@ -36,7 +36,7 @@ GPUData StreamLineSlicesEngine::buildStreamLine(const SimulationGrid *grid, QPoi
    TranslucentStreamLineBuilder builder(grid, QVector3D(seedPoint),
                                         Settings::visualization::streamLines().getVector,
                                         Settings::visualization::streamLines().colorMap->textureGetter,
-                                        Settings::simulation().getMagnitudeRange(Settings::visualization::streamLines().vector));
+                                        Settings::simulation().getMagnitudeRange(Settings::visualization::streamLines().vectorField));
    streamobject::Line streamLine = builder.getStreamLine();
    return streamLine.GPUDataEdges();
 }

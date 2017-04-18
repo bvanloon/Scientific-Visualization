@@ -17,7 +17,7 @@ class StreamObject : public QObject {
       double edgeLength;
       double totalLength;
 
-      Settings::sim::Vector vector;
+      Settings::sim::Vector vectorField;
       Vertex::vectorGetter getVector;
 
       double getEdgeLengthFactor() const;
