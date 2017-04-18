@@ -70,25 +70,28 @@ namespace streamobject {
 
           QVector3D position;
 
-          void setUpNeighbour(Vertex *upNeighbour);
-          void addLeftNeighbour(Vertex *value);
-          void addRightNeighbour(Vertex *leftNeighbour);
-
-          QSet<Vertex *> getLeftNeighbours() const;
-
-          QSet<Vertex *> getRightNeighbours() const;
-
           Vertex *getDownNeighbour() const;
+          bool hasDownNeighbour() const;
 
           Vertex *getUpNeighbour() const;
+          void setUpNeighbour(Vertex *upNeighbour);
+          bool hasUpNeighbour() const;
 
-          double distanceTo(Vertex other);
+          double distanceTo(Vertex other) const;
+
+          Vertex *getLeftNeighbour() const;
+          void setLeftNeighbour(Vertex *value);
+          bool hasLeftNeighbour() const;
+
+          Vertex *getRightNeighbour() const;
+          void setRightNeighbour(Vertex *value);
+          bool hasRightNeighbour() const;
 
        private:
           Vertex *downNeighbour;
           Vertex *upNeighbour;
-          QSet<Vertex *> leftNeighbours;
-          QSet<Vertex *> rightNeighbours;
+          Vertex *leftNeighbour;
+          Vertex *rightNeighbour;
     };
 
     class Surface::SurfaceBuilder::VertexList {

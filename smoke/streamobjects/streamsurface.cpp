@@ -210,8 +210,8 @@ void streamobject::Surface::SurfaceBuilder::nextConnectStreamLinesAtLevel(int le
 
 void streamobject::Surface::SurfaceBuilder::connectVertices(streamobject::Surface::SurfaceBuilder::Vertex *left, streamobject::Surface::SurfaceBuilder::Vertex *right)
 {
-   left->addRightNeighbour(right);
-   right->addLeftNeighbour(left);
+   left->setRightNeighbour(right);
+   right->setLeftNeighbour(left);
 }
 
 GPUData streamobject::Surface::SurfaceBuilder::buildTriangles()
@@ -221,7 +221,12 @@ GPUData streamobject::Surface::SurfaceBuilder::buildTriangles()
    {
       for (Vertex *vertex : streamLine)
       {
-         if (hasLowerLeftTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->getLeftNeighbours(), vertex->getUpNeighbour()));
+         //Temporary check:
+         if (hasLowerLeftTriangle(vertex))
+         {
+            //Temporary check:
+            if (vertex->hasLeftNeighbour() && vertex->hasUpNeighbour()) data.extend(buildTriangle(vertex, vertex->getLeftNeighbour(), vertex->getUpNeighbour()));
+         }
 //                  if (hasUpperRightTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->));
       }
    }
@@ -273,7 +278,6 @@ GPUData streamobject::Surface::SurfaceBuilder::getGPUData()
 {
    GPUData data;
    data.extend(buildTriangles());
-   data.extend(buildUpperRightTriangles());
    return data;
 }
 
@@ -298,16 +302,16 @@ GPUData streamobject::Surface::SurfaceBuilder::getEdgeGPUData()
             this->gpuData.addElement(vertex->getDownNeighbour()->position, normal, textureCoordinate);
          }
          //Edges between leftNeighbours and vertex
-         for (Vertex *leftNeighbour : vertex->getLeftNeighbours())
+         if (vertex->getLeftNeighbour())
          {
             this->gpuData.addElement(vertex->position, normal, textureCoordinate);
-            this->gpuData.addElement(leftNeighbour->position, normal, textureCoordinate);
+            this->gpuData.addElement(vertex->getLeftNeighbour()->position, normal, textureCoordinate);
          }
          //Edges between rightNeighbours and vertex
-         for (Vertex *rightNeighbour : vertex->getRightNeighbours())
+         if (vertex->getRightNeighbour())
          {
             this->gpuData.addElement(vertex->position, normal, textureCoordinate);
-            this->gpuData.addElement(rightNeighbour->position, normal, textureCoordinate);
+            this->gpuData.addElement(vertex->getRightNeighbour()->position, normal, textureCoordinate);
          }
       }
    }
@@ -324,33 +328,27 @@ int streamobject::Surface::SurfaceBuilder::longestStreamLineLength()
 streamobject::Surface::SurfaceBuilder::Vertex::Vertex(QVector3D position, streamobject::Surface::SurfaceBuilder::Vertex *downNeighbour) :
    position(position),
    downNeighbour(downNeighbour),
-   upNeighbour(nullptr)
+   upNeighbour(nullptr),
+   leftNeighbour(nullptr),
+   rightNeighbour(nullptr)
 {}
 
 streamobject::Surface::SurfaceBuilder::Vertex::~Vertex()
-{
-   this->leftNeighbours.clear();
-   this->rightNeighbours.clear();
-}
+{}
 
 void streamobject::Surface::SurfaceBuilder::Vertex::setUpNeighbour(Vertex *upNeighbour)
 {
    this->upNeighbour = upNeighbour;
 }
 
-void streamobject::Surface::SurfaceBuilder::Vertex::addLeftNeighbour(Vertex *rightNeighbour)
+bool streamobject::Surface::SurfaceBuilder::Vertex::hasUpNeighbour() const
 {
-   leftNeighbours.insert(rightNeighbour);
+   return this->upNeighbour != nullptr;
 }
 
-void streamobject::Surface::SurfaceBuilder::Vertex::addRightNeighbour(Vertex *leftNeighbour)
+double streamobject::Surface::SurfaceBuilder::Vertex::distanceTo(streamobject::Surface::SurfaceBuilder::Vertex other) const
 {
-   rightNeighbours.insert(leftNeighbour);
-}
-
-QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getRightNeighbours() const
-{
-   return rightNeighbours;
+   return other.position.distanceToPoint(this->position);
 }
 
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getUpNeighbour() const
@@ -358,9 +356,34 @@ streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBui
    return upNeighbour;
 }
 
-double streamobject::Surface::SurfaceBuilder::Vertex::distanceTo(streamobject::Surface::SurfaceBuilder::Vertex other)
+streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getRightNeighbour() const
 {
-   return other.position.distanceToPoint(this->position);
+   return rightNeighbour;
+}
+
+void streamobject::Surface::SurfaceBuilder::Vertex::setRightNeighbour(Vertex *value)
+{
+   rightNeighbour = value;
+}
+
+bool streamobject::Surface::SurfaceBuilder::Vertex::hasRightNeighbour() const
+{
+   return this->rightNeighbour != nullptr;
+}
+
+streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getLeftNeighbour() const
+{
+   return leftNeighbour;
+}
+
+void streamobject::Surface::SurfaceBuilder::Vertex::setLeftNeighbour(Vertex *value)
+{
+   leftNeighbour = value;
+}
+
+bool streamobject::Surface::SurfaceBuilder::Vertex::hasLeftNeighbour() const
+{
+   return this->leftNeighbour != nullptr;
 }
 
 streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBuilder::Vertex::getDownNeighbour() const
@@ -368,9 +391,9 @@ streamobject::Surface::SurfaceBuilder::Vertex *streamobject::Surface::SurfaceBui
    return downNeighbour;
 }
 
-QSet<streamobject::Surface::SurfaceBuilder::Vertex *> streamobject::Surface::SurfaceBuilder::Vertex::getLeftNeighbours() const
+bool streamobject::Surface::SurfaceBuilder::Vertex::hasDownNeighbour() const
 {
-   return leftNeighbours;
+   return this->downNeighbour != nullptr;
 }
 
 streamobject::Surface::SurfaceBuilder::VertexList::VertexList(streamobject::Line streamLine, int length)
