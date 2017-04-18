@@ -33,10 +33,11 @@ namespace streamobject {
 
           int getLength() const;
 
-          bool isLastVertex(ConstIterator iterator);
+          QVector3D vertexAt(int i) const;
 
-          ConstIterator verticesBegin() const;
-          ConstIterator verticesEnd() const;
+          double getTextureAt(int i) const;
+
+          double getAlphaAt(int i) const;
 
        private:
           QList<float> textureCoordinates;

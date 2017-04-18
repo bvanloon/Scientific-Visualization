@@ -8,10 +8,13 @@ StreamSurfaceEngine::StreamSurfaceEngine(SimulationGrid *grid) :
 
 void StreamSurfaceEngine::draw()
 {
-   streamobject::Surface surface;
+   streamobject::Surface surface = streamobject::Surface::debugSurfaceWithSplit(2);
    drawSurface(surface);
    if (Settings::visualization::streamSurfaces().showLines) drawLines(surface);
    if (Settings::visualization::streamSurfaces().showVertices) drawVertices(surface);
+
+   GPUData data = surface.GPUDataSurfaceEdges();
+   updateBuffersAndDraw(data);
 }
 
 void StreamSurfaceEngine::drawVertices(streamobject::Surface surface)
