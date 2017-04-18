@@ -8,6 +8,7 @@ StreamObject::StreamObject(QObject *parent) :
    QObject(parent),
    timeStep(1.0),
    maximumTime(100),
+   vector(Settings::sim::Vector::fluidVelocity),
    //Private
    edgeLengthFactor(0.33),
    totalLengthFactor(std::numeric_limits<double>::infinity())
@@ -15,6 +16,8 @@ StreamObject::StreamObject(QObject *parent) :
    //Initial cellsize is -1, which doesn't make sense.
    this->edgeLength = 4.0;
    this->totalLength = 4.0;
+
+   this->vectorField = Vertex::getVectorGetter(vector);
 }
 
 void StreamObject::ontimeStepChanged(double newTimeStep)

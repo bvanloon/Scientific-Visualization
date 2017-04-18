@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSizeF>
+#include "grid/vertex.h"
 
 class StreamObject : public QObject {
    Q_OBJECT
@@ -15,6 +16,9 @@ class StreamObject : public QObject {
 
       double edgeLength;
       double totalLength;
+
+      Settings::sim::Vector vector;
+      Vertex::vectorGetter vectorField;
 
       double getEdgeLengthFactor() const;
 

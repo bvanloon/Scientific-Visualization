@@ -8,9 +8,6 @@ Settings::visualization::StreamLines::StreamLines(QObject *parent) :
    colorMap(new ColorMap())
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
-   vector = Settings::sim::Vector::fluidVelocity;
-   vectorField = Vertex::getVectorGetter(vector);
-
    connectToOtherSettings();
 }
 

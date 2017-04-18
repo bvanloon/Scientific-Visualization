@@ -17,9 +17,6 @@ class Settings::visualization::StreamLines : public StreamObject
 
       Settings::visualization::ColorMap *colorMap;
 
-      Settings::sim::Vector vector;
-      Vertex::vectorGetter vectorField;
-
       QList<QPointF> seedPoints;
 
       int numberOfSeedPoints();
