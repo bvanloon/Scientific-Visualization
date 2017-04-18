@@ -268,25 +268,21 @@ GPUData streamobject::Surface::SurfaceBuilder::buildTriangles()
    {
       for (Vertex *vertex : streamLine)
       {
-         if (hasLowerLeftTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->getRightNeighbour(), vertex->getUpNeighbour(), 2.5));
-         if (hasUpperRightTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->getLeftNeighbour(), vertex->getDownNeighbour(), 7.5));
+         if (hasLowerLeftTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->getRightNeighbour(), vertex->getUpNeighbour()));
+         if (hasUpperRightTriangle(vertex)) data.extend(buildTriangle(vertex, vertex->getLeftNeighbour(), vertex->getDownNeighbour()));
       }
    }
    return data;
 }
 
-GPUData streamobject::Surface::SurfaceBuilder::buildTriangle(Vertex *a, Vertex *b, Vertex *c, double texture)
+GPUData streamobject::Surface::SurfaceBuilder::buildTriangle(Vertex *a, Vertex *b, Vertex *c)
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "streamobject::Surface::SurfaceBuilder::buildTriangle do something with the texture and alpha of the streamline.";
-
-   double alpha = 0.5;
    QVector3D normal = computeTriangleNormal(a, b, c);
 
    GPUData triangle;
-   triangle.addElement(a->position, normal, texture, alpha);
-   triangle.addElement(b->position, normal, texture, alpha);
-   triangle.addElement(c->position, normal, texture, alpha);
+   triangle.addElement(a->position, normal, a->textureCoordinate, a->alpha);
+   triangle.addElement(b->position, normal, b->textureCoordinate, b->alpha);
+   triangle.addElement(c->position, normal, c->textureCoordinate, c->alpha);
    return triangle;
 }
 
