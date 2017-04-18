@@ -12,6 +12,7 @@ namespace streamobject {
     {
        public:
           Surface();
+          ~Surface();
 
           GPUData GPUDataVertices() const;
           GPUData GPUDataLines() const;
