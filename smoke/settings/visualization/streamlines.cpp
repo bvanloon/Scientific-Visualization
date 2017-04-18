@@ -4,7 +4,7 @@
 #include <limits>
 
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
-   QObject(parent),
+   StreamObject(parent),
    colorMap(new ColorMap()),
    timeStep(1.0),
    maximumTime(100),

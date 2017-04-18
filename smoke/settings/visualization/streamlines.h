@@ -3,11 +3,12 @@
 
 #include <QObject>
 #include "settings/settings.h"
+#include "settings/visualization/streamobject.h"
 #include "grid/vertex.h"
 #include <QList>
 #include <QMatrix4x4>
 
-class Settings::visualization::StreamLines : public QObject
+class Settings::visualization::StreamLines : public StreamObject
 {
    Q_OBJECT
 
