@@ -4,9 +4,10 @@
 #include <QObject>
 #include <QList>
 #include "settings/settings.h"
+#include "settings/visualization/streamobject.h"
 #include "streamobjects/seedcurve.h"
 
-class Settings::visualization::StreamSurfaces : public QObject
+class Settings::visualization::StreamSurfaces : public StreamObject
 {
    Q_OBJECT
 
