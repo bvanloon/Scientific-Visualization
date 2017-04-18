@@ -17,7 +17,7 @@ StreamObject::StreamObject(QObject *parent) :
    this->edgeLength = 4.0;
    this->totalLength = 4.0;
 
-   this->vectorField = Vertex::getVectorGetter(vector);
+   this->getVector = Vertex::getVectorGetter(vector);
 }
 
 void StreamObject::ontimeStepChanged(double newTimeStep)

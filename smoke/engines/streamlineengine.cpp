@@ -24,7 +24,7 @@ GPUData StreamLineEngine::buildStreamLines()
 GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
    StreamLineBuilder builder(grid, QVector3D(seedPoint),
-                             Settings::visualization::streamLines().vectorField,
+                             Settings::visualization::streamLines().getVector,
                              Settings::visualization::streamLines().colorMap->textureGetter);
    streamobject::Line streamLine = builder.getStreamLine();
 
