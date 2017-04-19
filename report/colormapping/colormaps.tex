@@ -1,40 +1,73 @@
 %!TEX root = ../scivis_lbaakman_bvanloon.tex
-This section discusses the colormaps provided in the application. Each colormap is accompanied with a short discussion giving the pros and cons of the colormap.
+This section discusses the colormaps provided in the application. Each colormap is accompanied with a short discussion giving the main goal of the colormap and its pros and cons.
+
+Colormaps are used to map scalar values to colors in order for the user to extract information about the scalar values in the visualization. The quality of a colormap can be judged by how well and intuitive the map allows inverse mapping. Which colormap is best used depends on the context and goal of the visualization. The zebra-colormap is for example well suited to visualize value variations (i.e. the first derivative of a scalar value), but would be less useful would the aim be to highlight maxima. Historical reasons can also influence the choice of colormaps. X-rays are for example standard displayed using a gray-scale colormap. Better alternatives might exist, but are not used due to status quo in the medical field.
+
+
 \begin{figure}
 	\centering
-	\begin{subfigure}{\textwidth}
+	\begin{subfigure}{0.44\textwidth}
 		\centering
-		\missingfigure{Image to be generated}
-		% \includegraphics[width=\textwidth]{./img/_}
-		\caption{Rainbow color map, $\VarDX = 0.8$.}
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/rainbow.png}
+		\caption{Rainbow colormap, using $\VarDX = 0.8$.}
 		\label{fig:colormapping:intro:differntColorMaps:rainbow}
 	\end{subfigure}
-	\begin{subfigure}{\textwidth}
+	\begin{subfigure}{0.44\textwidth}
 		\centering
-		\missingfigure{ColorMap to be generated}
-		% \includegraphics[width=\textwidth]{./img/_}
-		\caption{Gray scale color map.}
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/zebra}
+		\caption{Zebra colormap showing the first derivative.}
+		\label{fig:colormapping:intro:differntColorMaps:zebra}
+	\end{subfigure}	
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/grayscale}
+		\caption{Gray-scale colormap.}
 		\label{fig:colormapping:intro:differntColorMaps:grayscale}
 	\end{subfigure}	
-	\begin{subfigure}{\textwidth}
+	\begin{subfigure}{0.44\textwidth}
 		\centering
-		% \includegraphics[width=\textwidth]{./img/_}
-		\missingfigure{ColorMap to be determined}
-		\caption{Undetermined color map.}
-		\label{fig:colormapping:intro:differntColorMaps:ofChoice}
-	\end{subfigure}		
-	\caption{A visualization of different color maps: \subref{fig:colormapping:intro:differntColorMaps:rainbow} rainbow, \subref{fig:colormapping:intro:differntColorMaps:grayscale} gray scale, and \subref{fig:colormapping:intro:differntColorMaps:ofChoice} unknown color map.}
-	\label{fig:colormapping:introduction}
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/heat.png}
+		\caption{Heat colormap.}
+		\label{fig:colormapping:intro:differntColorMaps:heat}
+	\end{subfigure}
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/cold.png}
+		\caption{Cold colormap.}
+		\label{fig:colormapping:intro:differntColorMaps:cold}
+	\end{subfigure}
+		\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/hue.png}
+		\caption{Hue colormap using pink hue selected by user.}
+		\label{fig:colormapping:intro:differntColorMaps:hue}
+	\end{subfigure}
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/twocolor}
+		\caption{Two-color colormap.}
+		\label{fig:colormapping:intro:differntColorMaps:twocolor}
+	\end{subfigure}	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/diverging}
+		\caption{Blue red diverging colormap.}
+		\label{fig:colormapping:intro:differntColorMaps:diverging}
+	\end{subfigure}				
+
+	\caption{A visualization of the \emph{Fluid Density} using different colormaps available in the application. All colormaps the full range of availab}
+	\label{fig:colormapping:colormaps}
 \end{figure}
 
 
 \subsection{Rainbow colormap} % (fold)
 \label{ssub:rainbow_colormap}
-The rainbow colormap is, despite its flaws, one of the most used colormaps in the scientific community. The colormap is often seen as visual appealing and gives an intuitively mapping of high and low values to warm (red) and cold (blue) colors. However, when the scalar value does not represent a temperature this mapping might be less intuitive.
+The rainbow colormap is, despite its flaws, one of the most used colormaps in the scientific community. The colormap is often seen as visual appealing and gives an intuitively mapping of high and low values to warm (red) and cold (blue) colors. However, when the scalar value does not represent a temperature this mapping might be less intuitive which makes the colormap harder to use.
 
 \subsubsection{Flaws} % (fold)
 \label{ssub:flaws}
-Besides the flaw mentioned above the rainbow colormap also has some more technical flaws.
+The rainbow colormap is not only often used, but also often critiqued\cite{borland2007rainbow}\cite{divergingMoreland2009}. Besides the sometimes unintuitive associated of high and low values with warm and cold colors the colormap has some more (serious) flaws. 
+
+
 % subsubsection flaws (end)
 
 
