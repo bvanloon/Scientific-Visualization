@@ -1,11 +1,17 @@
 %!TEX root = ../scivis_lbaakman_bvanloon.tex
 
-\chapter{Skeleton Compilation} % (fold)
+\chapter{Smoke Visualization} % (fold)
 \label{cha:skeleton_compilation}
+In this chapter the skeleton code of the visualization project is introduced. The skeleton code contains a real-time fluid simulation plus some supporting functionality which takes care of the interaction between the simulation and the rest of the application. The purpose of our application is to provide different visualization methods to give a visual representation of these variables in order for the user to obtain insight about the fluid dynamics in the simulation. 
 
-\todo[inline]{Introduce the fluid simulation}
-\todo[inline]{Introduce fluid density}
-\todo[inline]{Introduce fluid velocity}
-\todo[inline]{Introduce force field}
+\section{Fluid Simulation} % (fold)
+\label{sec:fluid_simulation}
+The fluid simulation used in this project is developed by Jos Stam\cite{Simulation:Stam:2002}. In our application the simulation is considered black-box and is kept `as is' except from some modification which facilitates embedding of the simulation in our application. The simulation produces fluid velocity and fluid density that dynamically react to user-supplied forces. The simulation is performed on a discrete grid\footnote{Note that this simulation grid is independent of the visualization grid.} that loops around (e.g. fluids `disappearing' at an edge of the grid at added again at the opposite edge).
+
+\subsection{Simulation Interaction} % (fold)
+\label{sub:simulation_interaction}
+At every (discrete) time-step in the simulation two interactions between the simulation and our application takes place. The first interaction concerns the input of the forces, which can be added to the simulation by the user via mouse interaction. Next the simulation calculates the fluid movements and emits the resulting simulation grid containing the current sample grid. Three variables can be extracted for every sample point in the simulation: the fluid density, the fluid velocity (including direction), and the force field.
+
+Besides adding forces the user can also pause the simulation, change the time step of the simulation, and let a paused simulation perform a single step.
 
 % chapter skeleton_compilation (end)
