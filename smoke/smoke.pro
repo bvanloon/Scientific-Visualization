@@ -96,7 +96,8 @@ SOURCES += main.cpp\
     visualizationbuilders/translucentsmokebuilder.cpp \
     visualizationbuilders/translucentglyphbuilder.cpp \
     visualizationbuilders/translucentstreamlinebuilder.cpp \
-    colormaps/diverging.cpp
+    colormaps/diverging.cpp \
+    colormaps/twocolorcolormap.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -175,7 +176,8 @@ HEADERS  += main.ih\
     visualizationbuilders/translucentsmokebuilder.h \
     visualizationbuilders/translucentglyphbuilder.h \
     visualizationbuilders/translucentstreamlinebuilder.h \
-    colormaps/diverging.h
+    colormaps/diverging.h \
+    colormaps/twocolorcolormap.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
