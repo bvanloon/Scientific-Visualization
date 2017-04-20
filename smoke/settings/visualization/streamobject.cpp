@@ -84,7 +84,12 @@ Settings::sim::Scalar StreamObject::determineMagnitudeGetter(Settings::sim::Vect
       break;
 
    case Settings::sim::Vector::force:
+
+
       scalar = Settings::sim::Scalar::forceFieldMagnitude;
+
+
+
       break;
 
    case Settings::sim::Vector::fluidDensityGradient:
