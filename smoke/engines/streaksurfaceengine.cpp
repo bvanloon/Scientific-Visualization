@@ -1,4 +1,5 @@
 #include "streaksurfaceengine.h"
+#include "visualizationbuilders/streaklinebuilder.h"
 
 StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
    Abstract3DEngine(AbstractEngine::lightModel::phongLight,
@@ -34,7 +35,18 @@ void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
 
 void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
 {
-   GPUData data = surface.GPUDataLines();
+   bool warningShown = false;
+   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily showing the seedlines.";
+
+   GPUData data;
+   QList<QVector3D> seedPoints = Settings::visualization::streakSurface().seedCurve->getSeedPoints(Settings::visualization::streakSurface().resolution);
+   for (QVector3D seedPoint : seedPoints)
+   {
+      StreakLineBuilder builder(seedPoint, &Settings::visualization::streakSurface());
+      data.extend(builder.getLine().GPUDataEdges());
+   }
+
+//   GPUData data = surface.GPUDataLines();
    updateBuffersAndDraw(data);
 }
 
