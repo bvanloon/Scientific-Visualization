@@ -6,21 +6,15 @@ const double AbstractSliceEngine::maximumZTranslation = -850;
 const double AbstractSliceEngine::minimumZTranslation = 0.0;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
-   AbstractEngine(lightModel, engineType),
+   Abstract3DEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numSlices)
 {
-   updateModelViewMatrix();
    connectToSettings();
 }
 
 void AbstractSliceEngine::draw()
 {
    drawSlices();
-}
-
-void AbstractSliceEngine::onUpdateModelViewMatrix()
-{
-   updateModelViewMatrix();
 }
 
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
@@ -61,29 +55,6 @@ void AbstractSliceEngine::onClearCache()
 void AbstractSliceEngine::clearCache()
 {
    cache.clear();
-}
-
-void AbstractSliceEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
-{
-   this->setModelViewMatrix(computeViewMatrix() * modelMatrix);
-}
-
-QMatrix4x4 AbstractSliceEngine::computeViewMatrix()
-{
-   QMatrix4x4 viewMatrix = QMatrix4x4();
-
-   viewMatrix.translate(Settings::canvas().panningPosition);
-
-   QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
-   viewMatrix *= rotationMatrix;
-
-   viewMatrix.scale(Settings::canvas().scalingFactor);
-   return viewMatrix;
-}
-
-void AbstractSliceEngine::updateBuffers(GPUData data)
-{
-   AbstractEngine::updateBuffers(data);
 }
 
 void AbstractSliceEngine::drawSlices()

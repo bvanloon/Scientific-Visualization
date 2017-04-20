@@ -98,7 +98,8 @@ SOURCES += main.cpp\
     visualizationbuilders/translucentglyphbuilder.cpp \
     visualizationbuilders/translucentstreamlinebuilder.cpp \
     visualizationbuilders/streaklinebuilder.cpp \
-    engines/streaksurfaceengine.cpp
+    engines/streaksurfaceengine.cpp \
+    engines/abstract3Dengine.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -179,7 +180,8 @@ HEADERS  += main.ih\
     visualizationbuilders/translucentglyphbuilder.h \
     visualizationbuilders/translucentstreamlinebuilder.h \
     visualizationbuilders/streaklinebuilder.h \
-    engines/streaksurfaceengine.h
+    engines/streaksurfaceengine.h \
+    engines/abstract3Dengine.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \
