@@ -6,6 +6,4 @@ StreakLineBuilder::StreakLineBuilder(QVector3D currentPosition,
    StreamLineBuilder(&SimulationHistory::instance().getSimulationGridAtQueueIdx(0),
                      currentPosition,
                      configuration)
-{
-   qDebug() << "StreakLineBuilder::StreakLineBuilder";
-}
+{}
