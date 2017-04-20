@@ -4,14 +4,13 @@ HueColorMap::HueColorMap(int numColors, float saturation, float hue) :
    AbstractColorMap(numColors, saturation, hue)
 {
    fill();
+   this->save("../report/colormapping/img/colormaps/huecolormap.png", 0, 100);
 }
-
 
 AbstractColorMap *HueColorMap::Create(int numColors, float saturation, float hue)
 {
    return new HueColorMap(numColors, saturation, hue);
 }
-
 
 void HueColorMap::fill()
 {

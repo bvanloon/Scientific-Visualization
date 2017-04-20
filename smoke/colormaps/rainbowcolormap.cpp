@@ -13,6 +13,7 @@ RainbowColorMap::RainbowColorMap(int numColors, float saturation, float dx) :
    dx(dx)
 {
    fill();
+   this->save("../report/colormapping/img/colormaps/rainbowcolormap.png", 0, 100);
 }
 
 void RainbowColorMap::fill()

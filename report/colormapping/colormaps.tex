@@ -3,63 +3,99 @@ This section discusses the colormaps provided in the application. Each colormap 
 
 Colormaps are used to map scalar values to colors in order for the user to extract information about the scalar values in the visualization. The quality of a colormap can be judged by how well and intuitive the map allows inverse mapping. Which colormap is best used depends on the context and goal of the visualization. The zebra-colormap is for example well suited to visualize value variations (i.e. the first derivative of a scalar value), but would be less useful would the aim be to highlight maxima. Historical reasons can also influence the choice of colormaps. X-rays are for example standard displayed using a gray-scale colormap. Better alternatives might exist, but are not used due to status quo in the medical field.
 
+\todo[inline]{Range: dynamic and fixed}
+\todo[inline]{Clamping}
+\todo[inline]{Range}
 
 \begin{figure}
-	\centering
-	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/rainbow.png}
-		\caption{Rainbow colormap, using $\VarDX = 0.8$.}
-		\label{fig:colormapping:intro:differntColorMaps:rainbow}
+	\begin{subfigure}{1\textwidth}
+		\begin{minipage}[l]{0.05\textwidth}
+	    	\caption{} \label{fig:colormaps:legends:rainbow}
+	  	\end{minipage}
+	  \hfill
+	  	\begin{minipage}[l]{0.95\textwidth}
+	    	\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/rainbowcolormap.png}
+	  	\end{minipage}
 	\end{subfigure}
-	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/zebra}
-		\caption{Zebra colormap showing the first derivative.}
-		\label{fig:colormapping:intro:differntColorMaps:zebra}
-	\end{subfigure}	
-	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/grayscale}
-		\caption{Gray-scale colormap.}
-		\label{fig:colormapping:intro:differntColorMaps:grayscale}
-	\end{subfigure}	
-	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/heat.png}
-		\caption{Heat colormap.}
-		\label{fig:colormapping:intro:differntColorMaps:heat}
-	\end{subfigure}
-	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/cold.png}
-		\caption{Cold colormap.}
-		\label{fig:colormapping:intro:differntColorMaps:cold}
-	\end{subfigure}
-		\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/hue.png}
-		\caption{Hue colormap using pink hue selected by user.}
-		\label{fig:colormapping:intro:differntColorMaps:hue}
-	\end{subfigure}
-	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/twocolor}
-		\caption{Two-color colormap.}
-		\label{fig:colormapping:intro:differntColorMaps:twocolor}
-	\end{subfigure}	\begin{subfigure}{0.44\textwidth}
-		\centering
-		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/diverging}
-		\caption{Blue red diverging colormap.}
-		\label{fig:colormapping:intro:differntColorMaps:diverging}
-	\end{subfigure}				
 
-	\caption{A visualization of the \emph{Fluid Density} using different colormaps available in the application. All colormaps the full range of availab}
-	\label{fig:colormapping:colormaps}
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::zebra}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/zebracolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::grayscale}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/grayscalecolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::heat}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/heatcolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::cold}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/coldcolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::hue}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/huecolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::twocolors}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/twocolorscolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+  	\begin{subfigure}{1\textwidth}
+  		\begin{minipage}[l]{0.05\textwidth}
+    		\caption{} \label{fig:colormaps:legends::diverging}
+  		\end{minipage}
+  	\hfill
+  		\begin{minipage}[l]{0.95\textwidth}
+    		\includegraphics[width=\textwidth,height=15px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/divergingcolormap.png}
+  		\end{minipage}
+  	\end{subfigure}
+\caption{Colormap legends provided in the application: 
+(\subref{fig:colormaps:legends:rainbow}) rainbow, 
+\subref{fig:colormaps:legends::zebra} zebra,
+\subref{fig:colormaps:legends::grayscale} gray-scale,
+\subref{fig:colormaps:legends::heat} heat,
+\subref{fig:colormaps:legends::cold} cold,
+\subref{fig:colormaps:legends::hue} user picked hue,
+\subref{fig:colormaps:legends::twocolors} linear two-color, and
+\subref{fig:colormaps:legends::diverging} blue-red diverging. Each colormap provides 256 different colors, 
+ }\label{fig:colormaps:legends}
 \end{figure}
 
 
-\subsection{Rainbow colormap} % (fold)
+\subsection{Rainbow Colormap} % (fold)
 \label{ssub:rainbow_colormap}
 The rainbow colormap is, despite its flaws, one of the most used colormaps in the scientific community. The colormap is often seen as visual appealing and gives an intuitively mapping of high and low values to warm (red) and cold (blue) colors. However, when the scalar value does not represent a temperature this mapping might be less intuitive which makes the colormap harder to use.
 
@@ -71,8 +107,12 @@ The rainbow colormap is not only often used, but also often critiqued\cite{borla
 % subsubsection flaws (end)
 
 
+\subsection{Luminance Colormaps} % (fold)
+\label{sub:luminance_colormaps}
 
-\subsection{Gray Scale colormap} % (fold)
+% subsection luminance_colormaps (end)
+
+\subsubsection{Gray Scale colormap} % (fold)
 \label{ssub:gray_scale_colormap}
 	% GrayScale ColorMap
 	\todo[inline]{Discuss GrayScale color map: advantages, disadvantages}
@@ -82,17 +122,22 @@ Disadvantages: surface shading, same luminance may look different depending on t
 	% ColorMap of Choice
 	\todo[inline]{Discuss Chosen color map: advantages, disadvantages, why this one}
 
-\subsection{Heat, Cold, and Hue Colormap} % (fold)
-\label{sub:heat_and_cold_colormap}
+\subsubsection{Heat Colormap} % (fold)
+\label{sub:heat__colormap}
 
-% subsection heat_and_cold_colormap (end)
+\subsubsection{Cold Colormap} % (fold)
+\label{ssub:cold_colormap}
+
+\subsubsection{Single Hue Colormap} % (fold)
+\label{ssub:single_hue_colormap}
+
+\subsection{Two Hue Colormap} % (fold)
+\label{sub:two_hue_colormap}
+
+% subsection two_hue_colormap (end)
+
 \subsection{Diverging Colormap} % (fold)
 \label{sub:diverging_colormap}
 
 % subsection diverging_colormap (end)
 
-\subsection{Zebra Colormap} % (fold)
-\label{sub:zebra_colormap}
-
-% subsection zebra_colormap (end)
-% section color_maps (end)

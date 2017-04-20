@@ -14,6 +14,7 @@ class Diverging : public AbstractColorMap
 
       void fill();
 
+
       QRgb divergenceColor(float f, float fmid);
 };
 

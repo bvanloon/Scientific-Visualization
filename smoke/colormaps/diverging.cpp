@@ -21,6 +21,7 @@ void Diverging::fill()
    {
       setPixel(i, 0, divergenceColor(f, fmid));
    }
+   this->save("../report/colormapping/img/colormaps/divergingcolormap.png", 0, 100);
 }
 
 QRgb Diverging::divergenceColor(float f, float fmid)
