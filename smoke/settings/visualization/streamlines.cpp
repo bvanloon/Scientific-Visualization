@@ -15,8 +15,6 @@ void Settings::visualization::StreamLines::connectToOtherSettings()
 {
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF,QSizeF)),
             this, SLOT(onWindowResized(QSizeF,QSizeF)));
-   connect(&Settings::simulation(), SIGNAL(cellSizeChanged(QSizeF)),
-           this, SLOT(onCellSizeChanged(QSizeF)));
 }
 
 void Settings::visualization::StreamLines::transformSeedPoints(QMatrix4x4 transformationMatrix)

@@ -21,6 +21,7 @@ StreamObject::StreamObject(QObject *parent) :
 
    this->getVector = Vertex::getVectorGetter(vectorField);
    this->getMagnitude = Vertex::getScalarGetter(vectorFieldMagnitude);
+   connectToOtherSettings();
 }
 
 void StreamObject::ontimeStepChanged(double newTimeStep)
@@ -53,6 +54,12 @@ void StreamObject::onCellSizeChanged(QSizeF currentCellSize)
 {
    this->edgeLength = computeEdgeLength(this->edgeLengthFactor, currentCellSize.width());
    this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
+}
+
+void StreamObject::connectToOtherSettings()
+{
+   connect(&Settings::simulation(), SIGNAL(cellSizeChanged(QSizeF)),
+            this, SLOT(onCellSizeChanged(QSizeF)));
 }
 
 double StreamObject::getTotalLengthFactor() const

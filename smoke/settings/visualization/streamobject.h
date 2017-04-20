@@ -49,6 +49,8 @@ class StreamObject : public QObject {
       double edgeLengthFactor;
       double totalLengthFactor;
 
+      void connectToOtherSettings();
+
       double computeEdgeLength(double factor, double cellSize);
 
       double computeMaximumTotalLength(double factor, double cellSize);
