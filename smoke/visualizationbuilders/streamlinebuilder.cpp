@@ -4,12 +4,14 @@
 const float StreamLineBuilder::minimumMagnitude = 0.004;
 
 StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
-                                     Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
+                                     Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter,
+                                     const Settings::visualization::StreamObject *configuration) :
    grid(grid),
    seedPoint(seedPoint),
    vectorGetter(vectorGetter),
    magnitudeGetter(magnitudeGetter),
-   currentMagnitudeIsLargeEnough(true)
+   currentMagnitudeIsLargeEnough(true),
+   configuration(configuration)
 {
    this->timeStep = Settings::visualization::streamLines().timeStep;
    this->maximumTime = Settings::visualization::streamLines().maximumTime;

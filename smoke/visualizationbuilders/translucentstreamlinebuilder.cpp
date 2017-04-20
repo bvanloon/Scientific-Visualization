@@ -1,5 +1,5 @@
 #include "translucentstreamlinebuilder.h"
-
+#include "settings/visualization/streamlines.h"
 
 TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
    const UniformGrid *grid,
@@ -9,7 +9,7 @@ TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
    Range<double> magnitudeRange
    ) :
    AbstractTranslucentBuilder(magnitudeRange),
-   StreamLineBuilder(grid, currentPosition, vectorGetter, magnitudeGetter)
+   StreamLineBuilder(grid, currentPosition, vectorGetter, magnitudeGetter, &Settings::visualization::streamLines())
 {}
 
 bool TranslucentStreamLineBuilder::tryAddingVertex(QVector3D position)

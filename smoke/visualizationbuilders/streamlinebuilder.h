@@ -3,12 +3,14 @@
 
 #include "grid/uniformgrid.h"
 #include "streamobjects/streamline.h"
+#include "settings/visualization/streamobject.h"
 
 class StreamLineBuilder {
    public:
       StreamLineBuilder(const UniformGrid *grid, QVector3D currentPosition,
                         Vertex::vectorGetter vectorGetter,
-                        Vertex::scalarGetter magnitudeGetter);
+                        Vertex::scalarGetter magnitudeGetter,
+                        const Settings::visualization::StreamObject *configuration);
 
       streamobject::Line getStreamLine();
 
@@ -26,6 +28,8 @@ class StreamLineBuilder {
 
       double edgeLength;
       double maximumTotalLength;
+
+      const Settings::visualization::StreamObject *configuration;
 
       QVector3D seedPoint;
 
