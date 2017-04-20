@@ -46,8 +46,6 @@ class AbstractSliceEngine : public Abstract3DEngine
 
       double computeTranslationStepSize();
 
-      void updateBuffers(GPUData data);
-
       void connectToSettings();
 
       virtual void connectToColorMap();

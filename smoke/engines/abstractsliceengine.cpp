@@ -57,11 +57,6 @@ void AbstractSliceEngine::clearCache()
    cache.clear();
 }
 
-void AbstractSliceEngine::updateBuffers(GPUData data)
-{
-   AbstractEngine::updateBuffers(data);
-}
-
 void AbstractSliceEngine::drawSlices()
 {
    QMatrix4x4 modelMatrix;
