@@ -31,6 +31,8 @@ class StreamSurfacesTab : public QWidget
 
       void resolutionChanged(int resolution);
 
+      void numberOfStatesChanged(int newNumberOfStates);
+
       void clearSeedCurves();
 
    private slots:
@@ -43,6 +45,8 @@ class StreamSurfacesTab : public QWidget
       void on_showLinesCheckBox_clicked(bool checked);
 
       void on_showVerticesCheckBox_clicked(bool checked);
+
+      void on_numStatesSpinBox_valueChanged(int value);
 
    private:
       Ui::StreamSurfacesTab *ui;

@@ -40,6 +40,8 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       void onShowStreamSurfaceVerticesToggled(bool toggle);
 
+      void onNumberOfStatesChanged(int newNumberOfStates);
+
    private slots:
 
    private:

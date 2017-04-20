@@ -45,6 +45,7 @@ void StreamSurfacesTab::setUiToDefaults()
    this->ui->showLinesCheckBox->setChecked(Settings::visualization::streakSurface().showLines);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
+   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().numberOfStates);
 }
 
 void StreamSurfacesTab::connectToSettings()
@@ -61,6 +62,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceLinesToggled(bool)));
    connect(this, SIGNAL(showStreamSurfaceVerticesToggled(bool)),
            &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceVerticesToggled(bool)));
+   connect(this, SIGNAL(numberOfStatesChanged(int)),
+           &Settings::visualization::streakSurface(), SLOT(onNumberOfStatesChanged(int)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -76,4 +79,9 @@ void StreamSurfacesTab::on_showLinesCheckBox_clicked(bool checked)
 void StreamSurfacesTab::on_showVerticesCheckBox_clicked(bool checked)
 {
    emit showStreamSurfaceVerticesToggled(checked);
+}
+
+void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
+{
+   emit numberOfStatesChanged(value);
 }

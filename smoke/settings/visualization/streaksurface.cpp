@@ -67,6 +67,11 @@ void Settings::visualization::StreakSurface::onShowStreamSurfaceVerticesToggled(
    this->showVertices = toggle;
 }
 
+void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumberOfStates)
+{
+   this->numberOfStates = newNumberOfStates;
+}
+
 void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)
 {
    this->seedCurve->applyTransformation(transform);
