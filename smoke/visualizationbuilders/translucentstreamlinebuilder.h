@@ -11,7 +11,6 @@ class TranslucentStreamLineBuilder :
    public:
       TranslucentStreamLineBuilder(const UniformGrid *grid,
                                    QVector3D currentPosition,
-                                   Vertex::vectorGetter vectorGetter,
                                    Vertex::scalarGetter magnitudeGetter,
                                    Range<double> magnitudeRange);
 

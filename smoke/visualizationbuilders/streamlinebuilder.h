@@ -8,7 +8,6 @@
 class StreamLineBuilder {
    public:
       StreamLineBuilder(const UniformGrid *grid, QVector3D currentPosition,
-                        Vertex::vectorGetter vectorGetter,
                         Vertex::scalarGetter magnitudeGetter,
                         const Settings::visualization::StreamObject *configuration);
 
@@ -29,7 +28,6 @@ class StreamLineBuilder {
 
       QVector3D seedPoint;
 
-      Vertex::vectorGetter vectorGetter;
       Vertex::scalarGetter magnitudeGetter;
 
       static const float minimumMagnitude;

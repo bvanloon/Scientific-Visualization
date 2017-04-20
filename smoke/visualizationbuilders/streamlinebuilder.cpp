@@ -3,12 +3,10 @@
 
 const float StreamLineBuilder::minimumMagnitude = 0.004;
 
-StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
-                                     Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter,
+StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint, Vertex::scalarGetter magnitudeGetter,
                                      const Settings::visualization::StreamObject *configuration) :
    grid(grid),
    seedPoint(seedPoint),
-   vectorGetter(vectorGetter),
    magnitudeGetter(magnitudeGetter),
    currentMagnitudeIsLargeEnough(true),
    configuration(configuration)
@@ -110,7 +108,7 @@ float StreamLineBuilder::computeMagnitude(QVector3D position)
 QVector3D StreamLineBuilder::integrate(QVector3D previousPosition)
 {
    //Euler will do just fine for now
-   QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->vectorGetter);
+   QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->configuration->getVector);
    QVector3D currentPosition = previousPosition + previousVector.normalized() * this->configuration->edgeLength;
 
    return currentPosition;
