@@ -7,3 +7,9 @@ StreakLineBuilder::StreakLineBuilder(QVector3D currentPosition,
                      currentPosition,
                      configuration)
 {}
+
+QVector3D StreakLineBuilder::integrate(QVector3D previousPosition)
+{
+   QVector3D nextPosition = previousPosition + QVector3D(10, 10, 10);
+   return nextPosition;
+}

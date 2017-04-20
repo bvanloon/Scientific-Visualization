@@ -18,6 +18,8 @@ class StreamLineBuilder {
       float computeMagnitude(QVector3D position);
       bool isMagnitudeLargeEnoguh(float magnitude);
 
+      virtual QVector3D integrate(QVector3D previousPosition);
+
    private:
       const UniformGrid *grid;
 
@@ -44,8 +46,6 @@ class StreamLineBuilder {
       bool tryAddingEdge(QVector3D previousPosition, QVector3D position);
 
       bool tryAddingSeedPoint(QVector3D seedPoint);
-
-      QVector3D integrate(QVector3D previousPosition);
 };
 
 #endif // STREAMLINEBUILDER_H
