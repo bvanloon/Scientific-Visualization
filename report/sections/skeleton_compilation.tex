@@ -1,6 +1,6 @@
 %!TEX root = ../scivis_lbaakman_bvanloon.tex
 
-\chapter{Smoke Visualization} % (fold)
+\chapter{Fluid Visualization} % (fold)
 \label{cha:skeleton_compilation}
 In this chapter the skeleton code of the visualization project is introduced. The skeleton code contains a real-time fluid simulation plus some supporting functionality which takes care of the interaction between the simulation and the rest of the application. The purpose of our application is to provide different visualization methods to give a visual representation of these variables in order for the user to obtain insight about the fluid dynamics in the simulation. 
 
@@ -10,8 +10,9 @@ The fluid simulation used in this project is developed by Jos Stam\cite{Simulati
 
 \subsection{Simulation Interaction} % (fold)
 \label{sub:simulation_interaction}
-At every (discrete) time-step in the simulation two interactions between the simulation and our application takes place. The first interaction concerns the input of the forces, which can be added to the simulation by the user via mouse interaction. Next the simulation calculates the fluid movements and emits the resulting simulation grid containing the current sample grid. Three variables can be extracted for every sample point in the simulation: the fluid density, the fluid velocity (including direction), and the force field.
+At every (discrete) time-step in the simulation two interactions between the simulation and our application takes place. The first interaction concerns the input of the forces, which can be added to the simulation by the user via mouse interaction. Next the simulation calculates the fluid movements and emits the resulting simulation grid containing the current sample grid. Three variables can be extracted for every sample point in the simulation: the fluid density, the fluid velocity (including direction), and the force field.\todo{Give exact variable names.}
 
 Besides adding forces the user can also pause the simulation, change the time step of the simulation, and let a paused simulation perform a single step.
+
 
 % chapter skeleton_compilation (end)

@@ -11,17 +11,16 @@ AbstractColorMap *Coldcolormap::Create(int numColors, float saturation, float UN
    return new Coldcolormap(numColors, saturation);
 }
 
-
 Coldcolormap::Coldcolormap(int numColors, float saturation) :
    AbstractColorMap(numColors, saturation)
 {
    fill();
+   this->save("../report/colormapping/img/colormaps/coldcolormap.png", 0, 100);
 }
-
 
 void Coldcolormap::fill()
 {
-   float stepSize = 1.0 / (numColors - 1);
+   float stepSize = 1.0 / (numColors);
    float f = 0;
 
    for (int i = 0; i < numColors; f += stepSize, i++)
@@ -29,7 +28,6 @@ void Coldcolormap::fill()
       setPixel(i, 0, setSaturation(toColdColor(f), saturation));
    }
 }
-
 
 QRgb Coldcolormap::toColdColor(float f)
 {
