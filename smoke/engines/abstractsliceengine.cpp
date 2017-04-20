@@ -68,19 +68,6 @@ void AbstractSliceEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
    this->setModelViewMatrix(computeViewMatrix() * modelMatrix);
 }
 
-QMatrix4x4 AbstractSliceEngine::computeViewMatrix()
-{
-   QMatrix4x4 viewMatrix = QMatrix4x4();
-
-   viewMatrix.translate(Settings::canvas().panningPosition);
-
-   QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
-   viewMatrix *= rotationMatrix;
-
-   viewMatrix.scale(Settings::canvas().scalingFactor);
-   return viewMatrix;
-}
-
 void AbstractSliceEngine::updateBuffers(GPUData data)
 {
    AbstractEngine::updateBuffers(data);

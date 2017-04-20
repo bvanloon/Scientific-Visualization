@@ -18,6 +18,7 @@ class Abstract3DEngine : public AbstractEngine
    public slots:
 
    protected:
+      QMatrix4x4 computeViewMatrix();
 
    private slots:
 
