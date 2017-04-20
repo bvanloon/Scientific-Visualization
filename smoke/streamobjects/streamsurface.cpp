@@ -3,6 +3,10 @@
 streamobject::Surface::Surface()
 {}
 
+streamobject::Surface::Surface(SeedCurve seedCurve)
+{
+}
+
 streamobject::Surface::~Surface()
 {}
 
