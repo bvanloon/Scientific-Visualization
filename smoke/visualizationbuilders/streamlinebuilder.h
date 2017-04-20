@@ -27,8 +27,6 @@ class StreamLineBuilder {
 
       QVector3D seedPoint;
 
-      static const float minimumMagnitude;
-
       bool currentMagnitudeIsLargeEnough;
 
       void build(QVector3D seedPoint);

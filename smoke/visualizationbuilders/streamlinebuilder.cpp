@@ -1,8 +1,6 @@
 #include "streamlinebuilder.h"
 #include "settings/visualizationsettings.h"
 
-const float StreamLineBuilder::minimumMagnitude = 0.004;
-
 StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
                                      const Settings::visualization::StreamObject *configuration) :
    grid(grid),
@@ -55,7 +53,7 @@ bool StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 
 bool StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
 {
-   return magnitude > StreamLineBuilder::minimumMagnitude;
+   return magnitude > this->configuration->minimumMagnitude;
 }
 
 bool StreamLineBuilder::hasTimeLeftOver(double currentTime)
