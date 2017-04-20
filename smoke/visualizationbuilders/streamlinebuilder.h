@@ -23,7 +23,6 @@ class StreamLineBuilder {
    private:
       const UniformGrid *grid;
 
-      double edgeLength;
       double maximumTotalLength;
 
       const Settings::visualization::StreamObject *configuration;

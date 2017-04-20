@@ -13,7 +13,6 @@ StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoin
    currentMagnitudeIsLargeEnough(true),
    configuration(configuration)
 {
-   this->edgeLength = Settings::visualization::streamLines().edgeLength;
    this->maximumTotalLength = Settings::visualization::streamLines().totalLength;
 }
 
@@ -112,7 +111,7 @@ QVector3D StreamLineBuilder::integrate(QVector3D previousPosition)
 {
    //Euler will do just fine for now
    QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->vectorGetter);
-   QVector3D currentPosition = previousPosition + previousVector.normalized() * this->edgeLength;
+   QVector3D currentPosition = previousPosition + previousVector.normalized() * this->configuration->edgeLength;
 
    return currentPosition;
 }
