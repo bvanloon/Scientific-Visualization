@@ -7,7 +7,8 @@
 class StreakLineBuilder : public StreamLineBuilder
 {
    public:
-      StreakLineBuilder(QVector3D currentPosition, const Settings::visualization::StreamObject *configuration);
+      StreakLineBuilder(QVector3D currentPosition, const
+                        Settings::visualization::StreamObject *configuration);
 };
 
 #endif // STREAKLINEBUILDER_H
