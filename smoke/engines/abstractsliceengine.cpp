@@ -6,7 +6,7 @@ const double AbstractSliceEngine::maximumZTranslation = -850;
 const double AbstractSliceEngine::minimumZTranslation = 0.0;
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
-   AbstractEngine(lightModel, engineType),
+   Abstract3DEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numSlices)
 {
    updateModelViewMatrix();

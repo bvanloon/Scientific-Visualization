@@ -3,11 +3,11 @@
 
 #include <QObject>
 #include <QMatrix4x4>
-#include "abstractengine.h"
+#include "abstract3Dengine.h"
 #include "unused.h"
 #include "utilities/sizelimitedqueue.h"
 
-class AbstractSliceEngine : public AbstractEngine
+class AbstractSliceEngine : public Abstract3DEngine
 {
    Q_OBJECT
 
