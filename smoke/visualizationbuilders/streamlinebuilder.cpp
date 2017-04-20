@@ -7,9 +7,7 @@ StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoin
    seedPoint(seedPoint),
    currentMagnitudeIsLargeEnough(true),
    configuration(configuration)
-{
-   this->maximumTotalLength = Settings::visualization::streamLines().totalLength;
-}
+{}
 
 streamobject::Line StreamLineBuilder::getStreamLine()
 {
@@ -66,7 +64,7 @@ bool StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D
    double edgeLength = (destination - origin).length();
    double potentialStreamLineLength = this->streamLine.getLength() + edgeLength;
 
-   return potentialStreamLineLength < this->maximumTotalLength;
+   return potentialStreamLineLength < this->configuration->totalLength;
 }
 
 bool StreamLineBuilder::tryAddingVertex(QVector3D position)

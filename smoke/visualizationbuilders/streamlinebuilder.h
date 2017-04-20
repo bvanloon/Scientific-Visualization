@@ -21,8 +21,6 @@ class StreamLineBuilder {
    private:
       const UniformGrid *grid;
 
-      double maximumTotalLength;
-
       const Settings::visualization::StreamObject *configuration;
 
       QVector3D seedPoint;
