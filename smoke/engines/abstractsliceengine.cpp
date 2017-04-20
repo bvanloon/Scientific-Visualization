@@ -17,11 +17,6 @@ void AbstractSliceEngine::draw()
    drawSlices();
 }
 
-void AbstractSliceEngine::onUpdateModelViewMatrix()
-{
-   updateModelViewMatrix();
-}
-
 void AbstractSliceEngine::onNumberOfSlicesChanged(int newNumberOfSlices)
 {
    cache.changeMaximumSize(newNumberOfSlices);

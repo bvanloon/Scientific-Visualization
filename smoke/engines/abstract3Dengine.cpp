@@ -7,8 +7,12 @@ Abstract3DEngine::Abstract3DEngine(AbstractEngine::lightModel lightModel,
    AbstractEngine(lightModel, engineType)
 {
    updateModelViewMatrix();
-   qDebug() << "Abstract3DEngine::Abstract3DEngine: Call connectToSettings().";
-//    connectToSettings();
+   connectToSettings();
+}
+
+void Abstract3DEngine::onUpdateModelViewMatrix()
+{
+   updateModelViewMatrix();
 }
 
 void Abstract3DEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
@@ -27,4 +31,10 @@ QMatrix4x4 Abstract3DEngine::computeViewMatrix()
 
    viewMatrix.scale(Settings::canvas().scalingFactor);
    return viewMatrix;
+}
+
+void Abstract3DEngine::connectToSettings()
+{
+   connect(&Settings::canvas(), SIGNAL(updateModelViewMatrix()),
+            this, SLOT(onUpdateModelViewMatrix()));
 }

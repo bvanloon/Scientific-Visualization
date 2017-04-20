@@ -17,7 +17,6 @@ class AbstractSliceEngine : public Abstract3DEngine
       void draw();
 
    public slots:
-      void onUpdateModelViewMatrix();
 
       void onNumberOfSlicesChanged(int newNumberOfSlices);
 

@@ -13,10 +13,12 @@ class Abstract3DEngine : public AbstractEngine
    public:
       Abstract3DEngine(AbstractEngine::lightModel lightModel,
                        Settings::engines::EnginesTypes engineType);
+      virtual void draw() = 0;
 
    signals:
 
    public slots:
+      void onUpdateModelViewMatrix();
 
    protected:
       void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
@@ -25,6 +27,8 @@ class Abstract3DEngine : public AbstractEngine
    private slots:
 
    private:
+
+      void connectToSettings();
 };
 
 #endif // ABSTRACT3DENGINE_H
