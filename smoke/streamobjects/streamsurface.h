@@ -3,6 +3,7 @@
 
 #include "utilities/gpudata.h"
 #include "streamobjects/streamline.h"
+#include "streamobjects/seedcurve.h"
 #include <QList>
 #include <QSet>
 
@@ -12,6 +13,7 @@ namespace streamobject {
     {
        public:
           Surface();
+          Surface(SeedCurve seedCurve, int resolution);
           ~Surface();
 
           GPUData GPUDataVertices() const;

@@ -25,7 +25,7 @@ GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
    StreamLineBuilder builder(grid, QVector3D(seedPoint),
                              &Settings::visualization::streamLines());
-   streamobject::Line streamLine = builder.getStreamLine();
+   streamobject::Line streamLine = builder.getLine();
 
    return streamLine.GPUDataEdges();
 }

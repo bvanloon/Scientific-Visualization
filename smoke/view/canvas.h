@@ -18,7 +18,7 @@
 #include "engines/seedpointengine.h"
 #include "engines/smokeslicesengine.h"
 #include "engines/streamlineslicesengine.h"
-#include "engines/streamsurfaceengine.h"
+#include "engines/streaksurfaceengine.h"
 #include "engines/glyphsliceengine.h"
 #include "engines/seedcurveengine.h"
 #include "simulation/simulation.h"

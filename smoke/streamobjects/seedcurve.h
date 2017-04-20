@@ -14,8 +14,12 @@ class SeedCurve : public shapes::PolyLine
 
       void applyTransformation(QMatrix4x4 transform);
 
+      QList<QVector3D> getSeedPoints(int resolution);
+
    private:
       GPUData edgeToGPUData(QVector3D start, QVector3D end, int resolution);
+
+      QList<QVector3D> edgeToSeedPoints(QVector3D start, QVector3D end, int resolution);
 };
 
 #endif // SEEDCURVE_H

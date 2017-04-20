@@ -77,7 +77,7 @@ void Canvas::buildEngineMap()
 
    enginemap.insert(EnginePair(
                          Settings::engines::EnginesTypes::streamSurfaces,
-                        new StreamSurfaceEngine(simulation->getSimulationGrid())));
+                        new StreakSurfaceEngine(simulation->getSimulationGrid())));
 }
 
 void Canvas::connectEngines()

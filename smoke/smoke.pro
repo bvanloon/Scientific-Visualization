@@ -38,7 +38,6 @@ SOURCES += main.cpp\
     engines/smokeslicesengine.cpp \
     engines/streamlineengine.cpp \
     engines/streamlineslicesengine.cpp \
-    engines/streamsurfaceengine.cpp \
     glyphs/abstractglyph.cpp \
     glyphs/airplane.cpp \
     glyphs/ccwtriangle.cpp \
@@ -98,6 +97,8 @@ SOURCES += main.cpp\
     visualizationbuilders/translucentsmokebuilder.cpp \
     visualizationbuilders/translucentglyphbuilder.cpp \
     visualizationbuilders/translucentstreamlinebuilder.cpp \
+    visualizationbuilders/streaklinebuilder.cpp \
+    engines/streaksurfaceengine.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -116,7 +117,6 @@ HEADERS  += main.ih\
     engines/smokeslicesengine.h \
     engines/streamlineengine.h \
     engines/streamlineslicesengine.h \
-    engines/streamsurfaceengine.h \
     glyphs/abstractglyph.h \
     glyphs/airplane.h \
     glyphs/ccwtriangle.h \
@@ -177,7 +177,9 @@ HEADERS  += main.ih\
     visualizationbuilders/abstracttranslucentbuilder.h \
     visualizationbuilders/translucentsmokebuilder.h \
     visualizationbuilders/translucentglyphbuilder.h \
-    visualizationbuilders/translucentstreamlinebuilder.h
+    visualizationbuilders/translucentstreamlinebuilder.h \
+    visualizationbuilders/streaklinebuilder.h \
+    engines/streaksurfaceengine.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

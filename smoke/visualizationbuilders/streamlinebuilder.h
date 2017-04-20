@@ -10,7 +10,7 @@ class StreamLineBuilder {
       StreamLineBuilder(const UniformGrid *grid, QVector3D currentPosition,
                         const Settings::visualization::StreamObject *configuration);
 
-      streamobject::Line getStreamLine();
+      streamobject::Line getLine();
 
    protected:
       streamobject::Line streamLine;
