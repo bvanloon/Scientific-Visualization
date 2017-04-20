@@ -4,11 +4,10 @@
 TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
    const UniformGrid *grid,
    QVector3D currentPosition,
-   Vertex::scalarGetter magnitudeGetter,
    Range<double> magnitudeRange
    ) :
    AbstractTranslucentBuilder(magnitudeRange),
-   StreamLineBuilder(grid, currentPosition, magnitudeGetter, &Settings::visualization::streamLines())
+   StreamLineBuilder(grid, currentPosition, &Settings::visualization::streamLines())
 {}
 
 bool TranslucentStreamLineBuilder::tryAddingVertex(QVector3D position)

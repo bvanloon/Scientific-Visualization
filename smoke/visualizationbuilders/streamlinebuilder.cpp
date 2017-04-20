@@ -3,11 +3,10 @@
 
 const float StreamLineBuilder::minimumMagnitude = 0.004;
 
-StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint, Vertex::scalarGetter magnitudeGetter,
+StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
                                      const Settings::visualization::StreamObject *configuration) :
    grid(grid),
    seedPoint(seedPoint),
-   magnitudeGetter(magnitudeGetter),
    currentMagnitudeIsLargeEnough(true),
    configuration(configuration)
 {
@@ -100,7 +99,7 @@ bool StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
 float StreamLineBuilder::computeMagnitude(QVector3D position)
 {
    StructuredCell *cell = this->grid->findCellContaining(position);
-   float textureCoordinate = cell->interpolateScalar(position, this->magnitudeGetter);
+   float textureCoordinate = cell->interpolateScalar(position, this->configuration->getMagnitude);
 
    return textureCoordinate;
 }
