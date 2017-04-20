@@ -7,12 +7,12 @@
 #include "settings/visualization/streamobject.h"
 #include "streamobjects/seedcurve.h"
 
-class Settings::visualization::StreamSurfaces : public Settings::visualization::StreamObject
+class Settings::visualization::StreakSurface : public Settings::visualization::StreamObject
 {
    Q_OBJECT
 
    public:
-      static const StreamSurfaces& instance();
+      static const StreakSurface& instance();
 
       Settings::visualization::ColorMap *colorMap;
 
@@ -41,9 +41,9 @@ class Settings::visualization::StreamSurfaces : public Settings::visualization::
    private slots:
 
    private:
-      explicit StreamSurfaces(QObject *parent = 0);
-      StreamSurfaces(StreamSurfaces const&) = delete;
-      void operator=(StreamSurfaces const&) = delete;
+      explicit StreakSurface(QObject *parent = 0);
+      StreakSurface(StreakSurface const&) = delete;
+      void operator=(StreakSurface const&) = delete;
 
       void connectToOtherSettings();
 

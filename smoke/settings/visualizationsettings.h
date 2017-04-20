@@ -7,7 +7,7 @@
 #include "settings.h"
 #include "simulation/simulation.h"
 #include "settings/visualization/streamlines.h"
-#include "settings/visualization/streamsurfaces.h"
+#include "settings/visualization/streaksurface.h"
 #include "settings/visualization/glyphs.h"
 #include "settings/visualization/slices.h"
 

@@ -1,8 +1,8 @@
-#include "streamsurfaces.h"
+#include "streaksurface.h"
 #include "settings/visualizationsettings.h"
 #include "settings/canvassettings.h"
 
-Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
+Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    StreamObject(parent),
    colorMap(new ColorMap()),
    resolution(3),
@@ -17,19 +17,19 @@ Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
    seedCurve->addVertex(QVector3D(400, 300, 0));
 }
 
-void Settings::visualization::StreamSurfaces::connectToOtherSettings()
+void Settings::visualization::StreakSurface::connectToOtherSettings()
 {
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF,QSizeF)),
            this, SLOT(onWindowResized(QSizeF,QSizeF)));
 }
 
-const Settings::visualization::StreamSurfaces& Settings::visualization::StreamSurfaces::instance()
+const Settings::visualization::StreakSurface& Settings::visualization::StreakSurface::instance()
 {
-   static StreamSurfaces instance;
+   static StreakSurface instance;
    return instance;
 }
 
-void Settings::visualization::StreamSurfaces::onWindowResized(QSizeF oldSize, QSizeF newSize)
+void Settings::visualization::StreakSurface::onWindowResized(QSizeF oldSize, QSizeF newSize)
 {
    double xScale = newSize.width() / oldSize.width();
    double yScale = newSize.height() / oldSize.height();
@@ -40,33 +40,33 @@ void Settings::visualization::StreamSurfaces::onWindowResized(QSizeF oldSize, QS
    transformSeedCurves(transformationMatrix);
 }
 
-void Settings::visualization::StreamSurfaces::onClearSeedCurves()
+void Settings::visualization::StreakSurface::onClearSeedCurves()
 {
    delete seedCurve;
    seedCurve = new SeedCurve();
 }
 
-void Settings::visualization::StreamSurfaces::onSeedCurveVertexAdded(QPointF vertexPosition)
+void Settings::visualization::StreakSurface::onSeedCurveVertexAdded(QPointF vertexPosition)
 {
    seedCurve->addVertex(QVector3D(Settings::canvas().convertToNormalCoordinates(vertexPosition)));
 }
 
-void Settings::visualization::StreamSurfaces::onResolutionChanged(int resolution)
+void Settings::visualization::StreakSurface::onResolutionChanged(int resolution)
 {
    this->resolution = resolution;
 }
 
-void Settings::visualization::StreamSurfaces::onShowStreamSurfaceLinesToggled(bool toggle)
+void Settings::visualization::StreakSurface::onShowStreamSurfaceLinesToggled(bool toggle)
 {
    this->showLines = toggle;
 }
 
-void Settings::visualization::StreamSurfaces::onShowStreamSurfaceVerticesToggled(bool toggle)
+void Settings::visualization::StreakSurface::onShowStreamSurfaceVerticesToggled(bool toggle)
 {
    this->showVertices = toggle;
 }
 
-void Settings::visualization::StreamSurfaces::transformSeedCurves(QMatrix4x4 transform)
+void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)
 {
    this->seedCurve->applyTransformation(transform);
 }
