@@ -44,8 +44,6 @@ class StreamLineBuilder {
 
       bool isVertexAllowed(QVector3D vertex);
 
-
-
       bool hasTimeLeftOver(double currentTime);
 
       bool isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination);

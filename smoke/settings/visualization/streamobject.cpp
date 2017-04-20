@@ -8,6 +8,7 @@ StreamObject::StreamObject(QObject *parent) :
    QObject(parent),
    timeStep(1.0),
    maximumTime(100),
+   minimumMagnitude(0.004),
    vectorField(Settings::sim::Vector::fluidVelocity),
    vectorFieldMagnitude(determineMagnitudeGetter(vectorField)),
    //Private

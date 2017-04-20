@@ -17,6 +17,8 @@ class StreamObject : public QObject {
       double edgeLength;
       double totalLength;
 
+      double minimumMagnitude;
+
       Settings::sim::Vector vectorField;
       Vertex::vectorGetter getVector;
       Settings::sim::Scalar vectorFieldMagnitude;
@@ -50,7 +52,6 @@ class StreamObject : public QObject {
       double computeEdgeLength(double factor, double cellSize);
 
       double computeMaximumTotalLength(double factor, double cellSize);
-
 
       Settings::sim::Scalar determineMagnitudeGetter(Settings::sim::Vector vectorField);
 };
