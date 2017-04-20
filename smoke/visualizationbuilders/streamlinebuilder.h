@@ -23,8 +23,6 @@ class StreamLineBuilder {
    private:
       const UniformGrid *grid;
 
-      double maximumTime;
-
       double edgeLength;
       double maximumTotalLength;
 

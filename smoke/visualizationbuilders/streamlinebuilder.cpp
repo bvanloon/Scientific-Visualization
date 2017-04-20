@@ -13,8 +13,6 @@ StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoin
    currentMagnitudeIsLargeEnough(true),
    configuration(configuration)
 {
-   this->maximumTime = Settings::visualization::streamLines().maximumTime;
-
    this->edgeLength = Settings::visualization::streamLines().edgeLength;
    this->maximumTotalLength = Settings::visualization::streamLines().totalLength;
 }
@@ -66,7 +64,7 @@ bool StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
 
 bool StreamLineBuilder::hasTimeLeftOver(double currentTime)
 {
-   return currentTime <= this->maximumTime;
+   return currentTime <= this->configuration->maximumTime;
 }
 
 bool StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination)
