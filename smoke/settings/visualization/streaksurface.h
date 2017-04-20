@@ -26,6 +26,7 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
       SeedCurve *seedCurve;
 
    signals:
+      void numberOfStatesChanged(int newNumberOfStates);
 
    public slots:
       void onWindowResized(QSizeF oldSize, QSizeF newSize);

@@ -70,6 +70,7 @@ void Settings::visualization::StreakSurface::onShowStreamSurfaceVerticesToggled(
 void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumberOfStates)
 {
    this->numberOfStates = newNumberOfStates;
+   emit numberOfStatesChanged(newNumberOfStates);
 }
 
 void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)
