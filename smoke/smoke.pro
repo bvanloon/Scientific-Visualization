@@ -60,7 +60,6 @@ SOURCES += main.cpp\
     settings/visualization/smokesettings.cpp \
     settings/visualization/streamlines.cpp \
     settings/visualization/streamobject.cpp \
-    settings/visualization/streamsurfaces.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
     shapes/polyline.cpp \
@@ -99,7 +98,8 @@ SOURCES += main.cpp\
     visualizationbuilders/translucentstreamlinebuilder.cpp \
     visualizationbuilders/streaklinebuilder.cpp \
     engines/streaksurfaceengine.cpp \
-    engines/abstract3Dengine.cpp
+    engines/abstract3Dengine.cpp \
+    settings/visualization/streaksurface.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -140,7 +140,6 @@ HEADERS  += main.ih\
     settings/visualization/slices.h \
     settings/visualization/streamlines.h \
     settings/visualization/streamobject.h \
-    settings/visualization/streamsurfaces.h \
     settings/visualizationsettings.h \
     shapes/cone.h \
     shapes/polyline.h \
@@ -181,7 +180,8 @@ HEADERS  += main.ih\
     visualizationbuilders/translucentstreamlinebuilder.h \
     visualizationbuilders/streaklinebuilder.h \
     engines/streaksurfaceengine.h \
-    engines/abstract3Dengine.h
+    engines/abstract3Dengine.h \
+    settings/visualization/streaksurface.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

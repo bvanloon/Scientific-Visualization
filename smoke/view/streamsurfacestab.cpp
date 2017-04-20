@@ -42,9 +42,10 @@ void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
 void StreamSurfacesTab::setUiToDefaults()
 {
    this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
-   this->ui->showLinesCheckBox->setChecked(Settings::visualization::streamSurfaces().showLines);
-   this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streamSurfaces().showVertices);
-   this->ui->resolutionSpinBox->setValue(Settings::visualization::streamSurfaces().resolution);
+   this->ui->showLinesCheckBox->setChecked(Settings::visualization::streakSurface().showLines);
+   this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
+   this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
+   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().numberOfStates);
 }
 
 void StreamSurfacesTab::connectToSettings()
@@ -54,13 +55,15 @@ void StreamSurfacesTab::connectToSettings()
    connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this, SIGNAL(clearSeedCurves()),
-           &Settings::visualization::streamSurfaces(), SLOT(onClearSeedCurves()));
+           &Settings::visualization::streakSurface(), SLOT(onClearSeedCurves()));
    connect(this, SIGNAL(resolutionChanged(int)),
-           &Settings::visualization::streamSurfaces(), SLOT(onResolutionChanged(int)));
+           &Settings::visualization::streakSurface(), SLOT(onResolutionChanged(int)));
    connect(this, SIGNAL(showStreamSurfaceLinesToggled(bool)),
-           &Settings::visualization::streamSurfaces(), SLOT(onShowStreamSurfaceLinesToggled(bool)));
+           &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceLinesToggled(bool)));
    connect(this, SIGNAL(showStreamSurfaceVerticesToggled(bool)),
-           &Settings::visualization::streamSurfaces(), SLOT(onShowStreamSurfaceVerticesToggled(bool)));
+           &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceVerticesToggled(bool)));
+   connect(this, SIGNAL(numberOfStatesChanged(int)),
+           &Settings::visualization::streakSurface(), SLOT(onNumberOfStatesChanged(int)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -76,4 +79,9 @@ void StreamSurfacesTab::on_showLinesCheckBox_clicked(bool checked)
 void StreamSurfacesTab::on_showVerticesCheckBox_clicked(bool checked)
 {
    emit showStreamSurfaceVerticesToggled(checked);
+}
+
+void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
+{
+   emit numberOfStatesChanged(value);
 }
