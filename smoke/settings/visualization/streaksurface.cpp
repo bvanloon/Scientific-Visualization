@@ -8,6 +8,7 @@ Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    resolution(3),
    showVertices(true),
    showLines(true),
+   numberOfStates(10),
    seedCurve(new SeedCurve())
 {
    connectToOtherSettings();

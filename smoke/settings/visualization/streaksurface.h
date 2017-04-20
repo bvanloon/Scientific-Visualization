@@ -21,6 +21,8 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
       bool showVertices;
       bool showLines;
 
+      int numberOfStates;
+
       SeedCurve *seedCurve;
 
    signals:
