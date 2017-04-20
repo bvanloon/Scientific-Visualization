@@ -5,57 +5,61 @@
 #include <QSizeF>
 #include "grid/vertex.h"
 
-class StreamObject : public QObject {
-   Q_OBJECT
+namespace Settings {
+    namespace visualization {
+        class StreamObject : public QObject {
+           Q_OBJECT
 
-   public:
-      explicit StreamObject(QObject *parent = 0);
+           public:
+              explicit StreamObject(QObject *parent = 0);
 
-      double timeStep;
-      double maximumTime;
+              double timeStep;
+              double maximumTime;
 
-      double edgeLength;
-      double totalLength;
+              double edgeLength;
+              double totalLength;
 
-      double minimumMagnitude;
+              double minimumMagnitude;
 
-      Settings::sim::Vector vectorField;
-      Vertex::vectorGetter getVector;
-      Settings::sim::Scalar vectorFieldMagnitude;
-      Vertex::scalarGetter getMagnitude;
+              Settings::sim::Vector vectorField;
+              Vertex::vectorGetter getVector;
+              Settings::sim::Scalar vectorFieldMagnitude;
+              Vertex::scalarGetter getMagnitude;
 
-      double getEdgeLengthFactor() const;
+              double getEdgeLengthFactor() const;
 
-      double getTotalLengthFactor() const;
+              double getTotalLengthFactor() const;
 
-   signals:
-      void clearCache();
+           signals:
+              void clearCache();
 
-   public slots:
-      void ontimeStepChanged(double newTimeStep);
+           public slots:
+              void ontimeStepChanged(double newTimeStep);
 
-      void onMaximumTimeChanged(double newMaximumTime);
+              void onMaximumTimeChanged(double newMaximumTime);
 
-      void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
+              void onEdgeLengthFactorChanged(double newEdgeLengthFactor);
 
-      void onMaximumTotalLengthFactorChanged(double newValue);
+              void onMaximumTotalLengthFactorChanged(double newValue);
 
-      void onCellSizeChanged(QSizeF currentCellSize);
+              void onCellSizeChanged(QSizeF currentCellSize);
 
-   private slots:
+           private slots:
 
-   private:
+           private:
 
-      double edgeLengthFactor;
-      double totalLengthFactor;
+              double edgeLengthFactor;
+              double totalLengthFactor;
 
-      void connectToOtherSettings();
+              void connectToOtherSettings();
 
-      double computeEdgeLength(double factor, double cellSize);
+              double computeEdgeLength(double factor, double cellSize);
 
-      double computeMaximumTotalLength(double factor, double cellSize);
+              double computeMaximumTotalLength(double factor, double cellSize);
 
-      Settings::sim::Scalar determineMagnitudeGetter(Settings::sim::Vector vectorField);
-};
+              Settings::sim::Scalar determineMagnitudeGetter(Settings::sim::Vector vectorField);
+        };
+    }
+}
 
 #endif // STREAMOBJECT_H

@@ -7,7 +7,7 @@
 #include "settings/visualization/streamobject.h"
 #include "streamobjects/seedcurve.h"
 
-class Settings::visualization::StreamSurfaces : public StreamObject
+class Settings::visualization::StreamSurfaces : public Settings::visualization::StreamObject
 {
    Q_OBJECT
 

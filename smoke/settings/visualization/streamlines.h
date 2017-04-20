@@ -8,7 +8,7 @@
 #include <QList>
 #include <QMatrix4x4>
 
-class Settings::visualization::StreamLines : public StreamObject
+class Settings::visualization::StreamLines : public Settings::visualization::StreamObject
 {
    Q_OBJECT
 

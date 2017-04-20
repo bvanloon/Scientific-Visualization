@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <limits>
 
-StreamObject::StreamObject(QObject *parent) :
+Settings::visualization::StreamObject::StreamObject(QObject *parent) :
    QObject(parent),
    timeStep(1.0),
    maximumTime(100),
@@ -24,65 +24,65 @@ StreamObject::StreamObject(QObject *parent) :
    connectToOtherSettings();
 }
 
-void StreamObject::ontimeStepChanged(double newTimeStep)
+void Settings::visualization::StreamObject::ontimeStepChanged(double newTimeStep)
 {
    this->timeStep = newTimeStep;
    emit clearCache();
 }
 
-void StreamObject::onMaximumTimeChanged(double newMaximumTime)
+void Settings::visualization::StreamObject::onMaximumTimeChanged(double newMaximumTime)
 {
    this->maximumTime = newMaximumTime;
    emit clearCache();
 }
 
-void StreamObject::onEdgeLengthFactorChanged(double newEdgeLengthFactor)
+void Settings::visualization::StreamObject::onEdgeLengthFactorChanged(double newEdgeLengthFactor)
 {
    this->edgeLength = computeEdgeLength(newEdgeLengthFactor, Settings::simulation().cellSize.width());
    this->edgeLengthFactor = newEdgeLengthFactor;
    emit clearCache();
 }
 
-void StreamObject::onMaximumTotalLengthFactorChanged(double newValue)
+void Settings::visualization::StreamObject::onMaximumTotalLengthFactorChanged(double newValue)
 {
    this->totalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
    this->totalLengthFactor = newValue;
    emit clearCache();
 }
 
-void StreamObject::onCellSizeChanged(QSizeF currentCellSize)
+void Settings::visualization::StreamObject::onCellSizeChanged(QSizeF currentCellSize)
 {
    this->edgeLength = computeEdgeLength(this->edgeLengthFactor, currentCellSize.width());
    this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
 }
 
-void StreamObject::connectToOtherSettings()
+void Settings::visualization::StreamObject::connectToOtherSettings()
 {
    connect(&Settings::simulation(), SIGNAL(cellSizeChanged(QSizeF)),
             this, SLOT(onCellSizeChanged(QSizeF)));
 }
 
-double StreamObject::getTotalLengthFactor() const
+double Settings::visualization::StreamObject::getTotalLengthFactor() const
 {
    return totalLengthFactor;
 }
 
-double StreamObject::getEdgeLengthFactor() const
+double Settings::visualization::StreamObject::getEdgeLengthFactor() const
 {
    return edgeLengthFactor;
 }
 
-double StreamObject::computeEdgeLength(double factor, double cellSize)
+double Settings::visualization::StreamObject::computeEdgeLength(double factor, double cellSize)
 {
    return factor * cellSize;
 }
 
-double StreamObject::computeMaximumTotalLength(double factor, double cellSize)
+double Settings::visualization::StreamObject::computeMaximumTotalLength(double factor, double cellSize)
 {
    return factor * cellSize;
 }
 
-Settings::sim::Scalar StreamObject::determineMagnitudeGetter(Settings::sim::Vector vectorField)
+Settings::sim::Scalar Settings::visualization::StreamObject::determineMagnitudeGetter(Settings::sim::Vector vectorField)
 {
    Settings::sim::Scalar scalar;
    switch (vectorField)
