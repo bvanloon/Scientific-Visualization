@@ -6,10 +6,14 @@ Abstract3DEngine::Abstract3DEngine(AbstractEngine::lightModel lightModel,
                                    Settings::engines::EnginesTypes engineType) :
    AbstractEngine(lightModel, engineType)
 {
-   qDebug() << "Abstract3DEngine::Abstract3DEngine: Call updateModelViewMatrix.";
+   updateModelViewMatrix();
    qDebug() << "Abstract3DEngine::Abstract3DEngine: Call connectToSettings().";
-//    updateModelViewMatrix();
 //    connectToSettings();
+}
+
+void Abstract3DEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
+{
+   this->setModelViewMatrix(computeViewMatrix() * modelMatrix);
 }
 
 QMatrix4x4 Abstract3DEngine::computeViewMatrix()

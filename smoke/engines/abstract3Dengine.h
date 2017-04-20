@@ -4,6 +4,7 @@
 #include "abstractengine.h"
 
 #include <QObject>
+#include <QMatrix4x4>
 
 class Abstract3DEngine : public AbstractEngine
 {
@@ -18,6 +19,7 @@ class Abstract3DEngine : public AbstractEngine
    public slots:
 
    protected:
+      void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
       QMatrix4x4 computeViewMatrix();
 
    private slots:

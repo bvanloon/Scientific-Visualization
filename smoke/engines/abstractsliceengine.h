@@ -45,8 +45,6 @@ class AbstractSliceEngine : public Abstract3DEngine
 
       void drawSlices();
 
-      void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
-
       double computeTranslationStepSize();
 
       void updateBuffers(GPUData data);

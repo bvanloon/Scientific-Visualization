@@ -9,7 +9,6 @@ AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, 
    Abstract3DEngine(lightModel, engineType),
    cache(Settings::visualization::slices().numSlices)
 {
-   updateModelViewMatrix();
    connectToSettings();
 }
 
@@ -61,11 +60,6 @@ void AbstractSliceEngine::onClearCache()
 void AbstractSliceEngine::clearCache()
 {
    cache.clear();
-}
-
-void AbstractSliceEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
-{
-   this->setModelViewMatrix(computeViewMatrix() * modelMatrix);
 }
 
 void AbstractSliceEngine::updateBuffers(GPUData data)
