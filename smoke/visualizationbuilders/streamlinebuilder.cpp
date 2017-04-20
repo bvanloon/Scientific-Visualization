@@ -13,7 +13,6 @@ StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoin
    currentMagnitudeIsLargeEnough(true),
    configuration(configuration)
 {
-   this->timeStep = Settings::visualization::streamLines().timeStep;
    this->maximumTime = Settings::visualization::streamLines().maximumTime;
 
    this->edgeLength = Settings::visualization::streamLines().edgeLength;
@@ -39,7 +38,7 @@ void StreamLineBuilder::build(QVector3D seedPoint)
       succes = tryAddingEdge(current, next);
 
       current = next;
-      time += this->timeStep;
+      time += this->configuration->timeStep;
    }
 }
 
