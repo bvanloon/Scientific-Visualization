@@ -1,22 +1,13 @@
 #include "streamlinebuilder.h"
 #include "settings/visualizationsettings.h"
 
-const float StreamLineBuilder::minimumMagnitude = 0.004;
-
 StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
-                                     Vertex::vectorGetter vectorGetter, Vertex::scalarGetter magnitudeGetter) :
+                                     const Settings::visualization::StreamObject *configuration) :
    grid(grid),
    seedPoint(seedPoint),
-   vectorGetter(vectorGetter),
-   magnitudeGetter(magnitudeGetter),
-   currentMagnitudeIsLargeEnough(true)
-{
-   this->timeStep = Settings::visualization::streamLines().timeStep;
-   this->maximumTime = Settings::visualization::streamLines().maximumTime;
-
-   this->edgeLength = Settings::visualization::streamLines().edgeLength;
-   this->maximumTotalLength = Settings::visualization::streamLines().totalLength;
-}
+   currentMagnitudeIsLargeEnough(true),
+   configuration(configuration)
+{}
 
 streamobject::Line StreamLineBuilder::getStreamLine()
 {
@@ -37,7 +28,7 @@ void StreamLineBuilder::build(QVector3D seedPoint)
       succes = tryAddingEdge(current, next);
 
       current = next;
-      time += this->timeStep;
+      time += this->configuration->timeStep;
    }
 }
 
@@ -60,12 +51,12 @@ bool StreamLineBuilder::isVertexAllowed(QVector3D vertex)
 
 bool StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
 {
-   return magnitude > StreamLineBuilder::minimumMagnitude;
+   return magnitude > this->configuration->minimumMagnitude;
 }
 
 bool StreamLineBuilder::hasTimeLeftOver(double currentTime)
 {
-   return currentTime <= this->maximumTime;
+   return currentTime <= this->configuration->maximumTime;
 }
 
 bool StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D destination)
@@ -73,7 +64,7 @@ bool StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D
    double edgeLength = (destination - origin).length();
    double potentialStreamLineLength = this->streamLine.getLength() + edgeLength;
 
-   return potentialStreamLineLength < this->maximumTotalLength;
+   return potentialStreamLineLength < this->configuration->totalLength;
 }
 
 bool StreamLineBuilder::tryAddingVertex(QVector3D position)
@@ -104,7 +95,7 @@ bool StreamLineBuilder::tryAddingSeedPoint(QVector3D seedPoint)
 float StreamLineBuilder::computeMagnitude(QVector3D position)
 {
    StructuredCell *cell = this->grid->findCellContaining(position);
-   float textureCoordinate = cell->interpolateScalar(position, this->magnitudeGetter);
+   float textureCoordinate = cell->interpolateScalar(position, this->configuration->getMagnitude);
 
    return textureCoordinate;
 }
@@ -112,8 +103,8 @@ float StreamLineBuilder::computeMagnitude(QVector3D position)
 QVector3D StreamLineBuilder::integrate(QVector3D previousPosition)
 {
    //Euler will do just fine for now
-   QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->vectorGetter);
-   QVector3D currentPosition = previousPosition + previousVector.normalized() * this->edgeLength;
+   QVector3D previousVector = this->grid->findCellContaining(previousPosition)->interpolate2DVector(previousPosition, this->configuration->getVector);
+   QVector3D currentPosition = previousPosition + previousVector.normalized() * this->configuration->edgeLength;
 
    return currentPosition;
 }

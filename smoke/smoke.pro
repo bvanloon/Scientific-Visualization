@@ -60,6 +60,7 @@ SOURCES += main.cpp\
     settings/visualization/slices.cpp \
     settings/visualization/smokesettings.cpp \
     settings/visualization/streamlines.cpp \
+    settings/visualization/streamobject.cpp \
     settings/visualization/streamsurfaces.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
@@ -96,7 +97,7 @@ SOURCES += main.cpp\
     visualizationbuilders/abstracttranslucentbuilder.cpp \
     visualizationbuilders/translucentsmokebuilder.cpp \
     visualizationbuilders/translucentglyphbuilder.cpp \
-    visualizationbuilders/translucentstreamlinebuilder.cpp
+    visualizationbuilders/translucentstreamlinebuilder.cpp \
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -137,6 +138,7 @@ HEADERS  += main.ih\
     settings/visualization/glyphs.h \
     settings/visualization/slices.h \
     settings/visualization/streamlines.h \
+    settings/visualization/streamobject.h \
     settings/visualization/streamsurfaces.h \
     settings/visualizationsettings.h \
     shapes/cone.h \

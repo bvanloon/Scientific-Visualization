@@ -3,7 +3,7 @@
 #include "settings/canvassettings.h"
 
 Settings::visualization::StreamSurfaces::StreamSurfaces(QObject *parent) :
-   QObject(parent),
+   StreamObject(parent),
    colorMap(new ColorMap()),
    resolution(3),
    showVertices(true),
