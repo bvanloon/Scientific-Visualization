@@ -6,10 +6,10 @@
 #include "streamobjects/streamsurface.h"
 #include "unused.h"
 
-class StreamSurfaceEngine : public AbstractEngine
+class StreakSurfaceEngine : public AbstractEngine
 {
    public:
-      StreamSurfaceEngine(SimulationGrid *grid);
+      StreakSurfaceEngine(SimulationGrid *grid);
 
       void draw();
 

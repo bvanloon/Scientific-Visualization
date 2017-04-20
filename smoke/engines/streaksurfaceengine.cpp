@@ -1,12 +1,12 @@
-#include "streamsurfaceengine.h"
+#include "streaksurfaceengine.h"
 
-StreamSurfaceEngine::StreamSurfaceEngine(SimulationGrid *grid) :
+StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
    AbstractEngine(AbstractEngine::lightModel::phongLight,
                   Settings::engines::EnginesTypes::streamSurfaces),
    simulation(grid)
 {}
 
-void StreamSurfaceEngine::draw()
+void StreakSurfaceEngine::draw()
 {
    streamobject::Surface surface = streamobject::Surface::debugSurfaceWithSplit(2);
    drawSurface(surface);
@@ -17,19 +17,19 @@ void StreamSurfaceEngine::draw()
    updateBuffersAndDraw(data);
 }
 
-void StreamSurfaceEngine::drawVertices(streamobject::Surface surface)
+void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
 {
    GPUData data = surface.GPUDataVertices();
    updateBuffersAndDraw(data);
 }
 
-void StreamSurfaceEngine::drawLines(streamobject::Surface surface)
+void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
 {
    GPUData data = surface.GPUDataLines();
    updateBuffersAndDraw(data);
 }
 
-void StreamSurfaceEngine::drawSurface(streamobject::Surface surface)
+void StreakSurfaceEngine::drawSurface(streamobject::Surface surface)
 {
    GPUData data = surface.GPUDataSurface();
    updateBuffersAndDraw(data);
