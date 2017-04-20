@@ -9,6 +9,7 @@ StreamObject::StreamObject(QObject *parent) :
    timeStep(1.0),
    maximumTime(100),
    vectorField(Settings::sim::Vector::fluidVelocity),
+   vectorFieldMagnitude(determineMagnitudeGetter(vectorField)),
    //Private
    edgeLengthFactor(0.33),
    totalLengthFactor(std::numeric_limits<double>::infinity())
@@ -18,6 +19,7 @@ StreamObject::StreamObject(QObject *parent) :
    this->totalLength = 4.0;
 
    this->getVector = Vertex::getVectorGetter(vectorField);
+   this->getMagnitude = Vertex::getScalarGetter(vectorFieldMagnitude);
 }
 
 void StreamObject::ontimeStepChanged(double newTimeStep)
@@ -70,4 +72,30 @@ double StreamObject::computeEdgeLength(double factor, double cellSize)
 double StreamObject::computeMaximumTotalLength(double factor, double cellSize)
 {
    return factor * cellSize;
+}
+
+Settings::sim::Scalar StreamObject::determineMagnitudeGetter(Settings::sim::Vector vectorField)
+{
+   Settings::sim::Scalar scalar;
+   switch (vectorField)
+   {
+   case Settings::sim::Vector::fluidVelocity:
+      scalar = Settings::sim::Scalar::fluidVelocityMagnitude;
+      break;
+
+   case Settings::sim::Vector::force:
+      scalar = Settings::sim::Scalar::forceFieldMagnitude;
+      break;
+
+   case Settings::sim::Vector::fluidDensityGradient:
+      qDebug() << "There is no magnitudegetter for fluidDensityGradient, returing the fluidDensity.";
+      scalar = Settings::sim::fluidDensity;
+      break;
+
+   case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
+      qDebug() << "There is no magnitudegetter for fluidVelocityMagnitudeGradient, returing the forceFieldMagnitude.";
+      scalar = Settings::sim::fluidVelocityMagnitude;
+      break;
+   }
+   return scalar;
 }
