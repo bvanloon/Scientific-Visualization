@@ -10,13 +10,14 @@
 #include "zebramap.h"
 #include "huecolormap.h"
 #include "diverging.h"
+#include "twocolorcolormap.h"
 
 
 
 class ColorMapFactory
 {
    public:
-      enum colorMaps { rainbow, heat, cold, grayScale, zebra, hue, diverging };
+      enum colorMaps { rainbow, heat, cold, grayScale, zebra, hue, diverging, twocolor };
 
       ~ColorMapFactory();
 

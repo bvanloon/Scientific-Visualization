@@ -14,6 +14,7 @@ ColorMapFactory::ColorMapFactory()
    registerColorMap(ColorMapFactory::colorMaps::zebra, &ZebraMap::Create);
    registerColorMap(ColorMapFactory::colorMaps::hue, &HueColorMap::Create);
    registerColorMap(ColorMapFactory::colorMaps::diverging, &Diverging::Create);
+   registerColorMap(ColorMapFactory::colorMaps::twocolor, &TwoColorColormap::Create);
 }
 
 ColorMapFactory::~ColorMapFactory()
@@ -23,7 +24,7 @@ QStringList ColorMapFactory::getColorMapNames()
 {
    QStringList colormapNamesList;
 
-   colormapNamesList << "Rainbow" << "Hot" << "Cold" << "Grayscale" << "Zebra" << "Hue" << "Diverging";
+   colormapNamesList << "Rainbow" << "Hot" << "Cold" << "Grayscale" << "Zebra" << "Hue" << "Diverging" << "Two Color";
 
    return colormapNamesList;
 }
