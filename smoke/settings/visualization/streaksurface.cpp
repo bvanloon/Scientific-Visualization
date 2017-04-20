@@ -8,10 +8,12 @@ Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    resolution(3),
    showVertices(true),
    showLines(true),
-   numberOfStates(10),
    seedCurve(new SeedCurve())
 {
    connectToOtherSettings();
+
+   this->timeStep = 1.0;
+   this->maximumTime = 10.0;
 
    seedCurve->addVertex(QVector3D(20, 40, 0));
    seedCurve->addVertex(QVector3D(300, 40, 0));
@@ -28,6 +30,11 @@ const Settings::visualization::StreakSurface& Settings::visualization::StreakSur
 {
    static StreakSurface instance;
    return instance;
+}
+
+int Settings::visualization::StreakSurface::getNumberOfStates() const
+{
+   return static_cast<int>(this->maximumTime);
 }
 
 void Settings::visualization::StreakSurface::onWindowResized(QSizeF oldSize, QSizeF newSize)
@@ -69,7 +76,7 @@ void Settings::visualization::StreakSurface::onShowStreamSurfaceVerticesToggled(
 
 void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumberOfStates)
 {
-   this->numberOfStates = newNumberOfStates;
+   this->maximumTime = newNumberOfStates;
    emit numberOfStatesChanged(newNumberOfStates);
 }
 
