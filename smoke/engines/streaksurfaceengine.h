@@ -16,9 +16,9 @@ class StreakSurfaceEngine : public Abstract3DEngine
    private:
       SimulationGrid *simulation;
 
-      void drawVertices(streamobject::Surface surface);
       void drawLines(streamobject::Surface surface);
       void drawSurface(streamobject::Surface surface);
+      void drawVertices(QList<streamobject::Line> streakLines);
 
       QList<QVector3D> getSeedPoints();
 

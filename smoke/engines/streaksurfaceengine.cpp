@@ -16,18 +16,10 @@ void StreakSurfaceEngine::draw()
    if (Settings::visualization::streakSurface().showVertices) drawVertices(streakLines);
 }
 
-void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
+void StreakSurfaceEngine::drawVertices(QList<streamobject::Line> streakLines)
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawVertices: Temporarily showing the seedpoints.";
-
    GPUData data(GL_POINTS);
-   QList<QVector3D> seedPoints = Settings::visualization::streakSurface().seedCurve->getSeedPoints(Settings::visualization::streakSurface().resolution);
-   for (QVector3D seedPoint : seedPoints)
-   {
-      data.addElement(seedPoint, QVector3D(0.0, 0.0, 1.0), 1.0, 1.0);
-   }
-//   GPUData data = surface.GPUDataVertices();
+   for (streamobject::Line streakLine : streakLines) data.extend(streakLine.GPUDataVertices(0.0));
    updateBuffersAndDraw(data);
 }
 
