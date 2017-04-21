@@ -6,9 +6,8 @@ Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    StreamObject(parent),
    colorMap(new ColorMap()),
    resolution(3),
-   showVertices(true),
-   showLines(true),
-   showSurface(true),
+   showVertices(true), showLines(true), showSurface(true),
+   divergenceSensitivity(200),
    seedCurve(new SeedCurve())
 {
    connectToOtherSettings();

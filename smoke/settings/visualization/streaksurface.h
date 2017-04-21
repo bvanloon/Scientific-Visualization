@@ -23,6 +23,8 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
       bool showLines;
       bool showSurface;
 
+      double divergenceSensitivity;
+
       SeedCurve *seedCurve;
 
       int numberOfStates;

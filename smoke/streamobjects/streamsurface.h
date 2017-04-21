@@ -18,8 +18,8 @@ namespace streamobject {
 
           GPUData GPUDataVertices() const;
           GPUData GPUDataLines() const;
-          GPUData GPUDataSurfaceEdges() const;
-          GPUData GPUDataSurface() const;
+          GPUData GPUDataSurfaceEdges(double divergenceSensitivity) const;
+          GPUData GPUDataSurface(double divergenceSensitivity) const;
 
           static Surface debugSurfaceWithSplit(double offset = 0);
           static Surface debugSurfaceWithHole(double offset = 0);
@@ -35,7 +35,7 @@ namespace streamobject {
 
     class Surface::SurfaceBuilder {
        public:
-          SurfaceBuilder(QList<Line> streamLines, double maximumDistanceBetweenConnectedVertices = 200);
+          SurfaceBuilder(QList<Line> streamLines, double maximumDistanceBetweenConnectedVertices);
           ~SurfaceBuilder();
 
           GPUData getGPUData();

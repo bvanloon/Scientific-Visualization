@@ -33,7 +33,7 @@ void StreakSurfaceEngine::drawLines(QList<streamobject::Line> streakLines)
 void StreakSurfaceEngine::drawSurface(QList<streamobject::Line> streakLines)
 {
    streamobject::Surface surface(streakLines);
-   GPUData data = surface.GPUDataSurface();
+   GPUData data = surface.GPUDataSurface(Settings::visualization::streakSurface().divergenceSensitivity);
    updateBuffersAndDraw(data);
 }
 
