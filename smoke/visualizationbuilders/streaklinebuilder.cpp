@@ -6,7 +6,8 @@ StreakLineBuilder::StreakLineBuilder(QVector3D currentPosition,
    StreamLineBuilder(&SimulationHistory::instance().getSimulationGridAtQueueIdx(0),
                      currentPosition,
                      configuration),
-   currentStateIdx(0)
+   currentStateIdx(0),
+   zStep(zStep)
 {}
 
 bool StreakLineBuilder::isMagnitudeLargeEnough(float UNUSED(magnitude))
@@ -16,9 +17,9 @@ bool StreakLineBuilder::isMagnitudeLargeEnough(float UNUSED(magnitude))
 
 QVector3D StreakLineBuilder::integrate(QVector3D previousPosition)
 {
+   ++currentStateIdx;
    QVector3D nextPosition = StreamLineBuilder::integrate(previousPosition);
-   nextPosition.setZ(++currentStateIdx);
-
+   nextPosition.setZ(computeZValue(currentStateIdx));
    moveToNextGrid();
 
    return nextPosition;
@@ -31,4 +32,9 @@ void StreakLineBuilder::moveToNextGrid()
       this->grid = &SimulationHistory::instance().getSimulationGridAtQueueIdx(currentStateIdx);
    }
    else terminate = true;
+}
+
+double StreakLineBuilder::computeZValue(int currentStateIdx)
+{
+   return currentStateIdx * zStep;
 }

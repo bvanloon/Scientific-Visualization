@@ -22,6 +22,7 @@ class StreakLineBuilder : public StreamLineBuilder
       double zStep;
 
       void moveToNextGrid();
+      double computeZValue(int currentStateIdx);
 };
 
 #endif // STREAKLINEBUILDER_H

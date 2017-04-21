@@ -57,4 +57,6 @@ void StreakSurfaceEngine::drawSurface(streamobject::Surface surface)
 }
 
 double StreakSurfaceEngine::computeZStep()
-{}
+{
+   return zTranslationRange.length() / (Settings::visualization::streakSurface().getNumberOfStates() + 1);
+}
