@@ -26,4 +26,9 @@ QVector3D StreakLineBuilder::integrate(QVector3D previousPosition)
 
 void StreakLineBuilder::moveToNextGrid()
 {
+   if (this->currentStateIdx < SimulationHistory::instance().size())
+   {
+      this->grid = &SimulationHistory::instance().getSimulationGridAtQueueIdx(currentStateIdx);
+   }
+   else terminate = true;
 }

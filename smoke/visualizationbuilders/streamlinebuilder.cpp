@@ -4,9 +4,9 @@
 StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoint,
                                      const Settings::visualization::StreamObject *configuration) :
    grid(grid),
-   seedPoint(seedPoint),
-   currentMagnitudeIsLargeEnough(true),
-   configuration(configuration)
+   terminate(false),
+   configuration(configuration),
+   seedPoint(seedPoint)
 {}
 
 streamobject::Line StreamLineBuilder::buildLine()
@@ -35,7 +35,7 @@ void StreamLineBuilder::build(QVector3D seedPoint)
 bool StreamLineBuilder::continueBuilding(double currentTime)
 {
    return hasTimeLeftOver(currentTime) &&
-          this->currentMagnitudeIsLargeEnough;
+          !this->terminate;
 }
 
 bool StreamLineBuilder::isEdgeAllowed(QVector3D origin, QVector3D destination)
