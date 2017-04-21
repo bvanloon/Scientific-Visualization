@@ -75,6 +75,11 @@ void Settings::visualization::StreakSurface::onShowStreamSurfaceVerticesToggled(
    this->showVertices = toggle;
 }
 
+void Settings::visualization::StreakSurface::onShowStreamSurfaceFaceToggled(bool toggle)
+{
+   this->showSurface = toggle;
+}
+
 void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumberOfStates)
 {
    this->maximumTime = newNumberOfStates - 1;
