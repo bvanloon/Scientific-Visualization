@@ -29,6 +29,8 @@ class StreamSurfacesTab : public QWidget
 
       void showStreamSurfaceLinesToggled(bool toggle);
 
+      void showStreamSurfaceFaceToggled(bool toggle);
+
       void resolutionChanged(int resolution);
 
       void numberOfStatesChanged(int newNumberOfStates);
@@ -50,7 +52,7 @@ class StreamSurfacesTab : public QWidget
 
       void on_showSurfaceCheckBox_clicked(bool checked);
 
-private:
+   private:
       Ui::StreamSurfacesTab *ui;
 
       void setUiToDefaults();

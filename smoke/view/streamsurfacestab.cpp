@@ -84,6 +84,7 @@ void StreamSurfacesTab::on_showVerticesCheckBox_clicked(bool checked)
 
 void StreamSurfacesTab::on_showSurfaceCheckBox_clicked(bool checked)
 {
+   emit showStreamSurfaceFaceToggled(checked);
 }
 
 void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
