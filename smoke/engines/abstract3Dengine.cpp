@@ -2,8 +2,7 @@
 #include "settings/canvassettings.h"
 #include "settings/visualizationsettings.h"
 
-const double Abstract3DEngine::maximumZTranslation = -850;
-const double Abstract3DEngine::minimumZTranslation = 0.0;
+const Range<double> Abstract3DEngine::zTranslationRange = Range<double>(0.0, -850);
 
 Abstract3DEngine::Abstract3DEngine(AbstractEngine::lightModel lightModel,
                                    Settings::engines::EnginesTypes engineType) :

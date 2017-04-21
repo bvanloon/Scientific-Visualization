@@ -70,7 +70,7 @@ void AbstractSliceEngine::drawSlices()
 double AbstractSliceEngine::computeTranslationStepSize()
 {
    double numSlices = static_cast<double>(Settings::visualization::slices().numSlices);
-   return (maximumZTranslation - minimumZTranslation) / (numSlices - 1);
+   return zTranslationRange.length() / (numSlices - 1);
 }
 
 void AbstractSliceEngine::connectToSettings()
