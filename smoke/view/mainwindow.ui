@@ -76,7 +76,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideNone</enum>
@@ -106,7 +106,7 @@
       </widget>
       <widget class="StreamSurfacesTab" name="streamSurfacesTab">
        <attribute name="title">
-        <string>Stream Surfaces</string>
+        <string>Streak Objects</string>
        </attribute>
       </widget>
       <widget class="SlicesTab" name="slicesTab">
