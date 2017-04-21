@@ -16,6 +16,7 @@ class StreamLineBuilder {
       streamobject::Line streamLine;
       const UniformGrid *grid;
       bool terminate;
+      const Settings::visualization::StreamObject *configuration;
 
       virtual float computeMagnitude(QVector3D position);
       virtual bool isMagnitudeLargeEnough(float magnitude);
@@ -23,8 +24,6 @@ class StreamLineBuilder {
       virtual QVector3D integrate(QVector3D previousPosition);
 
    private:
-
-      const Settings::visualization::StreamObject *configuration;
 
       QVector3D seedPoint;
 
