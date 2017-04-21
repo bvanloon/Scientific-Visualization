@@ -105,7 +105,7 @@ void Settings::visualization::StreakSurface::onToggleListenForVertices(bool togg
 
 void Settings::visualization::StreakSurface::onRemoveLastVertexFromSeedCurve()
 {
-   qDebug() << "Settings::visualization::StreakSurface::onRemoveLastVertexFromSeedCurve";
+   this->seedCurve->removeTail();
 }
 
 void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)
