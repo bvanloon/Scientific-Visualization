@@ -3,10 +3,9 @@
 streamobject::Surface::Surface()
 {}
 
-streamobject::Surface::Surface(SeedCurve seedCurve, int resolution)
-{
-   QList<QVector3D> seedpoints = seedCurve.getSeedPoints(resolution);
-}
+streamobject::Surface::Surface(QList<streamobject::Line> streamLines) :
+   streamLines(streamLines)
+{}
 
 streamobject::Surface::~Surface()
 {}

@@ -13,7 +13,7 @@ namespace streamobject {
     {
        public:
           Surface();
-          Surface(SeedCurve seedCurve, int resolution);
+          Surface(QList<streamobject::Line> streamLines);
           ~Surface();
 
           GPUData GPUDataVertices() const;
