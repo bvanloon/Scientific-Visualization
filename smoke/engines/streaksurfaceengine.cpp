@@ -19,7 +19,7 @@ void StreakSurfaceEngine::draw()
 
 void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
 {
-   bool warningShown = false;
+   static bool warningShown = false;
    if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawVertices: Temporarily showing the seedpoints.";
 
    GPUData data(GL_POINTS);
