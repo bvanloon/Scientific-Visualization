@@ -43,6 +43,7 @@ void StreamSurfacesTab::setUiToDefaults()
 {
    this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
    this->ui->showLinesCheckBox->setChecked(Settings::visualization::streakSurface().showLines);
+   this->ui->showSurfaceCheckBox->setChecked(Settings::visualization::streakSurface().showSurface);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
    this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().getNumberOfStates());
