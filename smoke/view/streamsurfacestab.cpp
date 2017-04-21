@@ -65,6 +65,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceVerticesToggled(bool)));
    connect(this, SIGNAL(numberOfStatesChanged(int)),
            &Settings::visualization::streakSurface(), SLOT(onNumberOfStatesChanged(int)));
+   connect(this, SIGNAL(showStreamSurfaceFaceToggled(bool)),
+           &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceFaceToggled(bool)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
