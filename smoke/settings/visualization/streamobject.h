@@ -23,6 +23,7 @@ namespace Settings {
 
               Settings::sim::Vector vectorField;
               Vertex::vectorGetter getVector;
+
               Settings::sim::Scalar vectorFieldMagnitude;
               Vertex::scalarGetter getMagnitude;
 
@@ -43,6 +44,8 @@ namespace Settings {
               void onMaximumTotalLengthFactorChanged(double newValue);
 
               void onCellSizeChanged(QSizeF currentCellSize);
+
+              void onVectorFieldChanged(Settings::sim::Vector newVectorField);
 
            private slots:
 

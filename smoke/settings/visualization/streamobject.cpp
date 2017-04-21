@@ -56,6 +56,16 @@ void Settings::visualization::StreamObject::onCellSizeChanged(QSizeF currentCell
    this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
 }
 
+void Settings::visualization::StreamObject::onVectorFieldChanged(Settings::sim::Vector newVectorField)
+{
+   qDebug() << "Settings::visualization::StreamObject::onVectorFieldChanged";
+   this->vectorField = newVectorField;
+   this->getVector = Vertex::getVectorGetter(vectorField);
+
+   this->vectorFieldMagnitude = determineMagnitudeGetter(vectorField);
+   this->getMagnitude = Vertex::getScalarGetter(vectorFieldMagnitude);
+}
+
 void Settings::visualization::StreamObject::connectToOtherSettings()
 {
    connect(&Settings::simulation(), SIGNAL(cellSizeChanged(QSizeF)),
