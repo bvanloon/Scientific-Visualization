@@ -1,12 +1,12 @@
 #ifndef STREAMSURFACEENGINE_H
 #define STREAMSURFACEENGINE_H
 
-#include "abstractengine.h"
+#include "abstract3Dengine.h"
 #include "grid/simulationgrid.h"
 #include "streamobjects/streamsurface.h"
 #include "unused.h"
 
-class StreakSurfaceEngine : public AbstractEngine
+class StreakSurfaceEngine : public Abstract3DEngine
 {
    public:
       StreakSurfaceEngine(SimulationGrid *grid);

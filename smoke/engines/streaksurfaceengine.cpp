@@ -1,8 +1,8 @@
 #include "streaksurfaceengine.h"
 
 StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
-   AbstractEngine(AbstractEngine::lightModel::phongLight,
-                  Settings::engines::EnginesTypes::streamSurfaces),
+   Abstract3DEngine(AbstractEngine::lightModel::phongLight,
+                    Settings::engines::EnginesTypes::streamSurfaces),
    simulation(grid)
 {}
 
