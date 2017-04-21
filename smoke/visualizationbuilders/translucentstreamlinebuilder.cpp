@@ -13,7 +13,7 @@ TranslucentStreamLineBuilder::TranslucentStreamLineBuilder(
 bool TranslucentStreamLineBuilder::tryAddingVertex(QVector3D position)
 {
    float magnitude = this->computeMagnitude(position);
-   bool magnitudeAllowed = this->isMagnitudeLargeEnoguh(magnitude);
+   bool magnitudeAllowed = this->isMagnitudeLargeEnough(magnitude);
    float alpha = computeAlpha(magnitude);
 
    if (magnitudeAllowed) this->streamLine.addVertex(position, magnitude, alpha);

@@ -49,7 +49,7 @@ bool StreamLineBuilder::isVertexAllowed(QVector3D vertex)
    return this->grid->inGridArea(vertex);
 }
 
-bool StreamLineBuilder::isMagnitudeLargeEnoguh(float magnitude)
+bool StreamLineBuilder::isMagnitudeLargeEnough(float magnitude)
 {
    return magnitude > this->configuration->minimumMagnitude;
 }
@@ -70,7 +70,7 @@ bool StreamLineBuilder::isNewStreamLineLengthAllowed(QVector3D origin, QVector3D
 bool StreamLineBuilder::tryAddingVertex(QVector3D position)
 {
    float magnitude = this->computeMagnitude(position);
-   bool magnitudeAllowed = this->isMagnitudeLargeEnoguh(magnitude);
+   bool magnitudeAllowed = this->isMagnitudeLargeEnough(magnitude);
 
    if (magnitudeAllowed) this->streamLine.addVertex(position, magnitude);
    return magnitudeAllowed;

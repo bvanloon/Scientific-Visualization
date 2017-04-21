@@ -15,8 +15,8 @@ class StreamLineBuilder {
    protected:
       streamobject::Line streamLine;
 
-      float computeMagnitude(QVector3D position);
-      bool isMagnitudeLargeEnoguh(float magnitude);
+      virtual float computeMagnitude(QVector3D position);
+      virtual bool isMagnitudeLargeEnough(float magnitude);
 
       virtual QVector3D integrate(QVector3D previousPosition);
 

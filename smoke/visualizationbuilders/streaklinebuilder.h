@@ -12,6 +12,7 @@ class StreakLineBuilder : public StreamLineBuilder
 
    protected:
       QVector3D integrate(QVector3D previousPosition);
+      bool isMagnitudeLargeEnough(float magnitude);
 };
 
 #endif // STREAKLINEBUILDER_H
