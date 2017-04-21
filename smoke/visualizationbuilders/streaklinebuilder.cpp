@@ -13,3 +13,8 @@ QVector3D StreakLineBuilder::integrate(QVector3D previousPosition)
    QVector3D nextPosition = previousPosition + QVector3D(10, 10, 10);
    return nextPosition;
 }
+
+bool StreakLineBuilder::isMagnitudeLargeEnough(float magnitude)
+{
+   return true;
+}
