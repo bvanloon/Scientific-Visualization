@@ -36,7 +36,7 @@ void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
 void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
 {
    bool warningShown = false;
-   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily showing the seedlines.";
+   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily showing the streak lines.";
 
    GPUData data;
    QList<QVector3D> seedPoints = Settings::visualization::streakSurface().seedCurve->getSeedPoints(Settings::visualization::streakSurface().resolution);
