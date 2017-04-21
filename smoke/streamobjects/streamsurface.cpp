@@ -12,7 +12,6 @@ streamobject::Surface::~Surface()
 
 GPUData streamobject::Surface::GPUDataVertices() const
 {
-   float textureCoordinate = 0.0;
    GPUData vertices;
    for (auto streamline : streamLines) vertices.extend(streamline.GPUDataVertices());
    return vertices;

@@ -24,9 +24,6 @@ ColorMapTab *StreamSurfacesTab::getColorMapWidget()
    return ui->colorMapWidget;
 }
 
-void StreamSurfacesTab::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
-{}
-
 void StreamSurfacesTab::onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude)
 {
    this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(magnitude);
@@ -55,8 +52,6 @@ void StreamSurfacesTab::connectToSettings()
 {
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
-   connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
-            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this, SIGNAL(clearSeedCurves()),
            &Settings::visualization::streakSurface(), SLOT(onClearSeedCurves()));
    connect(this, SIGNAL(resolutionChanged(int)),

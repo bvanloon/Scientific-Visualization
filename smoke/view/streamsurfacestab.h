@@ -20,7 +20,6 @@ class StreamSurfacesTab : public QWidget
       ColorMapTab *getColorMapWidget();
 
    public slots:
-      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
       void onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude);
 
