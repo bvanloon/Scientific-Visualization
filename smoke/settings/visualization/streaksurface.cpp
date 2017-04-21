@@ -5,7 +5,7 @@
 Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    StreamObject(parent),
    colorMap(new ColorMap()),
-   resolution(3),
+   resolution(100),
    showVertices(true), showLines(true), showSurface(true),
    divergenceSensitivity(200),
    seedCurve(new SeedCurve())
@@ -13,7 +13,7 @@ Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    connectToOtherSettings();
 
    this->timeStep = 1.0;
-   this->maximumTime = 10.0;
+   this->maximumTime = 200;
 
    seedCurve->addVertex(QVector3D(20, 40, 0));
    seedCurve->addVertex(QVector3D(300, 40, 0));
