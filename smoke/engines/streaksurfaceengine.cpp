@@ -43,7 +43,7 @@ void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
    for (QVector3D seedPoint : seedPoints)
    {
       StreakLineBuilder builder(seedPoint, &Settings::visualization::streakSurface());
-      data.extend(builder.getLine().GPUDataEdges());
+      data.extend(builder.buildLine().GPUDataEdges());
    }
 
 //   GPUData data = surface.GPUDataLines();

@@ -9,7 +9,7 @@ StreamLineBuilder::StreamLineBuilder(const UniformGrid *grid, QVector3D seedPoin
    configuration(configuration)
 {}
 
-streamobject::Line StreamLineBuilder::getLine()
+streamobject::Line StreamLineBuilder::buildLine()
 {
    if (this->streamLine.hasNoVertices()) build(seedPoint);
    return this->streamLine;
