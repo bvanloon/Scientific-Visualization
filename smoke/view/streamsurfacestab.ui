@@ -104,22 +104,34 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QCheckBox" name="showLinesCheckBox">
-          <property name="text">
-           <string>Show Lines</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="showVerticesCheckBox">
-          <property name="text">
-           <string>Show Vertices</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Visualizations</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QCheckBox" name="showSurfaceCheckBox">
+           <property name="text">
+            <string>Surface</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="showLinesCheckBox">
+           <property name="text">
+            <string>Lines</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="showVerticesCheckBox">
+           <property name="text">
+            <string>Vertices</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>
