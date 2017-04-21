@@ -16,6 +16,8 @@ class StreakLineBuilder : public StreamLineBuilder
 
       bool isMagnitudeLargeEnough(float UNUSED(magnitude));
 
+   private:
+      int currentStateIdx;
 };
 
 #endif // STREAKLINEBUILDER_H
