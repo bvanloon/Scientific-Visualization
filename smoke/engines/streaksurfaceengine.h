@@ -9,13 +9,11 @@
 class StreakSurfaceEngine : public Abstract3DEngine
 {
    public:
-      StreakSurfaceEngine(SimulationGrid *grid);
+      StreakSurfaceEngine();
 
       void draw();
 
    private:
-      SimulationGrid *simulation;
-
       void drawVertices(QList<streamobject::Line> streakLines);
       void drawLines(QList<streamobject::Line> streakLines);
       void drawSurface(QList<streamobject::Line> streakLines);

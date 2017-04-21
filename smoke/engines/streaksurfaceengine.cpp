@@ -1,10 +1,9 @@
 #include "streaksurfaceengine.h"
 #include "visualizationbuilders/streaklinebuilder.h"
 
-StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
+StreakSurfaceEngine::StreakSurfaceEngine() :
    Abstract3DEngine(AbstractEngine::lightModel::phongLight,
-                    Settings::engines::EnginesTypes::streakObjects),
-   simulation(grid)
+                    Settings::engines::EnginesTypes::streakObjects)
 {}
 
 void StreakSurfaceEngine::draw()
