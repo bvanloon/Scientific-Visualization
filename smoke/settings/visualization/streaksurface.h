@@ -57,6 +57,8 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       void onToggleListenForVertices(bool toggle);
 
+      void onRemoveLastVertexFromSeedCurve();
+
    private slots:
 
    private:

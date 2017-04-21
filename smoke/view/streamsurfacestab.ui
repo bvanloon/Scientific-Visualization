@@ -208,6 +208,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="clearLastVertexButton">
+          <property name="text">
+           <string>Clear Last Vertex</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="clearSeedCurvesButton">
           <property name="text">
            <string>Clear</string>

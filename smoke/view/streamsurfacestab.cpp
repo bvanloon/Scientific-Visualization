@@ -81,6 +81,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::canvas(), SLOT(onToggleAll3DEngines(bool)));
    connect(this, SIGNAL(toggleListenForVertices(bool)),
            &Settings::visualization::streakSurface(), SLOT(onToggleListenForVertices(bool)));
+   connect(this, SIGNAL(removeLastVertexFromSeedCurve()),
+           &Settings::visualization::streakSurface(), SLOT(onRemoveLastVertexFromSeedCurve()));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -145,4 +147,9 @@ void StreamSurfacesTab::exitDefineSeedCurveMode()
    emit engineToggled(Settings::engines::streakObjects, true);
    emit toggleListenForVertices(false);
    this->ui->defineSeedCurveButton->setText("Define");
+}
+
+void StreamSurfacesTab::on_clearLastVertexButton_clicked()
+{
+   emit removeLastVertexFromSeedCurve();
 }
