@@ -25,19 +25,15 @@ void StreakSurfaceEngine::drawVertices(QList<streamobject::Line> streakLines)
 
 void StreakSurfaceEngine::drawLines(QList<streamobject::Line> streakLines)
 {
-    GPUData data(GL_LINES);
-    for (streamobject::Line streakLine : streakLines) data.extend(streakLine.GPUDataEdges());
-    updateBuffersAndDraw(data);
+   GPUData data(GL_LINES);
+   for (streamobject::Line streakLine : streakLines) data.extend(streakLine.GPUDataEdges());
+   updateBuffersAndDraw(data);
 }
 
-
-void StreakSurfaceEngine::drawSurface(streamobject::Surface surface)
+void StreakSurfaceEngine::drawSurface(QList<streamobject::Line> streakLines)
 {
-//   static bool warningShown = false;
-//   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily recomputing the streak lines.";
-
-   streamobject::Surface theSurface(computeStreakLines(getSeedPoints()));
-   GPUData data = theSurface.GPUDataSurface();
+   streamobject::Surface surface(streakLines);
+   GPUData data = surface.GPUDataSurface();
    updateBuffersAndDraw(data);
 }
 
