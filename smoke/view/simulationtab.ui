@@ -124,7 +124,7 @@
         <item>
          <widget class="QCheckBox" name="streamSurfacesCheckBox">
           <property name="text">
-           <string>Stream Surfaces</string>
+           <string>Streak Objects</string>
           </property>
          </widget>
         </item>

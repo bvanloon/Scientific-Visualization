@@ -39,6 +39,8 @@ class StreamSurfacesTab : public QWidget
 
       void numberOfStatesChanged(int newNumberOfStates);
 
+      void divergenceSensitivityChanged(double newSensitivity);
+
       void clearSeedCurves();
 
    private slots:
@@ -57,6 +59,8 @@ class StreamSurfacesTab : public QWidget
       void on_showSurfaceCheckBox_clicked(bool checked);
 
       void on_vectorFieldComboBox_currentIndexChanged(int index);
+
+      void on_divergenceSensitivitySpinBox_valueChanged(double value);
 
    private:
       Ui::StreamSurfacesTab *ui;

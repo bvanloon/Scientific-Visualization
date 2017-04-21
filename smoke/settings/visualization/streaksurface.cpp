@@ -5,16 +5,16 @@
 Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    StreamObject(parent),
    colorMap(new ColorMap()),
-   resolution(3),
-   showVertices(true),
-   showLines(true),
-   showSurface(true),
+   resolution(100),
+   showVertices(true), showLines(true), showSurface(true),
+   divergenceSensitivity(200),
    seedCurve(new SeedCurve())
 {
    connectToOtherSettings();
 
    this->timeStep = 1.0;
-   this->maximumTime = 10.0;
+   this->maximumTime = 200;
+   this->numberOfStates = maximumTime;
 
    seedCurve->addVertex(QVector3D(20, 40, 0));
    seedCurve->addVertex(QVector3D(300, 40, 0));
@@ -31,11 +31,6 @@ const Settings::visualization::StreakSurface& Settings::visualization::StreakSur
 {
    static StreakSurface instance;
    return instance;
-}
-
-int Settings::visualization::StreakSurface::getNumberOfStates() const
-{
-   return static_cast<int>(this->maximumTime);
 }
 
 void Settings::visualization::StreakSurface::onWindowResized(QSizeF oldSize, QSizeF newSize)
@@ -80,10 +75,26 @@ void Settings::visualization::StreakSurface::onShowStreamSurfaceFaceToggled(bool
    this->showSurface = toggle;
 }
 
+void Settings::visualization::StreakSurface::ontimeStepChanged(double UNUSED(newTimeStep))
+{
+   qDebug() << "Settings::visualization::StreakSurface::ontimeStepChanged should not be used. Timestep is not changed.";
+}
+
+void Settings::visualization::StreakSurface::onMaximumTimeChanged(double UNUSED(newMaximumTime))
+{
+   qDebug() << "Settings::visualization::StreakSurface::onMaximumTimeChanged should not be used. Maximum time is not changed.";
+}
+
 void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumberOfStates)
 {
    this->maximumTime = newNumberOfStates - 1;
+   this->numberOfStates = static_cast<int>(this->maximumTime);
    emit numberOfStatesChanged(newNumberOfStates);
+}
+
+void Settings::visualization::StreakSurface::onDivergenceSensitivityChanged(double sensitivity)
+{
+   this->divergenceSensitivity = sensitivity;
 }
 
 void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)

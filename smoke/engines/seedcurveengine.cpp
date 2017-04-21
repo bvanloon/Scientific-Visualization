@@ -2,7 +2,7 @@
 
 SeedCurveEngine::SeedCurveEngine() :
    AbstractEngine(AbstractEngine::lightModel::noLight,
-                  Settings::engines::EnginesTypes::seedCurves)
+                  Settings::engines::EnginesTypes::seedCurve)
 {}
 
 void SeedCurveEngine::draw()

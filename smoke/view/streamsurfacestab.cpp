@@ -26,7 +26,7 @@ ColorMapTab *StreamSurfacesTab::getColorMapWidget()
 
 void StreamSurfacesTab::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   if (engine == Settings::engines::EnginesTypes::seedCurves) this->ui->showSeedCurvesCheckBox->setChecked(checked);
+   if (engine == Settings::engines::EnginesTypes::seedCurve) this->ui->showSeedCurvesCheckBox->setChecked(checked);
 }
 
 void StreamSurfacesTab::onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude)
@@ -42,21 +42,22 @@ void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
 
 void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
-   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, true);
+   emit engineToggled(Settings::engines::EnginesTypes::seedCurve, checked);
+   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streakObjects, true);
 }
 
 void StreamSurfacesTab::setUiToDefaults()
 {
-   this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
+   this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurve]);
    this->ui->showLinesCheckBox->setChecked(Settings::visualization::streakSurface().showLines);
    this->ui->showSurfaceCheckBox->setChecked(Settings::visualization::streakSurface().showSurface);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
-   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().getNumberOfStates());
+   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().numberOfStates);
    this->ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::streakSurface().vectorField);
    this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::visualization::streakSurface().vectorFieldMagnitude);
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
+   this->ui->divergenceSensitivitySpinBox->setValue(Settings::visualization::streakSurface().divergenceSensitivity);
 }
 
 void StreamSurfacesTab::connectToSettings()
@@ -81,6 +82,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onVectorFieldChanged(Settings::sim::Vector)));
    connect(&Settings::visualization::streakSurface(), SIGNAL(vectorFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)),
            this, SLOT(onVectoFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)));
+   connect(this, SIGNAL(divergenceSensitivityChanged(double)),
+           &Settings::visualization::streakSurface(), SLOT(onDivergenceSensitivityChanged(double)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -116,4 +119,9 @@ void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
 void StreamSurfacesTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 {
    emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
+}
+
+void StreamSurfacesTab::on_divergenceSensitivitySpinBox_valueChanged(double value)
+{
+   emit divergenceSensitivityChanged(value);
 }

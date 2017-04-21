@@ -78,8 +78,8 @@ namespace Settings {
         {
            smoke,
            glyphs,
-           seedCurves,
-           streamSurfaces,
+           seedCurve,
+           streakObjects,
            seedPoints,
            streamLines,
 
