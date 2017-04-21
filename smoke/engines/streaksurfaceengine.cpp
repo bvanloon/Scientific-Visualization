@@ -55,5 +55,5 @@ QList<streamobject::Line> StreakSurfaceEngine::computeStreakLines(QList<QVector3
 
 double StreakSurfaceEngine::computeZStep()
 {
-   return zTranslationRange.length() / (Settings::visualization::streakSurface().getNumberOfStates() + 1);
+   return zTranslationRange.length() / (Settings::visualization::streakSurface().numberOfStates + 1);
 }

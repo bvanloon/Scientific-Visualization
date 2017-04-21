@@ -53,7 +53,7 @@ void StreamSurfacesTab::setUiToDefaults()
    this->ui->showSurfaceCheckBox->setChecked(Settings::visualization::streakSurface().showSurface);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
-   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().getNumberOfStates());
+   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().numberOfStates);
    this->ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::streakSurface().vectorField);
    this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::visualization::streakSurface().vectorFieldMagnitude);
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);

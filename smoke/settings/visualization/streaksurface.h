@@ -6,6 +6,7 @@
 #include "settings/settings.h"
 #include "settings/visualization/streamobject.h"
 #include "streamobjects/seedcurve.h"
+#include "unused.h"
 
 class Settings::visualization::StreakSurface : public Settings::visualization::StreamObject
 {
@@ -24,7 +25,7 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       SeedCurve *seedCurve;
 
-      int getNumberOfStates() const;
+      int numberOfStates;
 
    signals:
       void numberOfStatesChanged(int newNumberOfStates);
@@ -43,6 +44,10 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
       void onShowStreamSurfaceVerticesToggled(bool toggle);
 
       void onShowStreamSurfaceFaceToggled(bool toggle);
+
+      void ontimeStepChanged(double UNUSED(newTimeStep));
+
+      void onMaximumTimeChanged(double UNUSED(newMaximumTime));
 
       void onNumberOfStatesChanged(int newNumberOfStates);
 
