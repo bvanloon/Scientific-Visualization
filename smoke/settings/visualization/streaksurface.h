@@ -20,6 +20,7 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       bool showVertices;
       bool showLines;
+      bool showSurface;
 
       SeedCurve *seedCurve;
 
