@@ -25,8 +25,8 @@ void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engi
 {
    EngineMap::const_iterator toggledPair = this->engines.find(engine);
    if (toggledPair.value() != nullptr) toggledPair.value()->setChecked(checked);
-   if (checked && this->isSliceEngine(engine)) toggle2DEngines(false);
-   if (checked && this->isNonSliceEngine(engine)) toggleSliceEngines(false);
+   if (checked && this->is3DEngine(engine)) toggle2DEngines(false);
+   if (checked && this->is2DEngine(engine)) toggle3DEngines(false);
 }
 
 void SimulationSettingPane::onScalingFactorChanged(double scalingFactor)
@@ -98,9 +98,9 @@ void SimulationSettingPane::registerEngines()
    register2DEngine(Settings::engines::EnginesTypes::seedCurves);
    register2DEngine(Settings::engines::EnginesTypes::seedPoints);
 
-   registerSliceEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
-   registerSliceEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
-   registerSliceEngine(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
+   register3DEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
+   register3DEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
+   register3DEngine(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -110,9 +110,9 @@ void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
    this->ui->freezeButton->setText(labelText);
 }
 
-void SimulationSettingPane::toggleSliceEngines(bool toggle)
+void SimulationSettingPane::toggle3DEngines(bool toggle)
 {
-   for (auto engine : sliceEngines.keys()) emit engineToggled(engine, toggle);
+   for (auto engine : engines3D.keys()) emit engineToggled(engine, toggle);
    this->ui->viewGroupBox->setDisabled(!toggle);
 }
 
@@ -122,12 +122,12 @@ void SimulationSettingPane::toggle2DEngines(bool toggle)
    this->ui->viewGroupBox->setDisabled(toggle);
 }
 
-bool SimulationSettingPane::isSliceEngine(Settings::engines::EnginesTypes engine)
+bool SimulationSettingPane::is3DEngine(Settings::engines::EnginesTypes engine)
 {
-   return this->sliceEngines.contains(engine);
+   return this->engines3D.contains(engine);
 }
 
-bool SimulationSettingPane::isNonSliceEngine(Settings::engines::EnginesTypes engine)
+bool SimulationSettingPane::is2DEngine(Settings::engines::EnginesTypes engine)
 {
    return this->engines2D.contains(engine);
 }
@@ -138,10 +138,10 @@ void SimulationSettingPane::register2DEngine(Settings::engines::EnginesTypes eng
    this->engines2D.insert(engine, engineCheckBox);
 }
 
-void SimulationSettingPane::registerSliceEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox)
+void SimulationSettingPane::register3DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox)
 {
    this->engines.insert(engine, engineCheckBox);
-   this->sliceEngines.insert(engine, engineCheckBox);
+   this->engines3D.insert(engine, engineCheckBox);
 }
 
 void SimulationSettingPane::on_freezeButton_clicked()
