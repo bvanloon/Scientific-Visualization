@@ -49,15 +49,11 @@ void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
 
 void StreakSurfaceEngine::drawSurface(streamobject::Surface surface)
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily recomputing the streak lines.";
+//   static bool warningShown = false;
+//   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily recomputing the streak lines.";
 
-   streamobject::Surface surface = streamobject::Surface(Settings::visualization::streakSurface().seedCurve,
-                                                             Settings::visualization::streakSurface().resolution);
-
-
-
-   GPUData data = surface.GPUDataSurface();
+   streamobject::Surface theSurface(computeStreakLines(getSeedPoints()));
+   GPUData data = theSurface.GPUDataSurface();
    updateBuffersAndDraw(data);
 }
 
