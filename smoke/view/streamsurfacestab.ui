@@ -151,11 +151,11 @@
         <property name="title">
          <string>Visualizations</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QCheckBox" name="showSurfaceCheckBox">
+          <widget class="QCheckBox" name="showVerticesCheckBox">
            <property name="text">
-            <string>Surface</string>
+            <string>Vertices</string>
            </property>
           </widget>
          </item>
@@ -167,9 +167,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="showVerticesCheckBox">
+          <widget class="QCheckBox" name="showSurfaceCheckBox">
            <property name="text">
-            <string>Vertices</string>
+            <string>Surface</string>
            </property>
           </widget>
          </item>
