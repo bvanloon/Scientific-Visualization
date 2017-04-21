@@ -14,6 +14,7 @@ Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
 
    this->timeStep = 1.0;
    this->maximumTime = 200;
+   this->numberOfStates = maximumTime;
 
    seedCurve->addVertex(QVector3D(20, 40, 0));
    seedCurve->addVertex(QVector3D(300, 40, 0));
