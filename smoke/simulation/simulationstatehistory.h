@@ -36,6 +36,8 @@ class SimulationHistory : public QObject
 
       int mostRecentStateIdx() const;
 
+      int size() const;
+
    signals:
 
    public slots:

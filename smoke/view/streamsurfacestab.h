@@ -22,8 +22,22 @@ class StreamSurfacesTab : public QWidget
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude);
+
    signals:
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
+
+      void showStreamSurfaceVerticesToggled(bool toggle);
+
+      void showStreamSurfaceLinesToggled(bool toggle);
+
+      void showStreamSurfaceFaceToggled(bool toggle);
+
+      void vectorFieldChanged(Settings::sim::Vector newVectorField);
+
+      void resolutionChanged(int resolution);
+
+      void numberOfStatesChanged(int newNumberOfStates);
 
       void clearSeedCurves();
 
@@ -32,9 +46,22 @@ class StreamSurfacesTab : public QWidget
 
       void on_showSeedCurvesCheckBox_clicked(bool checked);
 
+      void on_resolutionSpinBox_valueChanged(int value);
+
+      void on_showLinesCheckBox_clicked(bool checked);
+
+      void on_showVerticesCheckBox_clicked(bool checked);
+
+      void on_numStatesSpinBox_valueChanged(int value);
+
+      void on_showSurfaceCheckBox_clicked(bool checked);
+
+      void on_vectorFieldComboBox_currentIndexChanged(int index);
+
    private:
       Ui::StreamSurfacesTab *ui;
 
+      void fillUI();
       void setUiToDefaults();
       void connectToSettings();
 };

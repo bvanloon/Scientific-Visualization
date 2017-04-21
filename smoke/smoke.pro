@@ -38,7 +38,6 @@ SOURCES += main.cpp\
     engines/smokeslicesengine.cpp \
     engines/streamlineengine.cpp \
     engines/streamlineslicesengine.cpp \
-    engines/streamsurfaceengine.cpp \
     glyphs/abstractglyph.cpp \
     glyphs/airplane.cpp \
     glyphs/ccwtriangle.cpp \
@@ -60,7 +59,7 @@ SOURCES += main.cpp\
     settings/visualization/slices.cpp \
     settings/visualization/smokesettings.cpp \
     settings/visualization/streamlines.cpp \
-    settings/visualization/streamsurfaces.cpp \
+    settings/visualization/streamobject.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
     shapes/polyline.cpp \
@@ -72,6 +71,7 @@ SOURCES += main.cpp\
     simulation/utils.cpp \
     streamobjects/seedcurve.cpp \
     streamobjects/streamline.cpp \
+    streamobjects/streamsurface.cpp \
     utilities/approximation.cpp \
     utilities/gpudata.cpp \
     utilities/mesh.cpp \
@@ -97,7 +97,12 @@ SOURCES += main.cpp\
     visualizationbuilders/translucentglyphbuilder.cpp \
     visualizationbuilders/translucentstreamlinebuilder.cpp \
     colormaps/diverging.cpp \
-    colormaps/twocolorcolormap.cpp
+    colormaps/twocolorcolormap.cpp \
+    visualizationbuilders/translucentstreamlinebuilder.cpp \
+    visualizationbuilders/streaklinebuilder.cpp \
+    engines/streaksurfaceengine.cpp \
+    engines/abstract3Dengine.cpp \
+    settings/visualization/streaksurface.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
@@ -116,7 +121,6 @@ HEADERS  += main.ih\
     engines/smokeslicesengine.h \
     engines/streamlineengine.h \
     engines/streamlineslicesengine.h \
-    engines/streamsurfaceengine.h \
     glyphs/abstractglyph.h \
     glyphs/airplane.h \
     glyphs/ccwtriangle.h \
@@ -138,7 +142,7 @@ HEADERS  += main.ih\
     settings/visualization/glyphs.h \
     settings/visualization/slices.h \
     settings/visualization/streamlines.h \
-    settings/visualization/streamsurfaces.h \
+    settings/visualization/streamobject.h \
     settings/visualizationsettings.h \
     shapes/cone.h \
     shapes/polyline.h \
@@ -150,6 +154,7 @@ HEADERS  += main.ih\
     simulation/utils.h \
     streamobjects/seedcurve.h \
     streamobjects/streamline.h \
+    streamobjects/streamsurface.h \
     unused.h \
     utilities/approximation.h \
     utilities/gpudata.h \
@@ -175,6 +180,11 @@ HEADERS  += main.ih\
     visualizationbuilders/abstracttranslucentbuilder.h \
     visualizationbuilders/translucentsmokebuilder.h \
     visualizationbuilders/translucentglyphbuilder.h \
+    visualizationbuilders/translucentstreamlinebuilder.h \
+    visualizationbuilders/streaklinebuilder.h \
+    engines/streaksurfaceengine.h \
+    engines/abstract3Dengine.h \
+    settings/visualization/streaksurface.h \
     visualizationbuilders/translucentstreamlinebuilder.h \
     colormaps/diverging.h \
     colormaps/twocolorcolormap.h

@@ -62,9 +62,14 @@ int SimulationHistory::mostRecentStateIdx() const
    return idx;
 }
 
+int SimulationHistory::size() const
+{
+   return this->states.size();
+}
+
 void SimulationHistory::onHistorySizeChanged(int size)
 {
-   this->states.changeMaximumSize(size);
+   if (size > states.getMaximumSize()) this->states.changeMaximumSize(size);
 }
 
 SimulationData *SimulationHistory::getStateAtQueueIdx(int idx) const

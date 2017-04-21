@@ -4,39 +4,17 @@
 #include <limits>
 
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
-   QObject(parent),
-   colorMap(new ColorMap()),
-   timeStep(1.0),
-   maximumTime(100),
-   edgeLengthFactor(Settings::defaults::visualization::streamlines::edgeLengthFactor),
-   totalLengthFactor(Settings::defaults::visualization::streamlines::totalLengthFactor)
+   StreamObject(parent),
+   colorMap(new ColorMap())
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
-   this->edgeLength = computeEdgeLength(edgeLengthFactor, Settings::simulation().cellSize.width());
-   this->totalLength = computeMaximumTotalLength(totalLengthFactor, Settings::simulation().cellSize.width());
-
-   vector = Settings::sim::Vector::fluidVelocity;
-   vectorField = Vertex::getVectorGetter(vector);
-
    connectToOtherSettings();
-}
-
-double Settings::visualization::StreamLines::computeEdgeLength(double factor, double cellSize)
-{
-   return factor * cellSize;
-}
-
-double Settings::visualization::StreamLines::computeMaximumTotalLength(double factor, double cellSize)
-{
-   return factor * cellSize;
 }
 
 void Settings::visualization::StreamLines::connectToOtherSettings()
 {
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF,QSizeF)),
             this, SLOT(onWindowResized(QSizeF,QSizeF)));
-   connect(&Settings::simulation(), SIGNAL(cellSizeChanged(QSizeF)),
-           this, SLOT(onCellSizeChanged(QSizeF)));
 }
 
 void Settings::visualization::StreamLines::transformSeedPoints(QMatrix4x4 transformationMatrix)
@@ -64,32 +42,6 @@ int Settings::visualization::StreamLines::numberOfSeedPoints()
    return this->seedPoints.length();
 }
 
-void Settings::visualization::StreamLines::ontimeStepChanged(double newTimeStep)
-{
-   this->timeStep = newTimeStep;
-   emit clearCache();
-}
-
-void Settings::visualization::StreamLines::onMaximumTimeChanged(double newMaximumTime)
-{
-   this->maximumTime = newMaximumTime;
-   emit clearCache();
-}
-
-void Settings::visualization::StreamLines::onEdgeLengthFactorChanged(double newEdgeLengthFactor)
-{
-   this->edgeLength = computeEdgeLength(newEdgeLengthFactor, Settings::simulation().cellSize.width());
-   this->edgeLengthFactor = newEdgeLengthFactor;
-   emit clearCache();
-}
-
-void Settings::visualization::StreamLines::onMaximumTotalLengthFactorChanged(double newValue)
-{
-   this->totalLength = computeMaximumTotalLength(newValue, Settings::simulation().cellSize.width());
-   this->totalLengthFactor = newValue;
-   emit clearCache();
-}
-
 void Settings::visualization::StreamLines::onClearSeedPoints()
 {
    this->seedPoints.clear();
@@ -112,10 +64,4 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
 
    transformationMatrix.scale(xScale, yScale, 0.0);
    transformSeedPoints(transformationMatrix);
-}
-
-void Settings::visualization::StreamLines::onCellSizeChanged(QSizeF currentCellSize)
-{
-   this->edgeLength = computeEdgeLength(this->edgeLengthFactor, currentCellSize.width());
-   this->totalLength = computeMaximumTotalLength(this->totalLengthFactor, currentCellSize.width());
 }
