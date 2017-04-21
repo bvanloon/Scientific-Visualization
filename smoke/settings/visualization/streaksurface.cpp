@@ -76,7 +76,7 @@ void Settings::visualization::StreakSurface::onShowStreamSurfaceVerticesToggled(
 
 void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumberOfStates)
 {
-   this->maximumTime = newNumberOfStates;
+   this->maximumTime = newNumberOfStates - 1;
    emit numberOfStatesChanged(newNumberOfStates);
 }
 
