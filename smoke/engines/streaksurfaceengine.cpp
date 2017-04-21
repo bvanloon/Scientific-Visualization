@@ -64,6 +64,14 @@ void StreakSurfaceEngine::drawSurface(streamobject::Surface surface)
    updateBuffersAndDraw(data);
 }
 
+QList<QVector3D> StreakSurfaceEngine::getSeedPoints()
+{
+   return Settings::visualization::streakSurface().seedCurve->getSeedPoints(Settings::visualization::streakSurface().resolution);
+}
+
+QList<streamobject::Line> StreakSurfaceEngine::computeStreakLines(QList<QVector3D> seedPoints)
+{}
+
 double StreakSurfaceEngine::computeZStep()
 {
    return zTranslationRange.length() / (Settings::visualization::streakSurface().getNumberOfStates() + 1);

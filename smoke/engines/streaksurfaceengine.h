@@ -20,6 +20,8 @@ class StreakSurfaceEngine : public Abstract3DEngine
       void drawLines(streamobject::Surface surface);
       void drawSurface(streamobject::Surface surface);
 
+      QList<QVector3D> getSeedPoints();
+
       double computeZStep();
 };
 
