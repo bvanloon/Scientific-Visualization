@@ -116,7 +116,7 @@ class SimulationSettingPane : public QWidget
       bool is2DEngine(Settings::engines::EnginesTypes engine);
 
       void register2DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox = nullptr);
-      void register3DEngines(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
+      void register3DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
 
       EngineMap engines;
       EngineMap engines2D;
