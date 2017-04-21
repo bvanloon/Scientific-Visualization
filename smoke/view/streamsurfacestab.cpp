@@ -116,3 +116,29 @@ void StreamSurfacesTab::on_divergenceSensitivitySpinBox_valueChanged(double valu
 {
    emit divergenceSensitivityChanged(value);
 }
+
+void StreamSurfacesTab::on_defineSeedCurveButton_clicked()
+{
+   static bool drawingSeedCurve = false;
+   drawingSeedCurve = !drawingSeedCurve;
+   if (drawingSeedCurve) enterDefineSeedCurveMode();
+   else exitDefineSeedCurveMode();
+}
+
+void StreamSurfacesTab::enterDefineSeedCurveMode()
+{
+   qDebug() << "Drawing Seed Curve";
+   //Disable all 3D engines
+   //Enable the seedcurve engine
+   //Start listening to shift click.
+   this->ui->defineSeedCurveButton->setText("Show Streak Object");
+}
+
+void StreamSurfacesTab::exitDefineSeedCurveMode()
+{
+   this->ui->defineSeedCurveButton->setText("Define");
+   //Disable all engines
+   //Enable the streak object engine.
+   //Stop listening to shift click.
+   qDebug() << "Not Drawing Seed Curve";
+}

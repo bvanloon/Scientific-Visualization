@@ -201,7 +201,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="defineSeedCurveButton">
           <property name="text">
            <string>Define</string>
           </property>

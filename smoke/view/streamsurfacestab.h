@@ -60,8 +60,13 @@ class StreamSurfacesTab : public QWidget
 
       void on_divergenceSensitivitySpinBox_valueChanged(double value);
 
+      void on_defineSeedCurveButton_clicked();
+
    private:
       Ui::StreamSurfacesTab *ui;
+
+      void enterDefineSeedCurveMode();
+      void exitDefineSeedCurveMode();
 
       void fillUI();
       void setUiToDefaults();
