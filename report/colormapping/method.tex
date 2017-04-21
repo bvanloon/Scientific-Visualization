@@ -76,27 +76,35 @@ The second method uses a dynamic range $[f_{min}, f_{max}]$. This is done by det
 
 \subsubsection{Clamping} % (fold)
 \label{ssub:clamping}
-In the section above we assumed that the scalar values were uniformly distributed in their range. However, some simulations might result in non-uniformly distributed scalar values, e.g. most scalar values fall within a range much smaller than $[f_{min}, f_{max}]$. In these cases it might be desirable to use show more detail in the range that contains the most scalar values. To facilitate this the user can adapt $[f_{min}, f_{max}]$ to a range $[f^{clamp}_{min}, f^{clamp}_{max}]$ such that $f_{min} \leq f^{clamp}_{min}$ and $f_{max} \geq f^{clamp}_{max}$. Scalar values outside the range $[f^{clamp}_{min}, f^{clamp}_{max}]$ are clamped to the edge of the colormap. This has as disadvantage that it is not possible to distinguish between scalar values outside of the clamping range, but offers better resolution inside this range.
-
-
+In the section above we assumed that the scalar values were uniformly distributed in their range. However, some simulations might result in non-uniformly distributed scalar values, e.g. most scalar values fall within a range much smaller than $[f_{min}, f_{max}]$. In these cases it might be desirable to use show more detail in the range that contains the most scalar values. To facilitate this the user can adapt $[f_{min}, f_{max}]$ to a range $[f^{clamp}_{min}, f^{clamp}_{max}]$ such that $f_{min} \leq f^{clamp}_{min}$ and $f_{max} \geq f^{clamp}_{max}$. Scalar values outside the range $[f^{clamp}_{min}, f^{clamp}_{max}]$ are clamped to the edge of the colormap. This has as disadvantage that it is not possible to distinguish between scalar values outside of the clamping range, but offers better resolution inside this range. An example of clamping is given in \cref{fig:colormapping:clamped}, here the clamped variant shows much more detail but shows the same color for all scalar values between $0.1$ and $10$.
 
 \begin{figure}[tb]
 	\centering
 	\begin{subfigure}[t]{0.4\textwidth}
 		\centering
 		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/notclamped}
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] at (0,0) 
+		    {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormaps/rainbowcolormap}};
+			\foreach \x in {0,2,...,10} { \node [anchor=north west] at (\x/1.8,0) {\x}; }
+		\end{tikzpicture}
 		\caption{Visualization of the scalar values without clamping using the rainbow colormap.}
 		\label{fig:colormapping:clamped:disabled}
 	\end{subfigure}
 	\hspace{50px}
 	\begin{subfigure}[t]{0.4\textwidth}
 		\centering
-		\includegraphics[width=0.8\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/clamped_01}
-		\includegraphics[width=0.09\textwidth, trim={1435px 30px 330px 50px}, clip]{colormapping/img/clamped_01}
+		\includegraphics[width=\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/clamped_01}
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] at (0,0) 
+		    {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormaps/rainbowcolormap}};
+			{ \node [anchor=north west]  {0.0}; }
+			{ \node [anchor=north east]  {0.1}; }
+		\end{tikzpicture}
 		\caption{Visualization of the scalar values with clamping using the rainbow colormap with $f^{clamp} = 0.1 f_{max}$.}
 		\label{fig:colormapping:clamped:enabled}
 	\end{subfigure}	
-	\caption{Example of a visualization with and without clamping of $f_{max}$. The clamped version (figure \subref{fig:colormapping:clamped:enabled}) shows more detail but }
+	\caption{Example of a visualization with and without clamping of $f_{max}$. The clamped version (figure \subref{fig:colormapping:clamped:enabled}) shows more detail but does not discriminate scalar values above $0.1$.}
 	\label{fig:colormapping:clamped}
 \end{figure}
 
