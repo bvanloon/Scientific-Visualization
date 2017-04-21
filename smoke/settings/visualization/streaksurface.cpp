@@ -91,6 +91,11 @@ void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumb
    emit numberOfStatesChanged(newNumberOfStates);
 }
 
+void Settings::visualization::StreakSurface::onDivergenceSensitivityChanged(double sensitivity)
+{
+   this->divergenceSensitivity = sensitivity;
+}
+
 void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)
 {
    this->seedCurve->applyTransformation(transform);

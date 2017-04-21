@@ -57,6 +57,7 @@ void StreamSurfacesTab::setUiToDefaults()
    this->ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::streakSurface().vectorField);
    this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::visualization::streakSurface().vectorFieldMagnitude);
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
+   this->ui->divergenceSensitivitySpinBox->setValue(Settings::visualization::streakSurface().divergenceSensitivity);
 }
 
 void StreamSurfacesTab::connectToSettings()
@@ -81,6 +82,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onVectorFieldChanged(Settings::sim::Vector)));
    connect(&Settings::visualization::streakSurface(), SIGNAL(vectorFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)),
            this, SLOT(onVectoFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)));
+   connect(this, SIGNAL(divergenceSensitivityChanged(double)),
+           &Settings::visualization::streakSurface(), SLOT(onDivergenceSensitivityChanged(double)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -116,4 +119,9 @@ void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
 void StreamSurfacesTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 {
    emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
+}
+
+void StreamSurfacesTab::on_divergenceSensitivitySpinBox_valueChanged(double value)
+{
+   emit divergenceSensitivityChanged(value);
 }

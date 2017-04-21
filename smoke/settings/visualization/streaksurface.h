@@ -53,6 +53,8 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       void onNumberOfStatesChanged(int newNumberOfStates);
 
+      void onDivergenceSensitivityChanged(double sensitivity);
+
    private slots:
 
    private:
