@@ -138,9 +138,10 @@ void StreamSurfacesTab::enterDefineSeedCurveMode()
 
 void StreamSurfacesTab::exitDefineSeedCurveMode()
 {
+   emit toggleListenForVertices(false);
+   emit engineToggled(Settings::engines::seedCurve, false);
    emit toggleAllEngines(false);
    emit engineToggled(Settings::engines::streakObjects, true);
-   emit toggleListenForVertices(false);
    this->ui->defineSeedCurveButton->setText("Define");
 }
 
