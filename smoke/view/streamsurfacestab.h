@@ -48,7 +48,9 @@ class StreamSurfacesTab : public QWidget
 
       void on_numStatesSpinBox_valueChanged(int value);
 
-   private:
+      void on_showSurfaceCheckBox_clicked(bool checked);
+
+private:
       Ui::StreamSurfacesTab *ui;
 
       void setUiToDefaults();

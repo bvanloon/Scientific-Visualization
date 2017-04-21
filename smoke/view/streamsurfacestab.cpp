@@ -82,6 +82,10 @@ void StreamSurfacesTab::on_showVerticesCheckBox_clicked(bool checked)
    emit showStreamSurfaceVerticesToggled(checked);
 }
 
+void StreamSurfacesTab::on_showSurfaceCheckBox_clicked(bool checked)
+{
+}
+
 void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
 {
    emit numberOfStatesChanged(value);
