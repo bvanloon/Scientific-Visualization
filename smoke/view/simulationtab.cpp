@@ -24,6 +24,8 @@ SimulationSettingPane::~SimulationSettingPane()
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
    EngineMap::const_iterator toggledPair = this->engines.find(engine);
+   if (toggledPair == this->engines.end()) return;
+
    if (toggledPair.value() != nullptr) toggledPair.value()->setChecked(checked);
    if (checked && this->is3DEngine(engine)) toggle2DEngines(false);
    if (checked && this->is2DEngine(engine)) toggle3DEngines(false);
