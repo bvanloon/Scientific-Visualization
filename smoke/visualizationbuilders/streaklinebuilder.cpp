@@ -16,6 +16,14 @@ bool StreakLineBuilder::isMagnitudeLargeEnough(float UNUSED(magnitude))
 
 QVector3D StreakLineBuilder::integrate(QVector3D previousPosition)
 {
-   QVector3D nextPosition = previousPosition + QVector3D(10, 10, 10);
+   QVector3D nextPosition = StreamLineBuilder::integrate(previousPosition);
+   nextPosition.setZ(++currentStateIdx);
+
+   moveToNextGrid();
+
    return nextPosition;
+}
+
+void StreakLineBuilder::moveToNextGrid()
+{
 }

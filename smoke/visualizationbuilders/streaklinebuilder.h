@@ -18,6 +18,8 @@ class StreakLineBuilder : public StreamLineBuilder
 
    private:
       int currentStateIdx;
+
+      void moveToNextGrid();
 };
 
 #endif // STREAKLINEBUILDER_H
