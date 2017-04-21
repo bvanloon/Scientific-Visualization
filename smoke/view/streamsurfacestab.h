@@ -31,6 +31,8 @@ class StreamSurfacesTab : public QWidget
 
       void showStreamSurfaceFaceToggled(bool toggle);
 
+      void vectorFieldChanged(Settings::sim::Vector newVectorField);
+
       void resolutionChanged(int resolution);
 
       void numberOfStatesChanged(int newNumberOfStates);
@@ -51,6 +53,8 @@ class StreamSurfacesTab : public QWidget
       void on_numStatesSpinBox_valueChanged(int value);
 
       void on_showSurfaceCheckBox_clicked(bool checked);
+
+      void on_vectorFieldComboBox_currentIndexChanged(int index);
 
    private:
       Ui::StreamSurfacesTab *ui;

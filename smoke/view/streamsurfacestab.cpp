@@ -69,6 +69,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onNumberOfStatesChanged(int)));
    connect(this, SIGNAL(showStreamSurfaceFaceToggled(bool)),
            &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceFaceToggled(bool)));
+   connect(this, SIGNAL(vectorFieldChanged(Settings::sim::Vector)),
+           &Settings::visualization::streakSurface(), SLOT(onVectorFieldChanged(Settings::sim::Vector)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -99,4 +101,9 @@ void StreamSurfacesTab::fillUI()
 void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
 {
    emit numberOfStatesChanged(value);
+}
+
+void StreamSurfacesTab::on_vectorFieldComboBox_currentIndexChanged(int index)
+{
+   emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
 }
