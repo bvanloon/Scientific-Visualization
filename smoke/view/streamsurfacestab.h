@@ -47,6 +47,7 @@ class StreamSurfacesTab : public QWidget
 
       void toggleAllEngines(bool toggle);
 
+      void toggleListenForVertices(bool toggle);
 
    private slots:
       void on_clearSeedCurvesButton_pressed();

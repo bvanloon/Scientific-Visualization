@@ -79,6 +79,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::canvas(), SLOT(onToggleAllEngines(bool)));
    connect(this, SIGNAL(toggleAll3Dengines(bool)),
            &Settings::canvas(), SLOT(onToggleAll3DEngines(bool)));
+   connect(this, SIGNAL(toggleListenForVertices(bool)),
+           &Settings::visualization::streakSurface(), SLOT(onToggleListenForVertices(bool)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -131,18 +133,16 @@ void StreamSurfacesTab::on_defineSeedCurveButton_clicked()
 
 void StreamSurfacesTab::enterDefineSeedCurveMode()
 {
-   qDebug() << "Drawing Seed Curve";
-   //Disable all 3D engines
-   //Enable the seedcurve engine
-   //Start listening to shift click.
+   emit toggleAll3Dengines(false);
+   emit engineToggled(Settings::engines::seedCurve, true);
+   emit toggleListenForVertices(true);
    this->ui->defineSeedCurveButton->setText("Show Streak Object");
 }
 
 void StreamSurfacesTab::exitDefineSeedCurveMode()
 {
+   emit toggleAllEngines(false);
+   emit engineToggled(Settings::engines::streakObjects, true);
+   emit toggleListenForVertices(false);
    this->ui->defineSeedCurveButton->setText("Define");
-   //Disable all engines
-   //Enable the streak object engine.
-   //Stop listening to shift click.
-   qDebug() << "Not Drawing Seed Curve";
 }
