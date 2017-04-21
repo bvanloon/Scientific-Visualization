@@ -29,6 +29,12 @@ void StreamSurfacesTab::onEngineToggled(Settings::engines::EnginesTypes engine, 
    if (engine == Settings::engines::EnginesTypes::seedCurves) this->ui->showSeedCurvesCheckBox->setChecked(checked);
 }
 
+void StreamSurfacesTab::onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude)
+{
+   this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(magnitude);
+   this->ui->vectorFieldComboBox->setCurrentIndex(vectorField);
+}
+
 void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
 {
    emit clearSeedCurves();
@@ -49,6 +55,8 @@ void StreamSurfacesTab::setUiToDefaults()
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
    this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().getNumberOfStates());
    this->ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::streakSurface().vectorField);
+   this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::visualization::streakSurface().vectorFieldMagnitude);
+   this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
 }
 
 void StreamSurfacesTab::connectToSettings()
@@ -71,6 +79,8 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onShowStreamSurfaceFaceToggled(bool)));
    connect(this, SIGNAL(vectorFieldChanged(Settings::sim::Vector)),
            &Settings::visualization::streakSurface(), SLOT(onVectorFieldChanged(Settings::sim::Vector)));
+   connect(&Settings::visualization::streakSurface(), SIGNAL(vectorFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)),
+           this, SLOT(onVectoFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)

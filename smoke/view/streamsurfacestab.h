@@ -22,6 +22,8 @@ class StreamSurfacesTab : public QWidget
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude);
+
    signals:
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 

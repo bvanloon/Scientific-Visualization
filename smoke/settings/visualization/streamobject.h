@@ -34,6 +34,8 @@ namespace Settings {
            signals:
               void clearCache();
 
+              void vectorFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude);
+
            public slots:
               void ontimeStepChanged(double newTimeStep);
 

@@ -90,7 +90,11 @@ void Settings::visualization::StreamObject::setVectorField(Settings::sim::Vector
    this->vectorField = vectorField;
    this->getVector = Vertex::getVectorGetter(vectorField);
 
-   setVectorFieldMagnitude(determineMagnitudeEnum(vectorField));
+   Settings::sim::Scalar magnitude = determineMagnitudeEnum(vectorField);
+
+   setVectorFieldMagnitude(magnitude);
+
+   emit vectorFieldChanged(vectorField, magnitude);
 }
 
 void Settings::visualization::StreamObject::setVectorFieldMagnitude(Settings::sim::Scalar magnitude)
