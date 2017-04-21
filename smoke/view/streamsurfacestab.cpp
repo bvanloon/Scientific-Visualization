@@ -10,6 +10,7 @@ StreamSurfacesTab::StreamSurfacesTab(QWidget *parent) :
 {
    ui->setupUi(this);
    connectToSettings();
+   fillUI();
    setUiToDefaults();
 }
 
@@ -47,6 +48,7 @@ void StreamSurfacesTab::setUiToDefaults()
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
    this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().getNumberOfStates());
+   this->ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::streakSurface().vectorField);
 }
 
 void StreamSurfacesTab::connectToSettings()
@@ -87,6 +89,11 @@ void StreamSurfacesTab::on_showVerticesCheckBox_clicked(bool checked)
 void StreamSurfacesTab::on_showSurfaceCheckBox_clicked(bool checked)
 {
    emit showStreamSurfaceFaceToggled(checked);
+}
+
+void StreamSurfacesTab::fillUI()
+{
+   this->ui->vectorFieldComboBox->addItems(Settings::visualization::getNonDerivedVectorVariableNames());
 }
 
 void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)

@@ -55,6 +55,7 @@ class StreamSurfacesTab : public QWidget
    private:
       Ui::StreamSurfacesTab *ui;
 
+      void fillUI();
       void setUiToDefaults();
       void connectToSettings();
 };
