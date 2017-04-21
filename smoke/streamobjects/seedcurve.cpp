@@ -71,6 +71,11 @@ void SeedCurve::applyTransformation(QMatrix4x4 transform)
    }
 }
 
+void SeedCurve::removeTail()
+{
+   if (!vertices.isEmpty()) this->vertices.takeLast();
+}
+
 QList<QVector3D> SeedCurve::getSeedPoints(int resolution)
 {
    QList<QVector3D> seedPoints;

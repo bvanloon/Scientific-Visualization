@@ -20,7 +20,6 @@ class StreamSurfacesTab : public QWidget
       ColorMapTab *getColorMapWidget();
 
    public slots:
-      void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
       void onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude);
 
@@ -43,10 +42,16 @@ class StreamSurfacesTab : public QWidget
 
       void clearSeedCurves();
 
+      void toggleAll3Dengines(bool toggle);
+
+      void toggleAllEngines(bool toggle);
+
+      void toggleListenForVertices(bool toggle);
+
+      void removeLastVertexFromSeedCurve();
+
    private slots:
       void on_clearSeedCurvesButton_pressed();
-
-      void on_showSeedCurvesCheckBox_clicked(bool checked);
 
       void on_resolutionSpinBox_valueChanged(int value);
 
@@ -62,8 +67,15 @@ class StreamSurfacesTab : public QWidget
 
       void on_divergenceSensitivitySpinBox_valueChanged(double value);
 
+      void on_defineSeedCurveButton_clicked();
+
+      void on_clearLastVertexButton_clicked();
+
    private:
       Ui::StreamSurfacesTab *ui;
+
+      void enterDefineSeedCurveMode();
+      void exitDefineSeedCurveMode();
 
       void fillUI();
       void setUiToDefaults();

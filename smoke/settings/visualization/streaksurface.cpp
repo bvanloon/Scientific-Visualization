@@ -8,7 +8,8 @@ Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    resolution(100),
    showVertices(true), showLines(true), showSurface(true),
    divergenceSensitivity(200),
-   seedCurve(new SeedCurve())
+   seedCurve(new SeedCurve()),
+   listeningForSeedCurveVertices(false)
 {
    connectToOtherSettings();
 
@@ -52,7 +53,7 @@ void Settings::visualization::StreakSurface::onClearSeedCurves()
 
 void Settings::visualization::StreakSurface::onSeedCurveVertexAdded(QPointF vertexPosition)
 {
-   seedCurve->addVertex(QVector3D(Settings::canvas().convertToNormalCoordinates(vertexPosition)));
+   if (listeningForSeedCurveVertices) seedCurve->addVertex(QVector3D(Settings::canvas().convertToNormalCoordinates(vertexPosition)));
 }
 
 void Settings::visualization::StreakSurface::onResolutionChanged(int resolution)
@@ -95,6 +96,16 @@ void Settings::visualization::StreakSurface::onNumberOfStatesChanged(int newNumb
 void Settings::visualization::StreakSurface::onDivergenceSensitivityChanged(double sensitivity)
 {
    this->divergenceSensitivity = sensitivity;
+}
+
+void Settings::visualization::StreakSurface::onToggleListenForVertices(bool toggle)
+{
+   this->listeningForSeedCurveVertices = toggle;
+}
+
+void Settings::visualization::StreakSurface::onRemoveLastVertexFromSeedCurve()
+{
+   this->seedCurve->removeTail();
 }
 
 void Settings::visualization::StreakSurface::transformSeedCurves(QMatrix4x4 transform)

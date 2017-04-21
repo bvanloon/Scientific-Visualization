@@ -55,12 +55,18 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       void onDivergenceSensitivityChanged(double sensitivity);
 
+      void onToggleListenForVertices(bool toggle);
+
+      void onRemoveLastVertexFromSeedCurve();
+
    private slots:
 
    private:
       explicit StreakSurface(QObject *parent = 0);
       StreakSurface(StreakSurface const&) = delete;
       void operator=(StreakSurface const&) = delete;
+
+      bool listeningForSeedCurveVertices;
 
       void connectToOtherSettings();
 

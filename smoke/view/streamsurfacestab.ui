@@ -199,18 +199,29 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="showSeedCurvesCheckBox">
-        <property name="text">
-         <string>Show Seed Curve</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="clearSeedCurvesButton">
-        <property name="text">
-         <string>Clear Seed Curve</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="defineSeedCurveButton">
+          <property name="text">
+           <string>Define</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearLastVertexButton">
+          <property name="text">
+           <string>Clear Last Vertex</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearSeedCurvesButton">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
