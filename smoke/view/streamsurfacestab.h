@@ -43,6 +43,11 @@ class StreamSurfacesTab : public QWidget
 
       void clearSeedCurves();
 
+      void toggleAll3Dengines(bool toggle);
+
+      void toggleAllEngines(bool toggle);
+
+
    private slots:
       void on_clearSeedCurvesButton_pressed();
 

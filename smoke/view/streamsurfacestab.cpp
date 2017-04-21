@@ -75,6 +75,10 @@ void StreamSurfacesTab::connectToSettings()
            this, SLOT(onVectoFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)));
    connect(this, SIGNAL(divergenceSensitivityChanged(double)),
            &Settings::visualization::streakSurface(), SLOT(onDivergenceSensitivityChanged(double)));
+   connect(this, SIGNAL(toggleAllEngines(bool)),
+           &Settings::canvas(), SLOT(onToggleAllEngines(bool)));
+   connect(this, SIGNAL(toggleAll3Dengines(bool)),
+           &Settings::canvas(), SLOT(onToggleAll3DEngines(bool)));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
