@@ -9,13 +9,11 @@ StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
 
 void StreakSurfaceEngine::draw()
 {
-   streamobject::Surface surface = streamobject::Surface::debugSurfaceWithSplit(2);
-   drawSurface(surface);
-   if (Settings::visualization::streakSurface().showLines) drawLines(surface);
-   if (Settings::visualization::streakSurface().showVertices) drawVertices(surface);
+   QList<streamobject::Line> streakLines = computeStreakLines(getSeedPoints());
 
-   GPUData data = surface.GPUDataSurfaceEdges();
-   updateBuffersAndDraw(data);
+   if (Settings::visualization::streakSurface().showSurface) drawSurface(streakLines);
+   if (Settings::visualization::streakSurface().showLines) drawLines(streakLines);
+   if (Settings::visualization::streakSurface().showVertices) drawVertices(streakLines);
 }
 
 void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
