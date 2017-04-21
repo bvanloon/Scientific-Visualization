@@ -9,7 +9,8 @@ class StreakLineBuilder : public StreamLineBuilder
 {
    public:
       StreakLineBuilder(QVector3D currentPosition, const
-                        Settings::visualization::StreamObject *configuration);
+                        Settings::visualization::StreamObject *configuration,
+                        double zStep);
 
    protected:
       QVector3D integrate(QVector3D previousPosition);
@@ -18,6 +19,7 @@ class StreakLineBuilder : public StreamLineBuilder
 
    private:
       int currentStateIdx;
+      double zStep;
 
       void moveToNextGrid();
 };

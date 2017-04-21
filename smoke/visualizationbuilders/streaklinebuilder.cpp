@@ -2,7 +2,7 @@
 #include "simulation/simulationstatehistory.h"
 
 StreakLineBuilder::StreakLineBuilder(QVector3D currentPosition,
-                                     const Settings::visualization::StreamObject *configuration) :
+                                     const Settings::visualization::StreamObject *configuration, double zStep) :
    StreamLineBuilder(&SimulationHistory::instance().getSimulationGridAtQueueIdx(0),
                      currentPosition,
                      configuration),
