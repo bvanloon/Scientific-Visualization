@@ -72,11 +72,11 @@ void Canvas::buildEngineMap()
                         new StreamLineSlicesEngine()));
 
    enginemap.insert(EnginePair(
-                         Settings::engines::EnginesTypes::seedCurves,
+                         Settings::engines::EnginesTypes::seedCurve,
                         new SeedCurveEngine()));
 
    enginemap.insert(EnginePair(
-                         Settings::engines::EnginesTypes::streamSurfaces,
+                         Settings::engines::EnginesTypes::streakObjects,
                         new StreakSurfaceEngine(simulation->getSimulationGrid())));
 }
 
@@ -86,8 +86,8 @@ void Canvas::connectEngines()
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphs));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedPoints));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamLines));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedCurves));
-   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streamSurfaces));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::seedCurve));
+   connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::streakObjects));
 
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::smokeSlices));
    connectThisAndEngine(getEngine(Settings::engines::EnginesTypes::glyphSlices));

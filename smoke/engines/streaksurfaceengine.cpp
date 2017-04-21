@@ -3,7 +3,7 @@
 
 StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
    Abstract3DEngine(AbstractEngine::lightModel::phongLight,
-                    Settings::engines::EnginesTypes::streamSurfaces),
+                    Settings::engines::EnginesTypes::streakObjects),
    simulation(grid)
 {}
 

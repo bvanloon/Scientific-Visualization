@@ -26,7 +26,7 @@ ColorMapTab *StreamSurfacesTab::getColorMapWidget()
 
 void StreamSurfacesTab::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
-   if (engine == Settings::engines::EnginesTypes::seedCurves) this->ui->showSeedCurvesCheckBox->setChecked(checked);
+   if (engine == Settings::engines::EnginesTypes::seedCurve) this->ui->showSeedCurvesCheckBox->setChecked(checked);
 }
 
 void StreamSurfacesTab::onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude)
@@ -42,13 +42,13 @@ void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
 
 void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
-   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, true);
+   emit engineToggled(Settings::engines::EnginesTypes::seedCurve, checked);
+   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streakObjects, true);
 }
 
 void StreamSurfacesTab::setUiToDefaults()
 {
-   this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
+   this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurve]);
    this->ui->showLinesCheckBox->setChecked(Settings::visualization::streakSurface().showLines);
    this->ui->showSurfaceCheckBox->setChecked(Settings::visualization::streakSurface().showSurface);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
