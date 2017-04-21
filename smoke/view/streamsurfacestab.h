@@ -46,8 +46,6 @@ class StreamSurfacesTab : public QWidget
    private slots:
       void on_clearSeedCurvesButton_pressed();
 
-      void on_showSeedCurvesCheckBox_clicked(bool checked);
-
       void on_resolutionSpinBox_valueChanged(int value);
 
       void on_showLinesCheckBox_clicked(bool checked);
