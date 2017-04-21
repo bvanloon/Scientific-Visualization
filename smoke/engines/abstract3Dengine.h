@@ -24,6 +24,9 @@ class Abstract3DEngine : public AbstractEngine
       void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
       QMatrix4x4 computeViewMatrix();
 
+      static const double maximumZTranslation;
+      static const double minimumZTranslation;
+
    private slots:
 
    private:

@@ -37,8 +37,6 @@ class AbstractSliceEngine : public Abstract3DEngine
       void clearCache();
 
    private:
-      static const double maximumZTranslation;
-      static const double minimumZTranslation;
 
       int numRecentSimulationStatesNotInSlice;
 
