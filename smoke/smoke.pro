@@ -23,11 +23,14 @@ SOURCES += main.cpp\
         colormaps/abstractcolormap.cpp \
     colormaps/coldcolormap.cpp \
     colormaps/colormapfactory.cpp \
+    colormaps/diverging.cpp \
     colormaps/grayscalecolormap.cpp \
     colormaps/heatcolormap.cpp \
     colormaps/huecolormap.cpp \
     colormaps/rainbowcolormap.cpp \
+    colormaps/twocolorcolormap.cpp \
     colormaps/zebramap.cpp \
+    engines/abstract3Dengine.cpp \
     engines/abstractengine.cpp \
     engines/abstractsliceengine.cpp \
     engines/glyphengine.cpp \
@@ -36,9 +39,9 @@ SOURCES += main.cpp\
     engines/seedpointengine.cpp \
     engines/smokeengine.cpp \
     engines/smokeslicesengine.cpp \
+    engines/streaksurfaceengine.cpp \
     engines/streamlineengine.cpp \
     engines/streamlineslicesengine.cpp \
-    engines/streamsurfaceengine.cpp \
     glyphs/abstractglyph.cpp \
     glyphs/airplane.cpp \
     glyphs/ccwtriangle.cpp \
@@ -59,8 +62,9 @@ SOURCES += main.cpp\
     settings/visualization/glyphs.cpp \
     settings/visualization/slices.cpp \
     settings/visualization/smokesettings.cpp \
+    settings/visualization/streaksurface.cpp \
     settings/visualization/streamlines.cpp \
-    settings/visualization/streamsurfaces.cpp \
+    settings/visualization/streamobject.cpp \
     settings/visualization/visualizationsettings.cpp \
     shapes/cone.cpp \
     shapes/polyline.cpp \
@@ -72,6 +76,7 @@ SOURCES += main.cpp\
     simulation/utils.cpp \
     streamobjects/seedcurve.cpp \
     streamobjects/streamline.cpp \
+    streamobjects/streamsurface.cpp \
     utilities/approximation.cpp \
     utilities/gpudata.cpp \
     utilities/mesh.cpp \
@@ -89,23 +94,25 @@ SOURCES += main.cpp\
     view/slicestab.cpp \
     view/streamlinestab.cpp \
     view/streamsurfacestab.cpp \
+    visualizationbuilders/abstracttranslucentbuilder.cpp \
     visualizationbuilders/glyphbuilder.cpp \
     visualizationbuilders/smokebuilder.cpp \
+    visualizationbuilders/streaklinebuilder.cpp \
     visualizationbuilders/streamlinebuilder.cpp \
-    visualizationbuilders/abstracttranslucentbuilder.cpp \
-    visualizationbuilders/translucentsmokebuilder.cpp \
     visualizationbuilders/translucentglyphbuilder.cpp \
-    visualizationbuilders/translucentstreamlinebuilder.cpp \
-    colormaps/diverging.cpp \
-    colormaps/twocolorcolormap.cpp
+    visualizationbuilders/translucentsmokebuilder.cpp \
+    visualizationbuilders/translucentstreamlinebuilder.cpp
 
 HEADERS  += main.ih\
         colormaps/abstractcolormap.h \
     colormaps/coldcolormap.h \
     colormaps/colormapfactory.h \
+    colormaps/diverging.h \
     colormaps/huecolormap.h \
     colormaps/rainbowcolormap.h \
+    colormaps/twocolorcolormap.h \
     colormaps/zebramap.h \
+    engines/abstract3Dengine.h \
     engines/abstractengine.h \
     engines/abstractsliceengine.h \
     engines/glyphengine.h \
@@ -114,9 +121,9 @@ HEADERS  += main.ih\
     engines/seedpointengine.h \
     engines/smokeengine.h \
     engines/smokeslicesengine.h \
+    engines/streaksurfaceengine.h \
     engines/streamlineengine.h \
     engines/streamlineslicesengine.h \
-    engines/streamsurfaceengine.h \
     glyphs/abstractglyph.h \
     glyphs/airplane.h \
     glyphs/ccwtriangle.h \
@@ -137,8 +144,9 @@ HEADERS  += main.ih\
     settings/simulationsettings.h \
     settings/visualization/glyphs.h \
     settings/visualization/slices.h \
+    settings/visualization/streaksurface.h \
     settings/visualization/streamlines.h \
-    settings/visualization/streamsurfaces.h \
+    settings/visualization/streamobject.h \
     settings/visualizationsettings.h \
     shapes/cone.h \
     shapes/polyline.h \
@@ -150,6 +158,7 @@ HEADERS  += main.ih\
     simulation/utils.h \
     streamobjects/seedcurve.h \
     streamobjects/streamline.h \
+    streamobjects/streamsurface.h \
     unused.h \
     utilities/approximation.h \
     utilities/gpudata.h \
@@ -169,15 +178,14 @@ HEADERS  += main.ih\
     view/slicestab.h \
     view/streamlinestab.h \
     view/streamsurfacestab.h \
+    visualizationbuilders/abstracttranslucentbuilder.h \
     visualizationbuilders/glyphbuilder.h \
     visualizationbuilders/smokebuilder.h \
+    visualizationbuilders/streaklinebuilder.h \
     visualizationbuilders/streamlinebuilder.h \
-    visualizationbuilders/abstracttranslucentbuilder.h \
-    visualizationbuilders/translucentsmokebuilder.h \
     visualizationbuilders/translucentglyphbuilder.h \
-    visualizationbuilders/translucentstreamlinebuilder.h \
-    colormaps/diverging.h \
-    colormaps/twocolorcolormap.h
+    visualizationbuilders/translucentsmokebuilder.h \
+    visualizationbuilders/translucentstreamlinebuilder.h
 
 FORMS    += view/mainwindow.ui \
     view/colormaplegend.ui \

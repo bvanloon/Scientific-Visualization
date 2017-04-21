@@ -53,10 +53,10 @@ void MainWindow::onOpenGLReady()
                          Settings::visualization::streamLines().colorMap);
    connectAbstractEngine(Settings::engines::seedCurves,
                          this->streamSurfacesTab->getColorMapWidget(),
-                         Settings::visualization::streamSurfaces().colorMap);
+                         Settings::visualization::streakSurface().colorMap);
    connectAbstractEngine(Settings::engines::streamSurfaces,
                          this->streamSurfacesTab->getColorMapWidget(),
-                         Settings::visualization::streamSurfaces().colorMap);
+                         Settings::visualization::streakSurface().colorMap);
 
    connectAbstractSliceEngine(Settings::engines::smokeSlices,
                          this->smokeTab->getColorMapWidget(),
@@ -106,6 +106,8 @@ void MainWindow::connectSimuationStateHistory()
            &SimulationHistory::instance(), SLOT(onWindowResized(QSizeF)));
    connect(&Settings::visualization::glyphs(), SIGNAL(gridDimensionChanged(QSizeF)),
            &SimulationHistory::instance(), SLOT(onGridDimensionChanged(QSizeF)));
+   connect(&Settings::visualization::streakSurface(), SIGNAL(numberOfStatesChanged(int)),
+           &SimulationHistory::instance(), SLOT(onHistorySizeChanged(int)));
 }
 
 void MainWindow::connectCanvasAndThis()
@@ -140,7 +142,7 @@ void MainWindow::connectCanvasAndSettings()
            &Settings::canvas(), SLOT(onPanningPositionChanged(QVector3D)));
 
    connect(this->canvas, SIGNAL(seedCurveVertexAdded(QPointF)),
-           &Settings::visualization::streamSurfaces(), SLOT(onSeedCurveVertexAdded(QPointF)));
+           &Settings::visualization::streakSurface(), SLOT(onSeedCurveVertexAdded(QPointF)));
 }
 
 void MainWindow::connectCanvasAndTabs()

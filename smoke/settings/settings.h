@@ -41,8 +41,8 @@ namespace Settings {
         class StreamLines;
         const StreamLines& streamLines();
 
-        class StreamSurfaces;
-        const StreamSurfaces& streamSurfaces();
+        class StreakSurface;
+        const StreakSurface& streakSurface();
 
         class Slices;
         const Slices& slices();
@@ -127,11 +127,6 @@ namespace Settings {
             namespace glyphs {
                 static const QSize gridSize = QSize(20, 15);
             }
-
-            namespace streamlines {
-                static const double edgeLengthFactor = 0.33;
-                static const double totalLengthFactor = std::numeric_limits<double>::infinity();
-            }
         }
 
         namespace engines {
@@ -142,9 +137,9 @@ namespace Settings {
                //Glyphs
                false,
                //Stream Surfaces
-               true, true,
-               //StreamLines
                false,false,
+               //StreamLines
+               true, true,
 
                //Slice Engines
                false,false, false

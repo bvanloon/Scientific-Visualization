@@ -20,6 +20,36 @@ GPUData SeedCurve::GPUDataEdges(int resolution)
    return curveData;
 }
 
+GPUData SeedCurve::edgeToGPUData(QVector3D start, QVector3D end, int resolution)
+{
+   float minTextureCoordinate = 0.0;
+
+   float maxTextureCoordinate = 1.0;
+
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+
+   QVector3D direction = (end - start);
+
+   double stepLength = direction.length() / resolution;
+
+   direction.normalize();
+
+   QVector3D pieceStart = start;
+   QVector3D pieceEnd = start + stepLength * direction;
+
+   GPUData data(GL_LINES);
+
+   for (int i = 0; i < resolution; i++)
+   {
+      data.addElement(pieceStart, normal, minTextureCoordinate);
+      data.addElement(pieceEnd, normal, maxTextureCoordinate);
+
+      pieceStart = pieceEnd;
+      pieceEnd += stepLength * direction;
+   }
+   return data;
+}
+
 GPUData SeedCurve::GPUDataVertices()
 {
    GPUData data(GL_POINTS);
@@ -41,35 +71,31 @@ void SeedCurve::applyTransformation(QMatrix4x4 transform)
    }
 }
 
-GPUData SeedCurve::edgeToGPUData(QVector3D start, QVector3D end, int resolution)
+QList<QVector3D> SeedCurve::getSeedPoints(int resolution)
 {
-   float minTextureCoordinate = 0.0;
-   float maxTextureCoordinate = 1.0;
+   QList<QVector3D> seedPoints;
+   QList<QVector3D>::iterator start = this->vertices.begin();
+   QList<QVector3D>::iterator end = start + 1;
 
-   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   for ( ; end < this->vertices.end(); ++start, ++end)
+   {
+      seedPoints.append(edgeToSeedPoints(*start, *end, resolution));
+   }
+   return seedPoints;
+}
 
+QList<QVector3D> SeedCurve::edgeToSeedPoints(QVector3D start, QVector3D end, int resolution)
+{
    QVector3D direction = (end - start);
-
    double stepLength = direction.length() / resolution;
-
    direction.normalize();
 
-   QVector3D pieceStart = start;
-   QVector3D pieceEnd = start + stepLength * direction;
+   QVector3D current = start;
+   QList<QVector3D> seedPoints;
 
-   GPUData data(GL_LINES);
-
-   data.addElement(start, normal, minTextureCoordinate);
-   data.addElement(end, normal, maxTextureCoordinate);
-
-
-   for (int i = 0; i < resolution; i++)
+   for (int i = 0; i < resolution; i++, current += stepLength * direction)
    {
-      data.addElement(pieceStart, normal, minTextureCoordinate);
-      data.addElement(pieceEnd, normal, maxTextureCoordinate);
-
-      pieceStart = pieceEnd;
-      pieceEnd += stepLength * direction;
+      seedPoints.append(current);
    }
-   return data;
+   return seedPoints;
 }

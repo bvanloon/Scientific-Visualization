@@ -3,11 +3,11 @@
 
 #include <QObject>
 #include <QMatrix4x4>
-#include "abstractengine.h"
+#include "abstract3Dengine.h"
 #include "unused.h"
 #include "utilities/sizelimitedqueue.h"
 
-class AbstractSliceEngine : public AbstractEngine
+class AbstractSliceEngine : public Abstract3DEngine
 {
    Q_OBJECT
 
@@ -17,7 +17,6 @@ class AbstractSliceEngine : public AbstractEngine
       void draw();
 
    public slots:
-      void onUpdateModelViewMatrix();
 
       void onNumberOfSlicesChanged(int newNumberOfSlices);
 
@@ -38,20 +37,12 @@ class AbstractSliceEngine : public AbstractEngine
       void clearCache();
 
    private:
-      static const double maximumZTranslation;
-      static const double minimumZTranslation;
 
       int numRecentSimulationStatesNotInSlice;
 
       void drawSlices();
 
-      void updateModelViewMatrix(QMatrix4x4 modelMatrix = QMatrix4x4());
-
-      QMatrix4x4 computeViewMatrix();
-
       double computeTranslationStepSize();
-
-      void updateBuffers(GPUData data);
 
       void connectToSettings();
 

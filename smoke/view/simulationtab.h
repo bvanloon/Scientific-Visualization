@@ -107,21 +107,20 @@ class SimulationSettingPane : public QWidget
 
       void setFreezeButtonLabel(bool frozen);
 
-      void toggleSliceEngines(bool toggle);
+      void toggle3DEngines(bool toggle);
 
       void toggle2DEngines(bool toggle);
 
-      bool isSliceEngine(Settings::engines::EnginesTypes engine);
+      bool is3DEngine(Settings::engines::EnginesTypes engine);
 
-      bool isNonSliceEngine(Settings::engines::EnginesTypes engine);
+      bool is2DEngine(Settings::engines::EnginesTypes engine);
 
       void register2DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox = nullptr);
-      void registerSliceEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
-
+      void register3DEngine(Settings::engines::EnginesTypes engine, QCheckBox *engineCheckBox);
 
       EngineMap engines;
       EngineMap engines2D;
-      EngineMap sliceEngines;
+      EngineMap engines3D;
 };
 
 #endif // SIMULATIONSETTINGPANE_H

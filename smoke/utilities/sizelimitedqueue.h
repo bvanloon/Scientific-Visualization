@@ -35,6 +35,8 @@ class SizeLimitedQueue : public QQueue<T>
          return theTail;
       }
 
+      inline int getMaximumSize() const { return maximumSize; }
+
    private:
       int maximumSize;
 
@@ -69,6 +71,8 @@ class SizeLimitedQueue<T *> : public QQueue<T *>
          maximumSize = newSize;
          this->trim();
       }
+
+      inline int getMaximumSize() const { return maximumSize; }
 
       inline const T& tail() const { return QList<T *>::last(); }
 

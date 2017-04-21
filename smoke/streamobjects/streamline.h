@@ -16,17 +16,28 @@ namespace streamobject {
           Line(QPointF seedPoint, float textureCoordinate, float alpha = 1.0);
           Line();
 
+          typedef QList<QVector3D>::ConstIterator ConstIterator;
+          typedef QList<QVector3D>::Iterator Iterator;
+
           void addVertex(QVector3D vertex, float textureCoordinate, float alpha = 1.0);
 
           bool hasNoVertices();
 
-          GPUData toGPUData() const;
+          GPUData GPUDataEdges() const;
+
+          GPUData GPUDataEdges(float textureCoordinate) const;
+
+          GPUData GPUDataVertices() const;
 
           int numVertices() const;
 
           int getLength() const;
 
-          static const int drawMode = GL_LINES;
+          QVector3D vertexAt(int i) const;
+
+          double getTextureAt(int i) const;
+
+          double getAlphaAt(int i) const;
 
        private:
           QList<float> textureCoordinates;

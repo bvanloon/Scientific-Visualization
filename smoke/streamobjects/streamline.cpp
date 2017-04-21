@@ -21,9 +21,9 @@ streamobject::Line::Line() :
    shapes::PolyLine()
 {}
 
-GPUData streamobject::Line::toGPUData() const
+GPUData streamobject::Line::GPUDataEdges() const
 {
-   GPUData data(drawMode);
+   GPUData data(GL_LINES);
 
    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
 
@@ -37,6 +37,30 @@ GPUData streamobject::Line::toGPUData() const
    return data;
 }
 
+GPUData streamobject::Line::GPUDataEdges(float textureCoordinate) const
+{
+   GPUData data(GL_LINES);
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   float alpha = 1.0;
+
+   if (this->numVertices() <= 1) return data;
+
+   for (int current = 0, next = 1; next < this->vertices.length(); current++, next++)
+   {
+      data.addElement(vertices[current], normal, textureCoordinate, alpha);
+      data.addElement(vertices[next], normal, textureCoordinate, alpha);
+   }
+   return data;
+}
+
+GPUData streamobject::Line::GPUDataVertices() const
+{
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   GPUData vertices(GL_POINTS);
+   vertices.addElements(this->vertices.toVector(), normal, this->textureCoordinates.toVector());
+   return vertices;
+}
+
 int streamobject::Line::numVertices() const
 {
    return this->vertices.length();
@@ -45,6 +69,21 @@ int streamobject::Line::numVertices() const
 int streamobject::Line::getLength() const
 {
    return shapes::PolyLine::getLength();
+}
+
+QVector3D streamobject::Line::vertexAt(int i) const
+{
+   return vertices[i];
+}
+
+double streamobject::Line::getTextureAt(int i) const
+{
+   return textureCoordinates[i];
+}
+
+double streamobject::Line::getAlphaAt(int i) const
+{
+   return alphaValues[i];
 }
 
 bool streamobject::Line::isEdgeAllowed(QVector3D vertex)

@@ -17,7 +17,7 @@ void StreamLineSlicesEngine::updateCache()
 
 GPUData StreamLineSlicesEngine::buildStreamLines()
 {
-   GPUData data(streamobject::Line::drawMode);
+   GPUData data;
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
@@ -34,11 +34,9 @@ GPUData StreamLineSlicesEngine::buildStreamLines()
 GPUData StreamLineSlicesEngine::buildStreamLine(const SimulationGrid *grid, QPointF seedPoint)
 {
    TranslucentStreamLineBuilder builder(grid, QVector3D(seedPoint),
-                                        Settings::visualization::streamLines().vectorField,
-                                        Settings::visualization::streamLines().colorMap->textureGetter,
-                                        Settings::simulation().getMagnitudeRange(Settings::visualization::streamLines().vector));
-   streamobject::Line streamLine = builder.getStreamLine();
-   return streamLine.toGPUData();
+                                        Settings::simulation().getMagnitudeRange(Settings::visualization::streamLines().vectorField));
+   streamobject::Line streamLine = builder.buildLine();
+   return streamLine.GPUDataEdges();
 }
 
 void StreamLineSlicesEngine::connectToSettings()

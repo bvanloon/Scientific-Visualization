@@ -11,7 +11,7 @@ StreamLineEngine::StreamLineEngine(UniformGrid *simulationGrid) :
 
 GPUData StreamLineEngine::buildStreamLines()
 {
-   GPUData data(streamobject::Line::drawMode);
+   GPUData data;
 
    for (QPointF seedpoint : Settings::visualization::streamLines().seedPoints)
    {
@@ -24,11 +24,10 @@ GPUData StreamLineEngine::buildStreamLines()
 GPUData StreamLineEngine::buildStreamLine(QPointF seedPoint)
 {
    StreamLineBuilder builder(grid, QVector3D(seedPoint),
-                             Settings::visualization::streamLines().vectorField,
-                             Settings::visualization::streamLines().colorMap->textureGetter);
-   streamobject::Line streamLine = builder.getStreamLine();
+                             &Settings::visualization::streamLines());
+   streamobject::Line streamLine = builder.buildLine();
 
-   return streamLine.toGPUData();
+   return streamLine.GPUDataEdges();
 }
 
 void StreamLineEngine::draw()

@@ -32,13 +32,13 @@
       <property name="minimumSize">
        <size>
         <width>500</width>
-        <height>700</height>
+        <height>500</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>2880</width>
-        <height>1800</height>
+        <width>16777215</width>
+        <height>16777215</height>
        </size>
       </property>
       <property name="baseSize">
@@ -106,7 +106,7 @@
       </widget>
       <widget class="StreamSurfacesTab" name="streamSurfacesTab">
        <attribute name="title">
-        <string>Stream Surfaces</string>
+        <string>Streak Objects</string>
        </attribute>
       </widget>
       <widget class="SlicesTab" name="slicesTab">
