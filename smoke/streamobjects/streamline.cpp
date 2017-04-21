@@ -53,11 +53,11 @@ GPUData streamobject::Line::GPUDataEdges(float textureCoordinate) const
    return data;
 }
 
-GPUData streamobject::Line::GPUDataVertices(float textureCoordinate) const
+GPUData streamobject::Line::GPUDataVertices() const
 {
    QVector3D normal = QVector3D(0.0, 0.0, 1.0);
    GPUData vertices(GL_POINTS);
-   vertices.addElements(this->vertices.toVector(), normal, textureCoordinate);
+   vertices.addElements(this->vertices.toVector(), normal, this->textureCoordinates.toVector());
    return vertices;
 }
 

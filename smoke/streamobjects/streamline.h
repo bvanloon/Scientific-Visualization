@@ -27,7 +27,7 @@ namespace streamobject {
 
           GPUData GPUDataEdges(float textureCoordinate) const;
 
-          GPUData GPUDataVertices(float textureCoordinate) const;
+          GPUData GPUDataVertices() const;
 
           int numVertices() const;
 

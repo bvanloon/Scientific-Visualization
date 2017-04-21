@@ -19,7 +19,7 @@ void StreakSurfaceEngine::draw()
 void StreakSurfaceEngine::drawVertices(QList<streamobject::Line> streakLines)
 {
    GPUData data(GL_POINTS);
-   for (streamobject::Line streakLine : streakLines) data.extend(streakLine.GPUDataVertices(0.0));
+   for (streamobject::Line streakLine : streakLines) data.extend(streakLine.GPUDataVertices());
    updateBuffersAndDraw(data);
 }
 
