@@ -35,7 +35,7 @@ void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
 
 void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
 {
-   bool warningShown = false;
+   static bool warningShown = false;
    if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily showing the streak lines.";
 
    GPUData data;
