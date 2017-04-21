@@ -3,6 +3,7 @@
 
 #include "visualizationbuilders/streamlinebuilder.h"
 #include "settings/visualization/streamobject.h"
+#include "unused.h"
 
 class StreakLineBuilder : public StreamLineBuilder
 {
@@ -12,7 +13,9 @@ class StreakLineBuilder : public StreamLineBuilder
 
    protected:
       QVector3D integrate(QVector3D previousPosition);
-      bool isMagnitudeLargeEnough(float magnitude);
+
+      bool isMagnitudeLargeEnough(float UNUSED(magnitude));
+
 };
 
 #endif // STREAKLINEBUILDER_H

@@ -8,7 +8,7 @@ StreakLineBuilder::StreakLineBuilder(QVector3D currentPosition,
                      configuration)
 {}
 
-bool StreakLineBuilder::isMagnitudeLargeEnough(float magnitude)
+bool StreakLineBuilder::isMagnitudeLargeEnough(float UNUSED(magnitude))
 {
    return true;
 }
