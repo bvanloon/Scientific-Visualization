@@ -42,7 +42,7 @@ void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
    QList<QVector3D> seedPoints = Settings::visualization::streakSurface().seedCurve->getSeedPoints(Settings::visualization::streakSurface().resolution);
    for (QVector3D seedPoint : seedPoints)
    {
-      StreakLineBuilder builder(seedPoint, &Settings::visualization::streakSurface());
+      StreakLineBuilder builder(seedPoint, &Settings::visualization::streakSurface(), computeZStep());
       data.extend(builder.buildLine().GPUDataEdges());
    }
 
@@ -55,3 +55,6 @@ void StreakSurfaceEngine::drawSurface(streamobject::Surface surface)
    GPUData data = surface.GPUDataSurface();
    updateBuffersAndDraw(data);
 }
+
+double StreakSurfaceEngine::computeZStep()
+{}

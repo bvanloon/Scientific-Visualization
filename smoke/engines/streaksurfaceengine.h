@@ -19,6 +19,8 @@ class StreakSurfaceEngine : public Abstract3DEngine
       void drawVertices(streamobject::Surface surface);
       void drawLines(streamobject::Surface surface);
       void drawSurface(streamobject::Surface surface);
+
+      double computeZStep();
 };
 
 #endif // STREAMSURFACEENGINE_H
