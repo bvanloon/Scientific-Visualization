@@ -36,15 +36,12 @@ void StreakSurfaceEngine::drawVertices(streamobject::Surface surface)
 void StreakSurfaceEngine::drawLines(streamobject::Surface surface)
 {
    static bool warningShown = false;
-   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily showing the streak lines.";
+   if (!warningShown++) qDebug() << "StreakSurfaceEngine::drawLines: Temporarily recomputing the streaklines.";
 
    GPUData data;
-   QList<QVector3D> seedPoints = Settings::visualization::streakSurface().seedCurve->getSeedPoints(Settings::visualization::streakSurface().resolution);
-   for (QVector3D seedPoint : seedPoints)
-   {
-      StreakLineBuilder builder(seedPoint, &Settings::visualization::streakSurface(), computeZStep());
-      data.extend(builder.buildLine().GPUDataEdges());
-   }
+
+   QList<streamobject::Line> streakLines = computeStreakLines(getSeedPoints());
+   for (streamobject::Line streakLine : streakLines) data.extend(streakLine.GPUDataEdges());
 
 //   GPUData data = surface.GPUDataLines();
    updateBuffersAndDraw(data);
@@ -70,7 +67,15 @@ QList<QVector3D> StreakSurfaceEngine::getSeedPoints()
 }
 
 QList<streamobject::Line> StreakSurfaceEngine::computeStreakLines(QList<QVector3D> seedPoints)
-{}
+{
+   QList<streamobject::Line> streamLines;
+   for (QVector3D seedPoint : seedPoints)
+   {
+      StreakLineBuilder builder(seedPoint, &Settings::visualization::streakSurface(), computeZStep());
+      streamLines.append(builder.buildLine());
+   }
+   return streamLines;
+}
 
 double StreakSurfaceEngine::computeZStep()
 {

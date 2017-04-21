@@ -22,6 +22,8 @@ class StreakSurfaceEngine : public Abstract3DEngine
 
       QList<QVector3D> getSeedPoints();
 
+      QList<streamobject::Line> computeStreakLines(QList<QVector3D> seedPoints);
+
       double computeZStep();
 };
 
