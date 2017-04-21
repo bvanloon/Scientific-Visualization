@@ -73,6 +73,12 @@
           <property name="minimum">
            <number>1</number>
           </property>
+          <property name="maximum">
+           <number>400</number>
+          </property>
+          <property name="singleStep">
+           <number>10</number>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
