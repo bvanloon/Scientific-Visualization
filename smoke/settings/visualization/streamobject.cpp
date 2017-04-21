@@ -9,8 +9,6 @@ Settings::visualization::StreamObject::StreamObject(QObject *parent) :
    timeStep(1.0),
    maximumTime(100),
    minimumMagnitude(0.004),
-   vectorField(Settings::sim::Vector::fluidVelocity),
-   vectorFieldMagnitude(determineMagnitudeGetter(vectorField)),
    //Private
    edgeLengthFactor(0.33),
    totalLengthFactor(std::numeric_limits<double>::infinity())
@@ -19,8 +17,8 @@ Settings::visualization::StreamObject::StreamObject(QObject *parent) :
    this->edgeLength = 4.0;
    this->totalLength = 4.0;
 
-   this->getVector = Vertex::getVectorGetter(vectorField);
-   this->getMagnitude = Vertex::getScalarGetter(vectorFieldMagnitude);
+   setVectorField(Settings::sim::Vector::fluidVelocity);
+
    connectToOtherSettings();
 }
 
@@ -58,12 +56,7 @@ void Settings::visualization::StreamObject::onCellSizeChanged(QSizeF currentCell
 
 void Settings::visualization::StreamObject::onVectorFieldChanged(Settings::sim::Vector newVectorField)
 {
-   qDebug() << "Settings::visualization::StreamObject::onVectorFieldChanged";
-   this->vectorField = newVectorField;
-   this->getVector = Vertex::getVectorGetter(vectorField);
-
-   this->vectorFieldMagnitude = determineMagnitudeGetter(vectorField);
-   this->getMagnitude = Vertex::getScalarGetter(vectorFieldMagnitude);
+   setVectorField(newVectorField);
 }
 
 void Settings::visualization::StreamObject::connectToOtherSettings()
@@ -92,7 +85,21 @@ double Settings::visualization::StreamObject::computeMaximumTotalLength(double f
    return factor * cellSize;
 }
 
-Settings::sim::Scalar Settings::visualization::StreamObject::determineMagnitudeGetter(Settings::sim::Vector vectorField)
+void Settings::visualization::StreamObject::setVectorField(Settings::sim::Vector vectorField)
+{
+   this->vectorField = vectorField;
+   this->getVector = Vertex::getVectorGetter(vectorField);
+
+   setVectorFieldMagnitude(determineMagnitudeEnum(vectorField));
+}
+
+void Settings::visualization::StreamObject::setVectorFieldMagnitude(Settings::sim::Scalar magnitude)
+{
+   this->vectorFieldMagnitude = magnitude;
+   this->getMagnitude = Vertex::getScalarGetter(magnitude);
+}
+
+Settings::sim::Scalar Settings::visualization::StreamObject::determineMagnitudeEnum(Settings::sim::Vector vectorField)
 {
    Settings::sim::Scalar scalar;
    switch (vectorField)

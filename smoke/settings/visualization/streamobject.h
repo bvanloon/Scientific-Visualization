@@ -60,7 +60,11 @@ namespace Settings {
 
               double computeMaximumTotalLength(double factor, double cellSize);
 
-              Settings::sim::Scalar determineMagnitudeGetter(Settings::sim::Vector vectorField);
+              void setVectorField(Settings::sim::Vector vectorField);
+
+              void setVectorFieldMagnitude(Settings::sim::Scalar magnitude);
+
+              Settings::sim::Scalar determineMagnitudeEnum(Settings::sim::Vector vectorField);
         };
     }
 }
