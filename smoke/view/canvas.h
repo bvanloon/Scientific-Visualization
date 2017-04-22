@@ -107,7 +107,6 @@ class Canvas : public QOpenGLWidget, protected QOpenGLFunctions
       void initiateIdleLoop();
 
 
-
       // OpenGL initialization
       void initializeUniforms();
 

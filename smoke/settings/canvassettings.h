@@ -54,6 +54,11 @@ class Settings::Canvas : public QObject
 
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void onToggleAllEngines(bool toggle);
+      void onToggleAll3DEngines(bool toggle);
+      void onToggleAllSliceEngines(bool toggle);
+      void onToggleAll2DEngines(bool toggle);
+
       void onSetViewMatrixToTopDownView();
 
       void onSetViewMatrixToSideView();
@@ -67,6 +72,11 @@ class Settings::Canvas : public QObject
       void setRotation(int xAngle, int yAngle, int zAngle);
       void setRotation(Rotation rotation);
       void setScaling(float scalingFactor);
+
+      void toggleAllEngines(bool toggle);
+      void toggleAll3DEngines(bool toggle);
+      void toggleAllSliceEngines(bool toggle);
+      void toggleAll2DEngines(bool toggle);
 
       Canvas(Canvas const&) = delete;
       void operator=(Canvas const&) = delete;

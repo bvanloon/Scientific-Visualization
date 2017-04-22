@@ -14,6 +14,8 @@ class SeedCurve : public shapes::PolyLine
 
       void applyTransformation(QMatrix4x4 transform);
 
+      void removeTail();
+
       QList<QVector3D> getSeedPoints(int resolution);
 
    private:

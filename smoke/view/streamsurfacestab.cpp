@@ -24,11 +24,6 @@ ColorMapTab *StreamSurfacesTab::getColorMapWidget()
    return ui->colorMapWidget;
 }
 
-void StreamSurfacesTab::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
-{
-   if (engine == Settings::engines::EnginesTypes::seedCurves) this->ui->showSeedCurvesCheckBox->setChecked(checked);
-}
-
 void StreamSurfacesTab::onVectoFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude)
 {
    this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(magnitude);
@@ -40,31 +35,23 @@ void StreamSurfacesTab::on_clearSeedCurvesButton_pressed()
    emit clearSeedCurves();
 }
 
-void StreamSurfacesTab::on_showSeedCurvesCheckBox_clicked(bool checked)
-{
-   emit engineToggled(Settings::engines::EnginesTypes::seedCurves, checked);
-   if (checked) emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, true);
-}
-
 void StreamSurfacesTab::setUiToDefaults()
 {
-   this->ui->showSeedCurvesCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedCurves]);
    this->ui->showLinesCheckBox->setChecked(Settings::visualization::streakSurface().showLines);
    this->ui->showSurfaceCheckBox->setChecked(Settings::visualization::streakSurface().showSurface);
    this->ui->showVerticesCheckBox->setChecked(Settings::visualization::streakSurface().showVertices);
    this->ui->resolutionSpinBox->setValue(Settings::visualization::streakSurface().resolution);
-   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().getNumberOfStates());
+   this->ui->numStatesSpinBox->setValue(Settings::visualization::streakSurface().numberOfStates);
    this->ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::streakSurface().vectorField);
    this->ui->colorMapWidget->getVariableSelector()->setCurrentIndex(Settings::visualization::streakSurface().vectorFieldMagnitude);
    this->ui->colorMapWidget->getVariableSelector()->setDisabled(true);
+   this->ui->divergenceSensitivitySpinBox->setValue(Settings::visualization::streakSurface().divergenceSensitivity);
 }
 
 void StreamSurfacesTab::connectToSettings()
 {
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
-   connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
-            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this, SIGNAL(clearSeedCurves()),
            &Settings::visualization::streakSurface(), SLOT(onClearSeedCurves()));
    connect(this, SIGNAL(resolutionChanged(int)),
@@ -81,6 +68,16 @@ void StreamSurfacesTab::connectToSettings()
            &Settings::visualization::streakSurface(), SLOT(onVectorFieldChanged(Settings::sim::Vector)));
    connect(&Settings::visualization::streakSurface(), SIGNAL(vectorFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)),
            this, SLOT(onVectoFieldChanged(Settings::sim::Vector,Settings::sim::Scalar)));
+   connect(this, SIGNAL(divergenceSensitivityChanged(double)),
+           &Settings::visualization::streakSurface(), SLOT(onDivergenceSensitivityChanged(double)));
+   connect(this, SIGNAL(toggleAllEngines(bool)),
+           &Settings::canvas(), SLOT(onToggleAllEngines(bool)));
+   connect(this, SIGNAL(toggleAll3Dengines(bool)),
+           &Settings::canvas(), SLOT(onToggleAll3DEngines(bool)));
+   connect(this, SIGNAL(toggleListenForVertices(bool)),
+           &Settings::visualization::streakSurface(), SLOT(onToggleListenForVertices(bool)));
+   connect(this, SIGNAL(removeLastVertexFromSeedCurve()),
+           &Settings::visualization::streakSurface(), SLOT(onRemoveLastVertexFromSeedCurve()));
 }
 
 void StreamSurfacesTab::on_resolutionSpinBox_valueChanged(int value)
@@ -116,4 +113,39 @@ void StreamSurfacesTab::on_numStatesSpinBox_valueChanged(int value)
 void StreamSurfacesTab::on_vectorFieldComboBox_currentIndexChanged(int index)
 {
    emit vectorFieldChanged(static_cast<Settings::sim::Vector>(index));
+}
+
+void StreamSurfacesTab::on_divergenceSensitivitySpinBox_valueChanged(double value)
+{
+   emit divergenceSensitivityChanged(value);
+}
+
+void StreamSurfacesTab::on_defineSeedCurveButton_clicked()
+{
+   static bool drawingSeedCurve = false;
+   drawingSeedCurve = !drawingSeedCurve;
+   if (drawingSeedCurve) enterDefineSeedCurveMode();
+   else exitDefineSeedCurveMode();
+}
+
+void StreamSurfacesTab::enterDefineSeedCurveMode()
+{
+   emit toggleAll3Dengines(false);
+   emit engineToggled(Settings::engines::seedCurve, true);
+   emit toggleListenForVertices(true);
+   this->ui->defineSeedCurveButton->setText("Show Streak Object");
+}
+
+void StreamSurfacesTab::exitDefineSeedCurveMode()
+{
+   emit toggleListenForVertices(false);
+   emit engineToggled(Settings::engines::seedCurve, false);
+   emit toggleAllEngines(false);
+   emit engineToggled(Settings::engines::streakObjects, true);
+   this->ui->defineSeedCurveButton->setText("Define");
+}
+
+void StreamSurfacesTab::on_clearLastVertexButton_clicked()
+{
+   emit removeLastVertexFromSeedCurve();
 }

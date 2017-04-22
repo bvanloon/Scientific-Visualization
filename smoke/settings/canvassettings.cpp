@@ -34,6 +34,33 @@ void Settings::Canvas::setScaling(float scalingFactor)
    emit updateModelViewMatrix();
 }
 
+void Settings::Canvas::toggleAllEngines(bool toggle)
+{
+   toggleAll2DEngines(toggle);
+   toggleAll3DEngines(toggle);
+}
+
+void Settings::Canvas::toggleAll3DEngines(bool toggle)
+{
+   toggleAllSliceEngines(toggle);
+   emit engineToggled(Settings::engines::EnginesTypes::streakObjects, toggle);
+}
+
+void Settings::Canvas::toggleAllSliceEngines(bool toggle)
+{
+   emit engineToggled(Settings::engines::EnginesTypes::smokeSlices, toggle);
+   emit engineToggled(Settings::engines::EnginesTypes::glyphSlices, toggle);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLineSlices, toggle);
+}
+
+void Settings::Canvas::toggleAll2DEngines(bool toggle)
+{
+   emit engineToggled(Settings::engines::EnginesTypes::smoke, toggle);
+   emit engineToggled(Settings::engines::EnginesTypes::glyphs, toggle);
+   emit engineToggled(Settings::engines::EnginesTypes::streamLines, toggle);
+   emit engineToggled(Settings::engines::EnginesTypes::seedPoints, toggle);
+}
+
 const Settings::Canvas& Settings::Canvas::instance()
 {
    static Canvas instance;
@@ -102,6 +129,26 @@ void Settings::Canvas::onEngineToggled(Settings::engines::EnginesTypes engine, b
 {
    if (checked) emit clearCache(engine);
    emit engineToggled(engine, checked);
+}
+
+void Settings::Canvas::onToggleAllEngines(bool toggle)
+{
+   toggleAllEngines(toggle);
+}
+
+void Settings::Canvas::onToggleAll3DEngines(bool toggle)
+{
+   toggleAll3DEngines(toggle);
+}
+
+void Settings::Canvas::onToggleAllSliceEngines(bool toggle)
+{
+   toggleAllSliceEngines(toggle);
+}
+
+void Settings::Canvas::onToggleAll2DEngines(bool toggle)
+{
+   toggleAll2DEngines(toggle);
 }
 
 void Settings::Canvas::onSetViewMatrixToTopDownView()

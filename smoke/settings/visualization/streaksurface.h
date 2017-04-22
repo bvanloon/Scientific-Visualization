@@ -6,6 +6,7 @@
 #include "settings/settings.h"
 #include "settings/visualization/streamobject.h"
 #include "streamobjects/seedcurve.h"
+#include "unused.h"
 
 class Settings::visualization::StreakSurface : public Settings::visualization::StreamObject
 {
@@ -22,9 +23,11 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
       bool showLines;
       bool showSurface;
 
+      double divergenceSensitivity;
+
       SeedCurve *seedCurve;
 
-      int getNumberOfStates() const;
+      int numberOfStates;
 
    signals:
       void numberOfStatesChanged(int newNumberOfStates);
@@ -44,7 +47,17 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
 
       void onShowStreamSurfaceFaceToggled(bool toggle);
 
+      void ontimeStepChanged(double UNUSED(newTimeStep));
+
+      void onMaximumTimeChanged(double UNUSED(newMaximumTime));
+
       void onNumberOfStatesChanged(int newNumberOfStates);
+
+      void onDivergenceSensitivityChanged(double sensitivity);
+
+      void onToggleListenForVertices(bool toggle);
+
+      void onRemoveLastVertexFromSeedCurve();
 
    private slots:
 
@@ -52,6 +65,8 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
       explicit StreakSurface(QObject *parent = 0);
       StreakSurface(StreakSurface const&) = delete;
       void operator=(StreakSurface const&) = delete;
+
+      bool listeningForSeedCurveVertices;
 
       void connectToOtherSettings();
 

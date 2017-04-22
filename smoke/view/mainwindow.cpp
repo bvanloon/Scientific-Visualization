@@ -51,10 +51,10 @@ void MainWindow::onOpenGLReady()
    connectAbstractEngine(Settings::engines::streamLines,
                          this->streamLinesTab->getColorMapWidget(),
                          Settings::visualization::streamLines().colorMap);
-   connectAbstractEngine(Settings::engines::seedCurves,
+   connectAbstractEngine(Settings::engines::seedCurve,
                          this->streamSurfacesTab->getColorMapWidget(),
                          Settings::visualization::streakSurface().colorMap);
-   connectAbstractEngine(Settings::engines::streamSurfaces,
+   connectAbstractEngine(Settings::engines::streakObjects,
                          this->streamSurfacesTab->getColorMapWidget(),
                          Settings::visualization::streakSurface().colorMap);
 

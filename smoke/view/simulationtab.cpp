@@ -24,6 +24,8 @@ SimulationSettingPane::~SimulationSettingPane()
 void SimulationSettingPane::onEngineToggled(Settings::engines::EnginesTypes engine, bool checked)
 {
    EngineMap::const_iterator toggledPair = this->engines.find(engine);
+   if (toggledPair == this->engines.end()) return;
+
    if (toggledPair.value() != nullptr) toggledPair.value()->setChecked(checked);
    if (checked && this->is3DEngine(engine)) toggle2DEngines(false);
    if (checked && this->is2DEngine(engine)) toggle3DEngines(false);
@@ -94,14 +96,13 @@ void SimulationSettingPane::registerEngines()
    register2DEngine(Settings::engines::EnginesTypes::smoke, this->ui->smokeCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::glyphs, this->ui->glyphsCheckBox);
    register2DEngine(Settings::engines::EnginesTypes::streamLines, this->ui->streamLinesCheckBox);
-   register2DEngine(Settings::engines::EnginesTypes::seedCurves);
    register2DEngine(Settings::engines::EnginesTypes::seedPoints);
 
    register3DEngine(Settings::engines::EnginesTypes::smokeSlices, this->ui->smokeSlicesCheckBox);
    register3DEngine(Settings::engines::EnginesTypes::glyphSlices, this->ui->glyphSlicesCheckBox);
    register3DEngine(Settings::engines::EnginesTypes::streamLineSlices, this->ui->streamLineSlicesCheckBox);
 
-   register3DEngine(Settings::engines::EnginesTypes::streamSurfaces, this->ui->streamSurfacesCheckBox);
+   register3DEngine(Settings::engines::EnginesTypes::streakObjects, this->ui->streamSurfacesCheckBox);
 }
 
 void SimulationSettingPane::setFreezeButtonLabel(bool frozen)
@@ -206,7 +207,7 @@ void SimulationSettingPane::on_streamLineSlicesCheckBox_clicked(bool checked)
 
 void SimulationSettingPane::on_streamSurfacesCheckBox_clicked(bool checked)
 {
-   emit engineToggled(Settings::engines::EnginesTypes::streamSurfaces, checked);
+   emit engineToggled(Settings::engines::EnginesTypes::streakObjects, checked);
 }
 
 void SimulationSettingPane::on_xRotationDial_valueChanged(int value)

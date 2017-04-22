@@ -12,7 +12,6 @@ streamobject::Surface::~Surface()
 
 GPUData streamobject::Surface::GPUDataVertices() const
 {
-   float textureCoordinate = 0.0;
    GPUData vertices;
    for (auto streamline : streamLines) vertices.extend(streamline.GPUDataVertices());
    return vertices;
@@ -26,15 +25,15 @@ GPUData streamobject::Surface::GPUDataLines() const
    return lines;
 }
 
-GPUData streamobject::Surface::GPUDataSurfaceEdges() const
+GPUData streamobject::Surface::GPUDataSurfaceEdges(double divergenceSensitivity) const
 {
-   GPUData data = SurfaceBuilder(this->streamLines).getEdgeGPUData();
+   GPUData data = SurfaceBuilder(this->streamLines, divergenceSensitivity).getEdgeGPUData();
    return data;
 }
 
-GPUData streamobject::Surface::GPUDataSurface() const
+GPUData streamobject::Surface::GPUDataSurface(double divergenceSensitivity) const
 {
-   GPUData data = SurfaceBuilder(this->streamLines).getGPUData();
+   GPUData data = SurfaceBuilder(this->streamLines, divergenceSensitivity).getGPUData();
    return data;
 }
 

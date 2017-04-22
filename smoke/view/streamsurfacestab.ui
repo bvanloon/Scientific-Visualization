@@ -73,6 +73,12 @@
           <property name="minimum">
            <number>1</number>
           </property>
+          <property name="maximum">
+           <number>400</number>
+          </property>
+          <property name="singleStep">
+           <number>10</number>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
@@ -118,6 +124,32 @@
           </property>
          </widget>
         </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="divergenceSensitivityLabel">
+          <property name="toolTip">
+           <string/>
+          </property>
+          <property name="text">
+           <string>Divergence sensitivity</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="divergenceSensitivitySpinBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <double>200.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>1.000000000000000</double>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -125,11 +157,11 @@
         <property name="title">
          <string>Visualizations</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QCheckBox" name="showSurfaceCheckBox">
+          <widget class="QCheckBox" name="showVerticesCheckBox">
            <property name="text">
-            <string>Surface</string>
+            <string>Vertices</string>
            </property>
           </widget>
          </item>
@@ -141,9 +173,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="showVerticesCheckBox">
+          <widget class="QCheckBox" name="showSurfaceCheckBox">
            <property name="text">
-            <string>Vertices</string>
+            <string>Surface</string>
            </property>
           </widget>
          </item>
@@ -167,18 +199,29 @@
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="showSeedCurvesCheckBox">
+       <widget class="QPushButton" name="defineSeedCurveButton">
         <property name="text">
-         <string>Show Seed Curve</string>
+         <string>Define</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="clearSeedCurvesButton">
-        <property name="text">
-         <string>Clear Seed Curve</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="clearLastVertexButton">
+          <property name="text">
+           <string>Clear Last Vertex</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearSeedCurvesButton">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

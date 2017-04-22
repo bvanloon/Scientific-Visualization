@@ -1,10 +1,9 @@
 #include "streaksurfaceengine.h"
 #include "visualizationbuilders/streaklinebuilder.h"
 
-StreakSurfaceEngine::StreakSurfaceEngine(SimulationGrid *grid) :
+StreakSurfaceEngine::StreakSurfaceEngine() :
    Abstract3DEngine(AbstractEngine::lightModel::phongLight,
-                    Settings::engines::EnginesTypes::streamSurfaces),
-   simulation(grid)
+                    Settings::engines::EnginesTypes::streakObjects)
 {}
 
 void StreakSurfaceEngine::draw()
@@ -33,7 +32,7 @@ void StreakSurfaceEngine::drawLines(QList<streamobject::Line> streakLines)
 void StreakSurfaceEngine::drawSurface(QList<streamobject::Line> streakLines)
 {
    streamobject::Surface surface(streakLines);
-   GPUData data = surface.GPUDataSurface();
+   GPUData data = surface.GPUDataSurface(Settings::visualization::streakSurface().divergenceSensitivity);
    updateBuffersAndDraw(data);
 }
 
@@ -55,5 +54,5 @@ QList<streamobject::Line> StreakSurfaceEngine::computeStreakLines(QList<QVector3
 
 double StreakSurfaceEngine::computeZStep()
 {
-   return zTranslationRange.length() / (Settings::visualization::streakSurface().getNumberOfStates() + 1);
+   return zTranslationRange.length() / (Settings::visualization::streakSurface().numberOfStates + 1);
 }
