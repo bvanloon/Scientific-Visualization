@@ -1,6 +1,80 @@
 %!TEX root = ../scivis_lbaakman_bvanloon.tex
 \chapter{Glyphs} % (fold)
 \label{cha:glyphs}
+In this chapter a set of \emph{Glyphs} is introduced. Glyphs is a visualization technique which can be used to visualize a vector field by showing its orientation and magnitude. This is done by using icons that show direction and magnitude. A disadvantage of glyphs is the size the icons take in; because icons need to show both direction and magnitude they need to be of some size to convey this information in a clear matter. This means that the number of glyphs used in the visualization needs to be restricted to avoid clutter and glyphs blending together. This means the visualization can not be as `dense' as the scalar visualization meaning that not for every point of the simulation information can be shown. In the next section we discuss how the simulation is (sub)sampled and how we prevent the glyphs from cluttering used a grid and proper scaling. In \cref{sec:types_of_glyps} the different glyphs are discussed that we have chosen to implement.
 
-\todo[inline]{linear scaling}
-% chapter glyphs (end)
+\section{Method} % (fold)
+\label{sec:method}
+The main method for constructing glyphs is to sample the dataset and place a glyph at every sample-point. This glyphs is than scaled, colored and rotated based on the values on this sample-points. 
+
+\subsection{Sampling Grid} % (fold)
+\label{sub:sampling_grid}
+Since glyphs can not be shown for every vertex of the simulation due to there size, we need to sample the simulation using a sampling grid. The dimensions of the grid denote how at how may sampling points the simulation is sampled and consequently how many glyphs are shown. Less sampling points will result in less glyphs and thus less clutter, but also lessens the amount of information that is displayed. Increasing the grid size will increase the amount of information in the visualization, but might increase cluttering which can interfere with how well the information can be understand by the user.
+
+% subsection sampling_grid (end)
+
+\todo[inline]{Grid/sampling. }
+\todo[inline]{Jittering}
+
+\subsubsection{Jitter} % (fold)
+\label{ssub:jitter}
+When glyphs are shown on a uniform grid artifacts might appear when the sampling rate causes non existing patterns to appear in the visualization. These patterns can be avoided by adding some random shifts in the sampling grid. This is done by shifting each grid-point by a random factor controlled by the jitter factor. This way the grid stays a structured grid since the order of the vertices does not change, but the grid will no longer be uniform which prevents the appearance of artifacts.\todo[inline]{Image Jitter}
+
+
+% subsubsection jittering (end)
+\todo[inline]{Interpolation: what why}
+\todo[inline]{Scaling}
+For every glyph, the scaling is done proportional to the cell size (and thus proportional to the sub-sampling rate). To ensure the scaling of the glyphs is linear there is no minimum size of the glyph required. This has as disadvantage that glyphs of vectors with a very small magnitude might not be visible.
+% section method (end)
+\subsection{Variable Selection} % (fold)
+\label{sub:variable_selection}
+\todo[inline]{Vector field}
+\todo[inline]{Scalar field}
+
+% subsection variable_selection (end)
+
+\section{Types of Glyps} % (fold)
+\label{sec:types_of_glyps}
+
+\subsection{Hedgehogs} % (fold)
+\label{sub:hedgehogs}
+The simplest form of glyphs are hedgehogs. Hedgehogs are lines which are placed in the direction of the vector and stretched relative to its magnitude. The glyph can be colored in two ways, first we can let the color of the glyph correspond with the vector magnitude. This way the magnitude is conveyed to the user by both the length and the color of the glyph which can help inverse mapping. Alternatively the glyph can be colored according to some scalar value. This increases the information density of the visualization, but might damper the clarity of the visualization.
+
+Hedgehogs have as advantage that the glyph takes up relatively little space. A major drawback of hedgehogs is that it is not possible to distinguish between two vectors going in opposite directions, as they will be represented by the same line. 
+
+\todo[inline]{example figure}
+
+
+\subsubsection{Goroud Shaded Hedgehogs} % (fold)
+\label{sub:goroud_shaded_hedgehogs}
+\todo[inline]{Figure and text}
+
+
+\subsection{Triangles} % (fold)
+\label{sub:triangles}
+The triangle glyph is one of the simplest glyphs that can give directional information. It is constructed by placing the middle of one side of the triangle orthogonal on the vector. The two others sides are stretched in the direction of the vector relative to the vectors magnitude. Thus, the triangle will appear longer as the magnitude of the vector increases. Besides the length the surface of the triangle also increases, which will help the inverse mapping process from glyphs back to magnitudes.
+
+Although the triangles properly conveys the direction in most cases, a problem arises when the magnitude scales the triangles such that the extended sides become as long as the base side. \todo{example} When this happens the triangle becomes equilateral and can no longer be mapped to a single direction, but corresponds to three different directions. This could be solved by curving the two extended sides inwards or by making the triangle into an arrow. Unfortunately these solutions are not implemented in the application. 
+
+The triangle glyph is implemented such that the base side has a fixed length. This has as side-effect that vectors with a small magnitude might appear as lines orthogonal to the vector field. This can confuse users not aware of this effect, who therefore might interpret the triangle as a hedgehog. This increases the learning curve of the visualization but does not have to be a problem once the user is aware.
+
+\subsection{Airplanes} % (fold)
+\label{sub:airplanes}
+In the previous section two flaws of the triangle where pointed out that could cause possible difficulty with the inverse mapping process. These flaws are fixed by the airplane glyph discussed in this section. The airplane glyph is a 3D glyph that exist out of two mirrored triangles joined by one side forming an airplane like structure. Depending on the vector magnitude the sides joined together will be pulled upwards, while the free vertex of both triangles will be pulled backwards. This has as effect that the airplane will become longer and pointier as the magnitude increases. Therefore the larger the magnitude becomes, the more prominent the direction of the glyph will be. This has two positive effects. Increasing magnitudes will have a clear natural order and as the magnitude increases the direction of the glyph becomes better visible. Since one can argue that the direction of a vector is of more importance when its magnitude increases this can be seen as a positive effect.
+
+Since the airplane is a 3D glyph it is possible to use shading with the glyph visualization. This means that in the case of overlapping glyphs, single glyphs can be distinguished more easily due to the visual clues shading offers. 
+
+The airplane glyph has a drawback concerning its scaling. When an airplane glyph is scaled up based on some magnitude, its wings are pushed down and its base is pulled up. Because the perspective in which the glyphs are shown (top-down) is not orthogonal to the glyphs surface, the `wings' of the glyph become skewed, meaning that the visible surface of a glyph is smaller than its real surface. This effects increases as the glyph is scaled up, meaning that its relative surface becomes smaller as its corresponding magnitude increases which means the ordering of the magnitude becomes non-linear. Because of this (possible harmful) effect the inverse mapping from glyph surface to magnitude becomes a bit more difficult for larger magnitudes.
+% subsection airplanes (end)
+
+
+\section{Results} % (fold)
+\label{sec:results}
+
+
+
+
+In general we can conclude that although glyphs provide a nice way to visualize vector data the method also has many problems. The glyphs require space to be drawn, can occlude each other, sampling artifacts can appear, and directions are sometimes hard to decode. Some of these problems are partly solved by adding jitter to the grid and by using different types of glyphs, but most can not be solved entirely. In chapter \todo{Chapter} an alternative visualization method is given involving streamlines.
+
+
+% section results (end)
