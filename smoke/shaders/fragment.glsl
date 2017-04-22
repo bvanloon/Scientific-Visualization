@@ -31,9 +31,9 @@ uniform float globalAlpha;
 
 
 //Constants
-vec3 eye = vec3(400.0, 400.0, 800.0);
-LightInfo light = LightInfo(vec3(600.0, 600.0, 1200.0), vec3(1.0), vec3(1.0), vec3(1.0));
-MaterialInfo material = MaterialInfo(0.3, 0.5, 0.9, 150.0);
+vec3 eye = vec3(2000.0, 5000.0, -1000.0);
+LightInfo light = LightInfo(vec3(-2000.0, 5000.0, 1000.0), vec3(1.0), vec3(10.0), vec3(1.0));
+MaterialInfo material = MaterialInfo(0.3, 0.5, 0.4, 150.0);
 
 //Auxilary Functions
 vec3 unitVectorToColor(vec3 vector){
