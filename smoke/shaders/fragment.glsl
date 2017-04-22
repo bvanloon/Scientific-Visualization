@@ -57,7 +57,7 @@ void noLight(){
 }
 
 void phongLight(){
-    vec3 viewVector = normalize(eye - vsPosition);
+    vec3 viewVector = normalize(-eye);
     vec3 lightVector = normalize(light.position - vsPosition);
     vec3 reflectionVector = normalize(reflect(-lightVector, vsNormal));
 
@@ -68,14 +68,15 @@ void phongLight(){
         materialColor, 
         light.ambientLightIntensity);
 
-    float diffuseDotProduct = dot(vsNormal, lightVector);
+    float diffuseDotProduct = max(dot(vsNormal, lightVector), 0.0);
+
     vec3 diffuse = frontLightMaterial(
         material.diffuseReflectionConstant, 
         materialColor, 
-        light.diffuseLightIntensity) * max(diffuseDotProduct, 0.0);
+        light.diffuseLightIntensity) * diffuseDotProduct;
     vec3 specular;
     if(diffuseDotProduct > 0){
-        vec3 specular = frontLightMaterial(
+        specular = frontLightMaterial(
             material.specularReflectionConstant,
             materialColor,
             light.specularLightIntensity) * pow(max(dot(reflectionVector, viewVector), 0.0 ), material.alfa);
