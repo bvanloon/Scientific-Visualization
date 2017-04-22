@@ -150,64 +150,75 @@ GPUData GPUData::debugCube()
    //Forward facing
    normal = QVector3D::crossProduct(A, C);
    //left back Triangle
-   data.addElement(A, normal, 1.0);
-   data.addElement(C, normal, 1.0);
-   data.addElement(B, normal, 1.0);
 
-   data.addElement(A, normal, 1.0);
-   data.addElement(D, normal, 1.0);
-   data.addElement(C, normal, 1.0);
+   float blue = 0.0;
+
+   data.addElement(A, normal, blue);
+   data.addElement(C, normal, blue);
+   data.addElement(B, normal, blue);
+
+   data.addElement(A, normal, blue);
+   data.addElement(D, normal, blue);
+   data.addElement(C, normal, blue);
 
 
    normal = QVector3D::crossProduct(A, E);
    //right back
-   data.addElement(A, normal, 1.0);
-   data.addElement(B, normal, 1.0);
-   data.addElement(E, normal, 1.0);
+   float lightBlue = 2.9;
 
-   data.addElement(B, normal, 1.0);
-   data.addElement(F, normal, 1.0);
-   data.addElement(E, normal, 1.0);
+   data.addElement(A, normal, lightBlue);
+   data.addElement(B, normal, lightBlue);
+   data.addElement(E, normal, lightBlue);
+
+   data.addElement(B, normal, lightBlue);
+   data.addElement(F, normal, lightBlue);
+   data.addElement(E, normal, lightBlue);
 
    normal = QVector3D::crossProduct(C, H);
    //Bottom
-   data.addElement(B, normal, 1.0);
-   data.addElement(C, normal, 1.0);
-   data.addElement(H, normal, 1.0);
+   float green = 5.0;
 
-   data.addElement(B, normal, 1.0);
-   data.addElement(H, normal, 1.0);
-   data.addElement(F, normal, 1.0);
+   data.addElement(B, normal, green);
+   data.addElement(C, normal, green);
+   data.addElement(H, normal, green);
+
+   data.addElement(B, normal, green);
+   data.addElement(H, normal, green);
+   data.addElement(F, normal, green);
 
    normal = QVector3D::crossProduct(A, G);
    //Top
-   data.addElement(A, normal, 1.0);
-   data.addElement(D, normal, 1.0);
-   data.addElement(G, normal, 1.0);
+   float yellow = 7.1;
 
-   data.addElement(A, normal, 1.0);
-   data.addElement(G, normal, 1.0);
-   data.addElement(E, normal, 1.0);
+   data.addElement(A, normal, yellow);
+   data.addElement(D, normal, yellow);
+   data.addElement(G, normal, yellow);
+
+   data.addElement(A, normal, yellow);
+   data.addElement(G, normal, yellow);
+   data.addElement(E, normal, yellow);
 
    normal = QVector3D::crossProduct(D, G);
    //Left front
-   data.addElement(C, normal, 1.0);
-   data.addElement(G, normal, 1.0);
-   data.addElement(D, normal, 1.0);
+   float orange = 7.8;
+   data.addElement(C, normal, orange);
+   data.addElement(G, normal, orange);
+   data.addElement(D, normal, orange);
 
-   data.addElement(C, normal, 1.0);
-   data.addElement(H, normal, 1.0);
-   data.addElement(G, normal, 1.0);
+   data.addElement(C, normal, orange);
+   data.addElement(H, normal, orange);
+   data.addElement(G, normal, orange);
 
    normal = QVector3D::crossProduct(G, H);
    //Right front
-   data.addElement(G, normal, 1.0);
-   data.addElement(H, normal, 1.0);
-   data.addElement(F, normal, 1.0);
+   float red = 10.0;
+   data.addElement(G, normal, red);
+   data.addElement(H, normal, red);
+   data.addElement(F, normal, red);
 
-   data.addElement(E, normal, 1.0);
-   data.addElement(G, normal, 1.0);
-   data.addElement(F, normal, 1.0);
+   data.addElement(E, normal, red);
+   data.addElement(G, normal, red);
+   data.addElement(F, normal, red);
 
    return data;
 }
