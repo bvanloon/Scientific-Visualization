@@ -44,6 +44,8 @@ class GPUData
 
       static GPUData debugSlice();
 
+      static GPUData debugCube();
+
       bool isEmpty();
 
    private:
