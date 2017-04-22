@@ -63,15 +63,30 @@ void phongLight(){
 
     vec3 materialColor = texture(colormap, vsTextureCoordinate).xyz;
 
-    float diffuseDotProduct = max(dot(vsNormal, lightVector), dot(-1 * vsNormal, lightVector));
+    vec3 ambient = frontLightMaterial(
+        material.ambientReflectionConstant, 
+        materialColor, 
+        light.ambientLightIntensity);
 
-    vec3 ambient = frontLightMaterial(material.ambientReflectionConstant, materialColor, light.ambientLightIntensity);
-    vec3 diffuse = frontLightMaterial(material.diffuseReflectionConstant, materialColor, light.diffuseLightIntensity)
-                   * max(diffuseDotProduct, 0.0);
-    vec3 specular = frontLightMaterial(material.specularReflectionConstant, materialColor, light.specularLightIntensity)
-                    * pow( max(dot(reflectionVector, viewVector), 0.0 ), material.alfa)
-                    * max(diffuseDotProduct, 0.0);
-    vec3 phongColor = clamp(ambient + diffuse + specular, 0, 1);
+    float diffuseDotProduct = dot(vsNormal, lightVector);
+    vec3 diffuse = frontLightMaterial(
+        material.diffuseReflectionConstant, 
+        materialColor, 
+        light.diffuseLightIntensity) * max(diffuseDotProduct, 0.0);
+    vec3 specular;
+    if(diffuseDotProduct > 0){
+        vec3 specular = frontLightMaterial(
+            material.specularReflectionConstant,
+            materialColor,
+            light.specularLightIntensity) * pow(max(dot(reflectionVector, viewVector), 0.0 ), material.alfa);
+    }
+    vec3 phongColor = clamp(
+        vec3(0.0) 
+        + ambient 
+        + diffuse 
+        + specular
+        , 
+        0, 1);
     fColor = vec4(phongColor, computeAlpha());
 }
 
