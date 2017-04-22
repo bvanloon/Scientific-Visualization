@@ -3,3 +3,11 @@
 \newcommand{\smoke}{scalar visualization}
 \newcommand*{\simulation}{width=\textwidth, trim={35px 30px 430px 30px}, clip}
 %\newcommand*{\simulation}{trim={10 px \trendViewBottom px \evolutionviewRight px 710px}
+
+\newcommand{\addrainbow}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormaps/rainbowcolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	

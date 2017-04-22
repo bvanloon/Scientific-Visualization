@@ -43,7 +43,7 @@ QRgb Diverging::divergenceColor(float f, float fmid)
    int blue;
    if (f <= fmid)
    {
-      red = rMin + ((rMid - rMin) * f);
+      z red = rMin + ((rMid - rMin) * f);
       green = gMin + ((gMid - gMin) * f);
       blue = bMin + ((bMid - bMin) * f);
    }
