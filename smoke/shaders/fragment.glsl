@@ -81,13 +81,7 @@ void phongLight(){
             materialColor,
             light.specularLightIntensity) * pow(max(dot(reflectionVector, viewVector), 0.0 ), material.alfa);
     }
-    vec3 phongColor = clamp(
-        vec3(0.0) 
-        + ambient 
-        + diffuse 
-        + specular
-        , 
-        0, 1);
+    vec3 phongColor = clamp((ambient + diffuse + specular), 0, 1);
     fColor = vec4(phongColor, computeAlpha());
 }
 
