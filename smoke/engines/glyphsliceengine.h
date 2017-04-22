@@ -18,8 +18,6 @@ class GlyphSliceEngine : public AbstractSliceEngine {
    protected:
       void updateCache();
 
-      void draw();
-
    private:
 
       void connectToSettings();

@@ -27,15 +27,6 @@ void GlyphSliceEngine::updateCache()
    this->cache.enqueue(builder.getGPUData());
 }
 
-void GlyphSliceEngine::draw()
-{
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "GlyphSliceEngine::draw(): Temporary implementation of draw.";
-
-   GPUData data = GPUData::debugCube();
-   updateBuffersAndDraw(data);
-}
-
 void GlyphSliceEngine::connectToSettings()
 {
    connect(&Settings::visualization::glyphs(), SIGNAL(clearCache()),
