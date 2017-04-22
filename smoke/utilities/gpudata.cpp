@@ -148,7 +148,7 @@ GPUData GPUData::debugCube()
    QVector3D H = QVector3D(midx, yA, posz);
 
    //Forward facing
-   normal = QVector3D::crossProduct(A, C);
+   normal = QVector3D::crossProduct(A - C, C - B).normalized();
    //left back Triangle
 
    float blue = 0.0;
@@ -162,7 +162,7 @@ GPUData GPUData::debugCube()
    data.addElement(C, normal, blue);
 
 
-   normal = QVector3D::crossProduct(A, E);
+   normal = QVector3D::crossProduct(A - B, E - B).normalized();
    //right back
    float lightBlue = 2.9;
 
@@ -174,7 +174,7 @@ GPUData GPUData::debugCube()
    data.addElement(F, normal, lightBlue);
    data.addElement(E, normal, lightBlue);
 
-   normal = QVector3D::crossProduct(C, H);
+   normal = QVector3D::crossProduct(C - B, H - B).normalized();
    //Bottom
    float green = 5.0;
 
@@ -186,7 +186,7 @@ GPUData GPUData::debugCube()
    data.addElement(H, normal, green);
    data.addElement(F, normal, green);
 
-   normal = QVector3D::crossProduct(A, G);
+   normal = QVector3D::crossProduct(A - D, G - D).normalized();
    //Top
    float yellow = 7.1;
 
@@ -198,7 +198,7 @@ GPUData GPUData::debugCube()
    data.addElement(G, normal, yellow);
    data.addElement(E, normal, yellow);
 
-   normal = QVector3D::crossProduct(D, G);
+   normal = QVector3D::crossProduct(D - C, G - C).normalized();
    //Left front
    float orange = 7.8;
    data.addElement(C, normal, orange);
@@ -209,7 +209,7 @@ GPUData GPUData::debugCube()
    data.addElement(H, normal, orange);
    data.addElement(G, normal, orange);
 
-   normal = QVector3D::crossProduct(G, H);
+   normal = QVector3D::crossProduct(G - F, H - F).normalized();
    //Right front
    float red = 10.0;
    data.addElement(G, normal, red);
