@@ -33,7 +33,7 @@ uniform float globalAlpha;
 //Constants
 LightInfo light = LightInfo(vec3(745.0, 560.0, 200.0), vec3(1.0), vec3(10.0), vec3(1.0));
 vec3 eye = vec3(745.0, 560.0, 100.0);
-MaterialInfo material = MaterialInfo(0.3, 0.5, 0.4, 150.0);
+MaterialInfo material = MaterialInfo(0.3, 0.5, 0.4, 10.0);
 
 //Auxilary Functions
 vec3 unitVectorToColor(vec3 vector){
