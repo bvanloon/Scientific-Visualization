@@ -139,10 +139,10 @@ namespace Settings {
                //Stream Surfaces
                false,false,
                //StreamLines
-               true, true,
+               false,false,
 
                //Slice Engines
-               false,false, false
+               false,true, false
             };
         }
     }
