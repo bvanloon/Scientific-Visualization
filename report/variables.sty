@@ -16,6 +16,10 @@
     \includegraphics[trim = 12px 12px 417px 12px,clip,width=1\textwidth,#1]%
         {#2}%
 }
+\newcommand{\threeDScreenshot}[2][]{%
+    \includegraphics[trim = 50px 80px 425px 50px,clip,width=1\textwidth,#1]%
+        {#2}%
+}
 %\newcommand*{\simulation}{trim={10 px \trendViewBottom px \evolutionviewRight px 710px}
 
 % Color Maps
@@ -85,16 +89,29 @@
 % Streamlines
 \newcommand{\vectorFieldCont}[1]{\ensuremath{\vec{F}\!\left(#1\right)}\xspace}
 \newcommand{\vectorFieldDisc}[1]{\ensuremath{\vec{F}\!\left(#1\right)}\xspace}
+
+\newcommand{\vectorFieldDiscTime}[2]{\ensuremath{\vec{F}_{#2}\!\left(#1\right)}\xspace}
+
 \newcommand{\seedPoint}[1]{\ensuremath{\mathit{p}_{#1}}\xspace}
+
+\newcommand{\seedCurve}{\ensuremath{\mathit{Q}}\xspace}
+\newcommand{\seedCurveVertex}[1]{\ensuremath{\mathit{q}_{#1}}\xspace}
+
 \newcommand{\integrationTime}{\ensuremath{t}\xspace}
 \newcommand{\timeInterval}{\ensuremath{\text{T}}\xspace}
 \newcommand{\streamLine}{\ensuremath{\mathtt{S}}\xspace}
+\newcommand{\streamLineIdx}[1]{\ensuremath{\mathtt{S}_{#1}}\xspace}
 \newcommand{\streamLineVertexCont}[1]{\ensuremath{p\left(#1\right)}\xspace}
 \newcommand{\streamLineVertexDisc}[1]{\ensuremath{p_{#1}}\xspace}
 
 \newcommand{\timeStep}{\ensuremath{\mathtt{timeStep}}\xspace}
 \newcommand{\timeStepMax}{\ensuremath{\timeStep_{\text{max}}}\xspace}
 \newcommand{\edgeLength}{\ensuremath{\mathtt{edgeLength}}\xspace}
-\newcommand{\edgeLengthMax}{\ensuremath{streamLineLength_{\text{max}}}\xspace}
+\newcommand{\edgeLengthMax}{\ensuremath{\mathtt{streamLineLength}_{\text{max}}}\xspace}
 \newcommand{\magnitude}{\ensuremath{\mathtt{magnitude}}\xspace}
 \newcommand{\magnitudeMin}{\ensuremath{\magnitude_{\text{min}}}\xspace}
+
+% Streamsurfaces
+\newcommand{\resolution}{\ensuremath{\mathtt{resolution}}\xspace}
+\newcommand{\numStates}{\ensuremath{\mathtt{\#states}}\xspace}
+\newcommand{\divergenceCriterion}{\ensuremath{\mathtt{divergence_{\text{max}}}}\xspace}

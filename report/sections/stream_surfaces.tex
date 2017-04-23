@@ -2,4 +2,14 @@
 \chapter{Stream Surfaces} % (fold)
 \label{cha:stream_surfaces}
 
+Stream surfaces are basically a bunch of connected streamlines that all have their seed point on some seed curve. The flow of the vector field is always tangent to the surface of stream surface. As our simulation has only two dimensional vector fields we use time as the third dimension. Thus our stream surfaces show the variation of a two dimensional vector field as a function of time. 
+
+\Cref{s:streamsurfaces:method} explains how we compute the three dimensional streamlines, and how we go from a streamlines that are densely seeded on a curve to a surface. \Cref{s:streamsurfaces:design} is concerned with the visualization of the thus defined surface. In \cref{s:streamsurfaces:results} a number of visualizations of a three dimensional vector field are presented and discussed.
+
+\input{sections/streamsurfaces/method}
+
+\input{sections/streamsurfaces/design}
+
+\input{sections/streamsurfaces/results}
+
 % chapter stream_surfaces (end)

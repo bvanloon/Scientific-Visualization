@@ -1,0 +1,27 @@
+%!TEX root = ../../scivis_lbaakman_bvanloon.tex
+\section{Method}
+\label{s:streamsurfaces:method}
+This section explains how one can define a stream surface given a seed curve \seedCurve, with $n$ vertices, $\seedCurveVertex{0}, \cdots ,\seedCurveVertex{n}$ and $T$ two-dimensional vector fields, $\vectorFieldDiscTime{}{0}, \cdots, \vectorFieldDiscTime{}{T}$,  that represent the different states of some vector field as a function of time.
+
+
+In \cref{s:streamsurface:method:time} we explain how we compute a three dimensional streamline in a number of consecutive two dimensional datasets. \Cref{s:streamsurface:method:seedCurve} explain how we compute the seed points given the seed curve \seedCurve. \Cref{s:streamsurface:method:surface} discusses how we define a stream surface from a set of streamlines. 
+
+\subsection{Time as the Third Dimension}
+\label{s:streamsurface:method:time}
+We start the streamline at seed point \seedPoint{0} in the two-dimensional vector field \vectorFieldDiscTime{}{T}, \ie the oldest vector field that we have. We then compute the next vertex of the two-dimensional streamline in the vector field \vectorFieldDiscTime{}{T} with seed point \seedPoint{0}. We refer to this two-dimensional position as \seedPoint{1}. This position is used as the seed point of a two-dimensional streamline of one edge in the vector field \vectorFieldDiscTime{}{T - 1}. The other vertex of that edge is referred to as \seedPoint{2}, and is used as the seed point in \vectorFieldDiscTime{}{T - 2}. This process is repeated until we have reached \vectorFieldDiscTime{}{0}. 
+
+The points $\seedPoint{0}, \cdots, \seedPoint{T}$ define the three dimensional stream line. The \textit{z}-coordinate of these points is computed in such a way that the points are spread uniformly in \textit{z} over some predefined range for \textit{z}.
+
+
+The streamline is thus computed according to the process described in \cref{cha:streamlines}, with one change: there is no lower bound for the magnitude, \ie $\magnitudeMin = \infty$.
+
+\subsection{From a Seed Curve to Seed Points}
+\label{s:streamsurface:method:seedCurve}
+The seed curve is a polyline, each of the line segments of this polyline is split into \resolution segments. The higher \resolution is the better the final stream surface is. 
+
+\subsection{Building the Surface}
+\label{s:streamsurface:method:surface}
+The final step of defining a stream surface is the determination of a surface from a set of streamlines, \streamLineIdx{0}, \streamLineIdx{N}. The line segments of the stream lines are have all approximately the same length, as the distance between \seedPoint{i} and \seedPoint{i + 1} is equal for every segment in every stream line and the difference in \textit{z}-coordinates of consecutive stream line vertices is also equal. We then define the stream surface by connecting vertex \seedPoint{i} of stream line \streamLineIdx{j} with \seedPoint{i} of stream line \streamLineIdx{j + 1}, for $j < N$. If stream line \streamLineIdx{j} has a vertex \seedPoint{i}, but \streamLineIdx{j + 1} is shorter and does not have a \seedPoint{i}, we connect \seedPoint{i} of \streamLineIdx{j} to the last vertex of \streamLineIdx{j + 1}.
+
+
+The resulting connections define a collection of quads that could define a surface. However the thus defined surface would happily move though some obstacle that is encountered by the flow of the vector field. To avoid this we do not connect two neighboring vertices of streamlines if the distance between them is greater than \divergenceCriterion. We chose to explicitly model the divergence of stream lines in this way as to us, adding more seedpoints at the location of the divergence did not make sense.
