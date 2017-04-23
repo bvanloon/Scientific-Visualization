@@ -1,0 +1,14 @@
+%!TEX root = ../../scivis_lbaakman_bvanloon.tex
+\section{Design}
+\label{s:streamlines:design}
+The visualization of the vector field with streamlines depends on the placement of the seed points, discussed in \cref{ss:streamlines:design:seedpoints} and the parameterization of the streamline computation, discussed in \cref{ss:streamlines:design:parameterization}.
+
+\subsection{Seed Points}
+\label{ss:streamlines:design:seedpoints}
+We have implemented two mechanisms of placing seed points, that can be combined. We allow the user to place the seed points manually. This allows use to use the insight of the user to gain coverage, uniformity and continuity. A disadvantage of placing seed points manually is that it is a lot of work to place seed points like this. Therefore we also offer the probability of placing a grid of seed points over the complete domain. The advantage is that it is fast. Furthermore a fine mazed grid, the grid dimensions can be set by the user, allows for good coverage. However uniformity is definitely not ensured in this way, however this can be solved by letter the user manually add seed points to the grid of seed points near areas where the density of the streamlines is low.
+
+\subsection{Visualization Parameterization}
+\label{ss:streamlines:design:parameterization}
+The user can parameterize the visualization with a number of variables. The \t{time step}, \timeStep, and \t{maximum time}, \timeStepMax, directly map to \integrationTime and \timeInterval. The length of the edges of the streamline, and the upper limit of the length of the streamline are controlled by \edgeLength and \edgeLengthMax, respectively. Both of these are expressed in the width, or equivalently since our simulation cells are squares, in the height, of the simulation cells. This gives the user more insight in the length of the (elements of the) streamlines, than arbitrary numbers would have been. Lastly the user can also set the minimum magnitude, \t{magnitudeMin}, to control the termination of the integration of the streamline.
+
+Both \t{timeStepMax} and \t{edgeLengthMax} can be set to $\infty$, this makes it possible to discount these factors when computing the streamlines. If both of these values are set to $\infty$ the integration of the streamline only terminates if the magnitude of the vector falls below \magnitudeMin or if \streamLineVertexDisc{i} falls outside of the computational domain.

@@ -1,0 +1,33 @@
+%!TEX root = ../../scivis_lbaakman_bvanloon.tex
+\section{Method}
+\label{s:streamlines:method}
+
+A streamline can be described as the integral of the vector field \vectorFieldCont{\integrationTime} over some interval \timeInterval and starting from the location \seedPoint{0}:
+%
+\begin{equation}
+\label{eq:streamlines:equationToSolve}
+	\streamLine = 
+		\left\{ \streamLineVertexCont{\tau}, \tau \in [0, \timeInterval]\right\} 
+		\quad 
+		\streamLineVertexCont{\tau} = \int_{\integrationTime = 0}^{\tau} \vectorFieldCont{p} \d \integrationTime 
+		\quad\quad 
+		\text{where } \streamLineVertexCont{0} = \seedPoint{0}
+\end{equation}
+%
+In this equation $\integrationTime$ represents integration time, as the vectorfield we consider is time independent, \ie it is the state of the simulation at a certain point in time. To compute a streamline \cref{eq:streamlines:equationToSolve} needs to be solved. This can be done numerically with Euler intergration:
+\begin{align}
+	\int_{\integrationTime = 0}^{\tau} \vectorFieldDisc{p} \d \integrationTime	 
+	=  
+	\sum_{i = 0}^{\frac{\tau}{\Delta \integrationTime}} \vectorFieldDisc{\streamLineVertexDisc{i}} \cdot \Delta \integrationTime \quad \quad \text{where } \streamLineVertexDisc{i} = \streamLineVertexDisc{i - 1} + \vectorFieldDisc{i - 1} \cdot \Delta \integrationTime.
+\end{align}
+A disadvantage of this integration method is its high integration method. As a consequence the farther away the vertex of the streamline is of the seedpoint the more its position deviatees form the position the imaginary particle would have had if it had traversed the vector field. This could be solved by using an integration method that has a lower error. 
+
+Since computing the streamlines is already computationally quite expensive, we chose to use the Euler method, and allow the user to improve the accuracy of the integration by changing \integrationTime, instead of using an integration method with a lower integration error and higher compotational complexity. To avoid large edges in the streamline we multiplied $\Delta\integrationTime$ with the normalized vector \cite{telea2014data}. 
+
+Our integration terminates if one of these conditions is true:
+\begin{itemize}
+	\item $\integrationTime > \timeInterval$, \ie if we have run through our entire time interval.
+	\item The magnitude of \streamLineVertexDisc{i} is smaller than some lower limit.
+	\item The total length of the streamline is greater than some upper limit.
+	\item \streamLineVertexDisc{i} falls outside of the computational domain of the simulation.
+\end{itemize}
