@@ -1,12 +1,115 @@
 %!TEX root = ../../scivis_lbaakman_bvanloon.tex
 \section{Results}
 \label{s:streamsurfaces:results}
+This section presents and discusses several visualizations of the evolution of a two-dimensional vector field as a function of time with stream surfaces. All visualizations in this section will show the fluid velocity, and will be colored according to the fluid velocity magnitude with a color map that is not clamped. The older simulation states are shown near the bottom of the images, more recent states are shown near the top of the images.
 
-\todo[inline]{Introduction into the section}
-\todo[inline]{Different visualization methods: vertices/lines/surface}
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.7\textwidth}
+		\centering
+		\assusScreenshot[height=0.27\textheight, keepaspectratio=true]{./img/streamsurfaces/vertices}
+		\caption{Vertices}
+		\label{fig:streamsurfaces:differentmethods:vertices}
+	\end{subfigure}
+	\begin{subfigure}{0.7\textwidth}
+		\centering
+		\assusScreenshot[height=0.27\textheight, keepaspectratio=true]{./img/streamsurfaces/lines}
+		\caption{Stream Lines}
+		\label{fig:streamsurfaces:differentmethods:lines}
+	\end{subfigure}	
+	\begin{subfigure}{0.7\textwidth}
+		\centering
+		\assusScreenshot[height=0.27\textheight, keepaspectratio=true]{./img/streamsurfaces/surface}
+		\caption{Stream Surface}
+		\label{fig:streamsurfaces:differentmethods:surface}
+	\end{subfigure}		
+	\caption{Visualization of the change of a two-dimensional vector field, \velocity, as function of time with \subref{fig:streamsurfaces:differentmethods:vertices} the vertices of the stream lines, \subref{fig:streamsurfaces:differentmethods:lines} the stream lines and \subref{fig:streamsurfaces:differentmethods:surface} the stream surface. %
+	\resolution = 10, \numStates = 200, \divergenceCriterion = 200.0.}
+	\label{fig:streamsurfaces:differentmethods}
+\end{figure}
 
-\todo[inline]{Results of different resolution}
+We support three different ways of visualizing a stream surface. Firstly one can use the vertices of the streamlines as shown in \cref{fig:streamsurfaces:differentmethods:vertices}. Alternatively one can visualize the streamlines as in \cref{fig:streamsurfaces:differentmethods:lines}, or the surface defined by these lines as in \cref{fig:streamsurfaces:differentmethods:surface}. 
 
-\todo[inline]{Results of different number of states}
+\Cref{fig:streamsurfaces:differentmethods:surface} clearly illustrates one issues of our stream surfaces, firstly the edges of the computational domain are not reached gracefully. It is possible that this is caused by the fact that our streamlines end at their last vertex before the end of the computational domain, instead of on the edge of the domain.
 
-\todo[inline]{Results of different divergence sensitivity}
+It should be noted that the resolution of seed lines used for the visualizations in \cref{fig:streamsurfaces:differentmethods} was chosen quite low, to emphasize the difference between the lines and the vertices.
+
+The straight streamlines at the bottom of these figures, \ie in the oldest simulation states, are caused by lack of user input at the beginning. In that case, all vectors are \vec{0}, consequently $\seedPoint{i} = \seedPoint{i + 1}$, which results in a line segment whose vertices only differ in their \textit{z}-values.
+
+\Cref{fig:streamsurfaces:differentResolution} presents three visualizations of the same data set with three different resolutions. This figures clearly illustrates the importance of choosing a resolution that is sensible for the data, in this case a resolution of five is clearly too low, \resolution = 50, seems sufficient. If resolution is set to 100 the stream lines are so close together that they nearly form a surface. 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/r5}
+		\caption{\resolution = 5}
+		\label{fig:streamsurfaces:differentResolution:r5}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/r50}
+		\caption{\resolution = 50}
+		\label{fig:streamsurfaces:differentResolution:r50}
+	\end{subfigure} 
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/r100}
+		\caption{\resolution = 100}
+		\label{fig:streamsurfaces:differentResolution:r100}
+	\end{subfigure} 
+	\caption{Visualization of the change of a two-dimensional vector field, \velocity, as function of time with different resolutions. %
+	\numStates = 200}
+	\label{fig:streamsurfaces:differentResolution}
+\end{figure}
+
+The influence of the \divergenceCriterion is illustrated in \cref{fig:streamsurfaces:differentDivergenceCriterion}. To more clearly show the divergence both the stream lines and the stream surfaces are shown. Since the length of the stream lines are not influenced by \divergenceCriterion they are always visible independent of the divergence of the vector field.
+
+The influence of the \divergenceCriterion can be seen in the size of the triangle that is placed between the flow that moves to the left and the flow to the right. The higher the divergence criterion the longer the two flows are connected. If \divergenceCriterion = 3 the stream splits quite early, whereas for \divergenceCriterion = 200 the streams stay together until \rfrac{1}{3} of the y-axis. The influence of the divergence criterion is also illustrated in the upper left corner of these images. 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/d3}
+		\caption{\resolution = 3}
+		\label{fig:streamsurfaces:differentDivergenceCriterion:r3}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/d30}
+		\caption{\resolution = 30}
+		\label{fig:streamsurfaces:differentDivergenceCriterion:r30}
+	\end{subfigure} 
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/d200}
+		\caption{\resolution = 200}
+		\label{fig:streamsurfaces:differentDivergenceCriterion:r200}
+	\end{subfigure} 
+	\caption{Visualization of the change of a two-dimensional vector field, \velocity, as function of time with different divergence criteria. %
+	\resolution = 100, \numStates = 200.}
+	\label{fig:streamsurfaces:differentDivergenceCriterion}
+\end{figure}
+
+\Cref{fig:streamsurfaces:differentVectorFields} shows the stream lines of two different vector fields, namely the fluid velocity field and the force field. \Cref{fig:streamsurfaces:differentVectorFields:force} clearly illustrates that the added forces decays quite quickly. This visualization also shows that the stream lines are straight lines as long as the vector fields don't change as a function of time at the position of the seed point.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/fluidVelocity}
+		\caption{\velocity}
+		\label{fig:streamsurfaces:differentVectorFields:velocity}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\threeDScreenshot{./img/streamsurfaces/force}
+		\caption{\force}
+		\label{fig:streamsurfaces:differentVectorFields:force}
+	\end{subfigure}  
+	\caption{Visualization of the change of \subref{fig:streamsurfaces:differentVectorFields:velocity} fluid velocity field and \subref{fig:streamsurfaces:differentVectorFields:force} the force field as a function of time. 
+	%
+	\resolution = 100, \numStates = 200}
+	\label{fig:streamsurfaces:differentVectorFields}
+\end{figure}

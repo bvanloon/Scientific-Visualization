@@ -16,6 +16,10 @@
     \includegraphics[trim = 12px 12px 417px 12px,clip,width=1\textwidth,#1]%
         {#2}%
 }
+\newcommand{\threeDScreenshot}[2][]{%
+    \includegraphics[trim = 50px 80px 425px 50px,clip,width=1\textwidth,#1]%
+        {#2}%
+}
 %\newcommand*{\simulation}{trim={10 px \trendViewBottom px \evolutionviewRight px 710px}
 
 % Color Maps
@@ -103,10 +107,11 @@
 \newcommand{\timeStep}{\ensuremath{\mathtt{timeStep}}\xspace}
 \newcommand{\timeStepMax}{\ensuremath{\timeStep_{\text{max}}}\xspace}
 \newcommand{\edgeLength}{\ensuremath{\mathtt{edgeLength}}\xspace}
-\newcommand{\edgeLengthMax}{\ensuremath{streamLineLength_{\text{max}}}\xspace}
+\newcommand{\edgeLengthMax}{\ensuremath{\mathtt{streamLineLength}_{\text{max}}}\xspace}
 \newcommand{\magnitude}{\ensuremath{\mathtt{magnitude}}\xspace}
 \newcommand{\magnitudeMin}{\ensuremath{\magnitude_{\text{min}}}\xspace}
 
 % Streamsurfaces
 \newcommand{\resolution}{\ensuremath{\mathtt{resolution}}\xspace}
+\newcommand{\numStates}{\ensuremath{\mathtt{\#states}}\xspace}
 \newcommand{\divergenceCriterion}{\ensuremath{\mathtt{divergence_{\text{max}}}}\xspace}
