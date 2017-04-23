@@ -93,6 +93,7 @@ void Settings::Simulation::onTimeStepChanged(float value)
 
 void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
 {
+   useDynamicValueRange = toggle;
    if (toggle) switchToDynamicValueRanges();
    else switchToStaticValueRanges();
 }
