@@ -23,6 +23,8 @@ class Settings::visualization::Glyphs : public QObject
       QSizeF approxCellSize;
       float scale;
 
+      double jitterFactor;
+
       Range<double> getCurrentMagnitudeRange() const;
 
    signals:
@@ -40,6 +42,8 @@ class Settings::visualization::Glyphs : public QObject
       void onScaleChanged(double scale);
 
       void onGridDimensionChanged(QSizeF newDimension);
+
+      void onJitterFactorChanged(double newJitterFactor);
 
    private:
       explicit Glyphs(QObject *parent = 0);

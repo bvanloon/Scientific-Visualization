@@ -136,6 +136,16 @@
           </property>
          </widget>
         </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="jitterFactorlabel">
+          <property name="text">
+           <string>Jitter Factor</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QDoubleSpinBox" name="jitterFactorSpinBox"/>
+        </item>
        </layout>
       </item>
      </layout>
