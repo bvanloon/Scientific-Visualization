@@ -203,23 +203,17 @@ SimulationData *SimulationRealization::getData() const
 
 Range<double> SimulationRealization::getCurrentFluidDensityRange()
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationRealization::getCurrentFluidDensityRange: temporary fixed range.";
-   return Range<double>(0.0, 1.0);
+   return data->getDensityRange();
 }
 
-Range<double> SimulationRealization::getCurrentFluidVelocityMagnitude()
+Range<double> SimulationRealization::getCurrentFluidVelocityMagnitudeRange()
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationRealization::getCurrentFluidVelocityMagnitude: temporary fixed range.";
-   return Range<double>(0.0, 2.0);
+   return data->getFluidVelocityMagnitudeRange();
 }
 
-Range<double> SimulationRealization::getCurrentForceFieldMagnitude()
+Range<double> SimulationRealization::getCurrentForceFieldMagnitudeRange()
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationRealization::getCurrentForceFieldMagnitude: temporarffy fixed range.";
-   return Range<double>(0.0, 3.0);
+   return data->getForceMagnitudeRange();
 }
 
 //do_one_simulation_step: Do one complete cycle of the simulation:

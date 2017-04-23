@@ -28,9 +28,9 @@ class SimulationRealization
 
       Range<double> getCurrentFluidDensityRange();
 
-      Range<double> getCurrentFluidVelocityMagnitude();
+      Range<double> getCurrentFluidVelocityMagnitudeRange();
 
-      Range<double> getCurrentForceFieldMagnitude();
+      Range<double> getCurrentForceFieldMagnitudeRange();
 
    private:
       //--- SIMULATION PARAMETERS ------------------------------------------------------------------------

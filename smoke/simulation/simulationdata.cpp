@@ -85,7 +85,14 @@ fftw_real SimulationData::getVyAt(int idx) const
 QVector2D SimulationData::getFluidVelocityAt(int idx) const
 {
    return QVector2D(getVxAt(idx),
-                     getVyAt(idx));
+                    getVyAt(idx));
+}
+
+Range<double> SimulationData::getFluidVelocityMagnitudeRange()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationData::getFluidVelocityMagnitudeRange(): temporary fixed range.";
+   return Range<double>(0.0, 2.0);
 }
 
 fftw_real *SimulationData::getFx()
@@ -111,7 +118,14 @@ fftw_real SimulationData::getFyAt(int idx) const
 QVector2D SimulationData::getForceAt(int idx)
 {
    return QVector2D(getFxAt(idx),
-                     getFyAt(idx));
+                    getFyAt(idx));
+}
+
+Range<double> SimulationData::getForceMagnitudeRange()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationData::getForceMagnitudeRange(): temporary fixed range.";
+   return Range<double>(0.0, 3.0);
 }
 
 fftw_real *SimulationData::getRho()
@@ -127,6 +141,13 @@ fftw_real SimulationData::getRhoAt(int idx) const
 double SimulationData::getDensityAt(int idx) const
 {
    return this->getRhoAt(idx);
+}
+
+Range<double> SimulationData::getDensityRange()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationData::getDensityRange(): temporary fixed range.";
+   return Range<double>(0.0, 1.0);
 }
 
 SimulationData SimulationData::mean(QList<SimulationData> list)
