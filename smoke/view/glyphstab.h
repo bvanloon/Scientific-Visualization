@@ -27,6 +27,8 @@ class GlyphsTab : public QWidget
 
       void glyphChanged(Settings::sim::GlyphsType glyph);
 
+      void jitterFactorChanged(double value);
+
       void scaleChanged(double scale);
 
    private slots:
@@ -39,6 +41,8 @@ class GlyphsTab : public QWidget
       void on_glyphSelector_currentIndexChanged(int index);
 
       void on_scale_valueChanged(double scale);
+
+      void on_jitterFactorSpinBox_valueChanged(double arg1);
 
    private:
       Ui::GlyphsTab *ui;

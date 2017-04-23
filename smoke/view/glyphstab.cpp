@@ -37,12 +37,16 @@ void GlyphsTab::setUiToDefaults()
 
    ui->glyphSelector->addItems(Settings::visualization::getGlyphNames());
    ui->glyphSelector->setCurrentIndex(Settings::visualization::glyphs().glyph);
+
+   ui->jitterFactorSpinBox->setValue(Settings::visualization::glyphs().jitterFactor);
 }
 
 void GlyphsTab::connectToSettings()
 {
    connect(this, SIGNAL(gridDimensionChanged(QSizeF)),
             &Settings::visualization::glyphs(), SLOT(onGridDimensionChanged(QSizeF)));
+   connect(this, SIGNAL(jitterFactorChanged(double)),
+           &Settings::visualization::glyphs(), SLOT(onJitterFactorChanged(double)));
 }
 
 void GlyphsTab::updateScaleSpinBoxConfiguration(double currentValue)
@@ -94,4 +98,9 @@ void GlyphsTab::on_scale_valueChanged(double scale)
 {
    updateScaleSpinBoxConfiguration(scale);
    emit scaleChanged(scale);
+}
+
+void GlyphsTab::on_jitterFactorSpinBox_valueChanged(double value)
+{
+   emit jitterFactorChanged(value);
 }
