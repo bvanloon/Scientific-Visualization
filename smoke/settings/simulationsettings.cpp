@@ -53,7 +53,7 @@ Range<double> Settings::Simulation::getMagnitudeRange(Settings::sim::Vector vect
    case Settings::sim::Vector::fluidVelocityMagnitudeGradient:
    //fall through
    default:
-      qDebug() << "Settings::visualization::Glyphs::getCurrentMagnitudeRange(): Current gradient magnitudes are not supported. ";
+      qDebug() << "Settings::visualization::Glyphs::getCurrentMagnitudeRange(): Currently gradient magnitudes are not supported. ";
       exit(-1);
    }
 }
