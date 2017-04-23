@@ -47,8 +47,6 @@ class SimulationHistory : public QObject
 
       void onWindowResized(QSizeF newWindowSize);
 
-      void onGridDimensionChanged(QSizeF newDimension);
-
       void onReplaceGrid();
 
    private slots:

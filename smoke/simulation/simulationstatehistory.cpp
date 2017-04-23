@@ -108,16 +108,6 @@ void SimulationHistory::onWindowResized(QSizeF newWindowSize)
    mirrorVisualizationGrid->changeGridArea(newWindowSize, mirrorSimulationGrid->getCellSize());
 }
 
-void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
-{
-   delete mirrorVisualizationGrid;
-   mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
-                Settings::visualization::glyphs().gridDimension.width(),
-                Settings::canvas().size,
-                Settings::visualization::glyphs().jitterFactor,
-               mirrorSimulationGrid);
-}
-
 void SimulationHistory::onReplaceGrid()
 {
    delete mirrorVisualizationGrid;
