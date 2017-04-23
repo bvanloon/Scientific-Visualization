@@ -145,9 +145,9 @@ double SimulationData::getDensityAt(int idx) const
 
 Range<double> SimulationData::getDensityRange()
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationData::getDensityRange(): temporary fixed range.";
-   return Range<double>(0.0, 1.0);
+   fftw_real minimum = *std::min_element(rho.constBegin(), rho.constEnd());
+   fftw_real maximum = *std::max_element(rho.constBegin(), rho.constEnd());
+   return Range<double>(minimum, maximum);
 }
 
 SimulationData SimulationData::mean(QList<SimulationData> list)
