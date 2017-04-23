@@ -9,11 +9,14 @@ Settings::Simulation::Simulation(QObject *parent) :
    timestep(0.4),
    frozen(false),
    force(10.0f),
-   cellSize(-1, -1)
+   cellSize(-1, -1),
+   useDynamicValueRange(true)
 {
    scalarRanges.insert(Settings::sim::Scalar::fluidDensity, Range<double>(0.0f, force));
    scalarRanges.insert(Settings::sim::Scalar::fluidVelocityMagnitude, Range<double>(0.0f, 0.1f));
    scalarRanges.insert(Settings::sim::Scalar::forceFieldMagnitude, Range<double>(0.0f, 0.5f));
+
+   onUseDynamicValueRangeToggled(useDynamicValueRange);
 }
 
 void Settings::Simulation::updateRange(Settings::sim::Scalar scalar, float minimum, float maximum)
@@ -90,6 +93,12 @@ void Settings::Simulation::onTimeStepChanged(float value)
    this->timestep = value;
 }
 
+void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
+{
+   if (toggle) switchToDynamicValueRanges();
+   else switchToStaticValueRanges();
+}
+
 void Settings::Simulation::updateGridCellSize()
 {
    updateGridCellSize(Settings::canvas().size.width(), Settings::canvas().size.height());
@@ -101,4 +110,14 @@ void Settings::Simulation::updateGridCellSize(int canvasWidth, int canvasHeight)
    cellSize.setWidth((fftw_real)canvasWidth / (fftw_real)(dimension + 1));
    emit recomputeVertexPositions(QSize(canvasWidth, canvasHeight), cellSize);
    emit cellSizeChanged(this->cellSize);
+}
+
+void Settings::Simulation::switchToDynamicValueRanges()
+{
+   qDebug() << "Settings::Simulation::switchToDynamicValueRanges";
+}
+
+void Settings::Simulation::switchToStaticValueRanges()
+{
+   qDebug() << "Settings::Simulation::switchToStaticValueRanges";
 }

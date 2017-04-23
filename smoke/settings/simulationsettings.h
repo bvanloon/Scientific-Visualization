@@ -19,6 +19,7 @@ class Settings::Simulation : public QObject
       bool frozen;
       float force;
       QSizeF cellSize;
+      bool useDynamicValueRange;
 
       const float simulationTimeStepMinimum = 0.35;
       const float simulationTimeStepMaximum = 0.45;
@@ -50,6 +51,8 @@ class Settings::Simulation : public QObject
 
       void onTimeStepChanged(float value);
 
+      void onUseDynamicValueRangeToggled(bool toggle);
+
    private:
       explicit Simulation(QObject *parent = 0);
 
@@ -63,6 +66,10 @@ class Settings::Simulation : public QObject
       void updateGridCellSize();
 
       void updateGridCellSize(int canvasWidth, int height);
+
+      void switchToDynamicValueRanges();
+
+      void switchToStaticValueRanges();
 
       Range<double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 };
