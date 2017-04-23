@@ -50,12 +50,3 @@ void GlyphEngine::connnectToSettings()
    connect(&Settings::visualization::glyphs(), SIGNAL(replaceGrid()),
             this, SLOT(onReplaceGrid()));
 }
-
-void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
-{
-   visualizationGrid = JitterGrid::createVisualizationGrid(Settings::visualization::glyphs().gridDimension.width(),
-                                                           Settings::canvas().size,
-                                                           Settings::visualization::glyphs().jitterFactor,
-                                                           simulationGrid);
-   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
-}

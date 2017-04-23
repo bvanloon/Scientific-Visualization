@@ -17,8 +17,6 @@ class GlyphEngine : public AbstractEngine {
    public slots:
       void onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize);
 
-      void onGridDimensionChanged(int width, int UNUSED(height));
-
       void onReplaceGrid();
 
    signals:

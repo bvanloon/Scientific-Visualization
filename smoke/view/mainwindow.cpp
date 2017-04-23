@@ -69,7 +69,6 @@ void MainWindow::onOpenGLReady()
                          Settings::visualization::streamLines().colorMap);
 
    connectGlyphEngineAndSettings();
-   connectGlyphEngineAndGlyphTab();
 
    connectThisToFinishConnectionsReceivers();
    emit finishedSettingUpConnections();
@@ -241,12 +240,6 @@ void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engi
             engine, SLOT(onUpdateModelViewMatrix()));
    connect(simulation, SIGNAL(newSimulationState(SimulationData *)),
            engine, SLOT(onNewSimulationState()));
-}
-
-void MainWindow::connectGlyphEngineAndGlyphTab()
-{
-   connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
-            this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
 void MainWindow::connectGlyphEngineAndSettings()
