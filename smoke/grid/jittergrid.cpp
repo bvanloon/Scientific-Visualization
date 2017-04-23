@@ -1,17 +1,18 @@
 #include "jittergrid.h"
 #include "qdebug.h"
 #include <limits>
-JitterGrid::JitterGrid(int dimension, QSizeF areaSize, QSizeF padding) :
-   UniformGrid(dimension, areaSize, padding)
+JitterGrid::JitterGrid(int dimension, QSizeF areaSize, QSizeF padding, double jitterFactor) :
+   UniformGrid(dimension, areaSize, padding),
+   jitterFactor(jitterFactor)
 {
    re.seed(42);
 }
 
 UniformGrid *JitterGrid::createVisualizationGrid(int dimension,
-                                                 QSizeF size,
+                                                 QSizeF size, double jitterFactor,
                                                  UniformGrid *simulationGrid)
 {
-   JitterGrid *grid = new JitterGrid(dimension, size, simulationGrid->getPadding());
+   JitterGrid *grid = new JitterGrid(dimension, size, simulationGrid->getPadding(), jitterFactor);
 
    createVertices(grid, simulationGrid);
    createCells(grid);

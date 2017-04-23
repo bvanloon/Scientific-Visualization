@@ -11,6 +11,7 @@ GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
       JitterGrid::createVisualizationGrid(
          Settings::visualization::glyphs().gridDimension.width(),
          Settings::canvas().size,
+         Settings::visualization::glyphs().jitterFactor,
          simulationGrid)
       ),
    simulationGrid(simulationGrid)
@@ -35,6 +36,6 @@ void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 
 void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
-   visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
+   visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, Settings::visualization::glyphs().jitterFactor, simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }

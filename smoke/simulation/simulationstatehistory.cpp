@@ -12,6 +12,7 @@ SimulationHistory::SimulationHistory(QObject *parent) :
    mirrorVisualizationGrid(JitterGrid::createVisualizationGrid(
                               Settings::visualization::glyphs().gridDimension.width(),
                               Settings::canvas().size,
+                              Settings::visualization::glyphs().jitterFactor,
                               mirrorSimulationGrid))
 {}
 
@@ -113,5 +114,6 @@ void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
    mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
                 newDimension.width(),
                 Settings::canvas().size,
+                Settings::visualization::glyphs().jitterFactor,
                 mirrorSimulationGrid);
 }
