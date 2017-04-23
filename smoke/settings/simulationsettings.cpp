@@ -74,6 +74,27 @@ Range<double> Settings::Simulation::getMagnitudeRange(Settings::sim::Vector vect
    }
 }
 
+void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
+{
+   useDynamicValueRange = toggle;
+   if (toggle) switchToDynamicValueRanges();
+   else switchToStaticValueRanges();
+}
+
+void Settings::Simulation::onUpdateDynamicRange(Settings::sim::Scalar scalar, Range<double> range)
+{
+   updateDynamicRange(scalar, range.minimum(), range.maximum());
+}
+
+void Settings::Simulation::switchToDynamicValueRanges()
+{
+   qDebug() << "Settings::Simulation::switchToDynamicValueRanges";
+}
+
+void Settings::Simulation::switchToStaticValueRanges()
+{
+   qDebug() << "Settings::Simulation::switchToStaticValueRanges";
+}
 void Settings::Simulation::onDimensionChanged(int newDimension)
 {
    this->dimension = newDimension;
@@ -107,18 +128,6 @@ void Settings::Simulation::onTimeStepChanged(float value)
    this->timestep = value;
 }
 
-void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
-{
-   useDynamicValueRange = toggle;
-   if (toggle) switchToDynamicValueRanges();
-   else switchToStaticValueRanges();
-}
-
-void Settings::Simulation::onUpdateDynamicRange(Settings::sim::Scalar scalar, Range<double> range)
-{
-   updateDynamicRange(scalar, range.minimum(), range.maximum());
-}
-
 void Settings::Simulation::onAllConnectionsAreSetUp()
 {
    onUseDynamicValueRangeToggled(useDynamicValueRange);
@@ -135,14 +144,4 @@ void Settings::Simulation::updateGridCellSize(int canvasWidth, int canvasHeight)
    cellSize.setWidth((fftw_real)canvasWidth / (fftw_real)(dimension + 1));
    emit recomputeVertexPositions(QSize(canvasWidth, canvasHeight), cellSize);
    emit cellSizeChanged(this->cellSize);
-}
-
-void Settings::Simulation::switchToDynamicValueRanges()
-{
-   qDebug() << "Settings::Simulation::switchToDynamicValueRanges";
-}
-
-void Settings::Simulation::switchToStaticValueRanges()
-{
-   qDebug() << "Settings::Simulation::switchToStaticValueRanges";
 }
