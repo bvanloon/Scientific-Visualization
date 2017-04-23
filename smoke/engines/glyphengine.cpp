@@ -38,6 +38,7 @@ void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 
 void GlyphEngine::onReplaceGrid()
 {
+   delete visualizationGrid;
    visualizationGrid = JitterGrid::createVisualizationGrid(Settings::visualization::glyphs().gridDimension.width(),
                                                             Settings::canvas().size,
                                                             Settings::visualization::glyphs().jitterFactor,
