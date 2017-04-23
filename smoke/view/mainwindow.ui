@@ -106,7 +106,7 @@
       </widget>
       <widget class="StreamSurfacesTab" name="streamSurfacesTab">
        <attribute name="title">
-        <string>Streak Objects</string>
+        <string>Particle Traces</string>
        </attribute>
       </widget>
       <widget class="SlicesTab" name="slicesTab">
