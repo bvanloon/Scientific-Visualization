@@ -54,11 +54,9 @@ class StreamLinesTab : public QWidget
 
       void on_maximumLengthSelector_valueChanged(double value);
 
-      void on_gridWidthSpinBox_valueChanged(int width);
-
-      void on_gridHeightSpinBox_valueChanged(int height);
-
       void on_minimumMagnitudeSpinBox_valueChanged(double arg1);
+
+      void on_addGridSeedPointsButton_clicked();
 
    private:
       Ui::StreamLinesTab *ui;

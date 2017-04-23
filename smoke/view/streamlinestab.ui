@@ -187,6 +187,13 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
+       <widget class="QCheckBox" name="showSeedPoinsCheckBox">
+        <property name="text">
+         <string>Show Seed Points</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="seedPointsExplanationLabel">
         <property name="text">
          <string>Add seed points by cmd + click (OS X) or ctrl + click (Windows) or add a grid of seedpoints:</string>
@@ -241,9 +248,9 @@
        </layout>
       </item>
       <item>
-       <widget class="QCheckBox" name="showSeedPoinsCheckBox">
+       <widget class="QPushButton" name="addGridSeedPointsButton">
         <property name="text">
-         <string>Show Seed Points</string>
+         <string>Add Grid of Seed Points</string>
         </property>
        </widget>
       </item>

@@ -103,17 +103,13 @@ void StreamLinesTab::on_maximumLengthSelector_valueChanged(double value)
    emit maximumTotalLengthFactorChanged(value);
 }
 
-void StreamLinesTab::on_gridWidthSpinBox_valueChanged(int width)
-{
-   emit addSeedPointGrid(QSize(width, ui->gridHeightSpinBox->value()));
-}
-
-void StreamLinesTab::on_gridHeightSpinBox_valueChanged(int height)
-{
-   emit addSeedPointGrid(QSize(ui->gridWidthSpinBox->value(), height));
-}
-
 void StreamLinesTab::on_minimumMagnitudeSpinBox_valueChanged(double value)
 {
    emit minimumMagnitudeChanged(value);
+}
+
+void StreamLinesTab::on_addGridSeedPointsButton_clicked()
+{
+   emit addSeedPointGrid(QSize(ui->gridWidthSpinBox->value(),
+                                ui->gridHeightSpinBox->value()));
 }
