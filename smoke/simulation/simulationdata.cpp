@@ -91,9 +91,16 @@ QVector2D SimulationData::getFluidVelocityAt(int idx) const
 
 Range<double> SimulationData::getFluidVelocityMagnitudeRange()
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationData::getFluidVelocityMagnitudeRange(): temporary fixed range.";
-   return Range<double>(0.0, 2.0);
+   double minimum = std::numeric_limits<double>::max();
+   double maximum = std::numeric_limits<double>::min();
+   double currentMagnitude;
+   for (int i = 0; i < velocitiesSize; i++)
+   {
+      currentMagnitude = getFluidVelocityAt(i).length();
+      minimum = qMin(currentMagnitude, minimum);
+      maximum = qMax(currentMagnitude, maximum);
+   }
+   return Range<double>(minimum, maximum);
 }
 
 fftw_real *SimulationData::getFx()
