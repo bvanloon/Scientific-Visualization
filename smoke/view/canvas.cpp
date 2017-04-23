@@ -113,7 +113,7 @@ void Canvas::initializeGL()
    initializeOpenGLFunctions();
    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-   glPointSize(5.0);
+   glPointSize(2.0);
 
    glEnable(GL_BLEND);
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -199,7 +199,7 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 void Canvas::paintGL()
 {
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-   glPointSize(5.0);
+   glPointSize(2.0);
    enginesDraw();
 }
 
