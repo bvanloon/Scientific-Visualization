@@ -112,7 +112,7 @@ void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
 {
    delete mirrorVisualizationGrid;
    mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
-                newDimension.width(),
+                Settings::visualization::glyphs().gridDimension.width(),
                 Settings::canvas().size,
                 Settings::visualization::glyphs().jitterFactor,
                mirrorSimulationGrid);
@@ -120,5 +120,10 @@ void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
 
 void SimulationHistory::onReplaceGrid()
 {
-   qDebug() << "SimulationHistory::onReplaceGrid()";
+   delete mirrorVisualizationGrid;
+   mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
+                 Settings::visualization::glyphs().gridDimension.width(),
+                 Settings::canvas().size,
+                 Settings::visualization::glyphs().jitterFactor,
+                mirrorSimulationGrid);
 }
