@@ -54,6 +54,8 @@ void SimulationSettingPane::setUItoDefaults()
    ui->forceSlider->setMaximum(Settings::defaults::simulation::forceMax);
    ui->forceSlider->setValue(Settings::simulation().force);
 
+   ui->dynamicValueRangeCheckBox->setChecked(Settings::simulation().useDynamicValueRange);
+
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 
    ui->xRotationDial->setValue(Settings::canvas().rotation.x());
