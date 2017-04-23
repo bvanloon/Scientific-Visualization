@@ -94,7 +94,7 @@ Range<double> SimulationData::getFluidVelocityMagnitudeRange()
    double minimum = std::numeric_limits<double>::max();
    double maximum = std::numeric_limits<double>::min();
    double currentMagnitude;
-   for (int i = 0; i < velocitiesSize; i++)
+   for (size_t i = 0; i < velocitiesSize; i++)
    {
       currentMagnitude = getFluidVelocityAt(i).length();
       minimum = qMin(currentMagnitude, minimum);
@@ -134,7 +134,7 @@ Range<double> SimulationData::getForceMagnitudeRange()
    double minimum = std::numeric_limits<double>::max();
    double maximum = std::numeric_limits<double>::min();
    double currentMagnitude;
-   for (int i = 0; i < forceSize; i++)
+   for (size_t i = 0; i < forceSize; i++)
    {
       currentMagnitude = getForceAt(i).length();
       minimum = qMin(currentMagnitude, minimum);
