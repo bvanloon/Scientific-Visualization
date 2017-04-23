@@ -150,6 +150,29 @@
             </property>
            </widget>
           </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="minimumMagnitudeLabel">
+            <property name="text">
+             <string>Minimum magnitude</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QDoubleSpinBox" name="minimumMagnitudeSpinBox">
+            <property name="decimals">
+             <number>6</number>
+            </property>
+            <property name="minimum">
+             <double>0.000001000000000</double>
+            </property>
+            <property name="maximum">
+             <double>10.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.000010000000000</double>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>

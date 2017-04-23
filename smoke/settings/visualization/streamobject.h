@@ -49,6 +49,8 @@ namespace Settings {
 
               void onVectorFieldChanged(Settings::sim::Vector newVectorField);
 
+              void onMinimumMagnitudeChanged(double magnitude);
+
            private slots:
 
            private:

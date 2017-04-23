@@ -38,6 +38,8 @@ class StreamLinesTab : public QWidget
 
       void addSeedPointGrid(QSize size);
 
+      void minimumMagnitudeChanged(double magnitude);
+
    private slots:
 
       void on_timeStepSelector_valueChanged(double arg1);
@@ -55,6 +57,8 @@ class StreamLinesTab : public QWidget
       void on_gridWidthSpinBox_valueChanged(int width);
 
       void on_gridHeightSpinBox_valueChanged(int height);
+
+      void on_minimumMagnitudeSpinBox_valueChanged(double arg1);
 
    private:
       Ui::StreamLinesTab *ui;

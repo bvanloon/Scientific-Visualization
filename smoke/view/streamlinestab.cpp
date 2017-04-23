@@ -50,6 +50,7 @@ void StreamLinesTab::setUiToDefaults()
    this->ui->edgeLengthSelector->setValue(Settings::visualization::streamLines().getEdgeLengthFactor());
 
    this->ui->showSeedPoinsCheckBox->setChecked(Settings::defaults::engines::activeEngines[Settings::engines::EnginesTypes::seedPoints]);
+   this->ui->minimumMagnitudeSpinBox->setValue(Settings::visualization::streamLines().minimumMagnitude);
 }
 
 void StreamLinesTab::connectToSettings()
@@ -58,6 +59,8 @@ void StreamLinesTab::connectToSettings()
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this, SIGNAL(addSeedPointGrid(QSize)),
            &Settings::visualization::streamLines(), SLOT(onAddSeedPointGrid(QSize)));
+   connect(this, SIGNAL(minimumMagnitudeChanged(double)),
+           &Settings::visualization::streamLines(), SLOT(onMinimumMagnitudeChanged(double)));
 }
 
 void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox *spinBox, double value)
@@ -108,4 +111,9 @@ void StreamLinesTab::on_gridWidthSpinBox_valueChanged(int width)
 void StreamLinesTab::on_gridHeightSpinBox_valueChanged(int height)
 {
    emit addSeedPointGrid(QSize(ui->gridWidthSpinBox->value(), height));
+}
+
+void StreamLinesTab::on_minimumMagnitudeSpinBox_valueChanged(double value)
+{
+   emit minimumMagnitudeChanged(value);
 }

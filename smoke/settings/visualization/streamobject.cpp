@@ -8,7 +8,7 @@ Settings::visualization::StreamObject::StreamObject(QObject *parent) :
    QObject(parent),
    timeStep(1.0),
    maximumTime(100),
-   minimumMagnitude(0.004),
+   minimumMagnitude(0.0004),
    //Private
    edgeLengthFactor(0.33),
    totalLengthFactor(std::numeric_limits<double>::infinity())
@@ -57,6 +57,12 @@ void Settings::visualization::StreamObject::onCellSizeChanged(QSizeF currentCell
 void Settings::visualization::StreamObject::onVectorFieldChanged(Settings::sim::Vector newVectorField)
 {
    setVectorField(newVectorField);
+}
+
+void Settings::visualization::StreamObject::onMinimumMagnitudeChanged(double magnitude)
+{
+   minimumMagnitude = magnitude;
+   clearCache();
 }
 
 void Settings::visualization::StreamObject::connectToOtherSettings()
