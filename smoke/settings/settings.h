@@ -123,10 +123,6 @@ namespace Settings {
                 static const float minSaturation = 0.0f;
                 static const float maxSaturation = 1.0f;
             }
-
-            namespace glyphs {
-                static const QSize gridSize = QSize(20, 15);
-            }
         }
 
         namespace engines {
