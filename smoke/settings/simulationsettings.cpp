@@ -114,6 +114,11 @@ void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
    else switchToStaticValueRanges();
 }
 
+void Settings::Simulation::onUpdateDynamicRange(Settings::sim::Scalar scalar, Range<double> range)
+{
+   updateDynamicRange(scalar, range.minimum(), range.maximum());
+}
+
 void Settings::Simulation::onAllConnectionsAreSetUp()
 {
    onUseDynamicValueRangeToggled(useDynamicValueRange);

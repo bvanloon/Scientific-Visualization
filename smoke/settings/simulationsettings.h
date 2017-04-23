@@ -53,6 +53,8 @@ class Settings::Simulation : public QObject
 
       void onUseDynamicValueRangeToggled(bool toggle);
 
+      void onUpdateDynamicRange(Settings::sim::Scalar scalar, Range<double> range);
+
       void onAllConnectionsAreSetUp();
 
    private:
