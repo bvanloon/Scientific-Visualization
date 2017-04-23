@@ -93,6 +93,8 @@ void SimulationSettingPane::connectToSettings()
            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
    connect(this, SIGNAL(useDynamicValueRangeToggled(bool)),
            &Settings::simulation(), SLOT(onUseDynamicValueRangeToggled(bool)));
+   connect(this, SIGNAL(updateStaticRangesToDynamicRanges()),
+           &Settings::simulation(), SLOT(onUpdateStaticRangesToDynamicRanges()));
 }
 
 void SimulationSettingPane::registerEngines()
@@ -252,4 +254,9 @@ void SimulationSettingPane::on_topDownViewButton_pressed()
 void SimulationSettingPane::on_dynamicValueRangeCheckBox_clicked(bool checked)
 {
    emit useDynamicValueRangeToggled(checked);
+}
+
+void SimulationSettingPane::on_updateStaticRangesButton_clicked()
+{
+   emit updateStaticRangesToDynamicRanges();
 }

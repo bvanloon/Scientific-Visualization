@@ -57,6 +57,8 @@ class Settings::Simulation : public QObject
 
       void onAllConnectionsAreSetUp();
 
+      void onUpdateStaticRangesToDynamicRanges();
+
    private:
       explicit Simulation(QObject *parent = 0);
 
@@ -76,7 +78,11 @@ class Settings::Simulation : public QObject
 
       void updateGridCellSize(int canvasWidth, int height);
 
+      void updateStaticRangeToDynamicRange(Settings::sim::Scalar scalar);
+
       void emitRange(Settings::sim::Scalar scalar);
+
+      Range<double> getDynamicRange(Settings::sim::Scalar scalar);
 
       Range<double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 };

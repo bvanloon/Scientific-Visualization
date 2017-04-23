@@ -44,6 +44,8 @@ class SimulationSettingPane : public QWidget
 
       void useDynamicValueRangeToggled(bool toggle);
 
+      void updateStaticRangesToDynamicRanges();
+
    public slots:
       void onEngineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
@@ -93,6 +95,8 @@ class SimulationSettingPane : public QWidget
       void on_topDownViewButton_pressed();
 
       void on_dynamicValueRangeCheckBox_clicked(bool checked);
+
+      void on_updateStaticRangesButton_clicked();
 
    private:
       typedef QMap<Settings::engines::EnginesTypes, QCheckBox *> EngineMap;

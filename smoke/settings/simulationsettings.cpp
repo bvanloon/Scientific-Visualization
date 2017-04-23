@@ -49,8 +49,8 @@ void Settings::Simulation::updateDynamicRange(Settings::sim::Scalar scalar, floa
 
 Range<double> Settings::Simulation::getRange(Settings::sim::Scalar scalar) const
 {
-   if (useDynamicValueRange) return this->dynamicScalarRanges.constFind(scalar).value();
-   else return this->staticScalarRanges.constFind(scalar).value();
+   if (useDynamicValueRange) return dynamicScalarRanges.constFind(scalar).value();
+   else return staticScalarRanges.constFind(scalar).value();
 }
 
 Range<double> Settings::Simulation::getMagnitudeRange(Settings::sim::Vector vector) const
@@ -130,6 +130,24 @@ void Settings::Simulation::onTimeStepChanged(float value)
 void Settings::Simulation::onAllConnectionsAreSetUp()
 {
    onUseDynamicValueRangeToggled(useDynamicValueRange);
+}
+
+void Settings::Simulation::onUpdateStaticRangesToDynamicRanges()
+{
+   updateStaticRangeToDynamicRange(Settings::sim::Scalar::fluidDensity);
+   updateStaticRangeToDynamicRange(Settings::sim::Scalar::fluidVelocityMagnitude);
+   updateStaticRangeToDynamicRange(Settings::sim::Scalar::forceFieldMagnitude);
+}
+
+void Settings::Simulation::updateStaticRangeToDynamicRange(Settings::sim::Scalar scalar)
+{
+   Range<double> range = getDynamicRange(scalar);
+   updateStaticRange(scalar, range.minimum(), range.maximum());
+}
+
+Range<double> Settings::Simulation::getDynamicRange(Settings::sim::Scalar scalar)
+{
+   return dynamicScalarRanges.constFind(scalar).value();
 }
 
 void Settings::Simulation::updateGridCellSize()

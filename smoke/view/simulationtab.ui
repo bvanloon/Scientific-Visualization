@@ -93,7 +93,14 @@
       <item>
        <widget class="QCheckBox" name="dynamicValueRangeCheckBox">
         <property name="text">
-         <string>Use dynamic value range.</string>
+         <string>Use dynamic value ranges</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="updateStaticRangesButton">
+        <property name="text">
+         <string>Update Static Ranges</string>
         </property>
        </widget>
       </item>
