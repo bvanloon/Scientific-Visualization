@@ -78,10 +78,6 @@ class Settings::Simulation : public QObject
 
       void emitRange(Settings::sim::Scalar scalar);
 
-      void switchToDynamicValueRanges();
-
-      void switchToStaticValueRanges();
-
       Range<double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 };
 

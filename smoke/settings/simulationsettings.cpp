@@ -77,29 +77,15 @@ Range<double> Settings::Simulation::getMagnitudeRange(Settings::sim::Vector vect
 void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
 {
    useDynamicValueRange = toggle;
-   if (toggle) switchToDynamicValueRanges();
-   else switchToStaticValueRanges();
+
+   emitRange(Settings::sim::Scalar::fluidDensity);
+   emitRange(Settings::sim::Scalar::fluidVelocityMagnitude);
+   emitRange(Settings::sim::Scalar::forceFieldMagnitude);
 }
 
 void Settings::Simulation::onUpdateDynamicRange(Settings::sim::Scalar scalar, Range<double> range)
 {
    updateDynamicRange(scalar, range.minimum(), range.maximum());
-}
-
-void Settings::Simulation::switchToDynamicValueRanges()
-{
-   qDebug() << "Settings::Simulation::switchToDynamicValueRanges";
-   emitRange(Settings::sim::Scalar::fluidDensity);
-   emitRange(Settings::sim::Scalar::fluidVelocityMagnitude);
-   emitRange(Settings::sim::Scalar::forceFieldMagnitude);
-}
-
-void Settings::Simulation::switchToStaticValueRanges()
-{
-   qDebug() << "Settings::Simulation::switchToStaticValueRanges";
-   emitRange(Settings::sim::Scalar::fluidDensity);
-   emitRange(Settings::sim::Scalar::fluidVelocityMagnitude);
-   emitRange(Settings::sim::Scalar::forceFieldMagnitude);
 }
 
 void Settings::Simulation::emitRange(Settings::sim::Scalar scalar)
