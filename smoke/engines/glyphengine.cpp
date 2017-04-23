@@ -38,7 +38,11 @@ void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 
 void GlyphEngine::onReplaceGrid()
 {
-   qDebug() << "GlyphEngine::onReplaceGrid()";
+   visualizationGrid = JitterGrid::createVisualizationGrid(Settings::visualization::glyphs().gridDimension.width(),
+                                                            Settings::canvas().size,
+                                                            Settings::visualization::glyphs().jitterFactor,
+                                                            simulationGrid);
+   emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void GlyphEngine::connnectToSettings()
@@ -49,6 +53,9 @@ void GlyphEngine::connnectToSettings()
 
 void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
 {
-   visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, Settings::visualization::glyphs().jitterFactor, simulationGrid);
+   visualizationGrid = JitterGrid::createVisualizationGrid(Settings::visualization::glyphs().gridDimension.width(),
+                                                           Settings::canvas().size,
+                                                           Settings::visualization::glyphs().jitterFactor,
+                                                           simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
