@@ -76,6 +76,8 @@ class Settings::Simulation : public QObject
 
       void updateGridCellSize(int canvasWidth, int height);
 
+      void emitRange(Settings::sim::Scalar scalar);
+
       void switchToDynamicValueRanges();
 
       void switchToStaticValueRanges();

@@ -89,12 +89,25 @@ void Settings::Simulation::onUpdateDynamicRange(Settings::sim::Scalar scalar, Ra
 void Settings::Simulation::switchToDynamicValueRanges()
 {
    qDebug() << "Settings::Simulation::switchToDynamicValueRanges";
+   emitRange(Settings::sim::Scalar::fluidDensity);
+   emitRange(Settings::sim::Scalar::fluidVelocityMagnitude);
+   emitRange(Settings::sim::Scalar::forceFieldMagnitude);
 }
 
 void Settings::Simulation::switchToStaticValueRanges()
 {
    qDebug() << "Settings::Simulation::switchToStaticValueRanges";
+   emitRange(Settings::sim::Scalar::fluidDensity);
+   emitRange(Settings::sim::Scalar::fluidVelocityMagnitude);
+   emitRange(Settings::sim::Scalar::forceFieldMagnitude);
 }
+
+void Settings::Simulation::emitRange(Settings::sim::Scalar scalar)
+{
+   Range<double> range = getRange(scalar);
+   emit valueRangeChanged(scalar, range.minimum(), range.maximum());
+}
+
 void Settings::Simulation::onDimensionChanged(int newDimension)
 {
    this->dimension = newDimension;
