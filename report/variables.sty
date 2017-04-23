@@ -6,12 +6,14 @@
 \newcommand{\velocitymagnitude}{\ensuremath{\vec{||v||}}\xspace}
 \newcommand{\force}{\ensuremath{\vec{f}}\xspace}
 \newcommand{\forcefieldmagnitude}{\ensuremath{\vec{||f||}}\xspace}
+\renewcommand{\d}[1]{\ensuremath{\operatorname{d}\!{#1}}}
+\newcommand{\VarDX}{\ensuremath{\mathtt{\d x}}}
 
 
-\newcommand{\VarDX}{\ensuremath{\mathtt{dx}}}
 \newcommand*{\simulation}{width=\textwidth, trim={35px 30px 430px 30px}, clip}
 %\newcommand*{\simulation}{trim={10 px \trendViewBottom px \evolutionviewRight px 710px}
 
+% Color Maps
 \newcommand{\addrainbow}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/rainbowcolormap}};
@@ -75,8 +77,12 @@
 		\end{tikzpicture}
 }	
 
-
-
-
-
-
+% Streamlines
+\newcommand{\vectorFieldCont}[1]{\ensuremath{\vec{F}\!\left(#1\right)}\xspace}
+\newcommand{\vectorFieldDisc}[1]{\ensuremath{\vec{F}\!\left(#1\right)}\xspace}
+\newcommand{\seedPoint}[1]{\ensuremath{\mathit{p}_{#1}}\xspace}
+\newcommand{\integrationTime}{\ensuremath{t}\xspace}
+\newcommand{\timeInterval}{\ensuremath{\text{T}}\xspace}
+\newcommand{\streamLine}{\ensuremath{\mathtt{S}}\xspace}
+\newcommand{\streamLineVertexCont}[1]{\ensuremath{p\left(#1\right)}\xspace}
+\newcommand{\streamLineVertexDisc}[1]{\ensuremath{p_{#1}}\xspace}
