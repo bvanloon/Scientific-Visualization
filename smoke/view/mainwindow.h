@@ -67,8 +67,6 @@ class MainWindow : public QMainWindow
 
 
       //Engines
-      void connectGlyphEngineAndGlyphTab();
-
       void connectGlyphEngineAndSettings();
 
       void connectAbstractEngine(Settings::engines::EnginesTypes engine,

@@ -9,22 +9,25 @@ GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
                   Settings::engines::EnginesTypes::glyphs),
    visualizationGrid(
       JitterGrid::createVisualizationGrid(
-         Settings::defaults::visualization::glyphs::gridSize.width(),
+         Settings::visualization::glyphs().gridDimension.width(),
          Settings::canvas().size,
+         Settings::visualization::glyphs().jitterFactor,
          simulationGrid)
       ),
    simulationGrid(simulationGrid)
 {
+   connnectToSettings();
+
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
 void GlyphEngine::draw()
 {
-    GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
+   GlyphBuilder builder = GlyphBuilder(this->visualizationGrid, Settings::visualization::glyphs().glyph,
                   Settings::visualization::glyphs().colorMap->textureGetter,
                   Settings::visualization::glyphs().vectorGetter);
-    GPUData data = builder.getGPUData();
-    updateBuffersAndDraw(data);
+   GPUData data = builder.getGPUData();
+   updateBuffersAndDraw(data);
 }
 
 void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
@@ -33,8 +36,18 @@ void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
-void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))
+void GlyphEngine::onReplaceGrid()
 {
-   visualizationGrid = JitterGrid::createVisualizationGrid(width, Settings::canvas().size, simulationGrid);
+   delete visualizationGrid;
+   visualizationGrid = JitterGrid::createVisualizationGrid(Settings::visualization::glyphs().gridDimension.width(),
+                                                            Settings::canvas().size,
+                                                            Settings::visualization::glyphs().jitterFactor,
+                                                            simulationGrid);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
+}
+
+void GlyphEngine::connnectToSettings()
+{
+   connect(&Settings::visualization::glyphs(), SIGNAL(replaceGrid()),
+            this, SLOT(onReplaceGrid()));
 }

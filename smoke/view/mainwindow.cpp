@@ -69,7 +69,6 @@ void MainWindow::onOpenGLReady()
                          Settings::visualization::streamLines().colorMap);
 
    connectGlyphEngineAndSettings();
-   connectGlyphEngineAndGlyphTab();
 
    connectThisToFinishConnectionsReceivers();
    emit finishedSettingUpConnections();
@@ -104,10 +103,10 @@ void MainWindow::connectSimuationStateHistory()
            &SimulationHistory::instance(), SLOT(onNewSimulationState(SimulationData *)));
    connect(&Settings::canvas(), SIGNAL(windowResized(QSizeF)),
            &SimulationHistory::instance(), SLOT(onWindowResized(QSizeF)));
-   connect(&Settings::visualization::glyphs(), SIGNAL(gridDimensionChanged(QSizeF)),
-           &SimulationHistory::instance(), SLOT(onGridDimensionChanged(QSizeF)));
    connect(&Settings::visualization::streakSurface(), SIGNAL(numberOfStatesChanged(int)),
            &SimulationHistory::instance(), SLOT(onHistorySizeChanged(int)));
+   connect(&Settings::visualization::glyphs(), SIGNAL(replaceGrid()),
+           &SimulationHistory::instance(), SLOT(onReplaceGrid()));
 }
 
 void MainWindow::connectCanvasAndThis()
@@ -241,12 +240,6 @@ void MainWindow::connectAbstractSliceEngine(Settings::engines::EnginesTypes engi
             engine, SLOT(onUpdateModelViewMatrix()));
    connect(simulation, SIGNAL(newSimulationState(SimulationData *)),
            engine, SLOT(onNewSimulationState()));
-}
-
-void MainWindow::connectGlyphEngineAndGlyphTab()
-{
-   connect(this->ui->glyphsTab, SIGNAL(gridDimensionChanged(int,int)),
-            this->canvas->getEngine(Settings::engines::EnginesTypes::glyphs), SLOT(onGridDimensionChanged(int,int)));
 }
 
 void MainWindow::connectGlyphEngineAndSettings()

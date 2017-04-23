@@ -22,8 +22,8 @@ ColorMapTab *GlyphsTab::getColorMapWidget()
 
 void GlyphsTab::setUiToDefaults()
 {
-   ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.height());
-   ui->gridWidthSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
+   ui->gridHeightSpinBox->setValue(Settings::visualization::glyphs().gridDimension.height());
+   ui->gridWidthSpinBox->setValue(Settings::visualization::glyphs().gridDimension.width());
 
    ui->vectorFieldComboBox->addItems(Settings::visualization::getAllVectorVariableNames());
    ui->vectorFieldComboBox->setCurrentIndex(Settings::visualization::glyphs().vectorField);
@@ -31,18 +31,22 @@ void GlyphsTab::setUiToDefaults()
    ui->scale->setValue(Settings::visualization::glyphs().scale);
    updateScaleSpinBoxConfiguration(Settings::visualization::glyphs().scale);
 
-   //Temporary, until we have support for a rectalinear grid.
-   ui->gridHeightSpinBox->setValue(Settings::defaults::visualization::glyphs::gridSize.width());
-   ui->gridHeightSpinBox->setDisabled(true);
-
    ui->glyphSelector->addItems(Settings::visualization::getGlyphNames());
    ui->glyphSelector->setCurrentIndex(Settings::visualization::glyphs().glyph);
+
+   ui->jitterFactorSpinBox->setValue(Settings::visualization::glyphs().jitterFactor);
+
+   //Temporary, until we have support for a rectalinear grid.
+   ui->gridHeightSpinBox->setValue(ui->gridWidthSpinBox->value());
+   ui->gridHeightSpinBox->setDisabled(true);
 }
 
 void GlyphsTab::connectToSettings()
 {
    connect(this, SIGNAL(gridDimensionChanged(QSizeF)),
             &Settings::visualization::glyphs(), SLOT(onGridDimensionChanged(QSizeF)));
+   connect(this, SIGNAL(jitterFactorChanged(double)),
+           &Settings::visualization::glyphs(), SLOT(onJitterFactorChanged(double)));
 }
 
 void GlyphsTab::updateScaleSpinBoxConfiguration(double currentValue)
@@ -94,4 +98,9 @@ void GlyphsTab::on_scale_valueChanged(double scale)
 {
    updateScaleSpinBoxConfiguration(scale);
    emit scaleChanged(scale);
+}
+
+void GlyphsTab::on_jitterFactorSpinBox_valueChanged(double value)
+{
+   emit jitterFactorChanged(value);
 }
