@@ -178,7 +178,7 @@
         <item>
          <widget class="QSpinBox" name="gridWidthSpinBox">
           <property name="minimum">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="maximum">
            <number>200</number>
@@ -198,7 +198,7 @@
         <item>
          <widget class="QSpinBox" name="gridHeightSpinBox">
           <property name="minimum">
-           <number>1</number>
+           <number>2</number>
           </property>
           <property name="maximum">
            <number>200</number>
