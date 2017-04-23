@@ -46,8 +46,11 @@ streamobject::Surface::SurfaceBuilder::SurfaceBuilder(QList<streamobject::Line> 
    gpuData(GL_LINES),
    maximumDistanceBetweenConnectedVertices(maximumDistanceBetweenConnectedVertices)
 {
-   buildStreamLines(streamLines);
-   nextConnect();
+   if (!streamLines.isEmpty())
+   {
+      buildStreamLines(streamLines);
+      nextConnect();
+   }
 }
 
 void streamobject::Surface::SurfaceBuilder::buildStreamLines(QList<streamobject::Line> lines)
