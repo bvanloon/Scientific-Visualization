@@ -108,6 +108,8 @@ void MainWindow::connectSimuationStateHistory()
            &SimulationHistory::instance(), SLOT(onGridDimensionChanged(QSizeF)));
    connect(&Settings::visualization::streakSurface(), SIGNAL(numberOfStatesChanged(int)),
            &SimulationHistory::instance(), SLOT(onHistorySizeChanged(int)));
+   connect(&Settings::visualization::glyphs(), SIGNAL(replaceGrid()),
+           &SimulationHistory::instance(), SLOT(onReplaceGrid()));
 }
 
 void MainWindow::connectCanvasAndThis()

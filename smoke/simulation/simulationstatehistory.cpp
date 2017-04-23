@@ -115,5 +115,10 @@ void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
                 newDimension.width(),
                 Settings::canvas().size,
                 Settings::visualization::glyphs().jitterFactor,
-                mirrorSimulationGrid);
+               mirrorSimulationGrid);
+}
+
+void SimulationHistory::onReplaceGrid()
+{
+   qDebug() << "SimulationHistory::onReplaceGrid()";
 }

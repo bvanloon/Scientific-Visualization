@@ -19,6 +19,8 @@ class GlyphEngine : public AbstractEngine {
 
       void onGridDimensionChanged(int width, int UNUSED(height));
 
+      void onReplaceGrid();
+
    signals:
       void cellSizeChanged(QSizeF newSize);
 
@@ -26,6 +28,8 @@ class GlyphEngine : public AbstractEngine {
 
       UniformGrid *visualizationGrid;
       UniformGrid *simulationGrid;
+
+      void connnectToSettings();
 };
 
 #endif // VECTORENGINE_H

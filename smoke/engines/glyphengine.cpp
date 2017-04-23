@@ -16,6 +16,8 @@ GlyphEngine::GlyphEngine(UniformGrid *simulationGrid) :
       ),
    simulationGrid(simulationGrid)
 {
+   connnectToSettings();
+
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
 }
 
@@ -32,6 +34,17 @@ void GlyphEngine::onRecomputeVertexPositions(QSize canvasSize, QSizeF cellSize)
 {
    visualizationGrid->changeGridArea(canvasSize, cellSize);
    emit cellSizeChanged(dynamic_cast<UniformGrid *>(visualizationGrid)->getCellSize());
+}
+
+void GlyphEngine::onReplaceGrid()
+{
+   qDebug() << "GlyphEngine::onReplaceGrid()";
+}
+
+void GlyphEngine::connnectToSettings()
+{
+   connect(&Settings::visualization::glyphs(), SIGNAL(replaceGrid()),
+            this, SLOT(onReplaceGrid()));
 }
 
 void GlyphEngine::onGridDimensionChanged(int width, int UNUSED(height))

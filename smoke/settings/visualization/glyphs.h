@@ -31,6 +31,8 @@ class Settings::visualization::Glyphs : public QObject
    signals:
       void gridDimensionChanged(QSizeF newDimension);
 
+      void replaceGrid();
+
       void clearCache();
 
    public slots:

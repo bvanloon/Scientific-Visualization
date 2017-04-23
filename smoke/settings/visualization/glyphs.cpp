@@ -85,12 +85,13 @@ void Settings::visualization::Glyphs::onGridDimensionChanged(QSizeF newDimension
 {
    gridDimension = newDimension.toSize();
    emit gridDimensionChanged(newDimension);
+   emit replaceGrid();
    emit clearCache();
 }
 
 void Settings::visualization::Glyphs::onJitterFactorChanged(double newJitterFactor)
 {
    jitterFactor = newJitterFactor;
-   qDebug() << "Settings::visualization::Glyphs::onJitterFactorChanged: Make sure that the change is handled.";
+   emit replaceGrid();
    emit clearCache();
 }
