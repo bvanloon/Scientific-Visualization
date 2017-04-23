@@ -103,7 +103,6 @@ void Settings::Simulation::onDimensionChanged(int newDimension)
 void Settings::Simulation::onForceChanged(float newForce)
 {
    this->force = newForce;
-   updateStaticRange(Settings::sim::fluidDensity, 0.0f, newForce);
 }
 
 void Settings::Simulation::onWindowResized(int width, int height)
