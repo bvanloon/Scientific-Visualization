@@ -1,6 +1,7 @@
 #include "simulationdata.h"
 #include <QDebug>
 #include <algorithm>
+#include <limits>
 
 SimulationData::SimulationData(int dimension) :
    velocitiesSize(dimension * 2 * (dimension / 2 + 1)),
@@ -123,9 +124,16 @@ QVector2D SimulationData::getForceAt(int idx)
 
 Range<double> SimulationData::getForceMagnitudeRange()
 {
-   static bool warningShown = false;
-   if (!warningShown++) qDebug() << "SimulationData::getForceMagnitudeRange(): temporary fixed range.";
-   return Range<double>(0.0, 3.0);
+   double minimum = std::numeric_limits<double>::max();
+   double maximum = std::numeric_limits<double>::min();
+   double currentMagnitude;
+   for (int i = 0; i < forceSize; i++)
+   {
+      currentMagnitude = getForceAt(i).length();
+      minimum = qMin(currentMagnitude, minimum);
+      maximum = qMax(currentMagnitude, maximum);
+   }
+   return Range<double>(minimum, maximum);
 }
 
 fftw_real *SimulationData::getRho()
