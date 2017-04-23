@@ -10,8 +10,9 @@ SimulationHistory::SimulationHistory(QObject *parent) :
                            Settings::canvas().size,
                            NULL)),
    mirrorVisualizationGrid(JitterGrid::createVisualizationGrid(
-                              Settings::defaults::visualization::glyphs::gridSize.width(),
+                              Settings::visualization::glyphs().gridDimension.width(),
                               Settings::canvas().size,
+                              Settings::visualization::glyphs().jitterFactor,
                               mirrorSimulationGrid))
 {}
 
@@ -107,11 +108,12 @@ void SimulationHistory::onWindowResized(QSizeF newWindowSize)
    mirrorVisualizationGrid->changeGridArea(newWindowSize, mirrorSimulationGrid->getCellSize());
 }
 
-void SimulationHistory::onGridDimensionChanged(QSizeF newDimension)
+void SimulationHistory::onReplaceGrid()
 {
    delete mirrorVisualizationGrid;
    mirrorVisualizationGrid = JitterGrid::createVisualizationGrid(
-                newDimension.width(),
-                Settings::canvas().size,
+                 Settings::visualization::glyphs().gridDimension.width(),
+                 Settings::canvas().size,
+                 Settings::visualization::glyphs().jitterFactor,
                 mirrorSimulationGrid);
 }

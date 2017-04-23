@@ -9,9 +9,9 @@
 class JitterGrid : public UniformGrid
 {
    public:
-      JitterGrid(int dimension, QSizeF areaSize, QSizeF padding);
+      JitterGrid(int dimension, QSizeF areaSize, QSizeF padding, double jitterFactor);
 
-      static UniformGrid *createVisualizationGrid(int dimension, QSizeF size,
+      static UniformGrid *createVisualizationGrid(int dimension, QSizeF size, double jitterFactor,
                                                   UniformGrid *simulationGrid);
 
    protected:
@@ -19,7 +19,7 @@ class JitterGrid : public UniformGrid
 
    private:
       std::default_random_engine re;
-      float jitterFactor = 0.4;
+      float jitterFactor;
 };
 
 #endif // JITTERGRID_H
