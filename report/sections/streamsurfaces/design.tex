@@ -2,8 +2,16 @@
 \section{Design}
 \label{s:streamsurfaces:design}
 
-\todo[inline]{Introduction into the section}
+The visualization of the vector field with the stream surface depends on the placement of the seed curve, which is discussed in \cref{s:streamsurfaces:design:seedcurve} and the parameters discussed in \cref{s:streamsurfaces:design:parameterization}.
 
 \subsection{Seed Curve}
+\label{s:streamsurfaces:design:seedcurve}
+Finding the best position for the seed curve is far from trivial to do automatically. Instead we ask the user to use their insight and draw the seed curve. 
 
 \subsection{Visualization Parameterization}
+\label{s:streamsurfaces:design:parameterization}
+Several parameters influence the visualization of the seed curve. We have already mentioned the number of seed points that is placed on one line segment of the seed curve, \ie \resolution. 
+
+The number of states parameter maps directly to the parameter $T$, mentioned in \cref{s:streamsurface:method:time}. The higher this parameter is the longer the stream lines can become. 
+
+The parameter \divergenceCriterion controls the maximum distance that is allowed between two neighboring vertices of two neighboring stream lines, as discussed in \cref{s:streamsurface:method:surface}.
