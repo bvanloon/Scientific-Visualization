@@ -19,6 +19,7 @@ class Settings::Simulation : public QObject
       bool frozen;
       float force;
       QSizeF cellSize;
+      bool useDynamicValueRange;
 
       const float simulationTimeStepMinimum = 0.35;
       const float simulationTimeStepMaximum = 0.45;
@@ -50,19 +51,38 @@ class Settings::Simulation : public QObject
 
       void onTimeStepChanged(float value);
 
+      void onUseDynamicValueRangeToggled(bool toggle);
+
+      void onUpdateDynamicRange(Settings::sim::Scalar scalar, Range<double> range);
+
+      void onAllConnectionsAreSetUp();
+
+      void onUpdateStaticRangesToDynamicRanges();
+
    private:
       explicit Simulation(QObject *parent = 0);
 
       Simulation(Simulation const&) = delete;
       void operator=(Simulation const&) = delete;
 
-      QMultiMap<Settings::sim::Scalar, Range<double> > scalarRanges;
+      QMultiMap<Settings::sim::Scalar, Range<double> > staticScalarRanges;
+      QMultiMap<Settings::sim::Scalar, Range<double> > dynamicScalarRanges;
 
-      void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
+      void updateRange(Settings::sim::Scalar scalar, QMultiMap<sim::Scalar, Range<double> > *rangeList, float minimum, float maximum);
+
+      void updateStaticRange(Settings::sim::Scalar scalar, float minimum, float maximum);
+
+      void updateDynamicRange(Settings::sim::Scalar scalar, float minimum, float maximum);
 
       void updateGridCellSize();
 
       void updateGridCellSize(int canvasWidth, int height);
+
+      void updateStaticRangeToDynamicRange(Settings::sim::Scalar scalar);
+
+      void emitRange(Settings::sim::Scalar scalar);
+
+      Range<double> getDynamicRange(Settings::sim::Scalar scalar);
 
       Range<double> computeGradientMagnitudeRange(double maximumGradientValue) const;
 };

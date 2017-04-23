@@ -5,6 +5,7 @@
 #include <QVector2D>
 #include <QVector>
 #include <assert.h>
+#include "utilities/range.h"
 
 class SimulationData
 {
@@ -23,6 +24,8 @@ class SimulationData
 
       QVector2D getFluidVelocityAt(int idx) const;
 
+      Range<double> getFluidVelocityMagnitudeRange();
+
       fftw_real *getFx();
       fftw_real getFxAt(int idx) const;
 
@@ -31,9 +34,13 @@ class SimulationData
 
       QVector2D getForceAt(int idx);
 
+      Range<double> getForceMagnitudeRange();
+
       fftw_real *getRho();
       fftw_real getRhoAt(int idx) const;
       double getDensityAt(int idx) const;
+
+      Range<double> getDensityRange();
 
 
       static SimulationData mean(QList<SimulationData> list);

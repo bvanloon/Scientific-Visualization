@@ -15,7 +15,14 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <widget class="ColorMapLegend" name="colormapLegend" native="true"/>
+    <widget class="ColorMapLegend" name="colormapLegend" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>80</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
    </item>
    <item>
     <layout class="QVBoxLayout" name="UIElementsLayout">

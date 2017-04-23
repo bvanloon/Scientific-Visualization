@@ -5,6 +5,7 @@
 #include <math.h>
 #include <QPoint>
 #include "simulationdata.h"
+#include "utilities/range.h"
 
 class SimulationRealization
 {
@@ -21,7 +22,15 @@ class SimulationRealization
       fftw_real *rho, *rho0;                    //smoke density at the current (rho) and previous (rho0) moment
       fftw_real *fx, *fy;           //(fx,fy)   = user-controlled simulation forces, steered with the mouse
 
+
+
       SimulationData *getData() const;
+
+      Range<double> getCurrentFluidDensityRange();
+
+      Range<double> getCurrentFluidVelocityMagnitudeRange();
+
+      Range<double> getCurrentForceFieldMagnitudeRange();
 
    private:
       //--- SIMULATION PARAMETERS ------------------------------------------------------------------------
