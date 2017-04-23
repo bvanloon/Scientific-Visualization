@@ -9,7 +9,8 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    vectorField(Settings::sim::Vector::fluidVelocity),
    glyph(Settings::sim::GlyphsType::airplane),
    scale(1.0),
-   jitterFactor(0.4)
+   jitterFactor(0.4),
+   gridDimension(20, 20)
 {
    vectorGetter = Vertex::getVectorGetter(vectorField);
 }
@@ -82,6 +83,7 @@ void Settings::visualization::Glyphs::onScaleChanged(double scale)
 
 void Settings::visualization::Glyphs::onGridDimensionChanged(QSizeF newDimension)
 {
+   gridDimension = newDimension.toSize();
    emit gridDimensionChanged(newDimension);
    emit clearCache();
 }

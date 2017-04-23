@@ -24,6 +24,7 @@ class Settings::visualization::Glyphs : public QObject
       float scale;
 
       double jitterFactor;
+      QSize gridDimension;
 
       Range<double> getCurrentMagnitudeRange() const;
 
