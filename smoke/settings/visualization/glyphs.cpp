@@ -8,7 +8,8 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    colorMap(new ColorMap()),
    vectorField(Settings::sim::Vector::fluidVelocity),
    glyph(Settings::sim::GlyphsType::airplane),
-   scale(1.0)
+   scale(1.0),
+   jitterFactor(0.4)
 {
    vectorGetter = Vertex::getVectorGetter(vectorField);
 }
