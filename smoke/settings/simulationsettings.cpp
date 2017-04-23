@@ -15,8 +15,6 @@ Settings::Simulation::Simulation(QObject *parent) :
    scalarRanges.insert(Settings::sim::Scalar::fluidDensity, Range<double>(0.0f, force));
    scalarRanges.insert(Settings::sim::Scalar::fluidVelocityMagnitude, Range<double>(0.0f, 0.1f));
    scalarRanges.insert(Settings::sim::Scalar::forceFieldMagnitude, Range<double>(0.0f, 0.5f));
-
-   onUseDynamicValueRangeToggled(useDynamicValueRange);
 }
 
 void Settings::Simulation::updateRange(Settings::sim::Scalar scalar, float minimum, float maximum)

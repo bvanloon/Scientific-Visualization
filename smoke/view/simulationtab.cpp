@@ -91,6 +91,8 @@ void SimulationSettingPane::connectToSettings()
            &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
    connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+   connect(this, SIGNAL(useDynamicValueRangeToggled(bool)),
+           &Settings::simulation(), SLOT(onUseDynamicValueRangeToggled(bool)));
 }
 
 void SimulationSettingPane::registerEngines()
@@ -245,4 +247,9 @@ void SimulationSettingPane::on_sideViewButton_pressed()
 void SimulationSettingPane::on_topDownViewButton_pressed()
 {
    emit setViewMatrixToTopDownView();
+}
+
+void SimulationSettingPane::on_dynamicValueRangeCheckBox_clicked(bool checked)
+{
+   emit useDynamicValueRangeToggled(checked);
 }
