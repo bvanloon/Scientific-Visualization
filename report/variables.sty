@@ -1,2 +1,81 @@
 % Color Maps
+\newcommand{\density}{\ensuremath{\rho}}
+\newcommand{\velocity}{\ensuremath{\vec{v}}}
+\newcommand{\velocitymagnitude}{\ensuremath{\vec{||v||}}}
+\newcommand{\force}{\ensuremath{\vec{f}}}
+\newcommand{\forcefieldmagnitude}{\ensuremath{\vec{||f||}}}
+
+
 \newcommand{\VarDX}{\ensuremath{\mathtt{dx}}}
+\newcommand{\smoke}{scalar visualization}
+\newcommand*{\simulation}{width=\textwidth, trim={35px 30px 430px 30px}, clip}
+%\newcommand*{\simulation}{trim={10 px \trendViewBottom px \evolutionviewRight px 710px}
+
+\newcommand{\addrainbow}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/rainbowcolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}
+
+\newcommand{\addcold}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/coldcolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}
+\newcommand{\addheat}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/heatcolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	
+
+\newcommand{\addhue}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/huecolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	
+
+\newcommand{\addgrayscale}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/grayscalecolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	
+
+\newcommand{\adddiverging}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/divergingcolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	
+
+\newcommand{\addtwocolors}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/twocolorscolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	
+
+\newcommand{\addzebra}[2]{
+		\begin{tikzpicture}
+		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/zebracolormap}};
+		      \node [anchor=north west] at (image.south west)  {#1};
+		      \node [anchor=north east] at (image.south east)  {#2};
+		\end{tikzpicture}
+}	
+
+
+
+
+
+

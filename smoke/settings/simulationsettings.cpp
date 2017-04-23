@@ -5,7 +5,7 @@
 
 Settings::Simulation::Simulation(QObject *parent) :
    QObject(parent),
-   dimension(50),
+   dimension(100),
    timestep(0.4),
    frozen(false),
    force(10.0f),

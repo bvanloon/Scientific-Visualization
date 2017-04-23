@@ -10,17 +10,16 @@ AbstractColorMap *HeatColorMap::Create(int numColors, float saturation, float UN
    return new HeatColorMap(numColors, saturation);
 }
 
-
 HeatColorMap::HeatColorMap(int numColors, float saturation) :
    AbstractColorMap(numColors, saturation)
 {
    fill();
+   this->save("../report/colormapping/img/colormaps/heatcolormap.png", 0, 100);
 }
-
 
 void HeatColorMap::fill()
 {
-   float stepSize = 1.0 / (numColors - 1);
+   float stepSize = 1.0 / (numColors);
    float f = 0;
 
    for (int i = 0; i < numColors; f += stepSize, i++)
@@ -28,7 +27,6 @@ void HeatColorMap::fill()
       setPixel(i, 0, setSaturation(toHeatColor(f), saturation));
    }
 }
-
 
 QRgb HeatColorMap::toHeatColor(float f)
 {

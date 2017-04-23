@@ -1,0 +1,18 @@
+%!TEX root = ../scivis_lbaakman_bvanloon.tex
+\chapter{Gradients} % (fold)
+\label{cha:gradients}
+In the previous chapters we already discussed the various datasets in the simulation; the fluid density, fluid velocity, and the force field. In this chapter we discuss how two new datasets are created using the existing data: the fluid density gradient and the fluid velocity gradient. Gradients are multi-variable generalization of derivatives and are a function of change in the associated dataset. Gradients are vector field containing with the direction of the vectors depicting the direction of greatest change and the magnitude of the vector representing the amount of change in that direction. Since the gradients are not directly represented, they have to inferred from the existing data.
+\section{Calculating Gradients} % (fold)
+\label{sec:calculating_gradients}
+Calculation of the fluid density gradient is done using the cells discussed in \cref{cha:glyphs}. The gradient of a point on the grid is calculated by looking at the difference between the values of vertices of the cell containing that point and linear interpolating this difference based on the position of the point in the cell. Similar to the interpolation of the vector data, the gradient vector can be interpolated by interpolating the $x$ and $y$ components independently, thus: 
+\begin{align*}
+\Delta \begin{bmatrix}x\\y \end{bmatrix} = \begin{bmatrix}\Delta x\\\Delta y \end{bmatrix} .
+\end{align*}
+This method can 
+
+
+% section gradient_of_the_fluid_density (end)
+% chapter gradients (end)
+\todo[inline]{Computation of the fluid velocuty magnitude gradient}
+\todo[inline]{Visualization of  the two gradients}
+\todo[inline]{Relation between the two gradients (orthogonal)}
