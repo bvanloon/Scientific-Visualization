@@ -68,5 +68,18 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
 
 void Settings::visualization::StreamLines::onAddSeedPointGrid(QSize dimension)
 {
-   qDebug() << "Settings::visualization::StreamLines::onAddSeedPointGrid: " << dimension;
+   double xStep = Settings::canvas().size.width() / (dimension.width() - 1);
+   double yStep = Settings::canvas().size.height() / (dimension.height() - 1);
+
+   QPointF seedPoint;
+
+   for (int y = 0; y < dimension.height(); y++)
+   {
+      seedPoint.setY(y * yStep);
+      for (int x = 0; x < dimension.width(); x++)
+      {
+         seedPoint.setX(x * xStep);
+         seedPoints.append(seedPoint);
+      }
+   }
 }
