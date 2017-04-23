@@ -1,39 +1,140 @@
 %!TEX root = ../../scivis_lbaakman_bvanloon.tex
 \section{Results}
 \label{s:streamlines:results}
-All images of streamlines computed in this section represent the state of the simulation as visualized by 
+%
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.5\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/manual.png}
+		\addrainbow{0.0}{0.005}
+		\addgrayscale{0.0}{0.005}
+	\end{subfigure}			
+	\caption{Manually seeded streamlines superimposed on \smoke of the fluid density with a gray scale color map that shows the fluid velocity magnitude. Seed points were placed in areas of high fluid velocity magnitude.\timeStep = 1.0, \timeStepMax = 100.0, \edgeLength = 0.33, \edgeLengthMax = $\infty$.}
+	\label{fig:streamlines:results:manuallySeed}
+\end{figure}
+
+This section presents several visualizations of the fluid velocity. All visualizations use the rainbow color map with 256 colors, without clamping and with the saturation set to 1.0.
+
+\Cref{fig:streamlines:results:manuallySeed} shows the visualization of the vector field with streamlines when the seed points are manually placed in areas with a high fluid velocity magnitude. This visualization has poor coverage, a large area of the vector field is not visualized at all. In the areas where streamlines are present the visualization is reasonable uniform, although the streamlines deviate quite a lot in the lower left corner. The continuity of this visualization if pretty good, near the center a few relatively long streamlines are present, but these are not so short as to make them hard to interpret.
+%
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/m005.png}
+		\caption{\magnitudeMin = 0.005}
+		\label{fig:streamlines:results:minimumMagnitudeVaries:m005}
+	\end{subfigure}
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/m0005.png}
+		\caption{\magnitudeMin = 0.0005}
+		\label{fig:streamlines:results:minimumMagnitudeVaries:m0005}
+	\end{subfigure}	
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/m00005.png}
+		\caption{\magnitudeMin = 0.00005}
+		\label{fig:streamlines:results:minimumMagnitudeVaries:m00005}
+	\end{subfigure}	
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/m001.png}
+		\caption{\magnitudeMin = 0.001}
+		\label{fig:streamlines:results:minimumMagnitudeVaries:m001}
+	\end{subfigure}	
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/m0001.png}
+		\caption{\magnitudeMin = 0.0001}
+		\label{fig:streamlines:results:minimumMagnitudeVaries:m0001}
+	\end{subfigure}		
+	\begin{subfigure}{0.32\textwidth}
+		\centering
+		\assusScreenshot{img/streamlines/m00001.png}
+		\caption{\magnitudeMin = 0.00001}
+		\label{fig:streamlines:results:minimumMagnitudeVaries:m00001}
+	\end{subfigure}	
+	\addrainbow{0.0}{0.006}		
+	\caption{Streamlines, seeded on an uniform $50 \times 50$ grid of seed points with varying minimum magnitude. \timeStep = 1.0, \timeStepMax = 100.0, \edgeLength = 0.33, \edgeLengthMax = $\infty$.}
+	\label{fig:streamlines:results:minimumMagnitudeVaries}
+\end{figure}
+%
+\Cref{fig:streamlines:results:minimumMagnitudeVaries} illustrates the influence of the minimum magnitude. Clearly \cref{fig:streamlines:results:minimumMagnitudeVaries:m005} is useless, and \cref{fig:streamlines:results:minimumMagnitudeVaries:m001,fig:streamlines:results:minimumMagnitudeVaries:m0005} are hardly useful. Comparing \cref{fig:streamlines:results:minimumMagnitudeVaries:m0001} with \cref{fig:streamlines:results:minimumMagnitudeVaries:m00001} we see that the area around the points of zero magnitude has significantly decreased. 
+
+In \cref{fig:streamlines:results:minimumMagnitudeVaries} the coverage is good for $\magnitudeMin < 0.0001$. For these values of \magnitudeMin uniformity is better than it was in \cref{fig:streamlines:results:manuallySeed}, but especially near the borders of the computational domain the density of the streamlines is lower than near the region of high fluid density velocity. All streamlines are long enough to follow, continuity is good for $\magnitudeMin < 0.0001$.
+
+\Cref{fig:streamlines:results:timeStepVaries} shows the influence of the time step on the visualization. Clearly increasing \timeStep results in a visualization with increasingly shorter streamlines. In \cref{fig:streamlines:results:timeStepVaries:t50} the streamlines have become short enough that the resulting visualization is reminiscent of the visualization of this vector field with glyphs. Although the continuity leaves much to be desired for $\timeStep = 50$, this visualization has good uniformity and coverage. The visualizations with lower values for \timeStep have better continuity, but worse coverage and uniformity. Based on \cref{fig:streamlines:results:timeStepVaries} we observe that as \timeStep increases continuity decreases. 
+
+If we were to increase the maximum time the streamlines would get longer. Eventually the integration of streamlines would only be terminated because the current magnitude falls below the threshold for that value.
+%
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/t1.png}
+		\caption{\timeStep = 1}
+		\label{fig:streamlines:results:timeStepVaries:t1}
+	\end{subfigure}		
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/t5.png}
+		\caption{\timeStep = 5}
+		\label{fig:streamlines:results:timeStepVaries:t5}
+	\end{subfigure}			
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/t10.png}
+		\caption{\timeStep = 10}
+		\label{fig:streamlines:results:timeStepVaries:t10}
+	\end{subfigure}				
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/t50.png}
+		\caption{\timeStep = 50}
+		\label{fig:streamlines:results:timeStepVaries:t50}
+	\end{subfigure}	
+	\addrainbow{0.0}{0.004}		
+	\caption{Streamlines, seeded on an uniform $50 \times 50$ grid of seed points with varying time steps. Seed points are shown as blue dots. \timeStepMax = 100.0, \edgeLength = 0.33, \edgeLengthMax = $\infty$, \magnitudeMin = 0.00001.}
+	\label{fig:streamlines:results:timeStepVaries}
+\end{figure}
+%
+\Cref{fig:streamlines:results:edgeLengthVaries} illustrates the effect of varying edge lengths. None of the visualizations in this figure are uniform or have globally good coverage. \Cref{fig:streamlines:results:edgeLengthVaries:e003} has good local coverage and uniformity and coverage. But quite low continuity, comparing this figure with the visualizations of the same vector field with a different value of \edgeLength we see that the integration of the streamlines in \cref{fig:streamlines:results:edgeLengthVaries:e003} has terminated because $\integrationTime > \timeInterval$. The differences in density between \cref{fig:streamlines:results:edgeLengthVaries:e03,fig:streamlines:results:edgeLengthVaries:e09} illustrate show that length of the streamlines for $\edgeLength = 0.03$ is terminated for that same condition. In \cref{fig:streamlines:results:edgeLengthVaries:e3} we observe that a too high edge length results in very angular streamlines. Clearly \edgeLength is of great influence of the continuity of the streamlines, which in term influences the coverage. 
+
+The bottom edge of the lower left corner of this figure shows that we simply discard the next vertex on the stream line if it went outside of the computational domain, instead of following the vector to the edge of the computational domain. The computations for this are quite trivial, but given that normally \edgeLength is quite small not extremely relevant.
+
+Decreasing the maximum length of a streamline would do exactly what the name of its parameter implies, as soon as the maximum length is low enough that the integration of the streamlines is not terminated because of a too low magnitude or because $\integrationTime < \timeInterval$. 
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{0.49\textwidth}
+	\begin{subfigure}{0.44\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{img/streamlines/simulationStateSmoke.png}
-		\caption{\velocitymagnitude}
-		\label{fig:streamlines:results:simulationstate:smoke}
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/e003.png}
+		\caption{\edgeLength = 0.003}
+		\label{fig:streamlines:results:edgeLengthVaries:e003}
 	\end{subfigure}
-	\begin{subfigure}{0.49\textwidth}
+	\begin{subfigure}{0.44\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{img/streamlines/simulationStateGlyphs.png}
-		\caption{\velocity}
-		\label{fig:streamlines:results:simulationstate:glyphs}
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/e03.png}
+		\caption{\edgeLength = 0.3}
+		\label{fig:streamlines:results:edgeLengthVaries:e03}
 	\end{subfigure}	
-	\caption{A visualization of the \subref{fig:streamlines:results:simulationstate:smoke} \velocitymagnitude and \subref{fig:streamlines:results:simulationstate:glyphs} \velocity of the vector field used to illustrate the visualization of streamlines in this section.}
-	\label{fig:streamlines:results:simulationstate}
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/e09.png}
+		\caption{\edgeLength = 0.9}
+		\label{fig:streamlines:results:edgeLengthVaries:e09}
+	\end{subfigure}		
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\assusScreenshot[height=0.15\textheight, keepaspectratio=true]{img/streamlines/e3.png}
+		\caption{\edgeLength = 3}
+		\label{fig:streamlines:results:edgeLengthVaries:e3}
+	\end{subfigure}			
+	\addrainbow{0.0}{0.005}		
+	\caption{Streamlines, seeded on an uniform $50 \times 50$ grid of seed points with varying edge lengths. \timeStep = 1.0, \timeStepMax = 100.0, \edgeLengthMax = $\infty$, \magnitudeMin = 0.0004.}
+	\label{fig:streamlines:results:edgeLengthVaries}
 \end{figure}
 
 
-\todo[inline]{Show streamlines when seeded on a few points, show both smoke and streamline visualization}
-\todo[inline]{Discuss differences}
-
-
-
-\todo[inline]{Show streamlines of state x when seeded on a grid with different minimum magnitudes}
-\todo[inline]{Discuss differences}
-
-\todo[inline]{Show streamlines of state x when seeded on a grid with different time steps}
-\todo[inline]{Discuss differences}
-
-\todo[inline]{Show streamlines of state x when seeded on a grid with different edge lengths}
-\todo[inline]{Discuss differences}
-
-\todo[inline]{Discuss that we didn't move the streamlines until the end of the computational domain}

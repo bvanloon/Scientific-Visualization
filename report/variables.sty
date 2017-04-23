@@ -1,5 +1,6 @@
 % Simulation
 \newcommand{\smoke}{scalar visualization\xspace}
+\newcommand{\Smoke}{Scalar visualization\xspace}
 
 \newcommand{\density}{\ensuremath{\rho}\xspace}
 \newcommand{\velocity}{\ensuremath{\vec{v}}\xspace}
@@ -11,69 +12,73 @@
 
 
 \newcommand*{\simulation}{width=\textwidth, trim={35px 30px 430px 30px}, clip}
+\newcommand{\assusScreenshot}[2][]{%
+    \includegraphics[trim = 12px 12px 417px 12px,clip,width=1\textwidth,#1]%
+        {#2}%
+}
 %\newcommand*{\simulation}{trim={10 px \trendViewBottom px \evolutionviewRight px 710px}
 
 % Color Maps
 \newcommand{\addrainbow}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/rainbowcolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }
 
 \newcommand{\addcold}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/coldcolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }
 \newcommand{\addheat}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/heatcolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }	
 
 \newcommand{\addhue}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/huecolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }	
 
 \newcommand{\addgrayscale}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/grayscalecolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }	
 
 \newcommand{\adddiverging}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/divergingcolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }	
 
 \newcommand{\addtwocolors}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/twocolorscolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }	
 
 \newcommand{\addzebra}[2]{
 		\begin{tikzpicture}
 		    \node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth,height=5px,keepaspectratio=false,frame]{colormapping/img/colormap_legends/zebracolormap}};
-		      \node [anchor=north west] at (image.south west)  {#1};
-		      \node [anchor=north east] at (image.south east)  {#2};
+		      \node [anchor=north west] at (image.south west)  {\footnotesize #1};
+		      \node [anchor=north east] at (image.south east)  {\footnotesize #2};
 		\end{tikzpicture}
 }	
 
@@ -86,3 +91,10 @@
 \newcommand{\streamLine}{\ensuremath{\mathtt{S}}\xspace}
 \newcommand{\streamLineVertexCont}[1]{\ensuremath{p\left(#1\right)}\xspace}
 \newcommand{\streamLineVertexDisc}[1]{\ensuremath{p_{#1}}\xspace}
+
+\newcommand{\timeStep}{\ensuremath{\mathtt{t}}\xspace}
+\newcommand{\timeStepMax}{\ensuremath{\timeStep_{\text{max}}}\xspace}
+\newcommand{\edgeLength}{\ensuremath{\mathtt{e}}\xspace}
+\newcommand{\edgeLengthMax}{\ensuremath{\edgeLength_{\text{max}}}\xspace}
+\newcommand{\magnitude}{\ensuremath{\mathtt{m}}\xspace}
+\newcommand{\magnitudeMin}{\ensuremath{\magnitude_{\text{min}}}\xspace}
