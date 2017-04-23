@@ -56,6 +56,8 @@ void StreamLinesTab::connectToSettings()
 {
    connect(this, SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
             &Settings::canvas(), SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+   connect(this, SIGNAL(addSeedPointGrid(QSize)),
+           &Settings::visualization::streamLines(), SLOT(onAddSeedPointGrid(QSize)));
 }
 
 void StreamLinesTab::setSpinBoxWithSpecialValueToDefault(QDoubleSpinBox *spinBox, double value)
@@ -96,4 +98,14 @@ void StreamLinesTab::on_maximumLengthSelector_valueChanged(double value)
 {
    if (value == this->ui->maximumLengthSelector->minimum()) value = std::numeric_limits<double>::infinity();
    emit maximumTotalLengthFactorChanged(value);
+}
+
+void StreamLinesTab::on_gridWidthSpinBox_valueChanged(int width)
+{
+   emit addSeedPointGrid(QSize(width, ui->gridHeightSpinBox->value()));
+}
+
+void StreamLinesTab::on_gridHeightSpinBox_valueChanged(int height)
+{
+   emit addSeedPointGrid(QSize(ui->gridWidthSpinBox->value(), height));
 }

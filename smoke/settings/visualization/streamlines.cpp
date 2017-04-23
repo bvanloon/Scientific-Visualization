@@ -65,3 +65,8 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
    transformationMatrix.scale(xScale, yScale, 0.0);
    transformSeedPoints(transformationMatrix);
 }
+
+void Settings::visualization::StreamLines::onAddSeedPointGrid(QSize dimension)
+{
+   qDebug() << "Settings::visualization::StreamLines::onAddSeedPointGrid: " << dimension;
+}
