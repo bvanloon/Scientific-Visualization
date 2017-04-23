@@ -53,6 +53,8 @@ class Settings::Simulation : public QObject
 
       void onUseDynamicValueRangeToggled(bool toggle);
 
+      void onAllConnectionsAreSetUp();
+
    private:
       explicit Simulation(QObject *parent = 0);
 

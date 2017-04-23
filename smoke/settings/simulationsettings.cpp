@@ -97,6 +97,11 @@ void Settings::Simulation::onUseDynamicValueRangeToggled(bool toggle)
    else switchToStaticValueRanges();
 }
 
+void Settings::Simulation::onAllConnectionsAreSetUp()
+{
+   onUseDynamicValueRangeToggled(useDynamicValueRange);
+}
+
 void Settings::Simulation::updateGridCellSize()
 {
    updateGridCellSize(Settings::canvas().size.width(), Settings::canvas().size.height());
