@@ -14,7 +14,9 @@ Simulation::Simulation(QObject *parent) :
            Settings::canvas().size,
            realization->getData())),
    lastMousePosition(0.0f, 0.0f)
-{}
+{
+   connectToSettings();
+}
 
 Simulation::~Simulation()
 {
@@ -27,6 +29,14 @@ void Simulation::step()
    this->realization->do_one_simulation_step();
    emit newSimulationState(new SimulationData(*(this->grid->getData())));
    emit newSimulationState();
+   emitUpdatesOfDynamicRanges();
+}
+
+void Simulation::emitUpdatesOfDynamicRanges()
+{
+   emit updateDynamicRange(Settings::sim::fluidDensity, realization->getCurrentFluidDensityRange());
+   emit updateDynamicRange(Settings::sim::fluidVelocityMagnitude, realization->getCurrentFluidVelocityMagnitudeRange());
+   emit updateDynamicRange(Settings::sim::forceFieldMagnitude, realization->getCurrentForceFieldMagnitudeRange());
 }
 
 void Simulation::onMouseMoved(QPoint newPosition)
@@ -45,6 +55,12 @@ void Simulation::onStep()
 void Simulation::onWindowResized(int width, int height)
 {
    grid->changeGridArea(QSizeF(width, height));
+}
+
+void Simulation::connectToSettings()
+{
+   connect(this, SIGNAL(updateDynamicRange(Settings::sim::Scalar,Range<double> )),
+            &Settings::simulation(), SLOT(onUpdateDynamicRange(Settings::sim::Scalar,Range<double> )));
 }
 
 SimulationGrid *Simulation::getSimulationGrid() const

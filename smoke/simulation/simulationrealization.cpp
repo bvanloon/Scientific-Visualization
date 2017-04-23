@@ -35,10 +35,10 @@ SimulationRealization::SimulationRealization() :
 
 SimulationRealization::~SimulationRealization()
 {
-    delete data;
-    free(vx0);
-    free(vy0);
-    free(rho0);
+   delete data;
+   free(vx0);
+   free(vy0);
+   free(rho0);
 }
 
 //FFT: Execute the Fast Fourier Transform on the dataset 'vx'.
@@ -198,7 +198,28 @@ void SimulationRealization::set_forces(void)
 
 SimulationData *SimulationRealization::getData() const
 {
-    return data;
+   return data;
+}
+
+Range<double> SimulationRealization::getCurrentFluidDensityRange()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationRealization::getCurrentFluidDensityRange: temporary fixed range.";
+   return Range<double>(0.0, 1.0);
+}
+
+Range<double> SimulationRealization::getCurrentFluidVelocityMagnitude()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationRealization::getCurrentFluidVelocityMagnitude: temporary fixed range.";
+   return Range<double>(0.0, 2.0);
+}
+
+Range<double> SimulationRealization::getCurrentForceFieldMagnitude()
+{
+   static bool warningShown = false;
+   if (!warningShown++) qDebug() << "SimulationRealization::getCurrentForceFieldMagnitude: temporarffy fixed range.";
+   return Range<double>(0.0, 3.0);
 }
 
 //do_one_simulation_step: Do one complete cycle of the simulation:
