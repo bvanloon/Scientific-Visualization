@@ -23,6 +23,9 @@
 \RequirePackage[pdftex]{graphicx}
 \RequirePackage[hang, small,labelfont=bf,up,textfont=it,up]{caption}
 \RequirePackage{subcaption}
+\DeclareCaptionLabelFormat{opening}{(#2)}
+\captionsetup{subrefformat=opening}
+
 \RequirePackage{placeins}%floatbarrier
 \usepackage[export]{adjustbox}
 \RequirePackage{mdframed}
