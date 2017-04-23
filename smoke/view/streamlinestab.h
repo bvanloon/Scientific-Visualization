@@ -36,6 +36,10 @@ class StreamLinesTab : public QWidget
 
       void engineToggled(Settings::engines::EnginesTypes engine, bool checked);
 
+      void addSeedPointGrid(QSize size);
+
+      void minimumMagnitudeChanged(double magnitude);
+
    private slots:
 
       void on_timeStepSelector_valueChanged(double arg1);
@@ -49,6 +53,10 @@ class StreamLinesTab : public QWidget
       void on_edgeLengthSelector_valueChanged(double value);
 
       void on_maximumLengthSelector_valueChanged(double value);
+
+      void on_minimumMagnitudeSpinBox_valueChanged(double arg1);
+
+      void on_addGridSeedPointsButton_clicked();
 
    private:
       Ui::StreamLinesTab *ui;

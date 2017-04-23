@@ -2,8 +2,8 @@
 #include "shapes/rectangle.h"
 #include "QMatrix4x4"
 
-const double SeedPointEngine::fillScale = 7;
-const double SeedPointEngine::borderScale = 10;
+const double SeedPointEngine::lowValue = 0.0;
+const double SeedPointEngine::highValue = 1.0;
 
 SeedPointEngine::SeedPointEngine() :
    AbstractEngine(AbstractEngine::lightModel::noLight,
@@ -12,85 +12,27 @@ SeedPointEngine::SeedPointEngine() :
 
 void SeedPointEngine::draw()
 {
-   int bufferLength = this->fillBuffers();
-
-   drawWithMode(drawMode, bufferLength);
+   GPUData data = buildGPUData();
+   updateBuffersAndDraw(data);
 }
 
-int SeedPointEngine::fillBuffers()
+GPUData SeedPointEngine::buildGPUData()
 {
-   fillIntermediateBuffers();
-
-   int numElementsInBuffer = intermediateBufferSize();
-
-   updateBuffer(this->vertexBuffer, vertices);
-   updateBuffer(this->normalBuffer, normals);
-   updateBuffer(this->textureCoordinateBuffer, textureCoordinates);
-   updateBuffer(this->alphaBuffer, QVector<float>(this->vertices.size(), 1.0));
-
-   clearIntermediateBuffers();
-
-   return numElementsInBuffer;
-}
-
-void SeedPointEngine::fillIntermediateBuffers()
-{
-   for(QPointF position : Settings::visualization::streamLines().seedPoints){
-       addSeedPoint(position);
+   GPUData data(GL_POINTS);
+   QVector3D normal = QVector3D(0.0, 0.0, 1.0);
+   for (QPointF seedPoint : Settings::visualization::streamLines().seedPoints)
+   {
+      data.addElement(QVector3D(seedPoint), normal, highValue);
    }
+   return data;
 }
 
-void SeedPointEngine::addSeedPoint(QPointF position)
+void SeedPointEngine::setColorMapValueRange(float UNUSED(min), float UNUSED(max))
 {
-   addSeedPointFill(position);
-   addSeedPointBorder(position);
+   AbstractEngine::setColorMapClampingTo(false);
 }
 
-void SeedPointEngine::addSeedPointBorder(QPointF position)
+void SeedPointEngine::setColorMapClampingTo(bool UNUSED(clampingOn))
 {
-   Range<double> range = Settings::simulation().getRange(Settings::visualization::streamLines().colorMap->scalar);
-   shapes::Rectangle rectangle = shapes::Rectangle(borderScale, borderScale);
-   mesh::TriangleMesh *mesh = rectangle.toTriangleMesh();
-
-   QMatrix4x4 translationMatrix;
-   translationMatrix.translate(position.x(), position.y(), 0.0);
-   mesh->applyTransformation(translationMatrix);
-
-   this->addMesh(mesh, range.maximum());
-
-   delete mesh;
-}
-
-void SeedPointEngine::addSeedPointFill(QPointF position)
-{
-   Range<double> range = Settings::simulation().getRange(Settings::visualization::streamLines().colorMap->scalar);
-   shapes::Rectangle rectangle = shapes::Rectangle(fillScale, fillScale);
-   mesh::TriangleMesh *mesh = rectangle.toTriangleMesh();
-
-   QMatrix4x4 translationMatrix;
-   translationMatrix.translate(position.x(), position.y(), 0.0);
-   mesh->applyTransformation(translationMatrix);
-
-   this->addMesh(mesh, range.minimum());
-
-   delete mesh;
-}
-
-void SeedPointEngine::addMesh(mesh::TriangleMesh *mesh, float textureCoordinate)
-{
-   vertices.append(mesh->getVerticesAsVBO());
-   normals.append(mesh->getNormalsAsVBO());
-   textureCoordinates.append(QVector<float>(mesh->numVBOVertices(), textureCoordinate));
-}
-
-void SeedPointEngine::clearIntermediateBuffers()
-{
-   this->vertices.clear();
-   this->normals.clear();
-   this->textureCoordinates.clear();
-}
-
-int SeedPointEngine::intermediateBufferSize()
-{
-   return this->vertices.length();
+   AbstractEngine::setColorMapValueRange(lowValue, highValue);
 }

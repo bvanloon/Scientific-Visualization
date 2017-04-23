@@ -6,6 +6,7 @@
 #include "settings/visualization/streamobject.h"
 #include "grid/vertex.h"
 #include <QList>
+#include <QSize>
 #include <QMatrix4x4>
 
 class Settings::visualization::StreamLines : public Settings::visualization::StreamObject
@@ -30,6 +31,8 @@ class Settings::visualization::StreamLines : public Settings::visualization::Str
       void onSeedPointAdded(QPointF newSeedPoint);
 
       void onWindowResized(QSizeF oldSize, QSizeF newSize);
+
+      void onAddSeedPointGrid(QSize dimension);
 
    private slots:
 

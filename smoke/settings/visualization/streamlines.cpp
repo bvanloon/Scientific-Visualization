@@ -65,3 +65,21 @@ void Settings::visualization::StreamLines::onWindowResized(QSizeF oldSize, QSize
    transformationMatrix.scale(xScale, yScale, 0.0);
    transformSeedPoints(transformationMatrix);
 }
+
+void Settings::visualization::StreamLines::onAddSeedPointGrid(QSize dimension)
+{
+   double xStep = (double)Settings::canvas().size.width() / (dimension.width() - 1);
+   double yStep = (double)Settings::canvas().size.height() / (dimension.height() - 1);
+
+   QPointF seedPoint;
+
+   for (int y = 0; y < dimension.height(); y++)
+   {
+      seedPoint.setY(y * yStep);
+      for (int x = 0; x < dimension.width(); x++)
+      {
+         seedPoint.setX(x * xStep);
+         seedPoints.append(seedPoint);
+      }
+   }
+}
