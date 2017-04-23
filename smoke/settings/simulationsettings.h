@@ -61,9 +61,14 @@ class Settings::Simulation : public QObject
       Simulation(Simulation const&) = delete;
       void operator=(Simulation const&) = delete;
 
-      QMultiMap<Settings::sim::Scalar, Range<double> > scalarRanges;
+      QMultiMap<Settings::sim::Scalar, Range<double> > staticScalarRanges;
+      QMultiMap<Settings::sim::Scalar, Range<double> > dynamicScalarRanges;
 
-      void updateRange(Settings::sim::Scalar scalar, float minimum, float maximum);
+      void updateRange(Settings::sim::Scalar scalar, QMultiMap<sim::Scalar, Range<double> > *rangeList, float minimum, float maximum);
+
+      void updateStaticRange(Settings::sim::Scalar scalar, float minimum, float maximum);
+
+      void updateDynamicRange(Settings::sim::Scalar scalar, float minimum, float maximum);
 
       void updateGridCellSize();
 
