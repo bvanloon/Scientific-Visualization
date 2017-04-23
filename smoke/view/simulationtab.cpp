@@ -54,6 +54,8 @@ void SimulationSettingPane::setUItoDefaults()
    ui->forceSlider->setMaximum(Settings::defaults::simulation::forceMax);
    ui->forceSlider->setValue(Settings::simulation().force);
 
+   ui->dynamicValueRangeCheckBox->setChecked(Settings::simulation().useDynamicValueRange);
+
    ui->stepButton->setDisabled(!Settings::simulation().frozen);
 
    ui->xRotationDial->setValue(Settings::canvas().rotation.x());
@@ -89,6 +91,10 @@ void SimulationSettingPane::connectToSettings()
            &Settings::canvas(), SLOT(onSetViewMatrixToTopDownView()));
    connect(&Settings::canvas(), SIGNAL(engineToggled(Settings::engines::EnginesTypes,bool)),
            this, SLOT(onEngineToggled(Settings::engines::EnginesTypes,bool)));
+   connect(this, SIGNAL(useDynamicValueRangeToggled(bool)),
+           &Settings::simulation(), SLOT(onUseDynamicValueRangeToggled(bool)));
+   connect(this, SIGNAL(updateStaticRangesToDynamicRanges()),
+           &Settings::simulation(), SLOT(onUpdateStaticRangesToDynamicRanges()));
 }
 
 void SimulationSettingPane::registerEngines()
@@ -243,4 +249,14 @@ void SimulationSettingPane::on_sideViewButton_pressed()
 void SimulationSettingPane::on_topDownViewButton_pressed()
 {
    emit setViewMatrixToTopDownView();
+}
+
+void SimulationSettingPane::on_dynamicValueRangeCheckBox_clicked(bool checked)
+{
+   emit useDynamicValueRangeToggled(checked);
+}
+
+void SimulationSettingPane::on_updateStaticRangesButton_clicked()
+{
+   emit updateStaticRangesToDynamicRanges();
 }

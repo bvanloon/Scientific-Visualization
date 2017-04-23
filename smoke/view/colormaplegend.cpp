@@ -35,30 +35,25 @@ ColorMapLegend::ColorMapLegend(QWidget *parent) :
                     )));
 }
 
-
 ColorMapLegend::~ColorMapLegend()
 {
    delete ui;
 }
-
 
 void ColorMapLegend::onColorMapChanged(AbstractColorMap colorMap)
 {
    setColorMap(colorMap);
 }
 
-
 void ColorMapLegend::onValueRangeChanged(float minimum, float maximum)
 {
    setValueRange(minimum, maximum);
 }
 
-
 void ColorMapLegend::onClampRangeChanged(float minimum, float maximum)
 {
    setFactorRange(minimum, maximum);
 }
-
 
 void ColorMapLegend::setFactorRange(float minimum, float maximum)
 {
@@ -67,7 +62,6 @@ void ColorMapLegend::setFactorRange(float minimum, float maximum)
    update();
 }
 
-
 void ColorMapLegend::setValueRange(float minimum, float maximum)
 {
    this->minimumValue = minimum;
@@ -75,20 +69,17 @@ void ColorMapLegend::setValueRange(float minimum, float maximum)
    update();
 }
 
-
 void ColorMapLegend::resizeEvent(QResizeEvent *event)
 {
    colorBar.setTop(getDescriptionLabelHeight());
    colorBar.setHeight(event->size().height() - 2 * getDescriptionLabelHeight());
 }
 
-
 void ColorMapLegend::paintEvent(QPaintEvent *UNUSED(event))
 {
    drawColorMapImage();
    drawTicksAndLabels();
 }
-
 
 void ColorMapLegend::drawColorMapImage()
 {
@@ -97,14 +88,12 @@ void ColorMapLegend::drawColorMapImage()
    painter.drawImage(colorBar, colorMapImage);
 }
 
-
 int ColorMapLegend::getDescriptionLabelHeight()
 {
    QFontMetrics fontMetrics(font());
 
    return fontMetrics.height();
 }
-
 
 void ColorMapLegend::drawTicksAndLabels()
 {
@@ -132,7 +121,6 @@ void ColorMapLegend::drawTicksAndLabels()
    drawTickandLabel(QPointF(0, colorBar.bottom()), maximumLabel);
 }
 
-
 void ColorMapLegend::drawTickandLabel(QPointF left, float value)
 {
    QPainter painter(this);
@@ -143,15 +131,13 @@ void ColorMapLegend::drawTickandLabel(QPointF left, float value)
    drawLabel(right, value);
 }
 
-
 void ColorMapLegend::drawLabel(QPointF left, float labelValue)
 {
    QPainter painter(this);
-   QString valueStr = QString().setNum(labelValue, 'f', 3);
+   QString valueStr = QString().setNum(labelValue, 'g', 3);
 
    painter.drawText(left + textOffset, valueStr);
 }
-
 
 void ColorMapLegend::setColorMap(AbstractColorMap colorMap)
 {

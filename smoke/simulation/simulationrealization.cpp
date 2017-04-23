@@ -35,10 +35,10 @@ SimulationRealization::SimulationRealization() :
 
 SimulationRealization::~SimulationRealization()
 {
-    delete data;
-    free(vx0);
-    free(vy0);
-    free(rho0);
+   delete data;
+   free(vx0);
+   free(vy0);
+   free(rho0);
 }
 
 //FFT: Execute the Fast Fourier Transform on the dataset 'vx'.
@@ -198,7 +198,22 @@ void SimulationRealization::set_forces(void)
 
 SimulationData *SimulationRealization::getData() const
 {
-    return data;
+   return data;
+}
+
+Range<double> SimulationRealization::getCurrentFluidDensityRange()
+{
+   return data->getDensityRange();
+}
+
+Range<double> SimulationRealization::getCurrentFluidVelocityMagnitudeRange()
+{
+   return data->getFluidVelocityMagnitudeRange();
+}
+
+Range<double> SimulationRealization::getCurrentForceFieldMagnitudeRange()
+{
+   return data->getForceMagnitudeRange();
 }
 
 //do_one_simulation_step: Do one complete cycle of the simulation:

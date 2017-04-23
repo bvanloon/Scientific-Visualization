@@ -1,6 +1,7 @@
 #include "simulationdata.h"
 #include <QDebug>
 #include <algorithm>
+#include <limits>
 
 SimulationData::SimulationData(int dimension) :
    velocitiesSize(dimension * 2 * (dimension / 2 + 1)),
@@ -85,7 +86,21 @@ fftw_real SimulationData::getVyAt(int idx) const
 QVector2D SimulationData::getFluidVelocityAt(int idx) const
 {
    return QVector2D(getVxAt(idx),
-                     getVyAt(idx));
+                    getVyAt(idx));
+}
+
+Range<double> SimulationData::getFluidVelocityMagnitudeRange()
+{
+   double minimum = std::numeric_limits<double>::max();
+   double maximum = std::numeric_limits<double>::min();
+   double currentMagnitude;
+   for (size_t i = 0; i < velocitiesSize; i++)
+   {
+      currentMagnitude = getFluidVelocityAt(i).length();
+      minimum = qMin(currentMagnitude, minimum);
+      maximum = qMax(currentMagnitude, maximum);
+   }
+   return Range<double>(minimum, maximum);
 }
 
 fftw_real *SimulationData::getFx()
@@ -111,7 +126,21 @@ fftw_real SimulationData::getFyAt(int idx) const
 QVector2D SimulationData::getForceAt(int idx)
 {
    return QVector2D(getFxAt(idx),
-                     getFyAt(idx));
+                    getFyAt(idx));
+}
+
+Range<double> SimulationData::getForceMagnitudeRange()
+{
+   double minimum = std::numeric_limits<double>::max();
+   double maximum = std::numeric_limits<double>::min();
+   double currentMagnitude;
+   for (size_t i = 0; i < forceSize; i++)
+   {
+      currentMagnitude = getForceAt(i).length();
+      minimum = qMin(currentMagnitude, minimum);
+      maximum = qMax(currentMagnitude, maximum);
+   }
+   return Range<double>(minimum, maximum);
 }
 
 fftw_real *SimulationData::getRho()
@@ -127,6 +156,13 @@ fftw_real SimulationData::getRhoAt(int idx) const
 double SimulationData::getDensityAt(int idx) const
 {
    return this->getRhoAt(idx);
+}
+
+Range<double> SimulationData::getDensityRange()
+{
+   fftw_real minimum = *std::min_element(rho.constBegin(), rho.constEnd());
+   fftw_real maximum = *std::max_element(rho.constBegin(), rho.constEnd());
+   return Range<double>(minimum, maximum);
 }
 
 SimulationData SimulationData::mean(QList<SimulationData> list)

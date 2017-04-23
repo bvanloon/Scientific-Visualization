@@ -22,6 +22,8 @@ class Simulation : public QObject {
       void newSimulationState(SimulationData *deepCopyOfNewSimulationData);
       void newSimulationState();
 
+      void updateDynamicRange(Settings::sim::Scalar scalar, Range<double> range);
+
    public slots:
 
       void onMouseMoved(QPoint newPosition);
@@ -35,6 +37,10 @@ class Simulation : public QObject {
       SimulationGrid *grid;
 
       QPoint lastMousePosition;
+
+      void connectToSettings();
+
+      void emitUpdatesOfDynamicRanges();
 };
 
 #endif // SMOKE_H
