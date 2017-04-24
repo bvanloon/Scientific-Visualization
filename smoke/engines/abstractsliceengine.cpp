@@ -4,7 +4,8 @@
 
 AbstractSliceEngine::AbstractSliceEngine(AbstractEngine::lightModel lightModel, Settings::engines::EnginesTypes engineType) :
    Abstract3DEngine(lightModel, engineType),
-   cache(Settings::visualization::slices().numSlices)
+   cache(Settings::visualization::slices().numSlices),
+   numRecentSimulationStatesNotInSlice(0)
 {
    connectToSettings();
 }
