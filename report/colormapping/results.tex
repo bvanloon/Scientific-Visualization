@@ -1,7 +1,5 @@
 %!TEX root = ../scivis_lbaakman_bvanloon.tex
-In \cref{fig:colormapping:colormaps} a visualization from simulation snapshot is shown using all the different colormaps available in the application. Looking at the difference between colormaps we can note a few things. Looking at the visualization that uses the rainbow colormap (\cref{fig:colormapping:intro:differntColorMaps:rainbow}) we see that the maxima are very prominent and that there is a clear distinction between the blue, green, and green areas but no clear transition between those areas. This conforms the disadvantages as discussed in \cref{ssub:rainbow_colormap}.  When we look at the visualization using the zebra colormap in \cref{fig:colormapping:intro:differntColorMaps:zebra} we see that this colormap indeed shows the difference between areas with high variation and low variation. 
-
-\begin{figure}[htb]
+\begin{figure}[h!]
 	\centering
 	\begin{subfigure}{0.35\textwidth}
 		\centering
@@ -22,15 +20,6 @@ In \cref{fig:colormapping:colormaps} a visualization from simulation snapshot is
 		\caption{Zebra}
 		\label{fig:colormapping:intro:differntColorMaps:zebra}
 	\end{subfigure}
-\caption{A visualization of the fluid density (\density) using the colormaps available in the application. All colormaps uses 256 colors except for the zebra colormap which uses 50. All colormaps are fully saturated.}
-\end{figure}
-
-
-Looking at the results when the gray-scale, single hue, heat, and cold colormaps are used (\cref{fig:colormapping:intro:differntColorMaps:grayscale} to \ref{fig:colormapping:intro:differntColorMaps:cold}) we see in all cases a nice transition (and ordering) from areas with low to areas with high values. Also note the added benefit of the maps containing hues compared to the gray-scale colormap; especially in the areas containing low values a bit more variation is visible.
-
-\begin{figure}[htb]
-\centering
-\ContinuedFloat
 	\begin{subfigure}{0.35\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/grayscale}
@@ -76,17 +65,7 @@ Looking at the results when the gray-scale, single hue, heat, and cold colormaps
 		Cold
 		}
 		\label{fig:colormapping:intro:differntColorMaps:cold}
-	\end{subfigure}
-\caption{Continued}
-\end{figure}
-When looking at the results for the isoluminant blue-red colormap in \cref{fig:colormapping:intro:differntColorMaps:twocolor} we see that the colormap does not offer as much details as the other colormaps. This confirms that these colormaps are not well suited for 2D visualizations. 
-
-Last we look at the visualization using the  diverging colormap in \cref{fig:colormapping:intro:differntColorMaps:diverging}. We can see the same distinct areas as with the rainbow colormap, showing clear difference between high and low areas. Compared to the rainbow colormap, there are two distinct differences. First the maxima do not draw as much attention as in the rainbow colormap, furthermore we can see a more natural transition from low to high values making this colormap more suitable.
-
-
-\begin{figure}[htb]
-\ContinuedFloat	
-\centering
+	\end{subfigure}	
 	\begin{subfigure}{0.35\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth, trim={35px 30px 430px 30px}, clip]{colormapping/img/twocolors}
@@ -109,8 +88,17 @@ Last we look at the visualization using the  diverging colormap in \cref{fig:col
 		Diverging
 		}
 		\label{fig:colormapping:intro:differntColorMaps:diverging}
-	\end{subfigure}				
-
-	\caption{Continued.}
-	\label{fig:colormapping:colormaps}
+	\end{subfigure}		
+\caption{A visualization of the fluid density (\density) using the color maps available in the application. All color maps uses 256 colors except for the zebra color map which uses 50. All color maps are fully saturated.}
+\label{fig:colormapping:colormaps}
 \end{figure}
+
+
+In \cref{fig:colormapping:colormaps} a visualization from simulation snapshot is shown using all the different color maps available in the application. Comparing these figures we observe firstly that in the visualization with the rainbow color map, \cref{fig:colormapping:intro:differntColorMaps:rainbow}, the maximum values are very prominent and that there is a clear distinction between the blue, green, and green areas but no clear transition between those areas. This fits with the disadvantages discussed in \cref{ssub:rainbow_colormap}. \Cref{fig:colormapping:intro:differntColorMaps:zebra} indeed illustrates the areas with high and low variation. 
+
+Comparing the luminance based color maps, \crefrange{fig:colormapping:intro:differntColorMaps:grayscale}{fig:colormapping:intro:differntColorMaps:cold}, we observe in all cases  a nice transition and from areas with low to areas with high scalar values. Also note the added benefit of the maps containing hues compared to the gray-scale color map; especially in the areas containing low values a bit more variation is visible.
+
+
+The isoluminant blue-red color map, shown in \cref{fig:colormapping:intro:differntColorMaps:twocolor}, does not offer as much details as the other color maps. This confirms that these color maps are not well suited for 2D visualizations.
+
+In the diverging color map, illustrated in \cref{fig:colormapping:intro:differntColorMaps:diverging}, one easily recognizes the same distinct areas shown by the rainbow color map.  Compared to the rainbow color map, there are two distinct differences. First the maximum values do not draw as much attention as they do in the rainbow color map, furthermore we can see a more natural transition from low to high values making this color map more suitable for visualization of these data.
