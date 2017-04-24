@@ -16,8 +16,6 @@ class Settings::visualization::StreamLines : public Settings::visualization::Str
    public:
       static const StreamLines& instance();
 
-      Settings::visualization::ColorMap *colorMap;
-
       QList<QPointF> seedPoints;
 
       int numberOfSeedPoints();

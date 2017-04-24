@@ -6,6 +6,7 @@
 
 Settings::visualization::StreamObject::StreamObject(QObject *parent) :
    QObject(parent),
+   colorMap(new ColorMap()),
    timeStep(1.0),
    maximumTime(100),
    minimumMagnitude(0.0004),

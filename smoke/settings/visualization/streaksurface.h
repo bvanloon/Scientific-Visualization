@@ -15,8 +15,6 @@ class Settings::visualization::StreakSurface : public Settings::visualization::S
    public:
       static const StreakSurface& instance();
 
-      Settings::visualization::ColorMap *colorMap;
-
       int resolution;
 
       bool showVertices;

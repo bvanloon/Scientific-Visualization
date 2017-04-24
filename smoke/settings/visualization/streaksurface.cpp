@@ -4,7 +4,6 @@
 
 Settings::visualization::StreakSurface::StreakSurface(QObject *parent) :
    StreamObject(parent),
-   colorMap(new ColorMap()),
    resolution(100),
    showVertices(true), showLines(true), showSurface(true),
    divergenceSensitivity(200),

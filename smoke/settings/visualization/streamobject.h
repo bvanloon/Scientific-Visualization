@@ -13,6 +13,8 @@ namespace Settings {
            public:
               explicit StreamObject(QObject *parent = 0);
 
+              Settings::visualization::ColorMap *colorMap;
+
               double timeStep;
               double maximumTime;
 
