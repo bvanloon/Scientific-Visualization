@@ -5,7 +5,6 @@ GrayScaleColorMap::GrayScaleColorMap(int numColors, float saturation) :
 
 {
    fill();
-   this->save("../report/colormapping/img/colormaps/gayscalecolormap.png", 0, 100);
 }
 
 AbstractColorMap *GrayScaleColorMap::Create(int numColors, float saturation, float UNUSED(hue))

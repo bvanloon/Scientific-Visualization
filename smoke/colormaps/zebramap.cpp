@@ -7,7 +7,6 @@ ZebraMap::ZebraMap(int numColors, float saturation) :
 
 {
    fill();
-   this->save("../report/colormapping/img/colormaps/zebracolormap.png", 0, 100);
 }
 
 AbstractColorMap *ZebraMap::Create(int numColors, float saturation, float UNUSED(hue))
