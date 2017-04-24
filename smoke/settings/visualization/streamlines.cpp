@@ -4,8 +4,7 @@
 #include <limits>
 
 Settings::visualization::StreamLines::StreamLines(QObject *parent) :
-   StreamObject(parent),
-   colorMap(new ColorMap())
+   StreamObject(parent)
 {
    colorMap->onTextureVariableChanged(Settings::sim::Scalar::fluidVelocityMagnitude);
    connectToOtherSettings();
