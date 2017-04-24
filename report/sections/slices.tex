@@ -5,7 +5,7 @@ In the previous chapters we have shown visualization techniques that only showed
 
 \section{Stacking Slices} % (fold)
 \label{sec:stacking_slices}
-A slice of the visualization can be considered as one frame of the visualization at a certain time-step in the simulation. Slices can, just as the 2D visualization, consist of scalar visualization using colormaps, glyphs, streamlines, or any combination of the previous. By stacking the slices on top of each other, a volume is formed showing a 3D visualization of (historical) simulation data. 
+A slice of the visualization can be considered as one frame of the visualization at a certain time-step in the simulation. Slices can, just as the 2D visualization, consist of scalar visualization using color maps, glyphs, streamlines, or any combination of the previous. By stacking the slices on top of each other, a volume is formed showing a 3D visualization of (historical) simulation data. 
 
 \subsection{Combining Slices} % (fold)
 \label{sub:combining_slices}
@@ -31,9 +31,9 @@ Slices are visualized by drawing associating each slice with a z-value and drawi
 \label{sub:alpha_blending}
 To enable the user to look inside the 3D volume alpha-blending is used. By lowering the alpha-channel the slices become somewhat transparent allowing the user to see multiple slices `though' each other. The amount of alpha-blending is regulated in two ways. 
 
-A global alpha value can be set by the user which controls the alpha value of each element in the visualization. Next this global alpha value is adapted for each data-point in the simulation depending on the scalar value or vector magnitude of the visualized data. This is done by scaling the global alpha value linearly with the scalar value, normalized by the current range of the scalar data. This means high valued data will also have a high alpha value. This means maxima will be emphasized while minima will be blended out.
+A global alpha value can be set by the user which controls the alpha value of each element in the visualization. Next this global alpha value is adapted for each data-point in the simulation depending on the scalar value or vector magnitude of the visualized data. This is done by scaling the global alpha value linearly with the scalar value, normalized by the current range of the scalar data. This means high valued data will also have a high alpha value. This means maximum values will be emphasized while minima will be blended out.
 
-Alpha blending has as disadvantage that visualizations will becomes `smudged' and are not clearly visible anymore. Furthermore can alpha-blending cause colors to appear that are not in the colormap.
+Alpha blending has as disadvantage that visualizations will becomes `smudged' and are not clearly visible anymore. Furthermore can alpha-blending cause colors to appear that are not in the color map.
 % subsubsection global_ (end)
 % subsection alpha_blending (end)
 
@@ -43,26 +43,26 @@ An important part of the slice visualization are the controls which can be used 
 
 \section{Results} % (fold)
 \label{sec:results}
-In this section various results of visualization using slices are given. Take note that these visualizations are very information dense and are therefor not very well suited to be viewed on paper. In figure \ref{fig:slices:colormap} the slices visualization for scalar visualization using colormapping. Looking at the slices one can see how the area with high fluid density moves trough the xy space. This is most prominent in the side view, but also visible due to the alpha-blending in the top down view.
+In this section various results of visualization using slices are given. Take note that these visualizations are very information dense and are therefor not very well suited to be viewed on paper. In figure \ref{fig:slices:colormap} the slices visualization for scalar visualization using color mapping. Looking at the slices one can see how the area with high fluid density moves trough the xy space. This is most prominent in the side view, but also visible due to the alpha-blending in the top down view.
 
-In figure \ref{fig:slices:streamlines} a slices visualization of streamlines is given. Here we can see the streamlines moving in a sort of waving fashion. While the result for the colormap were most prominent in the side view, the streamlines benefit most from the top down view.
+In figure \ref{fig:slices:streamlines} a slices visualization of streamlines is given. Here we can see the streamlines moving in a sort of waving fashion. While the result for the color map were most prominent in the side view, the streamlines benefit most from the top down view.
 
 \begin{figure}[tbh]
 	\centering
 	\begin{subfigure}{0.45\textwidth}
 		\centering
 		\includegraphics[width=0.9\textwidth, trim={35px 30px 430px 30px}, clip]{img/slices/diverging_sides}
-		\caption{Slices showing fluid density using the divergent colormap from a side view.}
+		\caption{Slices showing fluid density using the divergent color map from a side view.}
 		\label{fig:slices:colormap:side}
 	\end{subfigure}
 	\hspace{30px}
 	\begin{subfigure}{0.45\textwidth}	
 		\centering
 		\includegraphics[width=0.9\textwidth, trim={35px 30px 430px 30px}, clip]{img/slices/divering}
-		\caption{Slices showing fluid density using the divergent colormap from top down view.}
+		\caption{Slices showing fluid density using the divergent color map from top down view.}
 		\label{fig:slices:colormap:top}
 	\end{subfigure}
-	\caption{Slices visualization combining 20 frames of a scalar colormap visualization into a 3D visualization.}
+	\caption{Slices visualization combining 20 frames of a scalar color map visualization into a 3D visualization.}
 	\label{fig:slices:colormap}
 \end{figure}
 
