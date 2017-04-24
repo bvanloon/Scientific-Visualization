@@ -161,6 +161,6 @@ void Settings::Canvas::onSetViewMatrixToTopDownView()
 void Settings::Canvas::onSetViewMatrixToSideView()
 {
    setScaling(0.67);
-   setPanningPosition(QVector3D(676.947, 78.6077, 0));
+   setPanningPosition(QVector3D(0.0, 0.0, 0.0));
    setRotation(279, 180, 308);
 }

@@ -31,6 +31,8 @@ class Abstract3DEngine : public AbstractEngine
 
    private:
 
+      QMatrix4x4 toOriginTranslation();
+
       void connectToSettings();
 };
 
