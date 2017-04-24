@@ -133,7 +133,7 @@ void StreamSurfacesTab::enterDefineSeedCurveMode()
    emit toggleAll3Dengines(false);
    emit engineToggled(Settings::engines::seedCurve, true);
    emit toggleListenForVertices(true);
-   this->ui->defineSeedCurveButton->setText("Show Streak Object");
+   this->ui->defineSeedCurveButton->setText("Show Stream Objects");
 }
 
 void StreamSurfacesTab::exitDefineSeedCurveMode()
