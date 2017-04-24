@@ -129,7 +129,7 @@ namespace Settings {
             static const bool activeEngines[9] =
             {
                //Smoke
-               false,
+               true,
                //Glyphs
                false,
                //Stream Surfaces
@@ -138,7 +138,7 @@ namespace Settings {
                false,false,
 
                //Slice Engines
-               false,true, false
+               false,false, false
             };
         }
     }
