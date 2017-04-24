@@ -38,6 +38,8 @@ namespace Settings {
 
               void vectorFieldChanged(Settings::sim::Vector vectorField, Settings::sim::Scalar magnitude);
 
+              void textureVariableChanged(Settings::sim::Scalar textureVariable);
+
            public slots:
               void ontimeStepChanged(double newTimeStep);
 

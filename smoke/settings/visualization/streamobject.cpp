@@ -70,6 +70,8 @@ void Settings::visualization::StreamObject::connectToOtherSettings()
 {
    connect(&Settings::simulation(), SIGNAL(cellSizeChanged(QSizeF)),
             this, SLOT(onCellSizeChanged(QSizeF)));
+   connect(this, SIGNAL(textureVariableChanged(Settings::sim::Scalar)),
+           this->colorMap, SLOT(onTextureVariableChanged(Settings::sim::Scalar)));
 }
 
 double Settings::visualization::StreamObject::getTotalLengthFactor() const
@@ -102,6 +104,7 @@ void Settings::visualization::StreamObject::setVectorField(Settings::sim::Vector
    setVectorFieldMagnitude(magnitude);
 
    emit vectorFieldChanged(vectorField, magnitude);
+   emit textureVariableChanged(magnitude);
 }
 
 void Settings::visualization::StreamObject::setVectorFieldMagnitude(Settings::sim::Scalar magnitude)
