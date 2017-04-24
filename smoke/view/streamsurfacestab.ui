@@ -143,7 +143,7 @@
            </sizepolicy>
           </property>
           <property name="maximum">
-           <double>200.000000000000000</double>
+           <double>500.000000000000000</double>
           </property>
           <property name="value">
            <double>1.000000000000000</double>
