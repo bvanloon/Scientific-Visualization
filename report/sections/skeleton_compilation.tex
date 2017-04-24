@@ -4,15 +4,18 @@
 \label{cha:skeleton_compilation}
 In this chapter the skeleton code of the visualization project is introduced. The skeleton code contains a real-time fluid simulation plus some supporting functionality which takes care of the interaction between the simulation and the rest of the application. The purpose of our application is to provide different visualization methods to give a visual representation of these variables in order for the user to obtain insight about the fluid dynamics in the simulation. 
 
+As the focus of this project is on the visualization of the simulation, and not on the how and why of the simulation we treat the simulation as a black box. In \cref{sec:fluid_simulation} we shortly introduce the output of this black box, \cref{sub:simulation_interaction} presents the input we can provide to it. 
+
 \section{Fluid Simulation} % (fold)
 \label{sec:fluid_simulation}
-The fluid simulation used in this project is developed by Jos Stam\cite{Simulation:Stam:2002}. In our application the simulation is considered black-box and is kept `as is' except from some modification which facilitates embedding of the simulation in our application. The simulation produces fluid velocity and fluid density that dynamically react to user-supplied forces. The simulation is performed on a discrete grid\footnote{Note that this simulation grid is independent of the visualization grid.} that loops around (e.g. fluids `disappearing' at an edge of the grid at added again at the opposite edge). The simulation contains three data sets: the fluid density (\density), the fluid velocity (\velocity), and the force field \force. Since both the fluid velocity and the force field are vector data we can also their magnitude a scalar value (\velocitymagnitude, \forcefieldmagnitude)
+	The fluid simulation used in this project is developed by \textcite{Simulation:Stam:2002}. The simulation computes the velocity and the density of the fluid based on the user-supplied input force. The simulation is sampled on an uniform $50 \times 50$ grid that loops around, \eg fluids `disappearing' at one edge of the grid are added at the opposite edge.
 
-\subsection{Simulation Interaction} % (fold)
+	The simulation contains one scalar field and two vector fields: the fluid density (\density), the fluid velocity (\velocity), and the force field \force. Two logical derived scalar fields are the fluid velocity magnitude, \velocitymagnitude and the force field magnitude, \forcefieldmagnitude. 
+
+\section{Simulation Interaction} % (fold)
 \label{sub:simulation_interaction}
-At every (discrete) time-step in the simulation two interactions between the simulation and our application takes place. The first interaction concerns the input of the forces, which can be added to the simulation by the user via mouse interaction. Next the simulation calculates the fluid movements and emits the resulting simulation grid containing the current sample grid. 
+	We allow a number of inputs to the black box that is the simulation. The most important of which is adding force somewhere within the domain of the simulation. This process of adding force is akin to steering a fluid. The user of the application can add the force via interaction with the mouse. The amount of force added a the position of the mouse movement can be set interactively. 
 
-Besides adding forces the user can also pause the simulation, change the time step of the simulation, and let a paused simulation perform a single step.
-
+	Other than the force the user can also control the speed of the simulation interactively. Alternatively the simulation can be paused, which is comparable to instantly freezing the fluid. In this frozen state one can move to the next state of the simulation. 
 
 % chapter skeleton_compilation (end)
