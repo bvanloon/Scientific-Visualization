@@ -24,15 +24,40 @@ void Abstract3DEngine::updateModelViewMatrix(QMatrix4x4 modelMatrix)
 
 QMatrix4x4 Abstract3DEngine::computeViewMatrix()
 {
+   QMatrix4x4 toOriginTransform = toOriginTranslation();
+
    QMatrix4x4 viewMatrix = QMatrix4x4();
 
+   //Pan from original position
    viewMatrix.translate(Settings::canvas().panningPosition);
 
+   //Place back at original position
+   viewMatrix *= toOriginTransform.inverted();
+
+   //Rotate
    QMatrix4x4 rotationMatrix = Settings::canvas().rotation.matrix();
    viewMatrix *= rotationMatrix;
 
+   //Scale
    viewMatrix.scale(Settings::canvas().scalingFactor);
+
+   //Place at origin
+   viewMatrix *= toOriginTransform;
+
    return viewMatrix;
+}
+
+QMatrix4x4 Abstract3DEngine::toOriginTranslation()
+{
+   QMatrix4x4 transform;
+   QVector3D translation = QVector3D(
+               Settings::canvas().size.width(),
+               Settings::canvas().size.height(),
+               zTranslationRange.length());
+   translation /= 2;
+   translation *= -1;
+   transform.translate(translation);
+   return transform;
 }
 
 void Abstract3DEngine::connectToSettings()
