@@ -1,7 +1,7 @@
 #include "hedgehog.h"
 #include "settings/visualizationsettings.h"
 
-const double HedgeHog::cellRatio = 5;
+const double HedgeHog::cellRatio = 1;
 
 HedgeHog::HedgeHog(QVector3D position, QVector3D direction) :
    AbstractGlyph()

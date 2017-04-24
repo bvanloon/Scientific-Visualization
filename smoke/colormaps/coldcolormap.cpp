@@ -15,7 +15,6 @@ Coldcolormap::Coldcolormap(int numColors, float saturation) :
    AbstractColorMap(numColors, saturation)
 {
    fill();
-   this->save("../report/colormapping/img/colormaps/coldcolormap.png", 0, 100);
 }
 
 void Coldcolormap::fill()

@@ -10,7 +10,6 @@ TwoColorColormap::TwoColorColormap(int numColors, float saturation) :
    AbstractColorMap(numColors, saturation)
 {
    fill();
-   this->save("../report/colormapping/img/colormaps/twocolors.png", 0, 100);
 }
 
 void TwoColorColormap::fill()
