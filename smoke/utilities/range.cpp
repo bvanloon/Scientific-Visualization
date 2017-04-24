@@ -4,7 +4,7 @@
 
 void assertInUnitRange(float t)
 {
-   float epsilon = 100 * std::numeric_limits<float>::epsilon();
+   float epsilon = 100000 * std::numeric_limits<float>::epsilon();
 
    assert(t >= 0.0f - epsilon && t <= 1.0f + epsilon);
 }

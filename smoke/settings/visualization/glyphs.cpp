@@ -7,7 +7,7 @@ Settings::visualization::Glyphs::Glyphs(QObject *parent) :
    QObject(parent),
    colorMap(new ColorMap()),
    vectorField(Settings::sim::Vector::fluidVelocity),
-   glyph(Settings::sim::GlyphsType::airplane),
+   glyph(Settings::sim::GlyphsType::triangles),
    scale(1.0),
    jitterFactor(0.4),
    gridDimension(20, 20)
