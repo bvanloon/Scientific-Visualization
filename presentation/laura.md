@@ -1,6 +1,4 @@
 # Color Maps
-
-## Different Color Maps
 * Rainbow
 * Luminance Based: Hot, Cold, Gray Scale, Hue: You can choose color
 * Isoluminant:
